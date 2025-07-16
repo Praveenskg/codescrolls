@@ -1,7 +1,4 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* index.module.css */
 
 .heroBanner {
   padding: 4rem 0;
@@ -16,8 +13,137 @@
   }
 }
 
+.main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero {
+  margin-bottom: 4rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.highlight {
+  background: linear-gradient(to right, #7f5af0, #2cb67d);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--ifm-color-content-secondary);
+  margin: 1rem 0;
+}
+
 .buttons {
   display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.buttons a {
+  transition: transform 0.2s ease;
+}
+
+.buttons a:hover {
+  transform: scale(1.05);
+}
+
+.categories {
+  margin-top: 2rem;
+}
+
+.categoryImage {
+  max-width: 100%;
+  width: 300px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+.categoriesHeading {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.divider {
+  width: 100px;
+  height: 4px;
+  background-color: var(--ifm-color-primary);
+  margin: 0 auto 2rem;
+  border-radius: 4px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .categoryImage {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .categoryImage {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+  justify-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--ifm-background-surface-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.card:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
 }
