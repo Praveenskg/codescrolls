@@ -1,6 +1,7 @@
 ---
 sidebar_position: 4
 ---
+
 # Control Flow
 
 Control flow determines the order in which code is executed in a program. JavaScript executes code from top to bottom, but control flow statements let you alter this flow based on conditions.

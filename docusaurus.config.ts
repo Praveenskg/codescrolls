@@ -26,9 +26,9 @@ const config: Config = {
       "classic",
       {
         docs: {
-          sidebarPath: "./sidebars.ts",
+          path: "docs",
           routeBasePath: "docs",
-          editUrl: "https://github.com/Praveenskg/codepedia/edit/main/",
+          sidebarPath: "./sidebars.ts",
         },
         blog: {
           showReadingTime: true,
@@ -76,6 +76,8 @@ const config: Config = {
           href: "https://github.com/Praveenskg/codepedia",
           label: "GitHub",
           position: "right",
+          className: "header-github-link",
+          "aria-label": "GitHub repository",
         },
       ],
     },
@@ -91,7 +93,7 @@ const config: Config = {
             },
             {
               label: "TypeScript",
-              to: "/docs/typescript/README",
+              to: "/docs/typescript",
             },
           ],
         },

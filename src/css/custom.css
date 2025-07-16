@@ -32,3 +32,16 @@
   transform: translateY(-4px);
   box-shadow: var(--ifm-global-shadow-lw);
 }
+
+.markdown table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.markdown pre {
+  word-wrap: break-word;
+  overflow-x: auto;
+  max-width: 100%;
+}
