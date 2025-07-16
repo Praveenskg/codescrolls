@@ -63,6 +63,11 @@ const config: Config = {
           label: "Docs",
         },
         {
+          to: "/docs/javascript",
+          label: "JavaScript",
+          position: "left",
+        },
+        {
           to: "/blog",
           label: "Blog",
           position: "left",
@@ -82,7 +87,7 @@ const config: Config = {
           items: [
             {
               label: "JavaScript",
-              to: "/docs/javascript/README",
+              to: "/docs/javascript",
             },
             {
               label: "TypeScript",
