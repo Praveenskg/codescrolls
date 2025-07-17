@@ -1,6 +1,6 @@
-# 📘 CodePedia – JavaScript Notes & Blog
+# 📘 CodePedia – Notes, Blogs & CheatSheet
 
-This is a documentation site built using [Docusaurus 2](https://docusaurus.io/), a modern static site generator.  
+This is a documentation site built using [Docusaurus 3](https://docusaurus.io/), a modern static site generator.  
 It contains well-structured JavaScript notes, cheat sheets, and blogs.
 
 ## 🚀 Features
