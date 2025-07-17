@@ -9,8 +9,8 @@ const config: Config = {
   future: {
     v4: true,
   },
-  url: "https://praveenskg.github.io",
-  baseUrl: "/codepedia",
+  url: "https://docs.praveensingh.online",
+  baseUrl: "/",
   organizationName: "Praveenskg",
   projectName: "codepedia",
   trailingSlash: false,
