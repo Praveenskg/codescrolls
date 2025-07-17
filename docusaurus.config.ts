@@ -20,7 +20,15 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: '6869A3EDC26A8235', 
+      },
+    },
+  ],
   presets: [
     [
       "classic",
@@ -48,7 +56,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: "img/docusaurus-social-card.jpg",
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     navbar: {
       title: "CodePedia",
       logo: {
