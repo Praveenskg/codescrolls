@@ -1,41 +1,105 @@
-# Website
+# 📘 CodePedia – JavaScript Notes & Blog
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This is a documentation site built using [Docusaurus 2](https://docusaurus.io/), a modern static site generator.  
+It contains well-structured JavaScript notes, cheat sheets, and blogs.
 
-## Installation
+## 🚀 Features
+
+- ✍️ Markdown-based docs and blogs  
+- 🧭 Sidebar navigation  
+- 🔍 Full-text search  
+- 🖼️ Local image support  
+- 🌐 Custom domain: [docs.praveensingh.online](https://docs.praveensingh.online)
+
+---
+
+## 📦 Installation
+
+Install dependencies:
 
 ```bash
-yarn
+npm install
 ```
 
-## Local Development
+---
+
+## 🧑‍💻 Local Development
+
+To start the local dev server:
 
 ```bash
-yarn start
+npm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.  
+Live reload works out of the box for Markdown and React files.
 
-## Build
+---
+
+## 🏗️ Build
+
+Generate a static production build:
 
 ```bash
-yarn build
+npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+Static content will be output to the `build/` directory.
 
-## Deployment
+---
 
-Using SSH:
+## 🚀 Deployment
+
+### ✅ GitHub Pages (gh-pages branch)
+
+**Using SSH:**
 
 ```bash
 USE_SSH=true yarn deploy
 ```
 
-Not using SSH:
+**Using HTTPS with GitHub token:**
 
 ```bash
-GIT_USER=<Your GitHub username> yarn deploy
+GIT_USER=<your-github-username> yarn deploy
 ```
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This will:
+1. Build the site
+2. Push to the `gh-pages` branch
+3. Publish at https://<your-github-username>.github.io/<repo-name>/
+
+---
+
+## 🌐 Custom Domain Setup
+
+This site is served via a custom domain:  
+👉 [https://docs.praveensingh.online](https://docs.praveensingh.online)
+
+Make sure to:
+- Add a `CNAME` file with the domain inside the `static/` directory.
+- Point your DNS `A` or `CNAME` records to GitHub Pages servers.
+- Enable HTTPS from your repo settings once the certificate is issued.
+
+---
+
+## 📁 Folder Structure (Simplified)
+
+```
+.
+├── blog/                  # Blog posts
+├── docs/                  # Docs pages
+├── static/img/            # Static images
+├── src/pages/             # Custom pages like homepage
+├── docusaurus.config.ts   # Site config
+├── sidebars.ts            # Sidebar config
+├── README.md              # This file
+```
+
+---
+
+## 🧑‍🎓 Author
+
+Made with ❤️ by [Praveen Singh](https://github.com/praveenskg)
+
+---
