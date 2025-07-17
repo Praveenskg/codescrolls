@@ -65,6 +65,10 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
+        gtag: {
+          trackingID: 'G-6YM7WQM05W',
+          anonymizeIP: true,
+        },
         blog: {
           blogTitle: 'CodePedia Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
@@ -132,10 +136,6 @@ const config: Config = {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
-    gtag: {
-      trackingID: 'G-6YM7WQM05W',
-      anonymizeIP: true,
-    },
     docs: {
       sidebar: { hideable: true },
     },
