@@ -3,8 +3,107 @@ javascript:
   permalink: /javascript
   description: All posts related to JavaScript
 
+variables:
+  label: Variables
+  permalink: /variables
+  description: Learn how variables work in JavaScript
+
+hoisting:
+  label: Hoisting
+  permalink: /hoisting
+  description: Understand JavaScript hoisting behavior
+
+closures:
+  label: Closures
+  permalink: /closures
+  description: Dive into closures and lexical scoping
+
+async-await:
+  label: Async & Await
+  permalink: /async-await
+  description: Master asynchronous JavaScript
+
+promises:
+  label: Promises
+  permalink: /promises
+  description: Handling async operations with promises
+
+DOM:
+  label: DOM
+  permalink: /dom
+  description: Manipulating the Document Object Model
+
+ES6+:
+  label: ES6+
+  permalink: /es6-plus
+  description: Modern JavaScript features explained
+
+functions:
+  label: Functions
+  permalink: /functions
+  description: Understanding function behavior in JS
+
+objects:
+  label: Objects
+  permalink: /objects
+  description: Object manipulation and properties
+
+arrays:
+  label: Arrays
+  permalink: /arrays
+  description: Working with arrays in JavaScript
+
 blog:
   label: Blog
   permalink: /blog
   description: General blog posts and dev thoughts
-  
+
+productivity:
+  label: Productivity
+  permalink: /productivity
+  description: Tips to stay productive as a developer
+
+tools:
+  label: Developer Tools
+  permalink: /tools
+  description: Best tools and extensions for devs
+
+git:
+  label: Git
+  permalink: /git
+  description: Git tips, tricks, and workflows
+
+vscode:
+  label: VS Code
+  permalink: /vscode
+  description: Boost productivity using VS Code
+
+css:
+  label: CSS
+  permalink: /css
+  description: Styling your web apps the right way
+
+react:
+  label: React
+  permalink: /react
+  description: Writing reusable components in React
+
+typescript:
+  label: TypeScript
+  permalink: /typescript
+  description: Getting started with TypeScript
+
+debugging:
+  label: Debugging
+  permalink: /debugging
+  description: Techniques for fixing common bugs
+
+dev-life:
+  label: Developer Life
+  permalink: /dev-life
+  description: Developer journey, struggles, and wins
+
+career:
+  label: Career
+  permalink: /career
+  description: Developer career tips and insights

@@ -1,81 +1,104 @@
-import { themes as prismThemes } from "prism-react-renderer";
-import type { Config } from "@docusaurus/types";
-import type * as Preset from "@docusaurus/preset-classic";
+import type * as Preset from '@docusaurus/preset-classic';
+import type { Config } from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
-  title: "CodePedia",
-  tagline: "Your developer library for language docs, tips, and cheat sheets.",
-  favicon: "img/favicon.ico",
-  future: {
-    v4: true,
-  },
-  url: "https://docs.praveensingh.online",
-  baseUrl: "/",
-  organizationName: "Praveenskg",
-  projectName: "codepedia",
+  title: 'CodePedia',
+  tagline: 'Your developer library for language docs, tips, and cheat sheets.',
+  favicon: 'img/favicon.ico',
+  future: { v4: true },
+
+  url: 'https://docs.praveensingh.online',
+  baseUrl: '/',
+  organizationName: 'Praveenskg',
+  projectName: 'codepedia',
   trailingSlash: false,
-  onBrokenLinks: "warn",
-  onBrokenMarkdownLinks: "warn",
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
+
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: 'en',
+    locales: ['en'],
   },
+
   headTags: [
     {
-      tagName: "meta",
+      tagName: 'meta',
       attributes: {
-        name: "algolia-site-verification",
-        content: "6869A3EDC26A8235",
+        name: 'algolia-site-verification',
+        content: '6869A3EDC26A8235',
       },
     },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'CodePedia',
+        url: 'https://docs.praveensingh.online',
+        logo: 'https://docs.praveensingh.online/img/logo.svg',
+        sameAs: [
+          'https://github.com/Praveenskg',
+          'https://x.com/its_praveen_s',
+          'https://linkedin.com/in/praveenskg',
+        ],
+      }),
+    },
   ],
+
   presets: [
     [
-      "classic",
+      'classic',
       {
         docs: {
-          path: "docs",
-          routeBasePath: "docs",
-          sidebarPath: "./sidebars.ts",
+          path: 'docs',
+          routeBasePath: 'docs',
+          sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
         blog: {
-          blogTitle: "CodePedia Blog",
-          blogDescription:
-            "Tech blogs and tutorials on JavaScript, Web Dev, and more!",
-          blogSidebarTitle: "All Posts",
-          blogSidebarCount: "ALL",
-          showReadingTime: true,
+          blogTitle: 'CodePedia Blog',
+          blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
+          blogSidebarTitle: 'All Posts',
+          blogSidebarCount: 'ALL',
+          showReadingTime: false,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           feedOptions: {
-            type: ["rss", "atom"],
-            title: "CodePedia Blog Feed",
-            description: "Stay updated with the latest posts from CodePedia.",
+            type: ['rss', 'atom'],
+            title: 'CodePedia Blog Feed',
+            description: 'Stay updated with the latest posts from CodePedia.',
             copyright: `Copyright © ${new Date().getFullYear()} Praveen Singh`,
-            language: "en",
+            language: 'en',
             xslt: true,
           },
-          onInlineTags: "warn",
-          onInlineAuthors: "warn",
-          onUntruncatedBlogPosts: "warn",
+          onInlineTags: 'warn',
+          onInlineAuthors: 'warn',
+          onUntruncatedBlogPosts: 'warn',
           postsPerPage: 10,
         },
-
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: './src/css/custom.css',
         },
         sitemap: {
-          lastmod: "date",
-          changefreq: "weekly",
+          lastmod: 'date',
+          changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ["/tags/**"],
-          filename: "sitemap.xml",
-          createSitemapItems: async (params) => {
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+          createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter((item) => !item.url.includes("/page/"));
+            return items.filter(item => !item.url.includes('/page/'));
           },
         },
       } satisfies Preset.Options,
@@ -83,80 +106,101 @@ const config: Config = {
   ],
 
   themeConfig: {
-    docs: {
-      sidebar: {
-        hideable: true,
+    metadata: [
+      {
+        name: 'keywords',
+        content: 'JavaScript, Web Development, Tutorials, Code, Programming, CodePedia',
       },
+      { name: 'author', content: 'Praveen Singh' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@codepedia' },
+      { name: 'twitter:creator', content: '@praveenskg' },
+      { name: 'og:type', content: 'website' },
+      {
+        name: 'og:title',
+        content: 'CodePedia – Learn Web Development with Clean Notes',
+      },
+      {
+        name: 'og:description',
+        content: 'JavaScript, frontend, backend, and dev tutorials in clear, organized docs.',
+      },
+      {
+        name: 'og:image',
+        content: 'https://docs.praveensingh.online/img/cover.png',
+      },
+      { name: 'og:url', content: 'https://docs.praveensingh.online' },
+      { name: 'robots', content: 'index,follow' },
+      { name: 'googlebot', content: 'index,follow' },
+    ],
+
+    docs: {
+      sidebar: { hideable: true },
     },
+
     algolia: {
-      appId: "I05FKPCL6E",
-      apiKey: "37cfe6d63256aed03b14e335eec696b4",
-      indexName: "codepedia_pages",
+      appId: 'I05FKPCL6E',
+      apiKey: '37cfe6d63256aed03b14e335eec696b4',
+      indexName: 'codepedia_pages',
       contextualSearch: true,
-      placeholder: "Search CodePedia...",
+      placeholder: 'Search CodePedia...',
     },
+
     navbar: {
-      title: "CodePedia",
+      title: 'CodePedia',
       logo: {
-        alt: "CodePedia Logo",
-        src: "img/logo.svg",
+        alt: 'CodePedia Logo',
+        src: 'img/logo.svg',
       },
       items: [
         {
-          type: "docSidebar",
-          sidebarId: "tutorialSidebar",
-          position: "left",
-          label: "Docs",
+          type: 'docSidebar',
+          sidebarId: 'tutorialSidebar',
+          position: 'left',
+          label: 'Docs',
         },
         {
-          to: "/docs/javascript",
-          label: "JavaScript",
-          position: "left",
+          to: '/docs/javascript',
+          label: 'JavaScript',
+          position: 'left',
         },
         {
-          to: "/blog",
-          label: "Blog",
-          position: "left",
+          to: '/blog',
+          label: 'Blog',
+          position: 'left',
         },
         {
-          href: "https://github.com/Praveenskg/codepedia",
-          label: "GitHub",
-          position: "right",
-          className: "header-github-link",
-          "aria-label": "GitHub repository",
+          href: 'https://github.com/Praveenskg/codepedia',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
+
     footer: {
-      style: "light",
+      style: 'light',
       links: [
         {
-          title: "Docs",
+          title: 'Docs',
           items: [
-            {
-              label: "JavaScript",
-              to: "/docs/javascript",
-            },
-            {
-              label: "TypeScript",
-              to: "/docs/typescript",
-            },
+            { label: 'JavaScript', to: '/docs/javascript' },
+            { label: 'TypeScript', to: '/docs/typescript' },
           ],
         },
         {
-          title: "Community",
+          title: 'Community',
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/javascript",
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/javascript',
             },
             {
-              label: "LinkedIn",
-              href: "https://linkedin.com/in/praveenskg",
+              label: 'LinkedIn',
+              href: 'https://linkedin.com/in/praveenskg',
             },
             {
-              label: "X (Twitter)",
-              href: "https://x.com/its_praveen_s",
+              label: 'X (Twitter)',
+              href: 'https://x.com/its_praveen_s',
             },
           ],
         },

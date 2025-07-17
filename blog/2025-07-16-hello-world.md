@@ -2,7 +2,9 @@
 slug: hello-world
 title: Hello World – My First Blog!
 authors: praveen
-tags: [javascript, blog]
+tags:
+  - javascript
+  - blog
 description: This is my first blog post in CodePedia!
 ---
 

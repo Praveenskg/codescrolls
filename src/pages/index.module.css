@@ -36,7 +36,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-
 .subtitle {
   font-size: 1.2rem;
   color: var(--ifm-color-content-secondary);
@@ -83,7 +82,6 @@
   border-radius: 4px;
 }
 
-
 @media screen and (min-width: 768px) {
   .categoryImage {
     width: 400px;
@@ -124,12 +122,13 @@
   padding: 1rem;
   border-radius: 8px;
   background-color: var(--ifm-background-surface-color);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
   text-align: center;
   width: 100%;
   max-width: 400px;
 }
-
 
 .cardIcon {
   width: 48px;

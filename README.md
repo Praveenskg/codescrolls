@@ -5,10 +5,10 @@ It contains well-structured JavaScript notes, cheat sheets, and blogs.
 
 ## 🚀 Features
 
-- ✍️ Markdown-based docs and blogs  
-- 🧭 Sidebar navigation  
-- 🔍 Full-text search  
-- 🖼️ Local image support  
+- ✍️ Markdown-based docs and blogs
+- 🧭 Sidebar navigation
+- 🔍 Full-text search
+- 🖼️ Local image support
 - 🌐 Custom domain: [docs.praveensingh.online](https://docs.praveensingh.online)
 
 ---
@@ -65,6 +65,7 @@ GIT_USER=<your-github-username> yarn deploy
 ```
 
 This will:
+
 1. Build the site
 2. Push to the `gh-pages` branch
 3. Publish at https://<your-github-username>.github.io/<repo-name>/
@@ -77,6 +78,7 @@ This site is served via a custom domain:
 👉 [https://docs.praveensingh.online](https://docs.praveensingh.online)
 
 Make sure to:
+
 - Add a `CNAME` file with the domain inside the `static/` directory.
 - Point your DNS `A` or `CNAME` records to GitHub Pages servers.
 - Enable HTTPS from your repo settings once the certificate is issued.
