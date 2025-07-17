@@ -5,7 +5,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 const config: Config = {
   title: 'CodePedia',
   tagline: 'Your developer library for language docs, tips, and cheat sheets.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/logo.png',
   future: { v4: true },
 
   url: 'https://docs.praveensingh.online',
@@ -152,7 +152,7 @@ const config: Config = {
       title: 'CodePedia',
       logo: {
         alt: 'CodePedia Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       items: [
         {
