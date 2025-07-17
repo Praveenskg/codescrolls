@@ -41,17 +41,28 @@ const config: Config = {
           showLastUpdateTime: true,
         },
         blog: {
+          blogTitle: "CodePedia Blog",
+          blogDescription:
+            "Tech blogs and tutorials on JavaScript, Web Dev, and more!",
+          blogSidebarTitle: "All Posts",
+          blogSidebarCount: "ALL",
           showReadingTime: true,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           feedOptions: {
             type: ["rss", "atom"],
+            title: "CodePedia Blog Feed",
+            description: "Stay updated with the latest posts from CodePedia.",
+            copyright: `Copyright © ${new Date().getFullYear()} Praveen Singh`,
+            language: "en",
             xslt: true,
           },
           onInlineTags: "warn",
           onInlineAuthors: "warn",
           onUntruncatedBlogPosts: "warn",
+          postsPerPage: 10,
         },
+
         theme: {
           customCss: "./src/css/custom.css",
         },
