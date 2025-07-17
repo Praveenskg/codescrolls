@@ -63,8 +63,8 @@ const config: Config = {
     },
     algolia: {
       appId: "I05FKPCL6E",
-      apiKey: "bc3598230e72252543daa26a9ef01c25",
-      indexName: "CodePedia",
+      apiKey: "37cfe6d63256aed03b14e335eec696b4",
+      indexName: "codepedia",
       contextualSearch: true,
       placeholder: "Search CodePedia...",
     },
