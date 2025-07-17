@@ -22,10 +22,10 @@ const config: Config = {
   },
   headTags: [
     {
-      tagName: 'meta',
+      tagName: "meta",
       attributes: {
-        name: 'algolia-site-verification',
-        content: '6869A3EDC26A8235', 
+        name: "algolia-site-verification",
+        content: "6869A3EDC26A8235",
       },
     },
   ],
@@ -60,6 +60,13 @@ const config: Config = {
       sidebar: {
         hideable: true,
       },
+    },
+    algolia: {
+      appId: "I05FKPCL6E",
+      apiKey: "bc3598230e72252543daa26a9ef01c25",
+      indexName: "CodePedia",
+      contextualSearch: true,
+      placeholder: "Search CodePedia...",
     },
     navbar: {
       title: "CodePedia",
