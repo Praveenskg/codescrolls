@@ -37,9 +37,13 @@ const config: Config = {
           path: "docs",
           routeBasePath: "docs",
           sidebarPath: "./sidebars.ts",
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
         },
         blog: {
           showReadingTime: true,
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
           feedOptions: {
             type: ["rss", "atom"],
             xslt: true,
