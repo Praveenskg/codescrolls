@@ -132,7 +132,10 @@ const config: Config = {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
-
+    gtag: {
+      trackingID: 'G-6YM7WQM05W',
+      anonymizeIP: true,
+    },
     docs: {
       sidebar: { hideable: true },
     },
