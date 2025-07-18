@@ -1,5 +1,4 @@
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import { Card, CardContent } from './ui/card';
 
 const cheatsheets = [

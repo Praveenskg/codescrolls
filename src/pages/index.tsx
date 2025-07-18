@@ -49,10 +49,10 @@ export default function Home(): ReactNode {
         <section className='max-w-3xl text-center'>
           <h1 className='mb-4 text-center text-4xl font-bold md:text-5xl'>
             Welcome to{' '}
-            <span className='bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent'>
+            <span className='bg-linear-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent'>
               Code
             </span>
-            <span className='bg-gradient-to-r from-teal-400 to-emerald-500 bg-clip-text text-transparent'>
+            <span className='bg-linear-to-r from-teal-400 to-emerald-500 bg-clip-text text-transparent'>
               Pedia
             </span>{' '}
             🚀
@@ -63,7 +63,7 @@ export default function Home(): ReactNode {
           <div className='mt-6 flex flex-wrap justify-center gap-4'>
             <Link
               href='/docs/javascript'
-              className='flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-green-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:no-underline hover:shadow-2xl'
+              className='flex items-center gap-2 rounded-xl bg-linear-to-r from-blue-500 to-green-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:no-underline hover:shadow-2xl'
             >
               Start Learning JavaScript
             </Link>
@@ -71,7 +71,7 @@ export default function Home(): ReactNode {
               href='https://github.com/Praveenskg/codepedia'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:no-underline hover:shadow-2xl'
+              className='flex items-center gap-2 rounded-xl bg-linear-to-r from-purple-500 to-teal-500 px-6 py-3 font-semibold text-white shadow-lg transition-transform hover:scale-105 hover:no-underline hover:shadow-2xl'
             >
               🌟 GitHub Repo
             </Link>
@@ -86,7 +86,7 @@ export default function Home(): ReactNode {
             loading='lazy'
           />
           <h2 className='mb-2 text-2xl font-semibold'>📂 Categories</h2>
-          <hr className='mx-auto mb-6 h-1 w-24 rounded-full border-0 bg-gradient-to-r from-blue-500 to-green-500' />
+          <hr className='mx-auto mb-6 h-1 w-24 rounded-full border-0 bg-linear-to-r from-blue-500 to-green-500' />
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
             {categories.map(({ name, href, icon }) => (
               <Link
