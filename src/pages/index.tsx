@@ -86,8 +86,8 @@ export default function Home(): ReactNode {
             loading='lazy'
           />
           <h2 className='mb-2 text-2xl font-semibold'>📂 Categories</h2>
-          <hr className='mx-auto mb-6 h-1 w-24 rounded-full border-0 bg-linear-to-r from-blue-500 to-green-500' />
-          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
+          <hr className='mx-auto mb-6 h-2 w-24 rounded-full border-0 bg-linear-to-r from-blue-500 to-green-500' />
+          <div className='mx-auto grid max-w-4xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 md:grid-cols-3'>
             {categories.map(({ name, href, icon }) => (
               <Link
                 key={name}

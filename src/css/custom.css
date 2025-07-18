@@ -132,21 +132,12 @@
     @apply border-border outline-ring/50;
   }
 
-  *,
-  ::before,
-  ::after,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: hsl(var(--border));
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--border)) transparent;
-  }
-
   html {
-    font: var(--ifm-font-size-base) / var(--ifm-line-height-base) var(--ifm-font-family-base);
+    scroll-behavior: smooth;
+  }
+
+  button {
+    cursor: pointer;
   }
 }
 
