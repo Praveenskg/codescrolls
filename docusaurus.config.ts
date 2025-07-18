@@ -42,10 +42,10 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        name: 'CodePedia',
-        url: 'https://docs.praveensingh.online',
-        logo: 'https://docs.praveensingh.online/img/logo.svg',
-        sameAs: [
+        'name': 'CodePedia',
+        'url': 'https://docs.praveensingh.online',
+        'logo': 'https://docs.praveensingh.online/img/logo.svg',
+        'sameAs': [
           'https://github.com/Praveenskg',
           'https://x.com/its_praveen_s',
           'https://linkedin.com/in/praveenskg',
@@ -53,7 +53,7 @@ const config: Config = {
       }),
     },
   ],
-
+  plugins: ['./src/plugins/tailwind-config.js'],
   presets: [
     [
       'classic',
@@ -99,10 +99,10 @@ const config: Config = {
           priority: 0.5,
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
-          createSitemapItems: async params => {
+          createSitemapItems: async (params) => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter(item => !item.url.includes('/page/'));
+            return items.filter((item) => !item.url.includes('/page/'));
           },
         },
       } satisfies Preset.Options,
@@ -118,7 +118,7 @@ const config: Config = {
       { name: 'author', content: 'Praveen Singh' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@codepedia' },
-      { name: 'twitter:creator', content: '@praveenskg' },
+      { name: 'twitter:creator', content: '@its_Praveen_s' },
       { name: 'og:type', content: 'website' },
       {
         name: 'og:title',
@@ -157,9 +157,9 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docSidebar',
           position: 'left',
-          label: 'Docs',
+          label: 'Overview',
         },
         {
           type: 'docSidebar',
@@ -174,14 +174,20 @@ const config: Config = {
           label: 'React',
         },
         {
+          type: 'docSidebar',
+          sidebarId: 'cheatSheetSidebar',
+          position: 'left',
+          label: 'Cheat Sheets',
+        },
+        {
           to: '/blog',
           label: 'Blog',
           position: 'left',
         },
         {
-          href: 'https://github.com/Praveenskg/codepedia',
-          position: 'right',
-          className: 'header-github-link',
+          'href': 'https://github.com/Praveenskg/codepedia',
+          'position': 'right',
+          'className': 'header-github-link',
           'aria-label': 'GitHub repository',
         },
       ],

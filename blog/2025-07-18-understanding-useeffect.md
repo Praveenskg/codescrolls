@@ -1,10 +1,14 @@
 ---
-title: "Understanding useEffect Hook in React — With Practical Examples 🚀"
-description: "Learn how useEffect works in React, common pitfalls, and how to use it like a pro with real-world examples."
+title: 'Understanding useEffect Hook in React — With Practical Examples 🚀'
+description: 'Learn how useEffect works in React, common pitfalls, and how to use it like a pro with real-world examples.'
+slug: react-useeffect-hook
 tags: [react, hooks, useEffect, beginners]
 authors: [praveen]
-slug: understanding-useEffect-hook
+image: /img/blog/react.png
+keywords: ['react useeffect', 'useeffect hook', 'react hooks', 'side effects in react']
 ---
+
+![React useEffect Cover](/img/blog/react.png)
 
 React introduced Hooks in version 16.8 to make functional components powerful. Among them, `useEffect` is one of the most commonly used (and misunderstood!) hooks.
 
@@ -53,7 +57,7 @@ Run the effect only once when the component mounts:
 
 ```tsx
 useEffect(() => {
-  console.log("Component mounted!");
+  console.log('Component mounted!');
 }, []);
 ```
 
@@ -63,7 +67,7 @@ useEffect(() => {
 
 ```tsx
 useEffect(() => {
-  console.log("Count changed:", count);
+  console.log('Count changed:', count);
 }, [count]);
 ```
 
@@ -78,12 +82,12 @@ Used for **unmounting** or unsubscribing:
 ```tsx
 useEffect(() => {
   const timer = setInterval(() => {
-    console.log("Tick");
+    console.log('Tick');
   }, 1000);
 
   return () => {
     clearInterval(timer);
-    console.log("Cleaned up!");
+    console.log('Cleaned up!');
   };
 }, []);
 ```
@@ -145,4 +149,3 @@ function UserList() {
 
 👍 If you liked this article, share it or leave a star!  
 🔁 Follow me for more bite-sized React blogs.
-

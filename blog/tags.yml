@@ -3,6 +3,11 @@ javascript:
   permalink: /javascript
   description: All posts related to JavaScript
 
+beginners:
+  label: Beginners
+  permalink: /beginners
+  description: All posts related to beginners
+
 variables:
   label: Variables
   permalink: /variables
