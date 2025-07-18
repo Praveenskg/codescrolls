@@ -1,4 +1,4 @@
-module.exports = function tailwindPlugin(context, options) {
+export default function tailwindPlugin(context, options) {
   return {
     name: 'tailwind-plugin',
     configurePostCss(postcssOptions) {
@@ -6,4 +6,4 @@ module.exports = function tailwindPlugin(context, options) {
       return postcssOptions;
     },
   };
-};
+}
