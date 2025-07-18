@@ -162,9 +162,16 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          to: '/docs/javascript',
-          label: 'JavaScript',
+          type: 'docSidebar',
+          sidebarId: 'javascriptSidebar',
           position: 'left',
+          label: 'JavaScript',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'reactSidebar',
+          position: 'left',
+          label: 'React',
         },
         {
           to: '/blog',
