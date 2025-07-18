@@ -1,6 +1,6 @@
 ---
-id: intro
-title: JavaScript Intro
+id: index
+title: JavaScript Overview
 sidebar_position: 1
 tags:
   - JavaScript

@@ -61,3 +61,92 @@
 .header-github-link:hover::before {
   background-color: var(--ifm-navbar-link-hover-color);
 }
+
+@media (min-width: 997px) {
+  .navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+.navbar__title {
+  background: linear-gradient(to right, #7f5af0, #2cb67d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar__item {
+  position: relative;
+  /* Needed for ::after */
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.navbar__item:hover {
+  transform: scale(1.05);
+}
+
+.navbar__item::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0%;
+  background-color: #7f5af0;
+  transition: width 0.3s ease;
+  margin-top: 4px;
+}
+
+.navbar__item:hover::after,
+.navbar__link--active::after {
+  width: 100%;
+}
+
+.navbar__link--active {
+  position: relative;
+  color: var(--ifm-color-primary);
+  padding-bottom: 4px;
+}
+
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: #7f5af0;
+  border-radius: 2px;
+}
+
+.footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.footer a {
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer__title {
+  font-weight: bold;
+}
+
+.footer__copyright {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}

@@ -39,6 +39,7 @@ export default function Home(): ReactNode {
             src={useBaseUrl('/img/undraw_docusaurus_react.svg')}
             alt="Code Categories"
             className={styles.categoryImage}
+            loading="lazy"
           />
           <h2 className={styles.categoriesHeading}>📂 Categories</h2>
           <hr className={styles.divider} />
