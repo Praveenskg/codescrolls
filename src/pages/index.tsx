@@ -2,12 +2,13 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import { inject } from '@vercel/analytics';
 import type { ReactNode } from 'react';
 import styles from './index.module.css';
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
-
+  inject();
   const categories = [
     {
       name: 'JavaScript',
