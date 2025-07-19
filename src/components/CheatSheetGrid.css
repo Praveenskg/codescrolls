@@ -1,0 +1,45 @@
+.cheatsheet-grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.cheatsheet-card {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.cheatsheet-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(127, 90, 240, 0.35);
+}
+
+.cheatsheet-icon {
+  height: 40px;
+  object-fit: contain;
+  filter: brightness(1);
+}
+
+html[data-theme='dark'] .cheatsheet-card {
+  background: rgba(30, 30, 30, 0.7);
+  border-color: #333;
+}
+
+html[data-theme='dark'] .cheatsheet-icon {
+  filter: brightness(0.9);
+}
+
+.cheatsheet-title {
+  margin-top: 0.5rem;
+  text-align: center;
+  color: inherit;
+}

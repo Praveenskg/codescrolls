@@ -1,5 +1,5 @@
 import Link from '@docusaurus/Link';
-import { Card, CardContent } from './ui/card';
+import './CheatSheetGrid.css';
 
 const cheatsheets = [
   { title: 'JavaScript', href: './cheatsheets/javascript', icon: '/img/skills/JavaScript.svg' },
@@ -14,19 +14,11 @@ const cheatsheets = [
 
 export default function CheatSheetGrid() {
   return (
-    <div className='mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+    <div className='cheatsheet-grid'>
       {cheatsheets.map(({ title, href, icon }) => (
-        <Link key={title} href={href} className='no-underline hover:no-underline'>
-          <Card className='border border-border bg-white/70 backdrop-blur-md transition-transform hover:scale-[1.03] dark:bg-[#1e1e1e]/70'>
-            <CardContent className='flex flex-col items-center justify-center space-y-2 p-4'>
-              <img
-                src={icon}
-                alt={`${title} icon`}
-                className='h-10 object-contain dark:brightness-90'
-              />
-              <strong className='text-center'>{title}</strong>
-            </CardContent>
-          </Card>
+        <Link key={title} href={href} className='cheatsheet-card'>
+          <img src={icon} alt={`${title} icon`} className='cheatsheet-icon' />
+          <strong className='cheatsheet-title'>{title}</strong>
         </Link>
       ))}
     </div>

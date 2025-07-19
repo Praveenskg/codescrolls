@@ -23,13 +23,6 @@ const config: Config = {
 
   headTags: [
     {
-      tagName: 'meta',
-      attributes: {
-        name: 'algolia-site-verification',
-        content: '6869A3EDC26A8235',
-      },
-    },
-    {
       tagName: 'link',
       attributes: {
         rel: 'preconnect',
@@ -53,7 +46,25 @@ const config: Config = {
       }),
     },
   ],
-  plugins: ['./src/plugins/tailwind-config.js'],
+
+  themes: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        indexPages: true,
+        docsRouteBasePath: '/docs',
+        hashed: true,
+        language: ['en'],
+        highlightSearchTermsOnTargetPage: true,
+        searchResultContextMaxLength: 50,
+        searchResultLimits: 8,
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+      },
+    ],
+    'docusaurus-theme-openapi-docs',
+  ],
+
   presets: [
     [
       'classic',
@@ -136,18 +147,10 @@ const config: Config = {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
+
     docs: {
       sidebar: { hideable: true },
     },
-
-    algolia: {
-      appId: 'I05FKPCL6E',
-      apiKey: '37cfe6d63256aed03b14e335eec696b4',
-      indexName: 'codepedia_pages',
-      contextualSearch: true,
-      placeholder: 'Search CodePedia...',
-    },
-
     navbar: {
       title: 'CodePedia',
       logo: {
@@ -223,6 +226,7 @@ const config: Config = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} CodePedia by Praveen Singh.`,
     },
+
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

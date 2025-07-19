@@ -9,6 +9,5 @@
   "quoteProps": "consistent",
   "bracketSpacing": true,
   "arrowParens": "always",
-  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./src/css/custom.css"
+  "plugins": ["prettier-plugin-organize-imports"]
 }
