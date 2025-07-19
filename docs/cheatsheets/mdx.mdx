@@ -1,0 +1,154 @@
+---
+id: mdx-cheatsheet
+title: MDX Cheatsheet
+sidebar_label: MDX CheatSheet
+description: Essential MDX syntax and examples for building interactive docs
+keywords: [mdx, markdown, react, cheatsheet, docusaurus]
+---
+
+# 📘 MDX Cheatsheet
+
+A quick reference guide to writing MDX – Markdown + JSX. Perfect for Docusaurus, Next.js, and other static site generators that support interactive documentation.
+
+---
+
+## 🔍 What is MDX?
+
+MDX lets you use **JSX (React components)** directly in Markdown files. It's like Markdown supercharged with interactivity.
+
+---
+
+## 📝 Basic Markdown Syntax
+
+```md
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+**Bold**  
+_Italic_  
+~~Strikethrough~~
+
+- List Item 1
+- List Item 2
+
+[Link](https://example.com)
+```
+
+---
+
+## ⚛️ Using JSX in MDX
+
+```jsx
+<h1>This is a JSX header inside MDX</h1>
+<MyComponent />
+```
+
+---
+
+## 📦 Importing Components
+
+```jsx
+import MyComponent from '../components/MyComponent';
+
+<MyComponent />;
+```
+
+---
+
+## 💡 Admonitions
+
+```md
+:::tip
+This is a tip.
+:::
+
+:::info
+This is some information.
+:::
+
+:::warning
+This is a warning.
+:::
+
+:::danger
+This is a danger alert!
+:::
+```
+
+| Type       | Syntax Example | Color  |
+| ---------- | -------------- | ------ |
+| ✅ Tip     | `:::tip`       | Green  |
+| 💡 Info    | `:::info`      | Blue   |
+| ⚠️ Warning | `:::warning`   | Orange |
+| ❌ Danger  | `:::danger`    | Red    |
+
+---
+
+## 🧪 Code Blocks
+
+### Static Code Block
+
+```js
+const greet = (name) => `Hello, ${name}`;
+```
+
+### Live Code Block (Docusaurus)
+
+```mdx
+import LiveCodeBlock from '@theme/LiveCodeBlock';
+
+<LiveCodeBlock language='js'>{`
+function Hello() {
+  return 'Hi!';
+}
+console.log(Hello());
+`}</LiveCodeBlock>
+```
+
+---
+
+## 🧱 Custom Components Example
+
+```jsx
+// MyCard.jsx
+export default function MyCard({ title, children }) {
+  return (
+    <div className='p-4 rounded-xl bg-blue-50 shadow'>
+      <h3>{title}</h3>
+      <div>{children}</div>
+    </div>
+  );
+}
+```
+
+Usage in MDX:
+
+```mdx
+import MyCard from '../components/MyCard';
+
+<MyCard title='Note'>This is a custom note card.</MyCard>
+```
+
+---
+
+## 🧾 Frontmatter
+
+```mdx
+---
+id: hello-mdx
+title: Hello from MDX
+sidebar_label: Hello MDX
+description: MDX frontmatter example
+---
+```
+
+---
+
+## 📚 Resources
+
+- [MDX Official Docs](https://mdxjs.com/)
+- [Docusaurus MDX Guide](https://docusaurus.io/docs/markdown-features/mdx)
+- [Markdown Guide](https://www.markdownguide.org/)

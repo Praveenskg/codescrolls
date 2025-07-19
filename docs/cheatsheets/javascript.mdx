@@ -1,0 +1,126 @@
+---
+id: javascript
+title: JavaScript Cheatsheet
+sidebar_label: JavaScript CheatSheet
+description: Essential JavaScript syntax and examples
+keywords: [javascript, cheatsheet, js, reference]
+---
+
+import LiveCodeBlock from '@theme/LiveCodeBlock';
+
+# 📘 JavaScript Cheatsheet
+
+A quick reference guide for essential JavaScript syntax, features, and patterns.
+
+---
+
+:::info
+JavaScript is a versatile language used both on the frontend and backend.
+:::
+
+## 🧠 Variables
+
+```js
+// Declare variables
+let name = 'Alice';
+const age = 25;
+var country = 'India';
+```
+
+---
+
+## 🔢 Data Types
+
+```js
+let name = 'Alice'; // String
+let age = 25; // Number
+let isActive = true; // Boolean
+let data = null; // Null
+let user; // Undefined
+let list = [1, 2, 3]; // Array
+let obj = { key: 'value' }; // Object
+```
+
+---
+
+## 🧮 Functions
+
+```js
+function greet(name) {
+  return 'Hello, ' + name + '!';
+}
+console.log(greet('Praveen'));
+```
+
+---
+
+## 🔁 Loops
+
+```js
+for (let i = 0; i < 3; i++) {
+  console.log('Loop:', i);
+}
+```
+
+---
+
+## 📦 Arrays
+
+```js
+let fruits = ['apple', 'banana', 'mango'];
+
+fruits.push('grape'); // Add to end
+fruits.pop(); // Remove from end
+fruits.shift(); // Remove from start
+fruits.unshift('kiwi'); // Add to start
+```
+
+---
+
+## 🧱 Objects
+
+```js
+let user = {
+  name: 'Praveen',
+  age: 28,
+  greet: function () {
+    return 'Hello!';
+  },
+};
+
+console.log(user.name);
+console.log(user['age']);
+console.log(user.greet());
+```
+
+---
+
+## 🔀 Conditionals
+
+```js
+let age = 20;
+
+if (age >= 18) {
+  console.log('Adult');
+} else {
+  console.log('Minor');
+}
+```
+
+---
+
+## 📚 Resources
+
+- [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [JavaScript.info](https://javascript.info/)
+- [ES6 Features](https://github.com/lukehoban/es6features)
+
+---
+
+:::tip Pro Tip
+
+- Use `const` by default, `let` if reassigning
+- Prefer `let` and `const` over `var`
+- Use `===` instead of `==` for safer comparisons
+- Use arrow functions for shorter syntax
+  :::
