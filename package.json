@@ -1,7 +1,26 @@
 {
-  "name": "codepedia",
+  "name": "codescrolls",
   "version": "1.0.0",
   "private": true,
+  "description": "A developer-focused documentation site built using Docusaurus.",
+  "keywords": [
+    "docusaurus",
+    "documentation",
+    "codescrolls",
+    "developer-docs",
+    "mdx",
+    "typescript"
+  ],
+  "author": "Praveen Singh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/praveenskg/codescrolls.git"
+  },
+  "bugs": {
+    "url": "https://github.com/praveenskg/codescrolls/issues"
+  },
+  "homepage": "https://codescrolls.site",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",

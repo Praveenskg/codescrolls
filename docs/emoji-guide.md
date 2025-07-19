@@ -5,9 +5,9 @@ sidebar_label: Emoji Guide
 sidebar_position: 2
 ---
 
-# 🌟 CodePedia Emoji Usage Guide
+# 🌟 CodeScrolls Emoji Usage Guide
 
-This guide helps contributors use emojis consistently across all **docs** and **blog posts** in CodePedia.
+This guide helps contributors use emojis consistently across all **docs** and **blog posts** in CodeScrolls.
 
 ---
 
@@ -39,4 +39,3 @@ You can use emojis in list items, especially when explaining pros, cons, or step
 - ✅ Easy to learn and use
 - 🚫 Not supported in older browsers
 - 🔄 Reusable components
-```

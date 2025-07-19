@@ -1,11 +1,11 @@
 {
-  "name": "CodePedia",
-  "short_name": "CodePedia",
+  "name": "CodeScrolls",
+  "short_name": "Scrolls",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
-  "description": "Your dev cheat sheet hub",
+  "theme_color": "#0ea5e9",
+  "description": "A curated hub of dev notes, snippets, cheatsheets and documentation",
   "icons": [
     {
       "src": "/img/logo-192.png",

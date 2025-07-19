@@ -3,15 +3,15 @@ import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
-  title: 'CodePedia',
-  tagline: 'Your developer library for language docs, tips, and cheat sheets.',
+  title: 'CodeScrolls',
+  tagline: 'Scroll through code. Learn. Build. Repeat.',
   favicon: 'img/logo.png',
   future: { v4: true },
 
-  url: 'https://docs.praveensingh.online',
+  url: 'https://codescrolls.site',
   baseUrl: '/',
   organizationName: 'Praveenskg',
-  projectName: 'codepedia',
+  projectName: 'codescrolls',
   trailingSlash: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -35,9 +35,9 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        'name': 'CodePedia',
-        'url': 'https://docs.praveensingh.online',
-        'logo': 'https://docs.praveensingh.online/img/logo.svg',
+        'name': 'CodeScrolls',
+        'url': 'https://codescrolls.site',
+        'logo': 'https://codescrolls.site/img/logo.svg',
         'sameAs': [
           'https://github.com/Praveenskg',
           'https://x.com/its_praveen_s',
@@ -54,21 +54,9 @@ const config: Config = {
         debug: false,
         offlineModeActivationStrategies: ['appInstalled', 'standalone', 'queryString'],
         pwaHead: [
-          {
-            tagName: 'link',
-            rel: 'icon',
-            href: '/img/logo-192.png',
-          },
-          {
-            tagName: 'link',
-            rel: 'manifest',
-            href: '/manifest.json',
-          },
-          {
-            tagName: 'meta',
-            name: 'theme-color',
-            content: '#3b82f6',
-          },
+          { tagName: 'link', rel: 'icon', href: '/img/logo-192.png' },
+          { tagName: 'link', rel: 'manifest', href: '/manifest.json' },
+          { tagName: 'meta', name: 'theme-color', content: '#3b82f6' },
         ],
       },
     ],
@@ -108,7 +96,7 @@ const config: Config = {
           anonymizeIP: true,
         },
         blog: {
-          blogTitle: 'CodePedia Blog',
+          blogTitle: 'CodeScrolls Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
           blogSidebarTitle: 'All Posts',
           blogSidebarCount: 'ALL',
@@ -117,8 +105,8 @@ const config: Config = {
           showLastUpdateTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
-            title: 'CodePedia Blog Feed',
-            description: 'Stay updated with the latest posts from CodePedia.',
+            title: 'CodeScrolls Blog Feed',
+            description: 'Stay updated with the latest posts from CodeScrolls.',
             copyright: `Copyright © ${new Date().getFullYear()} Praveen Singh`,
             language: 'en',
             xslt: true,
@@ -151,26 +139,20 @@ const config: Config = {
     metadata: [
       {
         name: 'keywords',
-        content: 'JavaScript, Web Development, Tutorials, Code, Programming, CodePedia',
+        content: 'JavaScript, Web Development, Tutorials, Code, Programming, CodeScrolls',
       },
       { name: 'author', content: 'Praveen Singh' },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@codepedia' },
+      { name: 'twitter:site', content: '@codescrolls' },
       { name: 'twitter:creator', content: '@its_Praveen_s' },
       { name: 'og:type', content: 'website' },
-      {
-        name: 'og:title',
-        content: 'CodePedia – Learn Web Development with Clean Notes',
-      },
+      { name: 'og:title', content: 'CodeScrolls – Learn Web Development with Clean Notes' },
       {
         name: 'og:description',
         content: 'JavaScript, frontend, backend, and dev tutorials in clear, organized docs.',
       },
-      {
-        name: 'og:image',
-        content: 'https://docs.praveensingh.online/img/cover.png',
-      },
-      { name: 'og:url', content: 'https://docs.praveensingh.online' },
+      { name: 'og:image', content: 'https://codescrolls.site/img/cover.png' },
+      { name: 'og:url', content: 'https://codescrolls.site' },
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
@@ -179,9 +161,9 @@ const config: Config = {
       sidebar: { hideable: true },
     },
     navbar: {
-      title: 'CodePedia',
+      title: 'CodeScrolls',
       logo: {
-        alt: 'CodePedia Logo',
+        alt: 'CodeScrolls Logo',
         src: 'img/logo.png',
       },
       items: [
@@ -215,7 +197,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          'href': 'https://github.com/Praveenskg/codepedia',
+          'href': 'https://github.com/Praveenskg/codescrolls',
           'position': 'right',
           'className': 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -240,18 +222,12 @@ const config: Config = {
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/questions/tagged/javascript',
             },
-            {
-              label: 'LinkedIn',
-              href: 'https://linkedin.com/in/praveenskg',
-            },
-            {
-              label: 'X (Twitter)',
-              href: 'https://x.com/its_praveen_s',
-            },
+            { label: 'LinkedIn', href: 'https://linkedin.com/in/praveenskg' },
+            { label: 'X (Twitter)', href: 'https://x.com/its_praveen_s' },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} CodePedia by Praveen Singh.`,
+      copyright: `Copyright © ${new Date().getFullYear()} CodeScrolls by Praveen Singh.`,
     },
 
     prism: {

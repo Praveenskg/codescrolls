@@ -60,7 +60,7 @@ export default function Home(): ReactNode {
         <section className={styles.introSection}>
           <h1 className={styles.introHeading}>
             Welcome to <span className={styles.gradientText1}>Code</span>
-            <span className={styles.gradientText2}>Pedia</span> 🚀
+            <span className={styles.gradientText2}>Scrolls</span> 🚀
           </h1>
           <p className={styles.introSubtext}>
             Your one-stop hub for coding cheat sheets, language guides, Git tricks, and dev notes.
@@ -71,7 +71,7 @@ export default function Home(): ReactNode {
             </Link>
             <Link
               className={styles.btnPurple}
-              href='https://github.com/Praveenskg/codepedia'
+              href='https://github.com/Praveenskg/codescrolls'
               target='_blank'
               rel='noopener noreferrer'
             >

@@ -1,15 +1,19 @@
-# 📘 CodePedia – Notes, Blogs & CheatSheet
+# 📘 CodeScrolls – Developer Docs, Notes & CheatSheets
 
-This is a documentation site built using [Docusaurus 3](https://docusaurus.io/), a modern static site generator.  
-It contains well-structured JavaScript notes, cheat sheets, and blogs.
+CodeScrolls is a powerful and minimal documentation site built using [Docusaurus 3](https://docusaurus.io/).  
+It includes well-organized technical notes, cheat sheets, blogs, and guides for developers.
+
+> 🧠 Learn faster. 📚 Refer anytime. 🚀 Level up your dev journey.
 
 ## 🚀 Features
 
-- ✍️ Markdown-based docs and blogs
-- 🧭 Sidebar navigation
-- 🔍 Full-text search
+- ✍️ Markdown-powered documentation & blogs
+- ⚡ Blazing-fast performance (static site)
+- 🔍 Full-text local search (no Algolia required)
+- 🧠 JavaScript, TypeScript, and more coming soon
+- 🧭 Sidebar navigation & dark mode
 - 🖼️ Local image support
-- 🌐 Custom domain: [docs.praveensingh.online](https://docs.praveensingh.online)
+- [Live Link](https://codescrolls.site)
 
 ---
 
@@ -75,7 +79,7 @@ This will:
 ## 🌐 Custom Domain Setup
 
 This site is served via a custom domain:  
-👉 [https://docs.praveensingh.online](https://docs.praveensingh.online)
+👉 [CodeScrolls](https://codescrolls.site)
 
 Make sure to:
 
@@ -104,4 +108,3 @@ Make sure to:
 
 Made with ❤️ by [Praveen Singh](https://github.com/praveenskg)
 
----
