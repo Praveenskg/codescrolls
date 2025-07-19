@@ -79,7 +79,7 @@ export default function Home(): ReactNode {
         </section>
         <section className={styles.categorySection}>
           <img
-            src={useBaseUrl('/img/undraw_docusaurus_react.svg')}
+            src={useBaseUrl('/img/react.png')}
             alt='Code Categories'
             className={styles.categoryImg}
             loading='eager'

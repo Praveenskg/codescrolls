@@ -79,15 +79,13 @@ const config: Config = {
 
   themes: [
     [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
+      '@easyops-cn/docusaurus-search-local',
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
       {
-        indexPages: true,
-        docsRouteBasePath: '/docs',
         hashed: true,
         language: ['en'],
         highlightSearchTermsOnTargetPage: true,
-        searchResultContextMaxLength: 50,
-        searchResultLimits: 8,
+        explicitSearchResultPath: true,
       },
     ],
     '@docusaurus/theme-live-codeblock',
