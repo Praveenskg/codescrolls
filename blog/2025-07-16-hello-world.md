@@ -37,4 +37,3 @@ Think of it as your digital second brain for all things dev.
 ## 📝 Writing with Markdown
 
 Creating content in Docusaurus is incredibly fun and flexible. You write in Markdown, and it just works.
-

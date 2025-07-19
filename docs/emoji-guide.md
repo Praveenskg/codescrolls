@@ -39,3 +39,4 @@ You can use emojis in list items, especially when explaining pros, cons, or step
 - ✅ Easy to learn and use
 - 🚫 Not supported in older browsers
 - 🔄 Reusable components
+```

@@ -107,4 +107,3 @@ Make sure to:
 ## 🧑‍🎓 Author
 
 Made with ❤️ by [Praveen Singh](https://github.com/praveenskg)
-

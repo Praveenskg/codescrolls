@@ -53,7 +53,6 @@ export default function Home(): ReactNode {
     },
   ];
 
-
   return (
     <Layout title={`Welcome to ${siteConfig.title}`} description={siteConfig.tagline}>
       <main className={styles.homeMain}>
