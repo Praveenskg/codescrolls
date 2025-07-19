@@ -77,7 +77,7 @@ const config: Config = {
         searchBarShortcutHint: true,
       },
     ],
-    'docusaurus-theme-openapi-docs',
+    '@docusaurus/theme-live-codeblock',
   ],
 
   presets: [
@@ -156,7 +156,9 @@ const config: Config = {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
-
+    liveCodeBlock: {
+      playgroundPosition: 'bottom',
+    },
     docs: {
       sidebar: { hideable: true },
     },
