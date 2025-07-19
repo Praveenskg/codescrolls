@@ -2,53 +2,51 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import { inject } from '@vercel/analytics';
 import type { ReactNode } from 'react';
 import styles from './index.module.css';
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
-  inject();
   const categories = [
     {
       name: 'JavaScript',
       href: '/docs/javascript',
-      icon: '/img/skills/JavaScript.svg',
+      icon: '/img/skills/JavaScript.png',
       description:
         'Learn the most popular programming language of the web. Master variables, functions, DOM manipulation, and ES6+ features.',
     },
     {
       name: 'TypeScript',
       href: '/docs/typescript',
-      icon: '/img/skills/TypeScript.svg',
+      icon: '/img/skills/TypeScript.png',
       description:
         'TypeScript is JavaScript with superpowers. Add static typing, interfaces, and make your code safer and scalable.',
     },
     {
       name: 'React',
       href: '/docs/react',
-      icon: '/img/skills/React.svg',
+      icon: '/img/skills/React.png',
       description:
         'Build dynamic and fast UIs with React. Learn about components, hooks, state management, and the React ecosystem.',
     },
     {
       name: 'Git & GitHub',
       href: '/docs/git',
-      icon: '/img/skills/Git.svg',
+      icon: '/img/skills/Git.png',
       description:
         'Version control your projects with Git. Learn how to collaborate using GitHub, pull requests, and best practices.',
     },
     {
       name: 'Databases',
       href: '/docs/database',
-      icon: '/img/skills/Supabase.svg',
+      icon: '/img/skills/Supabase.png',
       description:
         'Understand the basics of SQL and NoSQL databases. Get hands-on with tools like Supabase and PostgreSQL.',
     },
     {
       name: 'Linux',
       href: '/docs/linux',
-      icon: '/img/skills/Linux.svg',
+      icon: '/img/skills/Linux.png',
       description:
         'Navigate and control systems using Linux commands. Perfect for developers and server-side operations.',
     },
@@ -84,14 +82,19 @@ export default function Home(): ReactNode {
             src={useBaseUrl('/img/undraw_docusaurus_react.svg')}
             alt='Code Categories'
             className={styles.categoryImg}
-            loading='lazy'
+            loading='eager'
           />
           <h2 className={styles.categoryHeading}>Categories</h2>
           <hr className={styles.categoryUnderline} />
           <div className={styles.categoryGrid}>
             {categories.map(({ name, href, icon, description }) => (
               <Link key={name} to={href} className={styles.categoryCard}>
-                <img src={useBaseUrl(icon)} alt={name} className={styles.categoryIcon} />
+                <img
+                  src={useBaseUrl(icon)}
+                  alt={name}
+                  className={styles.categoryIcon}
+                  loading='lazy'
+                />
                 <span className={styles.categoryName}>{name}</span>
                 <p className={styles.categoryDescription}>{description}</p>
               </Link>

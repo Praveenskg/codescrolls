@@ -24,9 +24,17 @@
 }
 
 .cheatsheet-icon {
-  height: 40px;
+  width: 64px;
+  height: 64px;
   object-fit: contain;
-  filter: brightness(1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.cheatsheet-card:hover .cheatsheet-icon {
+  transform: scale(1.05);
 }
 
 html[data-theme='dark'] .cheatsheet-card {

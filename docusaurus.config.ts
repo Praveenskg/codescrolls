@@ -68,6 +68,13 @@ const config: Config = {
         ],
       },
     ],
+    [
+      'vercel-analytics',
+      {
+        debug: true,
+        mode: 'auto',
+      },
+    ],
   ],
 
   themes: [
@@ -81,8 +88,6 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         searchResultContextMaxLength: 50,
         searchResultLimits: 8,
-        searchBarShortcut: true,
-        searchBarShortcutHint: true,
       },
     ],
     '@docusaurus/theme-live-codeblock',
