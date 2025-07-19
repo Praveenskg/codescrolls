@@ -1,0 +1,185 @@
+---
+id: git
+title: Git Cheatsheet
+sidebar_label: Git CheatSheet
+description: Essential Git commands for version control
+keywords: [git, cheatsheet, version control, commands]
+---
+
+# 🧠 Git Cheatsheet
+
+A handy reference for common Git commands used in day-to-day development.
+
+---
+
+![Git Workflow](/img/skills/Git.svg)
+
+## ⚙️ Setup
+
+```bash
+# Set your identity
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+
+# Check your configuration
+git config --list
+```
+
+---
+
+## 🌱 Start a Project
+
+```bash
+# Initialize a new repository
+git init
+
+# Clone an existing repository
+git clone https://github.com/user/repo.git
+```
+
+---
+
+## 📁 Working with Files
+
+```bash
+# Check status
+git status
+
+# Stage files
+git add filename
+git add .  # stage all
+
+# Commit changes
+git commit -m "Your message"
+
+# Remove a file from the repo
+git rm filename
+```
+
+---
+
+## 🔄 Branching
+
+```bash
+# List branches
+git branch
+
+# Create a new branch
+git branch new-feature
+
+# Switch to a branch
+git checkout new-feature
+
+# Create and switch
+git checkout -b new-feature
+```
+
+---
+
+## 🔀 Merging and Rebase
+
+```bash
+# Merge a branch into the current one
+git merge branch-name
+
+# Rebase current branch onto another
+git rebase main
+```
+
+---
+
+## ⬆️ Push and Pull
+
+```bash
+# Push to remote
+git push origin branch-name
+
+# Pull from remote
+git pull origin branch-name
+```
+
+---
+
+## 🧹 Clean and Undo
+
+```bash
+# Discard local changes
+git checkout -- filename
+
+# Unstage a file
+git reset filename
+
+# Undo last commit (keep changes)
+git reset --soft HEAD~1
+```
+
+---
+
+## 🕓 Logs & History
+
+```bash
+# View commit log
+git log
+
+# One-line summary
+git log --oneline
+
+# Who changed what & when
+git blame filename
+```
+
+---
+---
+
+## 🛠️ Fixing an Issue (Best Practice Workflow)
+
+```bash
+# 1. Make sure you're on the latest main branch
+git checkout main
+git pull origin main
+
+# 2. Create a new branch for the fix
+git checkout -b fix/bug-description
+
+# 3. Make your code changes...
+
+# 4. Stage and commit your changes
+git add .
+git commit -m "fix: meaningful message about the bug fix"
+
+# 5. Push the branch to origin
+git push origin fix/bug-description
+
+# 6. Open a Pull Request on GitHub
+# (Describe the issue and how it was fixed)
+
+# 7. After review, merge into main
+# (Use GitHub UI or CLI)
+
+# 8. Delete local & remote branch
+git branch -d fix/bug-description
+git push origin --delete fix/bug-description
+```
+
+✅ **Tips**:
+- Use conventional commit messages like `fix:` or `bug:`.
+- Always pull the latest changes before starting.
+- Small, focused commits make reviews easier.
+
+🧩 **Example PR Title**: `fix: prevent crash when user data is missing`
+
+---
+
+## 🔍 Git Tips
+
+- ✅ Use `.gitignore` to skip unnecessary files.
+- 🧪 `git stash` to temporarily save work.
+- 🔒 Use SSH instead of HTTPS for authentication.
+
+---
+
+## 📚 Resources
+
+- [Git Documentation](https://git-scm.com/doc)
+- [Pro Git Book](https://git-scm.com/book/en/v2)
+- [GitHub CLI](https://cli.github.com/)
