@@ -1,0 +1,210 @@
+---
+id: linux
+title: 🐧 Linux Cheatsheet
+sidebar_label: Linux CheatSheet
+description: Essential Linux commands and operations for everyday use
+keywords: [linux, terminal, shell, cheatsheet, commands]
+---
+
+# 🐧 Linux Cheatsheet
+
+A complete reference for common and advanced Linux commands — from navigation to permissions, networking, and beyond.
+
+---
+
+## 📁 File & Directory Navigation
+
+```bash
+# Show current directory
+pwd
+
+# List contents
+ls        # basic
+ls -l     # long format
+ls -a     # include hidden files
+ls -lh    # human-readable
+
+# Change directory
+cd /path/to/dir
+cd ~      # home directory
+cd ..     # up one level
+
+# Make or remove directories
+mkdir newfolder
+mkdir -p a/b/c      # nested dirs
+rmdir emptyfolder
+rm -r folder        # non-empty
+```
+
+---
+
+## 📄 File Operations
+
+```bash
+# Create a file
+touch file.txt
+
+# View file contents
+cat file.txt
+less file.txt       # scrollable
+head -n 10 file.txt
+tail -n 10 file.txt
+tail -f logfile.log # live updates
+
+# Copy, move, rename
+cp source.txt dest.txt
+mv file.txt newname.txt
+rm file.txt         # delete
+
+# Search inside files
+grep "text" file.txt
+grep -r "text" ./folder
+```
+
+---
+
+## ✍️ Editing Files
+
+```bash
+nano file.txt     # beginner-friendly
+vim file.txt      # advanced
+code file.txt     # VS Code (if installed)
+```
+
+---
+
+## 🔐 Permissions
+
+```bash
+# View permissions
+ls -l
+
+# Change permissions (r=4, w=2, x=1)
+chmod 755 script.sh      # rwxr-xr-x
+chmod +x script.sh       # add executable
+
+# Change ownership
+chown user:group file
+```
+
+---
+
+## 📦 Package Management
+
+### Ubuntu/Debian (apt)
+
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install packagename
+sudo apt remove packagename
+```
+
+### Arch (pacman)
+
+```bash
+sudo pacman -Syu
+sudo pacman -S packagename
+sudo pacman -R packagename
+```
+
+---
+
+## 🧠 System Info & Monitoring
+
+```bash
+# System info
+uname -a
+hostnamectl
+top                # live process viewer
+htop               # better top (if installed)
+
+# Memory & disk
+free -h
+df -h
+du -sh *
+
+# Uptime & load
+uptime
+```
+
+---
+
+## 🔄 Process Management
+
+```bash
+# Show running processes
+ps aux
+
+# Kill a process
+kill PID
+kill -9 PID        # force kill
+
+# Find by name
+pgrep firefox
+pkill firefox
+```
+
+---
+
+## 🌐 Networking
+
+```bash
+# Network info
+ip a
+ifconfig           # older systems
+ping google.com
+curl ifconfig.me   # public IP
+
+# Open ports & listening services
+netstat -tuln
+ss -tuln
+
+# DNS lookup
+nslookup domain.com
+dig domain.com
+```
+
+---
+
+## 🧪 Misc Commands
+
+```bash
+# History & shortcuts
+history
+!!         # run last command
+!n         # run command #n
+
+# Alias
+alias ll="ls -la"
+
+# Disk usage
+du -sh *
+
+# Find files
+find . -name "*.js"
+
+# Schedule jobs
+crontab -e
+
+# Background jobs
+&     # run in background
+jobs # list background jobs
+fg   # bring job to foreground
+```
+
+---
+
+## 📚 Resources
+
+- [tldr.sh](https://tldr.sh) – Simplified man pages
+- [explainshell.com](https://explainshell.com) – Explain shell commands
+- [cheat.sh](https://cheat.sh) – CLI cheatsheets
+
+---
+
+🧵 **Pro Tip**: Use `man command` to read the manual page for any command.
+
+📂 **Example**: `man ls`
+
+
