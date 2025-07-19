@@ -8,6 +8,7 @@
 .introSection {
   text-align: center;
   max-width: 48rem;
+  margin: 0 auto;
 }
 
 .introHeading {
@@ -110,18 +111,14 @@
   padding: 1.5rem;
   border: 1px solid #ddd;
   border-radius: 0.75rem;
+  background: #f9f9f9;
   transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .categoryCard:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(127, 90, 240, 0.35);
-}
-
-html[data-theme='dark'] .categoryCard {
-  background: rgba(30, 30, 30, 0.7);
-  border-color: #333;
 }
 
 .categoryIcon {
@@ -129,12 +126,51 @@ html[data-theme='dark'] .categoryCard {
   margin-bottom: 0.5rem;
 }
 
-html[data-theme='dark'] .categoryIcon {
-  filter: brightness(0.9);
-}
-
 .categoryName {
   font-size: 0.875rem;
   font-weight: 500;
   color: #374151;
+  transition: color 0.3s ease;
+}
+
+.categoryCard:hover .categoryName {
+  color: #3b82f6;
+}
+
+.categoryDescription {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.categoryCard:hover .categoryDescription {
+  color: #4b5563;
+}
+
+html[data-theme='dark'] .categoryCard {
+  background: rgba(30, 30, 30, 0.7);
+  border-color: #333;
+}
+
+html[data-theme='dark'] .categoryIcon {
+  filter: brightness(0.9);
+}
+
+html[data-theme='dark'] .categoryName {
+  color: #e5e7eb;
+}
+
+html[data-theme='dark'] .categoryCard:hover .categoryName {
+  color: #38bdf8;
+}
+
+html[data-theme='dark'] .categoryDescription {
+  color: #ccc;
+}
+
+html[data-theme='dark'] .categoryCard:hover .categoryDescription {
+  color: #e0e0e0;
 }
