@@ -1,0 +1,108 @@
+---
+id: components
+title: React Components
+description: Learn how to build and use functional components, pass props, and manage state in React with practical live examples.
+keywords: [react, components, functional components, jsx, props, state, hooks, ui development]
+sidebar_position: 2
+---
+
+
+# 🧱 React Components
+
+React components are the **building blocks** of every React application. They help structure your UI into reusable, independent pieces.
+
+:::info Types of Components
+React has two primary types of components:
+
+- 🧠 **Functional Components** – modern and most commonly used.
+- 🏗️ **Class Components** – older, but still work in legacy codebases.
+:::
+
+---
+
+## ✅ Functional Component Example
+
+```jsx live
+function Welcome() {
+  return <h1>Welcome to CodeScrolls 🚀</h1>;
+}
+```
+
+---
+
+## 📥 Passing Props
+
+Props allow you to pass data from one component to another.
+
+```jsx
+function GreetUser({ name }) {
+  return <h2>Hello, {name} 👋</h2>;
+}
+
+<GreetUser name='Praveen' />;
+```
+
+---
+
+## ♻️ Reusable Button Component
+
+```jsx
+function Button({ label, onClick }) {
+  return <button onClick={onClick}>{label}</button>;
+}
+
+<Button label='Click Me' onClick={() => alert('Clicked!')} />;
+```
+
+---
+
+## 🧠 State with useState Hook
+
+```jsx
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+<Counter />;
+```
+
+---
+
+## 🧱 Composition: Nesting Components
+
+```jsx
+function Card({ title, content }) {
+  return (
+    <div>
+      <h3>{title}</h3>
+      <p>{content}</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Card title='Intro to React' content='Learn to build UIs with components.' />
+      <Card title='Next Steps' content='Explore hooks, state, props, and more.' />
+    </>
+  );
+}
+
+<App />;
+```
+
+---
+
+> ⚡ Components should always be **pure functions** — given the same props, they must return the same UI output.
+
+---
+
+Need a refresher?  
+👉 Head back to the [React Overview](./)

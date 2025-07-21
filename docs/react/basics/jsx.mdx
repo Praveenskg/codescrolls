@@ -1,0 +1,125 @@
+---
+id: jsx
+title: JSX in React
+description: Learn how JSX works in React – the syntax extension that lets you write HTML in JavaScript.
+slug: /docs/react/basics/jsx
+sidebar_position: 1
+keywords:
+  - JSX
+  - React JSX
+  - React syntax
+  - JavaScript XML
+  - JSX tutorial
+  - React basics
+image: /img/cover.png
+---
+
+# 🎨 JSX – JavaScript XML
+
+JSX is a **syntax extension** for JavaScript that lets you write **HTML-like code inside JavaScript**. It's used in React to describe what the UI should look like.
+
+---
+
+## 📦 Why Use JSX?
+
+- It’s **more readable** than `React.createElement()`
+- JSX brings **HTML and JS closer**
+- Enables **dynamic rendering** using JavaScript expressions
+- Cleaner and **component-friendly**
+
+---
+
+## ✍️ Basic JSX Example
+
+```jsx live
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+```
+
+---
+
+## 🔄 Embedding JavaScript Expressions
+
+Use curly braces `{}` to embed JavaScript in JSX.
+
+```jsx live
+function GreetingWithName() {
+  const name = 'Praveen';
+  return <h2>Hello, {name} 👋</h2>;
+}
+```
+
+---
+
+## ⚠️ JSX Rules You Must Know
+
+- Return only **one root element** from a component
+- Use `className` instead of `class`
+- Event handlers like `onClick` are **camelCase**
+
+```jsx live
+function ButtonExample() {
+  return (
+    <button className='bg-blue-600 text-white px-4 py-2 rounded' onClick={() => alert('Clicked!')}>
+      Click Me
+    </button>
+  );
+}
+```
+
+---
+
+## 🔁 Convert HTML to JSX
+
+Here’s how you convert a simple HTML snippet to JSX.
+
+**HTML:**
+
+```html
+<div class="box">
+  <h2>Title</h2>
+  <p>Some text here.</p>
+</div>
+```
+
+**JSX:**
+
+```jsx live
+function HtmlToJsx() {
+  return (
+    <div className='box'>
+      <h2>Title</h2>
+      <p>Some text here.</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 🧠 JSX Behind the Scenes
+
+JSX is **syntactic sugar** for:
+
+```jsx
+<h1>Hello</h1>
+```
+
+which compiles to:
+
+```js
+React.createElement('h1', null, 'Hello');
+```
+
+---
+
+## ✅ Recap
+
+- JSX makes React code clean and readable
+- You can embed JS expressions using `{}`
+- JSX still compiles to `React.createElement` internally
+
+---
+
+> 🔍 Tip: Use an online converter like [transform.tools](https://transform.tools/html-to-jsx) to convert HTML to JSX.

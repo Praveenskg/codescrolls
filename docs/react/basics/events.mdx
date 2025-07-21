@@ -1,0 +1,112 @@
+---
+id: events
+title: Handling Events in React
+description: Learn how to handle events in React like onClick, onChange, and more using JSX syntax.
+keywords: [react, events, onclick, onchange, form events, event handling, react events]
+sidebar_position: 3
+---
+
+# React Events
+
+React uses a **synthetic event system** to handle DOM events across all browsers, making your event handling consistent and reliable.
+
+Just like in HTML, you can use events like `onClick`, `onChange`, `onSubmit`, etc., but with **camelCase** in JSX.
+
+---
+
+## 🖱️ onClick Example
+
+```jsx live
+function ClickButton() {
+  function handleClick() {
+    alert('You clicked the button!');
+  }
+
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+
+---
+
+## 🎯 Passing Arguments to Event Handlers
+
+```jsx
+function GreetUser({ name }) {
+  function sayHello(user) {
+    alert(`Hello, ${user}!`);
+  }
+
+  return <button onClick={() => sayHello(name)}>Greet {name}</button>;
+}
+
+<GreetUser name='Praveen' />;
+```
+
+---
+
+## 📝 Handling Input with onChange
+
+```jsx live
+function NameInput() {
+  const [name, setName] = React.useState('');
+
+  function handleChange(event) {
+    setName(event.target.value);
+  }
+
+  return (
+    <>
+      <input type='text' placeholder='Enter name' value={name} onChange={handleChange} />
+      <p>Hello, {name || 'Stranger'} 👋</p>
+    </>
+  );
+}
+```
+
+---
+
+## 📬 Form Submit with onSubmit
+
+```jsx live
+function ContactForm() {
+  const [email, setEmail] = React.useState('');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(`Thanks for subscribing, ${email}`);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type='email'
+        placeholder='Enter email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <button type='submit'>Subscribe</button>
+    </form>
+  );
+}
+```
+
+---
+
+## 🚨 Common Rules
+
+:::tip Important
+
+- Use **camelCase** for event names (`onClick`, `onChange`, `onSubmit`)
+- Don't use `return false` to prevent default behavior — use `event.preventDefault()` instead
+- Event handlers are **functions**, not strings (`onClick="alert('hi')"` vs `onClick={() => alert('hi')}`)
+  :::
+
+---
+
+## ✅ Summary
+
+React events:
+
+- Work like HTML but use camelCase
+- Wrap native DOM events with a synthetic layer for consistency
+- Help you handle interaction, input, and form logic
