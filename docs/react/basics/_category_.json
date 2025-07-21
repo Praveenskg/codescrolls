@@ -1,0 +1,10 @@
+{
+  "label": "React - Basics",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Basic React Concepts",
+    "description": "Fundamental concepts like JSX, components, props, and state."
+  }
+}

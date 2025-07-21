@@ -13,7 +13,7 @@ authors: praveen
 
 Here are the top 10 extensions I swear by as a web developer:
 
----
+## <!-- truncate -->
 
 ## 1. **Prettier – Code Formatter**
 

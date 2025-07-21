@@ -192,3 +192,31 @@
     var(--ifm-color-emphasis-100) 100%
   );
 }
+
+/* custom.css */
+
+.main-wrapper {
+  display: flex;
+}
+
+.theme-doc-sidebar-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-shrink: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.theme-doc-main-container {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.theme-doc-sidebar-item,
+.menu__link {
+  white-space: normal;
+  word-break: break-word;
+}

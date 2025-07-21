@@ -1,7 +1,10 @@
 {
   "label": "JavaScript - Basics",
   "position": 2,
+  "collapsed": false,
   "link": {
-    "type": "generated-index"
+    "type": "generated-index",
+    "title": "JavaScript Basics",
+    "description": "Fundamental concepts of JavaScript including variables, functions, loops, and more."
   }
 }
