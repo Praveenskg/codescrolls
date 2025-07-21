@@ -1,22 +1,23 @@
 ---
-id: react-overview
-title: Introduction to React
+id: index
+title: React Overview
+sidebar_position: 1
+slug: /docs/react
 sidebar_label: React Overview
-slug: /react
 ---
 
 # ⚛️ Introduction to React
 
-React is a **JavaScript library** for building **user interfaces**, maintained by Facebook. It allows developers to create large web applications that can update and render efficiently in response to data changes.
+React is a **JavaScript library** for building **user interfaces**, maintained by Facebook. It allows developers to create large web applications that update and render efficiently in response to data changes.
 
 ---
 
 ## 🎯 Why Use React?
 
-- ✅ **Component-Based**: Build encapsulated components that manage their own state.
-- ⚡ **Declarative**: Design simple views for each state in your application.
-- 🚀 **Fast & Efficient**: Virtual DOM for better performance.
-- 🌐 **Ecosystem & Community**: Vast community and ecosystem of libraries.
+- ✅ **Component-Based**: Build encapsulated components that manage their own state
+- ⚡ **Declarative**: Design simple views for each state in your application
+- 🚀 **Fast & Efficient**: Virtual DOM improves rendering performance
+- 🌐 **Ecosystem & Community**: Huge community and ecosystem of tools and libraries
 
 ---
 
@@ -32,11 +33,11 @@ React is a **JavaScript library** for building **user interfaces**, maintained b
 
 ## 🔧 Core Concepts
 
-- **JSX**: JavaScript + HTML-like syntax.
-- **Components**: Reusable building blocks.
-- **Props**: Pass data to components.
-- **State**: Handle dynamic data.
-- **Hooks**: Functional component features (like `useState`, `useEffect`).
+- **JSX**: JavaScript + HTML-like syntax
+- **Components**: Reusable building blocks of UI
+- **Props**: Pass data to components
+- **State**: Handle dynamic data
+- **Hooks**: Functional component features (`useState`, `useEffect`, etc.)
 
 ---
 
@@ -50,7 +51,7 @@ React is a **JavaScript library** for building **user interfaces**, maintained b
 - Lists and Keys
 - Hooks (useState, useEffect, etc.)
 
-> ✅ Make sure you’re familiar with JavaScript fundamentals before diving into React!
+> Before you begin, make sure you're comfortable with JavaScript fundamentals like variables, functions, and ES6 syntax.
 
 ---
 

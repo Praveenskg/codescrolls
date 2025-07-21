@@ -100,7 +100,6 @@ Next time your JS code behaves weirdly, ask yourself:
 
 > "Is this a hoisting issue?"
 
-
 ---
 
 Happy Coding! 💻

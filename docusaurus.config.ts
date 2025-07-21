@@ -200,6 +200,12 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'typescriptSidebar',
+          position: 'left',
+          label: 'Typescript',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'cheatSheetSidebar',
           position: 'left',
           label: 'Cheat Sheets',

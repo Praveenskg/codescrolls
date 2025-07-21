@@ -1,7 +1,7 @@
 ---
-title: "Top 10 VSCode Extensions for Web Developers 🚀"
-description: "These 10 VSCode extensions will seriously boost your web development productivity."
-tags: ["vscode", "web-development", "tools", "productivity"]
+title: 'Top 10 VSCode Extensions for Web Developers 🚀'
+description: 'These 10 VSCode extensions will seriously boost your web development productivity.'
+tags: ['vscode', 'web-development', 'tools', 'productivity']
 date: 2025-07-20
 authors: praveen
 ---
@@ -105,6 +105,7 @@ Think of Thunder Client as a lightweight Postman inside VSCode. Perfect for quic
 📦 Extension ID: `rangav.vscode-thunder-client`
 
 ---
+
 ---
 
 ## 🔥 Bonus Extensions (Because 10 Is Never Enough)
@@ -161,7 +162,6 @@ Bloggers and docs writers, this one's for you. It enhances Markdown editing in e
 That’s it for real this time! 😄  
 Now go supercharge your VSCode and get building.
 
-
 ## Final Thoughts 🧠
 
 Tools don’t define you, but the right tools definitely boost your workflow.  
@@ -173,4 +173,3 @@ Got a favorite VSCode extension that’s not on this list? Drop a comment and le
 
 🔥 Save this post, share it with your dev buddies, and keep building cool stuff.  
 Until next time — happy coding!
-
