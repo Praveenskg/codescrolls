@@ -1,0 +1,108 @@
+---
+id: context-api
+title: React Context API
+description: Learn how to manage global state in React using Context API with practical examples and live code.
+keywords: [react, context api, global state, state management, hooks]
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 🧩 React Context API
+
+React's Context API is a way to manage **global state** across your app — like theme, auth, or user preferences — without passing props manually at every level.
+
+---
+
+## 📦 Why Use Context?
+
+- Avoid **prop drilling**
+- Share state/data globally
+- Simple alternative to Redux or Zustand for small/medium apps
+
+---
+
+## ⚙️ How It Works
+
+1. **Create a context**
+2. **Wrap your app with a Provider**
+3. **Consume with `useContext` hook**
+
+---
+
+## ✍️ Create & Provide Context
+
+```jsx 
+import React, { createContext, useState } from 'react';
+
+// 1. Create Context
+const ThemeContext = createContext();
+
+// 2. Provider Component
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+```
+
+---
+
+## 📥 Consume Context (Child Component)
+
+```jsx
+import { useContext } from 'react';
+
+function ThemeSwitcher() {
+  const { theme, setTheme } = React.useContext(ThemeContext);
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button
+        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      >
+        Toggle Theme
+      </button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🧪 Putting it Together
+
+```jsx 
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemeSwitcher />
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## 🔁 Best Practices
+
+- Keep Context small and focused (e.g. one for theme, one for auth)
+- Avoid overusing Context for frequently changing data (can cause re-renders)
+- Combine with `useReducer` for complex state logic
+
+---
+
+> 💡 **Context is perfect for global, read-heavy data**. For dynamic or large apps, you may consider libraries like Redux or Zustand.
+
+---
+
+## 📘 What's Next?
+
+- Learn about [useReducer](./hooks)
+- Dive into [Form Handling in React](./forms)

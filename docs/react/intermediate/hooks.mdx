@@ -1,0 +1,144 @@
+---
+id: hooks
+title: React Hooks
+description: Learn the basics of React Hooks like useState, useEffect, and useRef with hands-on live examples.
+keywords: [react hooks, useState, useEffect, useRef, functional components, react state]
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# 🔗 React Hooks
+
+React Hooks let you **use state and other React features** without writing a class. They make functional components more powerful.
+
+---
+
+## 📦 Commonly Used Hooks
+
+| Hook         | Description                                 |
+|--------------|---------------------------------------------|
+| `useState`   | Adds local state to functional components   |
+| `useEffect`  | Performs side effects in function components|
+| `useRef`     | Access DOM nodes or persist values          |
+
+---
+
+## 🔁 useState – For Component State
+
+```jsx live
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+<Counter />
+```
+
+---
+
+## ⚙️ useEffect – For Side Effects
+
+```jsx live
+function Timer() {
+  const [seconds, setSeconds] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prev) => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
+  return <p>Timer: {seconds}s</p>;
+}
+
+<Timer />
+```
+
+---
+
+## 🔍 useRef – For Persistent References
+
+```jsx live
+function FocusInput() {
+  const inputRef = React.useRef(null);
+
+  const handleFocus = () => {
+    inputRef.current?.focus();
+  };
+
+  return (
+    <>
+      <input ref={inputRef} placeholder="Click the button to focus me" />
+      <button onClick={handleFocus}>Focus Input</button>
+    </>
+  );
+}
+
+<FocusInput />
+```
+---
+
+## 🧩 Custom Hook – useLocalStorage
+
+Create your own reusable hooks for specific logic.
+
+```jsx 
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = React.useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : initialValue;
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+
+function ThemeSwitcher() {
+  const [theme, setTheme] = useLocalStorage("theme", "light");
+
+  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+
+  return (
+    <div>
+      <p>Current Theme: {theme}</p>
+      <button onClick={toggleTheme}>Toggle</button>
+    </div>
+  );
+}
+
+<ThemeSwitcher />
+```
+---
+
+## 💡 When to Use Hooks?
+
+- Manage local state (`useState`)
+- Perform side effects like data fetching (`useEffect`)
+- Access or persist DOM references (`useRef`)
+
+---
+
+:::tip Rules of Hooks
+- ✅ Call hooks at the **top level only**
+- ✅ Use hooks only in **React functional components**
+:::
+
+---
+
+## 📘 What’s Next?
+
+- Dive into [Context API](./context-api)
+- Learn how to handle [Forms](./forms)
+- Master effects with [useEffect](./useeffect)

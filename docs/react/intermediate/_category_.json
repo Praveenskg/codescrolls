@@ -1,0 +1,10 @@
+{
+  "label": "React - Intermediate",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Intermediate React Concepts",
+    "description": "Explore deeper React topics like hooks, context, forms, and side effects."
+  }
+}
