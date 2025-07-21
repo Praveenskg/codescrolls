@@ -2,7 +2,6 @@
 id: index
 title: React Overview
 sidebar_position: 1
-slug: /docs/react
 sidebar_label: React Overview
 ---
 
