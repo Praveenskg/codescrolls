@@ -1,0 +1,113 @@
+---
+id: literal-types
+title: Literal Types
+description: Learn how literal types in TypeScript let you define exact values a variable can hold for better safety and expressiveness.
+keywords:
+  - typescript
+  - literal types
+  - string literals
+  - number literals
+  - union types
+  - type safety
+  - exact values
+image: /img/meta/ts-literal-types.png
+tags: [typescript, literal types, basics]
+---
+
+# Literal Types in TypeScript
+
+Literal types allow you to specify the exact value a string, number, or boolean must have.
+
+---
+
+## 1. String Literal Types
+
+You can define a type that only allows specific string values.
+
+```ts
+type Direction = 'left' | 'right' | 'up' | 'down';
+
+function move(direction: Direction) {
+  console.log(`Moving ${direction}`);
+}
+
+move('left');
+// move("backward"); ❌ Error
+```
+
+---
+
+## 2. Number Literal Types
+
+Limit a variable to specific numeric values.
+
+```ts
+type DiceRoll = 1 | 2 | 3 | 4 | 5 | 6;
+
+function rollDice(roll: DiceRoll) {
+  console.log(`You rolled a ${roll}`);
+}
+
+rollDice(6);
+// rollDice(7); ❌ Error
+```
+
+---
+
+## 3. Boolean Literal Types
+
+You can narrow boolean values to only `true` or `false`.
+
+```ts
+type YesNo = true | false;
+
+function toggle(value: YesNo) {
+  console.log(`Value is now: ${!value}`);
+}
+
+toggle(true);
+```
+
+## 4. Literal Types with Union + Narrowing
+
+Useful when handling known state strings.
+
+```ts
+type Status = 'loading' | 'success' | 'error';
+
+function handleRequest(status: Status) {
+  if (status === 'loading') {
+    console.log('Please wait...');
+  } else if (status === 'success') {
+    console.log('Data loaded!');
+  } else {
+    console.log('Something went wrong.');
+  }
+}
+```
+
+---
+
+## 5. Literal Types in UI Patterns
+
+Great for design variants, theme options, etc.
+
+```ts
+type ButtonVariant = 'primary' | 'secondary' | 'danger';
+
+function createButton(variant: ButtonVariant) {
+  const styles = {
+    primary: 'bg-blue-500 text-white',
+    secondary: 'bg-gray-200 text-black',
+    danger: 'bg-red-600 text-white',
+  };
+  console.log(`Created ${variant} button with styles: ${styles[variant]}`);
+}
+
+createButton('danger');
+```
+
+:::tip Tip
+
+Literal types are often used with unions and discriminated unions for type-safe design patterns in UI and APIs.
+:::

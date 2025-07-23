@@ -1,0 +1,10 @@
+{
+  "label": "TypeScript - Intermediate",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Intermediate TypeScript Concepts",
+    "description": "Dive deeper into TypeScript with concepts like unions, intersections, type guards, narrowing, enums, literal types, and type assertions."
+  }
+}
