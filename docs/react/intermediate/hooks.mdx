@@ -17,11 +17,11 @@ React Hooks let you **use state and other React features** without writing a cla
 
 ## 📦 Commonly Used Hooks
 
-| Hook         | Description                                 |
-|--------------|---------------------------------------------|
-| `useState`   | Adds local state to functional components   |
-| `useEffect`  | Performs side effects in function components|
-| `useRef`     | Access DOM nodes or persist values          |
+| Hook        | Description                                  |
+| ----------- | -------------------------------------------- |
+| `useState`  | Adds local state to functional components    |
+| `useEffect` | Performs side effects in function components |
+| `useRef`    | Access DOM nodes or persist values           |
 
 ---
 
@@ -38,7 +38,7 @@ function Counter() {
   );
 }
 
-<Counter />
+<Counter />;
 ```
 
 ---
@@ -60,7 +60,7 @@ function Timer() {
   return <p>Timer: {seconds}s</p>;
 }
 
-<Timer />
+<Timer />;
 ```
 
 ---
@@ -77,21 +77,22 @@ function FocusInput() {
 
   return (
     <>
-      <input ref={inputRef} placeholder="Click the button to focus me" />
+      <input ref={inputRef} placeholder='Click the button to focus me' />
       <button onClick={handleFocus}>Focus Input</button>
     </>
   );
 }
 
-<FocusInput />
+<FocusInput />;
 ```
+
 ---
 
 ## 🧩 Custom Hook – useLocalStorage
 
 Create your own reusable hooks for specific logic.
 
-```jsx 
+```jsx
 function useLocalStorage(key, initialValue) {
   const [value, setValue] = React.useState(() => {
     const stored = localStorage.getItem(key);
@@ -106,9 +107,9 @@ function useLocalStorage(key, initialValue) {
 }
 
 function ThemeSwitcher() {
-  const [theme, setTheme] = useLocalStorage("theme", "light");
+  const [theme, setTheme] = useLocalStorage('theme', 'light');
 
-  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <div>
@@ -118,8 +119,9 @@ function ThemeSwitcher() {
   );
 }
 
-<ThemeSwitcher />
+<ThemeSwitcher />;
 ```
+
 ---
 
 ## 💡 When to Use Hooks?
@@ -131,9 +133,10 @@ function ThemeSwitcher() {
 ---
 
 :::tip Rules of Hooks
+
 - ✅ Call hooks at the **top level only**
 - ✅ Use hooks only in **React functional components**
-:::
+  :::
 
 ---
 

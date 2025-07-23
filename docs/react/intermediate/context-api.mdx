@@ -33,7 +33,7 @@ React's Context API is a way to manage **global state** across your app — like
 
 ## ✍️ Create & Provide Context
 
-```jsx 
+```jsx
 import React, { createContext, useState } from 'react';
 
 // 1. Create Context
@@ -43,11 +43,7 @@ const ThemeContext = createContext();
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
 }
 ```
 
@@ -64,11 +60,7 @@ function ThemeSwitcher() {
   return (
     <div>
       <p>Current theme: {theme}</p>
-      <button
-        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      >
-        Toggle Theme
-      </button>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
     </div>
   );
 }
@@ -78,7 +70,7 @@ function ThemeSwitcher() {
 
 ## 🧪 Putting it Together
 
-```jsx 
+```jsx
 function App() {
   return (
     <ThemeProvider>

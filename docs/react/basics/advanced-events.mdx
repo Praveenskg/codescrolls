@@ -1,0 +1,99 @@
+---
+id: advanced-events
+title: Advanced Event Handling in React
+description: Learn advanced React event handling including keyboard events, focus/blur, event propagation, and more.
+keywords: [react, events, keyboard, focus, blur, event bubbling, event delegation]
+sidebar_position: 4
+---
+
+import Link from '@docusaurus/Link';
+
+# ⚡ Advanced Event Handling in React
+
+After mastering basic events like `onClick` and `onChange`, it's time to explore more **advanced interactions**.
+
+---
+
+## ⌨️ Keyboard Events
+
+React provides events for key presses, such as `onKeyDown`, `onKeyUp`, and `onKeyPress`.
+
+```jsx live
+function KeyPressExample() {
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      alert('Enter key pressed!');
+    }
+  };
+
+  return <input type='text' onKeyDown={handleKeyPress} placeholder='Press Enter...' />;
+}
+```
+
+---
+
+## 👀 Focus and Blur Events
+
+These are used to detect when a component gains or loses focus.
+
+```jsx live
+function FocusBlurExample() {
+  return (
+    <input
+      onFocus={() => console.log('Focused')}
+      onBlur={() => console.log('Blurred')}
+      placeholder='Click in and out of me'
+    />
+  );
+}
+```
+
+---
+
+## 🌐 Event Propagation (Bubbling & Capturing)
+
+React events bubble by default. You can **stop propagation** using `e.stopPropagation()`.
+
+```jsx live
+function PropagationExample() {
+  const handleOuterClick = () => alert('Outer clicked');
+  const handleInnerClick = (e) => {
+    e.stopPropagation();
+    alert('Inner clicked');
+  };
+
+  return (
+    <div onClick={handleOuterClick} style={{ padding: '20px', background: '#eee' }}>
+      <button onClick={handleInnerClick}>Click Inner</button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🧠 Synthetic Events
+
+React wraps native events with its **SyntheticEvent** system for cross-browser consistency.
+
+:::info
+Synthetic events normalize behavior across browsers and pool for performance — but beware when using them asynchronously.
+:::
+
+---
+
+## 🎯 Event Delegation
+
+React handles event delegation **automatically** using the virtual DOM, so you don’t need to attach individual listeners to every DOM node manually.
+
+---
+
+> 🔗 Want to explore more interactions?
+>
+> - [React Forms](./forms)
+> - [Hooks like `useEffect`](./useeffect)
+> - [Context API](./context-api)
+
+---
+
+👉 Go back to [React Events Overview](./events)
