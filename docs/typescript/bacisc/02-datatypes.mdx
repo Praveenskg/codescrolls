@@ -1,0 +1,181 @@
+---
+id: datatypes
+title: Data Types
+description: Understand the built-in data types in TypeScript including string, number, boolean, null, undefined, any, unknown, never, and more.
+keywords:
+  - typescript data types
+  - ts primitive types
+  - any vs unknown
+  - typescript types
+  - type inference
+  - never type
+  - union types
+  - type annotations
+image: /img/meta/ts-datatypes.png
+tags: [typescript, datatypes, types, basics]
+---
+
+# TypeScript Data Types
+
+TypeScript provides rich type annotations to help catch errors and improve code readability. Let's go through the core data types you’ll use regularly.
+
+## 1. Primitive Types
+
+### `string`
+
+```ts
+let username: string = 'Praveen';
+```
+
+### `number`
+
+```ts
+let age: number = 25;
+let price: number = 99.99;
+```
+
+### `boolean`
+
+```ts
+let isLoggedIn: boolean = true;
+```
+
+---
+
+## 2. Arrays
+
+```ts
+let fruits: string[] = ['apple', 'banana'];
+let scores: Array<number> = [10, 20, 30]; // Generic syntax
+```
+
+---
+
+## 3. Tuples
+
+Fixed-length arrays with specific types:
+
+```ts
+let user: [string, number] = ['Alice', 24];
+```
+
+---
+
+## 4. `any` (Avoid)
+
+Turns off type checking.
+
+```ts
+let random: any = 10;
+random = 'hello';
+random = true;
+```
+
+> Use with caution. Prefer safer alternatives.
+
+---
+
+## 5. `unknown` (Safer alternative to `any`)
+
+```ts
+let input: unknown;
+input = 'text';
+input = 10;
+
+// Need to narrow type before usage
+if (typeof input === 'string') {
+  console.log(input.toUpperCase());
+}
+```
+
+---
+
+## 6. `null` and `undefined`
+
+```ts
+let n: null = null;
+let u: undefined = undefined;
+```
+
+You can use union types for optional values:
+
+```ts
+let name: string | null = null;
+```
+
+---
+
+## 7. `object`
+
+Any non-primitive type:
+
+```ts
+let person: object = { name: 'John', age: 30 };
+```
+
+But better to define the shape:
+
+```ts
+let user: { name: string; age: number } = {
+  name: 'Alice',
+  age: 28,
+};
+```
+
+---
+
+## 8. Enums
+
+```ts
+enum Direction {
+  North,
+  South,
+  East,
+  West,
+}
+
+let dir: Direction = Direction.North;
+```
+
+---
+
+## 9. Literal Types
+
+Restrict values to exact strings/numbers:
+
+```ts
+let theme: 'light' | 'dark';
+theme = 'dark';
+```
+
+---
+
+## 10. Union & Intersection Types
+
+```ts
+let value: string | number; // union
+type A = { name: string };
+type B = { age: number };
+type C = A & B; // intersection
+```
+
+---
+
+## Summary
+
+| Type         | Example                           |          |
+| ------------ | --------------------------------- | -------- |
+| string       | `"Hello"`                         |          |
+| number       | `42`                              |          |
+| boolean      | `true`                            |          |
+| array        | `string[]`, `Array<number>`       |          |
+| tuple        | `[string, number]`                |          |
+| object       | `{ name: string; age: number }`   |          |
+| any          | (Avoid using unless necessary)    |          |
+| unknown      | (Use for safe unknown input)      |          |
+| null         | `null`                            |          |
+| undefined    | `undefined`                       |          |
+| enum         | `enum Direction { North, South }` |          |
+| literal      | \`"on"                            | "off"\`  |
+| union        | \`string                          | number\` |
+| intersection | `{ a } & { b }`                   |          |

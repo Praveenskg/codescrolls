@@ -1,0 +1,10 @@
+{
+  "label": "TypeScript - Basics",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Basic TypeScript Concepts",
+    "description": "Learn the core fundamentals of TypeScript such as variables, data types, functions, objects, and more."
+  }
+}

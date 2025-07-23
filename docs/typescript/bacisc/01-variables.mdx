@@ -1,0 +1,130 @@
+---
+id: variables
+title: Variables
+description: Learn how to declare variables in TypeScript using let, const, and var. Understand scoping rules, immutability, and best practices.
+keywords:
+  - typescript variables
+  - let in typescript
+  - const in typescript
+  - var in typescript
+  - block scope
+  - variable declaration
+  - typescript basics
+  - variable types in typescript
+image: /img/meta/ts-variables.png
+tags: [typescript, variables, basics]
+---
+
+# Variables in TypeScript
+
+TypeScript provides powerful static typing capabilities to JavaScript. When declaring variables, we can explicitly define their types to catch bugs early and improve developer experience.
+
+---
+
+## 1. Declaring Variables
+
+Use `let`, `const`, or `var` (though `var` is discouraged in modern TypeScript).
+
+```ts
+let name: string = 'Alice';
+const age: number = 25;
+```
+
+> Prefer const by default, use let if the variable will change.
+
+---
+
+## 2. Type Inference
+
+TypeScript can infer the type if you initialize the variable with a value.
+
+```ts
+let language = 'TypeScript'; // inferred as string
+let version = 4.9; // inferred as number
+```
+
+But explicitly adding types improves clarity:
+
+```ts
+let framework: string = 'React';
+```
+
+---
+
+## 3. Explicit Typing
+
+You can annotate the type manually, even if you don’t initialize the variable immediately:
+
+```ts
+let isActive: boolean;
+isActive = true;
+```
+
+---
+
+## 4. Union Types
+
+A variable can hold values of multiple types:
+
+```ts
+let value: string | number;
+value = 'Hello';
+value = 42;
+```
+
+---
+
+## 5. Any Type (Avoid if possible)
+
+Using `any` disables type checking:
+
+```ts
+let data: any = 'Text';
+data = 123;
+data = true;
+```
+
+> This removes all benefits of TypeScript. Use only when necessary.
+
+---
+
+## 6. Constant Declarations
+
+Use const for immutable values:
+
+```ts
+const PI: number = 3.14159;
+const appName = 'CodeScrolls'; // inferred as string
+```
+
+---
+
+## 7. Best Practices
+
+- Prefer const over let
+- Avoid var
+- Use explicit types where helpful
+- Avoid any unless unavoidable
+- Use union types when flexibility is needed
+- Keep variable names meaningful and descriptive
+
+---
+
+## 8. Quick Examples
+
+```ts
+let isOnline: boolean = true;
+let score: number = 100;
+let userName: string = 'Praveen';
+let tags: string[] = ['ts', 'js', 'node'];
+let config: { darkMode: boolean } = { darkMode: true };
+```
+
+:::info Summary
+
+- `let`, `const`, and type annotations help manage code safety.
+
+- TypeScript's type system helps catch bugs early.
+
+- Practice writing variables with and without inference.
+  :::
