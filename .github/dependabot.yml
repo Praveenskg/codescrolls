@@ -12,6 +12,22 @@ updates:
     labels:
       - 'dependencies'
       - 'automerge'
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@typescript-eslint/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      docusaurus:
+        patterns:
+          - "@docusaurus/*"
+          - "docusaurus"
 
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -23,3 +39,10 @@ updates:
     labels:
       - 'dependencies'
       - 'automerge'
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      actions:
+        patterns:
+          - "*"
