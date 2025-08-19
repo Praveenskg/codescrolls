@@ -1,18 +1,18 @@
 ---
-title: 'Understanding useEffect Hook in React — With Practical Examples 🚀'
+title: 'Understanding useEffect Hook in React — With Practical Examples'
 description: 'Learn how useEffect works in React, common pitfalls, and how to use it like a pro with real-world examples.'
 slug: react-useeffect-hook
 tags: [react, hooks, useEffect, beginners]
-authors: [praveen]
+authors: praveen
 image: /img/blog/react.png
 keywords: ['react useeffect', 'useeffect hook', 'react hooks', 'side effects in react']
 ---
 
 ![React useEffect Cover](/img/blog/react.png)
 
-React introduced Hooks in version 16.8 to make functional components powerful. Among them, `useEffect` is one of the most commonly used (and misunderstood!) hooks.
+React introduced Hooks in version 16.8 to make functional components powerful. Among them, `useEffect` is one of the most commonly used (and misunderstood) hooks.
 
-<!-- truncate -->
+{/* truncate */}
 
 In this post, we’ll explore:
 
@@ -21,14 +21,14 @@ In this post, we’ll explore:
 - useEffect as componentDidMount
 - Cleanup Functions
 - Dependency Array Explained
-- Common Mistakes 🚫
-- Real-world Examples ✅
+- Common Mistakes
+- Real-world Examples
 
 ---
 
-## 🔍 What is `useEffect`?
+## What is `useEffect`?
 
-`useEffect` lets you perform **side effects** in functional components — things like data fetching, DOM manipulation, subscriptions, etc.
+`useEffect` lets you perform **side effects** in functional components — things like data fetching, DOM manipulation, or subscriptions.
 
 ```tsx
 useEffect(() => {
@@ -38,7 +38,7 @@ useEffect(() => {
 
 ---
 
-## 📘 Basic Syntax
+## Basic Syntax
 
 ```tsx
 useEffect(() => {
@@ -51,7 +51,7 @@ useEffect(() => {
 
 ---
 
-## 🟢 useEffect as `componentDidMount`
+## useEffect as `componentDidMount`
 
 Run the effect only once when the component mounts:
 
@@ -63,7 +63,7 @@ useEffect(() => {
 
 ---
 
-## 🔁 useEffect on Dependency Update
+## useEffect on Dependency Update
 
 ```tsx
 useEffect(() => {
@@ -71,13 +71,13 @@ useEffect(() => {
 }, [count]);
 ```
 
-It only runs when `count` changes.
+This runs only when `count` changes.
 
 ---
 
-## 🧹 Cleanup Function
+## Cleanup Function
 
-Used for **unmounting** or unsubscribing:
+Cleanup functions are used for unmounting or unsubscribing:
 
 ```tsx
 useEffect(() => {
@@ -94,20 +94,20 @@ useEffect(() => {
 
 ---
 
-## ❗ Common Mistakes
+## Common Mistakes
 
-1. **Forgetting the dependency array:**  
-   This will run on every re-render, which might not be what you want.
+1. **Forgetting the dependency array**  
+   This runs on every re-render, which might not be what you want.
 
-2. **Using wrong dependencies:**  
+2. **Using wrong dependencies**  
    If you use variables inside `useEffect`, they should be in the dependency array.
 
-3. **Not cleaning up subscriptions:**  
+3. **Not cleaning up subscriptions**  
    Leads to memory leaks.
 
 ---
 
-## 💡 Real-world Example: Fetching Data
+## Real-world Example: Fetching Data
 
 ```tsx
 import { useEffect, useState } from 'react';
@@ -137,15 +137,12 @@ function UserList() {
 
 ---
 
-## 🧠 Conclusion
+## Conclusion
 
 `useEffect` is powerful but must be used carefully. Always understand **when** and **why** it's running. Once you master it, your functional components become truly powerful.
 
 ---
 
-📝 Stay tuned for more React magic! Next time, we’ll explore `useMemo` and `useCallback`.
+Stay tuned for more React content. Next time, we’ll explore `useMemo` and `useCallback`.
 
----
-
-👍 If you liked this article, share it or leave a star!  
-🔁 Follow me for more bite-sized React blogs.
+If you found this article helpful, consider sharing it with your peers or bookmarking it for later.

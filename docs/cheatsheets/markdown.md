@@ -4,13 +4,13 @@ title: Markdown CheatSheet
 sidebar_label: Markdown CheatSheet
 ---
 
-# 📒 Markdown CheatSheet
+# Markdown CheatSheet
 
 Master Markdown syntax with this quick reference. Perfect for writing blogs, docs, READMEs, and more.
 
 ---
 
-## 🔤 Headings
+## Headings
 
 ```markdown
 # H1
@@ -26,7 +26,7 @@ Master Markdown syntax with this quick reference. Perfect for writing blogs, doc
 ###### H6
 ```
 
-👉 Output:
+**Output:**
 
 # H1
 
@@ -42,7 +42,7 @@ Master Markdown syntax with this quick reference. Perfect for writing blogs, doc
 
 ---
 
-## ✍️ Text Formatting
+## Text Formatting
 
 ```markdown
 **Bold**
@@ -51,7 +51,7 @@ _Italic_
 **_Bold & Italic_**
 ```
 
-👉 Output:  
+**Output:**  
 **Bold**  
 _Italic_  
 ~~Strikethrough~~  
@@ -59,9 +59,9 @@ _Italic_
 
 ---
 
-## 📋 Lists
+## Lists
 
-### 🔸 Unordered List
+### Unordered List
 
 ```markdown
 - Item 1
@@ -69,13 +69,13 @@ _Italic_
   - Sub-item 2
 ```
 
-👉 Output:
+**Output:**
 
 - Item 1
   - Sub-item 1
   - Sub-item 2
 
-### 🔢 Ordered List
+### Ordered List
 
 ```markdown
 1. First
@@ -83,7 +83,7 @@ _Italic_
 3. Third
 ```
 
-👉 Output:
+**Output:**
 
 1. First
 2. Second
@@ -91,32 +91,29 @@ _Italic_
 
 ---
 
-## 🔗 Links
+## Links
 
 ```markdown
-[OpenAI](https://openai.com)
+[Codescrolls](https://www.codescrolls.site)
 ```
 
-👉 Output:  
-[OpenAI](https://openai.com)
+**Output:**  
+[Codescrolls](https://www.codescrolls.site)
 
 ---
 
-## 🖼️ Images
+## Images
 
 ```markdown
 ![Alt Text](/img/blog/react.png)
 ```
 
-👉 Output:
-
+**Output:**
 ![Sample Image](/img/blog/react.png)
-
-> ✅ Use WebP or optimized PNG/JPG for better performance.
 
 ---
 
-## 📦 Code
+## Code
 
 ### Inline code
 
@@ -124,52 +121,66 @@ _Italic_
 Use the `useEffect` hook in React.
 ```
 
-👉 Output:  
+**Output:**  
 Use the `useEffect` hook in React.
 
 ### Code block (with language)
 
-<small>Markdown:</small>
-
-<pre>
-```js
-console.log("Hello, Markdown!");
+````markdown
+```js title="example.js"
+console.log('Hello, Markdown!');
 ```
-</pre>
+````
 
-👉 Output:
+**Output:**
 
-```js
+```js title="example.js"
 console.log('Hello, Markdown!');
 ```
 
 ---
 
-## 📐 Blockquotes
+## Syntax Highlight with Title
+
+````markdown
+```js title="app.js"
+console.log('With title!');
+```
+````
+
+**Output:**
+
+```js title="app.js"
+console.log('With title!');
+```
+
+---
+
+## Blockquote
 
 ```markdown
 > This is a quote.
 ```
 
-👉 Output:
+**Output:**
 
 > This is a quote.
 
 ---
 
-## 📏 Horizontal Rule
+## Horizontal Rule
 
 ```markdown
 ---
 ```
 
-👉 Output:
+**Output:**
 
 ---
 
 ---
 
-## ✅ Task Lists
+## Task Lists
 
 ```markdown
 - [x] Learn Markdown
@@ -177,7 +188,7 @@ console.log('Hello, Markdown!');
 - [ ] Deploy to GitHub Pages
 ```
 
-👉 Output:
+**Output:**
 
 - [x] Learn Markdown
 - [ ] Write a blog
@@ -185,7 +196,7 @@ console.log('Hello, Markdown!');
 
 ---
 
-## 🧪 Tables
+## Tables
 
 ```markdown
 | Syntax | Description |
@@ -194,29 +205,183 @@ console.log('Hello, Markdown!');
 | Cell   | Data        |
 ```
 
-👉 Output:
-
+**Output**:
 | Syntax | Description |
 | ------ | ----------- |
-| Header | Title       |
-| Cell   | Data        |
+| Header | Title |
+| Cell | Data |
 
----
-
-## 🧑‍💻 Emoji Support
+### Table Alignment
 
 ```markdown
-I 💙 Markdown! 🚀
+| Left | Center | Right |
+| :--- | :----: | ----: |
+| a    |   b    |     c |
 ```
 
-👉 Output:  
-I 💙 Markdown! 🚀
+**Output:**
 
-> Emojis work in most Markdown renderers like GitHub, Docusaurus, etc.
+| Left | Center | Right |
+| :--- | :----: | ----: |
+| a    |   b    |     c |
 
 ---
 
-## 🧭 Navigation Links (Docusaurus)
+## Escaping Characters
+
+```markdown
+\*Not italic\*
+\# Not a heading
+```
+
+**Output:**
+
+\*Not italic\*  
+\# Not a heading
+
+---
+
+## Inline HTML
+
+```markdown
+Hello World  
+H<sub>2</sub>O  
+X<sup>2</sup>
+```
+
+**Output:**
+
+Hello World  
+H<sub>2</sub>O  
+X<sup>2</sup>
+
+---
+
+## Definition Lists
+
+```markdown
+Term 1
+: Definition 1
+
+Term 2
+: Definition 2
+```
+
+**Output (works in Docusaurus, Markdown-it, not GitHub):**
+
+Term 1  
+: Definition 1
+
+Term 2  
+: Definition 2
+
+> ⚠️ Note: Not supported in GitHub Markdown.
+
+---
+
+## Nested Checkboxes
+
+```markdown
+- [x] Task 1
+- [ ] Task 2
+  - [x] Sub-task A
+  - [ ] Sub-task B
+```
+
+**Output:**
+
+- [x] Task 1
+- [ ] Task 2
+  - [x] Sub-task A
+  - [ ] Sub-task B
+
+---
+
+## Headings with Links
+
+```markdown
+### [Markdown Guide](https://www.markdownguide.org/)
+```
+
+**Output:**
+
+### [Markdown Guide](https://www.markdownguide.org/)
+
+---
+
+## Image as Link
+
+```markdown
+[![Alt Text](/img/blog/react.png)](https://react.dev)
+```
+
+**Output:**  
+[![Alt Text](/img/blog/react.png)](https://react.dev)
+
+---
+
+## Callouts (Docusaurus)
+
+```markdown
+:::tip
+This is a tip.
+:::
+
+:::warning
+This is a warning.
+:::
+
+:::info
+This is an info.
+:::
+
+:::danger
+This is a danger.
+:::
+```
+
+**Output:**
+
+:::tip
+This is a tip.
+:::
+
+:::info
+This is some information.
+:::
+
+:::warning
+This is a warning.
+:::
+
+:::danger
+This is a danger alert!
+:::
+
+---
+
+## Automatic Links
+
+```markdown
+https://github.com
+```
+
+**Output:**  
+https://github.com
+
+---
+
+## Inline Comments (hidden)
+
+```markdown
+[comment]: # 'This will not be rendered'
+
+<!-- This will not show -->
+```
+
+---
+
+## Navigation Links (Docusaurus)
 
 ```markdown
 [← Previous Page](/docs/previous)
@@ -225,23 +390,7 @@ I 💙 Markdown! 🚀
 
 ---
 
-## 🧱 Collapse/Expand (Docusaurus only)
-
-```markdown
-:::details Click to expand
-This is hidden content.
-:::
-```
-
-👉 Output:
-
-:::details Click to expand
-This is hidden content.
-:::
-
----
-
-## 🏁 Footnotes
+## Footnotes
 
 ```markdown
 Here is a footnote reference[^1].
@@ -249,7 +398,7 @@ Here is a footnote reference[^1].
 [^1]: And here is the footnote content.
 ```
 
-👉 Output:
+**Output:**
 
 Here is a footnote reference[^1].
 
@@ -257,12 +406,19 @@ Here is a footnote reference[^1].
 
 ---
 
-## 📚 References
+## Emoji Shortcodes
+
+```markdown
+:smile: :rocket: :tada:
+```
+
+**Output:**
+
+😄 🚀 🎉
+
+---
+
+## References
 
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Docusaurus Markdown Features](https://docusaurus.io/docs/markdown-features)
-
----
-
-Happy Writing! ✍️  
-Use this cheatsheet to boost your productivity in blogs, docs, and READMEs!

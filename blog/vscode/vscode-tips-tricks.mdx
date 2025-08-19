@@ -1,0 +1,309 @@
+---
+title: "Top VS Code Tips and Tricks Every Developer Should Know"
+description: "Boost your productivity and coding experience with these advanced VS Code tips and tricks."
+authors: praveen
+tags: [VSCode, Productivity, Tips, Tricks, Extensions, Debugging, Shortcuts, Git]
+---
+
+
+# Top VS Code Tips and Tricks Every Developer Should Know
+
+Visual Studio Code (VS Code) has become one of the most popular code editors in the developer community. It's lightweight, extensible, and filled with powerful features that can supercharge your productivity if you know how to use them effectively.  
+
+In this article, we’ll explore **tips, tricks, and hidden gems** in VS Code that every developer should know. Whether you’re a beginner or a seasoned coder, there’s something in here that will make your workflow smoother.
+
+{/* truncate */}
+
+---
+
+## Table of Contents
+1. Master the Command Palette  
+2. Multi-Cursor Editing  
+3. Integrated Terminal  
+4. Must-Have Extensions  
+5. Fuzzy File Search  
+6. Workspaces and Project Management  
+7. Code Snippets  
+8. Themes and Icons  
+9. Debugging Like a Pro  
+10. Performance Boosters  
+11. Essential Shortcuts Cheat Sheet  
+12. Git Integration  
+13. Remote Development  
+14. Editor Customization  
+15. Final Thoughts  
+
+---
+
+## 1. Master the Command Palette
+
+The **Command Palette** is like the control center of VS Code. You can access it with:
+
+```bash
+Ctrl + Shift + P   # Windows/Linux
+Cmd + Shift + P    # macOS
+```
+
+From here, you can:
+- Run any VS Code command
+- Change settings
+- Install extensions
+- Switch color themes
+
+For example, typing `>format document` will instantly format your code without needing to remember specific shortcuts.
+
+**Pro Tip**: If you forget a shortcut, just open the Command Palette and search for the command.
+
+---
+
+## 2. Multi-Cursor Editing
+
+Multi-cursor editing allows you to edit multiple lines at once. Super handy for repetitive tasks!
+
+- `Alt + Click` → Place multiple cursors manually.
+- `Ctrl + Alt + Down/Up` → Add a cursor on the line below or above.
+- `Ctrl + D` → Select the next occurrence of a word.
+
+Example:
+
+```javascript
+// Change all 'var' to 'let'
+var a = 10;
+var b = 20;
+var c = 30;
+```
+
+With multi-cursor editing, you can change all `var` to `let` in one go.
+
+---
+
+## 3. Integrated Terminal
+
+Forget switching between your editor and terminal. VS Code has a built-in terminal.
+
+- Open with: `` Ctrl + ` `` (backtick).
+- Split terminals for multiple processes.
+- Run `npm start`, `git`, or any CLI tool directly.
+
+You can even configure different shells (bash, zsh, PowerShell, etc.) from `settings.json`.
+
+```json
+{
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
+}
+```
+
+---
+
+## 4. Must-Have Extensions
+
+Extensions are the soul of VS Code. Some must-haves:
+
+- **Prettier** – Auto-format your code.
+- **ESLint** – Catch syntax & style issues early.
+- **GitLens** – Supercharge your Git workflow.
+- **TabNine / Copilot** – AI-powered code suggestions.
+- **Live Server** – Auto-refresh your browser when editing HTML/CSS.
+
+Explore the marketplace with `Ctrl + Shift + X` (Extensions panel).
+
+---
+
+## 5. Fuzzy File Search
+
+Quickly jump between files without clicking around.
+
+```bash
+Ctrl + P   # Windows/Linux
+Cmd + P    # macOS
+```
+
+Type part of a filename and hit enter. You can even:
+- Prefix with `:` → Go to a line number
+- Prefix with `@` → Jump to symbols/functions in a file
+- Prefix with `#` → Search within a file
+
+Example: Typing `@render` will show all functions named `render` in the current file.
+
+---
+
+## 6. Workspaces and Project Management
+
+If you work on multiple projects, **Workspaces** help keep things organized.
+
+- Save a workspace with `File > Save Workspace As...`
+- Reopen with `File > Open Recent`
+
+You can have custom settings per workspace:
+
+```json
+{
+  "editor.tabSize": 4,
+  "files.exclude": {
+    "node_modules": true
+  }
+}
+```
+
+This makes sure project-specific configurations don’t mess with your global settings.
+
+---
+
+## 7. Code Snippets
+
+Snippets save tons of time by auto-expanding short codes into boilerplate.
+
+Example: Create a custom snippet in `settings > User Snippets`.
+
+```json
+{
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "export default function ${1:ComponentName}() {",
+      "  return (",
+      "    <div>${2}</div>",
+      "  );",
+      "}"
+    ],
+    "description": "Create a React Functional Component"
+  }
+}
+```
+
+Now just type `rfc` → Tab → and your React component is ready.
+
+---
+
+## 8. Themes and Icons
+
+Coding is more fun when your editor looks good.
+
+- Popular Themes: **Dracula, One Dark Pro, Night Owl**
+- Icon Packs: **Material Icon Theme, VSCode Icons**
+
+Pro Tip: Dark themes reduce eye strain during long coding sessions.
+
+---
+
+## 9. Debugging Like a Pro
+
+Forget `console.log()` everywhere — use the **VS Code Debugger**.
+
+- Set breakpoints by clicking beside line numbers.
+- Inspect variables live.
+- Step into functions, watch expressions, and modify values at runtime.
+
+For Node.js:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/app.js"
+    }
+  ]
+}
+```
+
+Debugging is also supported for Python, Java, Go, and more.
+
+---
+
+## 10. Performance Boosters
+
+- Disable unused extensions (`Ctrl + Shift + P > Extensions: Disable`).
+- Exclude heavy folders from search (`.git`, `node_modules`).
+- Enable `files.autoSave` to prevent losing changes.
+
+```json
+{
+  "files.autoSave": "onWindowChange"
+}
+```
+
+---
+
+## 11. Essential Shortcuts Cheat Sheet
+
+- `Ctrl + B` → Toggle sidebar
+- `Ctrl + /` → Comment/uncomment
+- `Shift + Alt + F` → Format document
+- `Ctrl + K + S` → Keyboard shortcut reference
+
+Customize your shortcuts in `File > Preferences > Keyboard Shortcuts`.
+
+---
+
+## 12. Git Integration
+
+VS Code has built-in **Git support**:
+
+- `Ctrl + Shift + G` → Open Source Control panel
+- Stage, commit, and push without terminal
+- View inline Git diffs
+
+With **GitLens**, you get even more:
+- See who last modified a line
+- Inline blame annotations
+- Explore commit history visually
+
+---
+
+## 13. Remote Development
+
+Work directly on remote servers or containers with:
+
+- **Remote - SSH** → Connect to servers
+- **Remote - Containers** → Develop inside Docker
+- **WSL Extension** → Use Linux on Windows
+
+This is perfect for cloud-based dev environments.
+
+---
+
+## 14. Editor Customization
+
+You can deeply customize VS Code using `settings.json`.
+
+```json
+{
+  "editor.minimap.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.cursorSmoothCaretAnimation": true,
+  "editor.wordWrap": "on"
+}
+```
+
+Want extra productivity? Add plugins like:
+- **Better Comments** → Highlight TODOs and warnings
+- **Error Lens** → Show errors inline
+
+---
+
+## 15. Final Thoughts
+
+VS Code is **much more than just a code editor**—it’s a complete development environment. By mastering shortcuts, using extensions wisely, and customizing your setup, you can code faster and smarter.
+
+If you’re new to VS Code, start with the Command Palette, extensions, and terminal. As you grow comfortable, dive into debugging, remote dev, and snippets.
+
+> Productivity isn’t about working harder — it’s about working smarter. With these VS Code tips and tricks, you’ll be flying through your codebase in no time.
+
+---
+
+## Quick Recap
+
+- Command Palette → Your control center
+- Multi-cursors → Edit faster
+- Extensions → Boost functionality
+- Snippets → Save time
+- Debugger → Replace console.log()
+- Git + GitLens → Better version control
+- Remote Development → Code anywhere
