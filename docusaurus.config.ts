@@ -6,7 +6,7 @@ const config: Config = {
   title: 'CodeScrolls',
   tagline: 'Scroll through code. Learn. Build. Repeat.',
   favicon: 'img/logo.png',
-  future: { v4: true },
+  future: { v4: true, experimental_faster: true },
 
   url: 'https://codescrolls.site',
   baseUrl: '/',
@@ -109,7 +109,7 @@ const config: Config = {
         blog: {
           blogTitle: 'CodeScrolls Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
-          blogSidebarTitle: 'All Posts',
+          blogSidebarTitle: 'Recent posts',
           blogSidebarCount: 'ALL',
           showReadingTime: false,
           showLastUpdateAuthor: true,
@@ -125,7 +125,7 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
-          postsPerPage: 10,
+          postsPerPage: 5,
         },
         theme: {
           customCss: './src/css/custom.css',

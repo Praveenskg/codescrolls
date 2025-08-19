@@ -61,6 +61,10 @@ import MyComponent from '../components/MyComponent';
 ## 💡 Admonitions
 
 ```md
+:::note
+This is a note.
+:::
+
 :::tip
 This is a tip.
 :::
@@ -80,14 +84,20 @@ This is a danger alert!
 
 | Type       | Syntax Example | Color  |
 | ---------- | -------------- | ------ |
-| ✅ Tip     | `:::tip`       | Green  |
-| 💡 Info    | `:::info`      | Blue   |
-| ⚠️ Warning | `:::warning`   | Orange |
-| ❌ Danger  | `:::danger`    | Red    |
+| note     | `:::note`       | Gray  |
+| Tip     | `:::tip`       | Green  |
+| Info    | `:::info`      | Blue   |
+| Warning | `:::warning`   | Orange |
+| Danger  | `:::danger`    | Red    |
+
+**Output:**
+:::note
+This is a note.
+:::
+
 :::tip
 This is a tip.
 :::
-
 :::info
 This is some information.
 :::

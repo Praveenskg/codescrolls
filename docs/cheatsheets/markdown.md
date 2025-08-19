@@ -323,6 +323,10 @@ Term 2
 ## Callouts (Docusaurus)
 
 ```markdown
+:::note
+This is a note.
+:::
+
 :::tip
 This is a tip.
 :::
@@ -341,6 +345,9 @@ This is a danger.
 ```
 
 **Output:**
+:::note
+This is a note.
+:::
 
 :::tip
 This is a tip.
