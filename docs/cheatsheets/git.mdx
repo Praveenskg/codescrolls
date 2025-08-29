@@ -6,7 +6,7 @@ description: Essential Git commands for version control
 keywords: [git, cheatsheet, version control, commands]
 ---
 
-# 🧠 Git Cheatsheet
+# Git Cheatsheet
 
 A handy reference for common Git commands used in day-to-day development.
 
@@ -14,7 +14,7 @@ A handy reference for common Git commands used in day-to-day development.
 
 ![Git Workflow](/img/skills/Git.png)
 
-## ⚙️ Setup
+## Setup
 
 ```bash
 # Set your identity
@@ -27,7 +27,7 @@ git config --list
 
 ---
 
-## 🌱 Start a Project
+## Start a Project
 
 ```bash
 # Initialize a new repository
@@ -39,15 +39,15 @@ git clone https://github.com/user/repo.git
 
 ---
 
-## 📁 Working with Files
+## Working with Files
 
 ```bash
-# Check status
+# Check status of changes
 git status
 
 # Stage files
 git add filename
-git add .  # stage all
+git add .  # stage all changes
 
 # Commit changes
 git commit -m "Your message"
@@ -58,7 +58,7 @@ git rm filename
 
 ---
 
-## 🔄 Branching
+## Branching
 
 ```bash
 # List branches
@@ -70,13 +70,13 @@ git branch new-feature
 # Switch to a branch
 git checkout new-feature
 
-# Create and switch
+# Create and switch in one step
 git checkout -b new-feature
 ```
 
 ---
 
-## 🔀 Merging and Rebase
+## Merging and Rebase
 
 ```bash
 # Merge a branch into the current one
@@ -88,7 +88,7 @@ git rebase main
 
 ---
 
-## ⬆️ Push and Pull
+## Push and Pull
 
 ```bash
 # Push to remote
@@ -100,7 +100,7 @@ git pull origin branch-name
 
 ---
 
-## 🧹 Clean and Undo
+## Clean and Undo
 
 ```bash
 # Discard local changes
@@ -109,13 +109,13 @@ git checkout -- filename
 # Unstage a file
 git reset filename
 
-# Undo last commit (keep changes)
+# Undo last commit but keep changes
 git reset --soft HEAD~1
 ```
 
 ---
 
-## 🕓 Logs & History
+## Logs & History
 
 ```bash
 # View commit log
@@ -124,62 +124,209 @@ git log
 # One-line summary
 git log --oneline
 
-# Who changed what & when
+# Show file history with author info
 git blame filename
 ```
 
 ---
 
-## 🛠️ Fixing an Issue (Best Practice Workflow)
+## Fixing an Issue (Recommended Workflow)
 
 ```bash
-# 1. Make sure you're on the latest main branch
+# 1. Update your main branch
 git checkout main
 git pull origin main
 
 # 2. Create a new branch for the fix
 git checkout -b fix/bug-description
 
-# 3. Make your code changes...
+# 3. Make your changes...
 
-# 4. Stage and commit your changes
+# 4. Stage and commit
 git add .
-git commit -m "fix: meaningful message about the bug fix"
+git commit -m "fix: describe the bug fix"
 
 # 5. Push the branch to origin
 git push origin fix/bug-description
 
 # 6. Open a Pull Request on GitHub
-# (Describe the issue and how it was fixed)
 
 # 7. After review, merge into main
-# (Use GitHub UI or CLI)
 
 # 8. Delete local & remote branch
 git branch -d fix/bug-description
 git push origin --delete fix/bug-description
 ```
+:::tip
+- Use clear and conventional commit messages like `fix:`, `feat:`, or `chore:`.
+- Always pull the latest changes before creating new branches.
+- Keep commits small and focused for easier reviews.
+- Use `.gitignore` to avoid committing unnecessary files.
+- Use `git stash` to temporarily save work in progress.
+- Prefer SSH over HTTPS for authentication.
+:::
+---
 
-✅ **Tips**:
+## Advanced Git
 
-- Use conventional commit messages like `fix:` or `bug:`.
-- Always pull the latest changes before starting.
-- Small, focused commits make reviews easier.
+### Cherry-pick
 
-🧩 **Example PR Title**: `fix: prevent crash when user data is missing`
+```bash
+# Apply a specific commit from another branch
+git cherry-pick <commit-hash>
+```
+
+### Revert
+
+```bash
+# Create a new commit that undoes a previous commit
+git revert <commit-hash>
+```
+
+### Reflog
+
+```bash
+# Show history of HEAD changes (including resets & checkouts)
+git reflog
+
+# Restore a deleted branch/commit
+git checkout <commit-hash>
+```
+
+### Reset (Hard vs Soft)
+
+```bash
+# Move HEAD to a previous commit, keep changes
+git reset --soft <commit-hash>
+
+# Move HEAD to a previous commit, discard changes
+git reset --hard <commit-hash>
+```
+
+### Bisect
+
+```bash
+# Start binary search to find a bad commit
+git bisect start
+git bisect bad          # mark current commit as bad
+git bisect good <hash>  # mark a known good commit
+```
+
+### Stash
+
+```bash
+# Save current changes temporarily
+git stash
+
+# List stashes
+git stash list
+
+# Apply the most recent stash
+git stash apply
+
+# Apply and drop stash
+git stash pop
+```
+
+### Tags & Releases
+
+```bash
+# Create a lightweight tag
+git tag v1.0.0
+
+# Create an annotated tag
+git tag -a v1.0.0 -m "Release v1.0.0"
+
+# Push tags to remote
+git push origin --tags
+```
+
+### Submodules
+
+```bash
+# Add a submodule
+git submodule add https://github.com/user/repo.git path/to/repo
+
+# Initialize and fetch submodules
+git submodule update --init --recursive
+
+# Update submodules
+git submodule update --remote --merge
+```
 
 ---
 
-## 🔍 Git Tips
+## Troubleshooting Common Issues
 
-- ✅ Use `.gitignore` to skip unnecessary files.
-- 🧪 `git stash` to temporarily save work.
-- 🔒 Use SSH instead of HTTPS for authentication.
+### Merge Conflicts
+
+```bash
+# See conflicting files
+git status
+
+# Edit the files to resolve conflicts, then stage them
+git add filename
+
+# Continue merge/rebase after resolving
+git merge --continue
+git rebase --continue
+```
+
+### Detached HEAD
+
+```bash
+# You are on a commit, not a branch
+# To return to a branch
+git checkout main
+
+# Or create a new branch from this commit
+git checkout -b new-branch
+```
+
+### Push Rejected (Non-Fast-Forward)
+
+```bash
+# Pull latest changes before pushing
+git pull --rebase origin main
+
+# Then push
+git push origin main
+```
+
+### Accidentally Deleted a Branch
+
+```bash
+# Find commit in reflog
+git reflog
+
+# Restore the branch
+git checkout -b branch-name <commit-hash>
+```
+
+### Overwritten Local Changes
+
+```bash
+# Recover changes if lost
+git reflog
+
+# Check out a previous commit with your changes
+git checkout <commit-hash>
+```
+
+### Undo a Merge/Rebase
+
+```bash
+# Abort a merge
+git merge --abort
+
+# Abort a rebase
+git rebase --abort
+```
 
 ---
 
-## 📚 Resources
+## Resources
 
-- [Git Documentation](https://git-scm.com/doc)
-- [Pro Git Book](https://git-scm.com/book/en/v2)
-- [GitHub CLI](https://cli.github.com/)
+- [Git Documentation](https://git-scm.com/doc)  
+- [Pro Git Book](https://git-scm.com/book/en/v2)  
+- [GitHub CLI](https://cli.github.com/)  
