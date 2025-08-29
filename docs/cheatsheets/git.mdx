@@ -157,7 +157,7 @@ git push origin fix/bug-description
 git branch -d fix/bug-description
 git push origin --delete fix/bug-description
 ```
-:::tip
+:::tip  Tips
 - Use clear and conventional commit messages like `fix:`, `feat:`, or `chore:`.
 - Always pull the latest changes before creating new branches.
 - Keep commits small and focused for easier reviews.
@@ -321,6 +321,72 @@ git merge --abort
 
 # Abort a rebase
 git rebase --abort
+```
+
+---
+
+## GitHub CLI Workflow
+
+### Authentication
+
+```bash
+# Login to GitHub
+gh auth login
+
+# Check authentication status
+gh auth status
+```
+
+### Pull Requests
+
+```bash
+# Create a new pull request
+gh pr create --title "fix: bug description" --body "Details about the fix"
+
+# List open PRs
+gh pr list
+
+# Checkout a pull request locally
+gh pr checkout <pr-number>
+
+# Merge a pull request
+gh pr merge <pr-number>
+```
+
+### Issues
+
+```bash
+# Create a new issue
+gh issue create --title "Bug: something broke" --body "Steps to reproduce..."
+
+# List issues
+gh issue list
+
+# View details of an issue
+gh issue view <issue-number>
+```
+
+### Releases
+
+```bash
+# Create a new release
+gh release create v1.0.0 --title "Release v1.0.0" --notes "Changelog details here"
+
+# List releases
+gh release list
+
+# View release details
+gh release view v1.0.0
+```
+
+### Gists
+
+```bash
+# Create a gist from a file
+gh gist create file.txt
+
+# List your gists
+gh gist list
 ```
 
 ---
