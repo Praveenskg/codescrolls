@@ -13,7 +13,7 @@
 
 .introHeading {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
@@ -50,11 +50,11 @@
   font-weight: 600;
   color: #fff;
   border-radius: 0.75rem;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-decoration: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .btnBlue {
@@ -112,8 +112,8 @@
   border: 1px solid #ddd;
   border-radius: 0.75rem;
   background: #f9f9f9;
-  transition: all 0.3s ease;
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .categoryCard:hover {
@@ -127,7 +127,7 @@
 }
 
 .categoryName {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   color: #374151;
   transition: color 0.3s ease;
@@ -150,9 +150,31 @@
   color: #4b5563;
 }
 
+.overviewList,
+.connectList {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.overviewList li,
+.connectList li {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+html[data-theme='dark'] {
+  --card-bg: rgba(30, 30, 30, 0.7);
+  --card-border: #333;
+  --text-primary: #e5e7eb;
+  --text-hover: #38bdf8;
+  --text-secondary: #ccc;
+  --text-secondary-hover: #e0e0e0;
+}
+
 html[data-theme='dark'] .categoryCard {
-  background: rgba(30, 30, 30, 0.7);
-  border-color: #333;
+  background: var(--card-bg);
+  border-color: var(--card-border);
 }
 
 html[data-theme='dark'] .categoryIcon {
@@ -160,17 +182,27 @@ html[data-theme='dark'] .categoryIcon {
 }
 
 html[data-theme='dark'] .categoryName {
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 html[data-theme='dark'] .categoryCard:hover .categoryName {
-  color: #38bdf8;
+  color: var(--text-hover);
 }
 
 html[data-theme='dark'] .categoryDescription {
-  color: #ccc;
+  color: var(--text-secondary);
 }
 
 html[data-theme='dark'] .categoryCard:hover .categoryDescription {
-  color: #e0e0e0;
+  color: var(--text-secondary-hover);
+}
+
+@media (max-width: 768px) {
+  .introHeading {
+    font-size: 2rem;
+  }
+
+  .categoryHeading {
+    font-size: 1.25rem;
+  }
 }

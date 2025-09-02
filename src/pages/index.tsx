@@ -7,48 +7,58 @@ import styles from './index.module.css';
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
+
   const categories = [
     {
       name: 'JavaScript',
-      href: '/docs/javascript',
+      href: '/javascript',
       icon: '/img/skills/JavaScript.png',
-      description:
-        'Learn the most popular programming language of the web. Master variables, functions, DOM manipulation, and ES6+ features.',
+      description: 'Variables, functions, arrays, ES6+, async/await, DOM, and design patterns.',
     },
     {
       name: 'TypeScript',
-      href: '/docs/typescript',
+      href: '/typescript',
       icon: '/img/skills/TypeScript.png',
-      description:
-        'TypeScript is JavaScript with superpowers. Add static typing, interfaces, and make your code safer and scalable.',
+      description: 'Static typing, interfaces, generics, and code reliability for large projects.',
     },
     {
       name: 'React',
-      href: '/docs/react',
+      href: '/react',
       icon: '/img/skills/React.png',
-      description:
-        'Build dynamic and fast UIs with React. Learn about components, hooks, state management, and the React ecosystem.',
+      description: 'Hooks, Components, Props, State, Context API, and modern UI design patterns.',
     },
     {
       name: 'Git & GitHub',
-      href: '/docs/git',
+      href: '/cheatsheets/git',
       icon: '/img/skills/Git.png',
-      description:
-        'Version control your projects with Git. Learn how to collaborate using GitHub, pull requests, and best practices.',
+      description: 'Version control, collaboration, pull requests, and best practices.',
     },
     {
       name: 'Databases',
-      href: '/docs/database',
+      href: '/database',
       icon: '/img/skills/Supabase.png',
       description:
-        'Understand the basics of SQL and NoSQL databases. Get hands-on with tools like Supabase and PostgreSQL.',
+        'Learn SQL/NoSQL databases with hands-on experience using Supabase & PostgreSQL.',
     },
     {
       name: 'Linux',
-      href: '/docs/linux',
+      href: '/cheatsheets/linux',
       icon: '/img/skills/Linux.png',
+      description: 'Control servers and systems using Linux commands and workflows.',
+    },
+  ];
+
+  const hubs = [
+    {
+      name: 'Interview Hub',
+      href: '/interviews',
+      description: 'Curated interview questions for JavaScript, React, TypeScript, and more.',
+    },
+    {
+      name: 'Cheat Sheets',
+      href: '/cheatsheets',
       description:
-        'Navigate and control systems using Linux commands. Perfect for developers and server-side operations.',
+        'Quick reference guides for programming languages, Git, tools, and productivity.',
     },
   ];
 
@@ -58,25 +68,28 @@ export default function Home(): ReactNode {
         <section className={styles.introSection}>
           <h1 className={styles.introHeading}>
             Welcome to <span className={styles.gradientText1}>Code</span>
-            <span className={styles.gradientText2}>Scrolls</span> 🚀
+            <span className={styles.gradientText2}>Scrolls</span>
           </h1>
           <p className={styles.introSubtext}>
             Your one-stop hub for coding cheat sheets, language guides, Git tricks, and dev notes.
           </p>
           <div className={styles.buttonGroup}>
-            <Link className={styles.btnBlue} href='/docs/javascript'>
+            <Link className={styles.btnBlue} href='/javascript'>
               Start Learning JavaScript
             </Link>
             <Link
               className={styles.btnPurple}
-              href='https://github.com/Praveenskg/codescrolls'
+              to='https://github.com/praveenskg/codescrolls'
               target='_blank'
-              rel='noopener noreferrer'
             >
-              🌟 GitHub Repo
+              Contribute on GitHub
+            </Link>
+            <Link className={styles.btnBlue} to='/blog'>
+              Visit Blog
             </Link>
           </div>
         </section>
+
         <section className={styles.categorySection}>
           <img
             src={useBaseUrl('/img/react.png')}
@@ -84,7 +97,7 @@ export default function Home(): ReactNode {
             className={styles.categoryImg}
             loading='eager'
           />
-          <h2 className={styles.categoryHeading}>Categories</h2>
+          <h2 className={styles.categoryHeading}>Explore Topics</h2>
           <hr className={styles.categoryUnderline} />
           <div className={styles.categoryGrid}>
             {categories.map(({ name, href, icon, description }) => (
@@ -100,6 +113,30 @@ export default function Home(): ReactNode {
               </Link>
             ))}
           </div>
+        </section>
+
+        <section className={styles.categorySection}>
+          <h2 className={styles.categoryHeading}>Resources & Hubs</h2>
+          <hr className={styles.categoryUnderline} />
+          <div className={styles.categoryGrid}>
+            {hubs.map(({ name, href, description }) => (
+              <Link key={name} to={href} className={styles.categoryCard}>
+                <h3 className={styles.categoryName}>{name}</h3>
+                <p className={styles.categoryDescription}>{description}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.categorySection}>
+          <h2 className={styles.categoryHeading}>Why Use CodeScrolls?</h2>
+          <hr className={styles.categoryUnderline} />
+          <ul className={styles.overviewList}>
+            <li>Professional and concise documentation for web development.</li>
+            <li>Covers frontend & backend topics, frameworks, and tools.</li>
+            <li>Ideal for developers preparing for interviews or polishing skills.</li>
+            <li>Continuously updated with latest industry practices.</li>
+          </ul>
         </section>
       </main>
     </Layout>

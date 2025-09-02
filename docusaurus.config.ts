@@ -24,10 +24,7 @@ const config: Config = {
   headTags: [
     {
       tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://fonts.googleapis.com',
-      },
+      attributes: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     },
     {
       tagName: 'script',
@@ -68,19 +65,12 @@ const config: Config = {
         ],
       },
     ],
-    [
-      'vercel-analytics',
-      {
-        debug: true,
-        mode: 'auto',
-      },
-    ],
+    ['vercel-analytics', { debug: true, mode: 'auto' }],
   ],
 
   themes: [
     [
       '@easyops-cn/docusaurus-search-local',
-      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
       {
         hashed: true,
         language: ['en'],
@@ -97,15 +87,12 @@ const config: Config = {
       {
         docs: {
           path: 'docs',
-          routeBasePath: 'docs',
+          routeBasePath: '/',
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
         },
-        gtag: {
-          trackingID: 'G-6YM7WQM05W',
-          anonymizeIP: true,
-        },
+        gtag: { trackingID: 'G-6YM7WQM05W', anonymizeIP: true },
         blog: {
           blogTitle: 'CodeScrolls Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
@@ -122,14 +109,9 @@ const config: Config = {
             language: 'en',
             xslt: true,
           },
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
           postsPerPage: 5,
         },
-        theme: {
-          customCss: './src/css/custom.css',
-        },
+        theme: { customCss: './src/css/custom.css' },
         sitemap: {
           lastmod: 'date',
           changefreq: 'weekly',
@@ -167,54 +149,49 @@ const config: Config = {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
     ],
-    liveCodeBlock: {
-      playgroundPosition: 'bottom',
-    },
-    docs: {
-      sidebar: { hideable: true },
-    },
+    liveCodeBlock: { playgroundPosition: 'bottom' },
+    docs: { sidebar: { hideable: true } },
+
     navbar: {
       title: 'CodeScrolls',
-      logo: {
-        alt: 'CodeScrolls Logo',
-        src: 'img/logo.png',
-      },
+      logo: { alt: 'CodeScrolls Logo', src: 'img/logo.png' },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'docSidebar',
-          position: 'left',
-          label: 'Overview',
-        },
         {
           type: 'docSidebar',
           sidebarId: 'javascriptSidebar',
           position: 'left',
           label: 'JavaScript',
+          to: '/javascript',
         },
         {
           type: 'docSidebar',
           sidebarId: 'reactSidebar',
           position: 'left',
           label: 'React',
+          to: '/react',
         },
         {
           type: 'docSidebar',
           sidebarId: 'typescriptSidebar',
           position: 'left',
           label: 'Typescript',
+          to: '/typescript',
         },
         {
           type: 'docSidebar',
           sidebarId: 'cheatSheetSidebar',
           position: 'left',
           label: 'Cheat Sheets',
+          to: '/cheatsheets',
         },
         {
-          to: '/blog',
-          label: 'Blog',
+          type: 'docSidebar',
+          sidebarId: 'interviewSidebar',
           position: 'left',
+          label: 'Interviews',
+          to: '/interviews',
         },
+        { to: '/blog', label: 'Blog', position: 'left' },
         {
           'href': 'https://github.com/Praveenskg/codescrolls',
           'position': 'right',
@@ -230,8 +207,8 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            { label: 'JavaScript', to: '/docs/javascript' },
-            { label: 'TypeScript', to: '/docs/typescript' },
+            { label: 'JavaScript', to: '/javascript' },
+            { label: 'TypeScript', to: '/typescript' },
           ],
         },
         {
@@ -239,8 +216,6 @@ const config: Config = {
           items: [
             { label: 'About', to: '/about' },
             { label: 'Contact', to: '/contact' },
-            { label: 'Privacy Policy', to: '/privacy-policy' },
-            { label: 'Terms of Service', to: '/terms-of-service' },
           ],
         },
         {
@@ -258,10 +233,7 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} CodeScrolls by Praveen Singh.`,
     },
 
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
+    prism: { theme: prismThemes.github, darkTheme: prismThemes.dracula },
   } satisfies Preset.ThemeConfig,
 };
 
