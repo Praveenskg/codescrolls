@@ -3,6 +3,18 @@ import './CheatSheetGrid.css';
 
 const interviews = [
   {
+    title: 'HTML',
+    href: './interviews/html',
+    icon: '/img/skills/HTML.png',
+    description: 'Tags, semantics, forms, accessibility, and HTML5 features.',
+  },
+  {
+    title: 'CSS',
+    href: './interviews/css',
+    icon: '/img/skills/CSS.png',
+    description: 'Selectors, flexbox, grid, animations, and responsive design.',
+  },
+  {
     title: 'JavaScript',
     href: './interviews/javascript',
     icon: '/img/skills/JavaScript.png',
