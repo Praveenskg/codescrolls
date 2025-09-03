@@ -1,6 +1,7 @@
 ---
 title: React Interview Questions
 description: 50 React interview questions and answers – from basics to advanced – with examples for interview preparation.
+sidebar_position: 6
 ---
 
 # React Interview Questions
