@@ -1,0 +1,454 @@
+---
+description: Master HTML interview questions from beginner to advanced
+  level. Covers HTML5, semantics, forms, accessibility, SEO, and more.
+id: html
+keywords:
+- html interview questions
+- html5 interview
+- semantic tags
+- forms
+- accessibility
+- codescrolls
+title: HTML Interview Questions
+sidebar_position: 2
+---
+
+#  HTML Interview Questions
+
+Welcome to the **HTML Interview Hub** 🚀\
+Here you'll find a collection of **50 essential HTML interview
+questions** covering basic, intermediate, and advanced levels with
+examples.
+
+------------------------------------------------------------------------
+
+## 🟢 Basic Level
+
+### 1. What is HTML?
+
+HTML (HyperText Markup Language) is the standard markup language for
+creating web pages. It provides the structure of a webpage.
+
+``` html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+```
+
+### 2. Difference between block-level and inline elements?
+
+-   Block-level: Start on a new line, take full width (`<div>`, `<p>`,
+    `<h1>`).\
+-   Inline: Do not start on a new line (`<span>`, `<a>`, `<b>`).
+
+``` html
+<p>This is <span>inline</span> text.</p>
+```
+
+### 3. What is the difference between HTML and HTML5?
+
+-   HTML5 is the latest version of HTML.\
+-   Introduces semantic tags, audio/video support, canvas, localStorage,
+    etc.
+
+``` html
+<video controls>
+  <source src="movie.mp4" type="video/mp4">
+</video>
+```
+
+### 4. What are semantic elements?
+
+Semantic elements clearly describe their meaning: `<header>`,
+`<footer>`, `<article>`, `<section>`.
+
+``` html
+<article>
+  <h2>Blog Post</h2>
+  <p>Content...</p>
+</article>
+```
+
+### 5. What is the difference between `id` and `class`?
+
+-   `id`: Unique identifier.\
+-   `class`: Can be shared by multiple elements.
+
+``` html
+<p id="unique">Hello</p>
+<p class="shared">World</p>
+```
+
+### 6. What are HTML attributes?
+
+Attributes provide additional information about elements.
+
+``` html
+<a href="https://example.com" target="_blank">Visit</a>
+```
+
+### 7. What is the difference between `<ol>` and `<ul>`?
+
+-   `<ol>`: Ordered list (numbers).\
+-   `<ul>`: Unordered list (bullets).
+
+``` html
+<ol><li>One</li><li>Two</li></ol>
+<ul><li>One</li><li>Two</li></ul>
+```
+
+### 8. What is the difference between `<div>` and `<span>`?
+
+-   `<div>`: Block container.\
+-   `<span>`: Inline container.
+
+``` html
+<div>Block element</div>
+<span>Inline element</span>
+```
+
+### 9. What is the purpose of `alt` in `<img>` tag?
+
+Provides alternative text for accessibility and SEO.
+
+``` html
+<img src="logo.png" alt="Company Logo">
+```
+
+### 10. What is the difference between `<em>` and `<strong>`?
+
+-   `<em>`: Emphasizes text.\
+-   `<strong>`: Indicates strong importance.
+
+``` html
+<p><em>Important</em> vs <strong>Critical</strong></p>
+```
+
+------------------------------------------------------------------------
+
+## 🟡 Intermediate Level
+
+### 11. What is the difference between inline, internal, and external CSS in HTML?
+
+-   Inline: `style` attribute.\
+-   Internal: `<style>` inside `<head>`.\
+-   External: Separate `.css` file.
+
+``` html
+<p style="color:red;">Inline</p>
+<style>p { color: blue; }</style>
+<link rel="stylesheet" href="style.css">
+```
+
+### 12. What is the difference between `<script>` and `<noscript>`?
+
+-   `<script>`: Embeds JavaScript.\
+-   `<noscript>`: Content shown if JS is disabled.
+
+``` html
+<script>alert("Hi");</script>
+<noscript>Please enable JavaScript.</noscript>
+```
+
+### 13. What are meta tags?
+
+Meta tags provide metadata like description, keywords, author, viewport.
+
+``` html
+<meta name="description" content="HTML Interview Questions">
+```
+
+### 14. Difference between relative and absolute URLs?
+
+-   Relative: Relative to current path.\
+-   Absolute: Full path with domain.
+
+``` html
+<a href="about.html">Relative</a>
+<a href="https://example.com/about.html">Absolute</a>
+```
+
+### 15. What is the difference between `<link>` and `<a>`?
+
+-   `<link>`: Defines a relationship (used for stylesheets).\
+-   `<a>`: Creates a hyperlink.
+
+``` html
+<link rel="stylesheet" href="style.css">
+<a href="page.html">Go</a>
+```
+
+### 16. What is the difference between inline elements and block elements?
+
+(Already explained above in Q2).
+
+### 17. What is the difference between `<section>` and `<article>`?
+
+-   `<section>`: Groups related content.\
+-   `<article>`: Self-contained content.
+
+``` html
+<section>
+  <article>News item</article>
+</section>
+```
+
+### 18. What is the difference between `<iframe>` and `<embed>`?
+
+-   `<iframe>`: Embeds entire page.\
+-   `<embed>`: Embeds external resources (like PDF, media).
+
+``` html
+<iframe src="page.html"></iframe>
+<embed src="file.pdf">
+```
+
+### 19. What is the difference between `<input type="radio">` and `<input type="checkbox">`?
+
+-   Radio: Select one option.\
+-   Checkbox: Select multiple options.
+
+``` html
+<input type="radio" name="gender"> Male
+<input type="radio" name="gender"> Female
+
+<input type="checkbox"> Apple
+<input type="checkbox"> Banana
+```
+
+### 20. What are HTML form attributes?
+
+-   `action`, `method`, `target`, `autocomplete`, `enctype`.
+
+``` html
+<form action="/submit" method="post">
+  <input type="text" name="name">
+  <button type="submit">Send</button>
+</form>
+```
+
+### 21. What is the difference between GET and POST methods?
+
+-   GET: Appends data in URL, less secure.\
+-   POST: Sends data in body, more secure.
+
+### 22. What are HTML5 new input types?
+
+`email`, `url`, `date`, `range`, `color`, `number`, `tel`, `search`.
+
+``` html
+<input type="email">
+<input type="date">
+```
+
+### 23. What is the difference between `localStorage`, `sessionStorage`, and cookies in HTML5?
+
+-   localStorage: Persistent.\
+-   sessionStorage: Cleared on close.\
+-   cookies: Sent with requests.
+
+### 24. What is the difference between SVG and Canvas?
+
+-   SVG: Vector-based.\
+-   Canvas: Pixel-based.
+
+``` html
+<svg width="100" height="100">
+  <circle cx="50" cy="50" r="40" stroke="black" fill="red"/>
+</svg>
+
+<canvas id="canvas" width="100" height="100"></canvas>
+```
+
+### 25. What are media queries?
+
+Used for responsive design.
+
+``` html
+<style>
+@media (max-width: 600px) {
+  body { background: lightblue; }
+}
+</style>
+```
+
+------------------------------------------------------------------------
+
+## 🔴 Advanced Level
+
+### 26. What is ARIA in HTML?
+
+Accessible Rich Internet Applications (ARIA) provide attributes to
+improve accessibility.
+
+``` html
+<button aria-label="Close">X</button>
+```
+
+### 27. What is lazy loading in HTML5?
+
+Delays loading of images/iframes until needed.
+
+``` html
+<img src="image.jpg" loading="lazy">
+```
+
+### 28. What is the difference between `async` and `defer` in `<script>`?
+
+-   `async`: Executes script as soon as loaded.\
+-   `defer`: Executes after HTML parsing.
+
+``` html
+<script src="file.js" async></script>
+<script src="file.js" defer></script>
+```
+
+### 29. What is the difference between `<canvas>` and `<svg>`?
+
+(Already explained in Q24).
+
+### 30. What is the difference between inline SVG and external SVG?
+
+-   Inline: Defined in HTML.\
+-   External: Linked via `<img>` or `<object>`.
+
+### 31. What are Web Components?
+
+Reusable custom elements using Shadow DOM, templates, and ES modules.
+
+``` html
+<my-component></my-component>
+```
+
+### 32. What is the difference between `<template>` and `<slot>`?
+
+-   `<template>`: Defines reusable markup.\
+-   `<slot>`: Placeholder in Shadow DOM.
+
+### 33. What are custom data attributes?
+
+Attributes starting with `data-` for storing extra info.
+
+``` html
+<div data-id="123">Item</div>
+```
+
+### 34. What are progressive web apps (PWAs) in HTML5?
+
+Web apps with offline capability, installable via service workers.
+
+### 35. What is the difference between inline events and addEventListener?
+
+-   Inline: `<button onclick="fn()">`.\
+-   addEventListener: JS-based, better separation.
+
+### 36. What is the difference between relative, absolute, and fixed positioning in CSS with HTML?
+
+-   Relative: Position relative to itself.\
+-   Absolute: Position relative to parent.\
+-   Fixed: Position relative to viewport.
+
+### 37. What is the difference between accessibility and usability in HTML?
+
+-   Accessibility: Making web usable for disabled users.\
+-   Usability: Making web easy to use for everyone.
+
+### 38. What are iframes security risks?
+
+Clickjacking, cross-site scripting. Mitigated with `sandbox` attribute.
+
+``` html
+<iframe src="page.html" sandbox></iframe>
+```
+
+### 39. What are HTML5 APIs?
+
+Geolocation, Drag & Drop, Web Storage, Web Workers, Canvas, etc.
+
+### 40. What is difference between inline and block-level form elements?
+
+-   Inline: `input`, `button`.\
+-   Block: `textarea`, `div`.
+
+### 41. What are responsive images in HTML5?
+
+Using `srcset` and `sizes` for adaptive images.
+
+``` html
+<img src="small.jpg" srcset="large.jpg 1000w" sizes="(max-width: 600px) 480px, 800px">
+```
+
+### 42. What is the difference between `rel="noopener"` and `rel="noreferrer"`?
+
+-   `noopener`: Prevents access to `window.opener`.\
+-   `noreferrer`: Also removes referrer info.
+
+### 43. What is microdata in HTML5?
+
+Used for embedding metadata with `itemscope`, `itemprop`.
+
+``` html
+<div itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name">John</span>
+</div>
+```
+
+### 44. What are HTML5 form validation attributes?
+
+`required`, `pattern`, `min`, `max`, `maxlength`.
+
+``` html
+<input type="text" required pattern="[A-Za-z]+">
+```
+
+### 45. What are pseudo-classes in HTML with CSS?
+
+Special states like `:hover`, `:focus`, `:nth-child`.
+
+``` html
+a:hover { color: red; }
+```
+
+### 46. What is difference between inline-block and block in HTML?
+
+-   block: Takes full width.\
+-   inline-block: Inline but respects width/height.
+
+### 47. What is shadow DOM in HTML5?
+
+Encapsulated DOM subtree for web components.
+
+### 48. What is difference between `preload`, `prefetch`, and `dns-prefetch`?
+
+-   preload: Load resources early.\
+-   prefetch: Load resources for future use.\
+-   dns-prefetch: Resolves domain early.
+
+``` html
+<link rel="preload" href="style.css" as="style">
+<link rel="prefetch" href="nextpage.html">
+<link rel="dns-prefetch" href="//example.com">
+```
+
+### 49. What are favicons?
+
+Small icons representing website in browser tab.
+
+``` html
+<link rel="icon" href="favicon.ico">
+```
+
+### 50. What is difference between HTML and XHTML?
+
+-   HTML: Flexible syntax.\
+-   XHTML: Strict XML-based syntax.
+
+``` xhtml
+<html xmlns="http://www.w3.org/1999/xhtml">
+```
