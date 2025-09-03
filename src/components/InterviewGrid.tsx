@@ -5,13 +5,13 @@ const interviews = [
   {
     title: 'HTML',
     href: './interviews/html',
-    icon: '/img/skills/HTML.png',
+    icon: '/img/skills/Html.png',
     description: 'Tags, semantics, forms, accessibility, and HTML5 features.',
   },
   {
     title: 'CSS',
     href: './interviews/css',
-    icon: '/img/skills/CSS.png',
+    icon: '/img/skills/Css.png',
     description: 'Selectors, flexbox, grid, animations, and responsive design.',
   },
   {
