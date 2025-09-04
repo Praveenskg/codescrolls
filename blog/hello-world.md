@@ -6,6 +6,7 @@ tags:
   - javascript
   - blog
 description: This is my first blog post on CodeScrolls, where we explore Markdown, Docusaurus, and share dev insights.
+date: 2025-08-15
 ---
 
 Welcome to my very first blog post on **CodeScrolls**! 🎉  
