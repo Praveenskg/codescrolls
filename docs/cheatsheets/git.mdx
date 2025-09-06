@@ -240,6 +240,35 @@ git tag -a v1.0.0 -m "Release v1.0.0"
 # Push tags to remote
 git push origin --tags
 ```
+### Manual Release Workflow (Git + npm)
+
+```bash
+# 1. Bump version (patch / minor / major)
+npm version patch   # or minor / major
+
+# 2. Create a Git tag (auto created by npm version also)
+git tag v1.0.0 -m "Release v1.0.0"
+
+# 3. Push commits and tags to remote
+git push origin main
+git push origin --tags
+
+# 4. Publish to npm (make sure you are logged in: npm login)
+npm publish --access public
+
+# 5. (Optional) Create GitHub Release with changelog
+gh release create v1.0.0 --title "Release v1.0.0" --notes "Changelog details here"
+```
+:::tip Notes
+
+Use `npm version patch` (or minor/major) instead of manually editing package.json version.
+
+This ensures commit + tag are created together.
+
+Always `run npm test && npm run build` before publishing.
+
+If using 2FA on npm, set it to Authorization only for CI/CD.
+:::
 
 ### Submodules
 
@@ -390,6 +419,7 @@ gh gist list
 ```
 
 ---
+
 
 ## Resources
 
