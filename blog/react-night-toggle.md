@@ -174,6 +174,17 @@ export default function App() {
 
 ---
 
+## 🔗 Links
+
+- 📦 **npm**:
+  [react-night-toggle](https://www.npmjs.com/package/react-night-toggle)
+- 💻 **GitHub**:
+  [github.com/Praveenskg/react-night-toggle](https://github.com/Praveenskg/react-night-toggle)
+- 🌍 **Live Demo**:
+  [react-night-toggle.vercel.app](https://react-night-toggle.vercel.app)
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome!  
