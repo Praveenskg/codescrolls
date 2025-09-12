@@ -112,3 +112,73 @@ career:
   label: Career
   permalink: /career
   description: Developer career tips and insights
+
+hooks:
+  label: Hooks
+  permalink: /hooks
+  description: React hooks and custom hooks
+
+frontend:
+  label: Frontend
+  permalink: /frontend
+  description: Frontend development and frameworks
+
+tutorial:
+  label: Tutorial
+  permalink: /tutorial
+  description: Step-by-step learning guides
+
+scope:
+  label: Scope
+  permalink: /scope
+  description: JavaScript scope and closures
+
+concepts:
+  label: Concepts
+  permalink: /concepts
+  description: Core programming concepts
+
+useEffect:
+  label: useEffect
+  permalink: /useeffect
+  description: React useEffect hook
+
+VSCode:
+  label: VS Code
+  permalink: /vs-code
+  description: Visual Studio Code tips and tricks
+
+Tips:
+  label: Tips
+  permalink: /tips
+  description: Helpful development tips
+
+Tricks:
+  label: Tricks
+  permalink: /tricks
+  description: Development tricks and hacks
+
+Extensions:
+  label: Extensions
+  permalink: /extensions
+  description: VS Code extensions
+
+Shortcuts:
+  label: Shortcuts
+  permalink: /shortcuts
+  description: Keyboard shortcuts
+
+web-development:
+  label: Web Development
+  permalink: /web-development
+  description: Web development topics
+
+darkmode:
+  label: Dark Mode
+  permalink: /darkmode
+  description: Dark mode themes and implementations
+
+opensource:
+  label: Open Source
+  permalink: /opensource
+  description: Open source projects and contributions

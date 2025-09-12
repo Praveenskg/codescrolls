@@ -1,0 +1,967 @@
+---
+title: 'Complete Guide to React Hooks — All Hooks Explained with Examples'
+description: 'Master all React hooks with comprehensive examples. From useState to custom hooks, learn everything you need to know about React hooks.'
+slug: complete-guide-react-hooks
+tags: [react, hooks, javascript, frontend, tutorial]
+authors: praveen
+image: /img/blog/react.png
+date: 2025-09-12
+keywords: ['react hooks', 'useState', 'useEffect', 'useContext', 'useReducer', 'useMemo', 'useCallback', 'useRef', 'custom hooks']
+---
+
+![React Hooks Complete Guide](/img/blog/react.png)
+
+React Hooks revolutionized how we write React components by allowing us to use state and other React features in functional components. This comprehensive guide covers all React hooks with practical examples.
+
+{/* truncate */}
+
+## Table of Contents
+
+1. [Introduction to React Hooks](#introduction-to-react-hooks)
+2. [Basic Hooks](#basic-hooks)
+   - [useState](#usestate)
+   - [useEffect](#useeffect)
+   - [useContext](#usecontext)
+3. [Additional Hooks](#additional-hooks)
+   - [useReducer](#usereducer)
+   - [useMemo](#usememo)
+   - [useCallback](#usecallback)
+   - [useRef](#useref)
+   - [useImperativeHandle](#useimperativehandle)
+   - [useLayoutEffect](#uselayouteffect)
+   - [useDebugValue](#usedebugvalue)
+4. [Custom Hooks](#custom-hooks)
+5. [Best Practices](#best-practices)
+6. [Conclusion](#conclusion)
+
+---
+
+## Introduction to React Hooks
+
+React Hooks are functions that let you "hook into" React state and lifecycle features from functional components. They were introduced in React 16.8 and have become the standard way to write React components.
+
+### Rules of Hooks
+
+1. **Only call hooks at the top level** - Don't call hooks inside loops, conditions, or nested functions
+2. **Only call hooks from React functions** - Call hooks from React function components or custom hooks
+
+---
+
+## Basic Hooks
+
+### useState
+
+`useState` is the most fundamental hook that allows you to add state to functional components.
+
+```tsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState('');
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+      
+      <input 
+        value={name} 
+        onChange={(e) => setName(e.target.value)} 
+        placeholder="Enter your name"
+      />
+      <p>Hello, {name}!</p>
+    </div>
+  );
+}
+```
+
+#### Advanced useState Examples
+
+```tsx
+// Using functional updates
+function AdvancedCounter() {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(prevCount => prevCount + 1);
+  };
+
+  const incrementBy = (amount) => {
+    setCount(prevCount => prevCount + amount);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+1</button>
+      <button onClick={() => incrementBy(5)}>+5</button>
+    </div>
+  );
+}
+
+// Using objects as state
+function UserProfile() {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    age: 0
+  });
+
+  const updateUser = (field, value) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      [field]: value
+    }));
+  };
+
+  return (
+    <div>
+      <input 
+        value={user.name}
+        onChange={(e) => updateUser('name', e.target.value)}
+        placeholder="Name"
+      />
+      <input 
+        value={user.email}
+        onChange={(e) => updateUser('email', e.target.value)}
+        placeholder="Email"
+      />
+      <input 
+        type="number"
+        value={user.age}
+        onChange={(e) => updateUser('age', parseInt(e.target.value))}
+        placeholder="Age"
+      />
+    </div>
+  );
+}
+```
+
+### useEffect
+
+`useEffect` lets you perform side effects in functional components.
+
+```tsx
+import React, { useState, useEffect } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('https://api.example.com/data');
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this runs once on mount
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return <div>{JSON.stringify(data)}</div>;
+}
+```
+
+#### useEffect with Dependencies
+
+```tsx
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      const userData = await response.json();
+      setUser(userData);
+    };
+
+    fetchUser();
+  }, [userId]); // Runs when userId changes
+
+  return user ? <div>{user.name}</div> : <div>Loading...</div>;
+}
+```
+
+#### Cleanup in useEffect
+
+```tsx
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(prevSeconds => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup function
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return <div>Timer: {seconds} seconds</div>;
+}
+
+// Event listener cleanup
+function WindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <div>
+      Window size: {windowSize.width} x {windowSize.height}
+    </div>
+  );
+}
+```
+
+### useContext
+
+`useContext` provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+```tsx
+import React, { createContext, useContext, useState } from 'react';
+
+// Create context
+const ThemeContext = createContext();
+
+// Provider component
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Consumer component
+function ThemedButton() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button 
+      onClick={toggleTheme}
+      style={{
+        backgroundColor: theme === 'light' ? '#fff' : '#333',
+        color: theme === 'light' ? '#333' : '#fff'
+      }}
+    >
+      Toggle Theme (Current: {theme})
+    </button>
+  );
+}
+
+// App component
+function App() {
+  return (
+    <ThemeProvider>
+      <div>
+        <h1>Theme Example</h1>
+        <ThemedButton />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## Additional Hooks
+
+### useReducer
+
+`useReducer` is an alternative to `useState` for managing complex state logic.
+
+```tsx
+import React, { useReducer } from 'react';
+
+// Reducer function
+function todoReducer(state, action) {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [...state, { id: Date.now(), text: action.text, completed: false }];
+    case 'TOGGLE_TODO':
+      return state.map(todo =>
+        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+      );
+    case 'DELETE_TODO':
+      return state.filter(todo => todo.id !== action.id);
+    default:
+      return state;
+  }
+}
+
+function TodoApp() {
+  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [inputValue, setInputValue] = useState('');
+
+  const addTodo = () => {
+    if (inputValue.trim()) {
+      dispatch({ type: 'ADD_TODO', text: inputValue });
+      setInputValue('');
+    }
+  };
+
+  return (
+    <div>
+      <input
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Add a todo"
+      />
+      <button onClick={addTodo}>Add Todo</button>
+      
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <span 
+              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+              onClick={() => dispatch({ type: 'TOGGLE_TODO', id: todo.id })}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => dispatch({ type: 'DELETE_TODO', id: todo.id })}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### useMemo
+
+`useMemo` returns a memoized value, helping optimize performance by avoiding expensive calculations on every render.
+
+```tsx
+import React, { useState, useMemo } from 'react';
+
+function ExpensiveCalculation({ numbers }) {
+  const [count, setCount] = useState(0);
+
+  // Expensive calculation that only runs when numbers change
+  const expensiveValue = useMemo(() => {
+    console.log('Calculating expensive value...');
+    return numbers.reduce((sum, num) => sum + num, 0);
+  }, [numbers]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <p>Expensive calculation result: {expensiveValue}</p>
+    </div>
+  );
+}
+
+// Example with object memoization
+function UserList({ users, filter }) {
+  const filteredUsers = useMemo(() => {
+    console.log('Filtering users...');
+    return users.filter(user => 
+      user.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [users, filter]);
+
+  return (
+    <ul>
+      {filteredUsers.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### useCallback
+
+`useCallback` returns a memoized callback function, preventing unnecessary re-renders of child components.
+
+```tsx
+import React, { useState, useCallback, memo } from 'react';
+
+// Child component that receives a callback
+const ExpensiveChild = memo(({ onClick, label }) => {
+  console.log(`Rendering ${label}`);
+  return <button onClick={onClick}>{label}</button>;
+});
+
+function ParentComponent() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState('');
+
+  // Without useCallback - this function is recreated on every render
+  const handleClickWithoutCallback = () => {
+    console.log('Button clicked');
+  };
+
+  // With useCallback - this function is only recreated when dependencies change
+  const handleClickWithCallback = useCallback(() => {
+    console.log('Button clicked');
+  }, []);
+
+  const increment = useCallback(() => {
+    setCount(prevCount => prevCount + 1);
+  }, []);
+
+  return (
+    <div>
+      <input 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter name"
+      />
+      <p>Count: {count}</p>
+      
+      <ExpensiveChild 
+        onClick={handleClickWithoutCallback} 
+        label="Without useCallback" 
+      />
+      <ExpensiveChild 
+        onClick={handleClickWithCallback} 
+        label="With useCallback" 
+      />
+      <ExpensiveChild 
+        onClick={increment} 
+        label="Increment" 
+      />
+    </div>
+  );
+}
+```
+
+### useRef
+
+`useRef` returns a mutable ref object that persists for the full lifetime of the component.
+
+```tsx
+import React, { useRef, useEffect, useState } from 'react';
+
+// Accessing DOM elements
+function FocusInput() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+
+// Storing mutable values without causing re-renders
+function Timer() {
+  const [count, setCount] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startTimer = () => {
+    if (intervalRef.current) return; // Prevent multiple intervals
+    
+    intervalRef.current = setInterval(() => {
+      setCount(prevCount => prevCount + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  const resetTimer = () => {
+    stopTimer();
+    setCount(0);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
+      <button onClick={resetTimer}>Reset</button>
+    </div>
+  );
+}
+
+// Previous value tracking
+function usePrevious(value) {
+  const ref = useRef();
+  
+  useEffect(() => {
+    ref.current = value;
+  });
+  
+  return ref.current;
+}
+
+function CounterWithPrevious() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {prevCount}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### useImperativeHandle
+
+`useImperativeHandle` customizes the instance value that is exposed to parent components when using ref.
+
+```tsx
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+
+// Child component with imperative handle
+const FancyInput = forwardRef((props, ref) => {
+  const inputRef = useRef();
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+    clear: () => {
+      inputRef.current.value = '';
+    },
+    getValue: () => {
+      return inputRef.current.value;
+    }
+  }));
+
+  return <input ref={inputRef} {...props} />;
+});
+
+// Parent component
+function Parent() {
+  const fancyInputRef = useRef();
+
+  const handleFocus = () => {
+    fancyInputRef.current.focus();
+  };
+
+  const handleClear = () => {
+    fancyInputRef.current.clear();
+  };
+
+  const handleGetValue = () => {
+    const value = fancyInputRef.current.getValue();
+    alert(`Input value: ${value}`);
+  };
+
+  return (
+    <div>
+      <FancyInput ref={fancyInputRef} placeholder="Type something..." />
+      <button onClick={handleFocus}>Focus Input</button>
+      <button onClick={handleClear}>Clear Input</button>
+      <button onClick={handleGetValue}>Get Value</button>
+    </div>
+  );
+}
+```
+
+### useLayoutEffect
+
+`useLayoutEffect` has the same signature as `useEffect`, but it fires synchronously after all DOM mutations.
+
+```tsx
+import React, { useState, useLayoutEffect, useRef } from 'react';
+
+function MeasureElement() {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const elementRef = useRef();
+
+  useLayoutEffect(() => {
+    if (elementRef.current) {
+      const { width, height } = elementRef.current.getBoundingClientRect();
+      setWidth(width);
+      setHeight(height);
+    }
+  });
+
+  return (
+    <div>
+      <div 
+        ref={elementRef}
+        style={{ 
+          padding: '20px', 
+          border: '1px solid #ccc',
+          margin: '10px'
+        }}
+      >
+        This element is {width}px wide and {height}px tall
+      </div>
+    </div>
+  );
+}
+```
+
+### useDebugValue
+
+`useDebugValue` can be used to display a label for custom hooks in React DevTools.
+
+```tsx
+import { useState, useDebugValue } from 'react';
+
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+  
+  useDebugValue(count > 10 ? 'Count is high' : 'Count is low');
+  
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(initialValue);
+  
+  return { count, increment, decrement, reset };
+}
+
+function CounterComponent() {
+  const { count, increment, decrement, reset } = useCounter(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+```
+
+---
+
+## Custom Hooks
+
+Custom hooks are JavaScript functions that start with "use" and can call other hooks.
+
+### useLocalStorage
+
+```tsx
+import { useState, useEffect } from 'react';
+
+function useLocalStorage(key, initialValue) {
+  // Get from local storage then parse stored json or return initialValue
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that persists the new value to localStorage
+  const setValue = (value) => {
+    try {
+      // Allow value to be a function so we have the same API as useState
+      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
+}
+
+// Usage
+function App() {
+  const [name, setName] = useLocalStorage('name', '');
+  const [age, setAge] = useLocalStorage('age', 0);
+
+  return (
+    <div>
+      <input 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter your name"
+      />
+      <input 
+        type="number"
+        value={age}
+        onChange={(e) => setAge(parseInt(e.target.value))}
+        placeholder="Enter your age"
+      />
+    </div>
+  );
+}
+```
+
+### useFetch
+
+```tsx
+import { useState, useEffect } from 'react';
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// Usage
+function UserProfile({ userId }) {
+  const { data: user, loading, error } = useFetch(`/api/users/${userId}`);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>No user found</div>;
+
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+### useDebounce
+
+```tsx
+import { useState, useEffect } from 'react';
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+// Usage
+function SearchInput() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      // Perform search API call
+      console.log('Searching for:', debouncedSearchTerm);
+    }
+  }, [debouncedSearchTerm]);
+
+  return (
+    <input
+      type="text"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+}
+```
+
+### useToggle
+
+```tsx
+import { useState, useCallback } from 'react';
+
+function useToggle(initialValue = false) {
+  const [value, setValue] = useState(initialValue);
+
+  const toggle = useCallback(() => {
+    setValue(prevValue => !prevValue);
+  }, []);
+
+  const setTrue = useCallback(() => {
+    setValue(true);
+  }, []);
+
+  const setFalse = useCallback(() => {
+    setValue(false);
+  }, []);
+
+  return [value, { toggle, setTrue, setFalse }];
+}
+
+// Usage
+function ToggleExample() {
+  const [isVisible, { toggle, setTrue, setFalse }] = useToggle(false);
+
+  return (
+    <div>
+      <button onClick={toggle}>Toggle</button>
+      <button onClick={setTrue}>Show</button>
+      <button onClick={setFalse}>Hide</button>
+      {isVisible && <p>This content is visible!</p>}
+    </div>
+  );
+}
+```
+
+---
+
+## Best Practices
+
+### 1. Hook Dependencies
+
+Always include all dependencies in the dependency array:
+
+```tsx
+// ❌ Wrong - missing dependencies
+useEffect(() => {
+  fetchUserData(userId, token);
+}, [userId]);
+
+// ✅ Correct - all dependencies included
+useEffect(() => {
+  fetchUserData(userId, token);
+}, [userId, token]);
+```
+
+### 2. Custom Hook Naming
+
+Always prefix custom hooks with "use":
+
+```tsx
+// ✅ Correct
+function useLocalStorage() { }
+function useFetch() { }
+function useDebounce() { }
+
+// ❌ Wrong
+function localStorage() { }
+function fetchData() { }
+```
+
+### 3. Conditional Hooks
+
+Never call hooks conditionally:
+
+```tsx
+// ❌ Wrong
+if (condition) {
+  const [state, setState] = useState(0);
+}
+
+// ✅ Correct
+const [state, setState] = useState(0);
+if (condition) {
+  // Use state here
+}
+```
+
+### 4. Performance Optimization
+
+Use `useMemo` and `useCallback` judiciously:
+
+```tsx
+// Only use when you have performance issues
+const expensiveValue = useMemo(() => {
+  return heavyCalculation(data);
+}, [data]);
+
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+```
+
+---
+
+## Conclusion
+
+React Hooks have transformed how we write React applications, making functional components as powerful as class components while being more concise and easier to understand. 
+
+Key takeaways:
+
+- **useState** for managing component state
+- **useEffect** for side effects and lifecycle events
+- **useContext** for consuming context values
+- **useReducer** for complex state management
+- **useMemo** and **useCallback** for performance optimization
+- **useRef** for accessing DOM elements and storing mutable values
+- **Custom hooks** for reusing stateful logic
+
+Remember to follow the Rules of Hooks and use these hooks appropriately to build efficient and maintainable React applications.
+
+---
+
+**Next Steps:**
+- Practice building components with different hooks
+- Create your own custom hooks for common patterns
+- Explore advanced patterns like compound components with hooks
+- Learn about testing components that use hooks
+
+Happy coding! 🚀
