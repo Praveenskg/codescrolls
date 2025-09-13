@@ -421,8 +421,470 @@ gh gist list
 ---
 
 
+## Git Hooks
+
+### Pre-commit Hook
+
+```bash
+# Create pre-commit hook
+echo '#!/bin/sh
+npm test
+npm run lint
+' > .git/hooks/pre-commit
+
+chmod +x .git/hooks/pre-commit
+```
+
+### Commit Message Hook
+
+```bash
+# Create commit-msg hook for conventional commits
+echo '#!/bin/sh
+commit_regex="^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .{1,50}"
+if ! grep -qE "$commit_regex" "$1"; then
+    echo "Invalid commit message format!"
+    echo "Use: type(scope): description"
+    exit 1
+fi
+' > .git/hooks/commit-msg
+
+chmod +x .git/hooks/commit-msg
+```
+
+---
+
+## Git Aliases
+
+### Useful Aliases
+
+```bash
+# Add to ~/.gitconfig
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    visual = !gitk
+    lg = log --oneline --graph --decorate --all
+    amend = commit --amend --no-edit
+    undo = reset HEAD~1 --mixed
+    wip = commit -am "WIP"
+    unwip = reset HEAD~1
+```
+
+### Advanced Aliases
+
+```bash
+[alias]
+    # Show file changes in last commit
+    lastdiff = diff HEAD~1 HEAD
+    
+    # Show commits by author
+    author = !git log --author="$1" --oneline
+    
+    # Show files changed in last commit
+    lastfiles = diff --name-only HEAD~1 HEAD
+    
+    # Interactive rebase for last N commits
+    rebasei = "!f() { git rebase -i HEAD~$1; }; f"
+    
+    # Create and switch to new branch
+    new = "!f() { git checkout -b $1; }; f"
+    
+    # Delete merged branches
+    cleanup = "!git branch --merged | grep -v '\\*\\|main\\|develop' | xargs -n 1 git branch -d"
+```
+
+---
+
+## Git Workflows
+
+### Git Flow
+
+```bash
+# Initialize git flow
+git flow init
+
+# Start a feature
+git flow feature start new-feature
+
+# Finish a feature
+git flow feature finish new-feature
+
+# Start a release
+git flow release start 1.0.0
+
+# Finish a release
+git flow release finish 1.0.0
+```
+
+### GitHub Flow
+
+```bash
+# 1. Create feature branch from main
+git checkout main
+git pull origin main
+git checkout -b feature/new-feature
+
+# 2. Make changes and commit
+git add .
+git commit -m "feat: add new feature"
+
+# 3. Push and create PR
+git push origin feature/new-feature
+
+# 4. After PR merge, clean up
+git checkout main
+git pull origin main
+git branch -d feature/new-feature
+```
+
+### GitLab Flow
+
+```bash
+# 1. Create branch from main
+git checkout main
+git pull origin main
+git checkout -b feature/new-feature
+
+# 2. Work on feature
+git add .
+git commit -m "feat: implement new feature"
+
+# 3. Push to feature branch
+git push origin feature/new-feature
+
+# 4. Create merge request
+# 5. After merge, delete branch
+git branch -d feature/new-feature
+```
+
+---
+
+## Advanced Git Commands
+
+### Interactive Rebase
+
+```bash
+# Rebase last 3 commits
+git rebase -i HEAD~3
+
+# During interactive rebase:
+# pick - use commit
+# reword - use commit, but edit message
+# edit - use commit, but stop for amending
+# squash - use commit, but meld into previous
+# drop - remove commit
+```
+
+### Partial Staging
+
+```bash
+# Stage parts of a file
+git add -p filename
+
+# Stage specific lines
+git add -p
+
+# During patch mode:
+# y - stage this hunk
+# n - don't stage this hunk
+# s - split into smaller hunks
+# e - manually edit the hunk
+```
+
+### Advanced Logging
+
+```bash
+# Show commits with file changes
+git log --stat
+
+# Show commits with patches
+git log -p
+
+# Show commits in a specific date range
+git log --since="2024-01-01" --until="2024-12-31"
+
+# Show commits by author
+git log --author="John Doe"
+
+# Show commits affecting specific files
+git log -- filename1 filename2
+
+# Show commits with graph
+git log --oneline --graph --decorate --all
+
+# Show commits with custom format
+git log --pretty=format:"%h - %an, %ar : %s"
+```
+
+### Advanced Diff
+
+```bash
+# Show diff between branches
+git diff branch1..branch2
+
+# Show diff between commits
+git diff commit1..commit2
+
+# Show diff for specific file
+git diff HEAD~1 HEAD -- filename
+
+# Show diff with word-level changes
+git diff --word-diff
+
+# Show diff with color
+git diff --color-words
+
+# Show diff ignoring whitespace
+git diff -w
+```
+
+### Advanced Branching
+
+```bash
+# List all branches (local and remote)
+git branch -a
+
+# List remote branches
+git branch -r
+
+# Create branch from specific commit
+git checkout -b new-branch <commit-hash>
+
+# Create branch from remote branch
+git checkout -b local-branch origin/remote-branch
+
+# Set upstream for existing branch
+git branch --set-upstream-to=origin/main main
+
+# Rename branch
+git branch -m old-name new-name
+
+# Delete remote branch
+git push origin --delete branch-name
+```
+
+### Advanced Merging
+
+```bash
+# Merge with no fast-forward
+git merge --no-ff feature-branch
+
+# Merge with squash
+git merge --squash feature-branch
+
+# Merge specific files from another branch
+git checkout feature-branch -- file1 file2
+
+# Merge with custom merge tool
+git merge --tool=vimdiff feature-branch
+```
+
+### Advanced Stashing
+
+```bash
+# Stash with message
+git stash push -m "Work in progress on feature X"
+
+# Stash specific files
+git stash push -m "Stash specific files" file1 file2
+
+# Stash including untracked files
+git stash push -u
+
+# Stash including ignored files
+git stash push -a
+
+# Apply specific stash
+git stash apply stash@{2}
+
+# Show stash contents
+git stash show -p stash@{0}
+
+# Create branch from stash
+git stash branch new-branch stash@{0}
+```
+
+---
+
+## Git Configuration
+
+### Global Configuration
+
+```bash
+# Set default branch name
+git config --global init.defaultBranch main
+
+# Set default editor
+git config --global core.editor "code --wait"
+
+# Set default merge tool
+git config --global merge.tool vscode
+
+# Set line ending handling
+git config --global core.autocrlf input  # Linux/Mac
+git config --global core.autocrlf true   # Windows
+
+# Set credential helper
+git config --global credential.helper store
+
+# Set push default
+git config --global push.default simple
+
+# Set pull strategy
+git config --global pull.rebase false
+```
+
+### Repository-specific Configuration
+
+```bash
+# Set local user for this repo
+git config user.name "Project Name"
+git config user.email "project@example.com"
+
+# Set local branch protection
+git config branch.main.protect true
+
+# Set local merge strategy
+git config merge.ours.driver true
+```
+
+---
+
+## Git Best Practices
+
+### Commit Message Guidelines
+
+```bash
+# Conventional Commits Format
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+
+# Types:
+feat:     A new feature
+fix:      A bug fix
+docs:     Documentation only changes
+style:    Changes that do not affect the meaning of the code
+refactor: A code change that neither fixes a bug nor adds a feature
+perf:     A code change that improves performance
+test:     Adding missing tests or correcting existing tests
+chore:    Changes to the build process or auxiliary tools
+```
+
+### Branch Naming Conventions
+
+```bash
+# Feature branches
+feature/user-authentication
+feature/payment-integration
+
+# Bug fix branches
+fix/login-error
+fix/memory-leak
+
+# Hotfix branches
+hotfix/security-patch
+hotfix/critical-bug
+
+# Release branches
+release/v1.2.0
+release/v2.0.0
+
+# Chore branches
+chore/update-dependencies
+chore/refactor-components
+```
+
+### File Organization
+
+```bash
+# .gitignore best practices
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+pids/
+*.pid
+*.seed
+```
+
+---
+
+## Git Security
+
+### SSH Key Setup
+
+```bash
+# Generate SSH key
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Add to SSH agent
+ssh-add ~/.ssh/id_ed25519
+
+# Copy public key
+cat ~/.ssh/id_ed25519.pub
+
+# Test SSH connection
+ssh -T git@github.com
+```
+
+### GPG Signing
+
+```bash
+# Generate GPG key
+gpg --full-generate-key
+
+# List GPG keys
+gpg --list-secret-keys --keyid-format LONG
+
+# Configure Git to use GPG
+git config --global user.signingkey <GPG_KEY_ID>
+git config --global commit.gpgsign true
+
+# Sign commits
+git commit -S -m "Signed commit message"
+```
+
+---
+
 ## Resources
 
 - [Git Documentation](https://git-scm.com/doc)  
 - [Pro Git Book](https://git-scm.com/book/en/v2)  
-- [GitHub CLI](https://cli.github.com/)  
+- [GitHub CLI](https://cli.github.com/)
+- [Conventional Commits](https://www.conventionalcommits.org/)
+- [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)
+- [GitHub Flow](https://guides.github.com/introduction/flow/)
+- [GitLab Flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html)  

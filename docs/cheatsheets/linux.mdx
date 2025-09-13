@@ -167,30 +167,379 @@ dig domain.com
 
 ---
 
-## 🧪 Misc Commands
+## 🔍 Advanced File Operations
+
+### Text Processing
 
 ```bash
-# History & shortcuts
-history
-!!         # run last command
-!n         # run command #n
+# Sort and filter
+sort file.txt
+sort -r file.txt        # reverse
+sort -n numbers.txt     # numeric
+uniq file.txt           # remove duplicates
+uniq -c file.txt        # count occurrences
 
-# Alias
-alias ll="ls -la"
+# Cut and paste
+cut -d',' -f1,3 file.csv    # extract columns
+paste file1.txt file2.txt   # merge files
 
-# Disk usage
-du -sh *
+# Advanced grep
+grep -i "pattern" file.txt     # case insensitive
+grep -v "pattern" file.txt     # invert match
+grep -n "pattern" file.txt     # show line numbers
+grep -A 3 -B 3 "pattern" file.txt  # context lines
+grep -r --include="*.js" "function" .  # recursive with file filter
 
-# Find files
-find . -name "*.js"
+# sed (stream editor)
+sed 's/old/new/g' file.txt     # replace text
+sed -i 's/old/new/g' file.txt  # edit in place
+sed '1,5d' file.txt            # delete lines 1-5
+sed -n '10,20p' file.txt       # print lines 10-20
 
-# Schedule jobs
-crontab -e
+# awk (pattern scanning)
+awk '{print $1}' file.txt      # print first column
+awk -F',' '{print $2}' file.csv # comma-separated
+awk '/pattern/ {print $0}' file.txt  # pattern matching
+```
 
+### Advanced Find Operations
+
+```bash
+# Find files by various criteria
+find . -name "*.js" -type f
+find . -size +100M              # files larger than 100MB
+find . -mtime -7                # modified in last 7 days
+find . -user username           # owned by user
+find . -perm 755                # specific permissions
+
+# Find and execute commands
+find . -name "*.log" -exec rm {} \;
+find . -name "*.tmp" -delete
+find . -type d -empty           # empty directories
+
+# Advanced find with multiple conditions
+find . \( -name "*.js" -o -name "*.ts" \) -size +1k
+```
+
+---
+
+## 🛠️ System Administration
+
+### User Management
+
+```bash
+# User operations
+sudo adduser newuser
+sudo deluser username
+sudo usermod -aG sudo username  # add to sudo group
+sudo passwd username            # change password
+
+# Group management
+sudo addgroup newgroup
+sudo delgroup groupname
+groups username                 # show user groups
+
+# Switch users
+su username                     # switch user
+sudo -u username command        # run as user
+```
+
+### Service Management
+
+```bash
+# Systemd services
+sudo systemctl start servicename
+sudo systemctl stop servicename
+sudo systemctl restart servicename
+sudo systemctl enable servicename
+sudo systemctl status servicename
+sudo systemctl list-units --type=service
+
+# Service logs
+sudo journalctl -u servicename
+sudo journalctl -f              # follow logs
+sudo journalctl --since "1 hour ago"
+```
+
+### Disk Management
+
+```bash
+# Disk information
+lsblk                           # list block devices
+fdisk -l                        # partition table
+df -h                           # disk usage
+du -sh /*                       # directory sizes
+
+# Mount operations
+sudo mount /dev/sdb1 /mnt
+sudo umount /mnt
+sudo mount -a                   # mount all in fstab
+
+# Create filesystems
+sudo mkfs.ext4 /dev/sdb1
+sudo mkfs.xfs /dev/sdb1
+```
+
+---
+
+## 🔒 Security & Permissions
+
+### Advanced Permissions
+
+```bash
+# Octal permissions
+chmod 755 file                  # rwxr-xr-x
+chmod 644 file                  # rw-r--r--
+chmod 600 file                  # rw-------
+chmod +x script.sh              # add execute
+
+# Special permissions
+chmod +s file                   # setuid
+chmod +t directory              # sticky bit
+chmod 1777 /tmp                 # sticky bit example
+
+# ACL (Access Control Lists)
+setfacl -m u:username:rwx file
+getfacl file
+setfacl -x u:username file      # remove ACL
+```
+
+### SSH & Remote Access
+
+```bash
+# SSH operations
+ssh user@hostname
+ssh -p 2222 user@hostname       # custom port
+ssh -i keyfile user@hostname    # key file
+ssh-copy-id user@hostname       # copy public key
+
+# SSH config
+# ~/.ssh/config
+Host myserver
+    HostName server.com
+    User myuser
+    Port 2222
+    IdentityFile ~/.ssh/id_rsa
+
+# SSH tunnels
+ssh -L 8080:localhost:80 user@server    # local port forward
+ssh -R 8080:localhost:80 user@server    # remote port forward
+```
+
+---
+
+## 🐚 Shell Scripting
+
+### Basic Scripting
+
+```bash
+#!/bin/bash
+# Shebang line
+
+# Variables
+NAME="John"
+AGE=25
+echo "Hello $NAME, you are $AGE years old"
+
+# Command substitution
+DATE=$(date)
+echo "Current date: $DATE"
+
+# Conditional statements
+if [ $AGE -gt 18 ]; then
+    echo "Adult"
+else
+    echo "Minor"
+fi
+
+# Loops
+for i in {1..5}; do
+    echo "Number: $i"
+done
+
+# Functions
+greet() {
+    echo "Hello $1"
+}
+greet "World"
+```
+
+### Advanced Scripting
+
+```bash
+# Error handling
+set -e                          # exit on error
+set -u                          # exit on undefined variable
+set -o pipefail                 # exit on pipe failure
+
+# Input validation
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <filename>"
+    exit 1
+fi
+
+# Logging
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> /var/log/script.log
+}
+
+# Signal handling
+trap 'echo "Script interrupted"; exit 1' INT TERM
+```
+
+---
+
+## 📊 Performance Monitoring
+
+### System Monitoring
+
+```bash
+# CPU and memory
+top -p PID                      # specific process
+htop                            # interactive top
+iostat 1                        # I/O statistics
+vmstat 1                        # virtual memory stats
+
+# Network monitoring
+iftop                           # network usage by connection
+nethogs                         # network usage by process
+ss -tuln                        # listening ports
+netstat -i                      # network interfaces
+
+# Disk I/O
+iotop                           # I/O by process
+lsof +D /path                   # files open in directory
+fuser -v /path                  # processes using path
+```
+
+### Log Analysis
+
+```bash
+# Log files
+tail -f /var/log/syslog         # follow system log
+journalctl -f                   # follow systemd journal
+dmesg | tail                    # kernel messages
+
+# Log analysis
+grep "ERROR" /var/log/app.log | wc -l    # count errors
+awk '/ERROR/ {print $1, $2}' /var/log/app.log  # extract timestamps
+```
+
+---
+
+## 🔧 Advanced Networking
+
+### Network Troubleshooting
+
+```bash
+# Connectivity tests
+ping -c 4 google.com            # ping 4 times
+traceroute google.com           # trace route
+mtr google.com                  # continuous traceroute
+
+# Port scanning
+nmap -p 80,443 hostname         # scan specific ports
+nmap -sS hostname               # stealth scan
+nmap -A hostname                # aggressive scan
+
+# Network capture
+tcpdump -i eth0 port 80         # capture HTTP traffic
+tcpdump -i any -n host 192.168.1.1  # capture specific host
+```
+
+### Firewall Management
+
+```bash
+# UFW (Ubuntu)
+sudo ufw enable
+sudo ufw allow 22               # allow SSH
+sudo ufw allow from 192.168.1.0/24
+sudo ufw deny 80
+sudo ufw status
+
+# iptables
+sudo iptables -L                # list rules
+sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+sudo iptables -A INPUT -j DROP
+```
+
+---
+
+## 🧪 Advanced Commands
+
+### Compression & Archives
+
+```bash
+# tar operations
+tar -czf archive.tar.gz files/  # create gzip archive
+tar -xzf archive.tar.gz         # extract gzip archive
+tar -cjf archive.tar.bz2 files/ # create bzip2 archive
+tar -tf archive.tar.gz          # list contents
+
+# zip operations
+zip -r archive.zip files/       # create zip
+unzip archive.zip               # extract zip
+unzip -l archive.zip            # list contents
+
+# 7zip operations
+7z a archive.7z files/          # create 7z
+7z x archive.7z                 # extract 7z
+```
+
+### Environment & Aliases
+
+```bash
+# Environment variables
+export PATH=$PATH:/new/path
+export EDITOR=vim
+env                             # show all variables
+printenv VARIABLE               # show specific variable
+
+# Aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# Functions
+mkcd() { mkdir -p "$1" && cd "$1"; }
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1     ;;
+            *.tar.gz)    tar xzf $1     ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       unrar e $1     ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xf $1      ;;
+            *.tbz2)      tar xjf $1     ;;
+            *.tgz)       tar xzf $1     ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+```
+
+### Job Control
+
+```bash
 # Background jobs
-&     # run in background
-jobs # list background jobs
-fg   # bring job to foreground
+command &                       # run in background
+jobs                            # list jobs
+fg %1                          # bring job 1 to foreground
+bg %1                          # send job 1 to background
+nohup command &                 # run immune to hangups
+
+# Process substitution
+diff <(command1) <(command2)    # compare outputs
+comm <(sort file1) <(sort file2) # compare sorted files
 ```
 
 ---
@@ -200,9 +549,22 @@ fg   # bring job to foreground
 - [tldr.sh](https://tldr.sh) – Simplified man pages
 - [explainshell.com](https://explainshell.com) – Explain shell commands
 - [cheat.sh](https://cheat.sh) – CLI cheatsheets
+- [Linux Command Library](https://linuxcommandlibrary.com) – Comprehensive command reference
+- [Bash Guide](https://mywiki.wooledge.org/BashGuide) – Advanced bash scripting
+- [Linux Academy](https://linuxacademy.com) – Linux training courses
 
 ---
 
-🧵 **Pro Tip**: Use `man command` to read the manual page for any command.
+:::tip Pro Tip
+Use `man command` to read the manual page for any command. For example: `man ls`
 
-📂 **Example**: `man ls`
+Also try `tldr command` for simplified examples of common commands.
+:::
+
+:::note Advanced Users
+For system administrators, consider learning about:
+- **Docker** for containerization
+- **Ansible** for configuration management  
+- **Prometheus** for monitoring
+- **ELK Stack** for log analysis
+:::

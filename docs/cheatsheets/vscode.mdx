@@ -218,23 +218,299 @@ Save Workspace As...
 
 ---
 
-##  Productivity Tips
+## Advanced Shortcuts
 
--  Use Zen Mode → `Ctrl/Cmd + K Z`
--  Toggle Auto Save → `File > Auto Save`
--  Use Markdown Preview → `Ctrl/Cmd + Shift + V`
--  Change Theme → `Ctrl/Cmd + K T`
+### Multi-Cursor Editing
+
+```bash
+Alt + Click                    # Add cursor at click position
+Ctrl/Cmd + Alt + Up/Down       # Add cursor above/below
+Ctrl/Cmd + D                   # Select next occurrence
+Ctrl/Cmd + Shift + L           # Select all occurrences
+Ctrl/Cmd + U                   # Undo last cursor operation
+```
+
+### Advanced Navigation
+
+```bash
+Ctrl/Cmd + G                   # Go to line
+Ctrl/Cmd + Shift + O           # Go to symbol in file
+Ctrl/Cmd + T                   # Go to symbol in workspace
+Ctrl/Cmd + Shift + P           # Command palette
+Ctrl/Cmd + P                   # Quick open
+```
+
+### Advanced Editing
+
+```bash
+Ctrl/Cmd + Shift + K           # Delete line
+Ctrl/Cmd + Shift + D           # Duplicate line
+Alt + Up/Down                  # Move line up/down
+Shift + Alt + Up/Down          # Copy line up/down
+Ctrl/Cmd + Shift + \           # Jump to matching bracket
+Ctrl/Cmd + ]                   # Indent line
+Ctrl/Cmd + [                   # Outdent line
+```
 
 ---
 
-##  Resources
+## Advanced Features
+
+### IntelliSense & Code Actions
+
+```bash
+Ctrl/Cmd + Space               # Trigger IntelliSense
+Ctrl/Cmd + Shift + Space       # Trigger parameter hints
+Ctrl/Cmd + .                   # Quick fix
+F12                            # Go to definition
+Alt + F12                      # Peek definition
+Shift + F12                    # Go to references
+```
+
+### Advanced Search
+
+```bash
+Ctrl/Cmd + F                   # Find in file
+Ctrl/Cmd + H                   # Replace in file
+Ctrl/Cmd + Shift + F           # Find in files
+Ctrl/Cmd + Shift + H           # Replace in files
+Alt + Enter                    # Select all matches
+Alt + C                        # Toggle case sensitive
+Alt + R                        # Toggle regex
+Alt + W                        # Toggle whole word
+```
+
+---
+
+## Advanced Extensions
+
+### Essential Extensions
+
+```bash
+# Popular Extensions
+- Prettier - Code formatter
+- ESLint - JavaScript linter
+- GitLens - Git supercharged
+- Live Server - Local development server
+- Bracket Pair Colorizer - Color matching brackets
+- Auto Rename Tag - Rename paired HTML/XML tags
+- Path Intellisense - Autocomplete filenames
+- CodeSnap - Screenshot code snippets
+- Error Lens - Show errors inline
+- Better Comments - Highlight comments
+```
+
+### Language-Specific Extensions
+
+```bash
+# JavaScript/TypeScript
+- JavaScript (ES6) code snippets
+- TypeScript Importer
+- Auto Import - ES6, TS, JSX, TSX
+
+# React
+- ES7+ React/Redux/React-Native snippets
+- React Native Tools
+- React Developer Tools
+
+# CSS/SCSS
+- SCSS IntelliSense
+- CSS Peek
+- Tailwind CSS IntelliSense
+
+# Markdown
+- Markdown All in One
+- Markdown Preview Enhanced
+- markdownlint
+```
+
+---
+
+## Advanced Configuration
+
+### Settings.json
+
+```json
+{
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Fira Code', 'Cascadia Code', monospace",
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "on",
+  "editor.minimap.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.editor.enablePreview": false,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true
+}
+```
+
+---
+
+## Advanced Workflows
+
+### Snippets
+
+```json
+{
+  "Console Log": {
+    "prefix": "cl",
+    "body": ["console.log('$1:', $1);"],
+    "description": "Console log with variable"
+  },
+  "React Functional Component": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react';",
+      "",
+      "const $1 = () => {",
+      "  return (",
+      "    <div>",
+      "      $2",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "export default $1;"
+    ],
+    "description": "React functional component"
+  }
+}
+```
+
+### Tasks (tasks.json)
+
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: install",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "group": "build"
+    },
+    {
+      "label": "npm: start",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "group": "build"
+    },
+    {
+      "label": "npm: build",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "group": "build"
+    }
+  ]
+}
+```
+
+---
+
+## Advanced Emmet
+
+### HTML Emmet
+
+```html
+<!-- Basic -->
+div.container>ul>li*5
+
+<!-- Advanced -->
+div.container>header>nav>ul>li*4>a[href="#$"]{Link $}+main>section*3>h2{Section $}+p{Lorem ipsum}
+
+<!-- Bootstrap -->
+.container>.row>.col-md-6*2
+
+<!-- React -->
+div.container>h1{Title}+p{Description}+button.btn.btn-primary{Click Me}
+```
+
+### CSS Emmet
+
+```css
+/* Basic */
+m10 → margin: 10px;
+p20 → padding: 20px;
+w100 → width: 100px;
+h50 → height: 50px;
+
+/* Advanced */
+m10-20 → margin: 10px 20px;
+p10-20-30 → padding: 10px 20px 30px;
+w100+h50 → width: 100px; height: 50px;
+
+/* Flexbox */
+fx → display: flex;
+fxc → display: flex; justify-content: center;
+fxa → display: flex; align-items: center;
+```
+
+---
+
+## Advanced Productivity Tips
+
+### Workspace Management
+
+```bash
+# Multi-root workspaces
+File > Add Folder to Workspace
+File > Save Workspace As...
+
+# Workspace settings
+.vscode/settings.json          # Workspace-specific settings
+.vscode/tasks.json             # Workspace tasks
+.vscode/launch.json            # Debug configurations
+.vscode/extensions.json        # Recommended extensions
+```
+
+### Performance Optimization
+
+```json
+{
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/build/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.git": true
+  }
+}
+```
+
+---
+
+## Resources
 
 - [VSCode Docs](https://code.visualstudio.com/docs)
 - [Shortcut Reference](https://code.visualstudio.com/shortcuts)
 - [Marketplace](https://marketplace.visualstudio.com/VSCode)
+- [VSCode Tips & Tricks](https://code.visualstudio.com/docs/getstarted/tips-and-tricks)
+- [Extension API](https://code.visualstudio.com/api)
 
 ---
 
 :::tip Pro Tip
-  Master the Command Palette (`Ctrl/Cmd + Shift + P`). It's your VSCode superpower.
+Master the Command Palette (`Ctrl/Cmd + Shift + P`). It's your VSCode superpower. You can access almost any feature through it!
+:::
+
+:::note Advanced Users
+For power users, consider learning VSCode's extension API to create custom extensions for your specific workflows.
 :::

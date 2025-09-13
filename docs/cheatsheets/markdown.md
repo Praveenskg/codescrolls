@@ -425,7 +425,426 @@ Here is a footnote reference[^1].
 
 ---
 
+## Advanced Code Blocks
+
+### Code Blocks with Line Numbers
+
+````markdown
+```js {1,3-5} title="highlighted-lines.js"
+function example() {
+  console.log('Line 1 - highlighted');
+  console.log('Line 2 - not highlighted');
+  console.log('Line 3 - highlighted');
+  console.log('Line 4 - highlighted');
+  console.log('Line 5 - highlighted');
+}
+```
+````
+
+### Code Blocks with Show/Hide
+
+````markdown
+```js title="example.js" showLineNumbers
+const message = "Hello, World!";
+console.log(message);
+```
+````
+
+### Multiple Code Blocks
+
+````markdown
+```js title="JavaScript"
+const greet = (name) => `Hello, ${name}!`;
+```
+
+```python title="Python"
+def greet(name):
+    return f"Hello, {name}!"
+```
+
+```bash title="Terminal"
+echo "Hello, World!"
+```
+````
+
+---
+
+## Advanced Tables
+
+### Table with Multiple Lines
+
+```markdown
+| Feature | Description | Status |
+|---------|-------------|--------|
+| Basic Syntax | Standard Markdown | ✅ Complete |
+| Advanced Tables | Multi-line cells | ✅ Complete |
+| Code Blocks | Syntax highlighting | 🚧 In Progress |
+| Interactive | JSX components | ❌ Not Started |
+```
+
+**Output:**
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| Basic Syntax | Standard Markdown | ✅ Complete |
+| Advanced Tables | Multi-line cells | ✅ Complete |
+| Code Blocks | Syntax highlighting | 🚧 In Progress |
+| Interactive | JSX components | ❌ Not Started |
+
+### Table with HTML
+
+```markdown
+| Name | Age | Actions |
+|------|-----|---------|
+| John | 25 | <button>Edit</button> |
+| Jane | 30 | <button>Delete</button> |
+```
+
+---
+
+## Advanced Lists
+
+### Mixed List Types
+
+```markdown
+1. First ordered item
+2. Second ordered item
+   - Unordered sub-item 1
+   - Unordered sub-item 2
+3. Third ordered item
+   1. Nested ordered item
+   2. Another nested item
+```
+
+**Output:**
+
+1. First ordered item
+2. Second ordered item
+   - Unordered sub-item 1
+   - Unordered sub-item 2
+3. Third ordered item
+   1. Nested ordered item
+   2. Another nested item
+
+### List with Paragraphs
+
+```markdown
+1. First item with a paragraph
+   
+   This is a paragraph inside a list item.
+
+2. Second item with code
+   
+   ```js
+   console.log('Code in list item');
+   ```
+
+3. Third item with a quote
+   
+   > This is a blockquote in a list item
+```
+
+---
+
+## Advanced Blockquotes
+
+### Nested Blockquotes
+
+```markdown
+> This is a blockquote
+> 
+> > This is a nested blockquote
+> > 
+> > > This is a double-nested blockquote
+```
+
+**Output:**
+
+> This is a blockquote
+> 
+> > This is a nested blockquote
+> > 
+> > > This is a double-nested blockquote
+
+### Blockquote with Attribution
+
+```markdown
+> The best way to predict the future is to invent it.
+> 
+> — Alan Kay
+```
+
+**Output:**
+
+> The best way to predict the future is to invent it.
+> 
+> — Alan Kay
+
+---
+
+## Advanced Links
+
+### Reference-Style Links
+
+```markdown
+[Google][1] is a search engine.
+[GitHub][github] is a code repository.
+
+[1]: https://google.com
+[github]: https://github.com "GitHub Homepage"
+```
+
+**Output:**
+
+[Google][1] is a search engine.
+[GitHub][github] is a code repository.
+
+[1]: https://google.com
+[github]: https://github.com "GitHub Homepage"
+
+### Links with Titles
+
+```markdown
+[CodeScrolls](https://codescrolls.site "Visit CodeScrolls for developer docs")
+```
+
+**Output:**
+
+[CodeScrolls](https://codescrolls.site "Visit CodeScrolls for developer docs")
+
+### Auto-links with Custom Text
+
+```markdown
+<https://codescrolls.site>
+<email@example.com>
+```
+
+**Output:**
+
+<!-- \<<https://codescrolls.site>\>
+\<<email@example.com>\> -->
+
+---
+
+## Advanced Images
+
+### Images with Dimensions
+
+```markdown
+![React Logo](/img/react.png "React Logo" width="100" height="100")
+```
+
+### Images with Links
+
+```markdown
+[![React Logo](/img/react.png)](https://react.dev "Visit React")
+```
+
+### Images with Captions (HTML)
+
+```markdown
+<figure>
+  <img src="/img/react.png" alt="React Logo" />
+  <figcaption>React - A JavaScript library for building user interfaces</figcaption>
+</figure>
+```
+
+---
+
+## Math and Equations
+
+### Inline Math
+
+```markdown
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$
+```
+
+### Block Math
+
+```markdown
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+```
+
+**Output:**
+
+<!-- $$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+
+--- -->
+
+## Advanced Admonitions (Docusaurus)
+
+### Admonitions with Titles
+
+```markdown
+:::note Important
+This is an important note with a custom title.
+:::
+
+:::tip Pro Tip
+Here's a professional tip for you!
+:::
+
+:::warning Deprecated
+This feature is deprecated and will be removed in v2.0
+:::
+
+:::danger Security Warning
+Never commit API keys to version control!
+:::
+
+:::info Did You Know?
+Markdown was created by John Gruber in 2004.
+:::
+```
+
+**Output:**
+
+:::note Important
+This is an important note with a custom title.
+:::
+
+:::tip Pro Tip
+Here's a professional tip for you!
+:::
+
+:::warning Deprecated
+This feature is deprecated and will be removed in v2.0
+:::
+
+:::danger Security Warning
+Never commit API keys to version control!
+:::
+
+:::info Did You Know?
+Markdown was created by John Gruber in 2004.
+:::
+
+---
+
+## Advanced HTML Integration
+
+### HTML Tables
+
+```markdown
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>City</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>25</td>
+      <td>New York</td>
+    </tr>
+    <tr>
+      <td>Jane</td>
+      <td>30</td>
+      <td>San Francisco</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### HTML Details/Summary
+
+```markdown
+<details>
+<summary>Click to expand</summary>
+
+This content is hidden by default and can be expanded.
+<!-- 
+```js
+console.log('Code inside details');
+``` -->
+</details>
+```
+
+---
+
+## Markdown Best Practices
+
+### 1. Consistent Formatting
+
+```markdown
+<!-- ✅ Good: Consistent spacing -->
+## Section Title
+
+Content here with proper spacing.
+
+### Subsection
+
+More content.
+
+<!-- ❌ Bad: Inconsistent spacing -->
+##Section Title
+Content here with no spacing.
+###Subsection
+More content.
+```
+
+### 2. Meaningful Link Text
+
+```markdown
+<!-- ✅ Good: Descriptive link text -->
+[Read our comprehensive React guide](/docs/react)
+
+<!-- ❌ Bad: Generic link text -->
+[Click here](/docs/react)
+```
+
+### 3. Alt Text for Images
+
+```markdown
+<!-- ✅ Good: Descriptive alt text -->
+![React component lifecycle diagram](/img/react-lifecycle.png)
+
+<!-- ❌ Bad: Generic alt text -->
+![Image](/img/react-lifecycle.png)
+```
+
+### 4. Code Block Language Specification
+
+```markdown
+<!-- ✅ Good: Specify language -->
+```js
+const message = "Hello, World!";
+```
+
+<!-- ❌ Bad: No language specified -->
+```
+const message = "Hello, World!";
+```
+```
+
+---
+
+## Common Markdown Flavors
+
+| Feature | GitHub | GitLab | Docusaurus | CommonMark |
+|---------|--------|--------|------------|------------|
+| Tables | ✅ | ✅ | ✅ | ✅ |
+| Task Lists | ✅ | ✅ | ✅ | ❌ |
+| Strikethrough | ✅ | ✅ | ✅ | ❌ |
+| Autolinks | ✅ | ✅ | ✅ | ✅ |
+| Footnotes | ✅ | ✅ | ✅ | ❌ |
+| Definition Lists | ❌ | ✅ | ✅ | ❌ |
+| Math | ❌ | ✅ | ✅ | ❌ |
+| Admonitions | ❌ | ❌ | ✅ | ❌ |
+
+---
+
 ## References
 
 - [Markdown Guide](https://www.markdownguide.org/)
 - [Docusaurus Markdown Features](https://docusaurus.io/docs/markdown-features)
+- [GitHub Flavored Markdown](https://github.github.com/gfm/)
+- [CommonMark Specification](https://spec.commonmark.org/)
+- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
