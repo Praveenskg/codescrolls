@@ -1,8 +1,20 @@
 ---
 slug: react-night-toggle
 title: 'Introducing react-night-toggle – A Dark/Light Mode Switch for React'
+description: 'A lightweight, customizable React component for dark/light mode toggle with smooth animations and TypeScript support.'
 authors: praveen
 tags: [react, javascript, darkmode, opensource]
+image: /img/blog/react.png
+date: 2025-08-14
+keywords:
+  [
+    'react dark mode',
+    'react toggle',
+    'dark mode switch',
+    'react component',
+    'night mode',
+    'theme toggle',
+  ]
 ---
 
 We all love dark mode, but implementing a clean and customizable toggle can be a bit annoying.  

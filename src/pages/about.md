@@ -1,6 +1,15 @@
 ---
 title: About CodeScrolls
 description: Learn more about the mission, vision, and creator of CodeScrolls – your dev knowledge hub.
+keywords:
+  [
+    about codescrolls,
+    praveen singh,
+    web development blog,
+    developer resources,
+    coding tutorials,
+    programming documentation,
+  ]
 ---
 
 # 🧠 About CodeScrolls

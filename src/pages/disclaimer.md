@@ -2,6 +2,15 @@
 title: Disclaimer
 description: Important disclaimers and limitations for CodeScrolls content and services.
 slug: /disclaimer
+keywords:
+  [
+    disclaimer,
+    legal disclaimer,
+    content disclaimer,
+    code examples disclaimer,
+    educational content,
+    liability limitation,
+  ]
 ---
 
 # ⚠️ Disclaimer

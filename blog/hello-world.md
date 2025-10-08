@@ -1,12 +1,22 @@
 ---
 slug: hello-world
 title: Hello World – My First Blog!
+description: This is my first blog post on CodeScrolls, where we explore Markdown, Docusaurus, and share dev insights.
 authors: praveen
 tags:
   - javascript
   - blog
-description: This is my first blog post on CodeScrolls, where we explore Markdown, Docusaurus, and share dev insights.
+image: /img/blog/hello-world.png
 date: 2025-08-15
+keywords:
+  [
+    'codescrolls',
+    'first blog post',
+    'docusaurus',
+    'markdown',
+    'web development blog',
+    'developer blog',
+  ]
 ---
 
 Welcome to my very first blog post on **CodeScrolls**! 🎉  

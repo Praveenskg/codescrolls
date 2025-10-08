@@ -2,6 +2,8 @@
 title: Privacy Policy
 description: How CodeScrolls collects, uses, and protects your data.
 slug: /privacy-policy
+keywords:
+  [privacy policy, data protection, user privacy, cookies policy, gdpr compliance, data security]
 ---
 
 # 🔒 Privacy Policy

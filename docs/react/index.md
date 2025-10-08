@@ -3,6 +3,18 @@ id: index
 title: React Overview
 sidebar_position: 1
 sidebar_label: React Overview
+description: Master React - learn components, hooks, state management, props, Context API, and modern React patterns for building interactive UIs.
+keywords:
+  [
+    react,
+    react tutorial,
+    learn react,
+    react hooks,
+    react components,
+    react state,
+    frontend framework,
+    react js,
+  ]
 ---
 
 # ⚛️ Introduction to React

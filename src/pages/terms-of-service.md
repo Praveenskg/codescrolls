@@ -2,6 +2,15 @@
 title: Terms of Service
 description: The terms and conditions for using CodeScrolls.
 slug: /terms-of-service
+keywords:
+  [
+    terms of service,
+    terms and conditions,
+    website terms,
+    user agreement,
+    legal terms,
+    service agreement,
+  ]
 ---
 
 # 📜 Terms of Service

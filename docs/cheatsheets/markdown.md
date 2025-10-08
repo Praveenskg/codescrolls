@@ -2,6 +2,17 @@
 id: markdown
 title: Markdown CheatSheet
 sidebar_label: Markdown CheatSheet
+description: Complete Markdown syntax guide with examples - headings, lists, code blocks, tables, links, images, and advanced features.
+keywords:
+  [
+    markdown,
+    markdown syntax,
+    markdown guide,
+    markdown cheatsheet,
+    markdown tutorial,
+    markdown examples,
+    md syntax,
+  ]
 ---
 
 # Markdown CheatSheet

@@ -2,6 +2,17 @@
 id: index
 title: JavaScript Overview
 sidebar_position: 1
+description: Learn JavaScript from basics to advanced - variables, functions, arrays, ES6+, async/await, DOM manipulation, and modern JavaScript features.
+keywords:
+  [
+    javascript,
+    javascript tutorial,
+    learn javascript,
+    js basics,
+    javascript guide,
+    web development,
+    frontend development,
+  ]
 tags:
   - JavaScript
   - Introduction

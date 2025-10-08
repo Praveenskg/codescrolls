@@ -1,6 +1,15 @@
 ---
 title: Contact Us
 description: Get in touch with the CodeScrolls team – feedback, contributions, support, and more.
+keywords:
+  [
+    contact codescrolls,
+    praveen singh contact,
+    web development help,
+    developer contact,
+    coding questions,
+    programming support,
+  ]
 ---
 
 # 📬 Contact CodeScrolls
