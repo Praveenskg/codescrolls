@@ -1,0 +1,651 @@
+---
+id: forms
+title: Forms in React
+sidebar_position: 7
+description: Learn how to handle forms in React, including controlled components, form validation, submission, and common form patterns.
+keywords: [react forms, controlled components, form validation, form submission, input handling, react form patterns]
+---
+
+# Forms in React
+
+**Forms** are essential for user input in web applications. React handles forms differently than traditional HTML forms, using **controlled components** for better control and validation.
+
+---
+
+## 📌 Controlled vs Uncontrolled Components
+
+### Controlled Components (Recommended)
+
+React controls the form element's value through state:
+
+```jsx
+import { useState } from 'react';
+
+function ControlledInput() {
+  const [value, setValue] = useState('');
+
+  return (
+    <input 
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  );
+}
+```
+
+### Uncontrolled Components
+
+DOM controls the form element's value:
+
+```jsx
+import { useRef } from 'react';
+
+function UncontrolledInput() {
+  const inputRef = useRef();
+
+  const handleSubmit = () => {
+    console.log(inputRef.current.value);
+  };
+
+  return <input ref={inputRef} />;
+}
+```
+
+---
+
+## 🔸 Basic Form Handling
+
+### Single Input
+
+```jsx
+function NameForm() {
+  const [name, setName] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Hello, ${name}!`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input 
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+### Multiple Inputs
+
+```jsx
+function UserForm() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form data:', formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        placeholder="First Name"
+      />
+      <input 
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        placeholder="Last Name"
+      />
+      <input 
+        name="email"
+        type="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+---
+
+## 🔸 Different Input Types
+
+### Text Input
+
+```jsx
+const [text, setText] = useState('');
+
+<input 
+  type="text"
+  value={text}
+  onChange={(e) => setText(e.target.value)}
+/>
+```
+
+### Textarea
+
+```jsx
+const [message, setMessage] = useState('');
+
+<textarea 
+  value={message}
+  onChange={(e) => setMessage(e.target.value)}
+  rows={4}
+/>
+```
+
+### Checkbox
+
+```jsx
+const [isChecked, setIsChecked] = useState(false);
+
+<input 
+  type="checkbox"
+  checked={isChecked}
+  onChange={(e) => setIsChecked(e.target.checked)}
+/>
+```
+
+### Multiple Checkboxes
+
+```jsx
+const [hobbies, setHobbies] = useState([]);
+
+const handleCheckbox = (hobby) => {
+  setHobbies(prev =>
+    prev.includes(hobby)
+      ? prev.filter(h => h !== hobby)
+      : [...prev, hobby]
+  );
+};
+
+<div>
+  <label>
+    <input 
+      type="checkbox"
+      checked={hobbies.includes('reading')}
+      onChange={() => handleCheckbox('reading')}
+    />
+    Reading
+  </label>
+  <label>
+    <input 
+      type="checkbox"
+      checked={hobbies.includes('gaming')}
+      onChange={() => handleCheckbox('gaming')}
+    />
+    Gaming
+  </label>
+</div>
+```
+
+### Radio Buttons
+
+```jsx
+const [gender, setGender] = useState('');
+
+<div>
+  <label>
+    <input 
+      type="radio"
+      value="male"
+      checked={gender === 'male'}
+      onChange={(e) => setGender(e.target.value)}
+    />
+    Male
+  </label>
+  <label>
+    <input 
+      type="radio"
+      value="female"
+      checked={gender === 'female'}
+      onChange={(e) => setGender(e.target.value)}
+    />
+    Female
+  </label>
+</div>
+```
+
+### Select Dropdown
+
+```jsx
+const [country, setCountry] = useState('');
+
+<select 
+  value={country}
+  onChange={(e) => setCountry(e.target.value)}
+>
+  <option value="">Select a country</option>
+  <option value="usa">USA</option>
+  <option value="uk">UK</option>
+  <option value="india">India</option>
+</select>
+```
+
+### Multi-Select
+
+```jsx
+const [selectedOptions, setSelectedOptions] = useState([]);
+
+<select 
+  multiple
+  value={selectedOptions}
+  onChange={(e) => {
+    const values = Array.from(e.target.selectedOptions, option => option.value);
+    setSelectedOptions(values);
+  }}
+>
+  <option value="option1">Option 1</option>
+  <option value="option2">Option 2</option>
+  <option value="option3">Option 3</option>
+</select>
+```
+
+### File Input
+
+```jsx
+const [file, setFile] = useState(null);
+
+<input 
+  type="file"
+  onChange={(e) => setFile(e.target.files[0])}
+/>
+```
+
+---
+
+## 🔸 Form Validation
+
+### Basic Validation
+
+```jsx
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Email is invalid';
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required';
+    } else if (password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = validate();
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log('Form is valid!', { email, password });
+      setErrors({});
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input 
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+        />
+        {errors.email && <span className="error">{errors.email}</span>}
+      </div>
+
+      <div>
+        <input 
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        {errors.password && <span className="error">{errors.password}</span>}
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  );
+}
+```
+
+### Real-Time Validation
+
+```jsx
+function SignupForm() {
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+
+  const validateUsername = (value) => {
+    if (value.length < 3) {
+      setError('Username must be at least 3 characters');
+    } else if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+      setError('Username can only contain letters, numbers, and underscores');
+    } else {
+      setError('');
+    }
+  };
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUsername(value);
+    validateUsername(value);
+  };
+
+  return (
+    <div>
+      <input 
+        value={username}
+        onChange={handleChange}
+        placeholder="Username"
+      />
+      {error && <span className="error">{error}</span>}
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Form Submission
+
+### Async Submission
+
+```jsx
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* Form inputs */}
+      
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </button>
+
+      {submitStatus === 'success' && (
+        <div className="success">Form submitted successfully!</div>
+      )}
+      {submitStatus === 'error' && (
+        <div className="error">Failed to submit form. Please try again.</div>
+      )}
+    </form>
+  );
+}
+```
+
+---
+
+## 🔸 Form Libraries
+
+### React Hook Form
+
+```jsx
+import { useForm } from 'react-hook-form';
+
+function RegistrationForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input 
+        {...register('email', { 
+          required: 'Email is required',
+          pattern: {
+            value: /\S+@\S+\.\S+/,
+            message: 'Invalid email'
+          }
+        })}
+        placeholder="Email"
+      />
+      {errors.email && <span>{errors.email.message}</span>}
+
+      <input 
+        {...register('password', { 
+          required: 'Password is required',
+          minLength: {
+            value: 6,
+            message: 'Password must be at least 6 characters'
+          }
+        })}
+        type="password"
+        placeholder="Password"
+      />
+      {errors.password && <span>{errors.password.message}</span>}
+
+      <button type="submit">Register</button>
+    </form>
+  );
+}
+```
+
+### Formik
+
+```jsx
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().min(6, 'Too short').required('Required')
+});
+
+function LoginForm() {
+  return (
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        console.log(values);
+      }}
+    >
+      <Form>
+        <Field name="email" type="email" placeholder="Email" />
+        <ErrorMessage name="email" component="div" />
+
+        <Field name="password" type="password" placeholder="Password" />
+        <ErrorMessage name="password" component="div" />
+
+        <button type="submit">Login</button>
+      </Form>
+    </Formik>
+  );
+}
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Use Controlled Components**
+
+```jsx
+// ✅ Good - Controlled
+const [value, setValue] = useState('');
+<input value={value} onChange={(e) => setValue(e.target.value)} />
+
+// ❌ Avoid - Uncontrolled (unless necessary)
+<input ref={inputRef} />
+```
+
+### 2. **Prevent Default Form Submission**
+
+```jsx
+const handleSubmit = (e) => {
+  e.preventDefault(); // Always prevent default
+  // Handle submission
+};
+```
+
+### 3. **Validate Before Submission**
+
+```jsx
+const handleSubmit = (e) => {
+  e.preventDefault();
+  
+  const errors = validate(formData);
+  if (Object.keys(errors).length > 0) {
+    setErrors(errors);
+    return;
+  }
+  
+  // Submit form
+};
+```
+
+### 4. **Provide Clear Error Messages**
+
+```jsx
+{errors.email && (
+  <span className="error" role="alert">
+    {errors.email}
+  </span>
+)}
+```
+
+### 5. **Disable Submit During Processing**
+
+```jsx
+<button type="submit" disabled={isSubmitting}>
+  {isSubmitting ? 'Submitting...' : 'Submit'}
+</button>
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Forgetting preventDefault**
+
+```jsx
+// ❌ Wrong - Page will reload
+const handleSubmit = () => {
+  console.log('Submit');
+};
+
+// ✅ Correct
+const handleSubmit = (e) => {
+  e.preventDefault();
+  console.log('Submit');
+};
+```
+
+### 2. **Not Using Controlled Components**
+
+```jsx
+// ❌ Bad - Uncontrolled
+<input onChange={(e) => console.log(e.target.value)} />
+
+// ✅ Good - Controlled
+<input value={value} onChange={(e) => setValue(e.target.value)} />
+```
+
+### 3. **Mutating State Directly**
+
+```jsx
+// ❌ Wrong
+formData.name = 'New Name';
+
+// ✅ Correct
+setFormData({ ...formData, name: 'New Name' });
+```
+
+---
+
+## 📝 Summary
+
+- Use **controlled components** for form inputs
+- Always **preventDefault()** on form submission
+- **Validate** inputs before submission
+- Provide **clear error messages**
+- **Disable** submit button during processing
+- Consider using **form libraries** for complex forms
+- Handle **async submission** properly
+- Support **multiple input types**
+
+---
+
+## 🔗 Related Topics
+
+- [State](./state)
+- [Events](./events)
+- [Hooks](../intermediate/hooks)
+- [Custom Hooks](../intermediate/custom-hooks)
+
+---
+
+**Master forms to build great user experiences!** 🚀

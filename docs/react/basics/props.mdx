@@ -1,0 +1,573 @@
+---
+id: props
+title: Props in React
+sidebar_position: 2
+description: Learn how to pass data between React components using props, including prop types, default props, and best practices.
+keywords: [react props, component props, passing data, react data flow, prop types, default props]
+---
+
+# Props in React
+
+**Props** (short for "properties") are how you pass data from parent components to child components in React. They are **read-only** and help make components reusable.
+
+---
+
+## 📌 What are Props?
+
+Props are arguments passed into React components, similar to function parameters. They allow you to pass data and event handlers down the component tree.
+
+```jsx
+function Welcome(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+// Usage
+<Welcome name="Praveen" />
+```
+
+---
+
+## 🔸 Passing Props
+
+### Basic Props
+
+```jsx
+function Greeting(props) {
+  return <h1>Welcome, {props.name}!</h1>;
+}
+
+function App() {
+  return (
+    <div>
+      <Greeting name="Alice" />
+      <Greeting name="Bob" />
+      <Greeting name="Charlie" />
+    </div>
+  );
+}
+```
+
+### Multiple Props
+
+```jsx
+function UserCard(props) {
+  return (
+    <div className="card">
+      <h2>{props.name}</h2>
+      <p>Age: {props.age}</p>
+      <p>Role: {props.role}</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <UserCard 
+      name="Praveen Singh" 
+      age={26} 
+      role="Full Stack Developer" 
+    />
+  );
+}
+```
+
+---
+
+## 🔸 Destructuring Props
+
+Instead of using `props.name`, you can destructure props for cleaner code:
+
+```jsx
+// Without destructuring
+function UserCard(props) {
+  return <h2>{props.name}</h2>;
+}
+
+// With destructuring
+function UserCard({ name, age, role }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Role: {role}</p>
+    </div>
+  );
+}
+```
+
+### Destructuring with Default Values
+
+```jsx
+function Button({ text = "Click Me", color = "blue" }) {
+  return (
+    <button style={{ backgroundColor: color }}>
+      {text}
+    </button>
+  );
+}
+
+// Usage
+<Button text="Submit" color="green" />
+<Button /> {/* Uses default values */}
+```
+
+---
+
+## 🔸 Props Types
+
+### String Props
+
+```jsx
+<Greeting name="John" />
+```
+
+### Number Props
+
+```jsx
+<UserCard age={25} />
+```
+
+### Boolean Props
+
+```jsx
+<Button disabled={true} />
+<Button disabled /> {/* Shorthand for true */}
+```
+
+### Array Props
+
+```jsx
+function List({ items }) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
+<List items={['Apple', 'Banana', 'Orange']} />
+```
+
+### Object Props
+
+```jsx
+function Profile({ user }) {
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+
+<Profile user={{ name: 'John', email: 'john@example.com' }} />
+```
+
+### Function Props (Callbacks)
+
+```jsx
+function Button({ onClick, text }) {
+  return <button onClick={onClick}>{text}</button>;
+}
+
+function App() {
+  const handleClick = () => {
+    alert('Button clicked!');
+  };
+
+  return <Button onClick={handleClick} text="Click Me" />;
+}
+```
+
+---
+
+## 🔸 Children Props
+
+The special `children` prop allows you to pass components or elements between opening and closing tags:
+
+```jsx
+function Card({ children }) {
+  return (
+    <div className="card">
+      {children}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <Card>
+      <h2>Card Title</h2>
+      <p>Card content goes here</p>
+    </Card>
+  );
+}
+```
+
+### Multiple Children
+
+```jsx
+function Layout({ children }) {
+  return (
+    <div className="layout">
+      <header>Header</header>
+      <main>{children}</main>
+      <footer>Footer</footer>
+    </div>
+  );
+}
+
+<Layout>
+  <h1>Welcome</h1>
+  <p>This is the main content</p>
+</Layout>
+```
+
+---
+
+## 🔸 Default Props
+
+You can set default values for props:
+
+### Using Default Parameters (Modern)
+
+```jsx
+function Button({ text = "Click Me", color = "blue" }) {
+  return <button style={{ color }}>{text}</button>;
+}
+```
+
+### Using defaultProps (Legacy)
+
+```jsx
+function Button({ text, color }) {
+  return <button style={{ color }}>{text}</button>;
+}
+
+Button.defaultProps = {
+  text: "Click Me",
+  color: "blue"
+};
+```
+
+---
+
+## 🔸 Prop Spreading
+
+You can spread an object as props:
+
+```jsx
+function UserCard({ name, age, role }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Role: {role}</p>
+    </div>
+  );
+}
+
+function App() {
+  const user = {
+    name: "Praveen",
+    age: 26,
+    role: "Developer"
+  };
+
+  return <UserCard {...user} />;
+}
+```
+
+---
+
+## 🔸 Props Validation with PropTypes
+
+PropTypes help validate the types of props passed to components:
+
+```jsx
+import PropTypes from 'prop-types';
+
+function UserCard({ name, age, email, isActive }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Email: {email}</p>
+      <p>Status: {isActive ? 'Active' : 'Inactive'}</p>
+    </div>
+  );
+}
+
+UserCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+  email: PropTypes.string,
+  isActive: PropTypes.bool
+};
+
+UserCard.defaultProps = {
+  isActive: true
+};
+```
+
+### Common PropTypes
+
+```jsx
+import PropTypes from 'prop-types';
+
+Component.propTypes = {
+  // Basic types
+  string: PropTypes.string,
+  number: PropTypes.number,
+  bool: PropTypes.bool,
+  func: PropTypes.func,
+  array: PropTypes.array,
+  object: PropTypes.object,
+  
+  // Required prop
+  requiredProp: PropTypes.string.isRequired,
+  
+  // Specific values
+  enum: PropTypes.oneOf(['small', 'medium', 'large']),
+  
+  // Array of specific type
+  arrayOfNumbers: PropTypes.arrayOf(PropTypes.number),
+  
+  // Object with specific shape
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    age: PropTypes.number
+  }),
+  
+  // One of many types
+  multi: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ])
+};
+```
+
+---
+
+## 🔸 TypeScript Props
+
+For TypeScript projects, define prop types using interfaces or types:
+
+```tsx
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  disabled?: boolean;
+  variant?: 'primary' | 'secondary';
+}
+
+function Button({ text, onClick, disabled = false, variant = 'primary' }: ButtonProps) {
+  return (
+    <button 
+      onClick={onClick} 
+      disabled={disabled}
+      className={variant}
+    >
+      {text}
+    </button>
+  );
+}
+```
+
+### With Children
+
+```tsx
+interface CardProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+function Card({ title, children }: CardProps) {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Common Patterns
+
+### Conditional Props
+
+```jsx
+function Button({ isPrimary, children }) {
+  return (
+    <button className={isPrimary ? 'btn-primary' : 'btn-secondary'}>
+      {children}
+    </button>
+  );
+}
+```
+
+### Computed Props
+
+```jsx
+function UserGreeting({ firstName, lastName }) {
+  const fullName = `${firstName} ${lastName}`;
+  
+  return <h1>Welcome, {fullName}!</h1>;
+}
+```
+
+### Props with Callbacks
+
+```jsx
+function SearchBox({ onSearch }) {
+  const [query, setQuery] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(query);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      <button type="submit">Search</button>
+    </form>
+  );
+}
+
+// Usage
+<SearchBox onSearch={(query) => console.log('Searching for:', query)} />
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Keep Props Simple**
+
+```jsx
+// ❌ Bad - Too many props
+<UserCard name={name} age={age} email={email} phone={phone} address={address} />
+
+// ✅ Good - Use object
+<UserCard user={{ name, age, email, phone, address }} />
+```
+
+### 2. **Use Destructuring**
+
+```jsx
+// ❌ Bad
+function Card(props) {
+  return <div>{props.title}</div>;
+}
+
+// ✅ Good
+function Card({ title }) {
+  return <div>{title}</div>;
+}
+```
+
+### 3. **Provide Default Values**
+
+```jsx
+function Button({ size = 'medium', variant = 'primary' }) {
+  return <button className={`btn-${size} btn-${variant}`}>Click</button>;
+}
+```
+
+### 4. **Validate Props**
+
+```jsx
+// Use PropTypes or TypeScript
+UserCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number
+};
+```
+
+### 5. **Don't Mutate Props**
+
+```jsx
+// ❌ Bad - Never modify props
+function Component({ items }) {
+  items.push('new item'); // Don't do this!
+  return <div>{items.length}</div>;
+}
+
+// ✅ Good - Create new array
+function Component({ items }) {
+  const newItems = [...items, 'new item'];
+  return <div>{newItems.length}</div>;
+}
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Modifying Props**
+
+```jsx
+// ❌ Wrong
+function Component({ user }) {
+  user.name = 'New Name'; // Props are read-only!
+}
+
+// ✅ Correct
+function Component({ user }) {
+  const [userData, setUserData] = useState(user);
+  // Now you can modify userData
+}
+```
+
+### 2. **Missing Keys in Lists**
+
+```jsx
+// ❌ Wrong
+{items.map(item => <div>{item}</div>)}
+
+// ✅ Correct
+{items.map((item, index) => <div key={index}>{item}</div>)}
+```
+
+### 3. **Passing Objects Inline**
+
+```jsx
+// ❌ Bad - Creates new object on every render
+<UserCard user={{ name: 'John', age: 25 }} />
+
+// ✅ Good - Define outside or use useMemo
+const user = { name: 'John', age: 25 };
+<UserCard user={user} />
+```
+
+---
+
+## 📝 Summary
+
+- **Props** are read-only data passed from parent to child
+- Use **destructuring** for cleaner code
+- **children** prop allows passing nested content
+- Use **PropTypes** or **TypeScript** for validation
+- **Never mutate** props directly
+- Props enable **component reusability**
+
+---
+
+## 🔗 Related Topics
+
+- [Components](./components)
+- [State Management](../intermediate/state-management)
+- [Hooks](../intermediate/hooks)
+- [Events](./events)
+
+---
+
+**Props are the foundation of React's data flow. Master them to build flexible, reusable components!** 🚀

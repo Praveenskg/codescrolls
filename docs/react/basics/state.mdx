@@ -1,0 +1,584 @@
+---
+id: state
+title: State in React
+sidebar_position: 3
+description: Learn how to manage component state in React using useState hook, state updates, and best practices for state management.
+keywords: [react state, useState, state management, component state, react hooks, state updates]
+---
+
+# State in React
+
+**State** is data that changes over time in your component. Unlike props, state is **managed within the component** and can be updated, causing the component to re-render.
+
+---
+
+## 📌 What is State?
+
+State is a JavaScript object that holds data that may change during the component's lifecycle. When state changes, React re-renders the component to reflect the new data.
+
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 useState Hook
+
+The `useState` hook is the primary way to add state to functional components.
+
+### Basic Syntax
+
+```jsx
+const [state, setState] = useState(initialValue);
+```
+
+- **`state`**: Current state value
+- **`setState`**: Function to update the state
+- **`initialValue`**: Initial state value
+
+### Example
+
+```jsx
+import { useState } from 'react';
+
+function TextInput() {
+  const [text, setText] = useState('');
+
+  return (
+    <div>
+      <input 
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <p>You typed: {text}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Multiple State Variables
+
+You can use multiple `useState` hooks in a single component:
+
+```jsx
+function UserForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [age, setAge] = useState(0);
+
+  return (
+    <form>
+      <input 
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+      />
+      <input 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input 
+        type="number"
+        value={age}
+        onChange={(e) => setAge(Number(e.target.value))}
+        placeholder="Age"
+      />
+    </form>
+  );
+}
+```
+
+---
+
+## 🔸 State with Different Data Types
+
+### String State
+
+```jsx
+const [name, setName] = useState('John');
+```
+
+### Number State
+
+```jsx
+const [count, setCount] = useState(0);
+```
+
+### Boolean State
+
+```jsx
+const [isOpen, setIsOpen] = useState(false);
+
+// Toggle function
+const toggle = () => setIsOpen(!isOpen);
+```
+
+### Array State
+
+```jsx
+const [items, setItems] = useState(['Apple', 'Banana']);
+
+// Add item
+const addItem = (item) => {
+  setItems([...items, item]);
+};
+
+// Remove item
+const removeItem = (index) => {
+  setItems(items.filter((_, i) => i !== index));
+};
+```
+
+### Object State
+
+```jsx
+const [user, setUser] = useState({
+  name: 'John',
+  age: 25,
+  email: 'john@example.com'
+});
+
+// Update single property
+const updateName = (newName) => {
+  setUser({ ...user, name: newName });
+};
+```
+
+---
+
+## 🔸 Updating State
+
+### Direct Update
+
+```jsx
+const [count, setCount] = useState(0);
+
+// Simple update
+setCount(5);
+```
+
+### Functional Update
+
+When the new state depends on the previous state, use functional updates:
+
+```jsx
+const [count, setCount] = useState(0);
+
+// ✅ Good - Functional update
+setCount(prevCount => prevCount + 1);
+
+// ❌ Bad - Direct update (can cause issues)
+setCount(count + 1);
+```
+
+### Why Functional Updates?
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  const incrementThreeTimes = () => {
+    // ❌ This will only increment by 1
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+
+    // ✅ This will increment by 3
+    setCount(prev => prev + 1);
+    setCount(prev => prev + 1);
+    setCount(prev => prev + 1);
+  };
+
+  return (
+    <button onClick={incrementThreeTimes}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+---
+
+## 🔸 Updating Arrays
+
+### Add Item
+
+```jsx
+const [todos, setTodos] = useState([]);
+
+const addTodo = (text) => {
+  setTodos([...todos, { id: Date.now(), text }]);
+};
+```
+
+### Remove Item
+
+```jsx
+const removeTodo = (id) => {
+  setTodos(todos.filter(todo => todo.id !== id));
+};
+```
+
+### Update Item
+
+```jsx
+const updateTodo = (id, newText) => {
+  setTodos(todos.map(todo => 
+    todo.id === id ? { ...todo, text: newText } : todo
+  ));
+};
+```
+
+### Complete Example
+
+```jsx
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  const addTodo = () => {
+    if (input.trim()) {
+      setTodos([...todos, { id: Date.now(), text: input, done: false }]);
+      setInput('');
+    }
+  };
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo
+    ));
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  return (
+    <div>
+      <input 
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={addTodo}>Add</button>
+      
+      <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <input 
+              type="checkbox"
+              checked={todo.done}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Updating Objects
+
+### Update Single Property
+
+```jsx
+const [user, setUser] = useState({
+  name: 'John',
+  age: 25,
+  email: 'john@example.com'
+});
+
+// Update name
+setUser({ ...user, name: 'Jane' });
+```
+
+### Update Nested Object
+
+```jsx
+const [user, setUser] = useState({
+  name: 'John',
+  address: {
+    city: 'New York',
+    country: 'USA'
+  }
+});
+
+// Update nested property
+setUser({
+  ...user,
+  address: {
+    ...user.address,
+    city: 'Los Angeles'
+  }
+});
+```
+
+### Form Example
+
+```jsx
+function UserForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    age: 0
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form data:', formData);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="Name"
+      />
+      <input 
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+      <input 
+        name="age"
+        type="number"
+        value={formData.age}
+        onChange={handleChange}
+        placeholder="Age"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+---
+
+## 🔸 Lazy Initial State
+
+If the initial state requires expensive computation, use a function:
+
+```jsx
+// ❌ Bad - Runs on every render
+const [state, setState] = useState(expensiveComputation());
+
+// ✅ Good - Runs only once
+const [state, setState] = useState(() => expensiveComputation());
+```
+
+### Example
+
+```jsx
+function Component() {
+  // This function only runs once
+  const [data, setData] = useState(() => {
+    const savedData = localStorage.getItem('data');
+    return savedData ? JSON.parse(savedData) : [];
+  });
+
+  return <div>{/* ... */}</div>;
+}
+```
+
+---
+
+## 🔸 State vs Props
+
+| Feature | State | Props |
+|---------|-------|-------|
+| **Ownership** | Owned by component | Passed from parent |
+| **Mutability** | Can be changed | Read-only |
+| **Purpose** | Internal data | External data |
+| **Updates** | Triggers re-render | Received from parent |
+
+### Example
+
+```jsx
+// Parent component (manages state)
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Child count={count} onIncrement={() => setCount(count + 1)} />
+  );
+}
+
+// Child component (receives props)
+function Child({ count, onIncrement }) {
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={onIncrement}>Increment</button>
+    </div>
+  );
+}
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Don't Mutate State Directly**
+
+```jsx
+// ❌ Bad
+const [items, setItems] = useState([1, 2, 3]);
+items.push(4); // Don't mutate!
+
+// ✅ Good
+setItems([...items, 4]);
+```
+
+### 2. **Use Functional Updates for Dependent State**
+
+```jsx
+// ❌ Bad
+setCount(count + 1);
+
+// ✅ Good
+setCount(prev => prev + 1);
+```
+
+### 3. **Group Related State**
+
+```jsx
+// ❌ Bad - Too many separate states
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const [email, setEmail] = useState('');
+
+// ✅ Good - Group related data
+const [user, setUser] = useState({
+  firstName: '',
+  lastName: '',
+  email: ''
+});
+```
+
+### 4. **Keep State Minimal**
+
+```jsx
+// ❌ Bad - Derived state
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const [fullName, setFullName] = useState('');
+
+// ✅ Good - Calculate on render
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+const fullName = `${firstName} ${lastName}`;
+```
+
+### 5. **Initialize State Properly**
+
+```jsx
+// ✅ Good - Clear initial values
+const [count, setCount] = useState(0);
+const [user, setUser] = useState(null);
+const [items, setItems] = useState([]);
+const [isLoading, setIsLoading] = useState(false);
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Mutating State**
+
+```jsx
+// ❌ Wrong
+const [user, setUser] = useState({ name: 'John' });
+user.name = 'Jane'; // Don't do this!
+
+// ✅ Correct
+setUser({ ...user, name: 'Jane' });
+```
+
+### 2. **Using State Immediately After Setting**
+
+```jsx
+// ❌ Wrong - State updates are asynchronous
+setCount(count + 1);
+console.log(count); // Still old value!
+
+// ✅ Correct - Use useEffect or functional update
+setCount(prev => {
+  console.log(prev + 1); // New value
+  return prev + 1;
+});
+```
+
+### 3. **Too Many State Variables**
+
+```jsx
+// ❌ Bad
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [age, setAge] = useState(0);
+const [address, setAddress] = useState('');
+
+// ✅ Better
+const [user, setUser] = useState({
+  name: '',
+  email: '',
+  age: 0,
+  address: ''
+});
+```
+
+---
+
+## 📝 Summary
+
+- **State** is mutable data managed within a component
+- Use **useState** hook to add state to functional components
+- **Never mutate** state directly - always use setState
+- Use **functional updates** when new state depends on old state
+- **Group related state** into objects
+- State updates are **asynchronous**
+
+---
+
+## 🔗 Related Topics
+
+- [Props](./props)
+- [Hooks](../intermediate/hooks)
+- [useEffect](../intermediate/hooks#useeffect)
+- [Context API](../intermediate/context-api)
+
+---
+
+**State is the heart of React components. Master it to build dynamic, interactive UIs!** 🚀
