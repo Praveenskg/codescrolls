@@ -4,7 +4,7 @@
   "collapsed": false,
   "link": {
     "type": "generated-index",
-    "title": "Basic React Concepts",
-    "description": "Fundamental concepts like JSX, components, props, and state."
+    "title": "React Basics",
+    "description": "Master fundamental React concepts including JSX, components, props, state, events, conditional rendering, lists, forms, and refs."
   }
 }

@@ -1,10 +1,10 @@
 {
   "label": "React - Intermediate",
-  "position": 2,
+  "position": 3,
   "collapsed": false,
   "link": {
     "type": "generated-index",
-    "title": "Intermediate React Concepts",
-    "description": "Explore deeper React topics like hooks, context, forms, and side effects."
+    "title": "Intermediate & Advanced React",
+    "description": "Deep dive into React hooks, Context API, custom hooks, performance optimization, and error boundaries for building production-ready applications."
   }
 }
