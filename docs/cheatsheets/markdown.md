@@ -445,7 +445,7 @@ function example() {
 
 ````markdown
 ```js title="example.js" showLineNumbers
-const message = "Hello, World!";
+const message = 'Hello, World!';
 console.log(message);
 ```
 ````
@@ -474,30 +474,30 @@ echo "Hello, World!"
 ### Table with Multiple Lines
 
 ```markdown
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Basic Syntax | Standard Markdown | ✅ Complete |
-| Advanced Tables | Multi-line cells | ✅ Complete |
-| Code Blocks | Syntax highlighting | 🚧 In Progress |
-| Interactive | JSX components | ❌ Not Started |
+| Feature         | Description         | Status         |
+| --------------- | ------------------- | -------------- |
+| Basic Syntax    | Standard Markdown   | ✅ Complete    |
+| Advanced Tables | Multi-line cells    | ✅ Complete    |
+| Code Blocks     | Syntax highlighting | 🚧 In Progress |
+| Interactive     | JSX components      | ❌ Not Started |
 ```
 
 **Output:**
 
-| Feature | Description | Status |
-|---------|-------------|--------|
-| Basic Syntax | Standard Markdown | ✅ Complete |
-| Advanced Tables | Multi-line cells | ✅ Complete |
-| Code Blocks | Syntax highlighting | 🚧 In Progress |
-| Interactive | JSX components | ❌ Not Started |
+| Feature         | Description         | Status         |
+| --------------- | ------------------- | -------------- |
+| Basic Syntax    | Standard Markdown   | ✅ Complete    |
+| Advanced Tables | Multi-line cells    | ✅ Complete    |
+| Code Blocks     | Syntax highlighting | 🚧 In Progress |
+| Interactive     | JSX components      | ❌ Not Started |
 
 ### Table with HTML
 
 ```markdown
-| Name | Age | Actions |
-|------|-----|---------|
-| John | 25 | <button>Edit</button> |
-| Jane | 30 | <button>Delete</button> |
+| Name | Age | Actions                 |
+| ---- | --- | ----------------------- |
+| John | 25  | <button>Edit</button>   |
+| Jane | 30  | <button>Delete</button> |
 ```
 
 ---
@@ -528,21 +528,23 @@ echo "Hello, World!"
 
 ### List with Paragraphs
 
-```markdown
+````markdown
 1. First item with a paragraph
-   
+
    This is a paragraph inside a list item.
 
 2. Second item with code
-   
+
    ```js
    console.log('Code in list item');
    ```
+````
 
 3. Third item with a quote
-   
+
    > This is a blockquote in a list item
-```
+
+````
 
 ---
 
@@ -552,32 +554,32 @@ echo "Hello, World!"
 
 ```markdown
 > This is a blockquote
-> 
+>
 > > This is a nested blockquote
-> > 
+> >
 > > > This is a double-nested blockquote
-```
+````
 
 **Output:**
 
 > This is a blockquote
-> 
+>
 > > This is a nested blockquote
-> > 
+> >
 > > > This is a double-nested blockquote
 
 ### Blockquote with Attribution
 
 ```markdown
 > The best way to predict the future is to invent it.
-> 
+>
 > — Alan Kay
 ```
 
 **Output:**
 
 > The best way to predict the future is to invent it.
-> 
+>
 > — Alan Kay
 
 ---
@@ -591,7 +593,7 @@ echo "Hello, World!"
 [GitHub][github] is a code repository.
 
 [1]: https://google.com
-[github]: https://github.com "GitHub Homepage"
+[github]: https://github.com 'GitHub Homepage'
 ```
 
 **Output:**
@@ -600,17 +602,17 @@ echo "Hello, World!"
 [GitHub][github] is a code repository.
 
 [1]: https://google.com
-[github]: https://github.com "GitHub Homepage"
+[github]: https://github.com 'GitHub Homepage'
 
 ### Links with Titles
 
 ```markdown
-[CodeScrolls](https://codescrolls.site "Visit CodeScrolls for developer docs")
+[CodeScrolls](https://codescrolls.site 'Visit CodeScrolls for developer docs')
 ```
 
 **Output:**
 
-[CodeScrolls](https://codescrolls.site "Visit CodeScrolls for developer docs")
+[CodeScrolls](https://codescrolls.site 'Visit CodeScrolls for developer docs')
 
 ### Auto-links with Custom Text
 
@@ -637,7 +639,7 @@ echo "Hello, World!"
 ### Images with Links
 
 ```markdown
-[![React Logo](/img/react.png)](https://react.dev "Visit React")
+[![React Logo](/img/react.png)](https://react.dev 'Visit React')
 ```
 
 ### Images with Captions (HTML)
@@ -755,17 +757,18 @@ Markdown was created by John Gruber in 2004.
 
 ### HTML Details/Summary
 
-```markdown
+````markdown
 <details>
 <summary>Click to expand</summary>
 
 This content is hidden by default and can be expanded.
-<!-- 
+
+<!--
 ```js
 console.log('Code inside details');
 ``` -->
 </details>
-```
+````
 
 ---
 
@@ -775,6 +778,7 @@ console.log('Code inside details');
 
 ```markdown
 <!-- ✅ Good: Consistent spacing -->
+
 ## Section Title
 
 Content here with proper spacing.
@@ -784,6 +788,7 @@ Content here with proper spacing.
 More content.
 
 <!-- ❌ Bad: Inconsistent spacing -->
+
 ##Section Title
 Content here with no spacing.
 ###Subsection
@@ -794,9 +799,11 @@ More content.
 
 ```markdown
 <!-- ✅ Good: Descriptive link text -->
+
 [Read our comprehensive React guide](/docs/react)
 
 <!-- ❌ Bad: Generic link text -->
+
 [Click here](/docs/react)
 ```
 
@@ -804,24 +811,30 @@ More content.
 
 ```markdown
 <!-- ✅ Good: Descriptive alt text -->
+
 ![React component lifecycle diagram](/img/react-lifecycle.png)
 
 <!-- ❌ Bad: Generic alt text -->
+
 ![Image](/img/react-lifecycle.png)
 ```
 
 ### 4. Code Block Language Specification
 
-```markdown
+````markdown
 <!-- ✅ Good: Specify language -->
+
 ```js
+const message = 'Hello, World!';
+```
+````
+
+<!-- ❌ Bad: No language specified -->
+
+```
 const message = "Hello, World!";
 ```
 
-<!-- ❌ Bad: No language specified -->
-```
-const message = "Hello, World!";
-```
 ```
 
 ---
@@ -848,3 +861,4 @@ const message = "Hello, World!";
 - [GitHub Flavored Markdown](https://github.github.com/gfm/)
 - [CommonMark Specification](https://spec.commonmark.org/)
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+```
