@@ -105,6 +105,431 @@ if (age >= 18) {
 } else {
   console.log('Minor');
 }
+
+// Ternary operator
+let status = age >= 18 ? 'Adult' : 'Minor';
+
+// Switch statement
+switch (day) {
+  case 'Monday':
+    console.log('Start of week');
+    break;
+  case 'Friday':
+    console.log('End of week');
+    break;
+  default:
+    console.log('Midweek');
+}
+```
+
+---
+
+## 🎯 Arrow Functions
+
+```js
+// Traditional function
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow function
+const add = (a, b) => a + b;
+
+// With single parameter
+const square = x => x * x;
+
+// With multiple lines
+const greet = name => {
+  const message = `Hello, ${name}!`;
+  return message;
+};
+```
+
+---
+
+## 🔄 Array Methods
+
+### Map, Filter, Reduce
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+// Map - transform each element
+const doubled = numbers.map(n => n * 2);
+// [2, 4, 6, 8, 10]
+
+// Filter - select elements
+const evens = numbers.filter(n => n % 2 === 0);
+// [2, 4]
+
+// Reduce - accumulate values
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+// 15
+
+// Find - get first match
+const found = numbers.find(n => n > 3);
+// 4
+
+// Some - check if any match
+const hasEven = numbers.some(n => n % 2 === 0);
+// true
+
+// Every - check if all match
+const allPositive = numbers.every(n => n > 0);
+// true
+```
+
+---
+
+## 📝 String Methods
+
+```js
+const str = 'Hello World';
+
+str.length;                    // 11
+str.toUpperCase();             // 'HELLO WORLD'
+str.toLowerCase();             // 'hello world'
+str.includes('World');         // true
+str.startsWith('Hello');       // true
+str.endsWith('World');         // true
+str.indexOf('World');          // 6
+str.slice(0, 5);              // 'Hello'
+str.split(' ');               // ['Hello', 'World']
+str.replace('World', 'JS');   // 'Hello JS'
+str.trim();                   // Remove whitespace
+str.repeat(2);                // 'Hello WorldHello World'
+```
+
+---
+
+## 🎁 Destructuring
+
+### Array Destructuring
+
+```js
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+// first = 1, second = 2, rest = [3, 4, 5]
+
+// Swapping variables
+let a = 1, b = 2;
+[a, b] = [b, a];
+```
+
+### Object Destructuring
+
+```js
+const user = { name: 'Alice', age: 25, city: 'NYC' };
+
+const { name, age } = user;
+// name = 'Alice', age = 25
+
+// With rename
+const { name: userName, age: userAge } = user;
+
+// With default values
+const { country = 'USA' } = user;
+```
+
+---
+
+## 📦 Spread & Rest Operators
+
+```js
+// Spread - expand array/object
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];
+// [1, 2, 3, 4, 5]
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 };
+// { a: 1, b: 2, c: 3 }
+
+// Rest - collect remaining items
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+sum(1, 2, 3, 4); // 10
+```
+
+---
+
+## ⏱️ Promises & Async/Await
+
+### Promises
+
+```js
+// Creating a promise
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Data loaded');
+    }, 1000);
+  });
+};
+
+// Using promises
+fetchData()
+  .then(data => console.log(data))
+  .catch(error => console.error(error))
+  .finally(() => console.log('Done'));
+```
+
+### Async/Await
+
+```js
+// Async function
+async function getData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// Using async function
+getData().then(data => console.log(data));
+```
+
+---
+
+## 🔗 ES6+ Features
+
+### Template Literals
+
+```js
+const name = 'Alice';
+const age = 25;
+const message = `Hello, ${name}! You are ${age} years old.`;
+
+// Multi-line strings
+const html = `
+  <div>
+    <h1>${name}</h1>
+    <p>Age: ${age}</p>
+  </div>
+`;
+```
+
+### Default Parameters
+
+```js
+function greet(name = 'Guest', greeting = 'Hello') {
+  return `${greeting}, ${name}!`;
+}
+
+greet(); // 'Hello, Guest!'
+greet('Alice'); // 'Hello, Alice!'
+```
+
+### Optional Chaining
+
+```js
+const user = {
+  name: 'Alice',
+  address: {
+    city: 'NYC'
+  }
+};
+
+// Safe property access
+const city = user?.address?.city; // 'NYC'
+const zip = user?.address?.zip; // undefined (no error)
+```
+
+### Nullish Coalescing
+
+```js
+const value = null ?? 'default'; // 'default'
+const value2 = 0 ?? 'default'; // 0 (not default)
+const value3 = '' ?? 'default'; // '' (not default)
+```
+
+---
+
+## 🧩 Classes
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    return `Hello, I'm ${this.name}`;
+  }
+
+  static species() {
+    return 'Homo sapiens';
+  }
+}
+
+// Inheritance
+class Student extends Person {
+  constructor(name, age, grade) {
+    super(name, age);
+    this.grade = grade;
+  }
+
+  study() {
+    return `${this.name} is studying`;
+  }
+}
+
+const student = new Student('Alice', 20, 'A');
+console.log(student.greet()); // 'Hello, I'm Alice'
+console.log(student.study()); // 'Alice is studying'
+```
+
+---
+
+## 🎯 DOM Manipulation
+
+```js
+// Select elements
+const element = document.getElementById('myId');
+const elements = document.querySelectorAll('.myClass');
+const first = document.querySelector('.myClass');
+
+// Modify content
+element.textContent = 'New text';
+element.innerHTML = '<strong>Bold text</strong>';
+
+// Modify attributes
+element.setAttribute('data-id', '123');
+element.classList.add('active');
+element.classList.remove('inactive');
+element.classList.toggle('highlight');
+
+// Create and append elements
+const newDiv = document.createElement('div');
+newDiv.textContent = 'Hello';
+document.body.appendChild(newDiv);
+
+// Event listeners
+element.addEventListener('click', (e) => {
+  console.log('Clicked!', e.target);
+});
+```
+
+---
+
+## 🔄 JSON Operations
+
+```js
+// Object to JSON string
+const obj = { name: 'Alice', age: 25 };
+const json = JSON.stringify(obj);
+// '{"name":"Alice","age":25}'
+
+// JSON string to object
+const parsed = JSON.parse(json);
+// { name: 'Alice', age: 25 }
+
+// Pretty print JSON
+const pretty = JSON.stringify(obj, null, 2);
+```
+
+---
+
+## 🕐 Date & Time
+
+```js
+const now = new Date();
+
+now.getFullYear();        // 2025
+now.getMonth();           // 0-11 (January = 0)
+now.getDate();            // 1-31
+now.getDay();             // 0-6 (Sunday = 0)
+now.getHours();           // 0-23
+now.getMinutes();         // 0-59
+now.getTime();            // Timestamp in milliseconds
+
+// Create specific date
+const date = new Date('2025-01-15');
+const date2 = new Date(2025, 0, 15); // Month is 0-indexed
+
+// Format date
+now.toLocaleDateString(); // '1/15/2025'
+now.toLocaleTimeString(); // '10:30:45 AM'
+now.toISOString();        // '2025-01-15T10:30:45.000Z'
+```
+
+---
+
+## 🔢 Math Operations
+
+```js
+Math.round(4.7);      // 5
+Math.ceil(4.1);       // 5
+Math.floor(4.9);      // 4
+Math.abs(-5);         // 5
+Math.max(1, 5, 3);    // 5
+Math.min(1, 5, 3);    // 1
+Math.random();        // 0 to 1 (exclusive)
+Math.pow(2, 3);       // 8
+Math.sqrt(16);        // 4
+
+// Random integer between min and max
+const randomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+```
+
+---
+
+## 🎪 Advanced Patterns
+
+### Closures
+
+```js
+function counter() {
+  let count = 0;
+  return {
+    increment: () => ++count,
+    decrement: () => --count,
+    getCount: () => count
+  };
+}
+
+const myCounter = counter();
+myCounter.increment(); // 1
+myCounter.increment(); // 2
+myCounter.getCount();  // 2
+```
+
+### Debounce
+
+```js
+function debounce(func, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Usage
+const handleSearch = debounce((query) => {
+  console.log('Searching for:', query);
+}, 300);
+```
+
+### Throttle
+
+```js
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
 ```
 
 ---
@@ -114,13 +539,20 @@ if (age >= 18) {
 - [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 - [JavaScript.info](https://javascript.info/)
 - [ES6 Features](https://github.com/lukehoban/es6features)
+- [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+- [Eloquent JavaScript](https://eloquentjavascript.net/)
 
 ---
 
 :::tip Pro Tip
-
-- Use `const` by default, `let` if reassigning
-- Prefer `let` and `const` over `var`
+- Use `const` by default, `let` if reassigning, avoid `var`
 - Use `===` instead of `==` for safer comparisons
-- Use arrow functions for shorter syntax
-  :::
+- Use arrow functions for shorter syntax and lexical `this`
+- Prefer array methods (`map`, `filter`, `reduce`) over loops
+- Use `async/await` for cleaner asynchronous code
+- Always handle errors with try/catch in async functions
+:::
+
+:::note Modern JavaScript
+ES6+ features like destructuring, spread operator, and optional chaining make JavaScript code more concise and readable. Use them whenever possible!
+:::
