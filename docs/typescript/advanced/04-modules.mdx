@@ -1,0 +1,674 @@
+---
+id: modules
+title: Module System in TypeScript
+sidebar_position: 4
+description: Master TypeScript modules with ES6 imports/exports, default exports, namespaces, and module resolution strategies.
+keywords: [typescript modules, es6 modules, import export, typescript namespaces, module resolution, typescript imports]
+---
+
+# Module System in TypeScript
+
+TypeScript uses **ES6 module syntax** for organizing code into reusable pieces. Modules help maintain code organization, encapsulation, and reusability.
+
+---
+
+## Why Modules?
+
+```typescript
+// Without modules - Everything in global scope
+function calculateTax(amount: number): number {
+  return amount * 0.1;
+}
+
+// With modules - Encapsulated and explicit
+// tax.ts
+export function calculateTax(amount: number): number {
+  return amount * 0.1;
+}
+
+// main.ts
+import { calculateTax } from './tax';
+```
+
+---
+
+## Named Exports
+
+### Single Export
+
+```typescript
+// user.ts
+export interface User {
+  id: number;
+  name: string;
+}
+
+export function getUser(id: number): User {
+  return { id, name: "John" };
+}
+
+export const MAX_USERS = 100;
+```
+
+### Multiple Exports
+
+```typescript
+// math.ts
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+function subtract(a: number, b: number): number {
+  return a - b;
+}
+
+function multiply(a: number, b: number): number {
+  return a * b;
+}
+
+export { add, subtract, multiply };
+```
+
+### Export with Alias
+
+```typescript
+// utils.ts
+function internalCalculate(x: number): number {
+  return x * 2;
+}
+
+export { internalCalculate as calculate };
+```
+
+---
+
+## Named Imports
+
+### Basic Import
+
+```typescript
+// main.ts
+import { User, getUser, MAX_USERS } from './user';
+
+const user: User = getUser(1);
+console.log(MAX_USERS);
+```
+
+### Import with Alias
+
+```typescript
+import { User as UserType, getUser as fetchUser } from './user';
+
+const user: UserType = fetchUser(1);
+```
+
+### Import All
+
+```typescript
+import * as MathUtils from './math';
+
+console.log(MathUtils.add(1, 2));
+console.log(MathUtils.subtract(5, 3));
+```
+
+---
+
+## Default Exports
+
+### Single Default Export
+
+```typescript
+// logger.ts
+export default class Logger {
+  log(message: string): void {
+    console.log(message);
+  }
+}
+
+// Or with function
+export default function log(message: string): void {
+  console.log(message);
+}
+```
+
+### Default Import
+
+```typescript
+// main.ts
+import Logger from './logger';
+
+const logger = new Logger();
+logger.log("Hello");
+
+// Can use any name
+import MyLogger from './logger';
+```
+
+### Mixing Default and Named Exports
+
+```typescript
+// api.ts
+export default class ApiClient {
+  get(url: string) { }
+}
+
+export interface ApiConfig {
+  baseUrl: string;
+}
+
+export const API_VERSION = "v1";
+```
+
+```typescript
+// main.ts
+import ApiClient, { ApiConfig, API_VERSION } from './api';
+
+const client = new ApiClient();
+const config: ApiConfig = { baseUrl: "https://api.example.com" };
+```
+
+---
+
+## Re-exporting
+
+### Re-export All
+
+```typescript
+// models/user.ts
+export interface User {
+  id: number;
+  name: string;
+}
+
+// models/post.ts
+export interface Post {
+  id: number;
+  title: string;
+}
+
+// models/index.ts
+export * from './user';
+export * from './post';
+
+// main.ts
+import { User, Post } from './models';
+```
+
+### Re-export with Alias
+
+```typescript
+// models/index.ts
+export { User as UserModel } from './user';
+export { Post as PostModel } from './post';
+```
+
+### Re-export Default
+
+```typescript
+// logger.ts
+export default class Logger { }
+
+// index.ts
+export { default as Logger } from './logger';
+
+// main.ts
+import { Logger } from './index';
+```
+
+---
+
+## Type-Only Imports/Exports
+
+### Type-Only Import
+
+```typescript
+// types.ts
+export interface User {
+  id: number;
+  name: string;
+}
+
+// main.ts
+import type { User } from './types';
+
+// Can only use as type, not as value
+const user: User = { id: 1, name: "John" };
+```
+
+### Type-Only Export
+
+```typescript
+// models.ts
+interface User {
+  id: number;
+  name: string;
+}
+
+export type { User };
+```
+
+### Mixed Import
+
+```typescript
+import { type User, getUser } from './user';
+
+// User is type-only, getUser is value
+const user: User = getUser(1);
+```
+
+---
+
+## Dynamic Imports
+
+### Async Import
+
+```typescript
+async function loadModule() {
+  const { default: Logger } = await import('./logger');
+  const logger = new Logger();
+  logger.log("Loaded dynamically");
+}
+```
+
+### Conditional Import
+
+```typescript
+async function getLogger() {
+  if (process.env.NODE_ENV === 'development') {
+    const { DevLogger } = await import('./dev-logger');
+    return new DevLogger();
+  } else {
+    const { ProdLogger } = await import('./prod-logger');
+    return new ProdLogger();
+  }
+}
+```
+
+### Code Splitting
+
+```typescript
+// React example
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+
+---
+
+## Module Resolution
+
+### Relative Imports
+
+```typescript
+// Same directory
+import { User } from './user';
+
+// Parent directory
+import { Config } from '../config';
+
+// Nested directory
+import { Utils } from './utils/helpers';
+```
+
+### Non-Relative Imports
+
+```typescript
+// Node modules
+import express from 'express';
+import { Request, Response } from 'express';
+
+// Path mapping (tsconfig.json)
+import { User } from '@models/user';
+import { API } from '@services/api';
+```
+
+### Path Mapping Configuration
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
+```
+
+```typescript
+// Before path mapping
+import { User } from '../../../models/user';
+
+// After path mapping
+import { User } from '@models/user';
+```
+
+---
+
+## Namespaces (Legacy)
+
+:::caution
+Namespaces are legacy. Prefer ES6 modules for new code.
+:::
+
+### Basic Namespace
+
+```typescript
+namespace Validation {
+  export interface StringValidator {
+    isValid(s: string): boolean;
+  }
+
+  export class EmailValidator implements StringValidator {
+    isValid(s: string): boolean {
+      return /\S+@\S+\.\S+/.test(s);
+    }
+  }
+}
+
+// Usage
+const validator = new Validation.EmailValidator();
+```
+
+### Nested Namespaces
+
+```typescript
+namespace App {
+  export namespace Models {
+    export interface User {
+      id: number;
+      name: string;
+    }
+  }
+
+  export namespace Services {
+    export class UserService {
+      getUser(id: number): Models.User {
+        return { id, name: "John" };
+      }
+    }
+  }
+}
+
+// Usage
+const service = new App.Services.UserService();
+const user: App.Models.User = service.getUser(1);
+```
+
+---
+
+## Module Augmentation
+
+### Extending External Modules
+
+```typescript
+// express.d.ts
+import 'express';
+
+declare module 'express' {
+  interface Request {
+    user?: {
+      id: number;
+      name: string;
+    };
+  }
+}
+
+// Now you can use it
+import { Request, Response } from 'express';
+
+app.get('/profile', (req: Request, res: Response) => {
+  console.log(req.user?.name); // TypeScript knows about user
+});
+```
+
+### Global Augmentation
+
+```typescript
+// global.d.ts
+declare global {
+  interface Window {
+    myApp: {
+      version: string;
+      config: Record<string, any>;
+    };
+  }
+}
+
+export {};
+
+// Usage
+window.myApp.version = "1.0.0";
+```
+
+---
+
+## Real-World Examples
+
+### API Module Structure
+
+```typescript
+// api/types.ts
+export interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+// api/client.ts
+import type { ApiResponse } from './types';
+
+export class ApiClient {
+  async get<T>(url: string): Promise<ApiResponse<T>> {
+    const response = await fetch(url);
+    return response.json();
+  }
+}
+
+// api/users.ts
+import { ApiClient } from './client';
+import type { User, ApiResponse } from './types';
+
+export class UserService {
+  constructor(private client: ApiClient) {}
+
+  async getUser(id: number): Promise<User> {
+    const response = await this.client.get<User>(`/users/${id}`);
+    return response.data;
+  }
+}
+
+// api/index.ts
+export * from './types';
+export * from './client';
+export * from './users';
+
+// main.ts
+import { ApiClient, UserService } from './api';
+
+const client = new ApiClient();
+const userService = new UserService(client);
+```
+
+### Feature Module
+
+```typescript
+// features/auth/types.ts
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface AuthUser {
+  id: number;
+  email: string;
+  token: string;
+}
+
+// features/auth/service.ts
+import type { LoginCredentials, AuthUser } from './types';
+
+export class AuthService {
+  async login(credentials: LoginCredentials): Promise<AuthUser> {
+    // Implementation
+  }
+}
+
+// features/auth/index.ts
+export * from './types';
+export * from './service';
+```
+
+---
+
+## Best Practices
+
+### 1. **Use Named Exports**
+
+```typescript
+// Good - Clear and explicit
+export function calculateTax(amount: number): number {
+  return amount * 0.1;
+}
+
+// Less clear
+export default function(amount: number): number {
+  return amount * 0.1;
+}
+```
+
+### 2. **Create Barrel Exports**
+
+```typescript
+// models/index.ts
+export * from './user';
+export * from './post';
+export * from './comment';
+
+// main.ts
+import { User, Post, Comment } from './models';
+```
+
+### 3. **Use Path Mapping**
+
+```typescript
+// Clean
+import { User } from '@models/user';
+
+// Messy
+import { User } from '../../../models/user';
+```
+
+### 4. **Separate Types from Implementation**
+
+```typescript
+// types.ts
+export interface User {
+  id: number;
+  name: string;
+}
+
+// service.ts
+import type { User } from './types';
+
+export class UserService {
+  getUser(id: number): User {
+    // Implementation
+  }
+}
+```
+
+---
+
+## Common Mistakes
+
+### 1. **Circular Dependencies**
+
+```typescript
+// Bad - Circular dependency
+// a.ts
+import { B } from './b';
+export class A {
+  b = new B();
+}
+
+// b.ts
+import { A } from './a';
+export class B {
+  a = new A();
+}
+
+// Good - Break the cycle
+// interfaces.ts
+export interface IA { }
+export interface IB { }
+
+// a.ts
+import type { IB } from './interfaces';
+export class A implements IA {
+  constructor(private b: IB) {}
+}
+```
+
+### 2. **Importing Everything**
+
+```typescript
+// Bad - Imports everything
+import * as Utils from './utils';
+
+// Good - Import only what you need
+import { formatDate, formatCurrency } from './utils';
+```
+
+### 3. **Mixing Default and Named Exports**
+
+```typescript
+// Confusing
+export default class User { }
+export const MAX_USERS = 100;
+
+// Consistent
+export class User { }
+export const MAX_USERS = 100;
+```
+
+---
+
+## Summary
+
+- Use **ES6 modules** for code organization
+- **Named exports** are more explicit
+- **Default exports** for single exports
+- **Re-export** to create barrel files
+- **Type-only imports** for better tree-shaking
+- **Dynamic imports** for code splitting
+- **Path mapping** for cleaner imports
+- Avoid **circular dependencies**
+
+---
+
+## Related Topics
+
+- [TypeScript with React](./typescript-react)
+- [Compiler Options](./compiler-options)
+- [Declaration Files](./declaration-files)
+- [Generics](./generics)
+
+---
+
+**Master modules to write organized, maintainable TypeScript code!** 

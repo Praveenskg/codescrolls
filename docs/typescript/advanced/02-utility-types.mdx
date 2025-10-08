@@ -1,0 +1,557 @@
+---
+id: utility-types
+title: Utility Types in TypeScript
+sidebar_position: 2
+description: Master TypeScript's built-in utility types like Partial, Required, Pick, Omit, Record, and more to transform and manipulate types.
+keywords: [typescript utility types, partial, required, pick, omit, record, readonly, typescript helpers]
+---
+
+# Utility Types in TypeScript
+
+TypeScript provides **built-in utility types** to transform and manipulate existing types. These are powerful tools for creating new types from existing ones.
+
+---
+
+## Why Utility Types?
+
+```typescript
+// Without utility types
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+}
+
+interface UpdateUser {
+  id?: number;
+  name?: string;
+  email?: string;
+  age?: number;
+}
+
+// With utility types
+type UpdateUser = Partial<User>; // All properties optional
+```
+
+---
+
+## Partial\<T\>
+
+Makes all properties **optional**.
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type PartialUser = Partial<User>;
+// {
+//   id?: number;
+//   name?: string;
+//   email?: string;
+// }
+
+// Usage
+function updateUser(id: number, updates: Partial<User>): void {
+  // Can update any subset of properties
+}
+
+updateUser(1, { name: "John" }); // OK
+updateUser(1, { email: "john@example.com" }); // OK
+updateUser(1, {}); // OK
+```
+
+---
+
+## Required\<T\>
+
+Makes all properties **required**.
+
+```typescript
+interface Config {
+  host?: string;
+  port?: number;
+  timeout?: number;
+}
+
+type RequiredConfig = Required<Config>;
+// {
+//   host: string;
+//   port: number;
+//   timeout: number;
+// }
+
+function initServer(config: Required<Config>): void {
+  // All properties must be provided
+}
+
+// initServer({ host: "localhost" }); // Error
+initServer({ host: "localhost", port: 3000, timeout: 5000 }); // OK
+```
+
+---
+
+## Readonly\<T\>
+
+Makes all properties **readonly**.
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+}
+
+type ReadonlyUser = Readonly<User>;
+// {
+//   readonly id: number;
+//   readonly name: string;
+// }
+
+const user: ReadonlyUser = { id: 1, name: "John" };
+// user.name = "Jane"; // Error: Cannot assign to 'name'
+```
+
+### Deep Readonly
+
+```typescript
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends object
+    ? DeepReadonly<T[P]>
+    : T[P];
+};
+
+interface User {
+  id: number;
+  profile: {
+    name: string;
+    settings: {
+      theme: string;
+    };
+  };
+}
+
+type ImmutableUser = DeepReadonly<User>;
+// All nested properties are readonly
+```
+
+---
+
+## Pick\<T, K\>
+
+Creates a type by **picking** specific properties.
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+  address: string;
+}
+
+type UserPreview = Pick<User, "id" | "name">;
+// {
+//   id: number;
+//   name: string;
+// }
+
+const preview: UserPreview = {
+  id: 1,
+  name: "John"
+};
+```
+
+---
+
+## Omit\<T, K\>
+
+Creates a type by **omitting** specific properties.
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
+
+type UserWithoutPassword = Omit<User, "password">;
+// {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
+
+type PublicUser = Omit<User, "password" | "email">;
+// {
+//   id: number;
+//   name: string;
+// }
+```
+
+---
+
+## Record\<K, T\>
+
+Creates an object type with **keys K** and **values T**.
+
+```typescript
+type Role = "admin" | "user" | "guest";
+
+type Permissions = Record<Role, string[]>;
+// {
+//   admin: string[];
+//   user: string[];
+//   guest: string[];
+// }
+
+const permissions: Permissions = {
+  admin: ["read", "write", "delete"],
+  user: ["read", "write"],
+  guest: ["read"]
+};
+```
+
+### Dynamic Keys
+
+```typescript
+type PageInfo = Record<string, { title: string; url: string }>;
+
+const pages: PageInfo = {
+  home: { title: "Home", url: "/" },
+  about: { title: "About", url: "/about" },
+  contact: { title: "Contact", url: "/contact" }
+};
+```
+
+---
+
+## Exclude\<T, U\>
+
+Excludes types from **union T** that are assignable to **U**.
+
+```typescript
+type AllColors = "red" | "blue" | "green" | "yellow";
+type PrimaryColors = "red" | "blue" | "yellow";
+
+type SecondaryColors = Exclude<AllColors, PrimaryColors>;
+// "green"
+
+type T1 = Exclude<string | number | boolean, boolean>;
+// string | number
+```
+
+---
+
+## Extract\<T, U\>
+
+Extracts types from **union T** that are assignable to **U**.
+
+```typescript
+type AllColors = "red" | "blue" | "green" | "yellow";
+type WarmColors = "red" | "yellow" | "orange";
+
+type CommonColors = Extract<AllColors, WarmColors>;
+// "red" | "yellow"
+
+type T1 = Extract<string | number | boolean, boolean>;
+// boolean
+```
+
+---
+
+## NonNullable\<T\>
+
+Removes **null** and **undefined** from type.
+
+```typescript
+type MaybeString = string | null | undefined;
+
+type DefiniteString = NonNullable<MaybeString>;
+// string
+
+function processValue(value: NonNullable<string | null>): void {
+  console.log(value.toUpperCase()); // Safe to use
+}
+```
+
+---
+
+## ReturnType\<T\>
+
+Extracts the **return type** of a function.
+
+```typescript
+function getUser() {
+  return { id: 1, name: "John", email: "john@example.com" };
+}
+
+type User = ReturnType<typeof getUser>;
+// {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
+
+function fetchData(): Promise<{ data: string }> {
+  return Promise.resolve({ data: "hello" });
+}
+
+type FetchResult = ReturnType<typeof fetchData>;
+// Promise<{ data: string }>
+```
+
+---
+
+## Parameters\<T\>
+
+Extracts **parameter types** as a tuple.
+
+```typescript
+function createUser(name: string, age: number, email: string) {
+  // ...
+}
+
+type CreateUserParams = Parameters<typeof createUser>;
+// [string, number, string]
+
+function callCreateUser(...args: CreateUserParams) {
+  createUser(...args);
+}
+```
+
+---
+
+## ConstructorParameters\<T\>
+
+Extracts **constructor parameter types**.
+
+```typescript
+class User {
+  constructor(public name: string, public age: number) {}
+}
+
+type UserConstructorParams = ConstructorParameters<typeof User>;
+// [string, number]
+
+function createUser(...args: UserConstructorParams): User {
+  return new User(...args);
+}
+```
+
+---
+
+## InstanceType\<T\>
+
+Extracts the **instance type** of a constructor.
+
+```typescript
+class User {
+  constructor(public name: string) {}
+}
+
+type UserInstance = InstanceType<typeof User>;
+// User
+
+function processUser(user: InstanceType<typeof User>): void {
+  console.log(user.name);
+}
+```
+
+---
+
+## Awaited\<T\>
+
+Unwraps **Promise** types.
+
+```typescript
+type AsyncString = Promise<string>;
+type SyncString = Awaited<AsyncString>;
+// string
+
+type NestedPromise = Promise<Promise<number>>;
+type UnwrappedNumber = Awaited<NestedPromise>;
+// number
+
+async function fetchUser(): Promise<User> {
+  // ...
+}
+
+type FetchedUser = Awaited<ReturnType<typeof fetchUser>>;
+// User
+```
+
+---
+
+## Combining Utility Types
+
+### Complex Transformations
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Public user (no password, readonly)
+type PublicUser = Readonly<Omit<User, "password">>;
+
+// User creation (no id, no timestamps, password required)
+type CreateUserDto = Omit<User, "id" | "createdAt" | "updatedAt">;
+
+// User update (all optional except id)
+type UpdateUserDto = Partial<Omit<User, "id">> & Pick<User, "id">;
+```
+
+### API Response Types
+
+```typescript
+interface ApiResponse<T> {
+  data: T;
+  status: number;
+  message: string;
+}
+
+type UserResponse = ApiResponse<User>;
+type UsersResponse = ApiResponse<User[]>;
+type ErrorResponse = Omit<ApiResponse<null>, "data"> & { error: string };
+```
+
+---
+
+## Custom Utility Types
+
+### Nullable
+
+```typescript
+type Nullable<T> = T | null;
+
+type NullableString = Nullable<string>; // string | null
+```
+
+### Optional
+
+```typescript
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type UserWithOptionalEmail = Optional<User, "email">;
+// {
+//   id: number;
+//   name: string;
+//   email?: string;
+// }
+```
+
+### DeepPartial
+
+```typescript
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
+interface Config {
+  server: {
+    host: string;
+    port: number;
+  };
+  database: {
+    url: string;
+  };
+}
+
+type PartialConfig = DeepPartial<Config>;
+// All nested properties are optional
+```
+
+---
+
+## Best Practices
+
+### 1. **Use Built-in Utilities First**
+
+```typescript
+// Reinventing the wheel
+type MyPartial<T> = { [P in keyof T]?: T[P] };
+
+// Use built-in
+type MyPartial<T> = Partial<T>;
+```
+
+### 2. **Combine for Complex Types**
+
+```typescript
+// Readable and maintainable
+type UpdateUserDto = Partial<Omit<User, "id">> & Pick<User, "id">;
+```
+
+### 3. **Create Domain-Specific Utilities**
+
+```typescript
+// Reusable domain utilities
+type ApiEntity<T> = T & {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type User = ApiEntity<{
+  name: string;
+  email: string;
+}>;
+```
+
+---
+
+## Utility Types Cheat Sheet
+
+| Utility Type | Purpose | Example |
+|--------------|---------|---------|
+| `Partial<T>` | Make all properties optional | `Partial<User>` |
+| `Required<T>` | Make all properties required | `Required<Config>` |
+| `Readonly<T>` | Make all properties readonly | `Readonly<User>` |
+| `Pick<T, K>` | Pick specific properties | `Pick<User, "id" \| "name">` |
+| `Omit<T, K>` | Omit specific properties | `Omit<User, "password">` |
+| `Record<K, T>` | Create object with keys K | `Record<string, number>` |
+| `Exclude<T, U>` | Exclude from union | `Exclude<string \| number, string>` |
+| `Extract<T, U>` | Extract from union | `Extract<string \| number, string>` |
+| `NonNullable<T>` | Remove null/undefined | `NonNullable<string \| null>` |
+| `ReturnType<T>` | Get function return type | `ReturnType<typeof fn>` |
+| `Parameters<T>` | Get function parameters | `Parameters<typeof fn>` |
+| `Awaited<T>` | Unwrap Promise | `Awaited<Promise<string>>` |
+
+---
+
+## Summary
+
+- **Utility types** transform existing types
+- **Built-in utilities** cover common patterns
+- **Combine utilities** for complex transformations
+- Use **`ReturnType`** and **`Parameters`** for functions
+- Create **custom utilities** for domain logic
+- **Type safety** without code duplication
+
+---
+
+## Related Topics
+
+- [Generics](./generics)
+- [Advanced Types](./advanced-types)
+- [Type Aliases](../basics/06-type-aliases)
+- [Mapped Types](./mapped-types)
+
+---
+
+**Master utility types to write cleaner, more maintainable TypeScript!** 

@@ -79,7 +79,7 @@ function move(dir: Direction) {
   console.log(`Moving ${dir}`);
 }
 
-move('up'); // ✅
-move('down'); // ✅
-move('north'); // ❌
+move('up'); // OK
+move('down'); // OK
+move('north'); // Error
 ```

@@ -1,0 +1,573 @@
+---
+id: enums
+title: Enums in TypeScript
+sidebar_position: 3
+description: Learn TypeScript enums including numeric, string, heterogeneous, and const enums with real-world examples and best practices.
+keywords: [typescript enums, numeric enums, string enums, const enums, enum typescript, typescript enumeration]
+---
+
+# Enums in TypeScript
+
+**Enums** (Enumerations) allow you to define a set of named constants. They make code more readable and maintainable by giving meaningful names to numeric or string values.
+
+---
+
+## Why Enums?
+
+Without enums:
+```typescript
+function setStatus(status: number) {
+  if (status === 0) {
+    // What does 0 mean?
+  }
+}
+
+setStatus(0); // Magic number
+```
+
+With enums:
+```typescript
+enum Status {
+  Pending,
+  Active,
+  Inactive
+}
+
+function setStatus(status: Status) {
+  if (status === Status.Pending) {
+    // Clear and readable
+  }
+}
+
+setStatus(Status.Pending); // Self-documenting
+```
+
+---
+
+## Numeric Enums
+
+### Auto-Incrementing
+
+```typescript
+enum Direction {
+  Up,    // 0
+  Down,  // 1
+  Left,  // 2
+  Right  // 3
+}
+
+console.log(Direction.Up);    // 0
+console.log(Direction.Down);  // 1
+console.log(Direction.Left);  // 2
+console.log(Direction.Right); // 3
+```
+
+### Custom Starting Value
+
+```typescript
+enum Status {
+  Pending = 1,  // 1
+  Active,       // 2
+  Inactive      // 3
+}
+
+console.log(Status.Pending);  // 1
+console.log(Status.Active);   // 2
+console.log(Status.Inactive); // 3
+```
+
+### Custom Values
+
+```typescript
+enum HttpStatus {
+  OK = 200,
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
+  InternalServerError = 500
+}
+
+console.log(HttpStatus.OK);        // 200
+console.log(HttpStatus.NotFound);  // 404
+```
+
+---
+
+## String Enums
+
+```typescript
+enum LogLevel {
+  Error = "ERROR",
+  Warning = "WARNING",
+  Info = "INFO",
+  Debug = "DEBUG"
+}
+
+function log(level: LogLevel, message: string) {
+  console.log(`[${level}] ${message}`);
+}
+
+log(LogLevel.Error, "Something went wrong");
+// [ERROR] Something went wrong
+```
+
+### Benefits of String Enums
+
+```typescript
+enum Environment {
+  Development = "development",
+  Staging = "staging",
+  Production = "production"
+}
+
+// More readable in debugging
+console.log(Environment.Development); // "development"
+
+// Better serialization
+const config = {
+  env: Environment.Production
+};
+console.log(JSON.stringify(config)); // {"env":"production"}
+```
+
+---
+
+## Heterogeneous Enums
+
+Mix of string and numeric values (not recommended):
+
+```typescript
+enum Mixed {
+  No = 0,
+  Yes = "YES"
+}
+
+console.log(Mixed.No);  // 0
+console.log(Mixed.Yes); // "YES"
+```
+
+:::caution
+Heterogeneous enums are rarely needed and can be confusing. Prefer consistent types.
+:::
+
+---
+
+## Const Enums
+
+**Const enums** are completely removed during compilation for better performance.
+
+```typescript
+const enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+let dir = Direction.Up;
+
+// Compiled JavaScript:
+// let dir = 0; /* Up */
+```
+
+### Regular Enum vs Const Enum
+
+```typescript
+// Regular enum
+enum Color {
+  Red,
+  Green,
+  Blue
+}
+
+// Compiled to:
+// var Color;
+// (function (Color) {
+//   Color[Color["Red"] = 0] = "Red";
+//   Color[Color["Green"] = 1] = "Green";
+//   Color[Color["Blue"] = 2] = "Blue";
+// })(Color || (Color = {}));
+
+// Const enum
+const enum Color {
+  Red,
+  Green,
+  Blue
+}
+
+// Compiled to: (inline values, no runtime object)
+// let color = 0; /* Red */
+```
+
+---
+
+## Reverse Mapping
+
+Numeric enums support **reverse mapping** (value → name):
+
+```typescript
+enum Status {
+  Pending = 1,
+  Active = 2,
+  Inactive = 3
+}
+
+console.log(Status.Pending);    // 1
+console.log(Status[1]);         // "Pending"
+console.log(Status[2]);         // "Active"
+
+// Reverse mapping doesn't work with string enums
+enum LogLevel {
+  Error = "ERROR",
+  Warning = "WARNING"
+}
+
+console.log(LogLevel.Error);    // "ERROR"
+console.log(LogLevel["ERROR"]); // undefined (no reverse mapping)
+```
+
+---
+
+## Computed and Constant Members
+
+### Constant Members
+
+```typescript
+enum FileAccess {
+  None,
+  Read = 1 << 1,      // 2
+  Write = 1 << 2,     // 4
+  ReadWrite = Read | Write  // 6
+}
+
+console.log(FileAccess.Read);      // 2
+console.log(FileAccess.Write);     // 4
+console.log(FileAccess.ReadWrite); // 6
+```
+
+### Computed Members
+
+```typescript
+function getValue() {
+  return 42;
+}
+
+enum Example {
+  A = getValue(),  // Computed
+  B,               // Error: Enum member must have initializer
+}
+```
+
+---
+
+## Enums as Types
+
+```typescript
+enum Status {
+  Pending = "pending",
+  Active = "active",
+  Inactive = "inactive"
+}
+
+interface User {
+  id: number;
+  name: string;
+  status: Status;  // Enum as type
+}
+
+const user: User = {
+  id: 1,
+  name: "John",
+  status: Status.Active  // OK
+};
+
+// user.status = "active"; // Error: Type '"active"' is not assignable to type 'Status'
+```
+
+---
+
+## Enum Utilities
+
+### Get All Values
+
+```typescript
+enum Color {
+  Red = "red",
+  Green = "green",
+  Blue = "blue"
+}
+
+type ColorValue = `${Color}`;
+// "red" | "green" | "blue"
+
+// Get all enum values
+const colorValues = Object.values(Color);
+// ["red", "green", "blue"]
+```
+
+### Get All Keys
+
+```typescript
+enum Status {
+  Pending = 1,
+  Active = 2,
+  Inactive = 3
+}
+
+const statusKeys = Object.keys(Status).filter(key => isNaN(Number(key)));
+// ["Pending", "Active", "Inactive"]
+```
+
+### Check if Value Exists
+
+```typescript
+enum Role {
+  Admin = "admin",
+  User = "user",
+  Guest = "guest"
+}
+
+function isValidRole(value: string): value is Role {
+  return Object.values(Role).includes(value as Role);
+}
+
+console.log(isValidRole("admin")); // true
+console.log(isValidRole("invalid")); // false
+```
+
+---
+
+## Real-World Examples
+
+### HTTP Status Codes
+
+```typescript
+enum HttpStatus {
+  // Success
+  OK = 200,
+  Created = 201,
+  Accepted = 202,
+  
+  // Client Errors
+  BadRequest = 400,
+  Unauthorized = 401,
+  Forbidden = 403,
+  NotFound = 404,
+  
+  // Server Errors
+  InternalServerError = 500,
+  BadGateway = 502,
+  ServiceUnavailable = 503
+}
+
+function handleResponse(status: HttpStatus) {
+  switch (status) {
+    case HttpStatus.OK:
+      console.log("Success!");
+      break;
+    case HttpStatus.NotFound:
+      console.log("Resource not found");
+      break;
+    case HttpStatus.InternalServerError:
+      console.log("Server error");
+      break;
+  }
+}
+```
+
+### User Roles
+
+```typescript
+enum UserRole {
+  Admin = "ADMIN",
+  Moderator = "MODERATOR",
+  User = "USER",
+  Guest = "GUEST"
+}
+
+const rolePermissions: Record<UserRole, string[]> = {
+  [UserRole.Admin]: ["read", "write", "delete", "manage"],
+  [UserRole.Moderator]: ["read", "write", "delete"],
+  [UserRole.User]: ["read", "write"],
+  [UserRole.Guest]: ["read"]
+};
+
+function checkPermission(role: UserRole, action: string): boolean {
+  return rolePermissions[role].includes(action);
+}
+```
+
+### Order Status
+
+```typescript
+enum OrderStatus {
+  Pending = "PENDING",
+  Processing = "PROCESSING",
+  Shipped = "SHIPPED",
+  Delivered = "DELIVERED",
+  Cancelled = "CANCELLED"
+}
+
+interface Order {
+  id: string;
+  status: OrderStatus;
+  createdAt: Date;
+}
+
+function canCancelOrder(order: Order): boolean {
+  return [OrderStatus.Pending, OrderStatus.Processing].includes(order.status);
+}
+```
+
+---
+
+## Best Practices
+
+### 1. **Prefer String Enums**
+
+```typescript
+// Good - Self-documenting
+enum Status {
+  Active = "ACTIVE",
+  Inactive = "INACTIVE"
+}
+
+// Less clear in logs/debugging
+enum Status {
+  Active,    // 0
+  Inactive   // 1
+}
+```
+
+### 2. **Use Const Enums for Performance**
+
+```typescript
+// Better performance (inlined)
+const enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+// Use regular enum if you need runtime features
+enum Status {
+  Pending,
+  Active
+}
+
+const statusName = Status[Status.Pending]; // Reverse mapping
+```
+
+### 3. **Consider Union Types as Alternative**
+
+```typescript
+// Enum
+enum Status {
+  Pending = "pending",
+  Active = "active"
+}
+
+// Union type (simpler, no runtime code)
+type Status = "pending" | "active";
+
+// Use enums when you need:
+// - Reverse mapping
+// - Grouping related constants
+// - Auto-completion in switch statements
+```
+
+### 4. **Use PascalCase for Enum Names**
+
+```typescript
+// Good
+enum UserRole {
+  Admin = "admin",
+  User = "user"
+}
+
+// Bad
+enum user_role {
+  admin = "admin",
+  user = "user"
+}
+```
+
+---
+
+## Common Mistakes
+
+### 1. **Mixing String and Number**
+
+```typescript
+// Confusing
+enum Mixed {
+  A = 0,
+  B = "B"
+}
+
+// Consistent
+enum Status {
+  Pending = "pending",
+  Active = "active"
+}
+```
+
+### 2. **Using Enums for Non-Related Values**
+
+```typescript
+// Bad - Unrelated values
+enum Config {
+  MaxUsers = 100,
+  AppName = "MyApp",
+  Version = "1.0.0"
+}
+
+// Good - Use object or separate enums
+const Config = {
+  maxUsers: 100,
+  appName: "MyApp",
+  version: "1.0.0"
+} as const;
+```
+
+### 3. **Not Initializing After Computed Member**
+
+```typescript
+// Error
+enum Example {
+  A = getValue(),
+  B,  // Error: must have initializer
+}
+
+// Correct
+enum Example {
+  A = getValue(),
+  B = 2,
+}
+```
+
+---
+
+## Summary
+
+- **Enums** define named constants
+- **Numeric enums** auto-increment by default
+- **String enums** are more readable
+- **Const enums** are inlined for performance
+- **Reverse mapping** works with numeric enums
+- Prefer **string enums** for clarity
+- Consider **union types** as alternatives
+
+---
+
+## Related Topics
+
+- [Union Types](../intermediate/01-union-intersection)
+- [Literal Types](../intermediate/04-literal-types)
+- [Type Aliases](../basics/06-type-aliases)
+- [Advanced Types](./advanced-types)
+
+---
+
+**Use enums to make your code more readable and maintainable!** 

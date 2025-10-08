@@ -1,0 +1,10 @@
+{
+  "label": "TypeScript - Advanced",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Advanced TypeScript",
+    "description": "Master advanced TypeScript concepts including generics, utility types, decorators, and integration with React and Node.js."
+  }
+}

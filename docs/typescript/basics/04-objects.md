@@ -66,7 +66,7 @@ type Point = {
 };
 
 const p1: Point = { x: 10, y: 20 };
-// p1.x = 5; ❌ Error: Cannot assign to 'x' because it is a read-only property
+// p1.x = 5; Error: Cannot assign to 'x' because it is a read-only property
 ```
 
 ---

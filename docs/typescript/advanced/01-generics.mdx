@@ -1,0 +1,531 @@
+---
+id: generics
+title: Generics in TypeScript
+sidebar_position: 1
+description: Master TypeScript generics to write reusable, type-safe code with generic functions, classes, interfaces, and constraints.
+keywords: [typescript generics, generic types, generic functions, generic classes, type parameters, typescript constraints]
+---
+
+# Generics in TypeScript
+
+**Generics** allow you to write reusable code that works with multiple types while maintaining type safety. They're one of TypeScript's most powerful features.
+
+---
+
+## Why Generics?
+
+Without generics:
+```typescript
+function identity(arg: any): any {
+  return arg;
+}
+
+// Lost type information
+const result = identity("hello"); // result is 'any'
+```
+
+With generics:
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Type preserved
+const result = identity("hello"); // result is 'string'
+```
+
+---
+
+## Generic Functions
+
+### Basic Generic Function
+
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+// Usage
+const num = identity<number>(42);
+const str = identity<string>("hello");
+const bool = identity<boolean>(true);
+
+// Type inference (recommended)
+const num2 = identity(42); // TypeScript infers number
+```
+
+### Multiple Type Parameters
+
+```typescript
+function pair<T, U>(first: T, second: U): [T, U] {
+  return [first, second];
+}
+
+const result = pair<string, number>("age", 25);
+// result: [string, number]
+
+// With inference
+const result2 = pair("age", 25); // TypeScript infers types
+```
+
+### Generic Array Functions
+
+```typescript
+function firstElement<T>(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+const numbers = [1, 2, 3];
+const first = firstElement(numbers); // first: number | undefined
+
+const strings = ["a", "b", "c"];
+const firstStr = firstElement(strings); // firstStr: string | undefined
+```
+
+---
+
+## Generic Interfaces
+
+### Basic Generic Interface
+
+```typescript
+interface Box<T> {
+  value: T;
+}
+
+const numberBox: Box<number> = { value: 42 };
+const stringBox: Box<string> = { value: "hello" };
+```
+
+### Generic Interface with Methods
+
+```typescript
+interface Repository<T> {
+  items: T[];
+  add(item: T): void;
+  remove(id: number): void;
+  find(id: number): T | undefined;
+}
+
+class UserRepository implements Repository<User> {
+  items: User[] = [];
+
+  add(user: User): void {
+    this.items.push(user);
+  }
+
+  remove(id: number): void {
+    this.items = this.items.filter(u => u.id !== id);
+  }
+
+  find(id: number): User | undefined {
+    return this.items.find(u => u.id === id);
+  }
+}
+```
+
+---
+
+## Generic Classes
+
+### Basic Generic Class
+
+```typescript
+class Stack<T> {
+  private items: T[] = [];
+
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+
+  peek(): T | undefined {
+    return this.items[this.items.length - 1];
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+}
+
+// Usage
+const numberStack = new Stack<number>();
+numberStack.push(1);
+numberStack.push(2);
+console.log(numberStack.pop()); // 2
+
+const stringStack = new Stack<string>();
+stringStack.push("hello");
+stringStack.push("world");
+```
+
+### Generic Class with Constructor
+
+```typescript
+class Pair<T, U> {
+  constructor(public first: T, public second: U) {}
+
+  swap(): Pair<U, T> {
+    return new Pair(this.second, this.first);
+  }
+}
+
+const pair = new Pair("age", 25);
+const swapped = pair.swap(); // Pair<number, string>
+```
+
+---
+
+## Generic Constraints
+
+### Extends Constraint
+
+```typescript
+interface HasLength {
+  length: number;
+}
+
+function logLength<T extends HasLength>(arg: T): void {
+  console.log(arg.length);
+}
+
+logLength("hello"); // string has length
+logLength([1, 2, 3]); // array has length
+logLength({ length: 10 }); // object has length
+// logLength(42); // Error: number doesn't have length
+```
+
+### Multiple Constraints
+
+```typescript
+interface Printable {
+  print(): void;
+}
+
+interface Comparable {
+  compareTo(other: any): number;
+}
+
+function process<T extends Printable & Comparable>(item: T): void {
+  item.print();
+  item.compareTo({});
+}
+```
+
+### Using Type Parameters in Constraints
+
+```typescript
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const person = {
+  name: "John",
+  age: 30
+};
+
+const name = getProperty(person, "name"); // string
+const age = getProperty(person, "age"); // number
+// getProperty(person, "invalid"); // Error
+```
+
+---
+
+## Generic Type Aliases
+
+### Basic Type Alias
+
+```typescript
+type Result<T> = {
+  success: boolean;
+  data: T;
+  error?: string;
+};
+
+const userResult: Result<User> = {
+  success: true,
+  data: { id: 1, name: "John" }
+};
+
+const errorResult: Result<null> = {
+  success: false,
+  data: null,
+  error: "User not found"
+};
+```
+
+### Generic Promise Type
+
+```typescript
+type AsyncResult<T> = Promise<Result<T>>;
+
+async function fetchUser(id: number): AsyncResult<User> {
+  try {
+    const user = await api.getUser(id);
+    return { success: true, data: user };
+  } catch (error) {
+    return { success: false, data: null, error: error.message };
+  }
+}
+```
+
+---
+
+## Default Generic Types
+
+```typescript
+interface Response<T = any> {
+  data: T;
+  status: number;
+}
+
+// With default
+const response1: Response = {
+  data: "anything",
+  status: 200
+};
+
+// With specific type
+const response2: Response<User> = {
+  data: { id: 1, name: "John" },
+  status: 200
+};
+```
+
+---
+
+## Generic Utility Patterns
+
+### Array Operations
+
+```typescript
+function map<T, U>(arr: T[], fn: (item: T) => U): U[] {
+  return arr.map(fn);
+}
+
+const numbers = [1, 2, 3];
+const strings = map(numbers, n => n.toString()); // string[]
+```
+
+### Filter with Type Guard
+
+```typescript
+function filter<T, S extends T>(
+  arr: T[],
+  predicate: (item: T) => item is S
+): S[] {
+  return arr.filter(predicate);
+}
+
+interface Animal {
+  name: string;
+}
+
+interface Dog extends Animal {
+  bark(): void;
+}
+
+function isDog(animal: Animal): animal is Dog {
+  return 'bark' in animal;
+}
+
+const animals: Animal[] = [/* ... */];
+const dogs = filter(animals, isDog); // Dog[]
+```
+
+---
+
+## Real-World Examples
+
+### API Client
+
+```typescript
+class ApiClient {
+  async get<T>(url: string): Promise<T> {
+    const response = await fetch(url);
+    return response.json();
+  }
+
+  async post<T, U>(url: string, data: T): Promise<U> {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+    return response.json();
+  }
+}
+
+// Usage
+const client = new ApiClient();
+const user = await client.get<User>('/api/users/1');
+const result = await client.post<CreateUserDto, User>('/api/users', {
+  name: "John",
+  email: "john@example.com"
+});
+```
+
+### State Management
+
+```typescript
+interface State<T> {
+  data: T;
+  loading: boolean;
+  error: string | null;
+}
+
+class Store<T> {
+  private state: State<T>;
+
+  constructor(initialData: T) {
+    this.state = {
+      data: initialData,
+      loading: false,
+      error: null
+    };
+  }
+
+  setState(updater: (prev: T) => T): void {
+    this.state.data = updater(this.state.data);
+  }
+
+  getState(): State<T> {
+    return this.state;
+  }
+}
+
+// Usage
+const userStore = new Store<User[]>([]);
+userStore.setState(users => [...users, newUser]);
+```
+
+---
+
+## Best Practices
+
+### 1. **Use Descriptive Type Parameter Names**
+
+```typescript
+// Bad - Single letter for complex types
+function process<T, U, V>(a: T, b: U): V { }
+
+// Good - Descriptive names
+function transform<Input, Output, Config>(
+  input: Input,
+  config: Config
+): Output { }
+```
+
+### 2. **Constrain When Necessary**
+
+```typescript
+// Too loose
+function sort<T>(arr: T[]): T[] { }
+
+// Constrained
+function sort<T extends { value: number }>(arr: T[]): T[] {
+  return arr.sort((a, b) => a.value - b.value);
+}
+```
+
+### 3. **Use Type Inference**
+
+```typescript
+// Verbose
+const result = identity<string>("hello");
+
+// Let TypeScript infer
+const result = identity("hello");
+```
+
+### 4. **Avoid Over-Generalization**
+
+```typescript
+// Too generic
+function process<T>(data: T): T {
+  return data; // Not doing anything useful
+}
+
+// Specific purpose
+function clone<T extends object>(obj: T): T {
+  return { ...obj };
+}
+```
+
+---
+
+## Common Mistakes
+
+### 1. **Not Using Constraints**
+
+```typescript
+// Wrong - Can't access length
+function logLength<T>(arg: T): void {
+  console.log(arg.length); // Error
+}
+
+// Correct - Use constraint
+function logLength<T extends { length: number }>(arg: T): void {
+  console.log(arg.length);
+}
+```
+
+### 2. **Overusing Generics**
+
+```typescript
+// Unnecessary generic
+function add<T extends number>(a: T, b: T): T {
+  return (a + b) as T;
+}
+
+// Simple is better
+function add(a: number, b: number): number {
+  return a + b;
+}
+```
+
+### 3. **Wrong Generic Placement**
+
+```typescript
+// Wrong - Generic on class but used once
+class Calculator<T> {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+}
+
+// Correct - Generic on method
+class Calculator {
+  add<T extends number>(a: T, b: T): T {
+    return (a + b) as T;
+  }
+}
+```
+
+---
+
+## Summary
+
+- **Generics** enable type-safe reusable code
+- Use **`<T>`** syntax for type parameters
+- **Constraints** limit what types can be used
+- Works with **functions, classes, interfaces**
+- **Type inference** reduces verbosity
+- Use **`extends keyof`** for object key access
+- **Default types** provide fallbacks
+- Don't **over-generalize** simple code
+
+---
+
+## Related Topics
+
+- [Utility Types](./utility-types)
+- [Type Aliases](../basics/06-type-aliases)
+- [Interfaces](../basics/07-interfaces)
+- [Advanced Types](./advanced-types)
+
+---
+
+**Master generics to write flexible, reusable TypeScript code!** 

@@ -1,0 +1,745 @@
+---
+id: compiler-options
+title: TypeScript Compiler Options
+sidebar_position: 5
+description: Master TypeScript compiler options in tsconfig.json including strict mode, module resolution, and essential configuration settings.
+keywords: [typescript compiler, tsconfig.json, typescript strict mode, compiler options, typescript configuration]
+---
+
+# TypeScript Compiler Options
+
+The **`tsconfig.json`** file configures how TypeScript compiles your code. Understanding compiler options is crucial for type safety and optimal builds.
+
+---
+
+## Basic tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+---
+
+## Essential Compiler Options
+
+### Target
+
+Specifies ECMAScript target version.
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020"  // ES3, ES5, ES6/ES2015, ES2016, ES2017, ES2018, ES2019, ES2020, ES2021, ES2022, ESNext
+  }
+}
+```
+
+```typescript
+// With target: "ES5"
+const greet = (name: string) => `Hello, ${name}`;
+// Compiles to:
+// var greet = function(name) { return "Hello, " + name; };
+
+// With target: "ES2015"
+const greet = (name: string) => `Hello, ${name}`;
+// Compiles to:
+// const greet = (name) => `Hello, ${name}`;
+```
+
+### Module
+
+Specifies module code generation.
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs"  // commonjs, amd, umd, system, es6/es2015, es2020, esnext, node16, nodenext
+  }
+}
+```
+
+```typescript
+// Source
+export const name = "John";
+
+// With module: "commonjs"
+exports.name = "John";
+
+// With module: "es2015"
+export const name = "John";
+```
+
+### Lib
+
+Specifies library files to include.
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+  }
+}
+```
+
+---
+
+## Strict Mode Options
+
+### strict
+
+Enables all strict type checking options.
+
+```json
+{
+  "compilerOptions": {
+    "strict": true  // Enables all strict options below
+  }
+}
+```
+
+### strictNullChecks
+
+```json
+{
+  "compilerOptions": {
+    "strictNullChecks": true
+  }
+}
+```
+
+```typescript
+// With strictNullChecks: false
+let name: string = null; // OK
+
+// With strictNullChecks: true
+let name: string = null; // Error
+let name: string | null = null; // OK
+```
+
+### strictFunctionTypes
+
+```json
+{
+  "compilerOptions": {
+    "strictFunctionTypes": true
+  }
+}
+```
+
+```typescript
+interface Animal {
+  name: string;
+}
+
+interface Dog extends Animal {
+  bark(): void;
+}
+
+let f1: (x: Animal) => void;
+let f2: (x: Dog) => void;
+
+// With strictFunctionTypes: true
+f1 = f2; // Error
+f2 = f1; // OK
+```
+
+### strictBindCallApply
+
+```json
+{
+  "compilerOptions": {
+    "strictBindCallApply": true
+  }
+}
+```
+
+```typescript
+function greet(name: string, age: number) {
+  console.log(`Hello ${name}, you are ${age}`);
+}
+
+// With strictBindCallApply: true
+greet.call(undefined, "John", 30); // OK
+greet.call(undefined, "John", "30"); // Error
+```
+
+### strictPropertyInitialization
+
+```json
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": true
+  }
+}
+```
+
+```typescript
+class User {
+  name: string; // Error: Property 'name' has no initializer
+  age: number = 0; // OK
+  email!: string; // OK (definite assignment assertion)
+}
+```
+
+### noImplicitAny
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitAny": true
+  }
+}
+```
+
+```typescript
+// With noImplicitAny: true
+function add(a, b) { // Error: Parameter 'a' implicitly has an 'any' type
+  return a + b;
+}
+
+// Fix
+function add(a: number, b: number): number {
+  return a + b;
+}
+```
+
+### noImplicitThis
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitThis": true
+  }
+}
+```
+
+```typescript
+// With noImplicitThis: true
+function logName() {
+  console.log(this.name); // Error: 'this' implicitly has type 'any'
+}
+
+// Fix
+function logName(this: { name: string }) {
+  console.log(this.name);
+}
+```
+
+---
+
+## Module Resolution
+
+### moduleResolution
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "node"  // node, classic, node16, nodenext
+  }
+}
+```
+
+### baseUrl
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src"
+  }
+}
+```
+
+```typescript
+// Without baseUrl
+import { User } from '../../../models/user';
+
+// With baseUrl: "./src"
+import { User } from 'models/user';
+```
+
+### paths
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
+```
+
+```typescript
+// Clean imports
+import { User } from '@models/user';
+import { ApiService } from '@services/api';
+import { formatDate } from '@utils/date';
+```
+
+### rootDirs
+
+```json
+{
+  "compilerOptions": {
+    "rootDirs": ["src", "generated"]
+  }
+}
+```
+
+---
+
+## Emit Options
+
+### outDir
+
+```json
+{
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}
+```
+
+### outFile
+
+```json
+{
+  "compilerOptions": {
+    "outFile": "./dist/bundle.js"
+  }
+}
+```
+
+### declaration
+
+Generate `.d.ts` files.
+
+```json
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./types"
+  }
+}
+```
+
+### sourceMap
+
+Generate source maps for debugging.
+
+```json
+{
+  "compilerOptions": {
+    "sourceMap": true
+  }
+}
+```
+
+### removeComments
+
+```json
+{
+  "compilerOptions": {
+    "removeComments": true
+  }
+}
+```
+
+### noEmit
+
+Don't emit output (useful for type checking only).
+
+```json
+{
+  "compilerOptions": {
+    "noEmit": true
+  }
+}
+```
+
+---
+
+## Type Checking Options
+
+### noUnusedLocals
+
+```json
+{
+  "compilerOptions": {
+    "noUnusedLocals": true
+  }
+}
+```
+
+```typescript
+function greet(name: string) {
+  const unused = "hello"; // Error: 'unused' is declared but never used
+  return `Hello, ${name}`;
+}
+```
+
+### noUnusedParameters
+
+```json
+{
+  "compilerOptions": {
+    "noUnusedParameters": true
+  }
+}
+```
+
+```typescript
+function greet(name: string, age: number) { // Error: 'age' is declared but never used
+  return `Hello, ${name}`;
+}
+
+// Fix: Prefix with underscore
+function greet(name: string, _age: number) {
+  return `Hello, ${name}`;
+}
+```
+
+### noImplicitReturns
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitReturns": true
+  }
+}
+```
+
+```typescript
+// Error: Not all code paths return a value
+function getStatus(status: number): string {
+  if (status === 200) {
+    return "OK";
+  }
+  // Missing return
+}
+
+// Fix
+function getStatus(status: number): string {
+  if (status === 200) {
+    return "OK";
+  }
+  return "Error";
+}
+```
+
+### noFallthroughCasesInSwitch
+
+```json
+{
+  "compilerOptions": {
+    "noFallthroughCasesInSwitch": true
+  }
+}
+```
+
+```typescript
+// Error: Fallthrough case in switch
+function getDay(day: number): string {
+  switch (day) {
+    case 1:
+      return "Monday";
+    case 2:
+      console.log("Tuesday"); // Missing return or break
+    case 3:
+      return "Wednesday";
+  }
+}
+```
+
+---
+
+## Interop Options
+
+### esModuleInterop
+
+```json
+{
+  "compilerOptions": {
+    "esModuleInterop": true
+  }
+}
+```
+
+```typescript
+// Without esModuleInterop
+import * as React from 'react';
+
+// With esModuleInterop
+import React from 'react';
+```
+
+### allowSyntheticDefaultImports
+
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true
+  }
+}
+```
+
+### resolveJsonModule
+
+```json
+{
+  "compilerOptions": {
+    "resolveJsonModule": true
+  }
+}
+```
+
+```typescript
+import config from './config.json';
+
+console.log(config.apiUrl);
+```
+
+---
+
+## Advanced Options
+
+### skipLibCheck
+
+Skip type checking of declaration files.
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true  // Faster compilation
+  }
+}
+```
+
+### forceConsistentCasingInFileNames
+
+```json
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true
+  }
+}
+```
+
+### isolatedModules
+
+```json
+{
+  "compilerOptions": {
+    "isolatedModules": true  // Required for Babel
+  }
+}
+```
+
+### allowJs
+
+Allow JavaScript files.
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true  // Type check JS files
+  }
+}
+```
+
+---
+
+## Project References
+
+### composite
+
+```json
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true
+  }
+}
+```
+
+### references
+
+```json
+{
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/utils" }
+  ]
+}
+```
+
+---
+
+## Real-World Configurations
+
+### React Project
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+```
+
+### Node.js Project
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["ES2020"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
+```
+
+### Library Project
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "esnext",
+    "lib": ["ES2020"],
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
+```
+
+---
+
+## Best Practices
+
+### 1. **Always Enable Strict Mode**
+
+```json
+{
+  "compilerOptions": {
+    "strict": true  // Catch more errors
+  }
+}
+```
+
+### 2. **Use Path Mapping**
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+```
+
+### 3. **Enable Unused Checks**
+
+```json
+{
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}
+```
+
+### 4. **Skip Lib Check for Faster Builds**
+
+```json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}
+```
+
+---
+
+## Summary
+
+- **`tsconfig.json`** configures TypeScript compiler
+- **`strict: true`** enables all strict checks
+- **Module resolution** controls import behavior
+- **Path mapping** simplifies imports
+- **Emit options** control output files
+- **Type checking** options catch more errors
+- Different configs for **React, Node.js, libraries**
+
+---
+
+## Related Topics
+
+- [Modules](./modules)
+- [TypeScript with React](./typescript-react)
+- [Declaration Files](./declaration-files)
+- [Generics](./generics)
+
+---
+
+**Master compiler options for optimal TypeScript configuration!** 

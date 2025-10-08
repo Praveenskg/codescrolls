@@ -1,0 +1,583 @@
+---
+id: advanced-types
+title: Advanced Types in TypeScript
+sidebar_position: 7
+description: Master advanced TypeScript types including mapped types, conditional types, template literal types, and advanced type manipulation.
+keywords: [typescript advanced types, mapped types, conditional types, template literal types, typescript type manipulation]
+---
+
+# Advanced Types in TypeScript
+
+Master **advanced type patterns** in TypeScript including mapped types, conditional types, template literals, and complex type transformations.
+
+---
+
+## Mapped Types
+
+### Basic Mapped Type
+
+```typescript
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+interface User {
+  name: string;
+  age: number;
+}
+
+type ReadonlyUser = Readonly<User>;
+// {
+//   readonly name: string;
+//   readonly age: number;
+// }
+```
+
+### Optional Mapped Type
+
+```typescript
+type Optional<T> = {
+  [P in keyof T]?: T[P];
+};
+
+type PartialUser = Optional<User>;
+// {
+//   name?: string;
+//   age?: number;
+// }
+```
+
+### Adding Modifiers
+
+```typescript
+// Add readonly
+type ReadonlyType<T> = {
+  +readonly [P in keyof T]: T[P];
+};
+
+// Remove readonly
+type Mutable<T> = {
+  -readonly [P in keyof T]: T[P];
+};
+
+// Remove optional
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+```
+
+---
+
+## Conditional Types
+
+### Basic Conditional Type
+
+```typescript
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<string>;  // true
+type B = IsString<number>;  // false
+```
+
+### Nested Conditional Types
+
+```typescript
+type TypeName<T> =
+  T extends string ? "string" :
+  T extends number ? "number" :
+  T extends boolean ? "boolean" :
+  T extends undefined ? "undefined" :
+  T extends Function ? "function" :
+  "object";
+
+type T1 = TypeName<string>;    // "string"
+type T2 = TypeName<number>;    // "number"
+type T3 = TypeName<() => void>; // "function"
+```
+
+### Distributive Conditional Types
+
+```typescript
+type ToArray<T> = T extends any ? T[] : never;
+
+type StrOrNumArray = ToArray<string | number>;
+// string[] | number[]
+```
+
+### Infer Keyword
+
+```typescript
+// Extract return type
+type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+
+function getUser() {
+  return { id: 1, name: "John" };
+}
+
+type User = ReturnType<typeof getUser>;
+// { id: number; name: string }
+
+// Extract array element type
+type ElementType<T> = T extends (infer E)[] ? E : never;
+
+type StringArray = string[];
+type Element = ElementType<StringArray>; // string
+
+// Extract Promise type
+type UnwrapPromise<T> = T extends Promise<infer U> ? U : T;
+
+type AsyncString = Promise<string>;
+type SyncString = UnwrapPromise<AsyncString>; // string
+```
+
+---
+
+## Template Literal Types
+
+### Basic Template Literals
+
+```typescript
+type Greeting = `Hello ${string}`;
+
+const greeting1: Greeting = "Hello World"; // OK
+const greeting2: Greeting = "Hi World";    // Error
+```
+
+### Union in Template Literals
+
+```typescript
+type Color = "red" | "blue" | "green";
+type Quantity = "one" | "two";
+
+type ColoredQuantity = `${Quantity} ${Color}`;
+// "one red" | "one blue" | "one green" | "two red" | "two blue" | "two green"
+```
+
+### Uppercase/Lowercase/Capitalize
+
+```typescript
+type Uppercase<S extends string> = intrinsic;
+type Lowercase<S extends string> = intrinsic;
+type Capitalize<S extends string> = intrinsic;
+type Uncapitalize<S extends string> = intrinsic;
+
+type Loud = Uppercase<"hello">;        // "HELLO"
+type Quiet = Lowercase<"HELLO">;       // "hello"
+type Proper = Capitalize<"hello">;     // "Hello"
+type Casual = Uncapitalize<"Hello">;   // "hello"
+```
+
+### Event Names
+
+```typescript
+type EventName = "click" | "focus" | "blur";
+type HandlerName = `on${Capitalize<EventName>}`;
+// "onClick" | "onFocus" | "onBlur"
+
+interface Events {
+  onClick: () => void;
+  onFocus: () => void;
+  onBlur: () => void;
+}
+```
+
+### CSS Properties
+
+```typescript
+type CSSProperty = "margin" | "padding";
+type Side = "top" | "right" | "bottom" | "left";
+
+type CSSPropertyWithSide = `${CSSProperty}-${Side}`;
+// "margin-top" | "margin-right" | ... | "padding-left"
+```
+
+---
+
+## Index Access Types
+
+```typescript
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type UserId = User["id"];        // number
+type UserName = User["name"];    // string
+type UserKeys = User["id" | "name"]; // number | string
+```
+
+### With Arrays
+
+```typescript
+const users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Jane" }
+];
+
+type User = typeof users[number];
+// { id: number; name: string }
+```
+
+---
+
+## Recursive Types
+
+### JSON Type
+
+```typescript
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONValue[]
+  | { [key: string]: JSONValue };
+
+const data: JSONValue = {
+  name: "John",
+  age: 30,
+  hobbies: ["reading", "coding"],
+  address: {
+    city: "NYC",
+    zip: 10001
+  }
+};
+```
+
+### Tree Structure
+
+```typescript
+interface TreeNode<T> {
+  value: T;
+  children?: TreeNode<T>[];
+}
+
+const tree: TreeNode<number> = {
+  value: 1,
+  children: [
+    { value: 2 },
+    {
+      value: 3,
+      children: [
+        { value: 4 },
+        { value: 5 }
+      ]
+    }
+  ]
+};
+```
+
+---
+
+## Type Guards
+
+### User-Defined Type Guards
+
+```typescript
+interface Dog {
+  bark(): void;
+}
+
+interface Cat {
+  meow(): void;
+}
+
+function isDog(animal: Dog | Cat): animal is Dog {
+  return (animal as Dog).bark !== undefined;
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (isDog(animal)) {
+    animal.bark(); // TypeScript knows it's Dog
+  } else {
+    animal.meow(); // TypeScript knows it's Cat
+  }
+}
+```
+
+### Narrowing with `in`
+
+```typescript
+interface Square {
+  kind: "square";
+  size: number;
+}
+
+interface Rectangle {
+  kind: "rectangle";
+  width: number;
+  height: number;
+}
+
+type Shape = Square | Rectangle;
+
+function area(shape: Shape): number {
+  if ("size" in shape) {
+    return shape.size * shape.size;
+  } else {
+    return shape.width * shape.height;
+  }
+}
+```
+
+---
+
+## Discriminated Unions
+
+```typescript
+interface Success {
+  type: "success";
+  data: string;
+}
+
+interface Error {
+  type: "error";
+  error: string;
+}
+
+interface Loading {
+  type: "loading";
+}
+
+type State = Success | Error | Loading;
+
+function handleState(state: State) {
+  switch (state.type) {
+    case "success":
+      console.log(state.data); // TypeScript knows state.data exists
+      break;
+    case "error":
+      console.log(state.error); // TypeScript knows state.error exists
+      break;
+    case "loading":
+      console.log("Loading..."); // No data or error
+      break;
+  }
+}
+```
+
+---
+
+## Advanced Utility Patterns
+
+### DeepPartial
+
+```typescript
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
+interface Config {
+  server: {
+    host: string;
+    port: number;
+  };
+  database: {
+    url: string;
+  };
+}
+
+const partialConfig: DeepPartial<Config> = {
+  server: {
+    host: "localhost"
+    // port is optional
+  }
+  // database is optional
+};
+```
+
+### DeepReadonly
+
+```typescript
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends object ? DeepReadonly<T[P]> : T[P];
+};
+
+interface User {
+  name: string;
+  address: {
+    city: string;
+  };
+}
+
+const user: DeepReadonly<User> = {
+  name: "John",
+  address: { city: "NYC" }
+};
+
+// user.name = "Jane"; // Error
+// user.address.city = "LA"; // Error
+```
+
+### Flatten
+
+```typescript
+type Flatten<T> = T extends Array<infer U> ? U : T;
+
+type Str = Flatten<string[]>;     // string
+type Num = Flatten<number>;       // number
+type Nested = Flatten<string[][]>; // string[]
+```
+
+### PromiseType
+
+```typescript
+type PromiseType<T> = T extends Promise<infer U> ? U : T;
+
+type AsyncNumber = Promise<number>;
+type SyncNumber = PromiseType<AsyncNumber>; // number
+```
+
+---
+
+## Real-World Examples
+
+### API Response Handler
+
+```typescript
+type ApiResponse<T> =
+  | { status: "success"; data: T }
+  | { status: "error"; error: string }
+  | { status: "loading" };
+
+function handleResponse<T>(response: ApiResponse<T>) {
+  switch (response.status) {
+    case "success":
+      return response.data;
+    case "error":
+      throw new Error(response.error);
+    case "loading":
+      return null;
+  }
+}
+```
+
+### Form Validation
+
+```typescript
+type ValidationRule<T> = {
+  [K in keyof T]: (value: T[K]) => string | null;
+};
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+const rules: ValidationRule<LoginForm> = {
+  email: (value) => {
+    return value.includes("@") ? null : "Invalid email";
+  },
+  password: (value) => {
+    return value.length >= 8 ? null : "Password too short";
+  }
+};
+```
+
+### Event Emitter
+
+```typescript
+type EventMap = {
+  click: { x: number; y: number };
+  focus: { element: string };
+  blur: {};
+};
+
+type EventHandler<T> = (data: T) => void;
+
+class EventEmitter<T extends EventMap> {
+  private handlers: {
+    [K in keyof T]?: EventHandler<T[K]>[];
+  } = {};
+
+  on<K extends keyof T>(event: K, handler: EventHandler<T[K]>) {
+    if (!this.handlers[event]) {
+      this.handlers[event] = [];
+    }
+    this.handlers[event]!.push(handler);
+  }
+
+  emit<K extends keyof T>(event: K, data: T[K]) {
+    this.handlers[event]?.forEach(handler => handler(data));
+  }
+}
+
+// Usage
+const emitter = new EventEmitter<EventMap>();
+
+emitter.on("click", (data) => {
+  console.log(data.x, data.y); // TypeScript knows data has x and y
+});
+
+emitter.emit("click", { x: 10, y: 20 });
+```
+
+---
+
+## Best Practices
+
+### 1. **Use Discriminated Unions for State**
+
+```typescript
+// Good
+type State =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: string };
+
+// Bad
+interface State {
+  status: "idle" | "loading" | "success";
+  data?: string;
+}
+```
+
+### 2. **Prefer Type Guards Over Type Assertions**
+
+```typescript
+// Good
+function isDog(animal: Animal): animal is Dog {
+  return "bark" in animal;
+}
+
+// Bad
+const dog = animal as Dog;
+```
+
+### 3. **Use Template Literals for String Unions**
+
+```typescript
+// Good
+type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
+type Endpoint = `/${string}`;
+type ApiCall = `${HttpMethod} ${Endpoint}`;
+
+// Manual combinations
+type ApiCall = "GET /users" | "POST /users" | ...;
+```
+
+---
+
+## Summary
+
+- **Mapped types** transform object types
+- **Conditional types** enable type logic
+- **Template literals** create string types
+- **Type guards** narrow types safely
+- **Discriminated unions** for state management
+- **Recursive types** for nested structures
+- **Advanced patterns** solve complex problems
+
+---
+
+## Related Topics
+
+- [Generics](./generics)
+- [Utility Types](./utility-types)
+- [Type Guards](../intermediate/02-type-guards)
+- [Union Types](../intermediate/01-union-intersection)
+
+---
+
+**Master advanced types to unlock TypeScript's full potential!** 

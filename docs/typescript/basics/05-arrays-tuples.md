@@ -38,7 +38,7 @@ Arrays can be readonly too:
 
 ```ts
 const readonlyNums: readonly number[] = [1, 2, 3];
-// readonlyNums[0] = 10; // ❌ Error
+// readonlyNums[0] = 10; // Error
 ```
 
 # Tuples
