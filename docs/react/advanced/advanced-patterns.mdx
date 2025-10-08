@@ -1,0 +1,558 @@
+---
+id: advanced-patterns
+title: Advanced React Patterns
+sidebar_position: 2
+description: Master advanced React patterns including compound components, render props, HOCs, portals, and more for building flexible, reusable components.
+keywords: [react patterns, compound components, render props, hoc, higher order components, react portals, advanced react]
+---
+
+# Advanced React Patterns
+
+**Advanced patterns** help you build flexible, reusable, and maintainable React components. Learn industry-standard patterns used in production applications.
+
+---
+
+## 📌 Why Learn Patterns?
+
+Benefits:
+- **Reusability** - Write once, use everywhere
+- **Flexibility** - Adapt to different use cases
+- **Maintainability** - Easier to understand and modify
+- **Scalability** - Build complex UIs efficiently
+
+---
+
+## 🔸 Compound Components
+
+### Basic Pattern
+
+```jsx
+function Tabs({ children }) {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div className="tabs">
+      {React.Children.map(children, (child, index) =>
+        React.cloneElement(child, {
+          isActive: index === activeTab,
+          onSelect: () => setActiveTab(index)
+        })
+      )}
+    </div>
+  );
+}
+
+function Tab({ title, isActive, onSelect, children }) {
+  return (
+    <div>
+      <button 
+        onClick={onSelect}
+        className={isActive ? 'active' : ''}
+      >
+        {title}
+      </button>
+      {isActive && <div>{children}</div>}
+    </div>
+  );
+}
+
+// Usage
+<Tabs>
+  <Tab title="Tab 1">Content 1</Tab>
+  <Tab title="Tab 2">Content 2</Tab>
+  <Tab title="Tab 3">Content 3</Tab>
+</Tabs>
+```
+
+### With Context
+
+```jsx
+const TabsContext = createContext();
+
+function Tabs({ children }) {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+      <div className="tabs">{children}</div>
+    </TabsContext.Provider>
+  );
+}
+
+function TabList({ children }) {
+  return <div className="tab-list">{children}</div>;
+}
+
+function Tab({ index, children }) {
+  const { activeTab, setActiveTab } = useContext(TabsContext);
+  
+  return (
+    <button
+      onClick={() => setActiveTab(index)}
+      className={activeTab === index ? 'active' : ''}
+    >
+      {children}
+    </button>
+  );
+}
+
+function TabPanels({ children }) {
+  const { activeTab } = useContext(TabsContext);
+  return <div>{children[activeTab]}</div>;
+}
+
+function TabPanel({ children }) {
+  return <div>{children}</div>;
+}
+
+// Usage
+<Tabs>
+  <TabList>
+    <Tab index={0}>Tab 1</Tab>
+    <Tab index={1}>Tab 2</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>Content 1</TabPanel>
+    <TabPanel>Content 2</TabPanel>
+  </TabPanels>
+</Tabs>
+```
+
+---
+
+## 🔸 Render Props
+
+### Basic Pattern
+
+```jsx
+function MouseTracker({ render }) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  return (
+    <div onMouseMove={handleMouseMove}>
+      {render(position)}
+    </div>
+  );
+}
+
+// Usage
+<MouseTracker 
+  render={({ x, y }) => (
+    <h1>Mouse position: {x}, {y}</h1>
+  )}
+/>
+```
+
+### With Children Function
+
+```jsx
+function DataFetcher({ url, children }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        setData(data);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return children({ data, loading });
+}
+
+// Usage
+<DataFetcher url="/api/users">
+  {({ data, loading }) => (
+    loading ? <div>Loading...</div> : <div>{data.name}</div>
+  )}
+</DataFetcher>
+```
+
+---
+
+## 🔸 Higher-Order Components (HOC)
+
+### Basic HOC
+
+```jsx
+function withLoading(Component) {
+  return function WithLoadingComponent({ isLoading, ...props }) {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+    return <Component {...props} />;
+  };
+}
+
+// Usage
+const UserListWithLoading = withLoading(UserList);
+
+<UserListWithLoading isLoading={loading} users={users} />
+```
+
+### HOC with Props
+
+```jsx
+function withAuth(Component) {
+  return function WithAuthComponent(props) {
+    const { isAuthenticated, user } = useAuth();
+
+    if (!isAuthenticated) {
+      return <Navigate to="/login" />;
+    }
+
+    return <Component {...props} user={user} />;
+  };
+}
+
+// Usage
+const ProtectedDashboard = withAuth(Dashboard);
+```
+
+### Composing HOCs
+
+```jsx
+const enhance = compose(
+  withAuth,
+  withLoading,
+  withErrorBoundary
+);
+
+const EnhancedComponent = enhance(MyComponent);
+```
+
+---
+
+## 🔸 Portals
+
+### Basic Portal
+
+```jsx
+import { createPortal } from 'react-dom';
+
+function Modal({ children, isOpen }) {
+  if (!isOpen) return null;
+
+  return createPortal(
+    <div className="modal-overlay">
+      <div className="modal">
+        {children}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+// Usage
+<Modal isOpen={isOpen}>
+  <h2>Modal Content</h2>
+  <button onClick={() => setIsOpen(false)}>Close</button>
+</Modal>
+```
+
+### Tooltip Portal
+
+```jsx
+function Tooltip({ children, content }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const ref = useRef(null);
+
+  const handleMouseEnter = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    setPosition({ x: rect.left, y: rect.bottom + 5 });
+    setIsVisible(true);
+  };
+
+  return (
+    <>
+      <span
+        ref={ref}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        {children}
+      </span>
+      
+      {isVisible && createPortal(
+        <div 
+          className="tooltip"
+          style={{ left: position.x, top: position.y }}
+        >
+          {content}
+        </div>,
+        document.body
+      )}
+    </>
+  );
+}
+```
+
+---
+
+## 🔸 Provider Pattern
+
+### Custom Provider
+
+```jsx
+const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+}
+
+// Usage
+<ThemeProvider>
+  <App />
+</ThemeProvider>
+```
+
+---
+
+## 🔸 Container/Presentational Pattern
+
+### Separation of Concerns
+
+```jsx
+// Container (Logic)
+function UserListContainer() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchUsers().then(data => {
+      setUsers(data);
+      setLoading(false);
+    });
+  }, []);
+
+  const handleDelete = (id) => {
+    setUsers(users.filter(u => u.id !== id));
+  };
+
+  return (
+    <UserListPresentation 
+      users={users}
+      loading={loading}
+      onDelete={handleDelete}
+    />
+  );
+}
+
+// Presentational (UI)
+function UserListPresentation({ users, loading, onDelete }) {
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>
+          {user.name}
+          <button onClick={() => onDelete(user.id)}>Delete</button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+---
+
+## 🔸 Controlled Props Pattern
+
+### Flexible Component
+
+```jsx
+function Counter({ value, onChange, defaultValue = 0 }) {
+  const [internalValue, setInternalValue] = useState(defaultValue);
+
+  // Controlled or uncontrolled
+  const isControlled = value !== undefined;
+  const currentValue = isControlled ? value : internalValue;
+
+  const handleIncrement = () => {
+    const newValue = currentValue + 1;
+    if (isControlled) {
+      onChange?.(newValue);
+    } else {
+      setInternalValue(newValue);
+    }
+  };
+
+  return (
+    <div>
+      <p>Count: {currentValue}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+}
+
+// Controlled usage
+<Counter value={count} onChange={setCount} />
+
+// Uncontrolled usage
+<Counter defaultValue={5} />
+```
+
+---
+
+## 🔸 State Reducer Pattern
+
+### Flexible State Management
+
+```jsx
+function useToggle(initialValue = false, reducer) {
+  const [state, setState] = useState({ on: initialValue });
+
+  const toggle = () => {
+    const newState = { on: !state.on };
+    const reducedState = reducer ? reducer(state, newState) : newState;
+    setState(reducedState);
+  };
+
+  return [state.on, toggle];
+}
+
+// Custom reducer
+const customReducer = (currentState, newState) => {
+  // Add custom logic
+  if (currentState.on && !newState.on) {
+    console.log('Turning off');
+  }
+  return newState;
+};
+
+// Usage
+const [isOn, toggle] = useToggle(false, customReducer);
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Choose the Right Pattern**
+
+```jsx
+// Simple state sharing → Context API
+// Reusable logic → Custom Hooks
+// Flexible components → Compound Components
+// Cross-cutting concerns → HOCs
+```
+
+### 2. **Keep Components Simple**
+
+```jsx
+// ✅ Good - Single responsibility
+function UserProfile({ user }) {
+  return <div>{user.name}</div>;
+}
+
+// ❌ Bad - Too many responsibilities
+function UserProfile({ user, theme, auth, settings }) {
+  // Too complex
+}
+```
+
+### 3. **Document Patterns**
+
+```jsx
+/**
+ * Tabs component using compound component pattern
+ * @example
+ * <Tabs>
+ *   <Tab title="Tab 1">Content 1</Tab>
+ * </Tabs>
+ */
+function Tabs({ children }) {
+  // Implementation
+}
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Overusing HOCs**
+
+```jsx
+// ❌ Bad - Too many HOCs
+const Enhanced = withAuth(withTheme(withData(withLoading(Component))));
+
+// ✅ Good - Use hooks instead
+function Component() {
+  const auth = useAuth();
+  const theme = useTheme();
+  const data = useData();
+  // ...
+}
+```
+
+### 2. **Not Handling Edge Cases**
+
+```jsx
+// ❌ Bad - No null check
+function useTheme() {
+  return useContext(ThemeContext);
+}
+
+// ✅ Good - Error handling
+function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+}
+```
+
+---
+
+## 📝 Summary
+
+- **Compound Components** - Flexible, composable APIs
+- **Render Props** - Share logic via function props
+- **HOCs** - Enhance components with additional props
+- **Portals** - Render outside parent DOM
+- **Provider Pattern** - Share state across tree
+- **Container/Presentational** - Separate logic from UI
+- **Controlled Props** - Flexible controlled/uncontrolled
+- **State Reducer** - Customizable state logic
+- Choose patterns based on **use case**
+- **Document** your patterns well
+
+---
+
+## 🔗 Related Topics
+
+- [Custom Hooks](../intermediate/custom-hooks)
+- [Context API](../intermediate/context-api)
+- [Performance Optimization](../intermediate/performance-optimization)
+- [Components](../basics/components)
+
+---
+
+**Master these patterns to build professional React applications!** 🚀

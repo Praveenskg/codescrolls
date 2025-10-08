@@ -52,15 +52,30 @@ React is a **JavaScript library** for building **user interfaces**, maintained b
 
 ---
 
-## ⏭️ What We’ll Cover Next
+## 📚 What's Covered
 
-- JSX and Rendering Elements
-- Components and Props
-- State and Lifecycle
-- Event Handling
+### **Basics**
+
+- JSX and Components
+- Props and State
+- Events and Forms
 - Conditional Rendering
 - Lists and Keys
-- Hooks (useState, useEffect, etc.)
+- Refs
+
+### **Intermediate**
+
+- React Hooks
+- Context API
+- Custom Hooks
+- Performance Optimization
+- Error Boundaries
+
+### **Advanced**
+
+- React Router
+- Advanced Patterns
+- Production Best Practices
 
 > Before you begin, make sure you're comfortable with JavaScript fundamentals like variables, functions, and ES6 syntax.
 

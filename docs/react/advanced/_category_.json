@@ -1,0 +1,10 @@
+{
+  "label": "React - Advanced",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Advanced React Topics",
+    "description": "Master advanced React concepts including React Router, testing, and advanced patterns for building production-ready applications."
+  }
+}
