@@ -209,6 +209,8 @@ const config: Config = {
           items: [
             { label: 'JavaScript', to: '/javascript' },
             { label: 'TypeScript', to: '/typescript' },
+            { label: 'React', to: '/react' },
+            { label: 'Cheat Sheets', to: '/cheatsheets' },
           ],
         },
         {
@@ -216,14 +218,23 @@ const config: Config = {
           items: [
             { label: 'About', to: '/about' },
             { label: 'Contact', to: '/contact' },
+            { label: 'Blog', to: '/blog' },
+          ],
+        },
+        {
+          title: 'Legal',
+          items: [
+            { label: 'Privacy Policy', to: '/privacy-policy' },
+            { label: 'Terms of Service', to: '/terms-of-service' },
+            { label: 'Disclaimer', to: '/disclaimer' },
           ],
         },
         {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/javascript',
+              label: 'GitHub',
+              href: 'https://github.com/Praveenskg/codescrolls',
             },
             { label: 'LinkedIn', href: 'https://linkedin.com/in/praveenskg' },
             { label: 'X (Twitter)', href: 'https://x.com/its_praveen_s' },

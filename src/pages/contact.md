@@ -23,7 +23,7 @@ For all general inquiries and support:
 
 Found a bug, want to add new docs, or suggest improvements?
 
-**→ [GitHub Repository](https://github.com/praveenskg/codepedia)**
+**→ [GitHub Repository](https://github.com/praveenskg/codescrolls)**
 
 We welcome pull requests and issue discussions! ⭐️
 
