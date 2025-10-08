@@ -16,6 +16,7 @@ CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus
 ## 🌟 Features
 
 ### **Content**
+
 - 📚 **Comprehensive Documentation** - JavaScript, TypeScript, React, and more
 - 📝 **Detailed Cheat Sheets** - Git, Linux, VSCode, Markdown, MDX, JavaScript
 - ✍️ **Technical Blog** - Tutorials, guides, and best practices
@@ -23,6 +24,7 @@ CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus
 - 🎯 **Code Examples** - Practical, runnable code snippets
 
 ### **Technical**
+
 - ⚡ **Blazing Fast** - Static site generation with Docusaurus 3.9.1
 - 🔍 **Local Search** - Full-text search without Algolia
 - 📱 **PWA Support** - Offline-capable Progressive Web App
@@ -31,6 +33,7 @@ CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus
 - 🚀 **Performance** - Optimized builds with experimental faster mode
 
 ### **Developer Experience**
+
 - 🔧 **TypeScript** - Full TypeScript support
 - 🎯 **ESLint** - Code quality enforcement with ESLint 9
 - 💅 **Prettier** - Consistent code formatting
@@ -39,6 +42,7 @@ CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus
 - 🤖 **GitHub Actions** - Automated workflows
 
 ### **SEO & Monetization**
+
 - 🔎 **SEO Optimized** - Meta tags, Open Graph, Twitter Cards
 - 🗺️ **Sitemap** - Auto-generated sitemap.xml
 - 🤖 **robots.txt** - Proper crawler configuration
@@ -96,6 +100,7 @@ npm install
 ```
 
 This will install all required dependencies including:
+
 - Docusaurus 3.9.1
 - React 19.2.0
 - TypeScript 5.9.3
@@ -116,6 +121,7 @@ npm start
 The site will open at [http://localhost:3000](http://localhost:3000).
 
 **Features:**
+
 - ⚡ Hot reload for instant updates
 - 🔍 Local search functionality
 - 🌙 Dark mode toggle
@@ -132,6 +138,7 @@ npm run build
 ```
 
 **Output:**
+
 - Static files in `build/` directory
 - Optimized for production
 - Ready for deployment
@@ -146,18 +153,18 @@ npm run serve
 
 ## 📜 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start development server |
-| `npm run build` | Build for production |
-| `npm run serve` | Serve production build locally |
-| `npm run clean` | Clear Docusaurus cache |
-| `npm run deploy` | Deploy to GitHub Pages |
-| `npm run typecheck` | Run TypeScript type checking |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
+| Script                 | Description                    |
+| ---------------------- | ------------------------------ |
+| `npm start`            | Start development server       |
+| `npm run build`        | Build for production           |
+| `npm run serve`        | Serve production build locally |
+| `npm run clean`        | Clear Docusaurus cache         |
+| `npm run deploy`       | Deploy to GitHub Pages         |
+| `npm run typecheck`    | Run TypeScript type checking   |
+| `npm run lint`         | Run ESLint                     |
+| `npm run lint:fix`     | Fix ESLint issues              |
+| `npm run format`       | Format code with Prettier      |
+| `npm run format:check` | Check code formatting          |
 
 ---
 
@@ -228,19 +235,23 @@ codescrolls/
 ### **Documentation**
 
 #### **JavaScript**
+
 - Basics: Variables, Data Types, Operators, Control Flow, Loops
 - Advanced: Closures, Promises, Async/Await, ES6+ Features
 
 #### **React**
+
 - Basics: Components, JSX, Props, State, Events
 - Intermediate: Hooks, Context API, Custom Hooks
 - Complete Hooks Guide: All React hooks with examples
 
 #### **TypeScript**
+
 - Basics: Variables, Data Types, Functions, Interfaces
 - Intermediate: Union Types, Type Guards, Generics
 
 #### **Cheat Sheets**
+
 - **Git** - Complete Git workflow and commands (890 lines)
 - **JavaScript** - ES6+ features and patterns (558 lines)
 - **Linux** - System administration and commands (571 lines)
@@ -249,6 +260,7 @@ codescrolls/
 - **VSCode** - Extensions and shortcuts (516 lines)
 
 #### **Interview Questions**
+
 - HTML (50 questions)
 - CSS (50 questions)
 - JavaScript (50 questions)
@@ -257,6 +269,7 @@ codescrolls/
 - Node.js (questions)
 
 ### **Blog Posts**
+
 - JavaScript closures and hoisting
 - React hooks deep dive
 - VSCode productivity tips
@@ -267,22 +280,26 @@ codescrolls/
 ## 🛠️ Tech Stack
 
 ### **Core**
+
 - **[Docusaurus 3.9.1](https://docusaurus.io/)** - Documentation framework
 - **[React 19.2.0](https://reactjs.org/)** - UI library
 - **[TypeScript 5.9.3](https://www.typescriptlang.org/)** - Type safety
 
 ### **Development Tools**
+
 - **[ESLint 9](https://eslint.org/)** - Code linting (flat config)
 - **[Prettier 3.6.2](https://prettier.io/)** - Code formatting
 - **[TypeScript ESLint](https://typescript-eslint.io/)** - TypeScript linting
 
 ### **Plugins & Features**
+
 - **[@docusaurus/plugin-pwa](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-pwa)** - PWA support
 - **[@docusaurus/theme-live-codeblock](https://docusaurus.io/docs/api/themes/@docusaurus/theme-live-codeblock)** - Live code editing
 - **[@easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)** - Local search
 - **[@docusaurus/plugin-vercel-analytics](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-vercel-analytics)** - Analytics
 
 ### **Styling**
+
 - Custom CSS with CSS variables
 - Dark mode support
 - Responsive design
@@ -314,6 +331,7 @@ GIT_USER=<your-username> npm run deploy
 This site uses a custom domain: **[codescrolls.site](https://codescrolls.site)**
 
 **Setup:**
+
 1. Add `CNAME` file in `static/` directory
 2. Configure DNS records (A or CNAME)
 3. Enable HTTPS in repository settings
@@ -337,11 +355,13 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ### **How to Contribute**
 
 1. **Fork the repository**
+
    ```bash
    git clone https://github.com/Praveenskg/codescrolls.git
    ```
 
 2. **Create a feature branch**
+
    ```bash
    git checkout -b feature/amazing-feature
    ```
@@ -352,6 +372,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
    - Improve content
 
 4. **Run quality checks**
+
    ```bash
    npm run typecheck
    npm run lint
@@ -360,6 +381,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
    ```
 
 5. **Commit your changes**
+
    ```bash
    git commit -m "feat: add amazing feature"
    ```
@@ -392,6 +414,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## 🌟 Features Highlight
 
 ### **SEO Optimized**
+
 - ✅ Meta tags and Open Graph
 - ✅ Sitemap generation
 - ✅ robots.txt configuration
@@ -399,6 +422,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - ✅ Fast loading times
 
 ### **Developer Friendly**
+
 - ✅ TypeScript support
 - ✅ ESLint configuration
 - ✅ Prettier formatting
@@ -406,6 +430,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 - ✅ Live code blocks
 
 ### **Production Ready**
+
 - ✅ CI/CD pipeline
 - ✅ Automated testing
 - ✅ Code quality checks

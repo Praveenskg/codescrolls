@@ -36,6 +36,7 @@ We use your information to:
 ### What Are Cookies?
 
 Cookies are small text files stored on your device when you visit our website. We use cookies to:
+
 - Remember your preferences
 - Analyze site traffic
 - Serve personalized advertisements
@@ -44,33 +45,39 @@ Cookies are small text files stored on your device when you visit our website. W
 ### Types of Cookies We Use:
 
 **1. Essential Cookies**
+
 - Required for basic site functionality
 - Cannot be disabled
 - Example: Session cookies, security cookies
 
 **2. Analytics Cookies**
+
 - Help us understand how visitors use our site
 - Collect anonymous usage data
 - Used by Google Analytics
 
 **3. Advertising Cookies**
+
 - Used to serve relevant ads
 - Track ad performance
 - Used by Google AdSense and partners
 - May track you across different websites
 
 **4. Preference Cookies**
+
 - Remember your settings (theme, language)
 - Enhance user experience
 
 ### Managing Cookies:
 
 You can control and/or delete cookies as you wish. You can:
+
 - Delete all cookies from your computer
 - Set your browser to prevent cookies from being stored
 - Accept cookies from specific websites only
 
 **Browser Settings:**
+
 - **Chrome:** Settings > Privacy and Security > Cookies
 - **Firefox:** Options > Privacy & Security > Cookies
 - **Safari:** Preferences > Privacy > Cookies
@@ -91,6 +98,7 @@ We use third-party services that may collect information used to identify you.
 ### Google Analytics
 
 We use Google Analytics to analyze website traffic and user behavior. Google Analytics uses cookies to collect anonymous information such as:
+
 - Pages visited
 - Time spent on site
 - Browser and device information
@@ -101,17 +109,20 @@ You can opt-out of Google Analytics by installing the [Google Analytics Opt-out 
 ### Google AdSense
 
 **CodeScrolls** uses Google AdSense to display advertisements. Google AdSense uses cookies and web beacons to:
+
 - Serve ads based on your prior visits to our website or other websites
 - Measure ad performance and engagement
 - Provide aggregate reports to advertisers
 
 **Third-Party Vendors:**
+
 - Google, as a third-party vendor, uses cookies to serve ads on our site
 - Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet
 - Users may opt out of personalized advertising by visiting [Ads Settings](https://www.google.com/settings/ads)
 - Users can also opt out of third-party vendor's use of cookies by visiting [aboutads.info](http://www.aboutads.info/choices/)
 
 **What Data is Collected:**
+
 - IP address (anonymized)
 - Browser type and version
 - Device information
@@ -121,6 +132,7 @@ You can opt-out of Google Analytics by installing the [Google Analytics Opt-out 
 - Ad interaction data
 
 **Your Choices:**
+
 - You can disable cookies in your browser settings
 - You can opt-out of personalized ads at [Google Ads Settings](https://www.google.com/settings/ads)
 - You can use browser extensions to block ads
@@ -145,6 +157,7 @@ If you are a parent or guardian and believe your child has provided us with pers
 ### COPPA Compliance:
 
 We comply with the Children's Online Privacy Protection Act (COPPA) and do not:
+
 - Knowingly collect information from children under 13
 - Target content to children under 13
 - Allow children under 13 to create accounts
@@ -164,6 +177,7 @@ By using our website, you consent to the transfer of your information to the Uni
 Depending on your location, you may have certain rights regarding your personal information:
 
 ### GDPR Rights (EU Users):
+
 - **Right to Access:** Request copies of your personal data
 - **Right to Rectification:** Request correction of inaccurate data
 - **Right to Erasure:** Request deletion of your data
@@ -173,6 +187,7 @@ Depending on your location, you may have certain rights regarding your personal 
 - **Right to Withdraw Consent:** Withdraw consent at any time
 
 ### CCPA Rights (California Users):
+
 - **Right to Know:** What personal information is collected
 - **Right to Delete:** Request deletion of personal information
 - **Right to Opt-Out:** Opt-out of the sale of personal information
@@ -186,6 +201,7 @@ Email us at **Praveencdg@gmail.com** with your request. We will respond within 3
 ## 📊 Data Retention
 
 We retain your information for as long as necessary to:
+
 - Provide our services
 - Comply with legal obligations
 - Resolve disputes
@@ -200,6 +216,7 @@ We retain your information for as long as necessary to:
 ## 🔐 Data Security Measures
 
 We implement appropriate technical and organizational measures to protect your data:
+
 - **Encryption:** HTTPS/SSL encryption for data transmission
 - **Access Controls:** Limited access to personal data
 - **Regular Updates:** Security patches and updates
@@ -214,6 +231,7 @@ However, no method of transmission over the Internet is 100% secure. While we st
 We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements.
 
 **When We Update:**
+
 - We will update the "Effective Date" at the top
 - Significant changes will be highlighted on our website
 - Continued use of the site constitutes acceptance of changes

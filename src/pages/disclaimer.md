@@ -21,6 +21,7 @@ The information provided on CodeScrolls is for general informational and educati
 ## 🎓 Educational Purpose
 
 All content on CodeScrolls, including but not limited to:
+
 - Code examples
 - Tutorials
 - Documentation
@@ -36,6 +37,7 @@ is provided for **educational purposes only**. The content is meant to help deve
 ### Technical Advice
 
 The content on this website does not constitute professional technical advice. Always:
+
 - Test code in a safe environment before production use
 - Consult official documentation
 - Seek professional advice for critical applications
@@ -44,6 +46,7 @@ The content on this website does not constitute professional technical advice. A
 ### Legal or Financial Advice
 
 CodeScrolls does not provide legal, financial, or professional advice. Any information regarding:
+
 - Software licenses
 - Business decisions
 - Career advice
@@ -58,6 +61,7 @@ should not be relied upon as professional advice. Consult appropriate profession
 ### Code Accuracy
 
 While we make every effort to provide accurate and working code examples:
+
 - Code may become outdated as technologies evolve
 - Examples are simplified for educational purposes
 - Production code may require additional security and error handling
@@ -66,6 +70,7 @@ While we make every effort to provide accurate and working code examples:
 ### No Warranty
 
 We provide code examples "as is" without warranty of any kind. We are not responsible for:
+
 - Errors or bugs in code examples
 - Compatibility issues
 - Security vulnerabilities
@@ -74,6 +79,7 @@ We provide code examples "as is" without warranty of any kind. We are not respon
 ### Your Responsibility
 
 You are responsible for:
+
 - Testing all code before implementation
 - Ensuring code meets your specific requirements
 - Implementing proper security measures
@@ -84,6 +90,7 @@ You are responsible for:
 ## 🔗 External Links
 
 CodeScrolls may contain links to external websites that are not provided or maintained by us. We:
+
 - Do not guarantee the accuracy of external content
 - Are not responsible for external website content
 - Do not endorse external websites or services
@@ -98,6 +105,7 @@ CodeScrolls may contain links to external websites that are not provided or main
 ### Affiliate Disclosure
 
 CodeScrolls may contain affiliate links to products or services. This means:
+
 - We may earn a commission if you make a purchase through our links
 - This comes at no additional cost to you
 - We only recommend products/services we believe are valuable
@@ -106,6 +114,7 @@ CodeScrolls may contain affiliate links to products or services. This means:
 ### Google AdSense
 
 We use Google AdSense to display advertisements. Please note:
+
 - We do not control the ads displayed
 - Ad content is determined by Google and advertisers
 - We are not responsible for advertiser claims
@@ -124,6 +133,7 @@ To the fullest extent permitted by law:
 ### No Liability for Damages
 
 We shall not be liable for any:
+
 - Direct, indirect, incidental, or consequential damages
 - Loss of data, profits, or business opportunities
 - System failures or security breaches
@@ -152,6 +162,7 @@ In no event shall our total liability to you exceed the amount you paid us (if a
 ### Technology Changes
 
 Technology evolves rapidly. Information that was accurate when published may become outdated. Always:
+
 - Check official documentation for the latest information
 - Verify compatibility with your specific versions
 - Test thoroughly in your environment
@@ -169,6 +180,7 @@ This disclaimer is governed by the laws of the United States. Any disputes shall
 ### Report Errors
 
 If you find any errors or inaccuracies in our content:
+
 - **Email:** Praveencdg@gmail.com
 - **GitHub:** [Open an Issue](https://github.com/praveenskg/codescrolls/issues)
 
@@ -177,6 +189,7 @@ We appreciate your help in keeping our content accurate!
 ### Content Removal Requests
 
 If you believe any content on our website infringes your rights:
+
 - Contact us immediately at Praveencdg@gmail.com
 - Provide specific details about the content
 - We will investigate and respond promptly
@@ -192,6 +205,7 @@ By using CodeScrolls, you acknowledge that you have read this disclaimer and agr
 ## 📄 Related Policies
 
 For more information about how we operate, please review:
+
 - [Privacy Policy](/privacy-policy) - How we handle your data
 - [Terms of Service](/terms-of-service) - Rules for using our website
 - [About Us](/about) - Learn more about CodeScrolls
@@ -203,12 +217,14 @@ For more information about how we operate, please review:
 ### For Developers:
 
 ✅ **DO:**
+
 - Use our content as a learning resource
 - Test all code before production use
 - Verify information from official sources
 - Report errors or inaccuracies
 
 ❌ **DON'T:**
+
 - Rely solely on our content for critical decisions
 - Use code without understanding it
 - Skip testing in your environment
@@ -217,6 +233,7 @@ For more information about how we operate, please review:
 ### For Production Use:
 
 Before using any code or information from CodeScrolls in production:
+
 1. ✅ Thoroughly test in a development environment
 2. ✅ Review and understand the code
 3. ✅ Check for security vulnerabilities
