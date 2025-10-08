@@ -1,0 +1,577 @@
+---
+id: error-boundaries
+title: Error Boundaries
+sidebar_position: 5
+description: Learn how to handle errors gracefully in React using error boundaries, including implementation patterns and best practices.
+keywords: [react error boundaries, error handling, componentDidCatch, getDerivedStateFromError, react error, error recovery]
+---
+
+# Error Boundaries in React
+
+**Error boundaries** are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI.
+
+---
+
+## 📌 What are Error Boundaries?
+
+Error boundaries catch errors during:
+- Rendering
+- Lifecycle methods
+- Constructors of child components
+
+They **don't** catch errors in:
+- Event handlers
+- Asynchronous code (setTimeout, promises)
+- Server-side rendering
+- Errors in the error boundary itself
+
+---
+
+## 🔸 Creating an Error Boundary
+
+### Basic Error Boundary
+
+```jsx
+import React from 'react';
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so next render shows fallback UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // Log error to error reporting service
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Usage
+function App() {
+  return (
+    <ErrorBoundary>
+      <MyComponent />
+    </ErrorBoundary>
+  );
+}
+```
+
+### Enhanced Error Boundary
+
+```jsx
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null,
+      errorInfo: null
+    };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      error,
+      errorInfo
+    });
+
+    // Log to error reporting service
+    logErrorToService(error, errorInfo);
+  }
+
+  resetError = () => {
+    this.setState({
+      hasError: false,
+      error: null,
+      errorInfo: null
+    });
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="error-boundary">
+          <h2>Oops! Something went wrong</h2>
+          <details>
+            <summary>Error Details</summary>
+            <p>{this.state.error?.toString()}</p>
+            <pre>{this.state.errorInfo?.componentStack}</pre>
+          </details>
+          <button onClick={this.resetError}>Try Again</button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+---
+
+## 🔸 Usage Patterns
+
+### Wrapping Entire App
+
+```jsx
+function App() {
+  return (
+    <ErrorBoundary>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router>
+    </ErrorBoundary>
+  );
+}
+```
+
+### Multiple Error Boundaries
+
+```jsx
+function App() {
+  return (
+    <div>
+      <Header />
+      
+      <ErrorBoundary fallback={<div>Sidebar error</div>}>
+        <Sidebar />
+      </ErrorBoundary>
+
+      <ErrorBoundary fallback={<div>Main content error</div>}>
+        <MainContent />
+      </ErrorBoundary>
+
+      <Footer />
+    </div>
+  );
+}
+```
+
+### With Custom Fallback
+
+```jsx
+class ErrorBoundary extends React.Component {
+  // ... state and methods
+
+  render() {
+    if (this.state.hasError) {
+      // Use custom fallback if provided
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+
+      // Default fallback
+      return <DefaultErrorUI />;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Usage
+<ErrorBoundary fallback={<CustomErrorPage />}>
+  <Component />
+</ErrorBoundary>
+```
+
+---
+
+## 🔸 Error Logging
+
+### Logging to Service
+
+```jsx
+function logErrorToService(error, errorInfo) {
+  // Send to error tracking service (Sentry, LogRocket, etc.)
+  if (process.env.NODE_ENV === 'production') {
+    Sentry.captureException(error, {
+      contexts: {
+        react: {
+          componentStack: errorInfo.componentStack
+        }
+      }
+    });
+  }
+}
+
+class ErrorBoundary extends React.Component {
+  componentDidCatch(error, errorInfo) {
+    logErrorToService(error, errorInfo);
+  }
+
+  // ... rest of component
+}
+```
+
+### With Sentry
+
+```jsx
+import * as Sentry from '@sentry/react';
+
+const ErrorBoundary = Sentry.ErrorBoundary;
+
+function App() {
+  return (
+    <ErrorBoundary 
+      fallback={<ErrorFallback />}
+      showDialog
+    >
+      <MyApp />
+    </ErrorBoundary>
+  );
+}
+```
+
+---
+
+## 🔸 Handling Event Handler Errors
+
+Error boundaries don't catch errors in event handlers. Use try-catch:
+
+```jsx
+function MyComponent() {
+  const [error, setError] = useState(null);
+
+  const handleClick = () => {
+    try {
+      // Code that might throw
+      riskyOperation();
+    } catch (error) {
+      setError(error);
+      logErrorToService(error);
+    }
+  };
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return <button onClick={handleClick}>Click Me</button>;
+}
+```
+
+---
+
+## 🔸 Async Error Handling
+
+### With useEffect
+
+```jsx
+function DataFetcher() {
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/data');
+        if (!response.ok) throw new Error('Failed to fetch');
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        setError(error);
+        logErrorToService(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return <div>{data}</div>;
+}
+```
+
+### Custom Hook for Async Errors
+
+```jsx
+function useAsyncError() {
+  const [, setError] = useState();
+
+  return useCallback((error) => {
+    setError(() => {
+      throw error;
+    });
+  }, []);
+}
+
+function MyComponent() {
+  const throwError = useAsyncError();
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(response => response.json())
+      .catch(throwError); // Will be caught by error boundary
+  }, [throwError]);
+
+  return <div>Component</div>;
+}
+```
+
+---
+
+## 🔸 Recovery Strategies
+
+### Retry Logic
+
+```jsx
+class ErrorBoundary extends React.Component {
+  state = {
+    hasError: false,
+    retryCount: 0
+  };
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  retry = () => {
+    this.setState(prev => ({
+      hasError: false,
+      retryCount: prev.retryCount + 1
+    }));
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div>
+          <h2>Something went wrong</h2>
+          <button onClick={this.retry}>
+            Retry ({this.state.retryCount}/3)
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+### Reset on Route Change
+
+```jsx
+import { useLocation } from 'react-router-dom';
+
+function ErrorBoundaryWithReset({ children }) {
+  const location = useLocation();
+  const [resetKey, setResetKey] = useState(0);
+
+  useEffect(() => {
+    setResetKey(prev => prev + 1);
+  }, [location.pathname]);
+
+  return (
+    <ErrorBoundary key={resetKey}>
+      {children}
+    </ErrorBoundary>
+  );
+}
+```
+
+---
+
+## 🔸 Development vs Production
+
+### Different Fallbacks
+
+```jsx
+class ErrorBoundary extends React.Component {
+  render() {
+    if (this.state.hasError) {
+      if (process.env.NODE_ENV === 'development') {
+        return (
+          <div>
+            <h2>Development Error</h2>
+            <pre>{this.state.error?.stack}</pre>
+          </div>
+        );
+      }
+
+      return (
+        <div>
+          <h2>Oops! Something went wrong</h2>
+          <p>Please try refreshing the page</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Use Multiple Error Boundaries**
+
+```jsx
+// ✅ Good - Granular error boundaries
+<div>
+  <ErrorBoundary name="sidebar">
+    <Sidebar />
+  </ErrorBoundary>
+
+  <ErrorBoundary name="main">
+    <MainContent />
+  </ErrorBoundary>
+</div>
+
+// ❌ Bad - Single boundary for everything
+<ErrorBoundary>
+  <Sidebar />
+  <MainContent />
+</ErrorBoundary>
+```
+
+### 2. **Log Errors to Service**
+
+```jsx
+componentDidCatch(error, errorInfo) {
+  // Always log in production
+  if (process.env.NODE_ENV === 'production') {
+    logErrorToService(error, errorInfo);
+  }
+}
+```
+
+### 3. **Provide Recovery Options**
+
+```jsx
+// ✅ Good - Give users options
+<div>
+  <button onClick={retry}>Try Again</button>
+  <button onClick={goHome}>Go Home</button>
+  <button onClick={reportBug}>Report Bug</button>
+</div>
+```
+
+### 4. **Handle Async Errors**
+
+```jsx
+// Use try-catch for async operations
+try {
+  await fetchData();
+} catch (error) {
+  setError(error);
+}
+```
+
+### 5. **Test Error Boundaries**
+
+```jsx
+// Throw error in development to test
+if (shouldThrowError) {
+  throw new Error('Test error');
+}
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Expecting to Catch Event Handler Errors**
+
+```jsx
+// ❌ Won't be caught by error boundary
+<button onClick={() => {
+  throw new Error('Error!');
+}}>
+  Click
+</button>
+
+// ✅ Use try-catch
+<button onClick={() => {
+  try {
+    riskyOperation();
+  } catch (error) {
+    handleError(error);
+  }
+}}>
+  Click
+</button>
+```
+
+### 2. **Not Logging Errors**
+
+```jsx
+// ❌ Bad - Silent failure
+componentDidCatch(error, errorInfo) {
+  this.setState({ hasError: true });
+}
+
+// ✅ Good - Log errors
+componentDidCatch(error, errorInfo) {
+  this.setState({ hasError: true });
+  logErrorToService(error, errorInfo);
+}
+```
+
+### 3. **Single Error Boundary for Entire App**
+
+```jsx
+// ❌ Bad - One error crashes everything
+<ErrorBoundary>
+  <EntireApp />
+</ErrorBoundary>
+
+// ✅ Good - Multiple boundaries
+<div>
+  <ErrorBoundary><Header /></ErrorBoundary>
+  <ErrorBoundary><Sidebar /></ErrorBoundary>
+  <ErrorBoundary><Main /></ErrorBoundary>
+</div>
+```
+
+---
+
+## 📝 Summary
+
+- **Error boundaries** catch rendering errors
+- Use **class components** (no hook equivalent yet)
+- Implement **getDerivedStateFromError** and **componentDidCatch**
+- **Don't catch** event handler or async errors
+- Use **multiple boundaries** for better isolation
+- **Log errors** to monitoring services
+- Provide **recovery options** (retry, go home)
+- Test error boundaries in **development**
+- Different fallbacks for **dev vs production**
+
+---
+
+## 🔗 Related Topics
+
+- [Hooks](./hooks)
+- [Custom Hooks](./custom-hooks)
+- [Performance Optimization](./performance-optimization)
+- [Context API](./context-api)
+
+---
+
+**Handle errors gracefully for better user experience!** 🚀

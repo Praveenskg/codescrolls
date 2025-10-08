@@ -1,0 +1,557 @@
+---
+id: performance-optimization
+title: Performance Optimization
+sidebar_position: 3
+description: Learn React performance optimization techniques including React.memo, useMemo, useCallback, code splitting, and lazy loading.
+keywords: [react performance, optimization, react memo, useMemo, useCallback, code splitting, lazy loading, react profiler]
+---
+
+# Performance Optimization in React
+
+**Performance optimization** ensures your React app runs smoothly and efficiently. Learn techniques to prevent unnecessary re-renders and improve load times.
+
+---
+
+## 📌 Why Optimize?
+
+Common performance issues:
+- Unnecessary re-renders
+- Large bundle sizes
+- Slow initial load
+- Memory leaks
+- Expensive computations
+
+---
+
+## 🔸 React.memo
+
+### Memoizing Components
+
+`React.memo` prevents re-renders when props haven't changed:
+
+```jsx
+import { memo } from 'react';
+
+const ExpensiveComponent = memo(function ExpensiveComponent({ data }) {
+  console.log('Rendering ExpensiveComponent');
+  
+  return (
+    <div>
+      {/* Complex rendering logic */}
+      {data.map(item => <div key={item.id}>{item.name}</div>)}
+    </div>
+  );
+});
+```
+
+### Custom Comparison
+
+```jsx
+const UserCard = memo(
+  function UserCard({ user }) {
+    return <div>{user.name}</div>;
+  },
+  (prevProps, nextProps) => {
+    // Return true if props are equal (skip re-render)
+    return prevProps.user.id === nextProps.user.id;
+  }
+);
+```
+
+---
+
+## 🔸 useMemo Hook
+
+### Memoizing Expensive Calculations
+
+```jsx
+import { useMemo } from 'react';
+
+function ProductList({ products, filter }) {
+  // Only recalculate when products or filter changes
+  const filteredProducts = useMemo(() => {
+    console.log('Filtering products...');
+    return products.filter(p => p.category === filter);
+  }, [products, filter]);
+
+  return (
+    <div>
+      {filteredProducts.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
+```
+
+### Avoiding Object Recreation
+
+```jsx
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  // ❌ Bad - New object on every render
+  const config = { theme: 'dark', count };
+
+  // ✅ Good - Memoized object
+  const config = useMemo(() => ({
+    theme: 'dark',
+    count
+  }), [count]);
+
+  return <Child config={config} />;
+}
+```
+
+---
+
+## 🔸 useCallback Hook
+
+### Memoizing Functions
+
+```jsx
+import { useCallback } from 'react';
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  // ❌ Bad - New function on every render
+  const handleClick = () => {
+    console.log('Clicked!');
+  };
+
+  // ✅ Good - Memoized function
+  const handleClick = useCallback(() => {
+    console.log('Clicked!');
+  }, []);
+
+  return <Child onClick={handleClick} />;
+}
+```
+
+### With Dependencies
+
+```jsx
+function TodoList({ todos }) {
+  const [filter, setFilter] = useState('all');
+
+  const handleToggle = useCallback((id) => {
+    // Function recreated only when todos change
+    const todo = todos.find(t => t.id === id);
+    console.log('Toggling:', todo);
+  }, [todos]);
+
+  return (
+    <div>
+      {todos.map(todo => (
+        <TodoItem 
+          key={todo.id}
+          todo={todo}
+          onToggle={handleToggle}
+        />
+      ))}
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Code Splitting
+
+### React.lazy and Suspense
+
+```jsx
+import { lazy, Suspense } from 'react';
+
+// Lazy load components
+const Dashboard = lazy(() => import('./Dashboard'));
+const Profile = lazy(() => import('./Profile'));
+const Settings = lazy(() => import('./Settings'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Suspense>
+  );
+}
+```
+
+### Route-Based Code Splitting
+
+```jsx
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
+```
+
+---
+
+## 🔸 Virtualization
+
+### React Window
+
+For large lists (1000+ items):
+
+```jsx
+import { FixedSizeList } from 'react-window';
+
+function VirtualList({ items }) {
+  const Row = ({ index, style }) => (
+    <div style={style}>
+      {items[index].name}
+    </div>
+  );
+
+  return (
+    <FixedSizeList
+      height={600}
+      itemCount={items.length}
+      itemSize={50}
+      width="100%"
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+```
+
+### React Virtuoso
+
+```jsx
+import { Virtuoso } from 'react-virtuoso';
+
+function InfiniteList({ items }) {
+  return (
+    <Virtuoso
+      style={{ height: '600px' }}
+      data={items}
+      itemContent={(index, item) => (
+        <div>{item.name}</div>
+      )}
+    />
+  );
+}
+```
+
+---
+
+## 🔸 Debouncing and Throttling
+
+### Debounce Search
+
+```jsx
+import { useState, useEffect } from 'react';
+
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
+function SearchBox() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    if (debouncedSearchTerm) {
+      // API call only after user stops typing
+      fetchResults(debouncedSearchTerm);
+    }
+  }, [debouncedSearchTerm]);
+
+  return (
+    <input 
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+}
+```
+
+### Throttle Scroll
+
+```jsx
+import { useEffect, useRef } from 'react';
+
+function useThrottle(callback, delay) {
+  const lastRun = useRef(Date.now());
+
+  return (...args) => {
+    const now = Date.now();
+    if (now - lastRun.current >= delay) {
+      callback(...args);
+      lastRun.current = now;
+    }
+  };
+}
+
+function ScrollTracker() {
+  const handleScroll = useThrottle(() => {
+    console.log('Scroll position:', window.scrollY);
+  }, 200);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return <div>Scroll to see throttled updates</div>;
+}
+```
+
+---
+
+## 🔸 Image Optimization
+
+### Lazy Loading Images
+
+```jsx
+function LazyImage({ src, alt }) {
+  return (
+    <img 
+      src={src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
+```
+
+### Progressive Image Loading
+
+```jsx
+function ProgressiveImage({ placeholder, src, alt }) {
+  const [imageSrc, setImageSrc] = useState(placeholder);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      setImageSrc(src);
+      setImageLoaded(true);
+    };
+  }, [src]);
+
+  return (
+    <img 
+      src={imageSrc}
+      alt={alt}
+      className={imageLoaded ? 'loaded' : 'loading'}
+    />
+  );
+}
+```
+
+---
+
+## 🔸 Bundle Size Optimization
+
+### Tree Shaking
+
+```jsx
+// ❌ Bad - Imports entire library
+import _ from 'lodash';
+
+// ✅ Good - Imports only what's needed
+import debounce from 'lodash/debounce';
+```
+
+### Dynamic Imports
+
+```jsx
+// Load library only when needed
+const loadChart = async () => {
+  const { Chart } = await import('chart.js');
+  return new Chart(ctx, config);
+};
+```
+
+---
+
+## 🔸 React Profiler
+
+### Measuring Performance
+
+```jsx
+import { Profiler } from 'react';
+
+function onRenderCallback(
+  id,
+  phase,
+  actualDuration,
+  baseDuration,
+  startTime,
+  commitTime
+) {
+  console.log(`${id} (${phase}) took ${actualDuration}ms`);
+}
+
+function App() {
+  return (
+    <Profiler id="App" onRender={onRenderCallback}>
+      <Dashboard />
+    </Profiler>
+  );
+}
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Avoid Inline Functions in JSX**
+
+```jsx
+// ❌ Bad - New function on every render
+<button onClick={() => handleClick(id)}>Click</button>
+
+// ✅ Good - Memoized function
+const handleClick = useCallback(() => {
+  doSomething(id);
+}, [id]);
+
+<button onClick={handleClick}>Click</button>
+```
+
+### 2. **Use Keys Properly**
+
+```jsx
+// ❌ Bad - Index as key
+{items.map((item, index) => <div key={index}>{item}</div>)}
+
+// ✅ Good - Unique ID
+{items.map(item => <div key={item.id}>{item}</div>)}
+```
+
+### 3. **Avoid Creating Objects in Render**
+
+```jsx
+// ❌ Bad - New object every render
+<Component style={{ margin: 10 }} />
+
+// ✅ Good - Define outside or use useMemo
+const style = { margin: 10 };
+<Component style={style} />
+```
+
+### 4. **Use Production Build**
+
+```bash
+# Development (slow)
+npm start
+
+# Production (optimized)
+npm run build
+```
+
+### 5. **Lazy Load Routes**
+
+```jsx
+// Split routes into separate bundles
+const Home = lazy(() => import('./Home'));
+const About = lazy(() => import('./About'));
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Premature Optimization**
+
+```jsx
+// ❌ Don't optimize everything
+const value = useMemo(() => x + y, [x, y]); // Overkill for simple calc
+
+// ✅ Optimize when needed
+const filteredList = useMemo(() => 
+  items.filter(expensive computation), 
+  [items]
+);
+```
+
+### 2. **Wrong Dependencies**
+
+```jsx
+// ❌ Wrong - Missing dependencies
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a]); // Missing 'b'!
+
+// ✅ Correct - All dependencies
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+```
+
+### 3. **Overusing React.memo**
+
+```jsx
+// ❌ Bad - Memoizing everything
+const SimpleComponent = memo(() => <div>Hello</div>);
+
+// ✅ Good - Only expensive components
+const ExpensiveList = memo(({ items }) => {
+  return items.map(/* expensive rendering */);
+});
+```
+
+---
+
+## 📝 Summary
+
+- Use **React.memo** for expensive components
+- Use **useMemo** for expensive calculations
+- Use **useCallback** for stable function references
+- Implement **code splitting** with React.lazy
+- Use **virtualization** for long lists
+- **Debounce** user input, **throttle** scroll events
+- Optimize **images** with lazy loading
+- Measure with **React Profiler**
+- **Don't premature optimize** - measure first!
+
+---
+
+## 🔗 Related Topics
+
+- [Hooks](./hooks)
+- [Custom Hooks](./custom-hooks)
+- [Context API](./context-api)
+- [Lists and Keys](../basics/lists-and-keys)
+
+---
+
+**Optimize wisely for a fast, smooth user experience!** 🚀

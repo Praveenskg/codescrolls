@@ -1,0 +1,677 @@
+---
+id: refs
+title: Refs in React
+sidebar_position: 8
+description: Learn how to use refs in React to access DOM elements and component instances, including useRef, forwardRef, and useImperativeHandle.
+keywords: [react refs, useRef, forwardRef, useImperativeHandle, dom manipulation, react reference, ref callback]
+---
+
+# Refs in React
+
+**Refs** provide a way to access DOM nodes or React elements directly. They're useful when you need to interact with the DOM imperatively or store mutable values that don't trigger re-renders.
+
+---
+
+## 📌 What are Refs?
+
+Refs allow you to:
+- Access DOM elements directly
+- Store mutable values that persist across renders
+- Interact with third-party libraries
+- Focus inputs, measure elements, trigger animations
+
+---
+
+## 🔸 useRef Hook
+
+### Basic Usage
+
+```jsx
+import { useRef } from 'react';
+
+function TextInput() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+```
+
+### Ref Object Structure
+
+```jsx
+const myRef = useRef(initialValue);
+
+// myRef = { current: initialValue }
+console.log(myRef.current); // Access the value
+myRef.current = newValue;   // Update the value
+```
+
+---
+
+## 🔸 Accessing DOM Elements
+
+### Focus Management
+
+```jsx
+function AutoFocusInput() {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    // Focus input on mount
+    inputRef.current.focus();
+  }, []);
+
+  return <input ref={inputRef} placeholder="Auto-focused" />;
+}
+```
+
+### Scroll to Element
+
+```jsx
+function ScrollToSection() {
+  const sectionRef = useRef(null);
+
+  const scrollToSection = () => {
+    sectionRef.current.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
+  return (
+    <div>
+      <button onClick={scrollToSection}>Scroll to Section</button>
+      
+      <div style={{ height: '1000px' }}>Content...</div>
+      
+      <div ref={sectionRef}>
+        <h2>Target Section</h2>
+      </div>
+    </div>
+  );
+}
+```
+
+### Measuring Elements
+
+```jsx
+function MeasureElement() {
+  const elementRef = useRef(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (elementRef.current) {
+      const { width, height } = elementRef.current.getBoundingClientRect();
+      setDimensions({ width, height });
+    }
+  }, []);
+
+  return (
+    <div>
+      <div ref={elementRef} style={{ padding: '20px', background: '#f0f0f0' }}>
+        Measure me!
+      </div>
+      <p>Width: {dimensions.width}px, Height: {dimensions.height}px</p>
+    </div>
+  );
+}
+```
+
+### Playing Video/Audio
+
+```jsx
+function VideoPlayer() {
+  const videoRef = useRef(null);
+
+  const play = () => videoRef.current.play();
+  const pause = () => videoRef.current.pause();
+  const restart = () => {
+    videoRef.current.currentTime = 0;
+    videoRef.current.play();
+  };
+
+  return (
+    <div>
+      <video ref={videoRef} width="400">
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+      
+      <div>
+        <button onClick={play}>Play</button>
+        <button onClick={pause}>Pause</button>
+        <button onClick={restart}>Restart</button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Storing Mutable Values
+
+### Preserving Values Across Renders
+
+```jsx
+function Timer() {
+  const [count, setCount] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startTimer = () => {
+    if (intervalRef.current) return; // Already running
+
+    intervalRef.current = setInterval(() => {
+      setCount(c => c + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => stopTimer(); // Cleanup on unmount
+  }, []);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
+    </div>
+  );
+}
+```
+
+### Tracking Previous Values
+
+```jsx
+function usePrevious(value) {
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
+}
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {prevCount}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### Avoiding Re-renders
+
+```jsx
+function ExpensiveComponent() {
+  const expensiveValueRef = useRef(null);
+
+  // Only compute once
+  if (expensiveValueRef.current === null) {
+    expensiveValueRef.current = computeExpensiveValue();
+  }
+
+  return <div>{expensiveValueRef.current}</div>;
+}
+```
+
+---
+
+## 🔸 Ref Callbacks
+
+### Dynamic Refs
+
+```jsx
+function DynamicList({ items }) {
+  const itemRefs = useRef({});
+
+  const scrollToItem = (id) => {
+    itemRefs.current[id]?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div>
+      {items.map(item => (
+        <div 
+          key={item.id}
+          ref={(el) => itemRefs.current[item.id] = el}
+        >
+          {item.name}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+### Callback Ref Pattern
+
+```jsx
+function MeasureOnRender() {
+  const [height, setHeight] = useState(0);
+
+  const measuredRef = useCallback(node => {
+    if (node !== null) {
+      setHeight(node.getBoundingClientRect().height);
+    }
+  }, []);
+
+  return (
+    <div>
+      <div ref={measuredRef}>
+        <p>Measure this element</p>
+      </div>
+      <p>Height: {height}px</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 forwardRef
+
+### Forwarding Refs to Child Components
+
+```jsx
+import { forwardRef } from 'react';
+
+const CustomInput = forwardRef((props, ref) => {
+  return <input ref={ref} {...props} />;
+});
+
+function Parent() {
+  const inputRef = useRef(null);
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <CustomInput ref={inputRef} placeholder="Custom input" />
+      <button onClick={focusInput}>Focus</button>
+    </div>
+  );
+}
+```
+
+### With TypeScript
+
+```tsx
+import { forwardRef, ForwardedRef } from 'react';
+
+interface InputProps {
+  placeholder?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const CustomInput = forwardRef<HTMLInputElement, InputProps>(
+  (props, ref) => {
+    return <input ref={ref} {...props} />;
+  }
+);
+```
+
+---
+
+## 🔸 useImperativeHandle
+
+### Exposing Custom Methods
+
+```jsx
+import { useImperativeHandle, forwardRef } from 'react';
+
+const FancyInput = forwardRef((props, ref) => {
+  const inputRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+    clear: () => {
+      inputRef.current.value = '';
+    },
+    getValue: () => {
+      return inputRef.current.value;
+    }
+  }));
+
+  return <input ref={inputRef} {...props} />;
+});
+
+function Parent() {
+  const fancyInputRef = useRef(null);
+
+  const handleClick = () => {
+    fancyInputRef.current.focus();
+    console.log(fancyInputRef.current.getValue());
+  };
+
+  return (
+    <div>
+      <FancyInput ref={fancyInputRef} />
+      <button onClick={handleClick}>Focus & Get Value</button>
+      <button onClick={() => fancyInputRef.current.clear()}>Clear</button>
+    </div>
+  );
+}
+```
+
+### Modal Example
+
+```jsx
+const Modal = forwardRef((props, ref) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
+    toggle: () => setIsOpen(prev => !prev)
+  }));
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        {props.children}
+        <button onClick={() => setIsOpen(false)}>Close</button>
+      </div>
+    </div>
+  );
+});
+
+function App() {
+  const modalRef = useRef(null);
+
+  return (
+    <div>
+      <button onClick={() => modalRef.current.open()}>Open Modal</button>
+      
+      <Modal ref={modalRef}>
+        <h2>Modal Content</h2>
+      </Modal>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔸 Common Use Cases
+
+### Form Management
+
+```jsx
+function Form() {
+  const formRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(formRef.current);
+    const data = Object.fromEntries(formData);
+    console.log(data);
+  };
+
+  const resetForm = () => {
+    formRef.current.reset();
+  };
+
+  return (
+    <form ref={formRef} onSubmit={handleSubmit}>
+      <input name="username" placeholder="Username" />
+      <input name="email" type="email" placeholder="Email" />
+      <button type="submit">Submit</button>
+      <button type="button" onClick={resetForm}>Reset</button>
+    </form>
+  );
+}
+```
+
+### Canvas Drawing
+
+```jsx
+function Canvas() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    // Draw on canvas
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(10, 10, 100, 100);
+  }, []);
+
+  return <canvas ref={canvasRef} width={400} height={400} />;
+}
+```
+
+### Third-Party Library Integration
+
+```jsx
+function MapComponent() {
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize map library
+    mapInstanceRef.current = new MapLibrary(mapRef.current, {
+      center: { lat: 0, lng: 0 },
+      zoom: 10
+    });
+
+    return () => {
+      // Cleanup
+      mapInstanceRef.current?.destroy();
+    };
+  }, []);
+
+  return <div ref={mapRef} style={{ width: '100%', height: '400px' }} />;
+}
+```
+
+---
+
+## 🔸 Refs vs State
+
+| Feature | Refs | State |
+|---------|------|-------|
+| **Triggers re-render** | ❌ No | ✅ Yes |
+| **Mutable** | ✅ Yes | ❌ No (use setState) |
+| **Async updates** | ❌ No (immediate) | ✅ Yes |
+| **Use case** | DOM access, timers | UI data |
+| **Persistence** | ✅ Across renders | ✅ Across renders |
+
+### When to Use Refs
+
+```jsx
+// ✅ Good - DOM manipulation
+const inputRef = useRef(null);
+inputRef.current.focus();
+
+// ✅ Good - Storing timer ID
+const timerRef = useRef(null);
+timerRef.current = setInterval(...);
+
+// ✅ Good - Previous value
+const prevValueRef = useRef(value);
+```
+
+### When to Use State
+
+```jsx
+// ✅ Good - UI data
+const [count, setCount] = useState(0);
+
+// ✅ Good - Triggers re-render
+const [isOpen, setIsOpen] = useState(false);
+
+// ✅ Good - Form inputs
+const [name, setName] = useState('');
+```
+
+---
+
+## ✅ Best Practices
+
+### 1. **Don't Overuse Refs**
+
+```jsx
+// ❌ Bad - Use state instead
+const countRef = useRef(0);
+countRef.current++;
+
+// ✅ Good - Use state for UI data
+const [count, setCount] = useState(0);
+setCount(count + 1);
+```
+
+### 2. **Check for null Before Accessing**
+
+```jsx
+// ❌ Bad - Can crash
+inputRef.current.focus();
+
+// ✅ Good - Safe access
+inputRef.current?.focus();
+
+// ✅ Also good
+if (inputRef.current) {
+  inputRef.current.focus();
+}
+```
+
+### 3. **Cleanup in useEffect**
+
+```jsx
+useEffect(() => {
+  const timer = setInterval(() => {
+    // Do something
+  }, 1000);
+  
+  timerRef.current = timer;
+
+  return () => {
+    clearInterval(timerRef.current);
+  };
+}, []);
+```
+
+### 4. **Use forwardRef for Reusable Components**
+
+```jsx
+// ✅ Good - Allows parent to access ref
+const Button = forwardRef((props, ref) => {
+  return <button ref={ref} {...props} />;
+});
+```
+
+### 5. **Avoid Refs for Controlled Components**
+
+```jsx
+// ❌ Bad - Use controlled component
+const inputRef = useRef();
+const getValue = () => inputRef.current.value;
+
+// ✅ Good - Controlled component
+const [value, setValue] = useState('');
+<input value={value} onChange={(e) => setValue(e.target.value)} />
+```
+
+---
+
+## 🚨 Common Mistakes
+
+### 1. **Using Refs for State**
+
+```jsx
+// ❌ Wrong - Won't trigger re-render
+const countRef = useRef(0);
+countRef.current++;
+
+// ✅ Correct - Use state
+const [count, setCount] = useState(0);
+setCount(count + 1);
+```
+
+### 2. **Not Checking for null**
+
+```jsx
+// ❌ Wrong - Can crash if ref is null
+const handleClick = () => {
+  inputRef.current.focus();
+};
+
+// ✅ Correct - Check first
+const handleClick = () => {
+  if (inputRef.current) {
+    inputRef.current.focus();
+  }
+};
+```
+
+### 3. **Forgetting Cleanup**
+
+```jsx
+// ❌ Wrong - Memory leak
+useEffect(() => {
+  intervalRef.current = setInterval(() => {}, 1000);
+}, []);
+
+// ✅ Correct - Cleanup
+useEffect(() => {
+  intervalRef.current = setInterval(() => {}, 1000);
+  return () => clearInterval(intervalRef.current);
+}, []);
+```
+
+---
+
+## 📝 Summary
+
+- **Refs** provide direct access to DOM elements
+- Use **useRef** for mutable values that don't trigger re-renders
+- Use **forwardRef** to pass refs to child components
+- Use **useImperativeHandle** to expose custom methods
+- **Don't overuse refs** - prefer state for UI data
+- Always **check for null** before accessing refs
+- **Cleanup** refs in useEffect when needed
+- Refs are **immediate** (not async like state)
+
+---
+
+## 🔗 Related Topics
+
+- [Hooks](../intermediate/hooks)
+- [State](./state)
+- [Effects](../intermediate/hooks#useeffect)
+- [Custom Hooks](../intermediate/custom-hooks)
+
+---
+
+**Use refs wisely for DOM manipulation and mutable values!** 🚀
