@@ -1,0 +1,9 @@
+{
+  "label": "HTML Advanced",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "title": "HTML Advanced",
+    "description": "Explore advanced HTML features like Web Components, Shadow DOM, and accessibility."
+  }
+}

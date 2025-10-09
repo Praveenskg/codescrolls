@@ -10,6 +10,12 @@ export default function Home(): ReactNode {
 
   const categories = [
     {
+      name: 'HTML',
+      href: '/html',
+      icon: '/img/skills/Html.png',
+      description: 'Semantic HTML, forms, accessibility, HTML5 APIs, and modern markup techniques.',
+    },
+    {
       name: 'JavaScript',
       href: '/javascript',
       icon: '/img/skills/JavaScript.png',
@@ -26,6 +32,12 @@ export default function Home(): ReactNode {
       href: '/react',
       icon: '/img/skills/React.png',
       description: 'Hooks, Components, Props, State, Context API, and modern UI design patterns.',
+    },
+    {
+      name: 'CSS',
+      href: '/css',
+      icon: '/img/skills/Css.png',
+      description: 'Selectors, layouts, animations, responsive design, and modern CSS features.',
     },
     {
       name: 'Interviews',

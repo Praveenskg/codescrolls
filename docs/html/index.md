@@ -1,0 +1,216 @@
+---
+id: html-overview
+title: HTML Complete Guide - From Basics to Advanced
+description: Master HTML from fundamentals to advanced features. Learn semantic HTML, forms, multimedia, accessibility, and modern HTML5 APIs with practical examples.
+keywords:
+  [
+    html tutorial,
+    learn html,
+    html guide,
+    semantic html,
+    html5,
+    web accessibility,
+    html forms,
+    html canvas,
+    svg tutorial,
+    web components,
+  ]
+tags: [HTML, Web Development, Frontend, Markup, Accessibility]
+sidebar_position: 1
+---
+
+# 🌐 HTML Complete Guide
+
+Welcome to the most comprehensive HTML learning resource! This guide will take you from absolute beginner to HTML expert with **200+ practical examples**, best practices, and real-world projects.
+
+## 📖 What is HTML?
+
+**HTML (HyperText Markup Language)** is the backbone of every website. It's the markup language that structures web content and defines the meaning and structure of web content.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First HTML Page</title>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to CodeScrolls</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home">
+        <h2>Learn Web Development</h2>
+        <p>Master HTML, CSS, JavaScript, and more!</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CodeScrolls. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
+```
+
+---
+
+## 🚀 Why Learn HTML?
+
+- **Foundation Skill**: Required for all web development
+- **Semantic Structure**: Create meaningful, accessible websites
+- **SEO Benefits**: Proper HTML improves search rankings
+- **Career Opportunities**: Frontend roles pay $60k-$120k+
+- **Modern Features**: HTML5 APIs, Canvas, Web Components
+- **Accessibility**: Build inclusive websites for everyone
+
+## 💼 What You Can Build with HTML
+
+- **Semantic Websites**: Well-structured, accessible web pages
+- **Interactive Forms**: Contact forms, registration forms, surveys
+- **Multimedia Content**: Video players, audio controls, image galleries
+- **Games**: Canvas-based games and interactive experiences
+- **Progressive Web Apps**: Modern web applications
+- **Data Visualization**: Charts and graphs with SVG and Canvas
+
+---
+
+## 📚 Complete Course Structure
+
+This guide is organized into **13 comprehensive topics** across three difficulty levels:
+
+### 🟢 Basics (5 Topics)
+
+1. **[HTML Elements](./basics/elements.md)** - Core HTML elements and their uses
+2. **[HTML Attributes](./basics/attributes.md)** - Adding properties to elements
+3. **[Semantic HTML](./basics/semantic-html.md)** - Meaningful structure for accessibility
+4. **[HTML Forms](./basics/forms.md)** - Creating interactive forms
+5. **[HTML Tables](./basics/tables.md)** - Organizing data in tables
+
+### 🟡 Intermediate (5 Topics)
+
+6. **[HTML5 APIs](./intermediate/html5-apis.md)** - Modern browser APIs
+7. **[Canvas](./intermediate/canvas.md)** - Drawing graphics with JavaScript
+8. **[SVG](./intermediate/svg.md)** - Scalable vector graphics
+9. **[Multimedia](./intermediate/multimedia.md)** - Audio, video, and embedded content
+10. **[Meta Tags & SEO](./intermediate/meta-seo.md)** - Optimization and metadata
+
+### 🔴 Advanced (3 Topics)
+
+11. **[Web Components](./advanced/web-components.md)** - Reusable custom elements
+12. **[Shadow DOM](./advanced/shadow-dom.md)** - Encapsulated styling and behavior
+13. **[Accessibility](./advanced/accessibility.md)** - Building inclusive websites
+
+---
+
+## 🎯 Learning Paths
+
+### 🌱 Beginner Path (1-2 weeks)
+
+**Goal**: Create well-structured static websites
+
+1. Start with **HTML Elements** (Day 1-2)
+2. Master **HTML Attributes** (Day 3)
+3. Learn **Semantic HTML** (Day 4-5)
+4. Create **HTML Forms** (Day 6-7)
+5. Build **HTML Tables** (Day 8)
+
+**Project**: Build a personal portfolio website
+
+### 🌿 Intermediate Path (2-3 weeks)
+
+**Goal**: Add interactivity and multimedia
+
+1. Explore **HTML5 APIs** (Week 1)
+2. Create with **Canvas** (Week 2)
+3. Master **SVG** graphics (Week 2)
+4. Add **Multimedia** content (Week 3)
+5. Optimize with **Meta Tags & SEO** (Week 3)
+
+**Project**: Build an interactive image gallery
+
+### 🌳 Advanced Path (2-4 weeks)
+
+**Goal**: Professional-grade web components
+
+1. Build **Web Components** (Week 1)
+2. Master **Shadow DOM** (Week 2)
+3. Implement **Accessibility** features (Week 3-4)
+
+**Project**: Create a reusable component library
+
+---
+
+## ✨ What Makes This Guide Special?
+
+- ✅ **Comprehensive Coverage**: 13 topics, 8,000+ lines of content
+- ✅ **200+ Code Examples**: Practical demonstrations
+- ✅ **Real-World Projects**: Build actual websites
+- ✅ **Best Practices**: Industry-standard techniques
+- ✅ **Accessibility Focus**: Inclusive design principles
+- ✅ **SEO Optimization**: Search-friendly HTML
+- ✅ **Modern HTML5**: Latest features and APIs
+- ✅ **Mobile-First**: Responsive design focus
+
+---
+
+## 🎓 Prerequisites
+
+- **Text Editor**: VS Code, Sublime, or any editor
+- **Web Browser**: Chrome, Firefox, or Safari
+- **No Programming Required**: HTML is markup language!
+
+---
+
+## 🛠️ How to Use This Guide
+
+1. **Follow the Learning Path**: Start with basics if you're new
+2. **Try Every Example**: Create HTML files and test in browser
+3. **Build Projects**: Apply knowledge to real websites
+4. **Practice Daily**: Consistency beats intensity
+5. **Validate Your Code**: Use W3C HTML Validator
+
+---
+
+## 🎨 Pro Tips for Learning HTML
+
+💡 **Use Semantic HTML**: Choose meaningful elements over generic divs  
+💡 **Validate Regularly**: Use W3C validator to catch errors  
+💡 **Mobile-First**: Design for mobile, enhance for desktop  
+💡 **Accessibility First**: Make your sites usable by everyone  
+💡 **Keep It Clean**: Proper indentation and organization  
+💡 **Learn by Inspecting**: Study professional websites' HTML  
+💡 **Use Comments**: Document your code structure
+
+---
+
+## 🚀 Quick Start
+
+Ready to begin? Start here:
+
+👉 **Absolute Beginner**: [HTML Elements →](./basics/elements.md)  
+👉 **Some Experience**: [Semantic HTML →](./basics/semantic-html.md)  
+👉 **Advanced User**: [Web Components →](./advanced/web-components.md)
+
+---
+
+## 📚 Additional Resources
+
+- **MDN Web Docs**: Comprehensive HTML reference
+- **W3C Validator**: Check your HTML validity
+- **HTML5 Please**: Check browser support
+- **Can I Use**: Browser compatibility reference
+- **WebAIM**: Accessibility guidelines
+
+---
+
+**Let's start your HTML journey! 🌐✨**
+
+_Choose your starting point above and begin creating beautiful, semantic web experiences._

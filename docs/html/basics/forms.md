@@ -1,0 +1,787 @@
+---
+id: html-forms
+title: HTML Forms - Complete Guide
+description: Master HTML forms with validation, accessibility, and best practices. Learn form elements, input types, form submission, and user experience.
+keywords:
+  [
+    html forms,
+    form validation,
+    form inputs,
+    html5 forms,
+    form accessibility,
+    form submission,
+    user input,
+  ]
+tags: [HTML, Forms, Validation, Accessibility, Input, UX]
+sidebar_position: 4
+---
+
+# 📝 HTML Forms
+
+HTML forms enable user interaction by collecting and submitting data. Modern HTML5 forms provide rich input types, validation, and accessibility features.
+
+## 📖 Form Basics
+
+### `<form>` Element
+
+Container for form controls and submission.
+
+```html
+<form action="/submit" method="post">
+  <!-- Form controls go here -->
+  <button type="submit">Submit</button>
+</form>
+```
+
+### Form Attributes
+
+```html
+<!-- Basic form -->
+<form action="/api/submit" method="post">
+  <!-- Form content -->
+</form>
+
+<!-- Form with validation disabled -->
+<form novalidate>
+  <!-- Custom validation -->
+</form>
+
+<!-- Form with encoding -->
+<form enctype="multipart/form-data">
+  <!-- File upload form -->
+</form>
+
+<!-- Form targeting -->
+<form target="_blank" action="/submit">
+  <!-- Opens result in new tab -->
+</form>
+```
+
+---
+
+## 🎯 Input Types
+
+### Text Inputs
+
+```html
+<!-- Single line text -->
+<input type="text" name="username" placeholder="Enter username" />
+
+<!-- Email validation -->
+<input type="email" name="email" placeholder="your@email.com" />
+
+<!-- URL validation -->
+<input type="url" name="website" placeholder="https://example.com" />
+
+<!-- Telephone number -->
+<input type="tel" name="phone" placeholder="+1 (555) 123-4567" />
+
+<!-- Password (masked) -->
+<input type="password" name="password" />
+```
+
+### Numeric Inputs
+
+```html
+<!-- Number with constraints -->
+<input type="number" name="age" min="1" max="120" step="1" value="25" />
+
+<!-- Range slider -->
+<input type="range" name="volume" min="0" max="100" step="5" value="50" />
+
+<!-- Date and time -->
+<input type="date" name="birthdate" />
+<input type="datetime-local" name="appointment" />
+<input type="time" name="meeting-time" />
+<input type="month" name="expiration" />
+<input type="week" name="vacation-week" />
+```
+
+### Selection Inputs
+
+```html
+<!-- Checkboxes -->
+<input type="checkbox" name="subscribe" id="newsletter" />
+<label for="newsletter">Subscribe to newsletter</label>
+
+<input type="checkbox" name="interests" value="html" /> HTML
+<input type="checkbox" name="interests" value="css" /> CSS
+<input type="checkbox" name="interests" value="js" /> JavaScript
+
+<!-- Radio buttons -->
+<input type="radio" name="gender" value="male" id="male" />
+<label for="male">Male</label>
+
+<input type="radio" name="gender" value="female" id="female" />
+<label for="female">Female</label>
+
+<input type="radio" name="gender" value="other" id="other" />
+<label for="other">Other</label>
+```
+
+### File Upload
+
+```html
+<!-- Single file -->
+<input type="file" name="avatar" accept="image/*" />
+
+<!-- Multiple files -->
+<input type="file" name="photos" multiple accept="image/png, image/jpeg" />
+
+<!-- Specific file types -->
+<input type="file" name="document" accept=".pdf,.doc,.docx" />
+```
+
+### Special Inputs
+
+```html
+<!-- Color picker -->
+<input type="color" name="favorite-color" value="#ff0000" />
+
+<!-- Search input -->
+<input type="search" name="query" placeholder="Search..." />
+
+<!-- Hidden input -->
+<input type="hidden" name="csrf-token" value="abc123" />
+```
+
+---
+
+## 📋 Form Elements
+
+### `<label>`
+
+Associates text with form controls.
+
+```html
+<!-- Explicit association -->
+<label for="email">Email Address:</label>
+<input type="email" id="email" name="email" />
+
+<!-- Implicit association -->
+<label>
+  Username:
+  <input type="text" name="username" />
+</label>
+```
+
+### `<fieldset>` and `<legend>`
+
+Groups related form controls.
+
+```html
+<fieldset>
+  <legend>Personal Information</legend>
+
+  <label for="firstname">First Name:</label>
+  <input type="text" id="firstname" name="firstname" />
+
+  <label for="lastname">Last Name:</label>
+  <input type="text" id="lastname" name="lastname" />
+</fieldset>
+
+<fieldset>
+  <legend>Account Preferences</legend>
+
+  <input type="checkbox" id="newsletter" name="newsletter" />
+  <label for="newsletter">Subscribe to newsletter</label>
+</fieldset>
+```
+
+### `<select>` and `<option>`
+
+Dropdown selection.
+
+```html
+<!-- Basic select -->
+<select name="country">
+  <option value="">Select a country</option>
+  <option value="us">United States</option>
+  <option value="ca">Canada</option>
+  <option value="uk">United Kingdom</option>
+</select>
+
+<!-- With optgroups -->
+<select name="car">
+  <optgroup label="Swedish Cars">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+  </optgroup>
+  <optgroup label="German Cars">
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+  </optgroup>
+</select>
+
+<!-- Multiple selection -->
+<select name="hobbies" multiple size="3">
+  <option value="reading">Reading</option>
+  <option value="sports">Sports</option>
+  <option value="music">Music</option>
+</select>
+```
+
+### `<textarea>`
+
+Multi-line text input.
+
+```html
+<!-- Basic textarea -->
+<textarea name="message" rows="5" cols="30">
+  Default text here...
+</textarea>
+
+<!-- With placeholder -->
+<textarea
+  name="comments"
+  placeholder="Enter your comments here..."
+  maxlength="500"
+  required
+></textarea>
+
+<!-- Auto-resizing -->
+<textarea
+  name="description"
+  style="resize: vertical; min-height: 100px;"
+  placeholder="Describe your project..."
+></textarea>
+```
+
+### `<button>`
+
+Clickable button.
+
+```html
+<!-- Submit button -->
+<button type="submit">Submit Form</button>
+
+<!-- Reset button -->
+<button type="reset">Reset Form</button>
+
+<!-- Regular button -->
+<button type="button" onclick="doSomething()">Click Me</button>
+
+<!-- Button with icon -->
+<button type="submit"><span>📤</span> Send Message</button>
+```
+
+---
+
+## ✅ Form Validation
+
+### HTML5 Validation Attributes
+
+```html
+<!-- Required field -->
+<input type="text" name="username" required />
+
+<!-- Minimum and maximum length -->
+<input type="password" name="password" minlength="8" maxlength="20" required />
+
+<!-- Pattern matching -->
+<input type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
+
+<!-- Email validation -->
+<input type="email" name="email" required />
+
+<!-- Number constraints -->
+<input type="number" name="age" min="1" max="120" required />
+
+<!-- Date constraints -->
+<input type="date" name="birthdate" max="2005-01-01" required />
+```
+
+### Custom Validation Messages
+
+```html
+<input
+  type="password"
+  name="password"
+  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters"
+  required
+/>
+```
+
+### JavaScript Validation
+
+```html
+<form id="myForm" novalidate>
+  <input type="email" id="email" name="email" required />
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  document.getElementById('myForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email');
+    if (!email.checkValidity()) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    // Submit form
+    this.submit();
+  });
+</script>
+```
+
+---
+
+## ♿ Accessibility
+
+### Proper Labels
+
+```html
+<!-- Always use labels -->
+<label for="email">Email Address:</label>
+<input type="email" id="email" name="email" />
+
+<!-- Screen reader only labels -->
+<label for="search" class="sr-only">Search:</label>
+<input type="search" id="search" name="query" />
+```
+
+### Fieldsets and Legends
+
+```html
+<fieldset>
+  <legend>Shipping Address</legend>
+
+  <label for="street">Street Address:</label>
+  <input type="text" id="street" name="street" />
+
+  <label for="city">City:</label>
+  <input type="text" id="city" name="city" />
+</fieldset>
+```
+
+### Error Messages
+
+```html
+<div>
+  <label for="password">Password:</label>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    aria-describedby="password-error"
+    aria-invalid="true"
+  />
+  <div id="password-error" class="error">Password must be at least 8 characters long</div>
+</div>
+```
+
+### Form Instructions
+
+```html
+<form>
+  <fieldset>
+    <legend>Create Account</legend>
+    <p id="form-instructions">All fields marked with * are required.</p>
+
+    <label for="username">Username *</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      required
+      aria-describedby="form-instructions"
+    />
+  </fieldset>
+</form>
+```
+
+---
+
+## 🎨 Form Styling
+
+### Basic Form Styling
+
+```html
+<style>
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .error {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+</style>
+
+<form class="form-container">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+```
+
+---
+
+## 📤 Form Submission
+
+### GET vs POST
+
+```html
+<!-- GET submission (data in URL) -->
+<form action="/search" method="get">
+  <input type="text" name="query" placeholder="Search..." />
+  <button type="submit">Search</button>
+</form>
+
+<!-- POST submission (data in body) -->
+<form action="/api/users" method="post">
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <button type="submit">Create User</button>
+</form>
+```
+
+### File Upload Forms
+
+```html
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="avatar" accept="image/*" />
+  <button type="submit">Upload</button>
+</form>
+```
+
+### FormData API
+
+```html
+<form id="myForm">
+  <input type="text" name="username" />
+  <input type="file" name="avatar" />
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  document.getElementById('myForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+      console.log('Success:', result);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  });
+</script>
+```
+
+---
+
+## 🎯 Complete Form Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .error {
+        color: #dc3545;
+        font-size: 0.875em;
+        margin-top: 5px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contact Us</h1>
+
+    <form action="/submit-contact" method="post" id="contactForm">
+      <fieldset>
+        <legend>Personal Information</legend>
+
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            minlength="2"
+            maxlength="50"
+            autocomplete="name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+          <div class="error" id="email-error" aria-live="polite"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="123-456-7890"
+            autocomplete="tel"
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Message Details</legend>
+
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <select id="subject" name="subject" required>
+            <option value="">Select a subject</option>
+            <option value="general">General Inquiry</option>
+            <option value="support">Technical Support</option>
+            <option value="feedback">Feedback</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <div>
+            <input type="radio" id="low" name="priority" value="low" checked />
+            <label for="low">Low</label>
+
+            <input type="radio" id="medium" name="priority" value="medium" />
+            <label for="medium">Medium</label>
+
+            <input type="radio" id="high" name="priority" value="high" />
+            <label for="high">High</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            minlength="10"
+            maxlength="1000"
+            rows="5"
+            placeholder="Please describe your inquiry..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="newsletter" name="newsletter" />
+          <label for="newsletter">Subscribe to our newsletter</label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Send Message</button>
+      <button type="reset">Clear Form</button>
+    </form>
+
+    <script>
+      const form = document.getElementById('contactForm');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Custom validation
+        const email = document.getElementById('email');
+        const emailError = document.getElementById('email-error');
+
+        if (!email.value.includes('@')) {
+          emailError.textContent = 'Please enter a valid email address';
+          email.focus();
+          return;
+        }
+
+        emailError.textContent = '';
+
+        // Submit form
+        alert('Form submitted successfully!');
+        form.reset();
+      });
+
+      // Real-time validation
+      document.getElementById('email').addEventListener('input', function () {
+        const emailError = document.getElementById('email-error');
+        if (this.validity.valid) {
+          emailError.textContent = '';
+        }
+      });
+    </script>
+  </body>
+</html>
+```
+
+---
+
+## 📋 Best Practices
+
+### ✅ DO:
+
+```html
+<!-- Use semantic form elements -->
+<form action="/submit" method="post">
+  <fieldset>
+    <legend>Personal Information</legend>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" />
+  </fieldset>
+</form>
+
+<!-- Always provide labels -->
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" />
+
+<!-- Use appropriate input types -->
+<input type="email" name="email" />
+<input type="tel" name="phone" />
+<input type="url" name="website" />
+
+<!-- Include validation -->
+<input type="password" required minlength="8" />
+
+<!-- Use fieldsets for grouping -->
+<fieldset>
+  <legend>Shipping Address</legend>
+  <!-- Address fields -->
+</fieldset>
+```
+
+### ❌ DON'T:
+
+```html
+<!-- Don't submit forms without action -->
+<form>
+  <input type="text" />
+  <button>Submit</button>
+</form>
+
+<!-- Don't use text inputs for everything -->
+<input type="text" name="email" />
+<!-- Use type="email" -->
+
+<!-- Don't forget accessibility -->
+<input type="text" />
+<!-- Missing label and name -->
+
+<!-- Don't use inline event handlers -->
+<button onclick="submitForm()">Submit</button>
+<!-- Use event listeners -->
+
+<!-- Don't rely only on HTML validation -->
+<form><!-- Add JavaScript validation for better UX --></form>
+```
+
+---
+
+## 🚀 What's Next?
+
+Now that you understand HTML forms, learn about **HTML Tables**:
+
+👉 [Next: HTML Tables →](./tables.md)
+
+Or return to the [HTML Overview →](../index.md)
+
+Master HTML forms for better user interaction! 📝

@@ -371,6 +371,13 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'htmlSidebar',
+          position: 'left',
+          label: 'HTML',
+          to: '/html',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'cheatSheetSidebar',
           position: 'left',
           label: 'Cheat Sheets',
