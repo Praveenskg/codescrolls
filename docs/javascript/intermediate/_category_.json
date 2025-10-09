@@ -1,0 +1,8 @@
+{
+  "label": "Intermediate JavaScript",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Master intermediate JavaScript concepts including functions, arrays, objects, and ES6+ features."
+  }
+}
