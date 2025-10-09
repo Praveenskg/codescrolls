@@ -28,17 +28,16 @@ export default function Home(): ReactNode {
       description: 'Hooks, Components, Props, State, Context API, and modern UI design patterns.',
     },
     {
+      name: 'Interviews',
+      href: '/interviews',
+      icon: '/img/skills/NodeJS.png',
+      description: 'Common interview questions for JavaScript, React, TypeScript, and Node.js.',
+    },
+    {
       name: 'Git & GitHub',
       href: '/cheatsheets/git',
       icon: '/img/skills/Git.png',
       description: 'Version control, collaboration, pull requests, and best practices.',
-    },
-    {
-      name: 'Databases',
-      href: '/database',
-      icon: '/img/skills/Supabase.png',
-      description:
-        'Learn SQL/NoSQL databases with hands-on experience using Supabase & PostgreSQL.',
     },
     {
       name: 'Linux',
@@ -48,15 +47,78 @@ export default function Home(): ReactNode {
     },
   ];
 
+  const featuredPosts = [
+    {
+      title: 'Understanding JavaScript Closures',
+      description: 'Deep dive into closures, lexical scoping, and practical use cases.',
+      href: '/blog/javascript-closures',
+      tag: 'JavaScript',
+    },
+    {
+      title: 'Complete Guide to React Hooks',
+      description: 'Master useState, useEffect, useContext, and custom hooks.',
+      href: '/blog/complete-guide-react-hooks',
+      tag: 'React',
+    },
+    {
+      title: 'JavaScript Hoisting Explained',
+      description: 'Understanding hoisting behavior for variables and functions.',
+      href: '/blog/javascript-hoisting',
+      tag: 'JavaScript',
+    },
+  ];
+
+  const features = [
+    {
+      icon: '📚',
+      title: 'Comprehensive Docs',
+      description: '100+ documentation pages covering JavaScript, React, TypeScript, and more.',
+    },
+    {
+      icon: '💡',
+      title: 'Interview Ready',
+      description: '300+ curated interview questions with detailed explanations.',
+    },
+    {
+      icon: '⚡',
+      title: 'Quick Reference',
+      description: 'Cheat sheets for instant access to syntax and commands.',
+    },
+    {
+      icon: '🎯',
+      title: 'Practical Examples',
+      description: 'Real-world code examples and best practices.',
+    },
+    {
+      icon: '🔄',
+      title: 'Always Updated',
+      description: 'Continuously updated with the latest web development trends.',
+    },
+    {
+      icon: '🌙',
+      title: 'Dark Mode',
+      description: 'Beautiful dark mode for comfortable reading anytime.',
+    },
+  ];
+
+  const stats = [
+    { value: '100+', label: 'Documentation Pages' },
+    { value: '300+', label: 'Interview Questions' },
+    { value: '8+', label: 'Blog Posts' },
+    { value: '6+', label: 'Cheat Sheets' },
+  ];
+
   const hubs = [
     {
       name: 'Interview Hub',
       href: '/interviews',
+      icon: '💼',
       description: 'Curated interview questions for JavaScript, React, TypeScript, and more.',
     },
     {
       name: 'Cheat Sheets',
       href: '/cheatsheets',
+      icon: '📝',
       description:
         'Quick reference guides for programming languages, Git, tools, and productivity.',
     },
@@ -65,40 +127,71 @@ export default function Home(): ReactNode {
   return (
     <Layout title={`Welcome to ${siteConfig.title}`} description={siteConfig.tagline}>
       <main className={styles.homeMain}>
-        <section className={styles.introSection}>
-          <h1 className={styles.introHeading}>
-            Welcome to <span className={styles.gradientText1}>Code</span>
-            <span className={styles.gradientText2}>Scrolls</span>
-          </h1>
-          <p className={styles.introSubtext}>
-            Your one-stop hub for coding cheat sheets, language guides, Git tricks, and dev notes.
-          </p>
-          <div className={styles.buttonGroup}>
-            <Link className={styles.btnBlue} href='/javascript'>
-              Start Learning JavaScript
-            </Link>
-            <Link
-              className={styles.btnPurple}
-              to='https://github.com/praveenskg/codescrolls'
-              target='_blank'
-            >
-              Contribute on GitHub
-            </Link>
-            <Link className={styles.btnBlue} to='/blog'>
-              Visit Blog
-            </Link>
+        {/* Hero Section with Animation */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroAnimation}>
+              <span className={styles.floatingEmoji}>💻</span>
+              <span className={styles.floatingEmoji}>🚀</span>
+              <span className={styles.floatingEmoji}>⚡</span>
+            </div>
+            <h1 className={styles.heroHeading}>
+              Welcome to <span className={styles.gradientText1}>Code</span>
+              <span className={styles.gradientText2}>Scrolls</span>
+            </h1>
+            <p className={styles.heroSubtext}>
+              Your comprehensive hub for modern web development. Master JavaScript, React,
+              TypeScript, and more with clear documentation, practical examples, and expert
+              insights.
+            </p>
+            <div className={styles.buttonGroup}>
+              <Link className={styles.btnPrimary} href='/javascript'>
+                🚀 Start Learning
+              </Link>
+              <Link className={styles.btnSecondary} to='/blog'>
+                📖 Read Blog
+              </Link>
+            </div>
           </div>
         </section>
 
+        {/* Statistics Section */}
+        <section className={styles.statsSection}>
+          <div className={styles.statsGrid}>
+            {stats.map(({ value, label }) => (
+              <div key={label} className={styles.statCard}>
+                <div className={styles.statValue}>{value}</div>
+                <div className={styles.statLabel}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Features Highlight Section */}
+        <section className={styles.featuresSection}>
+          <h2 className={styles.sectionHeading}>Why CodeScrolls?</h2>
+          <p className={styles.sectionSubtext}>
+            Everything you need to accelerate your web development journey
+          </p>
+          <hr className={styles.sectionUnderline} />
+          <div className={styles.featuresGrid}>
+            {features.map(({ icon, title, description }) => (
+              <div key={title} className={styles.featureCard}>
+                <div className={styles.featureIcon}>{icon}</div>
+                <h3 className={styles.featureTitle}>{title}</h3>
+                <p className={styles.featureDescription}>{description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Explore Topics Section */}
         <section className={styles.categorySection}>
-          <img
-            src={useBaseUrl('/img/react.png')}
-            alt='Code Categories'
-            className={styles.categoryImg}
-            loading='eager'
-          />
-          <h2 className={styles.categoryHeading}>Explore Topics</h2>
-          <hr className={styles.categoryUnderline} />
+          <h2 className={styles.sectionHeading}>Explore Topics</h2>
+          <p className={styles.sectionSubtext}>
+            Dive deep into the technologies that power modern web development
+          </p>
+          <hr className={styles.sectionUnderline} />
           <div className={styles.categoryGrid}>
             {categories.map(({ name, href, icon, description }) => (
               <Link key={name} to={href} className={styles.categoryCard}>
@@ -115,28 +208,77 @@ export default function Home(): ReactNode {
           </div>
         </section>
 
-        <section className={styles.categorySection}>
-          <h2 className={styles.categoryHeading}>Resources & Hubs</h2>
-          <hr className={styles.categoryUnderline} />
-          <div className={styles.categoryGrid}>
-            {hubs.map(({ name, href, description }) => (
-              <Link key={name} to={href} className={styles.categoryCard}>
-                <h3 className={styles.categoryName}>{name}</h3>
-                <p className={styles.categoryDescription}>{description}</p>
+        {/* Featured Blog Posts Section */}
+        <section className={styles.blogSection}>
+          <h2 className={styles.sectionHeading}>Featured Articles</h2>
+          <p className={styles.sectionSubtext}>Latest insights and tutorials from our blog</p>
+          <hr className={styles.sectionUnderline} />
+          <div className={styles.blogGrid}>
+            {featuredPosts.map(({ title, description, href, tag }) => (
+              <Link key={title} to={href} className={styles.blogCard}>
+                <span className={styles.blogTag}>{tag}</span>
+                <h3 className={styles.blogTitle}>{title}</h3>
+                <p className={styles.blogDescription}>{description}</p>
+                <span className={styles.blogLink}>Read more →</span>
+              </Link>
+            ))}
+          </div>
+          <div className={styles.ctaCenter}>
+            <Link className={styles.btnOutline} to='/blog'>
+              View All Posts
+            </Link>
+          </div>
+        </section>
+
+        {/* Resources Hub Section */}
+        <section className={styles.hubsSection}>
+          <h2 className={styles.sectionHeading}>Learning Resources</h2>
+          <p className={styles.sectionSubtext}>Additional resources to boost your learning</p>
+          <hr className={styles.sectionUnderline} />
+          <div className={styles.hubsGrid}>
+            {hubs.map(({ name, href, icon, description }) => (
+              <Link key={name} to={href} className={styles.hubCard}>
+                <div className={styles.hubIcon}>{icon}</div>
+                <h3 className={styles.hubName}>{name}</h3>
+                <p className={styles.hubDescription}>{description}</p>
               </Link>
             ))}
           </div>
         </section>
 
-        <section className={styles.categorySection}>
-          <h2 className={styles.categoryHeading}>Why Use CodeScrolls?</h2>
-          <hr className={styles.categoryUnderline} />
-          <ul className={styles.overviewList}>
-            <li>Professional and concise documentation for web development.</li>
-            <li>Covers frontend & backend topics, frameworks, and tools.</li>
-            <li>Ideal for developers preparing for interviews or polishing skills.</li>
-            <li>Continuously updated with latest industry practices.</li>
-          </ul>
+        {/* Testimonial/Quote Section */}
+        <section className={styles.quoteSection}>
+          <div className={styles.quoteCard}>
+            <div className={styles.quoteIcon}>💡</div>
+            <blockquote className={styles.quoteText}>
+              &ldquo;The journey of a thousand miles begins with a single line of code. Start your
+              web development journey with CodeScrolls today.&rdquo;
+            </blockquote>
+          </div>
+        </section>
+
+        {/* Call to Action Section */}
+        <section className={styles.ctaSection}>
+          <div className={styles.ctaContent}>
+            <h2 className={styles.ctaHeading}>Ready to Level Up Your Skills?</h2>
+            <p className={styles.ctaText}>
+              Join thousands of developers learning modern web development with CodeScrolls. Start
+              your journey today &ndash; it&apos;s completely free!
+            </p>
+            <div className={styles.ctaButtons}>
+              <Link className={styles.btnPrimary} href='/javascript'>
+                Get Started Now
+              </Link>
+              <Link
+                className={styles.btnOutlineLight}
+                to='https://github.com/praveenskg/codescrolls'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                ⭐ Star on GitHub
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
     </Layout>
