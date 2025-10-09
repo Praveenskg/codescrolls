@@ -145,7 +145,7 @@ CodeScrolls has a **world-class foundation** with comprehensive documentation in
 
 ### Cheatsheets (✅ Good)
 
-**Current:** 6 cheatsheets  
+**Current:** 6 cheatsheets
 **Status:** Good coverage
 
 ---
