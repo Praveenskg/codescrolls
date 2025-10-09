@@ -1,0 +1,763 @@
+---
+id: react
+title: React Cheatsheet
+sidebar_label: React CheatSheet
+description: Essential React hooks, components, and patterns - Quick reference guide
+keywords: [react, cheatsheet, hooks, components, jsx, reference]
+---
+
+# ⚛️ React Cheatsheet
+
+A quick reference guide for essential React concepts, hooks, components, and patterns.
+
+---
+
+:::info
+React is a JavaScript library for building user interfaces with components.
+:::
+
+## 🎨 JSX Basics
+
+```jsx
+// Basic JSX
+const element = <h1>Hello, React!</h1>;
+
+// JSX with expressions
+const name = 'Alice';
+const greeting = <h1>Hello, {name}!</h1>;
+
+// JSX attributes
+const image = <img src='/logo.png' alt='Logo' className='logo' />;
+
+// JSX children
+const container = (
+  <div className='container'>
+    <h1>Title</h1>
+    <p>Paragraph</p>
+  </div>
+);
+
+// Conditional rendering
+const message = isLoggedIn ? <p>Welcome back!</p> : <p>Please log in</p>;
+
+// List rendering
+const items = ['Apple', 'Banana', 'Orange'];
+const list = (
+  <ul>
+    {items.map((item, index) => (
+      <li key={index}>{item}</li>
+    ))}
+  </ul>
+);
+```
+
+---
+
+## 🏗️ Components
+
+```jsx
+// Function component
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+// Arrow function component
+const Greeting = ({ name, age }) => {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+    </div>
+  );
+};
+
+// Component with children
+function Card({ children, title }) {
+  return (
+    <div className='card'>
+      <h3>{title}</h3>
+      <div className='card-content'>{children}</div>
+    </div>
+  );
+}
+
+// Usage
+<Card title='My Card'>
+  <p>Card content goes here</p>
+</Card>;
+
+// Component composition
+function App() {
+  return (
+    <div>
+      <Header />
+      <Main />
+      <Footer />
+    </div>
+  );
+}
+```
+
+---
+
+## 🎣 Hooks - useState
+
+```jsx
+import { useState } from 'react';
+
+// Basic state
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  );
+}
+
+// State with object
+function Form() {
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+  });
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <form>
+      <input name='name' value={user.name} onChange={handleChange} />
+      <input name='email' value={user.email} onChange={handleChange} />
+    </form>
+  );
+}
+
+// State with array
+function TodoList() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (text) => {
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
+  };
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)));
+  };
+
+  return <div>{/* Render todos */}</div>;
+}
+```
+
+---
+
+## 🎣 Hooks - useEffect
+
+```jsx
+import { useEffect, useState } from 'react';
+
+// Run on mount
+useEffect(() => {
+  console.log('Component mounted');
+}, []);
+
+// Run on update
+useEffect(() => {
+  console.log('Count changed:', count);
+}, [count]);
+
+// Cleanup function
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log('Tick');
+  }, 1000);
+
+  return () => {
+    clearInterval(timer); // Cleanup
+  };
+}, []);
+
+// Fetch data
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/users/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+        setLoading(false);
+      });
+  }, [userId]);
+
+  if (loading) return <p>Loading...</p>;
+  return <div>{user.name}</div>;
+}
+```
+
+---
+
+## 🎣 Hooks - useContext
+
+```jsx
+import { createContext, useContext, useState } from 'react';
+
+// Create context
+const ThemeContext = createContext();
+
+// Provider component
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+}
+
+// Consumer component
+function ThemeToggle() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button onClick={toggleTheme}>
+      Current theme: {theme}
+      Switch to {theme === 'light' ? 'dark' : 'light'}
+    </button>
+  );
+}
+
+// App
+function App() {
+  return (
+    <ThemeProvider>
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+}
+```
+
+---
+
+## 🎣 Hooks - useRef
+
+```jsx
+import { useRef, useEffect } from 'react';
+
+// DOM reference
+function TextInput() {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus(); // Focus input on mount
+  }, []);
+
+  return <input ref={inputRef} type='text' />;
+}
+
+// Store mutable value (doesn't cause re-render)
+function Timer() {
+  const intervalRef = useRef(null);
+  const [count, setCount] = useState(0);
+
+  const start = () => {
+    intervalRef.current = setInterval(() => {
+      setCount((c) => c + 1);
+    }, 1000);
+  };
+
+  const stop = () => {
+    clearInterval(intervalRef.current);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={start}>Start</button>
+      <button onClick={stop}>Stop</button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🎣 Hooks - useMemo & useCallback
+
+```jsx
+import { useMemo, useCallback, useState } from 'react';
+
+// useMemo - Memoize expensive calculations
+function ExpensiveComponent({ items }) {
+  const total = useMemo(() => {
+    console.log('Calculating total...');
+    return items.reduce((sum, item) => sum + item.price, 0);
+  }, [items]); // Only recalculate when items change
+
+  return <div>Total: ${total}</div>;
+}
+
+// useCallback - Memoize callback functions
+function ParentComponent() {
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState('');
+
+  // Without useCallback, new function on every render
+  const handleClick = useCallback(() => {
+    console.log('Clicked with count:', count);
+  }, [count]);
+
+  return <ChildComponent onClick={handleClick} />;
+}
+```
+
+---
+
+## 🎣 Hooks - useReducer
+
+```jsx
+import { useReducer } from 'react';
+
+// Reducer function
+function counterReducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    case 'reset':
+      return { count: 0 };
+    default:
+      return state;
+  }
+}
+
+// Component
+function Counter() {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🎣 Custom Hooks
+
+```jsx
+// Custom hook for fetching data
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+  }, [url]);
+
+  return { data, loading, error };
+}
+
+// Usage
+function UserProfile() {
+  const { data: user, loading, error } = useFetch('/api/user');
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  return <div>{user.name}</div>;
+}
+
+// Custom hook for local storage
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+```
+
+---
+
+## 📝 Forms
+
+```jsx
+// Controlled component
+function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log({ email, password });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+      <input
+        type='password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder='Password'
+      />
+      <button type='submit'>Login</button>
+    </form>
+  );
+}
+
+// Form with validation
+function RegisterForm() {
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.username) newErrors.username = 'Username required';
+    if (!formData.email.includes('@')) newErrors.email = 'Invalid email';
+    if (formData.password.length < 6) newErrors.password = 'Password too short';
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newErrors = validate();
+    if (Object.keys(newErrors).length === 0) {
+      console.log('Form valid:', formData);
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  return <form onSubmit={handleSubmit}>{/* Form fields */}</form>;
+}
+```
+
+---
+
+## 🎭 Conditional Rendering
+
+```jsx
+// If-else with ternary
+function Greeting({ isLoggedIn }) {
+  return <div>{isLoggedIn ? <UserGreeting /> : <GuestGreeting />}</div>;
+}
+
+// Logical && operator
+function Mailbox({ unreadMessages }) {
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 && <h2>You have {unreadMessages.length} unread messages.</h2>}
+    </div>
+  );
+}
+
+// Switch case alternative
+function StatusMessage({ status }) {
+  const messages = {
+    loading: 'Loading...',
+    success: 'Success!',
+    error: 'Error occurred',
+  };
+
+  return <p>{messages[status] || 'Unknown status'}</p>;
+}
+
+// Early return
+function UserProfile({ user }) {
+  if (!user) {
+    return <p>No user found</p>;
+  }
+
+  if (user.isBlocked) {
+    return <p>User is blocked</p>;
+  }
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 📋 Lists & Keys
+
+```jsx
+// Basic list
+function TodoList({ todos }) {
+  return (
+    <ul>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.text}</li>
+      ))}
+    </ul>
+  );
+}
+
+// List with components
+function UserList({ users }) {
+  return (
+    <div>
+      {users.map((user) => (
+        <UserCard key={user.id} user={user} />
+      ))}
+    </div>
+  );
+}
+
+// List with index (only if items don't have IDs)
+function SimpleList({ items }) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+---
+
+## 🎯 Event Handling
+
+```jsx
+// Click event
+<button onClick={() => console.log('Clicked')}>Click me</button>;
+
+// Event with parameter
+<button onClick={() => handleDelete(id)}>Delete</button>;
+
+// Event object
+function handleChange(e) {
+  console.log(e.target.value);
+}
+<input onChange={handleChange} />;
+
+// Prevent default
+function handleSubmit(e) {
+  e.preventDefault();
+  console.log('Form submitted');
+}
+<form onSubmit={handleSubmit}>...</form>;
+
+// Common events
+<input
+  onFocus={() => console.log('Focus')}
+  onBlur={() => console.log('Blur')}
+  onChange={(e) => console.log(e.target.value)}
+  onKeyDown={(e) => console.log(e.key)}
+/>;
+```
+
+---
+
+## 🚀 Performance Optimization
+
+```jsx
+import { memo, lazy, Suspense } from 'react';
+
+// React.memo - Prevent unnecessary re-renders
+const ExpensiveComponent = memo(function ExpensiveComponent({ data }) {
+  return <div>{/* Expensive rendering */}</div>;
+});
+
+// Code splitting with lazy loading
+const LazyComponent = lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+
+// Avoid inline object/array creation
+// ❌ Bad: Creates new object on every render
+<Component style={{ margin: 10 }} />;
+
+// ✅ Good: Define outside component
+const styles = { margin: 10 };
+<Component style={styles} />;
+```
+
+---
+
+## 🎨 Styling
+
+```jsx
+// Inline styles
+<div style={{ color: 'blue', fontSize: '16px' }}>Text</div>;
+
+// CSS classes
+<div className='container'>Content</div>;
+
+// Conditional classes
+<div className={isActive ? 'active' : 'inactive'}>Content</div>;
+
+// Multiple classes
+<div className={`base-class ${isActive ? 'active' : ''}`}>Content</div>;
+
+// CSS Modules
+import styles from './Component.module.css';
+<div className={styles.container}>Content</div>;
+
+// Styled Components (external library)
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+`;
+
+<Button>Click me</Button>;
+```
+
+---
+
+## 🛡️ Error Boundaries
+
+```jsx
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+
+// Usage
+<ErrorBoundary>
+  <MyComponent />
+</ErrorBoundary>;
+```
+
+---
+
+## 📚 Quick Reference
+
+### Common Hooks
+
+```jsx
+useState, useEffect, useContext, useRef, useMemo,
+useCallback, useReducer, useLayoutEffect
+```
+
+### Lifecycle (with hooks)
+
+```jsx
+// Mount
+useEffect(() => {}, []);
+
+// Update
+useEffect(() => {}, [dependency]);
+
+// Unmount
+useEffect(() => {
+  return () => {
+    /* cleanup */
+  };
+}, []);
+```
+
+### Component Patterns
+
+```jsx
+// Container/Presentational
+// Higher-Order Components (HOC)
+// Render Props
+// Compound Components
+// Custom Hooks
+```
+
+---
+
+## ✨ Best Practices
+
+```jsx
+// ✅ DO: Use functional components
+function MyComponent() {
+  return <div>Content</div>;
+}
+
+// ✅ DO: Keep components small and focused
+// ✅ DO: Use PropTypes or TypeScript
+// ✅ DO: Extract reusable logic into custom hooks
+// ✅ DO: Use keys properly in lists
+// ✅ DO: Avoid inline functions in JSX when possible
+
+// ❌ DON'T: Mutate state directly
+// ❌ DON'T: Use index as key (when items can reorder)
+// ❌ DON'T: Put hooks inside conditions/loops
+// ❌ DON'T: Forget to cleanup in useEffect
+```
+
+---
+
+## 🚀 Resources
+
+- **Official Docs**: [react.dev](https://react.dev/)
+- **React Patterns**: [patterns.dev](https://www.patterns.dev/)
+- **Awesome React**: [GitHub](https://github.com/enaqx/awesome-react)
+
+---
+
+**Master React for building modern user interfaces!** ⚛️
+

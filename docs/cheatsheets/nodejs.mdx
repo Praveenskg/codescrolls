@@ -1,0 +1,752 @@
+---
+id: nodejs
+title: Node.js Cheatsheet
+sidebar_label: Node.js CheatSheet
+description: Essential Node.js APIs, modules, and patterns - Quick reference guide
+keywords: [nodejs, cheatsheet, node, backend, javascript, reference]
+---
+
+# 🟢 Node.js Cheatsheet
+
+A quick reference guide for essential Node.js APIs, modules, patterns, and best practices.
+
+---
+
+:::info
+Node.js is a JavaScript runtime built on Chrome's V8 engine for building server-side applications.
+:::
+
+## 📦 Modules System
+
+```js
+// CommonJS (default)
+const fs = require('fs');
+const path = require('path');
+
+module.exports = function myFunction() {
+  return 'Hello';
+};
+
+// Export multiple items
+module.exports = {
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+};
+
+// Named exports
+exports.myFunction = () => 'Hello';
+exports.myVariable = 42;
+
+// ES Modules (with "type": "module" in package.json)
+import fs from 'fs';
+import path from 'path';
+
+export function myFunction() {
+  return 'Hello';
+}
+
+export default myFunction;
+```
+
+---
+
+## 📁 File System (fs)
+
+```js
+const fs = require('fs');
+const path = require('path');
+
+// Read file (sync)
+const data = fs.readFileSync('file.txt', 'utf8');
+
+// Read file (async)
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+// Read file (promises)
+const fsPromises = require('fs').promises;
+const data = await fsPromises.readFile('file.txt', 'utf8');
+
+// Write file
+fs.writeFileSync('file.txt', 'Hello World');
+
+// Write file (async)
+fs.writeFile('file.txt', 'Hello World', (err) => {
+  if (err) throw err;
+  console.log('File written');
+});
+
+// Append to file
+fs.appendFileSync('file.txt', '\nNew line');
+
+// Check if file exists
+if (fs.existsSync('file.txt')) {
+  console.log('File exists');
+}
+
+// Delete file
+fs.unlinkSync('file.txt');
+
+// Create directory
+fs.mkdirSync('new-folder', { recursive: true });
+
+// Read directory
+const files = fs.readdirSync('./');
+
+// Get file stats
+const stats = fs.statSync('file.txt');
+console.log(stats.isFile()); // true
+console.log(stats.size); // File size in bytes
+```
+
+---
+
+## 🛤️ Path Module
+
+```js
+const path = require('path');
+
+// Join paths
+const filePath = path.join('/users', 'john', 'documents', 'file.txt');
+// Result: '/users/john/documents/file.txt'
+
+// Resolve absolute path
+const absolute = path.resolve('file.txt');
+// Result: '/current/directory/file.txt'
+
+// Get directory name
+path.dirname('/users/john/file.txt'); // '/users/john'
+
+// Get file name
+path.basename('/users/john/file.txt'); // 'file.txt'
+path.basename('/users/john/file.txt', '.txt'); // 'file'
+
+// Get file extension
+path.extname('/users/john/file.txt'); // '.txt'
+
+// Parse path
+const parsed = path.parse('/users/john/file.txt');
+// {
+//   root: '/',
+//   dir: '/users/john',
+//   base: 'file.txt',
+//   ext: '.txt',
+//   name: 'file'
+// }
+
+// Normalize path
+path.normalize('/users//john/../jane/./file.txt');
+// Result: '/users/jane/file.txt'
+```
+
+---
+
+## 🌐 HTTP Module
+
+```js
+const http = require('http');
+
+// Create server
+const server = http.createServer((req, res) => {
+  // Set response header
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+
+  // Send response
+  res.write('<h1>Hello World</h1>');
+  res.end();
+});
+
+// Listen on port
+server.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+
+// Handle different routes
+const server = http.createServer((req, res) => {
+  if (req.url === '/') {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.end('<h1>Home Page</h1>');
+  } else if (req.url === '/api') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: 'API endpoint' }));
+  } else {
+    res.writeHead(404);
+    res.end('Not Found');
+  }
+});
+
+// Make HTTP request
+http.get('http://api.example.com', (res) => {
+  let data = '';
+
+  res.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  res.on('end', () => {
+    console.log(data);
+  });
+});
+```
+
+---
+
+## 📡 Events Module
+
+```js
+const EventEmitter = require('events');
+
+// Create event emitter
+class MyEmitter extends EventEmitter {}
+const myEmitter = new MyEmitter();
+
+// Listen to event
+myEmitter.on('event', () => {
+  console.log('Event fired!');
+});
+
+// Emit event
+myEmitter.emit('event');
+
+// Event with data
+myEmitter.on('data', (data) => {
+  console.log('Received:', data);
+});
+
+myEmitter.emit('data', { name: 'John', age: 30 });
+
+// Listen once
+myEmitter.once('startup', () => {
+  console.log('This runs only once');
+});
+
+// Remove listener
+function callback() {
+  console.log('Hello');
+}
+
+myEmitter.on('hello', callback);
+myEmitter.off('hello', callback); // Remove listener
+```
+
+---
+
+## 🔄 Streams
+
+```js
+const fs = require('fs');
+const { Transform } = require('stream');
+
+// Readable stream
+const readStream = fs.createReadStream('input.txt', 'utf8');
+
+readStream.on('data', (chunk) => {
+  console.log('Chunk:', chunk);
+});
+
+readStream.on('end', () => {
+  console.log('Finished reading');
+});
+
+// Writable stream
+const writeStream = fs.createWriteStream('output.txt');
+
+writeStream.write('Hello ');
+writeStream.write('World\n');
+writeStream.end();
+
+// Pipe streams
+const readStream = fs.createReadStream('input.txt');
+const writeStream = fs.createWriteStream('output.txt');
+
+readStream.pipe(writeStream);
+
+// Transform stream
+const upperCaseTransform = new Transform({
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase());
+    callback();
+  },
+});
+
+fs.createReadStream('input.txt').pipe(upperCaseTransform).pipe(fs.createWriteStream('output.txt'));
+```
+
+---
+
+## ⚡ Express.js Basics
+
+```js
+const express = require('express');
+const app = express();
+
+// Middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+// Static files
+app.use(express.static('public'));
+
+// Routes
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+app.get('/api/users', (req, res) => {
+  res.json([
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+  ]);
+});
+
+// Route parameters
+app.get('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  res.send(`User ID: ${userId}`);
+});
+
+// Query parameters
+app.get('/search', (req, res) => {
+  const query = req.query.q;
+  res.send(`Search query: ${query}`);
+});
+
+// POST request
+app.post('/api/users', (req, res) => {
+  const user = req.body;
+  console.log('Creating user:', user);
+  res.status(201).json(user);
+});
+
+// PUT request
+app.put('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+  res.json({ id, ...updates });
+});
+
+// DELETE request
+app.delete('/api/users/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({ message: `User ${id} deleted` });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+// Start server
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+```
+
+---
+
+## 🗄️ Working with JSON
+
+```js
+// Read JSON file
+const fs = require('fs');
+const data = fs.readFileSync('data.json', 'utf8');
+const jsonData = JSON.parse(data);
+
+// Write JSON file
+const data = {
+  name: 'John',
+  age: 30,
+  hobbies: ['reading', 'coding'],
+};
+
+fs.writeFileSync('data.json', JSON.stringify(data, null, 2));
+
+// Parse JSON string
+const jsonString = '{"name":"John","age":30}';
+const obj = JSON.parse(jsonString);
+
+// Convert object to JSON string
+const obj = { name: 'John', age: 30 };
+const jsonString = JSON.stringify(obj);
+const prettyJson = JSON.stringify(obj, null, 2); // Formatted
+```
+
+---
+
+## ⏰ Timers
+
+```js
+// setTimeout - Run once after delay
+const timeoutId = setTimeout(() => {
+  console.log('Executed after 2 seconds');
+}, 2000);
+
+// Clear timeout
+clearTimeout(timeoutId);
+
+// setInterval - Run repeatedly
+const intervalId = setInterval(() => {
+  console.log('Executed every 1 second');
+}, 1000);
+
+// Clear interval
+clearInterval(intervalId);
+
+// setImmediate - Run after I/O events
+setImmediate(() => {
+  console.log('Executed immediately');
+});
+
+// process.nextTick - Run before I/O events
+process.nextTick(() => {
+  console.log('Executed on next tick');
+});
+```
+
+---
+
+## 🌍 Environment Variables
+
+```js
+// Access environment variables
+const port = process.env.PORT || 3000;
+const dbUrl = process.env.DATABASE_URL;
+const nodeEnv = process.env.NODE_ENV; // 'development' or 'production'
+
+// Using dotenv package
+require('dotenv').config();
+
+const apiKey = process.env.API_KEY;
+const secret = process.env.SECRET_KEY;
+
+// Set environment variable (temporarily)
+process.env.MY_VAR = 'value';
+
+// .env file
+// PORT=3000
+// DATABASE_URL=mongodb://localhost:27017/mydb
+// API_KEY=your-api-key-here
+```
+
+---
+
+## 🔐 Crypto Module
+
+```js
+const crypto = require('crypto');
+
+// Generate random bytes
+const randomBytes = crypto.randomBytes(16).toString('hex');
+
+// Hash password (SHA-256)
+const hash = crypto.createHash('sha256').update('password123').digest('hex');
+
+// HMAC (Hash-based Message Authentication Code)
+const hmac = crypto.createHmac('sha256', 'secret-key').update('message').digest('hex');
+
+// Encrypt and decrypt
+const algorithm = 'aes-256-cbc';
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+// Encrypt
+function encrypt(text) {
+  const cipher = crypto.createCipheriv(algorithm, key, iv);
+  let encrypted = cipher.update(text, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  return encrypted;
+}
+
+// Decrypt
+function decrypt(encrypted) {
+  const decipher = crypto.createDecipheriv(algorithm, key, iv);
+  let decrypted = decipher.update(encrypted, 'hex', 'utf8');
+  decrypted += decipher.final('utf8');
+  return decrypted;
+}
+```
+
+---
+
+## 🔧 Process Module
+
+```js
+// Process information
+console.log(process.version); // Node.js version
+console.log(process.platform); // 'linux', 'darwin', 'win32'
+console.log(process.arch); // 'x64', 'arm64'
+console.log(process.cwd()); // Current working directory
+console.log(process.pid); // Process ID
+
+// Command line arguments
+// node script.js arg1 arg2
+console.log(process.argv);
+// ['node', '/path/to/script.js', 'arg1', 'arg2']
+
+// Exit process
+process.exit(0); // Success
+process.exit(1); // Failure
+
+// Handle process events
+process.on('exit', (code) => {
+  console.log(`Exiting with code ${code}`);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught exception:', err);
+  process.exit(1);
+});
+
+// Memory usage
+console.log(process.memoryUsage());
+// {
+//   rss: 4935680,
+//   heapTotal: 1826816,
+//   heapUsed: 650472,
+//   external: 49879
+// }
+```
+
+---
+
+## 📝 Buffer
+
+```js
+// Create buffer
+const buf1 = Buffer.from('Hello');
+const buf2 = Buffer.from([72, 101, 108, 108, 111]);
+const buf3 = Buffer.alloc(10); // Allocate 10 bytes
+
+// Read buffer
+console.log(buf1.toString()); // 'Hello'
+console.log(buf1.toString('hex')); // '48656c6c6f'
+console.log(buf1.toString('base64')); // 'SGVsbG8='
+
+// Write to buffer
+const buf = Buffer.alloc(10);
+buf.write('Hello', 'utf8');
+
+// Buffer length
+console.log(buf.length); // 10
+
+// Concatenate buffers
+const buf1 = Buffer.from('Hello ');
+const buf2 = Buffer.from('World');
+const buf3 = Buffer.concat([buf1, buf2]);
+console.log(buf3.toString()); // 'Hello World'
+
+// Compare buffers
+const buf1 = Buffer.from('ABC');
+const buf2 = Buffer.from('BCD');
+console.log(buf1.compare(buf2)); // -1 (buf1 comes before buf2)
+```
+
+---
+
+## 🌐 URL Module
+
+```js
+const url = require('url');
+
+// Parse URL
+const myUrl = new URL('https://example.com:8080/path?name=john&age=30#section');
+
+console.log(myUrl.protocol); // 'https:'
+console.log(myUrl.hostname); // 'example.com'
+console.log(myUrl.port); // '8080'
+console.log(myUrl.pathname); // '/path'
+console.log(myUrl.search); // '?name=john&age=30'
+console.log(myUrl.hash); // '#section'
+
+// Query parameters
+const params = myUrl.searchParams;
+console.log(params.get('name')); // 'john'
+console.log(params.get('age')); // '30'
+
+// Construct URL
+const newUrl = new URL('https://example.com');
+newUrl.pathname = '/api/users';
+newUrl.searchParams.append('page', '1');
+newUrl.searchParams.append('limit', '10');
+
+console.log(newUrl.toString());
+// 'https://example.com/api/users?page=1&limit=10'
+```
+
+---
+
+## 🔄 Child Processes
+
+```js
+const { exec, spawn, fork } = require('child_process');
+
+// Execute shell command
+exec('ls -la', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error}`);
+    return;
+  }
+  console.log(`Output:\n${stdout}`);
+});
+
+// Spawn process
+const ls = spawn('ls', ['-la']);
+
+ls.stdout.on('data', (data) => {
+  console.log(`Output: ${data}`);
+});
+
+ls.stderr.on('data', (data) => {
+  console.error(`Error: ${data}`);
+});
+
+ls.on('close', (code) => {
+  console.log(`Process exited with code ${code}`);
+});
+
+// Fork (for Node.js scripts)
+const child = fork('child-script.js');
+
+child.on('message', (msg) => {
+  console.log('Message from child:', msg);
+});
+
+child.send({ hello: 'world' });
+```
+
+---
+
+## 📚 NPM Commands
+
+```bash
+# Initialize project
+npm init
+npm init -y  # Skip prompts
+
+# Install packages
+npm install express
+npm install -D nodemon  # Dev dependency
+npm install -g typescript  # Global install
+
+# Install from package.json
+npm install
+
+# Update packages
+npm update
+npm update express
+
+# Remove packages
+npm uninstall express
+npm uninstall -D nodemon
+
+# Run scripts
+npm start
+npm test
+npm run build
+
+# List packages
+npm list
+npm list -g  # Global packages
+
+# Check outdated packages
+npm outdated
+
+# Security audit
+npm audit
+npm audit fix
+```
+
+---
+
+## 🎯 Async/Await
+
+```js
+// Async function
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+// Multiple async operations
+async function processData() {
+  const user = await getUser();
+  const posts = await getPosts(user.id);
+  const comments = await getComments(posts[0].id);
+  return { user, posts, comments };
+}
+
+// Parallel async operations
+async function fetchMultiple() {
+  const [users, posts, comments] = await Promise.all([getUsers(), getPosts(), getComments()]);
+
+  return { users, posts, comments };
+}
+
+// Error handling
+async function getData() {
+  try {
+    const data = await fetchData();
+    return data;
+  } catch (error) {
+    console.error('Failed to fetch data:', error);
+    return null;
+  }
+}
+```
+
+---
+
+## ✨ Best Practices
+
+```js
+// ✅ DO: Use async/await instead of callbacks
+async function readFile() {
+  const data = await fs.promises.readFile('file.txt', 'utf8');
+  return data;
+}
+
+// ✅ DO: Handle errors properly
+try {
+  await riskyOperation();
+} catch (error) {
+  console.error('Error:', error);
+}
+
+// ✅ DO: Use environment variables for configuration
+const port = process.env.PORT || 3000;
+
+// ✅ DO: Use path.join for file paths
+const filePath = path.join(__dirname, 'data', 'file.txt');
+
+// ✅ DO: Close connections properly
+server.close(() => {
+  database.disconnect();
+});
+
+// ❌ DON'T: Use synchronous methods in production
+// ❌ DON'T: Ignore errors
+// ❌ DON'T: Hardcode sensitive data
+// ❌ DON'T: Use var (use const/let instead)
+```
+
+---
+
+## 🚀 Resources
+
+- **Official Docs**: [nodejs.org/docs](https://nodejs.org/docs/)
+- **NPM Registry**: [npmjs.com](https://www.npmjs.com/)
+- **Node.js Guides**: [nodejs.dev](https://nodejs.dev/)
+
+---
+
+**Master Node.js for building scalable server-side applications!** 🟢
+
