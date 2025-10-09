@@ -1,96 +1,662 @@
-# Loops
+---
+sidebar_position: 5
+id: javascript-loops
+title: JavaScript Loops - Complete Guide
+description: Master JavaScript loops including for, while, for...of, forEach, map, filter, and reduce. Learn iteration patterns with practical examples and best practices.
+keywords:
+  [
+    javascript loops,
+    for loop,
+    while loop,
+    for of loop,
+    foreach javascript,
+    map filter reduce,
+    loop iteration,
+    javascript iteration,
+  ]
+tags:
+  - JavaScript
+  - Loops
+  - Iteration
+  - Basics
+---
 
-Loops allow you to execute a block of code multiple times based on a condition.
+# JavaScript Loops
+
+Loops allow you to **execute code multiple times** efficiently. Master loops to work with collections, repeat tasks, and process data!
 
 ---
 
-## 📘 Basic Loop Types in JavaScript
+## 🔁 for Loop
 
-### 1. `for` Loop
+Use when you know how many iterations you need.
 
-Use when you know how many times to iterate.
+### Basic for Loop
 
-```js
+```js live
+// Syntax: for (initialization; condition; increment)
 for (let i = 0; i < 5; i++) {
   console.log('Count:', i);
 }
+
+// Output: Count: 0, 1, 2, 3, 4
 ```
 
-**Output**
+### Counting Down
 
+```js live
+for (let i = 5; i > 0; i--) {
+  console.log('Countdown:', i);
+}
+
+// Output: Countdown: 5, 4, 3, 2, 1
 ```
-Count: 0
-Count: 1
-Count: 2
-Count: 3
-Count: 4
+
+### Skip Iterations
+
+```js live
+for (let i = 0; i < 10; i += 2) {
+  console.log('Even:', i);
+}
+
+// Output: Even: 0, 2, 4, 6, 8
+```
+
+### Practical Example - Sum Array
+
+```js live
+const numbers = [10, 20, 30, 40, 50];
+let sum = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+  sum += numbers[i];
+}
+
+console.log('Sum:', sum); // 150
 ```
 
 ---
 
-### 2. `while` Loop
+## ⏳ while Loop
 
-Use when the number of iterations is unknown, but based on a condition.
+Use when iterations depend on a condition.
+
+### Basic while Loop
+
+```js live
+let count = 0;
+
+while (count < 3) {
+  console.log('While loop:', count);
+  count++;
+}
+
+// Output: While loop: 0, 1, 2
+```
+
+### Practical Example - Find First Match
+
+```js live
+const numbers = [1, 3, 5, 8, 10, 12];
+let i = 0;
+let firstEven = null;
+
+while (i < numbers.length) {
+  if (numbers[i] % 2 === 0) {
+    firstEven = numbers[i];
+    break; // Exit loop when found
+  }
+  i++;
+}
+
+console.log('First even number:', firstEven); // 8
+```
+
+### Infinite Loop Warning
 
 ```js
-let i = 0;
-while (i < 3) {
-  console.log('While loop:', i);
-  i++;
+// ⚠️ WARNING: Infinite loop!
+// Don't run this:
+/*
+while (true) {
+  console.log('Forever...');
+}
+*/
+
+// ✅ Always have an exit condition
+let safety = 0;
+while (safety < 1000) {
+  // Your code
+  safety++;
 }
 ```
 
 ---
 
-### 3. `do...while` Loop
+## 🔄 do...while Loop
 
-Runs **at least once**, even if the condition is false.
+Runs **at least once**, even if condition is false.
 
-```js
-let i = 0;
+### Basic do...while
+
+```js live
+let count = 0;
+
 do {
-  console.log('Do-While loop:', i);
-  i++;
-} while (i < 2);
+  console.log('Do-while:', count);
+  count++;
+} while (count < 3);
+
+// Output: Do-while: 0, 1, 2
 ```
 
----
+### Practical Example - Input Validation
 
-### 4. `for...of` Loop
+```js live
+function getValidInput(input) {
+  let attempt = 0;
 
-Use to iterate over iterable objects like arrays, strings, etc.
+  do {
+    attempt++;
+    console.log(`Attempt ${attempt}: ${input}`);
 
-```js
-const fruits = ['apple', 'banana', 'mango'];
-for (const fruit of fruits) {
-  console.log(fruit);
+    if (input && input.length >= 3) {
+      return { valid: true, value: input };
+    }
+
+    // Simulate getting new input
+    input = 'valid input';
+  } while (attempt < 3);
+
+  return { valid: false, value: null };
 }
+
+console.log(getValidInput('')); // Retries, then succeeds
 ```
 
 ---
 
-### 5. `for...in` Loop
+## 🎯 for...of Loop
 
-Use to iterate over object keys (not recommended for arrays).
+Iterate over **iterable objects** (arrays, strings, sets, maps).
 
-```js
-const person = { name: 'Praveen', age: 25 };
+### Array Iteration
+
+```js live
+const fruits = ['apple', 'banana', 'orange'];
+
+for (const fruit of fruits) {
+  console.log('Fruit:', fruit);
+}
+
+// Output: Fruit: apple, banana, orange
+```
+
+### String Iteration
+
+```js live
+const word = 'hello';
+
+for (const char of word) {
+  console.log('Char:', char);
+}
+
+// Output: Char: h, e, l, l, o
+```
+
+### With Index (Using .entries())
+
+```js live
+const colors = ['red', 'green', 'blue'];
+
+for (const [index, color] of colors.entries()) {
+  console.log(`${index}: ${color}`);
+}
+
+// Output: 0: red, 1: green, 2: blue
+```
+
+### Practical Example - Sum Array
+
+```js live
+const numbers = [5, 10, 15, 20];
+let total = 0;
+
+for (const num of numbers) {
+  total += num;
+}
+
+console.log('Total:', total); // 50
+```
+
+---
+
+## 🔑 for...in Loop
+
+Iterate over **object keys** (not recommended for arrays).
+
+### Object Iteration
+
+```js live
+const person = {
+  name: 'Alice',
+  age: 25,
+  city: 'NYC',
+};
 
 for (const key in person) {
   console.log(`${key}: ${person[key]}`);
 }
+
+// Output: name: Alice, age: 25, city: NYC
+```
+
+### Why Not for Arrays?
+
+```js live
+const arr = ['a', 'b', 'c'];
+
+// ❌ for...in returns indexes as strings
+for (const index in arr) {
+  console.log(typeof index); // 'string' (not number!)
+  console.log(index, arr[index]);
+}
+
+// ✅ Use for...of instead
+for (const value of arr) {
+  console.log(value);
+}
 ```
 
 ---
 
-## 🔄 Loop Control Statements
+## 🔧 Array Methods
 
-- **`break`** – exits the loop early
-- **`continue`** – skips to the next iteration
+Modern functional iteration methods.
+
+### forEach
+
+```js live
+const numbers = [1, 2, 3, 4, 5];
+
+numbers.forEach((num, index) => {
+  console.log(`Index ${index}: ${num}`);
+});
+
+// forEach doesn't return a value
+```
+
+### map - Transform Elements
+
+```js live
+const numbers = [1, 2, 3, 4, 5];
+
+const doubled = numbers.map((num) => num * 2);
+console.log('Doubled:', doubled); // [2, 4, 6, 8, 10]
+
+const squares = numbers.map((num) => num ** 2);
+console.log('Squares:', squares); // [1, 4, 9, 16, 25]
+```
+
+### filter - Keep Matching Elements
+
+```js live
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const evens = numbers.filter((num) => num % 2 === 0);
+console.log('Evens:', evens); // [2, 4, 6, 8, 10]
+
+const greaterThan5 = numbers.filter((num) => num > 5);
+console.log('Greater than 5:', greaterThan5); // [6, 7, 8, 9, 10]
+```
+
+### reduce - Combine to Single Value
+
+```js live
+const numbers = [1, 2, 3, 4, 5];
+
+// Sum
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log('Sum:', sum); // 15
+
+// Product
+const product = numbers.reduce((total, num) => total * num, 1);
+console.log('Product:', product); // 120
+
+// Max
+const max = numbers.reduce((max, num) => (num > max ? num : max), numbers[0]);
+console.log('Max:', max); // 5
+```
+
+### Method Chaining
+
+```js live
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const result = numbers
+  .filter((num) => num % 2 === 0) // [2, 4, 6, 8, 10]
+  .map((num) => num * 2) // [4, 8, 12, 16, 20]
+  .reduce((sum, num) => sum + num, 0); // 60
+
+console.log('Result:', result); // 60
+```
+
+---
+
+## 🎮 Loop Control
+
+### break - Exit Loop
+
+```js live
+for (let i = 0; i < 10; i++) {
+  if (i === 5) {
+    console.log('Breaking at', i);
+    break; // Exit loop
+  }
+  console.log(i);
+}
+
+// Output: 0, 1, 2, 3, 4, Breaking at 5
+```
+
+### continue - Skip Iteration
+
+```js live
+for (let i = 0; i < 5; i++) {
+  if (i === 2) {
+    console.log('Skipping', i);
+    continue; // Skip to next iteration
+  }
+  console.log(i);
+}
+
+// Output: 0, 1, Skipping 2, 3, 4
+```
+
+### Labeled Statements (Advanced)
+
+```js live
+outer: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) {
+      console.log('Breaking outer loop at', i, j);
+      break outer; // Break outer loop
+    }
+    console.log(`i=${i}, j=${j}`);
+  }
+}
+
+// Breaks entire nested loop structure
+```
+
+---
+
+## 📚 Practical Examples
+
+### Example 1: Find & Replace
+
+```js live
+function findAndReplace(arr, target, replacement) {
+  const result = [];
+
+  for (const item of arr) {
+    if (item === target) {
+      result.push(replacement);
+    } else {
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
+const colors = ['red', 'blue', 'red', 'green', 'red'];
+const updated = findAndReplace(colors, 'red', 'yellow');
+console.log('Updated:', updated);
+// ['yellow', 'blue', 'yellow', 'green', 'yellow']
+```
+
+### Example 2: Group By Property
+
+```js live
+function groupBy(array, key) {
+  const groups = {};
+
+  for (const item of array) {
+    const groupKey = item[key];
+
+    if (!groups[groupKey]) {
+      groups[groupKey] = [];
+    }
+
+    groups[groupKey].push(item);
+  }
+
+  return groups;
+}
+
+const users = [
+  { name: 'Alice', role: 'admin' },
+  { name: 'Bob', role: 'user' },
+  { name: 'Charlie', role: 'admin' },
+  { name: 'Diana', role: 'user' },
+];
+
+const grouped = groupBy(users, 'role');
+console.log('Grouped:', grouped);
+// {
+//   admin: [{name: 'Alice', role: 'admin'}, {name: 'Charlie', role: 'admin'}],
+//   user: [{name: 'Bob', role: 'user'}, {name: 'Diana', role: 'user'}]
+// }
+```
+
+### Example 3: Flatten Nested Array
+
+```js live
+function flatten(arr) {
+  const result = [];
+
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      // Recursively flatten
+      result.push(...flatten(item));
+    } else {
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
+const nested = [1, [2, 3], [4, [5, 6]], 7];
+const flat = flatten(nested);
+console.log('Flattened:', flat); // [1, 2, 3, 4, 5, 6, 7]
+```
+
+### Example 4: Generate Range
+
+```js live
+function range(start, end, step = 1) {
+  const result = [];
+
+  if (step > 0) {
+    for (let i = start; i <= end; i += step) {
+      result.push(i);
+    }
+  } else {
+    for (let i = start; i >= end; i += step) {
+      result.push(i);
+    }
+  }
+
+  return result;
+}
+
+console.log('Range 1-10:', range(1, 10)); // [1,2,3,4,5,6,7,8,9,10]
+console.log('Range 0-20 step 5:', range(0, 20, 5)); // [0,5,10,15,20]
+console.log('Range 10-1 step -2:', range(10, 1, -2)); // [10,8,6,4,2]
+```
+
+### Example 5: Calculate Statistics
+
+```js live
+function calculateStats(numbers) {
+  if (numbers.length === 0) return null;
+
+  let sum = 0;
+  let min = numbers[0];
+  let max = numbers[0];
+
+  for (const num of numbers) {
+    sum += num;
+    if (num < min) min = num;
+    if (num > max) max = num;
+  }
+
+  return {
+    count: numbers.length,
+    sum,
+    average: sum / numbers.length,
+    min,
+    max,
+  };
+}
+
+const data = [15, 23, 8, 42, 16, 4, 31];
+console.log('Stats:', calculateStats(data));
+// { count: 7, sum: 139, average: 19.857..., min: 4, max: 42 }
+```
+
+---
+
+## 🎯 Best Practices
+
+### 1. Choose the Right Loop
 
 ```js
-for (let i = 1; i <= 5; i++) {
-  if (i === 3) continue;
-  console.log(i); // Skips 3
+// ✅ for...of for arrays
+for (const item of array) {
+  /* ... */
+}
+
+// ✅ for...in for objects
+for (const key in object) {
+  /* ... */
+}
+
+// ✅ forEach for side effects
+array.forEach((item) => console.log(item));
+
+// ✅ map/filter/reduce for transformations
+const doubled = array.map((n) => n * 2);
+```
+
+### 2. Use Functional Methods
+
+```js
+// ✅ Good - declarative
+const evens = numbers.filter((n) => n % 2 === 0);
+
+// ❌ Verbose - imperative
+const evens2 = [];
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] % 2 === 0) {
+    evens2.push(numbers[i]);
+  }
 }
 ```
+
+### 3. Avoid Modifying Loop Variable
+
+```js
+// ❌ Bad - confusing
+for (let i = 0; i < 10; i++) {
+  if (condition) i += 2; // Don't do this!
+}
+
+// ✅ Good - clear intent
+for (let i = 0; i < 10; i += condition ? 3 : 1) {
+  /* ... */
+}
+```
+
+### 4. Cache Length in Performance-Critical Loops
+
+```js
+// ✅ Cache length
+const len = hugeArray.length;
+for (let i = 0; i < len; i++) {
+  /* ... */
+}
+```
+
+---
+
+## 💡 Common Pitfalls
+
+### Pitfall 1: Off-by-One Errors
+
+```js live
+const arr = [1, 2, 3, 4, 5];
+
+// ❌ Wrong - misses last element
+for (let i = 0; i < arr.length - 1; i++) {
+  console.log(arr[i]); // 1, 2, 3, 4 (missing 5!)
+}
+
+// ✅ Correct
+for (let i = 0; i < arr.length; i++) {
+  console.log(arr[i]); // 1, 2, 3, 4, 5
+}
+```
+
+### Pitfall 2: Modifying Array While Iterating
+
+```js live
+const numbers = [1, 2, 3, 4, 5];
+
+// ❌ Wrong - unpredictable behavior
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] % 2 === 0) {
+    numbers.splice(i, 1); // Modifying array!
+  }
+}
+
+// ✅ Correct - use filter
+const odds = numbers.filter((n) => n % 2 !== 0);
+console.log(odds); // [1, 3, 5]
+```
+
+### Pitfall 3: forEach Can't Break
+
+```js
+// ❌ forEach can't break
+array.forEach((item) => {
+  if (item === target) {
+    break; // SyntaxError!
+  }
+});
+
+// ✅ Use for...of if you need to break
+for (const item of array) {
+  if (item === target) {
+    break; // Works!
+  }
+}
+```
+
+---
+
+## 🔗 What's Next?
+
+Explore intermediate JavaScript concepts!
+
+👉 [Next: Functions (Intermediate) »](../intermediate/functions.md)
+
+---
+
+## 📖 Additional Resources
+
+- [MDN: Loops and Iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration)
+- [JavaScript.info: Loops](https://javascript.info/while-for)
+- [MDN: Array Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
