@@ -593,9 +593,9 @@ function rateLimit(fn, limit, period) {
 
 ## 🔗 What's Next?
 
-Learn about hoisting and execution context!
+Continue exploring advanced JavaScript concepts!
 
-👉 [Next: Hoisting »](./hoisting.md)
+👉 [Back to JavaScript Overview »](../index.md)
 
 ---
 
