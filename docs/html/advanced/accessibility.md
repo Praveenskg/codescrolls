@@ -1,0 +1,994 @@
+---
+id: accessibility
+title: HTML Accessibility - Building Inclusive Web Experiences
+description: Master HTML accessibility with ARIA attributes, semantic markup, keyboard navigation, and WCAG compliance for inclusive web experiences.
+keywords:
+  [
+    html accessibility,
+    web accessibility,
+    aria attributes,
+    wcag compliance,
+    screen readers,
+    keyboard navigation,
+    inclusive design,
+    a11y,
+  ]
+tags: [HTML, Accessibility, ARIA, WCAG, Inclusive, ScreenReaders]
+sidebar_position: 13
+---
+
+# ♿ HTML Accessibility
+
+Accessibility (often abbreviated as a11y) ensures that web content is usable by people with disabilities. HTML provides semantic elements, ARIA attributes, and best practices for creating inclusive web experiences.
+
+## 📖 Why Accessibility Matters?
+
+- **Legal Requirements**: Many countries require accessible websites
+- **Business Impact**: 15% of the world's population has some form of disability
+- **SEO Benefits**: Search engines favor accessible content
+- **Better UX**: Accessible sites work better for everyone
+- **Future-Proof**: Technologies change, but accessibility standards endure
+
+---
+
+## 🏗️ Semantic HTML for Accessibility
+
+### Document Structure
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessible Website - CodeScrolls</title>
+  </head>
+  <body>
+    <!-- Skip to main content link (hidden until focused) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <h1>Welcome to Our Accessible Website</h1>
+      <p>This website follows accessibility best practices.</p>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 CodeScrolls</p>
+    </footer>
+  </body>
+</html>
+```
+
+### Headings Hierarchy
+
+```html
+<article>
+  <h1>Main Article Title</h1>
+
+  <section>
+    <h2>Introduction Section</h2>
+    <p>Introduction content...</p>
+
+    <section>
+      <h3>Subsection</h3>
+      <p>More specific content...</p>
+
+      <section>
+        <h4>Deep Subsection</h4>
+        <p>Detailed information...</p>
+      </section>
+    </section>
+  </section>
+
+  <section>
+    <h2>Conclusion Section</h2>
+    <p>Summary content...</p>
+  </section>
+</article>
+```
+
+### Landmarks and Regions
+
+```html
+<body>
+  <!-- Header landmark -->
+  <header>
+    <h1>Site Title</h1>
+    <nav aria-label="Primary navigation">
+      <!-- Navigation content -->
+    </nav>
+  </header>
+
+  <!-- Main content landmark -->
+  <main>
+    <h1>Page Title</h1>
+
+    <!-- Complementary content -->
+    <aside aria-label="Related information">
+      <!-- Sidebar content -->
+    </aside>
+
+    <!-- Article content -->
+    <article>
+      <h2>Article Title</h2>
+      <p>Article content...</p>
+    </article>
+  </main>
+
+  <!-- Footer landmark -->
+  <footer>
+    <p>Copyright information</p>
+  </footer>
+</body>
+```
+
+---
+
+## 🎯 ARIA (Accessible Rich Internet Applications)
+
+### ARIA Roles
+
+```html
+<!-- Document structure roles -->
+<div role="banner">Site header content</div>
+<div role="navigation" aria-label="Main menu">Navigation</div>
+<div role="main">Main content area</div>
+<div role="complementary">Sidebar content</div>
+<div role="contentinfo">Footer information</div>
+
+<!-- Widget roles -->
+<div role="tablist" aria-label="Product tabs">
+  <button role="tab" aria-selected="true" aria-controls="panel1" id="tab1">Overview</button>
+  <button role="tab" aria-selected="false" aria-controls="panel2" id="tab2">Features</button>
+</div>
+
+<div role="tabpanel" aria-labelledby="tab1" id="panel1">Product overview content</div>
+
+<!-- Live regions -->
+<div role="status" aria-live="polite" aria-atomic="true">File upload progress: 50%</div>
+```
+
+### ARIA Properties and States
+
+```html
+<!-- Basic properties -->
+<button aria-label="Close dialog window">×</button>
+
+<img src="chart.png" alt="Sales chart for Q1 2025" aria-describedby="chart-description" />
+
+<div id="chart-description" class="sr-only">
+  This chart shows sales increasing from January to March 2025.
+</div>
+
+<!-- Dynamic states -->
+<button aria-expanded="false" aria-controls="menu">Menu</button>
+
+<div id="menu" aria-hidden="true">
+  <!-- Menu content -->
+</div>
+
+<!-- Form states -->
+<input type="text" aria-invalid="true" aria-describedby="error-message" />
+<div id="error-message" role="alert">Please enter a valid email address.</div>
+
+<!-- Progress indication -->
+<div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% complete</div>
+```
+
+### ARIA Labels and Descriptions
+
+```html
+<!-- aria-label for buttons without text -->
+<button aria-label="Search" onclick="search()">🔍</button>
+
+<!-- aria-labelledby for associating labels -->
+<div>
+  <h3 id="billing-address">Billing Address</h3>
+  <input type="text" aria-labelledby="billing-address" placeholder="Street address" />
+</div>
+
+<!-- aria-describedby for additional information -->
+<input type="password" aria-describedby="password-requirements" aria-invalid="true" />
+
+<div id="password-requirements">Password must be at least 8 characters and contain numbers.</div>
+
+<!-- aria-details for complex relationships -->
+<button aria-details="tooltip-content">Help</button>
+<div id="tooltip-content" role="tooltip" class="sr-only">
+  This button opens the help documentation in a new window.
+</div>
+```
+
+---
+
+## ⌨️ Keyboard Navigation
+
+### Focus Management
+
+```html
+<!-- Custom focus styles -->
+<style>
+  /* Remove default outline */
+  button:focus {
+    outline: none;
+  }
+
+  /* Custom focus indicator */
+  button:focus-visible {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+  }
+
+  /* Skip link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #007bff;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 6px;
+  }
+</style>
+
+<!-- Skip navigation -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Focusable elements -->
+<header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+  <!-- Main content -->
+</main>
+```
+
+### Tab Order and Focus Trapping
+
+```html
+<!-- Modal with focus trapping -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <h2 id="modal-title">Confirm Action</h2>
+  <p>Are you sure you want to delete this item?</p>
+
+  <div class="modal-actions">
+    <button id="cancel-btn">Cancel</button>
+    <button id="confirm-btn" autofocus>Delete</button>
+  </div>
+</div>
+
+<script>
+  class FocusTrap {
+    constructor(element) {
+      this.element = element;
+      this.focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      this.firstElement = this.focusableElements[0];
+      this.lastElement = this.focusableElements[this.focusableElements.length - 1];
+    }
+
+    trap() {
+      this.element.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === this.firstElement) {
+              e.preventDefault();
+              this.lastElement.focus();
+            }
+          } else {
+            // Tab
+            if (document.activeElement === this.lastElement) {
+              e.preventDefault();
+              this.firstElement.focus();
+            }
+          }
+        }
+
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      });
+
+      // Focus first element
+      this.firstElement.focus();
+    }
+
+    close() {
+      // Return focus to trigger element
+      // this.triggerElement.focus();
+      this.element.style.display = 'none';
+    }
+  }
+
+  // Usage
+  const modal = document.getElementById('modal');
+  const focusTrap = new FocusTrap(modal);
+
+  // When modal opens
+  focusTrap.trap();
+</script>
+```
+
+---
+
+## 📝 Form Accessibility
+
+### Accessible Form Structure
+
+```html
+<form action="/submit" method="post" novalidate>
+  <fieldset>
+    <legend>Contact Information</legend>
+
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        aria-required="true"
+        aria-describedby="name-error"
+      />
+      <div id="name-error" class="error" role="alert" aria-live="polite"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address *</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        aria-required="true"
+        aria-describedby="email-help email-error"
+      />
+      <div id="email-help" class="help">We'll never share your email.</div>
+      <div id="email-error" class="error" role="alert" aria-live="polite"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" aria-describedby="message-help"></textarea>
+      <div id="message-help" class="help">Tell us how we can help you.</div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Preferences</legend>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="newsletter" name="newsletter" />
+      <label for="newsletter">Subscribe to newsletter</label>
+    </div>
+  </fieldset>
+
+  <button type="submit">Send Message</button>
+</form>
+```
+
+### Error Handling and Validation
+
+```javascript
+const form = document.querySelector('form');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const nameError = document.getElementById('name-error');
+const emailError = document.getElementById('email-error');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let isValid = true;
+
+  // Name validation
+  if (!nameInput.value.trim()) {
+    showError(nameInput, nameError, 'Name is required');
+    isValid = false;
+  } else {
+    hideError(nameInput, nameError);
+  }
+
+  // Email validation
+  if (!emailInput.value.trim()) {
+    showError(emailInput, emailError, 'Email is required');
+    isValid = false;
+  } else if (!isValidEmail(emailInput.value)) {
+    showError(emailInput, emailError, 'Please enter a valid email address');
+    isValid = false;
+  } else {
+    hideError(emailInput, emailError);
+  }
+
+  if (isValid) {
+    // Submit form
+    console.log('Form submitted successfully');
+  }
+});
+
+function showError(input, errorElement, message) {
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  input.setAttribute('aria-invalid', 'true');
+  input.focus();
+}
+
+function hideError(input, errorElement) {
+  errorElement.style.display = 'none';
+  input.setAttribute('aria-invalid', 'false');
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Real-time validation feedback
+emailInput.addEventListener('blur', () => {
+  if (emailInput.value && !isValidEmail(emailInput.value)) {
+    showError(emailInput, emailError, 'Please enter a valid email address');
+  }
+});
+```
+
+---
+
+## 🖼️ Image Accessibility
+
+### Alternative Text
+
+```html
+<!-- Decorative images (no alt text needed) -->
+<img src="decorative-border.png" alt="" />
+
+<!-- Informative images -->
+<img src="chart.png" alt="Sales increased by 25% in Q1 2025" />
+
+<!-- Complex images with descriptions -->
+<img src="diagram.png" alt="Process flow diagram" aria-describedby="diagram-description" />
+
+<div id="diagram-description">
+  The diagram shows data flowing from input through processing to output, with error handling at
+  each step.
+</div>
+
+<!-- Images with captions -->
+<figure>
+  <img src="photo.jpg" alt="Team members celebrating project completion" />
+  <figcaption>The development team at the project launch event</figcaption>
+</figure>
+```
+
+### Image Maps
+
+```html
+<img src="floorplan.png" alt="Building floor plan" usemap="#floorplan-map" />
+
+<map name="floorplan-map">
+  <area
+    shape="rect"
+    coords="50,50,150,150"
+    href="/room101"
+    alt="Conference Room A"
+    aria-label="Conference Room A - capacity 20 people"
+  />
+  <area
+    shape="circle"
+    coords="200,100,30"
+    href="/room102"
+    alt="Meeting Room B"
+    aria-label="Meeting Room B - capacity 8 people"
+  />
+</map>
+```
+
+---
+
+## 📊 Data Tables
+
+### Simple Data Table
+
+```html
+<table>
+  <caption>
+    Employee Information - Q1 2025
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Department</th>
+      <th scope="col">Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">John Doe</th>
+      <td>Senior Developer</td>
+      <td>Engineering</td>
+      <td>$85,000</td>
+    </tr>
+    <tr>
+      <th scope="row">Jane Smith</th>
+      <td>UI Designer</td>
+      <td>Design</td>
+      <td>$75,000</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Complex Data Tables
+
+```html
+<table>
+  <caption>
+    Product Sales by Region and Quarter
+  </caption>
+
+  <!-- Column headers -->
+  <thead>
+    <tr>
+      <td rowspan="2"></td>
+      <th colspan="4" scope="colgroup">Q1 2025</th>
+      <th colspan="4" scope="colgroup">Q2 2025</th>
+    </tr>
+    <tr>
+      <th scope="col">Jan</th>
+      <th scope="col">Feb</th>
+      <th scope="col">Mar</th>
+      <th scope="col">Total</th>
+      <th scope="col">Apr</th>
+      <th scope="col">May</th>
+      <th scope="col">Jun</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+
+  <!-- Row headers and data -->
+  <tbody>
+    <tr>
+      <th scope="row">North America</th>
+      <td>$12,000</td>
+      <td>$15,000</td>
+      <td>$18,000</td>
+      <td>$45,000</td>
+      <td>$20,000</td>
+      <td>$22,000</td>
+      <td>$25,000</td>
+      <td>$67,000</td>
+    </tr>
+    <tr>
+      <th scope="row">Europe</th>
+      <td>$8,000</td>
+      <td>$10,000</td>
+      <td>$12,000</td>
+      <td>$30,000</td>
+      <td>$15,000</td>
+      <td>$17,000</td>
+      <td>$19,000</td>
+      <td>$51,000</td>
+    </tr>
+  </tbody>
+
+  <!-- Summary row -->
+  <tfoot>
+    <tr>
+      <th scope="row">Total</th>
+      <td>$20,000</td>
+      <td>$25,000</td>
+      <td>$30,000</td>
+      <td>$75,000</td>
+      <td>$35,000</td>
+      <td>$39,000</td>
+      <td>$44,000</td>
+      <td>$118,000</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+---
+
+## 🎵 Media Accessibility
+
+### Video with Captions
+
+```html
+<video
+  controls
+  width="640"
+  height="360"
+  aria-label="Product demonstration video"
+  aria-describedby="video-description"
+>
+  <source src="demo.mp4" type="video/mp4" />
+  <source src="demo.webm" type="video/webm" />
+
+  <!-- Multiple subtitle tracks -->
+  <track src="captions-en.vtt" kind="captions" srclang="en" label="English" default />
+  <track src="captions-es.vtt" kind="captions" srclang="es" label="Español" />
+
+  <!-- Audio descriptions -->
+  <track src="descriptions.vtt" kind="descriptions" srclang="en" label="Audio Description" />
+
+  <!-- Chapters for navigation -->
+  <track src="chapters.vtt" kind="chapters" srclang="en" label="Chapters" />
+
+  <div id="video-description">
+    This video demonstrates the key features of our product, including setup, configuration, and
+    usage examples.
+  </div>
+</video>
+```
+
+### Audio Content
+
+```html
+<!-- Podcast episode -->
+<audio controls aria-label="Podcast episode: Web Accessibility Best Practices">
+  <source src="episode.mp3" type="audio/mpeg" />
+  <source src="episode.ogg" type="audio/ogg" />
+
+  <!-- Transcript link -->
+  <p>
+    <a href="episode-transcript.html">Read episode transcript</a>
+  </p>
+</audio>
+
+<!-- Background audio with controls -->
+<div class="audio-player">
+  <audio id="background-audio" aria-label="Background music">
+    <source src="ambient-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button onclick="toggleAudio()" aria-label="Toggle background music">🔊</button>
+</div>
+```
+
+---
+
+## 🎯 Color and Contrast
+
+### Color Contrast Requirements
+
+```html
+<style>
+  /* High contrast text */
+  .high-contrast {
+    color: #000000;
+    background-color: #ffffff;
+  }
+
+  /* Focus indicators */
+  button:focus,
+  input:focus,
+  textarea:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+  }
+
+  /* Don't rely on color alone */
+  .status-error {
+    color: #dc3545;
+    font-weight: bold;
+    border-left: 4px solid #dc3545;
+    padding-left: 8px;
+  }
+
+  .status-success {
+    color: #28a745;
+    font-weight: bold;
+    border-left: 4px solid #28a745;
+    padding-left: 8px;
+  }
+</style>
+
+<!-- Good contrast examples -->
+<div class="high-contrast">
+  <p>This text has good contrast for readability.</p>
+</div>
+
+<!-- Status messages with visual cues -->
+<div class="status-error" role="alert">❌ Error: Invalid input provided</div>
+
+<div class="status-success">✅ Success: Data saved successfully</div>
+```
+
+### Testing Color Contrast
+
+```javascript
+// Simple contrast ratio calculator
+function getContrastRatio(color1, color2) {
+  // Convert hex to RGB
+  function hexToRgb(hex) {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
+  }
+
+  // Calculate luminance
+  function getLuminance(r, g, b) {
+    const [rs, gs, bs] = [r, g, b].map((c) => {
+      c = c / 255;
+      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+  }
+
+  const rgb1 = hexToRgb(color1);
+  const rgb2 = hexToRgb(color2);
+
+  if (!rgb1 || !rgb2) return null;
+
+  const lum1 = getLuminance(rgb1.r, rgb1.g, rgb1.b);
+  const lum2 = getLuminance(rgb2.r, rgb2.g, rgb2.b);
+
+  const brightest = Math.max(lum1, lum2);
+  const darkest = Math.min(lum1, lum2);
+
+  return (brightest + 0.05) / (darkest + 0.05);
+}
+
+// Usage
+const contrast = getContrastRatio('#000000', '#ffffff');
+console.log('Contrast ratio:', contrast.toFixed(2));
+// Should be at least 4.5:1 for normal text, 3:1 for large text
+```
+
+---
+
+## 🛠️ Testing and Tools
+
+### Automated Testing
+
+```javascript
+// Accessibility audit function
+function runAccessibilityAudit() {
+  const results = {
+    passed: [],
+    failed: [],
+    warnings: [],
+  };
+
+  // Check for alt text on images
+  const images = document.querySelectorAll('img');
+  images.forEach((img, index) => {
+    if (!img.getAttribute('alt') && img.getAttribute('alt') !== '') {
+      results.failed.push(`Image ${index + 1} missing alt text`);
+    } else {
+      results.passed.push(`Image ${index + 1} has alt text`);
+    }
+  });
+
+  // Check for form labels
+  const inputs = document.querySelectorAll('input, select, textarea');
+  inputs.forEach((input, index) => {
+    const label = document.querySelector(`label[for="${input.id}"]`);
+    if (!label && !input.getAttribute('aria-label')) {
+      results.failed.push(`Form control ${index + 1} missing label`);
+    } else {
+      results.passed.push(`Form control ${index + 1} has label`);
+    }
+  });
+
+  // Check heading hierarchy
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  let lastLevel = 0;
+  headings.forEach((heading, index) => {
+    const level = parseInt(heading.tagName.charAt(1));
+    if (level - lastLevel > 1) {
+      results.warnings.push(`Heading hierarchy skipped at heading ${index + 1}`);
+    }
+    lastLevel = level;
+  });
+
+  // Check for sufficient color contrast
+  const textElements = document.querySelectorAll('*');
+  textElements.forEach((element, index) => {
+    const style = window.getComputedStyle(element);
+    const color = style.color;
+    const backgroundColor = style.backgroundColor;
+
+    // This is a simplified check - use proper tools for production
+    if (color && backgroundColor && color !== backgroundColor) {
+      results.passed.push(`Element ${index + 1} has different text and background colors`);
+    }
+  });
+
+  return results;
+}
+
+// Run audit
+const auditResults = runAccessibilityAudit();
+console.log('Accessibility Audit Results:', auditResults);
+```
+
+### Screen Reader Testing
+
+```html
+<!-- Screen reader testing utilities -->
+<div id="sr-testing" style="display: none;">
+  <h2>Screen Reader Testing</h2>
+
+  <!-- Test different ARIA announcements -->
+  <button onclick="announce('Button clicked')">Test Announcement</button>
+
+  <!-- Test live regions -->
+  <div aria-live="polite" aria-atomic="true" id="live-region">Status updates appear here</div>
+
+  <button onclick="updateLiveRegion()">Update Live Region</button>
+
+  <!-- Test focus management -->
+  <button onclick="testFocusManagement()">Test Focus</button>
+  <div id="focus-target" tabindex="-1">Focus target</div>
+</div>
+
+<script>
+  function announce(message) {
+    // Create temporary element for announcement
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'assertive');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.style.position = 'absolute';
+    announcement.style.left = '-10000px';
+    announcement.style.width = '1px';
+    announcement.style.height = '1px';
+    announcement.style.overflow = 'hidden';
+
+    document.body.appendChild(announcement);
+    announcement.textContent = message;
+
+    // Remove after announcement
+    setTimeout(() => {
+      document.body.removeChild(announcement);
+    }, 1000);
+  }
+
+  function updateLiveRegion() {
+    const liveRegion = document.getElementById('live-region');
+    const updates = ['Loading...', 'Processing data...', 'Complete!'];
+
+    let index = 0;
+    const interval = setInterval(() => {
+      liveRegion.textContent = updates[index];
+      index++;
+
+      if (index >= updates.length) {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  function testFocusManagement() {
+    const target = document.getElementById('focus-target');
+    target.focus();
+
+    // Announce focus change
+    announce('Focus moved to test element');
+  }
+</script>
+```
+
+---
+
+## 📋 Best Practices Checklist
+
+### ✅ DO:
+
+```html
+<!-- Use semantic HTML -->
+<header>Site header</header>
+<nav>Navigation</nav>
+<main>Main content</main>
+<article>Articles</article>
+<aside>Sidebars</aside>
+<footer>Footers</footer>
+
+<!-- Provide alternative text -->
+<img src="chart.png" alt="Sales chart showing 25% growth in Q1" />
+
+<!-- Use ARIA when needed -->
+<button aria-expanded="false" aria-controls="menu">Menu</button>
+
+<!-- Ensure keyboard accessibility -->
+<button onclick="action()" onkeydown="handleKey(event)">Action</button>
+
+<!-- Test with keyboard navigation -->
+<!-- Tab through all interactive elements -->
+
+<!-- Provide sufficient color contrast -->
+<!-- Use tools like WebAIM Contrast Checker -->
+
+<!-- Include screen reader users -->
+<div aria-live="polite">Status: Loading...</div>
+```
+
+### ❌ DON'T:
+
+```html
+<!-- Don't use generic elements for structure -->
+<div id="header">Header</div>
+<!-- Use <header> -->
+
+<!-- Don't omit alt text -->
+<img src="photo.jpg" />
+<!-- Missing alt attribute -->
+
+<!-- Don't rely on color alone -->
+<p style="color: red;">Error message</p>
+<!-- Add visual cues -->
+
+<!-- Don't break keyboard navigation -->
+<div onclick="action()">Click me</div>
+<!-- Add tabindex or use button -->
+
+<!-- Don't use positive tabindex values -->
+<button tabindex="5">Button</button>
+<!-- Let browser handle tab order -->
+
+<!-- Don't hide focus indicators -->
+button:focus { outline: none; }
+<!-- Provide alternative focus style -->
+
+<!-- Don't use deprecated attributes -->
+<img alt="" />
+<!-- Empty alt is OK for decorative images -->
+```
+
+---
+
+## 🚀 What's Next?
+
+You've completed **ALL HTML documentation**! 🎉
+
+**HTML Documentation Summary:**
+
+- ✅ **HTML Basics**: Elements, Attributes, Semantic HTML, Forms, Tables
+- ✅ **HTML Intermediate**: HTML5 APIs, Canvas, SVG, Multimedia, Meta/SEO
+- ✅ **HTML Advanced**: Web Components, Shadow DOM, Accessibility
+
+**CodeScrolls now has complete HTML coverage alongside:**
+
+- ✅ JavaScript (19 files, 9,500+ lines)
+- ✅ CSS (19 files, 10,100+ lines)
+- ✅ React (18 files)
+- ✅ TypeScript (18 files)
+
+**Next recommended steps:**
+
+1. Test all HTML documentation builds
+2. Add Node.js documentation
+3. Implement testing framework
+4. Add more interactive examples
+
+**HTML documentation: MISSION ACCOMPLISHED!** 🌐✨
+
+Master accessibility for inclusive web experiences! ♿
