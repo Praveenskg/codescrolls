@@ -1,0 +1,290 @@
+---
+id: css-architecture
+title: CSS Architecture - BEM & Best Practices
+description: Master CSS architecture methodologies including BEM, SMACSS, and OOCSS. Learn how to organize, structure, and scale CSS for large projects.
+keywords:
+  [
+    css architecture,
+    bem methodology,
+    css organization,
+    smacss,
+    oocss,
+    css naming conventions,
+    scalable css,
+    css best practices,
+  ]
+tags: [CSS, Architecture, BEM, Best Practices, Advanced]
+sidebar_position: 3
+---
+
+# 🏗️ CSS Architecture
+
+Learn methodologies and best practices for organizing and structuring CSS in large-scale projects.
+
+## 🎯 BEM (Block Element Modifier)
+
+### Naming Convention
+
+```
+.block
+.block__element
+.block--modifier
+.block__element--modifier
+```
+
+### Example
+
+```html
+<!-- Block -->
+<div class="card">
+  <!-- Element -->
+  <h2 class="card__title">Title</h2>
+  <p class="card__description">Description</p>
+  <button class="card__button card__button--primary">Click</button>
+</div>
+
+<!-- Modified Block -->
+<div class="card card--featured">...</div>
+```
+
+```css
+/* Block */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* Element */
+.card__title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card__description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.card__button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Modifier */
+.card--featured {
+  border: 2px solid #007bff;
+}
+
+.card__button--primary {
+  background-color: #007bff;
+  color: white;
+}
+```
+
+---
+
+## 📁 File Organization
+
+### Component-Based Structure
+
+```
+styles/
+├── base/
+│   ├── reset.css
+│   ├── typography.css
+│   └── variables.css
+├── components/
+│   ├── button.css
+│   ├── card.css
+│   ├── modal.css
+│   └── nav.css
+├── layout/
+│   ├── header.css
+│   ├── footer.css
+│   └── grid.css
+├── pages/
+│   ├── home.css
+│   └── about.css
+└── utils/
+    ├── helpers.css
+    └── utilities.css
+```
+
+---
+
+## 🎯 CSS Principles
+
+### 1. Single Responsibility
+
+```css
+/* Bad: Multiple responsibilities */
+.button {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+/* Good: Separate concerns */
+.button {
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+}
+
+.button--centered {
+  display: flex;
+  justify-content: center;
+}
+
+.button--spaced {
+  margin: 1rem 0;
+}
+```
+
+### 2. DRY (Don't Repeat Yourself)
+
+```css
+/* Bad: Repetition */
+.button-primary {
+  padding: 12px 24px;
+  border-radius: 4px;
+  background-color: #007bff;
+}
+
+.button-secondary {
+  padding: 12px 24px;
+  border-radius: 4px;
+  background-color: #6c757d;
+}
+
+/* Good: Reusable classes */
+.button {
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+
+.button--primary {
+  background-color: #007bff;
+}
+
+.button--secondary {
+  background-color: #6c757d;
+}
+```
+
+### 3. Specificity Management
+
+```css
+/* Bad: Too specific */
+div#content .wrapper .container .card .title {
+  color: blue;
+}
+
+/* Good: Low specificity */
+.card__title {
+  color: blue;
+}
+```
+
+---
+
+## 🎨 Utility Classes
+
+```css
+/* Spacing */
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 1rem;
+}
+
+/* Text alignment */
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+
+/* Display */
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+```
+
+---
+
+## ✅ Best Practices
+
+1. **Use meaningful names**
+
+   ```css
+   .nav-primary {
+   } /* Not .nav1 */
+   .button-large {
+   } /* Not .btn-lg */
+   ```
+
+2. **Avoid deep nesting**
+
+   ```css
+   /* Bad */
+   .nav ul li a span {
+   }
+
+   /* Good */
+   .nav__link-text {
+   }
+   ```
+
+3. **Keep specificity low**
+
+   ```css
+   /* Prefer classes over IDs */
+   .header {
+   } /* Not #header */
+   ```
+
+4. **Mobile-first CSS**
+
+   ```css
+   /* Base (mobile) */
+   .card {
+     width: 100%;
+   }
+
+   /* Desktop */
+   @media (min-width: 768px) {
+     .card {
+       width: 50%;
+     }
+   }
+   ```
+
+---
+
+## 🚀 What's Next?
+
+Now learn about **CSS Performance**:
+
+👉 [Next: Performance →](./performance.md)
+
+Master CSS architecture for scalable projects! 🏗️

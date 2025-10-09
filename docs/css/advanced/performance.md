@@ -1,0 +1,256 @@
+---
+id: css-performance
+title: CSS Performance Optimization - Complete Guide
+description: Master CSS performance optimization. Learn to minify, reduce file size, optimize selectors, use critical CSS, and create fast-loading websites.
+keywords:
+  [
+    css performance,
+    css optimization,
+    minify css,
+    critical css,
+    css selectors performance,
+    reduce css file size,
+    fast css loading,
+  ]
+tags: [CSS, Performance, Optimization, Advanced]
+sidebar_position: 4
+---
+
+# ⚡ CSS Performance Optimization
+
+Optimize CSS for faster page loads, better user experience, and improved SEO rankings.
+
+## 🎯 Performance Best Practices
+
+### 1. Minify CSS
+
+Remove whitespace, comments, and unnecessary characters.
+
+```css
+/* Before (12 KB) */
+.button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+
+/* After (minified - 8 KB) */
+.button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+}
+```
+
+**Tools:**
+
+- cssnano
+- clean-css
+- PostCSS with cssnano plugin
+
+### 2. Combine CSS Files
+
+```html
+<!-- Bad: Multiple requests -->
+<link rel="stylesheet" href="base.css" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="layout.css" />
+
+<!-- Good: Single request -->
+<link rel="stylesheet" href="styles.min.css" />
+```
+
+### 3. Use Efficient Selectors
+
+```css
+/* Slow: Complex selectors */
+div#header nav ul li a.active {
+}
+
+/* Fast: Simple class */
+.nav-link--active {
+}
+
+/* Slow: Universal selector */
+* {
+  margin: 0;
+}
+
+/* Fast: Targeted reset */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+```
+
+---
+
+## 🎨 Critical CSS
+
+Load critical CSS inline, defer non-critical CSS.
+
+```html
+<!-- Inline critical CSS -->
+<style>
+  /* Above-the-fold styles */
+  .header {
+    /* ... */
+  }
+  .hero {
+    /* ... */
+  }
+</style>
+
+<!-- Defer non-critical CSS -->
+<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="styles.css" /></noscript>
+```
+
+---
+
+## ⚡ Optimize Properties
+
+### Use Hardware-Accelerated Properties
+
+```css
+/* Slow: Triggers layout */
+.element {
+  width: 100px;
+  height: 100px;
+  top: 10px;
+  left: 10px;
+}
+
+/* Fast: GPU-accelerated */
+.element {
+  transform: translate(10px, 10px);
+}
+```
+
+### Prefer transform and opacity
+
+```css
+/* Slow */
+.element {
+  width: 100px;
+  transition: width 0.3s;
+}
+.element:hover {
+  width: 200px;
+}
+
+/* Fast */
+.element {
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+.element:hover {
+  transform: scale(2);
+}
+```
+
+---
+
+## 📦 Reduce File Size
+
+### Remove Unused CSS
+
+```css
+/* Before: 500 KB with unused styles */
+/* After: 50 KB with only used styles */
+```
+
+**Tools:**
+
+- PurgeCSS
+- UnCSS
+- Chrome DevTools Coverage
+
+### Use Shorthand
+
+```css
+/* Verbose: 4 lines */
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 10px;
+margin-left: 20px;
+
+/* Shorthand: 1 line */
+margin: 10px 20px;
+```
+
+---
+
+## 🎯 Loading Strategies
+
+### 1. Async CSS Loading
+
+```html
+<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+```
+
+### 2. Media Query Optimization
+
+```html
+<!-- Load only when needed -->
+<link rel="stylesheet" href="print.css" media="print" />
+<link rel="stylesheet" href="mobile.css" media="(max-width: 768px)" />
+```
+
+### 3. Split CSS by Route
+
+```html
+<!-- Common styles -->
+<link rel="stylesheet" href="base.css" />
+
+<!-- Page-specific styles -->
+<link rel="stylesheet" href="home.css" />
+```
+
+---
+
+## ✅ Performance Checklist
+
+- [ ] Minify CSS files
+- [ ] Combine multiple CSS files
+- [ ] Remove unused CSS
+- [ ] Use efficient selectors
+- [ ] Implement critical CSS
+- [ ] Optimize images referenced in CSS
+- [ ] Use shorthand properties
+- [ ] Prefer transform and opacity
+- [ ] Defer non-critical CSS
+- [ ] Enable compression (gzip/brotli)
+
+---
+
+## 🔍 Measuring Performance
+
+### Tools
+
+- **Lighthouse**: Overall performance score
+- **Chrome DevTools**: Network, Performance tabs
+- **WebPageTest**: Detailed analysis
+- **PageSpeed Insights**: Google's recommendations
+
+### Key Metrics
+
+- **First Contentful Paint (FCP)**: < 1.8s
+- **Largest Contentful Paint (LCP)**: < 2.5s
+- **Cumulative Layout Shift (CLS)**: < 0.1
+
+---
+
+## 🚀 What's Next?
+
+Congratulations! You've completed the **complete CSS guide**! 🎉
+
+Return to:
+👉 [CSS Overview →](../index.md)  
+👉 [Documentation Home →](../../index.mdx)
+
+Master CSS performance for lightning-fast websites! ⚡
