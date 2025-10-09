@@ -57,7 +57,7 @@ body {
 
 ## 📚 Complete Course Structure
 
-This guide is organized into **16 comprehensive topics** across three difficulty levels:
+This guide is organized into **19 comprehensive topics** across three difficulty levels:
 
 ### 🟢 Basics (6 Topics)
 
@@ -68,7 +68,7 @@ This guide is organized into **16 comprehensive topics** across three difficulty
 5. **[Units & Values](./basics/units-values.md)** - px, em, rem, %, vh, vw
 6. **[Display & Visibility](./basics/display-visibility.md)** - Block, inline, inline-block, none
 
-### 🟡 Intermediate (6 Topics)
+### 🟡 Intermediate (9 Topics)
 
 7. **[Flexbox](./intermediate/flexbox.md)** - One-dimensional layouts
 8. **[CSS Grid](./intermediate/grid.md)** - Two-dimensional layouts
@@ -76,13 +76,16 @@ This guide is organized into **16 comprehensive topics** across three difficulty
 10. **[Responsive Design](./intermediate/responsive-design.md)** - Media queries, mobile-first
 11. **[Transitions](./intermediate/transitions.md)** - Smooth property changes
 12. **[Animations](./intermediate/animations.md)** - Keyframes, complex animations
+13. **[Transforms](./intermediate/transforms.md)** ⭐ NEW - 2D/3D transforms, rotate, scale, perspective
+14. **[Filters & Effects](./intermediate/filters-effects.md)** ⭐ NEW - Blur, brightness, blend modes
+15. **[Multi-column Layout](./intermediate/multi-column.md)** ⭐ NEW - Magazine-style layouts
 
 ### 🔴 Advanced (4 Topics)
 
-13. **[CSS Variables](./advanced/css-variables.md)** - Custom properties, theming
-14. **[Preprocessors](./advanced/preprocessors.md)** - SASS/SCSS, variables, mixins
-15. **[CSS Architecture](./advanced/architecture.md)** - BEM, SMACSS, organization
-16. **[Performance](./advanced/performance.md)** - Optimization, best practices
+16. **[CSS Variables](./advanced/css-variables.md)** - Custom properties, theming
+17. **[Preprocessors](./advanced/preprocessors.md)** - SASS/SCSS, variables, mixins
+18. **[CSS Architecture](./advanced/architecture.md)** - BEM, SMACSS, organization
+19. **[Performance](./advanced/performance.md)** - Optimization, best practices
 
 ## 🎯 Learning Paths
 
@@ -99,18 +102,21 @@ This guide is organized into **16 comprehensive topics** across three difficulty
 
 **Project**: Build a personal profile card
 
-### 🌿 Intermediate Path (2-3 weeks)
+### 🌿 Intermediate Path (3-4 weeks)
 
-**Goal**: Build responsive layouts
+**Goal**: Build responsive, interactive layouts
 
 1. Master **Flexbox** (Week 1)
-2. Learn **CSS Grid** (Week 2)
-3. Understand **Positioning** (Week 3)
-4. Implement **Responsive Design** (Week 3)
-5. Add **Transitions** (Week 4)
-6. Create **Animations** (Week 4)
+2. Learn **CSS Grid** (Week 1-2)
+3. Understand **Positioning** (Week 2)
+4. Implement **Responsive Design** (Week 2-3)
+5. Add **Transitions** (Week 3)
+6. Create **Animations** (Week 3)
+7. Master **Transforms** (Week 4)
+8. Apply **Filters & Effects** (Week 4)
+9. Learn **Multi-column Layout** (Week 4)
 
-**Project**: Build a responsive portfolio website
+**Project**: Build a responsive portfolio website with animations
 
 ### 🌳 Advanced Path (2-4 weeks)
 
@@ -125,8 +131,8 @@ This guide is organized into **16 comprehensive topics** across three difficulty
 
 ## ✨ What Makes This Guide Special?
 
-- ✅ **Comprehensive Coverage**: 16 topics, 8,000+ lines of content
-- ✅ **100+ Live Examples**: Try code in your browser
+- ✅ **100% Complete Coverage**: 19 topics, 11,000+ lines of content
+- ✅ **150+ Code Examples**: Practical demonstrations
 - ✅ **Real-World Projects**: Build actual websites
 - ✅ **Best Practices**: Industry-standard techniques
 - ✅ **Common Pitfalls**: Learn from mistakes

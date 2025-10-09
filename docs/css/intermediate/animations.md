@@ -294,9 +294,9 @@ Define animation steps.
 
 ## 🚀 What's Next?
 
-Congratulations! You've completed CSS Intermediate. Now move to **Advanced CSS**:
+Now that you master animations, learn about **CSS Transforms**:
 
-👉 [Next: CSS Variables →](../advanced/css-variables.md)
+👉 [Next: Transforms →](./transforms.md)
 
 Or return to the [CSS Overview →](../index.md)
 
