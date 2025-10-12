@@ -200,6 +200,7 @@ const config: Config = {
       },
     ],
     '@docusaurus/theme-live-codeblock',
+    '@docusaurus/theme-mermaid',
   ],
 
   presets: [
@@ -341,6 +342,20 @@ const config: Config = {
     ],
     liveCodeBlock: { playgroundPosition: 'bottom' },
     docs: { sidebar: { hideable: true } },
+    mermaid: {
+      theme: { light: 'default', dark: 'dark' },
+      options: {
+        fontFamily: 'var(--ifm-font-family-base)',
+        fontSize: 16,
+        curve: 'basis',
+        securityLevel: 'loose',
+        themeVariables: {
+          fontFamily: 'var(--ifm-font-family-base)',
+          fontSize: '16px',
+          darkMode: false,
+        },
+      },
+    },
 
     navbar: {
       title: 'CodeScrolls',
