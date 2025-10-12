@@ -182,3 +182,33 @@ opensource:
   label: Open Source
   permalink: /opensource
   description: Open source projects and contributions
+
+api:
+  label: API
+  permalink: /api
+  description: API design, development, and best practices
+
+backend:
+  label: Backend
+  permalink: /backend
+  description: Server-side development and backend technologies
+
+rest:
+  label: REST
+  permalink: /rest
+  description: RESTful API design and architecture
+
+design:
+  label: Design
+  permalink: /design
+  description: System design, architecture, and patterns
+
+best-practices:
+  label: Best Practices
+  permalink: /best-practices
+  description: Industry best practices and standards
+
+development:
+  label: Development
+  permalink: /development
+  description: Software development methodologies and processes
