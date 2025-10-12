@@ -14,11 +14,16 @@ const config: Config = {
   projectName: 'codescrolls',
   trailingSlash: false,
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
 
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
 
   headTags: [
@@ -203,7 +208,7 @@ const config: Config = {
       {
         docs: {
           path: 'docs',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
@@ -343,52 +348,53 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'javascriptSidebar',
+          sidebarId: 'htmlSidebar',
           position: 'left',
-          label: 'JavaScript',
-          to: '/javascript',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'reactSidebar',
-          position: 'left',
-          label: 'React',
-          to: '/react',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'typescriptSidebar',
-          position: 'left',
-          label: 'Typescript',
-          to: '/typescript',
+          label: 'HTML',
+          to: '/docs/html',
         },
         {
           type: 'docSidebar',
           sidebarId: 'cssSidebar',
           position: 'left',
           label: 'CSS',
-          to: '/css',
+          to: '/docs/css',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'htmlSidebar',
+          sidebarId: 'javascriptSidebar',
           position: 'left',
-          label: 'HTML',
-          to: '/html',
+          label: 'JavaScript',
+          to: '/docs/javascript',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'reactSidebar',
+          position: 'left',
+          label: 'React',
+          to: '/docs/react',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'typescriptSidebar',
+          position: 'left',
+          label: 'Typescript',
+          to: '/docs/typescript',
+        },
+
         {
           type: 'docSidebar',
           sidebarId: 'cheatSheetSidebar',
           position: 'left',
           label: 'Cheat Sheets',
-          to: '/cheatsheets',
+          to: '/docs/cheatsheets',
         },
         {
           type: 'docSidebar',
           sidebarId: 'interviewSidebar',
           position: 'left',
           label: 'Interviews',
-          to: '/interviews',
+          to: '/docs/interviews',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
@@ -406,10 +412,10 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            { label: 'JavaScript', to: '/javascript' },
-            { label: 'TypeScript', to: '/typescript' },
-            { label: 'React', to: '/react' },
-            { label: 'Cheat Sheets', to: '/cheatsheets' },
+            { label: 'JavaScript', to: '/docs/javascript' },
+            { label: 'TypeScript', to: '/docs/typescript' },
+            { label: 'React', to: '/docs/react' },
+            { label: 'Cheat Sheets', to: '/docs/cheatsheets' },
           ],
         },
         {

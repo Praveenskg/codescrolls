@@ -195,6 +195,23 @@
 
 /* custom.css */
 
+/* Documentation Index Page Styling */
+.docs-index-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
+}
+
+.docs-index-card {
+  transition: all 0.3s ease !important;
+}
+
+/* Button hover effects */
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+  text-decoration: none !important;
+}
+
 .main-wrapper {
   display: flex;
 }

@@ -46,6 +46,10 @@ html[data-theme='dark'] .cheatsheet-icon {
   filter: brightness(0.9);
 }
 
+html[data-theme='dark'] .cheatsheet-description {
+  color: #ccc;
+}
+
 .cheatsheet-title {
   margin-top: 0.5rem;
   text-align: center;

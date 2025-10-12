@@ -1,0 +1,643 @@
+---
+id: html
+title: HTML Cheatsheet
+sidebar_label: HTML CheatSheet
+description: Essential HTML elements, attributes, and semantic markup reference
+keywords: [html, cheatsheet, markup, semantic, reference, web development]
+---
+
+import LiveCodeBlock from '@theme/LiveCodeBlock';
+
+# 🌐 HTML Cheatsheet
+
+A comprehensive reference guide for HTML elements, attributes, semantic markup, and best practices.
+
+---
+
+:::info
+HTML (HyperText Markup Language) is the standard markup language for creating web pages and web applications.
+:::
+
+## 📄 Basic HTML Structure
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Title</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Content goes here -->
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 🏗️ Document Structure
+
+```html
+<!-- Header -->
+<header>
+  <h1>Main Title</h1>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main>
+  <article>
+    <h2>Article Title</h2>
+    <p>Article content...</p>
+  </article>
+
+  <aside>
+    <h3>Sidebar</h3>
+    <p>Related content...</p>
+  </aside>
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>&copy; 2024 Company Name</p>
+</footer>
+```
+
+---
+
+## 📝 Headings & Text
+
+```html
+<h1>Main Heading (h1)</h1>
+<h2>Subheading (h2)</h2>
+<h3>Sub-subheading (h3)</h3>
+<h4>Level 4 heading</h4>
+<h5>Level 5 heading</h5>
+<h6>Level 6 heading</h6>
+
+<!-- Text formatting -->
+<p>Regular paragraph text.</p>
+<strong>Bold text</strong>
+<em>Italic text</em>
+<u>Underlined text</u>
+<mark>Highlighted text</mark>
+<small>Small text</small>
+<del>Deleted text</del>
+<ins>Inserted text</ins>
+<sup>Superscript</sup>
+<sub>Subscript</sub>
+
+<!-- Line break & horizontal rule -->
+<br>
+<hr>
+```
+
+---
+
+## 🔗 Links & Navigation
+
+```html
+<!-- External link -->
+<a href="https://example.com">Visit Example</a>
+
+<!-- Internal link -->
+<a href="#section1">Jump to Section 1</a>
+
+<!-- Email link -->
+<a href="mailto:contact@example.com">Send Email</a>
+
+<!-- Phone link -->
+<a href="tel:+1234567890">Call Us</a>
+
+<!-- Download link -->
+<a href="document.pdf" download>Download PDF</a>
+
+<!-- Link with target -->
+<a href="https://example.com" target="_blank" rel="noopener">Open in New Tab</a>
+
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+```
+
+---
+
+## 🖼️ Images & Media
+
+```html
+<!-- Basic image -->
+<img src="image.jpg" alt="Description of image">
+
+<!-- Image with dimensions -->
+<img src="image.jpg" alt="Description" width="300" height="200">
+
+<!-- Responsive image -->
+<img src="image.jpg" alt="Description" style="max-width: 100%; height: auto;">
+
+<!-- Image with title -->
+<img src="image.jpg" alt="Description" title="Hover text">
+
+<!-- Figure with caption -->
+<figure>
+  <img src="diagram.jpg" alt="Process diagram">
+  <figcaption>Figure 1: Process flow diagram</figcaption>
+</figure>
+
+<!-- Video -->
+<video controls>
+  <source src="video.mp4" type="video/mp4">
+  <source src="video.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+
+<!-- Audio -->
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+```
+
+---
+
+## 📋 Lists
+
+```html
+<!-- Unordered list -->
+<ul>
+  <li>First item</li>
+  <li>Second item
+    <ul>
+      <li>Nested item</li>
+      <li>Another nested item</li>
+    </ul>
+  </li>
+  <li>Third item</li>
+</ul>
+
+<!-- Ordered list -->
+<ol>
+  <li>First step</li>
+  <li>Second step</li>
+  <li>Third step</li>
+</ol>
+
+<!-- Definition list -->
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+</dl>
+
+<!-- Menu list -->
+<menu>
+  <li><button onclick="save()">Save</button></li>
+  <li><button onclick="load()">Load</button></li>
+</menu>
+```
+
+---
+
+## 📊 Tables
+
+```html
+<table>
+  <caption>Employee Information</caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Doe</td>
+      <td>Developer</td>
+      <td>Engineering</td>
+    </tr>
+    <tr>
+      <td>Jane Smith</td>
+      <td>Designer</td>
+      <td>Design</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Total: 2 employees</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+---
+
+## 📝 Forms
+
+```html
+<form action="/submit" method="post">
+  <!-- Text input -->
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <!-- Email input -->
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+
+  <!-- Password input -->
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required>
+
+  <!-- Number input -->
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age" min="1" max="120">
+
+  <!-- Date input -->
+  <label for="birthdate">Birth Date:</label>
+  <input type="date" id="birthdate" name="birthdate">
+
+  <!-- Textarea -->
+  <label for="message">Message:</label>
+  <textarea id="message" name="message" rows="4" cols="50"></textarea>
+
+  <!-- Select dropdown -->
+  <label for="country">Country:</label>
+  <select id="country" name="country">
+    <option value="us">United States</option>
+    <option value="ca">Canada</option>
+    <option value="uk">United Kingdom</option>
+  </select>
+
+  <!-- Radio buttons -->
+  <fieldset>
+    <legend>Gender:</legend>
+    <label><input type="radio" name="gender" value="male"> Male</label>
+    <label><input type="radio" name="gender" value="female"> Female</label>
+  </fieldset>
+
+  <!-- Checkboxes -->
+  <fieldset>
+    <legend>Interests:</legend>
+    <label><input type="checkbox" name="interests" value="coding"> Coding</label>
+    <label><input type="checkbox" name="interests" value="design"> Design</label>
+    <label><input type="checkbox" name="interests" value="writing"> Writing</label>
+  </fieldset>
+
+  <!-- File upload -->
+  <label for="file">Upload File:</label>
+  <input type="file" id="file" name="file" accept=".jpg,.png,.pdf">
+
+  <!-- Submit button -->
+  <button type="submit">Submit</button>
+
+  <!-- Reset button -->
+  <button type="reset">Reset</button>
+</form>
+```
+
+---
+
+## 🏷️ Semantic Elements
+
+```html
+<!-- Article content -->
+<article>
+  <header>
+    <h1>Article Title</h1>
+    <time datetime="2024-01-15">January 15, 2024</time>
+  </header>
+  <p>Article content...</p>
+  <footer>
+    <p>Article footer</p>
+  </footer>
+</article>
+
+<!-- Section of content -->
+<section>
+  <h2>Section Heading</h2>
+  <p>Section content...</p>
+</section>
+
+<!-- Aside content -->
+<aside>
+  <h3>Related Links</h3>
+  <ul>
+    <li><a href="#link1">Related Link 1</a></li>
+    <li><a href="#link2">Related Link 2</a></li>
+  </ul>
+</aside>
+
+<!-- Generic container -->
+<div class="container">
+  <p>Generic content block</p>
+</div>
+
+<!-- Generic span -->
+<span class="highlight">Highlighted text</span>
+```
+
+---
+
+## 🎨 Text Formatting
+
+```html
+<!-- Blockquotes -->
+<blockquote>
+  <p>This is a blockquote with multiple paragraphs.</p>
+  <p>It can contain other elements too.</p>
+  <cite>— Source Author</cite>
+</blockquote>
+
+<!-- Preformatted text -->
+<pre>
+  This text maintains
+  its formatting
+  and spacing.
+</pre>
+
+<!-- Code inline -->
+<p>Use the <code>console.log()</code> function for debugging.</p>
+
+<!-- Code block -->
+<pre><code>
+// Code example
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+</code></pre>
+
+<!-- Abbreviations -->
+<p>The <abbr title="World Wide Web Consortium">W3C</abbr> sets web standards.</p>
+
+<!-- Citations -->
+<p>As stated in <cite>The Art of War</cite>, strategy is key.</p>
+```
+
+---
+
+## 🔧 Meta Tags & SEO
+
+```html
+<head>
+  <!-- Basic meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO meta tags -->
+  <title>Page Title - Site Name</title>
+  <meta name="description" content="Brief description of the page content (150-160 characters)">
+  <meta name="keywords" content="keyword1, keyword2, keyword3">
+  <meta name="author" content="Author Name">
+
+  <!-- Open Graph meta tags (Facebook) -->
+  <meta property="og:title" content="Page Title">
+  <meta property="og:description" content="Description for social sharing">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:url" content="https://example.com/page">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card meta tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page Title">
+  <meta name="twitter:description" content="Description for Twitter">
+  <meta name="twitter:image" content="https://example.com/image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- External resources -->
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+```
+
+---
+
+## 🎯 Interactive Elements
+
+```html
+<!-- Button -->
+<button type="button" onclick="alert('Hello!')">Click Me</button>
+
+<!-- Details/Summary (collapsible content) -->
+<details>
+  <summary>Click to expand</summary>
+  <p>Hidden content that can be revealed.</p>
+</details>
+
+<!-- Progress bar -->
+<label for="progress">Progress:</label>
+<progress id="progress" value="70" max="100">70%</progress>
+
+<!-- Meter (gauge) -->
+<label for="meter">Storage used:</label>
+<meter id="meter" value="0.8" min="0" max="1" low="0.2" high="0.8" optimum="0.5">
+  80%
+</meter>
+
+<!-- Dialog/Modal -->
+<dialog id="modal">
+  <h2>Modal Title</h2>
+  <p>Modal content...</p>
+  <button onclick="modal.close()">Close</button>
+</dialog>
+<button onclick="modal.showModal()">Open Modal</button>
+```
+
+---
+
+## 📱 Responsive Design
+
+```html
+<!-- Responsive images -->
+<img src="image.jpg" alt="Responsive image"
+     srcset="image-480w.jpg 480w,
+             image-768w.jpg 768w,
+             image-1024w.jpg 1024w"
+     sizes="(max-width: 480px) 100vw,
+            (max-width: 768px) 80vw,
+            50vw">
+
+<!-- Responsive video -->
+<video controls>
+  <source media="(min-width: 768px)" src="video-large.mp4">
+  <source media="(max-width: 767px)" src="video-small.mp4">
+</video>
+
+<!-- Picture element -->
+<picture>
+  <source media="(min-width: 768px)" srcset="image-large.jpg">
+  <source media="(max-width: 767px)" srcset="image-small.jpg">
+  <img src="image-fallback.jpg" alt="Responsive image">
+</picture>
+```
+
+---
+
+## ♿ Accessibility
+
+```html
+<!-- Semantic headings -->
+<h1>Main heading</h1>
+<h2>Subheading</h2>
+<h3>Sub-subheading</h3>
+
+<!-- Alt text for images -->
+<img src="logo.png" alt="Company Logo">
+
+<!-- Labels for form inputs -->
+<label for="email">Email Address:</label>
+<input type="email" id="email" name="email">
+
+<!-- ARIA attributes -->
+<button aria-label="Close menu" aria-expanded="false">
+  <span aria-hidden="true">×</span>
+</button>
+
+<!-- Skip links -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Focus management -->
+<button autofocus>Auto-focused button</button>
+
+<!-- Screen reader only content -->
+<span class="sr-only">This text is only visible to screen readers</span>
+```
+
+---
+
+## 🚀 HTML5 APIs & Features
+
+```html
+<!-- Geolocation -->
+<button onclick="getLocation()">Get Location</button>
+<script>
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+}
+</script>
+
+<!-- Local Storage -->
+<script>
+  // Store data
+  localStorage.setItem('username', 'john_doe');
+
+  // Retrieve data
+  const username = localStorage.getItem('username');
+
+  // Remove data
+  localStorage.removeItem('username');
+
+  // Clear all data
+  localStorage.clear();
+</script>
+
+<!-- Canvas for drawing -->
+<canvas id="myCanvas" width="400" height="200">
+  Your browser does not support HTML5 Canvas.
+</canvas>
+<script>
+  const canvas = document.getElementById('myCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(10, 10, 100, 100);
+</script>
+
+<!-- Drag and Drop -->
+<div id="drop-zone" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+  Drop files here
+</div>
+<script>
+  function dropHandler(ev) {
+    ev.preventDefault();
+    // Handle dropped files
+  }
+</script>
+```
+
+---
+
+## 📋 HTML Entities
+
+```html
+<!-- Common entities -->
+&nbsp;   <!-- Non-breaking space -->
+&lt;     <!-- Less than (<) -->
+&gt;     <!-- Greater than (>) -->
+&amp;     <!-- Ampersand (&) -->
+&quot;     <!-- Double quote (") -->
+&apos;     <!-- Single quote (') -->
+&copy;  <!-- Copyright (©) -->
+&reg;   <!-- Registered trademark (®) -->
+&trade; <!-- Trademark (™) -->
+&hellip; <!-- Horizontal ellipsis (…) -->
+&mdash;  <!-- Em dash (—) -->
+&ndash;  <!-- En dash (–) -->
+&bull;  <!-- Bullet (•) -->
+&deg;   <!-- Degree (°) -->
+&frac12; <!-- Fraction 1/2 (½) -->
+```
+
+---
+
+## 🔍 Quick Reference
+
+### **DOCTYPE & Basic Structure**
+- `<!DOCTYPE html>` - HTML5 document type
+- `<html>` - Root element
+- `<head>` - Document head
+- `<body>` - Document body
+
+### **Text Content**
+- `<h1>`-`<h6>` - Headings
+- `<p>` - Paragraph
+- `<br>` - Line break
+- `<hr>` - Horizontal rule
+
+### **Links & Media**
+- `<a>` - Hyperlink
+- `<img>` - Image
+- `<video>` - Video
+- `<audio>` - Audio
+
+### **Lists**
+- `<ul>` - Unordered list
+- `<ol>` - Ordered list
+- `<li>` - List item
+- `<dl>` - Definition list
+
+### **Forms**
+- `<form>` - Form container
+- `<input>` - Input field
+- `<textarea>` - Multi-line text
+- `<select>` - Dropdown
+- `<button>` - Button
+
+### **Semantic Elements**
+- `<header>` - Header content
+- `<nav>` - Navigation
+- `<main>` - Main content
+- `<article>` - Article content
+- `<section>` - Section
+- `<aside>` - Sidebar content
+- `<footer>` - Footer content
+
+---
+
+**Happy coding with HTML! 🎉**

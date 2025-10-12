@@ -11,56 +11,63 @@ export default function Home(): ReactNode {
   const categories = [
     {
       name: 'HTML',
-      href: '/html',
+      href: '/docs/html',
       icon: '/img/skills/Html.png',
       description:
         'Complete HTML guide from basics to advanced: semantic markup, forms, accessibility, Canvas, SVG, Web Components, and SEO.',
     },
     {
       name: 'JavaScript',
-      href: '/javascript',
+      href: '/docs/javascript',
       icon: '/img/skills/JavaScript.png',
       description:
         'Master JavaScript fundamentals, ES6+, DOM manipulation, async programming, design patterns, and modern development practices.',
     },
     {
       name: 'TypeScript',
-      href: '/typescript',
+      href: '/docs/typescript',
       icon: '/img/skills/TypeScript.png',
       description:
         'Type-safe JavaScript with interfaces, generics, advanced types, and scalable application development.',
     },
     {
       name: 'React',
-      href: '/react',
+      href: '/docs/react',
       icon: '/img/skills/React.png',
       description:
         'Modern React development: hooks, components, state management, Context API, and advanced patterns.',
     },
     {
       name: 'CSS',
-      href: '/css',
+      href: '/docs/css',
       icon: '/img/skills/Css.png',
       description:
         'Complete CSS mastery: layouts, animations, responsive design, Flexbox, Grid, and modern CSS features.',
     },
     {
-      name: 'Interviews',
-      href: '/interviews',
+      name: 'Node.js',
+      href: '/docs/cheatsheets/nodejs',
       icon: '/img/skills/NodeJS.png',
       description:
-        'Comprehensive interview preparation for JavaScript, React, TypeScript, HTML, CSS, and system design.',
+        'Server-side JavaScript with Express.js, APIs, databases, authentication, and scalable backend development.',
+    },
+    {
+      name: 'Interviews',
+      href: '/docs/interviews',
+      icon: '/img/skills/NodeJS.png',
+      description:
+        'Comprehensive interview preparation for JavaScript, React, TypeScript, HTML, CSS, Node.js, and system design.',
     },
     {
       name: 'Git & GitHub',
-      href: '/cheatsheets/git',
+      href: '/docs/cheatsheets/git',
       icon: '/img/skills/Git.png',
       description:
         'Version control mastery: Git commands, GitHub workflows, collaboration, and DevOps best practices.',
     },
     {
       name: 'Linux',
-      href: '/cheatsheets/linux',
+      href: '/docs/cheatsheets/linux',
       icon: '/img/skills/Linux.png',
       description:
         'Linux system administration: commands, server management, shell scripting, and development environments.',
@@ -81,10 +88,11 @@ export default function Home(): ReactNode {
       tag: 'React',
     },
     {
-      title: 'JavaScript Hoisting Explained',
-      description: 'Understanding hoisting behavior for variables and functions.',
-      href: '/blog/javascript-hoisting',
-      tag: 'JavaScript',
+      title: 'Understanding useEffect Hook in React',
+      description:
+        'Learn how useEffect works in React with practical examples and common pitfalls.',
+      href: '/blog/react-useeffect-hook',
+      tag: 'React',
     },
   ];
 
@@ -93,7 +101,7 @@ export default function Home(): ReactNode {
       icon: '📚',
       title: 'Complete Documentation',
       description:
-        '87+ comprehensive documentation pages covering HTML, JavaScript, CSS, React, and TypeScript from basics to advanced.',
+        '111+ comprehensive documentation pages covering HTML, JavaScript, CSS, React, and TypeScript from basics to advanced.',
     },
     {
       icon: '💡',
@@ -127,25 +135,31 @@ export default function Home(): ReactNode {
   ];
 
   const stats = [
-    { value: '87+', label: 'Documentation Pages' },
+    { value: '111+', label: 'Documentation Pages' },
     { value: '300+', label: 'Interview Questions' },
     { value: '8+', label: 'Blog Posts' },
-    { value: '6+', label: 'Cheat Sheets' },
+    { value: '10+', label: 'Cheat Sheets' },
   ];
 
   const hubs = [
     {
+      name: 'Documentation',
+      href: '/docs',
+      icon: '📚',
+      description: 'Comprehensive tutorials and guides for web development technologies.',
+    },
+    {
       name: 'Interview Hub',
-      href: '/interviews',
+      href: '/docs/interviews',
       icon: '💼',
-      description: 'Curated interview questions for JavaScript, React, TypeScript, and more.',
+      description: '300+ curated interview questions for JavaScript, React, TypeScript, and more.',
     },
     {
       name: 'Cheat Sheets',
-      href: '/cheatsheets',
+      href: '/docs/cheatsheets',
       icon: '📝',
       description:
-        'Quick reference guides for programming languages, Git, tools, and productivity.',
+        '10+ quick reference guides for programming languages, Git, tools, and productivity.',
     },
   ];
 
@@ -170,7 +184,7 @@ export default function Home(): ReactNode {
               insights.
             </p>
             <div className={styles.buttonGroup}>
-              <Link className={styles.btnPrimary} href='/javascript'>
+              <Link className={styles.btnPrimary} href='/docs'>
                 🚀 Start Learning
               </Link>
               <Link className={styles.btnSecondary} to='/blog'>
@@ -292,7 +306,7 @@ export default function Home(): ReactNode {
               with CodeScrolls. Start your journey today &ndash; it&apos;s completely free!
             </p>
             <div className={styles.ctaButtons}>
-              <Link className={styles.btnPrimary} href='/javascript'>
+              <Link className={styles.btnPrimary} href='/docs/javascript'>
                 Get Started Now
               </Link>
               <Link
