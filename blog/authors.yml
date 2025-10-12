@@ -1,6 +1,9 @@
 praveen:
   name: Praveen Singh
   title: Full Stack Developer
+  bio: Passionate full-stack developer specializing in modern web technologies, DevOps practices, and scalable application architecture. Loves sharing knowledge through open-source contributions and technical writing.
+  location: India
+  company: DreamStorey - Freelance Developer & Technical Writer
   url: https://linkedin.com/in/praveenskg
   image_url: https://github.com/praveenskg.png
   page: true

@@ -212,3 +212,133 @@ development:
   label: Development
   permalink: /development
   description: Software development methodologies and processes
+
+# Docker & Containerization
+docker:
+  label: Docker
+  permalink: /docker
+  description: Containerization, Docker, and container orchestration
+
+containers:
+  label: Containers
+  permalink: /containers
+  description: Container technology and management
+
+devops:
+  label: DevOps
+  permalink: /devops
+  description: Development Operations, CI/CD, and automation
+
+containerization:
+  label: Containerization
+  permalink: /containerization
+  description: Application containerization techniques
+
+dockerfile:
+  label: Dockerfile
+  permalink: /dockerfile
+  description: Docker image creation and Dockerfile best practices
+
+docker-compose:
+  label: Docker Compose
+  permalink: /docker-compose
+  description: Multi-container applications with Docker Compose
+
+# Database & Data Management
+database:
+  label: Database
+  permalink: /database
+  description: Database design, management, and optimization
+
+sql:
+  label: SQL
+  permalink: /sql
+  description: Structured Query Language and relational databases
+
+nosql:
+  label: NoSQL
+  permalink: /nosql
+  description: Non-relational databases and NoSQL solutions
+
+normalization:
+  label: Normalization
+  permalink: /normalization
+  description: Database normalization and data integrity
+
+indexing:
+  label: Indexing
+  permalink: /indexing
+  description: Database indexing strategies and performance
+
+performance:
+  label: Performance
+  permalink: /performance
+  description: Performance optimization and monitoring
+
+# CSS & Layout
+grid:
+  label: Grid
+  permalink: /grid
+  description: CSS Grid layout system
+
+flexbox:
+  label: Flexbox
+  permalink: /flexbox
+  description: CSS Flexible Box Layout
+
+layout:
+  label: Layout
+  permalink: /layout
+  description: Web page layout techniques and systems
+
+responsive:
+  label: Responsive
+  permalink: /responsive
+  description: Responsive web design and mobile-first approach
+
+# Git & Version Control
+workflow:
+  label: Workflow
+  permalink: /workflow
+  description: Development workflows and processes
+
+collaboration:
+  label: Collaboration
+  permalink: /collaboration
+  description: Team collaboration and development practices
+
+branching:
+  label: Branching
+  permalink: /branching
+  description: Git branching strategies and models
+
+version-control:
+  label: Version Control
+  permalink: /version-control
+  description: Version control systems and practices
+
+# JavaScript Async
+async:
+  label: Async
+  permalink: /async
+  description: Asynchronous programming patterns
+
+await:
+  label: Await
+  permalink: /await
+  description: Async/await syntax and usage
+
+asynchronous:
+  label: Asynchronous
+  permalink: /asynchronous
+  description: Asynchronous programming concepts
+
+callbacks:
+  label: Callbacks
+  permalink: /callbacks
+  description: Callback functions and patterns
+
+error-handling:
+  label: Error Handling
+  permalink: /error-handling
+  description: Error handling and exception management
