@@ -71,6 +71,13 @@ const cheatsheets = [
     description:
       'CSS selectors, properties, layouts, animations, responsive design, and modern CSS features.',
   },
+  {
+    title: 'SQL',
+    href: './cheatsheets/sql',
+    icon: '/img/skills/Supabase.png',
+    description:
+      'SQL queries, database design, joins, indexes, DDL/DML commands, and relational database best practices.',
+  },
 ];
 
 export default function CheatSheetGrid() {

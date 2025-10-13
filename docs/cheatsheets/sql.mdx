@@ -1,0 +1,799 @@
+---
+id: sql
+title: SQL Cheatsheet
+sidebar_label: SQL CheatSheet
+description: Essential SQL commands, database design, queries, joins, and best practices for relational databases
+keywords: [sql, database, mysql, postgresql, queries, joins, ddl, dml, database design]
+---
+
+import LiveCodeBlock from '@theme/LiveCodeBlock';
+
+# 🗄️ SQL Cheatsheet
+
+A comprehensive quick reference guide for SQL queries, database design, and relational database management.
+
+---
+
+:::info
+SQL (Structured Query Language) is the standard language for managing relational databases. This cheatsheet covers essential commands for MySQL, PostgreSQL, SQLite, and other SQL databases.
+:::
+
+## 🏗️ Database Basics
+
+### **Connecting to Database**
+```bash
+# MySQL
+mysql -h hostname -u username -p database_name
+
+# PostgreSQL
+psql -h hostname -U username -d database_name
+
+# SQLite (file-based)
+sqlite3 database.db
+```
+
+### **Database Operations**
+```sql
+-- Create database
+CREATE DATABASE mydatabase;
+
+-- Use/switch database
+USE mydatabase;  -- MySQL
+\c mydatabase;   -- PostgreSQL
+
+-- Show databases
+SHOW DATABASES;  -- MySQL
+\l               -- PostgreSQL
+
+-- Drop database
+DROP DATABASE mydatabase;
+```
+
+---
+
+## 📋 Data Definition Language (DDL)
+
+### **Creating Tables**
+```sql
+-- Basic table creation
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,  -- MySQL
+    -- id SERIAL PRIMARY KEY,           -- PostgreSQL
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    age INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table with constraints
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    status ENUM('pending', 'processing', 'shipped', 'delivered') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Foreign key constraint
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+
+    -- Check constraint
+    CONSTRAINT check_total CHECK (total > 0)
+);
+```
+
+### **Altering Tables**
+```sql
+-- Add column
+ALTER TABLE users ADD COLUMN phone VARCHAR(20);
+
+-- Modify column
+ALTER TABLE users MODIFY COLUMN email VARCHAR(300);  -- MySQL
+ALTER TABLE users ALTER COLUMN email TYPE VARCHAR(300);  -- PostgreSQL
+
+-- Rename column
+ALTER TABLE users RENAME COLUMN name TO full_name;  -- MySQL
+ALTER TABLE users RENAME name TO full_name;  -- PostgreSQL
+
+-- Drop column
+ALTER TABLE users DROP COLUMN phone;
+
+-- Add constraints
+ALTER TABLE users ADD CONSTRAINT unique_email UNIQUE (email);
+ALTER TABLE users ADD FOREIGN KEY (department_id) REFERENCES departments(id);
+```
+
+### **Dropping Tables**
+```sql
+-- Drop table
+DROP TABLE users;
+
+-- Drop table if exists
+DROP TABLE IF EXISTS users;
+
+-- Drop with cascade (removes dependent objects)
+DROP TABLE users CASCADE;
+```
+
+### **Indexes**
+```sql
+-- Create index
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_name_email ON users(name, email);
+
+-- Unique index
+CREATE UNIQUE INDEX idx_users_username ON users(username);
+
+-- Drop index
+DROP INDEX idx_users_email;  -- MySQL
+DROP INDEX idx_users_email;  -- PostgreSQL (different syntax might apply)
+```
+
+---
+
+## 🔍 Data Query Language (DQL)
+
+### **Basic SELECT Statements**
+```sql
+-- Select all columns
+SELECT * FROM users;
+
+-- Select specific columns
+SELECT name, email FROM users;
+
+-- Select with column aliases
+SELECT name AS full_name, email AS user_email FROM users;
+
+-- Select distinct values
+SELECT DISTINCT status FROM orders;
+
+-- Select with expressions
+SELECT name, age, age * 2 AS double_age FROM users;
+```
+
+### **WHERE Clause**
+```sql
+-- Basic conditions
+SELECT * FROM users WHERE age > 18;
+SELECT * FROM users WHERE status = 'active';
+
+-- Multiple conditions
+SELECT * FROM users WHERE age >= 18 AND status = 'active';
+SELECT * FROM users WHERE age < 18 OR status = 'inactive';
+
+-- IN operator
+SELECT * FROM users WHERE id IN (1, 2, 3, 4);
+SELECT * FROM products WHERE category IN ('electronics', 'books');
+
+-- BETWEEN operator
+SELECT * FROM users WHERE age BETWEEN 18 AND 65;
+SELECT * FROM orders WHERE created_at BETWEEN '2024-01-01' AND '2024-12-31';
+
+-- LIKE operator (pattern matching)
+SELECT * FROM users WHERE name LIKE 'John%';      -- Starts with John
+SELECT * FROM users WHERE email LIKE '%@gmail.com'; -- Ends with @gmail.com
+SELECT * FROM users WHERE name LIKE '%John%';     -- Contains John
+
+-- NULL checks
+SELECT * FROM users WHERE phone IS NULL;
+SELECT * FROM users WHERE phone IS NOT NULL;
+```
+
+### **ORDER BY Clause**
+```sql
+-- Single column sorting
+SELECT * FROM users ORDER BY name ASC;
+SELECT * FROM users ORDER BY created_at DESC;
+
+-- Multiple column sorting
+SELECT * FROM users ORDER BY last_name ASC, first_name ASC;
+
+-- Sort by expression
+SELECT * FROM users ORDER BY LENGTH(name) DESC;
+```
+
+### **LIMIT and OFFSET**
+```sql
+-- Limit results
+SELECT * FROM users LIMIT 10;
+
+-- Pagination
+SELECT * FROM users ORDER BY id LIMIT 10 OFFSET 20;  -- Page 3 (21-30)
+
+-- Top N records
+SELECT * FROM users ORDER BY score DESC LIMIT 5;
+```
+
+---
+
+## 🔗 JOIN Operations
+
+### **INNER JOIN**
+```sql
+-- Basic inner join
+SELECT users.name, orders.total, orders.status
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;
+
+-- Multiple joins
+SELECT u.name, o.total, p.name AS product_name
+FROM users u
+INNER JOIN orders o ON u.id = o.user_id
+INNER JOIN order_items oi ON o.id = oi.order_id
+INNER JOIN products p ON oi.product_id = p.id;
+```
+
+### **LEFT JOIN (LEFT OUTER JOIN)**
+```sql
+-- Users with their orders (including users with no orders)
+SELECT u.name, o.total, o.status
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id;
+
+-- Find users with no orders
+SELECT u.name
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE o.id IS NULL;
+```
+
+### **RIGHT JOIN (RIGHT OUTER JOIN)**
+```sql
+-- All orders with user info (including orders with missing users)
+SELECT u.name, o.total
+FROM users u
+RIGHT JOIN orders o ON u.id = o.user_id;
+```
+
+### **FULL OUTER JOIN**
+```sql
+-- All records from both tables
+SELECT u.name, o.total
+FROM users u
+FULL OUTER JOIN orders o ON u.id = o.user_id;
+```
+
+### **CROSS JOIN**
+```sql
+-- Cartesian product (all combinations)
+SELECT u.name, p.name AS product_name
+FROM users u
+CROSS JOIN products p;
+```
+
+### **Self JOIN**
+```sql
+-- Employees and their managers
+SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.id;
+```
+
+---
+
+## 📊 Aggregate Functions & GROUP BY
+
+### **Aggregate Functions**
+```sql
+-- COUNT
+SELECT COUNT(*) FROM users;                    -- Total users
+SELECT COUNT(DISTINCT email) FROM users;       -- Unique emails
+SELECT COUNT(*) FROM users WHERE active = true; -- Active users
+
+-- SUM
+SELECT SUM(salary) FROM employees;
+SELECT SUM(quantity * price) AS total_revenue FROM order_items;
+
+-- AVG
+SELECT AVG(age) FROM users;
+SELECT AVG(salary) FROM employees WHERE department = 'IT';
+
+-- MIN/MAX
+SELECT MIN(price) AS cheapest, MAX(price) AS expensive FROM products;
+SELECT MIN(created_at) AS first_order, MAX(created_at) AS last_order FROM orders;
+
+-- Other aggregates
+SELECT STDDEV(salary) AS salary_stddev FROM employees;
+SELECT VARIANCE(salary) AS salary_variance FROM employees;
+```
+
+### **GROUP BY Clause**
+```sql
+-- Group by single column
+SELECT department, COUNT(*) AS employee_count
+FROM employees
+GROUP BY department;
+
+-- Group by multiple columns
+SELECT department, job_title, COUNT(*) AS count
+FROM employees
+GROUP BY department, job_title;
+
+-- Group with aggregates
+SELECT
+    DATE(created_at) AS order_date,
+    COUNT(*) AS daily_orders,
+    SUM(total) AS daily_revenue
+FROM orders
+GROUP BY DATE(created_at)
+ORDER BY order_date DESC;
+```
+
+### **HAVING Clause**
+```sql
+-- Filter groups
+SELECT department, COUNT(*) AS employee_count
+FROM employees
+GROUP BY department
+HAVING COUNT(*) > 5;
+
+-- Complex HAVING conditions
+SELECT
+    customer_id,
+    SUM(total) AS total_spent,
+    COUNT(*) AS order_count
+FROM orders
+GROUP BY customer_id
+HAVING SUM(total) > 1000 AND COUNT(*) >= 3;
+```
+
+---
+
+## ✏️ Data Manipulation Language (DML)
+
+### **INSERT Statements**
+```sql
+-- Insert single row
+INSERT INTO users (name, email, age)
+VALUES ('John Doe', 'john@example.com', 30);
+
+-- Insert multiple rows
+INSERT INTO users (name, email, age) VALUES
+    ('Jane Smith', 'jane@example.com', 25),
+    ('Bob Johnson', 'bob@example.com', 35),
+    ('Alice Brown', 'alice@example.com', 28);
+
+-- Insert with subquery
+INSERT INTO user_logs (user_id, action, created_at)
+SELECT id, 'account_created', created_at
+FROM users
+WHERE created_at > '2024-01-01';
+```
+
+### **UPDATE Statements**
+```sql
+-- Update single column
+UPDATE users SET age = 31 WHERE id = 1;
+
+-- Update multiple columns
+UPDATE users
+SET name = 'John Smith', email = 'johnsmith@example.com'
+WHERE id = 1;
+
+-- Update with conditions
+UPDATE products
+SET price = price * 1.1
+WHERE category = 'electronics';
+
+-- Update with subquery
+UPDATE users
+SET last_login = NOW()
+WHERE id = (SELECT user_id FROM login_attempts ORDER BY created_at DESC LIMIT 1);
+```
+
+### **DELETE Statements**
+```sql
+-- Delete specific records
+DELETE FROM users WHERE id = 1;
+
+-- Delete with conditions
+DELETE FROM orders WHERE status = 'cancelled' AND created_at < '2024-01-01';
+
+-- Delete with subquery
+DELETE FROM users
+WHERE id NOT IN (
+    SELECT DISTINCT user_id FROM orders WHERE created_at > '2023-01-01'
+);
+
+-- Safe delete (check before deleting)
+DELETE FROM users WHERE active = false;
+```
+
+---
+
+## 🔧 Advanced SQL Features
+
+### **Subqueries**
+```sql
+-- Scalar subquery
+SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count
+FROM users;
+
+-- IN subquery
+SELECT * FROM products
+WHERE category_id IN (
+    SELECT id FROM categories WHERE name LIKE 'Electronics%'
+);
+
+-- EXISTS subquery
+SELECT * FROM users u
+WHERE EXISTS (
+    SELECT 1 FROM orders o WHERE o.user_id = u.id AND o.total > 100
+);
+
+-- Correlated subquery
+SELECT name,
+       (SELECT AVG(total) FROM orders WHERE user_id = users.id) AS avg_order
+FROM users;
+```
+
+### **Common Table Expressions (CTEs)**
+```sql
+-- Basic CTE
+WITH active_users AS (
+    SELECT * FROM users WHERE active = true
+)
+SELECT COUNT(*) FROM active_users;
+
+-- Recursive CTE (for hierarchical data)
+WITH RECURSIVE employee_hierarchy AS (
+    -- Base case
+    SELECT id, name, manager_id, 0 AS level
+    FROM employees
+    WHERE manager_id IS NULL
+
+    UNION ALL
+
+    -- Recursive case
+    SELECT e.id, e.name, e.manager_id, eh.level + 1
+    FROM employees e
+    JOIN employee_hierarchy eh ON e.manager_id = eh.id
+)
+SELECT * FROM employee_hierarchy ORDER BY level, name;
+```
+
+### **Window Functions**
+```sql
+-- ROW_NUMBER
+SELECT name, salary,
+       ROW_NUMBER() OVER (ORDER BY salary DESC) AS rank
+FROM employees;
+
+-- RANK and DENSE_RANK
+SELECT name, salary, department,
+       RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS dept_rank,
+       DENSE_RANK() OVER (ORDER BY salary DESC) AS overall_rank
+FROM employees;
+
+-- Running totals
+SELECT name, salary,
+       SUM(salary) OVER (ORDER BY salary DESC) AS running_total
+FROM employees;
+
+-- Moving averages
+SELECT date, sales,
+       AVG(sales) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS moving_avg
+FROM daily_sales;
+```
+
+---
+
+## 🔐 Data Control Language (DCL)
+
+### **User Management**
+```sql
+-- Create user
+CREATE USER 'app_user'@'localhost' IDENTIFIED BY 'password';  -- MySQL
+CREATE USER app_user WITH PASSWORD 'password';                -- PostgreSQL
+
+-- Grant permissions
+GRANT SELECT, INSERT, UPDATE ON mydatabase.* TO 'app_user'@'localhost';
+GRANT ALL PRIVILEGES ON DATABASE mydatabase TO app_user;
+
+-- Revoke permissions
+REVOKE DELETE ON mydatabase.* FROM 'app_user'@'localhost';
+
+-- Change password
+ALTER USER 'app_user'@'localhost' IDENTIFIED BY 'new_password';
+ALTER USER app_user PASSWORD 'new_password';
+
+-- Drop user
+DROP USER 'app_user'@'localhost';
+DROP USER app_user;
+```
+
+### **Transactions**
+```sql
+-- Start transaction
+START TRANSACTION;  -- MySQL
+BEGIN;             -- PostgreSQL
+
+-- Perform operations
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+
+-- Commit or rollback
+COMMIT;    -- Save changes
+ROLLBACK;  -- Undo changes
+
+-- Savepoints
+SAVEPOINT my_savepoint;
+-- ... operations ...
+ROLLBACK TO my_savepoint;
+```
+
+---
+
+## 📈 Database Design Patterns
+
+### **Normalization Examples**
+
+#### **First Normal Form (1NF)**
+```sql
+-- ❌ Not normalized
+CREATE TABLE user_contacts (
+    user_id INT,
+    name VARCHAR(100),
+    emails VARCHAR(500)  -- "email1,email2,email3"
+);
+
+-- ✅ 1NF Compliant
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE user_emails (
+    user_id INT,
+    email VARCHAR(255),
+    is_primary BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+```
+
+#### **Third Normal Form (3NF)**
+```sql
+-- ❌ Not normalized
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_name VARCHAR(100),
+    customer_city VARCHAR(50),    -- Depends on customer
+    product_name VARCHAR(100),
+    product_price DECIMAL(10,2),  -- Depends on product
+    quantity INT
+);
+
+-- ✅ 3NF Compliant
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    city VARCHAR(50)
+);
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10,2)
+);
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+```
+
+---
+
+## 🐛 Common SQL Problems & Solutions
+
+### **Performance Issues**
+```sql
+-- ❌ Slow query
+SELECT * FROM users WHERE UPPER(name) LIKE 'JOHN%';
+
+-- ✅ Optimized
+SELECT * FROM users WHERE name LIKE 'John%';
+
+-- ❌ Using SELECT *
+SELECT * FROM users WHERE active = true;
+
+-- ✅ Select only needed columns
+SELECT id, name, email FROM users WHERE active = true;
+
+-- ❌ No indexes on WHERE clauses
+SELECT * FROM orders WHERE customer_id = 123 AND created_at > '2024-01-01';
+
+-- ✅ Add composite index
+CREATE INDEX idx_orders_customer_date ON orders(customer_id, created_at);
+```
+
+### **Data Integrity Issues**
+```sql
+-- ❌ No foreign key constraints
+CREATE TABLE orders (
+    id INT PRIMARY KEY,
+    user_id INT  -- No constraint!
+);
+
+-- ✅ With constraints
+CREATE TABLE orders (
+    id INT PRIMARY KEY,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- ❌ NULL values in required fields
+INSERT INTO users (name) VALUES ('John');  -- email is NULL but required
+
+-- ✅ Check constraints
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    age INT CHECK (age >= 0 AND age <= 150)
+);
+```
+
+---
+
+## 🛠️ Database-Specific Syntax
+
+### **MySQL Specific**
+```sql
+-- Auto increment
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Full-text search
+ALTER TABLE articles ADD FULLTEXT(title, content);
+SELECT * FROM articles WHERE MATCH(title, content) AGAINST('database');
+
+-- LIMIT with OFFSET
+SELECT * FROM users LIMIT 10 OFFSET 20;
+```
+
+### **PostgreSQL Specific**
+```sql
+-- Serial auto increment
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- UUID generation
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE TABLE users (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- JSON operations
+CREATE TABLE user_profiles (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    profile_data JSONB
+);
+
+SELECT * FROM user_profiles WHERE profile_data->>'city' = 'New York';
+```
+
+### **SQLite Specific**
+```sql
+-- Autoincrement
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+);
+
+-- Date/time functions
+SELECT * FROM logs WHERE created_at >= datetime('now', '-1 day');
+
+-- Attach databases
+ATTACH DATABASE 'other.db' AS other;
+SELECT * FROM other.users;
+```
+
+---
+
+## 📊 Useful SQL Queries
+
+### **Analytics & Reporting**
+```sql
+-- Monthly sales report
+SELECT
+    DATE_FORMAT(created_at, '%Y-%m') AS month,
+    COUNT(*) AS orders_count,
+    SUM(total) AS total_revenue,
+    AVG(total) AS avg_order_value
+FROM orders
+WHERE created_at >= '2024-01-01'
+GROUP BY DATE_FORMAT(created_at, '%Y-%m')
+ORDER BY month;
+
+-- User engagement metrics
+SELECT
+    DATE(created_at) AS date,
+    COUNT(DISTINCT user_id) AS active_users,
+    COUNT(*) AS total_actions,
+    COUNT(*) / COUNT(DISTINCT user_id) AS actions_per_user
+FROM user_activity
+GROUP BY DATE(created_at)
+ORDER BY date DESC;
+
+-- Top products by revenue
+SELECT
+    p.name,
+    SUM(oi.quantity) AS total_quantity,
+    SUM(oi.quantity * oi.price) AS total_revenue
+FROM products p
+JOIN order_items oi ON p.id = oi.product_id
+JOIN orders o ON oi.order_id = o.id
+WHERE o.status = 'completed'
+GROUP BY p.id, p.name
+ORDER BY total_revenue DESC
+LIMIT 10;
+```
+
+### **Data Cleanup & Maintenance**
+```sql
+-- Remove duplicates
+DELETE FROM users
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM users
+    GROUP BY email
+);
+
+-- Archive old data
+INSERT INTO orders_archive
+SELECT * FROM orders WHERE created_at < '2023-01-01';
+
+DELETE FROM orders WHERE created_at < '2023-01-01';
+
+-- Update with JOIN
+UPDATE users u
+JOIN user_profiles p ON u.id = p.user_id
+SET u.last_login = p.last_activity
+WHERE p.last_activity > u.last_login;
+```
+
+---
+
+## 🎯 Best Practices
+
+### **Query Optimization**
+1. **Use EXPLAIN** to analyze query plans
+2. **Create appropriate indexes** for WHERE, JOIN, and ORDER BY clauses
+3. **Avoid SELECT *** in production
+4. **Use LIMIT** for large result sets
+5. **Prefer INNER JOIN** over complex subqueries when possible
+6. **Use UNION ALL** instead of UNION when duplicates aren't an issue
+
+### **Database Design**
+1. **Normalize** your data (1NF, 2NF, 3NF)
+2. **Use appropriate data types** (don't use VARCHAR for dates)
+3. **Add constraints** (NOT NULL, UNIQUE, CHECK, FOREIGN KEY)
+4. **Use meaningful naming conventions**
+5. **Plan for scalability** from the beginning
+
+### **Security**
+1. **Use parameterized queries** to prevent SQL injection
+2. **Grant minimal permissions** to database users
+3. **Regular backups** and testing restore procedures
+4. **Encrypt sensitive data** at rest and in transit
+5. **Monitor and audit** database activity
+
+### **Maintenance**
+1. **Regular VACUUM** (PostgreSQL) or OPTIMIZE (MySQL)
+2. **Monitor slow queries** and optimize them
+3. **Update statistics** for query planners
+4. **Plan for growth** - monitor disk space and performance
+
+---
+
+**🎉 Happy querying! Master these SQL fundamentals and you'll handle any database challenge!**
