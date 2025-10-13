@@ -16,23 +16,7 @@
     "description": "Page description"
   },
   "keywords": {
-    "message": [
-      "hojas de referencia",
-      "html",
-      "css",
-      "javascript",
-      "react",
-      "typescript",
-      "sql",
-      "database",
-      "api",
-      "rest",
-      "http",
-      "git",
-      "markdown",
-      "codescrolls",
-      "recursos para desarrolladores"
-    ],
+    "message": "hojas de referencia, html, css, javascript, react, typescript, sql, database, api, rest, http, git, markdown, codescrolls, recursos para desarrolladores",
     "description": "Page keywords"
   },
   "title.cheatsheets": {

@@ -12,19 +12,7 @@
     "description": "The description for the page"
   },
   "keywords": {
-    "message": [
-      "codescrolls",
-      "desarrollo web",
-      "documentos html",
-      "documentos css",
-      "documentos javascript",
-      "documentos react",
-      "documentos typescript",
-      "documentos nodejs",
-      "tutoriales de programación",
-      "recursos para desarrolladores",
-      "documentación de codificación"
-    ],
+    "message": "codescrolls, desarrollo web, documentos html, documentos css, documentos javascript, documentos react, documentos typescript, documentos nodejs, tutoriales de programación, recursos para desarrolladores, documentación de codificación",
     "description": "Keywords for SEO"
   },
   "link.javascript.title": {
