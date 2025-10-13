@@ -18,7 +18,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🚀 Added
 
 - **Major Release** of CodeScrolls v1.1.0 - Enhanced web development documentation platform
-- 🌍 **Internationalization (i18n)**: Multi-language support for English, Spanish, French, German, and Hindi
 - 🔒 **Security Policy**: Comprehensive SECURITY.md with vulnerability reporting guidelines
 - 💰 **Sponsorship Support**: FUNDING.yml for GitHub Sponsors integration
 - 📊 **Enhanced Analytics**: Google Analytics 4 and Vercel Analytics integration
@@ -149,11 +148,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme**: Custom CSS with dark mode and responsive design
 - **PWA**: @docusaurus/plugin-pwa for offline capability
 - **Analytics**: Google Analytics 4 + Vercel Analytics integration
-- **Internationalization**: Support for 5 languages (EN, ES, FR, DE, HI)
 
 ### 🎯 Key Features
 
-- **🌍 Multi-language Support**: Internationalization with 5 languages (EN, ES, FR, DE, HI)
 - **📱 Responsive Design**: Mobile-first approach with tablet optimization
 - **🌙 Theme Support**: Light/dark mode with Mermaid diagram integration
 - **🔍 Advanced Search**: Local full-text search with highlighting and performance
@@ -181,7 +178,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Zero Critical Vulnerabilities** with automated security scanning
 - **WCAG 2.1 AA Accessibility Compliance** throughout the site
 - **Mobile-First Responsive Design** with tablet optimization
-- **Multi-language Support** for 5 languages (English, Spanish, French, German, Hindi)
 
 ---
 
