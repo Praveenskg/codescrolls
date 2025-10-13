@@ -6,8 +6,13 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  quality-checks:
+    name: Code Quality Checks
     runs-on: ubuntu-latest
 
     strategy:
@@ -33,7 +38,48 @@ jobs:
       - name: Run Prettier check
         run: npx prettier --check .
 
+      - name: Security audit
+        run: npm audit --audit-level moderate
+        continue-on-error: true
+
+      - name: Check for outdated dependencies
+        run: npm outdated || true
+        continue-on-error: true
+
+  docs-validation:
+    name: Documentation Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate docs build
+        run: npm run build 2>&1 | tee build.log
+        env:
+          CI: true
+
+      - name: Check for broken links
+        run: |
+          if grep -q "broken links found" build.log; then
+            echo "⚠️  Broken links detected - check build output above"
+            grep -A 10 "broken links found" build.log || true
+          else
+            echo "✅ No broken links found"
+          fi
+        continue-on-error: true
+
   lint:
+    name: Code Linting
     runs-on: ubuntu-latest
 
     steps:
