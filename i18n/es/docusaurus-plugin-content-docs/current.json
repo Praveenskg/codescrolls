@@ -1,0 +1,78 @@
+{
+  "title": {
+    "message": "¡Bienvenido a la Documentación de CodeScrolls!",
+    "description": "The title in the navbar"
+  },
+  "sidebar_label": {
+    "message": "Resumen",
+    "description": "The label for the sidebar"
+  },
+  "description": {
+    "message": "Documentación completa de desarrollo web que cubre HTML, CSS, JavaScript, TypeScript, React, Node.js y herramientas modernas de desarrollo. Domina el desarrollo full-stack con guías profesionales.",
+    "description": "The description for the page"
+  },
+  "keywords": {
+    "message": [
+      "codescrolls",
+      "desarrollo web",
+      "documentos html",
+      "documentos css",
+      "documentos javascript",
+      "documentos react",
+      "documentos typescript",
+      "documentos nodejs",
+      "tutoriales de programación",
+      "recursos para desarrolladores",
+      "documentación de codificación"
+    ],
+    "description": "Keywords for SEO"
+  },
+  "link.javascript.title": {
+    "message": "JavaScript",
+    "description": "Title for JavaScript section"
+  },
+  "link.javascript.description": {
+    "message": "Sintaxis ES6+, programación asíncrona, manipulación del DOM, patrones de diseño y mejores prácticas modernas de JavaScript.",
+    "description": "Description for JavaScript section"
+  },
+  "link.react.title": {
+    "message": "React",
+    "description": "Title for React section"
+  },
+  "link.react.description": {
+    "message": "Componentes, JSX, props, state, eventos, hooks, gestión de estado, API Context y desarrollo moderno de React.",
+    "description": "Description for React section"
+  },
+  "link.typescript.title": {
+    "message": "TypeScript",
+    "description": "Title for TypeScript section"
+  },
+  "link.typescript.description": {
+    "message": "Seguridad de tipos, interfaces, genéricos, tipos de utilidad y desarrollo escalable de aplicaciones.",
+    "description": "Description for TypeScript section"
+  },
+  "link.html.title": {
+    "message": "HTML",
+    "description": "Title for HTML section"
+  },
+  "link.html.description": {
+    "message": "Marcado semántico, accesibilidad, formularios, multimedia, patrones de diseño receptivo.",
+    "description": "Description for HTML section"
+  },
+  "link.css.title": {
+    "message": "CSS",
+    "description": "Title for CSS section"
+  },
+  "link.css.description": {
+    "message": "Layouts, animaciones, Flexbox, Grid, diseño receptivo y técnicas modernas de estilo.",
+    "description": "Description for CSS section"
+  },
+  "link.nodejs.title": {
+    "message": "Node.js",
+    "description": "Title for Node.js section"
+  },
+  "link.nodejs.description": {
+    "message": "JavaScript del lado del servidor, Express.js, APIs, sistema de archivos y desarrollo backend esencial.",
+    "description": "Description for Node.js section"
+  }
+}
