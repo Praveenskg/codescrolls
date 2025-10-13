@@ -78,6 +78,13 @@ const cheatsheets = [
     description:
       'SQL queries, database design, joins, indexes, DDL/DML commands, and relational database best practices.',
   },
+  {
+    title: 'API/REST',
+    href: './cheatsheets/api',
+    icon: '/img/skills/NodeJS.png',
+    description:
+      'REST APIs, HTTP methods, status codes, authentication, API design patterns, and testing best practices.',
+  },
 ];
 
 export default function CheatSheetGrid() {

@@ -1,0 +1,870 @@
+---
+id: api
+title: API/REST Cheatsheet
+sidebar_label: API/REST CheatSheet
+description: Complete guide to REST APIs, HTTP methods, status codes, authentication, error handling, and API design best practices
+keywords: [api, rest, http, authentication, status codes, restful, api design, http methods, api testing]
+---
+
+import LiveCodeBlock from '@theme/LiveCodeBlock';
+
+# 🔗 API/REST Cheatsheet
+
+A comprehensive quick reference guide for REST APIs, HTTP protocols, authentication, and API design best practices.
+
+---
+
+:::info
+REST (Representational State Transfer) is the most common architectural style for building web APIs. This cheatsheet covers everything you need to design, consume, and test RESTful APIs.
+:::
+
+## 🌐 HTTP Methods
+
+### **Core HTTP Methods**
+```http
+GET     /users          # Retrieve data (safe, idempotent)
+POST    /users          # Create new resource (not idempotent)
+PUT     /users/123      # Update entire resource (idempotent)
+PATCH   /users/123      # Partial update (not idempotent)
+DELETE  /users/123      # Remove resource (idempotent)
+HEAD    /users          # Get headers only (safe, idempotent)
+OPTIONS /users          # Get allowed methods (safe, idempotent)
+```
+
+### **Method Properties**
+| Method | Safe | Idempotent | Cacheable |
+|--------|------|------------|-----------|
+| GET    | ✅   | ✅         | ✅        |
+| HEAD   | ✅   | ✅         | ✅        |
+| OPTIONS| ✅   | ✅         | ❌        |
+| PUT    | ❌   | ✅         | ❌        |
+| DELETE | ❌   | ✅         | ❌        |
+| POST   | ❌   | ❌         | ❌        |
+| PATCH  | ❌   | ❌         | ❌        |
+
+---
+
+## 📊 HTTP Status Codes
+
+### **1xx Informational**
+```http
+100 Continue           # Client should continue request
+101 Switching Protocols # Server switching protocols
+102 Processing         # Server processing request
+```
+
+### **2xx Success**
+```http
+200 OK                 # Request successful
+201 Created           # Resource created successfully
+202 Accepted          # Request accepted for processing
+203 Non-Authoritative Information # Response from cache
+204 No Content        # Success, no response body
+205 Reset Content     # Reset form/view
+206 Partial Content   # Partial response
+207 Multi-Status      # Multiple status codes
+208 Already Reported  # Already reported in DAV
+226 IM Used          # Instance manipulation used
+```
+
+### **3xx Redirection**
+```http
+300 Multiple Choices   # Multiple options available
+301 Moved Permanently  # Resource moved permanently
+302 Found             # Resource moved temporarily
+303 See Other         # See other location
+304 Not Modified      # Cached version still valid
+305 Use Proxy         # Use proxy (deprecated)
+307 Temporary Redirect # Temporary redirect (keep method)
+308 Permanent Redirect # Permanent redirect (keep method)
+```
+
+### **4xx Client Errors**
+```http
+400 Bad Request        # Invalid request syntax
+401 Unauthorized      # Authentication required
+402 Payment Required  # Payment needed
+403 Forbidden         # Access denied
+404 Not Found         # Resource doesn't exist
+405 Method Not Allowed # HTTP method not supported
+406 Not Acceptable    # Content type not acceptable
+407 Proxy Authentication Required # Proxy auth needed
+408 Request Timeout   # Request took too long
+409 Conflict          # Request conflicts with current state
+410 Gone              # Resource permanently removed
+411 Length Required   # Content-Length header missing
+412 Precondition Failed # Precondition failed
+413 Payload Too Large  # Request too large
+414 URI Too Long      # URI too long
+415 Unsupported Media Type # Media type not supported
+416 Range Not Satisfiable # Range invalid
+417 Expectation Failed # Expectation failed
+418 I'm a teapot      # April Fools joke
+421 Misdirected Request # Request misdirected
+422 Unprocessable Entity # Validation failed
+423 Locked            # Resource locked
+424 Failed Dependency # Dependency failed
+425 Too Early        # Too early
+426 Upgrade Required  # Protocol upgrade required
+428 Precondition Required # Precondition required
+429 Too Many Requests # Rate limited
+431 Request Header Fields Too Large # Headers too large
+451 Unavailable For Legal Reasons # Legal restrictions
+```
+
+### **5xx Server Errors**
+```http
+500 Internal Server Error  # Unexpected server error
+501 Not Implemented       # Feature not implemented
+502 Bad Gateway          # Upstream server error
+503 Service Unavailable   # Server temporarily down
+504 Gateway Timeout      # Upstream timeout
+505 HTTP Version Not Supported # HTTP version not supported
+506 Variant Also Negotiates # Variant negotiation error
+507 Insufficient Storage  # Storage full
+508 Loop Detected        # Infinite loop detected
+510 Not Extended         # Extension required
+511 Network Authentication Required # Network auth needed
+```
+
+---
+
+## 🔐 Authentication Methods
+
+### **API Key Authentication**
+```http
+# Query Parameter
+GET /api/users?api_key=your_api_key_here
+
+# Header
+X-API-Key: your_api_key_here
+Authorization: ApiKey your_api_key_here
+
+# Basic Auth (API Key as username)
+Authorization: Basic base64(api_key:)
+```
+
+### **Bearer Token (JWT)**
+```http
+# Most common for modern APIs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# Compact format
+Authorization: Bearer abc123def456
+```
+
+### **Basic Authentication**
+```http
+# Username:Password encoded in Base64
+Authorization: Basic dXNlcjpwYXNz
+
+# Example: user="admin", pass="secret"
+# Base64: YWRtaW46c2VjcmV0
+Authorization: Basic YWRtaW46c2VjcmV0
+```
+
+### **OAuth 2.0 Flow**
+```http
+# 1. Authorization Request
+GET /oauth/authorize?response_type=code&client_id=123&redirect_uri=https://app.com/callback&scope=read+write
+
+# 2. Authorization Code
+HTTP/1.1 302 Found
+Location: https://app.com/callback?code=abc123&state=xyz
+
+# 3. Token Exchange
+POST /oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code&code=abc123&redirect_uri=https://app.com/callback&client_id=123&client_secret=secret
+
+# 4. Token Response
+{
+  "access_token": "abc123",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "refresh123"
+}
+```
+
+### **Digest Authentication**
+```http
+# Challenge from server
+WWW-Authenticate: Digest realm="api@example.com", nonce="abc123", algorithm=MD5, qop="auth"
+
+# Client response
+Authorization: Digest username="user", realm="api@example.com", nonce="abc123", uri="/api/users", response="hash...", qop=auth, nc=00000001, cnonce="def456"
+```
+
+---
+
+## 📝 API Design Patterns
+
+### **RESTful Resource Naming**
+
+#### **Basic Resources**
+```http
+GET    /users           # List users
+GET    /users/123       # Get specific user
+POST   /users           # Create user
+PUT    /users/123       # Update user (full)
+PATCH  /users/123       # Update user (partial)
+DELETE /users/123       # Delete user
+```
+
+#### **Nested Resources**
+```http
+GET    /users/123/posts       # User's posts
+GET    /users/123/posts/456   # Specific post
+POST   /users/123/posts       # Create post for user
+PUT    /posts/456             # Update post (direct)
+DELETE /users/123/posts/456   # Delete user's post
+```
+
+#### **Actions on Resources**
+```http
+POST   /users/123/activate    # Action endpoints
+POST   /users/123/deactivate
+POST   /users/123/reset-password
+GET    /users/123/avatar      # Resource sub-components
+PUT    /users/123/avatar
+```
+
+### **Query Parameters**
+
+#### **Pagination**
+```http
+GET /users?page=1&limit=10&sort=name&order=asc
+GET /users?offset=20&limit=10
+GET /users?cursor=eyJpZCI6MTIzfQ==&limit=10
+```
+
+#### **Filtering**
+```http
+GET /users?status=active
+GET /users?age[gte]=18&age[lte]=65
+GET /users?role=admin,moderator
+GET /products?category=electronics&price_min=100&price_max=500
+GET /posts?published=true&author=john&tags=javascript,react
+```
+
+#### **Searching & Sorting**
+```http
+GET /users?search=john&fields=name,email,role
+GET /products?q=laptop&sort=price&order=desc
+GET /articles?tags=javascript&sort=published_at&order=desc
+```
+
+#### **Field Selection**
+```http
+GET /users?fields=id,name,email,created_at
+GET /users?include=posts,comments
+GET /users?exclude=password,deleted_at
+```
+
+### **Content Negotiation**
+
+#### **Accept Header**
+```http
+# Request specific format
+GET /users/123
+Accept: application/json
+
+GET /users/123
+Accept: application/xml
+
+GET /users/123
+Accept: text/csv
+```
+
+#### **Content-Type Header**
+```http
+# Specify request body format
+POST /users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+
+---
+
+## 📦 Request/Response Formats
+
+### **JSON API Response Structure**
+```json
+// Success Response
+{
+  "success": true,
+  "data": {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "created_at": "2024-01-15T10:30:00Z"
+  },
+  "message": "User retrieved successfully"
+}
+
+// Error Response
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid email format",
+    "details": [
+      {
+        "field": "email",
+        "value": "invalid-email",
+        "message": "Must be a valid email address"
+      }
+    ]
+  }
+}
+```
+
+### **List Response with Pagination**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 150,
+    "total_pages": 15,
+    "has_next": true,
+    "has_prev": false,
+    "next_url": "/api/users?page=2&limit=10",
+    "prev_url": null
+  }
+}
+```
+
+### **Error Response Formats**
+```json
+// Simple error
+{
+  "error": "Invalid credentials",
+  "code": 401
+}
+
+// Detailed error
+{
+  "error": {
+    "type": "AuthenticationError",
+    "code": "INVALID_CREDENTIALS",
+    "message": "The provided credentials are invalid",
+    "details": {
+      "reason": "password_mismatch"
+    }
+  }
+}
+
+// Multiple errors
+{
+  "errors": [
+    {
+      "field": "email",
+      "code": "INVALID_FORMAT",
+      "message": "Email must be valid"
+    },
+    {
+      "field": "password",
+      "code": "TOO_SHORT",
+      "message": "Password must be at least 8 characters"
+    }
+  ]
+}
+```
+
+---
+
+## 🧪 API Testing Tools
+
+### **cURL Commands**
+```bash
+# GET request
+curl -X GET "https://api.example.com/users" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Accept: application/json"
+
+# POST request
+curl -X POST "https://api.example.com/users" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John","email":"john@example.com"}'
+
+# PUT request
+curl -X PUT "https://api.example.com/users/123" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","email":"john@example.com"}'
+
+# DELETE request
+curl -X DELETE "https://api.example.com/users/123" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+
+# Upload file
+curl -X POST "https://api.example.com/upload" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "file=@/path/to/file.jpg" \
+  -F "description=Profile picture"
+
+# Verbose output
+curl -v -X GET "https://api.example.com/users"
+```
+
+### **HTTPie Commands**
+```bash
+# Simple GET
+http GET https://api.example.com/users
+
+# With authentication
+http GET https://api.example.com/users \
+  Authorization:"Bearer YOUR_TOKEN"
+
+# POST with JSON
+http POST https://api.example.com/users \
+  name="John Doe" \
+  email="john@example.com"
+
+# POST with JSON file
+http POST https://api.example.com/users \
+  < user.json
+
+# Download file
+http --download GET https://api.example.com/files/document.pdf
+```
+
+### **Postman Collection Examples**
+```json
+{
+  "info": {
+    "name": "User Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{auth_token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/users?page={{page}}&limit={{limit}}",
+          "host": ["{{base_url}}"],
+          "path": ["users"],
+          "query": [
+            { "key": "page", "value": "{{page}}" },
+            { "key": "limit", "value": "{{limit}}" }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "https://api.example.com" },
+    { "key": "auth_token", "value": "" },
+    { "key": "page", "value": "1" },
+    { "key": "limit", "value": "10" }
+  ]
+}
+```
+
+---
+
+## ⚡ Performance & Caching
+
+### **HTTP Caching Headers**
+```http
+# Cache-Control directives
+Cache-Control: no-cache              # Revalidate before using
+Cache-Control: no-store              # Don't cache
+Cache-Control: max-age=3600          # Cache for 1 hour
+Cache-Control: private               # User-specific cache
+Cache-Control: public                # Shared cache allowed
+
+# ETags for conditional requests
+ETag: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
+
+# Last-Modified for conditional requests
+Last-Modified: Wed, 21 Oct 2023 07:28:00 GMT
+If-Modified-Since: Wed, 21 Oct 2023 07:28:00 GMT
+```
+
+### **Rate Limiting Headers**
+```http
+# Rate limit information
+X-RateLimit-Limit: 1000         # Max requests per hour
+X-RateLimit-Remaining: 950      # Remaining requests
+X-RateLimit-Reset: 1640995200   # Unix timestamp when limit resets
+X-RateLimit-Retry-After: 3600   # Seconds to wait
+
+# Retry-After for 429 responses
+Retry-After: 3600               # Seconds
+Retry-After: Wed, 21 Oct 2023 08:28:00 GMT  # Date
+```
+
+### **Compression**
+```http
+# Request compression
+Accept-Encoding: gzip, deflate, br
+
+# Response compression
+Content-Encoding: gzip
+Content-Length: 348
+
+# Vary header for content negotiation
+Vary: Accept-Encoding
+```
+
+---
+
+## 🛡️ Security Best Practices
+
+### **HTTPS Always**
+```http
+# Redirect HTTP to HTTPS
+HTTP/1.1 301 Moved Permanently
+Location: https://api.example.com/users
+
+# HSTS Header
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+```
+
+### **CORS Configuration**
+```http
+# CORS headers
+Access-Control-Allow-Origin: https://yourapp.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization, X-API-Key
+Access-Control-Allow-Credentials: true
+Access-Control-Max-Age: 86400
+
+# Preflight request
+OPTIONS /api/users HTTP/1.1
+Host: api.example.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: X-Custom-Header
+```
+
+### **Input Validation**
+```json
+// Whitelist validation
+{
+  "name": "John Doe",           // Required, string, max 100 chars
+  "email": "john@example.com",  // Required, valid email format
+  "age": 25,                    // Optional, integer, 13-120
+  "role": "user"                // Optional, enum: admin|moderator|user
+}
+
+// Sanitization examples
+{
+  "comment": "<script>alert('xss')</script>",  // Becomes: alert('xss')
+  "sql": "'; DROP TABLE users; --",           // Properly escaped
+  "path": "../../../etc/passwd"               // Normalized to safe path
+}
+```
+
+### **API Keys Security**
+```http
+# Never expose API keys in URLs
+❌ GET /api/data?api_key=secret123
+✅ GET /api/data
+   Authorization: Bearer secret123
+
+# Use environment variables
+API_KEY=your_secret_key_here
+DATABASE_URL=postgresql://user:pass@localhost/db
+
+# Rotate keys regularly
+OLD_KEY=old_key_here
+NEW_KEY=new_key_here
+EXPIRY_DATE=2024-12-31
+```
+
+---
+
+## 🔄 API Versioning
+
+### **URL Versioning**
+```http
+# Version in path
+GET /v1/users
+GET /v2/users
+
+# Subdomain versioning
+GET https://v1.api.example.com/users
+GET https://v2.api.example.com/users
+```
+
+### **Header Versioning**
+```http
+# Accept header
+GET /users
+Accept: application/vnd.api+json; version=1.0
+
+# Custom header
+GET /users
+X-API-Version: 1.0
+X-API-Version: 2023-01-01
+```
+
+### **Query Parameter Versioning**
+```http
+GET /users?version=1
+GET /users?api_version=2.1
+```
+
+### **Content-Type Versioning**
+```http
+# Media type versioning
+GET /users
+Accept: application/vnd.company.api.v1+json
+
+POST /users
+Content-Type: application/vnd.company.api.v1+json
+```
+
+---
+
+## 📚 Advanced API Patterns
+
+### **GraphQL vs REST**
+```graphql
+# GraphQL Query
+query GetUser($id: ID!) {
+  user(id: $id) {
+    name
+    email
+    posts {
+      title
+      content
+      comments {
+        author {
+          name
+        }
+        text
+      }
+    }
+  }
+}
+
+# Equivalent REST calls
+GET /users/123
+GET /users/123/posts
+GET /posts/456/comments
+GET /comments/789/author
+```
+
+### **Webhooks**
+```http
+# Webhook payload
+POST /webhooks/order-created
+Content-Type: application/json
+X-Webhook-Signature: sha256=abc123...
+
+{
+  "event": "order.created",
+  "data": {
+    "order_id": "ord_123",
+    "user_id": "usr_456",
+    "amount": 99.99,
+    "items": [...]
+  },
+  "timestamp": "2024-01-15T10:30:00Z"
+}
+```
+
+### **File Upload APIs**
+```http
+# Single file upload
+POST /upload/avatar
+Content-Type: multipart/form-data
+
+# Form data
+------boundary
+Content-Disposition: form-data; name="file"; filename="avatar.jpg"
+Content-Type: image/jpeg
+
+(binary data)
+------boundary--
+
+# Multiple files
+POST /upload/documents
+Content-Type: multipart/form-data
+
+# Response
+{
+  "success": true,
+  "files": [
+    {
+      "filename": "document1.pdf",
+      "url": "https://cdn.example.com/files/doc1.pdf",
+      "size": 1024000
+    }
+  ]
+}
+```
+
+---
+
+## 🧪 Testing Strategies
+
+### **API Testing Checklist**
+```bash
+# Status Code Testing
+✓ 200 OK for successful GET
+✓ 201 Created for successful POST
+✓ 204 No Content for successful DELETE
+✓ 400 Bad Request for invalid input
+✓ 401 Unauthorized for missing auth
+✓ 403 Forbidden for insufficient permissions
+✓ 404 Not Found for missing resources
+✓ 422 Unprocessable Entity for validation errors
+✓ 429 Too Many Requests for rate limiting
+✓ 500 Internal Server Error for server issues
+
+# Response Format Testing
+✓ JSON structure matches specification
+✓ Required fields are present
+✓ Data types are correct
+✓ Pagination works correctly
+✓ Error responses follow consistent format
+✓ CORS headers are set correctly
+✓ Content-Type headers are correct
+```
+
+### **Load Testing Commands**
+```bash
+# Apache Bench (simple load testing)
+ab -n 1000 -c 10 https://api.example.com/users
+
+# Siege (advanced load testing)
+siege -c 50 -t 30s https://api.example.com/users
+
+# cURL with timing
+curl -w "@curl-format.txt" -o /dev/null -s https://api.example.com/users
+```
+
+### **Monitoring & Observability**
+```http
+# Health check endpoint
+GET /health
+GET /health/ready
+GET /health/live
+
+# Metrics endpoint
+GET /metrics
+Content-Type: application/json
+
+{
+  "uptime": "86400s",
+  "requests_total": 15420,
+  "requests_per_second": 12.5,
+  "error_rate": 0.02,
+  "response_time_avg": 245,
+  "response_time_95p": 450
+}
+```
+
+---
+
+## 🎯 API Design Best Practices
+
+### **RESTful Principles**
+```http
+# 1. Use nouns for resources
+✅ GET /users/123/posts
+❌ GET /getUserPosts/123
+
+# 2. Use HTTP methods correctly
+✅ DELETE /users/123      # Delete user
+❌ GET /users/delete/123  # Wrong method
+
+# 3. Use plural nouns
+✅ GET /users
+❌ GET /user
+
+# 4. Use sub-resources for relationships
+✅ GET /users/123/posts
+❌ GET /posts?user_id=123
+
+# 5. Handle trailing slashes consistently
+✅ GET /users/123
+❌ GET /users/123/
+```
+
+### **Error Handling**
+```json
+// Consistent error format
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Request validation failed",
+    "details": [
+      {
+        "field": "email",
+        "code": "INVALID_FORMAT",
+        "message": "Must be a valid email address"
+      }
+    ],
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abc123",
+    "path": "/api/users"
+  }
+}
+```
+
+### **Documentation Standards**
+```yaml
+# OpenAPI/Swagger specification
+openapi: 3.0.0
+info:
+  title: User Management API
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      summary: Get users list
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+```
+
+---
+
+**🎉 Master these API patterns and you'll build robust, scalable web services that developers love to use! 🚀**
