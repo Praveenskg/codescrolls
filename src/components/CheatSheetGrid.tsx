@@ -64,6 +64,13 @@ const cheatsheets = [
     icon: '/img/skills/VSCode.png',
     description: 'VS Code shortcuts, extensions, debugging, customization, and productivity tips.',
   },
+  {
+    title: 'CSS',
+    href: './cheatsheets/css',
+    icon: '/img/skills/Css.png',
+    description:
+      'CSS selectors, properties, layouts, animations, responsive design, and modern CSS features.',
+  },
 ];
 
 export default function CheatSheetGrid() {
