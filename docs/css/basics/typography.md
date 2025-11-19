@@ -341,6 +341,46 @@ p {
 }
 ```
 
+### text-wrap
+
+Controls how text wraps within its container.
+
+```css
+/* Default wrapping */
+p {
+  text-wrap: wrap; /* Normal wrapping */
+}
+
+/* Prevent wrapping */
+.title {
+  text-wrap: nowrap;
+}
+
+/* Balance text (experimental) */
+.heading {
+  text-wrap: balance; /* Attempts to balance lines */
+}
+
+/* Pretty wrapping (experimental) */
+p {
+  text-wrap: pretty; /* Prevents orphans/widows */
+}
+```
+
+### text-box-trim
+
+Controls vertical spacing using font metrics.
+
+```css
+.heading {
+  text-box-trim: trim-both; /* Trim space above and below */
+  text-box-trim: trim-start; /* Trim space above */
+  text-box-trim: trim-end; /* Trim space below */
+}
+```
+
+**Browser Support**: Chrome 120+, Firefox (experimental), Safari (experimental)
+
 ### text-decoration
 
 ```css

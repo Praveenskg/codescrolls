@@ -182,6 +182,103 @@ CSS has **147 named colors** you can use directly.
 - **Saturation**: 0-100% (0% = gray, 100% = full color)
 - **Lightness**: 0-100% (0% = black, 50% = normal, 100% = white)
 
+### 5. Modern Color Functions
+
+#### color-mix()
+
+Blend two colors together dynamically.
+
+```css
+/* Mix two colors */
+.button {
+  background-color: color-mix(in srgb, blue 50%, red 50%);
+  /* Result: Purple */
+}
+
+/* Mix with percentages */
+.card {
+  background-color: color-mix(in srgb, white 80%, blue 20%);
+  /* Light blue */
+}
+
+/* Hover effect with color mixing */
+.button {
+  background-color: blue;
+}
+
+.button:hover {
+  background-color: color-mix(in srgb, blue 70%, white 30%);
+  /* Lighter blue on hover */
+}
+
+/* Mix with transparency */
+.overlay {
+  background-color: color-mix(in srgb, black 50%, transparent);
+}
+```
+
+**Color Spaces:**
+
+- `in srgb` - Standard RGB (default)
+- `in display-p3` - Wide gamut
+- `in lab` - Perceptually uniform
+- `in oklch` - Modern, perceptually uniform
+
+#### oklch() and lab()
+
+Modern, perceptually uniform color spaces.
+
+```css
+/* OKLCH - Lightness, Chroma, Hue */
+.element {
+  color: oklch(70% 0.15 250); /* Lightness, Chroma, Hue */
+  background-color: oklch(50% 0.2 180);
+}
+
+/* LAB - Lightness, a-axis, b-axis */
+.element {
+  color: lab(70% 20 -30);
+  background-color: lab(50% 10 40);
+}
+
+/* With alpha */
+.element {
+  color: oklch(70% 0.15 250 / 0.8); /* 80% opacity */
+}
+```
+
+**Benefits:**
+
+- Perceptually uniform (equal steps = equal perceived difference)
+- Better for color manipulation
+- Wider color gamut support
+
+#### Relative Color Syntax
+
+Modify colors relative to existing ones.
+
+```css
+:root {
+  --primary: #007bff;
+}
+
+/* Create variations */
+.button {
+  background-color: rgb(from var(--primary) r g b / 0.8);
+  /* Same color, different alpha */
+}
+
+.light-button {
+  background-color: oklch(from var(--primary) calc(l + 0.2) c h);
+  /* Lighter version */
+}
+
+.dark-button {
+  background-color: oklch(from var(--primary) calc(l - 0.2) c h);
+  /* Darker version */
+}
+```
+
 ---
 
 ## 🖌️ Text Colors

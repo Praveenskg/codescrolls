@@ -297,6 +297,115 @@ Define animation steps.
 
 ---
 
+## 🆕 View Transitions API
+
+The View Transitions API enables smooth animations between different page states
+or views, perfect for SPAs and dynamic content updates.
+
+### Basic View Transition
+
+```javascript
+// JavaScript: Start transition
+document.startViewTransition(() => {
+  // Update DOM
+  document.getElementById('content').innerHTML = newContent;
+});
+```
+
+```css
+/* CSS: Style the transition */
+::view-transition-old(root) {
+  animation: fade-out 0.3s ease;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+```
+
+### Named Transitions
+
+```javascript
+// JavaScript: Named transition
+document.startViewTransition(() => {
+  document.getElementById('card').style.viewTransitionName = 'card';
+  // Update content
+});
+```
+
+```css
+/* Style specific element transition */
+::view-transition-group(card) {
+  animation-duration: 0.5s;
+}
+
+::view-transition-old(card) {
+  animation: slide-out 0.5s ease;
+}
+
+::view-transition-new(card) {
+  animation: slide-in 0.5s ease;
+}
+```
+
+### Page Transitions (SPA)
+
+```javascript
+// Navigate with transition
+async function navigateToPage(url) {
+  if (!document.startViewTransition) {
+    // Fallback for browsers without support
+    location.href = url;
+    return;
+  }
+
+  document.startViewTransition(async () => {
+    const response = await fetch(url);
+    const html = await response.text();
+    document.body.innerHTML = html;
+  });
+}
+```
+
+```css
+/* Smooth page transitions */
+::view-transition-old(root) {
+  animation: slide-out-left 0.3s ease;
+}
+
+::view-transition-new(root) {
+  animation: slide-in-right 0.3s ease;
+}
+
+@keyframes slide-out-left {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+}
+```
+
+**Browser Support**: Chrome 111+, Edge 111+, Safari 18.0+
+
+---
+
 ## 🚀 What's Next?
 
 Now that you master animations, learn about **CSS Transforms**:

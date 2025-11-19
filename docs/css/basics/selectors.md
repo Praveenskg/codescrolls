@@ -705,39 +705,183 @@ Now that you understand selectors, learn about the **Box Model**:
 
 ---
 
+## 🆕 Modern Selectors
+
+### :has() Parent Selector
+
+The `:has()` pseudo-class selects parent elements based on their children.
+
+```css
+/* Select card that contains an image */
+.card:has(img) {
+  border: 2px solid blue;
+}
+
+/* Select form that has invalid input */
+form:has(input:invalid) {
+  border-color: red;
+}
+
+/* Select list item that has a link */
+li:has(a) {
+  font-weight: bold;
+}
+
+/* Select article that has h2 */
+article:has(h2) {
+  padding: 2rem;
+}
+
+/* Complex: Select parent with multiple conditions */
+.card:has(img:hover) {
+  transform: scale(1.05);
+}
+
+/* Select nav that has active link */
+nav:has(a.active) {
+  background-color: #f0f0f0;
+}
+
+/* Select container without specific child */
+.container:not(:has(.error)) {
+  border-color: green;
+}
+```
+
+**Browser Support**: Chrome 105+, Firefox 121+, Safari 15.4+
+
+### CSS Nesting
+
+Native CSS nesting allows cleaner, more maintainable stylesheets.
+
+```css
+/* Basic nesting */
+.card {
+  padding: 1rem;
+  background: white;
+
+  /* Nested selector */
+  .title {
+    font-size: 1.5rem;
+    color: #333;
+  }
+
+  .content {
+    margin-top: 1rem;
+  }
+
+  /* Pseudo-classes */
+  &:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Media queries */
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
+}
+
+/* Complex nesting */
+.button {
+  padding: 0.5rem 1rem;
+
+  &.primary {
+    background-color: blue;
+    color: white;
+  }
+
+  &.secondary {
+    background-color: gray;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .icon {
+    margin-right: 0.5rem;
+  }
+}
+
+/* Nesting with combinators */
+.nav {
+  ul {
+    list-style: none;
+
+    li {
+      display: inline-block;
+
+      a {
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+```
+
+**Browser Support**: Chrome 112+, Firefox 117+, Safari 16.5+
+
+**Note**: The `&` symbol represents the parent selector.
+
+---
+
 ## 📚 Quick Reference
 
 ```css
 /* Universal */
-* { }
+* {
+}
 
 /* Element */
-p { }
+p {
+}
 
 /* Class */
-.class-name { }
+.class-name {
+}
 
 /* ID */
-#id-name { }
+#id-name {
+}
 
 /* Attribute */
-[attribute] { }
-[attribute="value"] { }
+[attribute] {
+}
+[attribute='value'] {
+}
 
 /* Combinators */
-div p { }      /* Descendant */
-div > p { }    /* Child */
-h2 + p { }     /* Adjacent sibling */
-h2 ~ p { }     /* General sibling */
+div p {
+} /* Descendant */
+div > p {
+} /* Child */
+h2 + p {
+} /* Adjacent sibling */
+h2 ~ p {
+} /* General sibling */
 
 /* Pseudo-classes */
 :hover, :focus, :active
 :first-child, :last-child
 :nth-child(n)
+:has()         /* Parent selector */
 
 /* Pseudo-elements */
 ::before, ::after
 ::first-letter, ::first-line
+
+/* Nesting */
+.parent {
+  .child {
+  }
+  &:hover {
+  }
+}
 ```
 
 Master these selectors and you'll have precise control over your CSS! 🎯

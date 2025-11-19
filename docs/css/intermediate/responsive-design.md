@@ -364,6 +364,185 @@ h1 {
 
 ---
 
+## 🆕 Container Queries
+
+Container queries allow components to adapt based on their **container size**
+rather than the viewport, enabling true component-based responsive design.
+
+### Basic Container Queries
+
+```css
+/* Define container context */
+.card-container {
+  container-type: inline-size;
+  /* Or: container-type: size; (for both width and height) */
+}
+
+/* Query based on container width */
+@container (min-width: 400px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .card-image {
+    width: 200px;
+  }
+}
+
+@container (min-width: 600px) {
+  .card {
+    padding: 2rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+```
+
+### Named Containers
+
+```css
+/* Define named container */
+.sidebar {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+.main-content {
+  container-type: inline-size;
+  container-name: main;
+}
+
+/* Query specific container */
+@container sidebar (min-width: 300px) {
+  .widget {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container main (min-width: 800px) {
+  .article {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+```
+
+### Container Query Units
+
+```css
+.card-container {
+  container-type: inline-size;
+}
+
+.card {
+  /* Use container-relative units */
+  padding: 5cqw; /* 5% of container width */
+  font-size: 2cqh; /* 2% of container height */
+  margin: 1cqi; /* 1% of inline size (width in horizontal writing) */
+  border-radius: 0.5cqb; /* 0.5% of block size (height) */
+
+  /* cqw = container query width */
+  /* cqh = container query height */
+  /* cqi = container query inline-size */
+  /* cqb = container query block-size */
+  /* cqmin = smaller of cqi or cqb */
+  /* cqmax = larger of cqi or cqb */
+}
+```
+
+### Practical Example: Card Component
+
+```html
+<div class="card-container">
+  <div class="card">
+    <img src="image.jpg" alt="Card image" class="card-image" />
+    <div class="card-content">
+      <h3 class="card-title">Card Title</h3>
+      <p class="card-text">Card description text...</p>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.card-container {
+  container-type: inline-size;
+  width: 100%;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Mobile: Stack vertically */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Container is wide enough: Side by side */
+@container (min-width: 400px) {
+  .card {
+    flex-direction: row;
+  }
+
+  .card-image {
+    width: 200px;
+    height: auto;
+  }
+}
+
+/* Container is very wide: Larger layout */
+@container (min-width: 600px) {
+  .card {
+    padding: 2rem;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+```
+
+### Container Query vs Media Query
+
+```css
+/* Media Query: Based on viewport */
+@media (min-width: 768px) {
+  .card {
+    /* Changes when VIEWPORT is wide */
+  }
+}
+
+/* Container Query: Based on container */
+.card-wrapper {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    /* Changes when CONTAINER is wide */
+    /* Works even if viewport is narrow! */
+  }
+}
+```
+
+**Browser Support**: Chrome 105+, Firefox 110+, Safari 16.0+
+
+---
+
 ## ✅ Best Practices
 
 1. **Mobile-First Always**

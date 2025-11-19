@@ -159,6 +159,9 @@ levels:
 - ✅ **Modern CSS**: Latest features and standards
 - ✅ **SEO Optimized**: Find what you need quickly
 - ✅ **Mobile-First**: Responsive design focus
+- ✅ **Cutting-Edge Features**: Container Queries, :has(), Nesting, Subgrid, and
+  more
+- ✅ **Performance Optimized**: Modern CSS techniques for faster websites
 
 ## 🎓 Prerequisites
 

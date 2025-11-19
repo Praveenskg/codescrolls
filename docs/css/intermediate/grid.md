@@ -366,6 +366,116 @@ Align individual items.
 
 ---
 
+## 🆕 Subgrid
+
+Subgrid allows nested grid items to inherit the grid tracks from their parent
+grid, ensuring perfect alignment across nested components.
+
+### Basic Subgrid
+
+```css
+/* Parent grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+}
+
+/* Child grid inherits parent's columns */
+.grid-item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 3; /* Span all 3 columns */
+}
+
+/* Or inherit rows */
+.grid-item {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3; /* Span all 3 rows */
+}
+
+/* Inherit both */
+.grid-item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: subgrid;
+  grid-column: span 3;
+  grid-row: span 3;
+}
+```
+
+### Practical Example: Card Layout
+
+```html
+<div class="card-grid">
+  <div class="card">
+    <img src="image.jpg" alt="Card image" />
+    <h3>Card Title</h3>
+    <p>Card description...</p>
+    <button>Learn More</button>
+  </div>
+  <!-- More cards -->
+</div>
+```
+
+```css
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: subgrid; /* Inherit parent columns */
+  grid-column: span 1;
+  gap: 1rem;
+
+  img {
+    grid-row: 1;
+  }
+
+  h3 {
+    grid-row: 2;
+  }
+
+  p {
+    grid-row: 3;
+  }
+
+  button {
+    grid-row: 4;
+  }
+}
+```
+
+### Subgrid with Named Lines
+
+```css
+.parent-grid {
+  display: grid;
+  grid-template-columns: [start] 200px [content-start] 1fr [content-end] 200px [end];
+}
+
+.child-grid {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: start / end;
+
+  /* Child items can use parent's named lines */
+  .child-item {
+    grid-column: content-start / content-end;
+  }
+}
+```
+
+**Browser Support**: Chrome 117+, Firefox 117+, Safari 16.0+
+
+---
+
 ## 🚀 What's Next?
 
 Now that you understand Grid, learn about **Positioning**:
