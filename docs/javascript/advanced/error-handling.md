@@ -361,6 +361,101 @@ async function fetchAllData() {
 
 ---
 
+## 🆕 Explicit Resource Management (ES2025)
+
+The `using` keyword automatically disposes of resources when they go out of
+scope.
+
+### Basic Usage
+
+```js
+// Resource with Symbol.dispose
+class FileHandle {
+  constructor(filename) {
+    this.filename = filename;
+  }
+
+  [Symbol.dispose]() {
+    console.log(`Closing file: ${this.filename}`);
+    // Close file, release resources
+  }
+}
+
+// Automatic disposal
+{
+  using file = new FileHandle('data.txt');
+  // Use file...
+  file.read();
+} // File automatically closed here!
+
+// Multiple resources
+{
+  using file1 = new FileHandle('file1.txt');
+  using file2 = new FileHandle('file2.txt');
+  // Both disposed in reverse order
+}
+```
+
+### Async Disposal
+
+```js
+class DatabaseConnection {
+  constructor(url) {
+    this.url = url;
+  }
+
+  async [Symbol.asyncDispose]() {
+    console.log('Closing database connection');
+    await this.close();
+  }
+}
+
+// Async disposal
+{
+  await using db = new DatabaseConnection('postgres://...');
+  await db.query('SELECT * FROM users');
+} // Connection automatically closed
+```
+
+### Practical Example: File Operations
+
+```js
+class File {
+  constructor(path) {
+    this.path = path;
+    this.handle = null;
+  }
+
+  async open() {
+    this.handle = await openFile(this.path);
+    return this;
+  }
+
+  async read() {
+    return await this.handle.read();
+  }
+
+  async [Symbol.asyncDispose]() {
+    if (this.handle) {
+      await this.handle.close();
+      console.log(`File ${this.path} closed`);
+    }
+  }
+}
+
+// Automatic cleanup
+async function processFile() {
+  await using file = await new File('data.txt').open();
+  const content = await file.read();
+  return content;
+  // File automatically closed even if error occurs
+}
+```
+
+**Browser Support**: Chrome 120+, Firefox (experimental), Safari (experimental)
+
+---
+
 ## 📚 Practical Examples
 
 ### Example 1: Form Validation

@@ -607,6 +607,71 @@ console.log(results); // Actual results
 
 ---
 
+## 🆕 Top-Level Await
+
+Use `await` at the module top level without wrapping in async functions.
+
+### Basic Usage
+
+```js
+// config.js
+// Fetch configuration before module loads
+const response = await fetch('/api/config');
+const config = await response.json();
+
+export default config;
+```
+
+```js
+// main.js
+import config from './config.js';
+
+// Config is already loaded!
+console.log('API URL:', config.apiUrl);
+```
+
+### Loading Dependencies
+
+```js
+// data.js
+const data = await import('./data.json', {
+  with: { type: 'json' },
+});
+
+export const users = data.default.users;
+```
+
+### Error Handling
+
+```js
+// app.js
+let config;
+
+try {
+  config = await fetch('/api/config').then(r => r.json());
+} catch (error) {
+  console.error('Failed to load config:', error);
+  config = { apiUrl: 'http://localhost:3000' }; // Fallback
+}
+
+export default config;
+```
+
+### Conditional Loading
+
+```js
+// feature.js
+const feature = await import(condition ? './feature-a.js' : './feature-b.js');
+
+feature.default.init();
+```
+
+**Browser Support**: Chrome 89+, Firefox 89+, Safari 15.0+
+
+**Note**: Top-level await only works in ES modules (`type="module"`).
+
+---
+
 ## 🔗 What's Next?
 
 Learn about JavaScript Classes!

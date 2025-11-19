@@ -557,14 +557,130 @@ arr3.push(5);
 console.log(arr1); // [1, 2, 3, 4] - Unchanged
 ```
 
+### Modern Array Methods (ES2023+)
+
+#### toSorted() - Non-mutating Sort
+
+```js live
+const numbers = [3, 1, 4, 1, 5];
+
+// Old way: mutates original
+const sorted1 = [...numbers].sort();
+console.log('Sorted copy:', sorted1);
+console.log('Original:', numbers); // Unchanged
+
+// New way: returns new array
+const sorted2 = numbers.toSorted();
+console.log('toSorted:', sorted2);
+console.log('Original:', numbers); // Unchanged
+
+// With compare function
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+];
+const sortedByAge = users.toSorted((a, b) => a.age - b.age);
+console.log('Sorted by age:', sortedByAge);
+```
+
+#### toReversed() - Non-mutating Reverse
+
+```js live
+const arr = [1, 2, 3, 4, 5];
+
+// Old way: mutates
+const reversed1 = [...arr].reverse();
+console.log('Reversed copy:', reversed1);
+
+// New way: returns new array
+const reversed2 = arr.toReversed();
+console.log('toReversed:', reversed2);
+console.log('Original:', arr); // [1, 2, 3, 4, 5] - Unchanged!
+```
+
+#### groupBy() - Group Array Elements
+
+```js live
+const users = [
+  { name: 'Alice', role: 'admin' },
+  { name: 'Bob', role: 'user' },
+  { name: 'Charlie', role: 'admin' },
+  { name: 'David', role: 'user' },
+];
+
+// Group by role
+const grouped = users.groupBy(user => user.role);
+console.log(grouped);
+// {
+//   admin: [
+//     { name: 'Alice', role: 'admin' },
+//     { name: 'Charlie', role: 'admin' }
+//   ],
+//   user: [
+//     { name: 'Bob', role: 'user' },
+//     { name: 'David', role: 'user' }
+//   ]
+// }
+
+// Group by age range
+const people = [
+  { name: 'Alice', age: 25 },
+  { name: 'Bob', age: 30 },
+  { name: 'Charlie', age: 25 },
+  { name: 'David', age: 35 },
+];
+
+const byAge = people.groupBy(person => {
+  if (person.age < 30) return 'young';
+  return 'mature';
+});
+console.log(byAge);
+```
+
+**Browser Support**: Chrome 110+, Firefox 127+, Safari 16.0+
+
+### Modern Set Methods (ES2024+)
+
+```js live
+const setA = new Set([1, 2, 3, 4]);
+const setB = new Set([3, 4, 5, 6]);
+
+// Union - all elements from both sets
+const union = setA.union(setB);
+console.log('Union:', union); // Set {1, 2, 3, 4, 5, 6}
+
+// Intersection - elements in both sets
+const intersection = setA.intersection(setB);
+console.log('Intersection:', intersection); // Set {3, 4}
+
+// Difference - elements in A but not in B
+const difference = setA.difference(setB);
+console.log('Difference:', difference); // Set {1, 2}
+
+// Symmetric Difference - elements in either set but not both
+const symmetricDiff = setA.symmetricDifference(setB);
+console.log('Symmetric Difference:', symmetricDiff); // Set {1, 2, 5, 6}
+
+// Subset check
+const setC = new Set([2, 3]);
+console.log('Is subset:', setC.isSubsetOf(setA)); // true
+console.log('Is superset:', setA.isSupersetOf(setC)); // true
+
+// Disjoint check
+const setD = new Set([7, 8]);
+console.log('Is disjoint:', setA.isDisjointFrom(setD)); // true
+```
+
+**Browser Support**: Chrome 122+, Firefox 127+, Safari 17.0+
+
 ### Pitfall 2: Mutating Methods
 
 ```js
 // These mutate original:
 // sort, reverse, push, pop, shift, unshift, splice
 
-// These don't:
-// slice, map, filter, concat, spread
+// These don't (new non-mutating methods):
+// toSorted, toReversed, slice, map, filter, concat, spread
 ```
 
 ### Pitfall 3: Array Length

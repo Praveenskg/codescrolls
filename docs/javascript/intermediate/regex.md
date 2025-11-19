@@ -239,6 +239,33 @@ for (const match of str.matchAll(regex)) {
 // Found test3 with number 3
 ```
 
+### RegExp.escape() - Escape Special Characters
+
+Safely escape user input for use in regular expressions.
+
+```js
+// User input that might contain regex special characters
+const userInput = 'a+b*c?';
+
+// Old way: Manual escaping (error-prone)
+const manualEscape = userInput.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+// New way: Built-in escape
+const safeRegex = new RegExp(RegExp.escape(userInput));
+console.log(safeRegex); // /a\+b\*c\?/
+
+// Use case: Search functionality
+function createSearchRegex(searchTerm) {
+  const escaped = RegExp.escape(searchTerm);
+  return new RegExp(escaped, 'gi');
+}
+
+const searchRegex = createSearchRegex('user@example.com');
+console.log('test@example.com'.match(searchRegex)); // Safe!
+```
+
+**Browser Support**: Chrome 120+, Firefox 127+, Safari 17.0+
+
 ---
 
 ## 📚 Practical Examples

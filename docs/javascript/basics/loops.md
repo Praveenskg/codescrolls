@@ -651,6 +651,120 @@ for (const item of array) {
 
 ---
 
+## 🆕 Iterator Helpers (ES2025)
+
+Built-in methods for working with iterators with lazy evaluation.
+
+### Basic Iterator Operations
+
+```js
+// Create an iterator
+function* generateNumbers() {
+  for (let i = 1; i <= 10; i++) {
+    yield i;
+  }
+}
+
+const numbers = generateNumbers();
+
+// Map - transform values
+const doubled = numbers.map(n => n * 2);
+console.log([...doubled]); // [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
+// Filter - keep matching values
+const evens = generateNumbers().filter(n => n % 2 === 0);
+console.log([...evens]); // [2, 4, 6, 8, 10]
+
+// Take - limit number of items
+const firstFive = generateNumbers().take(5);
+console.log([...firstFive]); // [1, 2, 3, 4, 5]
+
+// Drop - skip items
+const afterFive = generateNumbers().drop(5);
+console.log([...afterFive]); // [6, 7, 8, 9, 10]
+
+// Chain operations
+const result = generateNumbers()
+  .filter(n => n % 2 !== 0) // [1, 3, 5, 7, 9]
+  .map(n => n * 2) // [2, 6, 10, 14, 18]
+  .take(3) // [2, 6, 10]
+  .toArray(); // Convert to array
+
+console.log(result); // [2, 6, 10]
+```
+
+### Practical Example: Infinite Sequences
+
+```js
+// Infinite Fibonacci sequence
+function* fibonacci() {
+  let [a, b] = [0, 1];
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+// Get first 10 Fibonacci numbers
+const firstTen = fibonacci().take(10).toArray();
+
+console.log(firstTen); // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+// Get even Fibonacci numbers under 100
+const evenFibs = fibonacci()
+  .filter(n => n % 2 === 0)
+  .takeWhile(n => n < 100)
+  .toArray();
+
+console.log(evenFibs); // [0, 2, 8, 34]
+```
+
+### Iterator Methods
+
+```js
+const iterator = [1, 2, 3, 4, 5].values();
+
+// Map
+const mapped = iterator.map(x => x * 2);
+
+// Filter
+const filtered = iterator.filter(x => x > 2);
+
+// Take
+const taken = iterator.take(3);
+
+// Drop
+const dropped = iterator.drop(2);
+
+// TakeWhile
+const takenWhile = iterator.takeWhile(x => x < 4);
+
+// DropWhile
+const droppedWhile = iterator.dropWhile(x => x < 3);
+
+// FlatMap
+const flatMapped = iterator.flatMap(x => [x, x * 2]);
+
+// Reduce
+const sum = iterator.reduce((acc, x) => acc + x, 0);
+
+// Find
+const found = iterator.find(x => x > 3);
+
+// Some
+const hasEven = iterator.some(x => x % 2 === 0);
+
+// Every
+const allPositive = iterator.every(x => x > 0);
+
+// To Array
+const array = iterator.toArray();
+```
+
+**Browser Support**: Chrome 122+, Firefox 127+, Safari 17.0+
+
+---
+
 ## 🔗 What's Next?
 
 Explore intermediate JavaScript concepts!

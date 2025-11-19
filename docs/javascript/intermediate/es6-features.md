@@ -546,6 +546,58 @@ oldArray.push(newItem);
 
 ---
 
+## 🆕 Modern JavaScript Features (ES2024+)
+
+### Pipeline Operator (Proposed)
+
+Cleaner function composition syntax.
+
+```js
+// Old way: Nested function calls
+const result = processThree(processTwo(processOne(value)));
+
+// New way: Pipeline operator
+const result = value |> processOne |> processTwo |> processThree;
+
+// With arguments
+const result =
+  [1, 2, 3]
+  |> arr => arr.map(x => x * 2)
+  |> arr => arr.filter(x => x > 2)
+  |> arr => arr.reduce((a, b) => a + b, 0);
+
+console.log(result); // 10
+```
+
+**Status**: Stage 2 proposal (not yet in standard)
+
+### Records and Tuples (Proposed)
+
+Immutable data structures.
+
+```js
+// Record - immutable object
+const record = #{ x: 1, y: 2 };
+// record.x = 3; // Error: Cannot modify
+
+// Tuple - immutable array
+const tuple = #[1, 2, 3];
+// tuple[0] = 4; // Error: Cannot modify
+
+// Comparison by value
+const rec1 = #{ x: 1 };
+const rec2 = #{ x: 1 };
+console.log(rec1 === rec2); // true (value comparison)
+
+const arr1 = [1, 2];
+const arr2 = [1, 2];
+console.log(arr1 === arr2); // false (reference comparison)
+```
+
+**Status**: Stage 2 proposal (not yet in standard)
+
+---
+
 ## 🔗 What's Next?
 
 Learn asynchronous JavaScript with Promises!

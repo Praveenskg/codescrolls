@@ -502,6 +502,72 @@ console.log('Full config:', config);
 
 ---
 
+## 🆕 Modern Module Features
+
+### Top-Level Await
+
+Use `await` at the top level of modules without wrapping in async functions.
+
+```js
+// config.js
+// Fetch config before module loads
+const config = await fetch('/api/config').then(r => r.json());
+
+export default config;
+```
+
+```js
+// main.js
+import config from './config.js';
+
+// Config is already loaded!
+console.log('API URL:', config.apiUrl);
+```
+
+**Use Cases:**
+
+- Loading configuration
+- Initializing resources
+- Conditional imports
+
+**Browser Support**: Chrome 89+, Firefox 89+, Safari 15.0+
+
+### Import Attributes (JSON Modules)
+
+Import JSON files directly as modules.
+
+```js
+// Old way
+import configData from './config.json' assert { type: 'json' };
+
+// New way (ES2024+)
+import config from './config.json' with { type: 'json' };
+
+console.log(config.apiKey);
+console.log(config.endpoints);
+```
+
+**Benefits:**
+
+- Type safety
+- Better error handling
+- No manual parsing
+
+**Browser Support**: Chrome 91+, Firefox 108+, Safari 16.4+
+
+### Dynamic Import with Attributes
+
+```js
+// Load JSON dynamically
+const config = await import('./config.json', {
+  with: { type: 'json' },
+});
+
+console.log(config.default.apiKey);
+```
+
+---
+
 ## 🎯 Best Practices
 
 ### 1. One Module, One Responsibility

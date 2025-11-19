@@ -329,6 +329,47 @@ Promise.any(promises)
   });
 ```
 
+### Promise.try() (ES2025)
+
+Execute synchronous or asynchronous code and wrap result in a Promise.
+
+```js
+// Handle both sync and async code uniformly
+Promise.try(() => {
+  // This might be sync or async
+  return someFunction();
+})
+  .then(result => {
+    console.log('Success:', result);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+// Example: Safe function execution
+function processData(data) {
+  if (!data) {
+    throw new Error('Data required');
+  }
+  return data.toUpperCase();
+}
+
+// Works with sync functions
+Promise.try(() => processData('hello'))
+  .then(result => console.log(result)) // 'HELLO'
+  .catch(error => console.error(error));
+
+// Works with async functions too
+Promise.try(async () => {
+  const response = await fetch('/api/data');
+  return response.json();
+})
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```
+
+**Browser Support**: Chrome 120+, Firefox (experimental), Safari (experimental)
+
 ---
 
 ## 📚 Practical Examples
