@@ -1,7 +1,9 @@
 ---
 id: css-typography
 title: CSS Typography - Complete Guide
-description: Master CSS typography including fonts, text styling, line height, letter spacing, text alignment, web fonts, and creating beautiful readable text.
+description:
+  Master CSS typography including fonts, text styling, line height, letter
+  spacing, text alignment, web fonts, and creating beautiful readable text.
 keywords:
   [
     css typography,
@@ -20,7 +22,9 @@ sidebar_position: 4
 
 # ✍️ CSS Typography
 
-Typography is the art of arranging type to make text legible, readable, and visually appealing. Great typography elevates your website's design and user experience.
+Typography is the art of arranging type to make text legible, readable, and
+visually appealing. Great typography elevates your website's design and user
+experience.
 
 ## 📖 Font Properties
 
@@ -63,7 +67,8 @@ body {
 /* Modern sans-serif stack */
 body {
   font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
 }
 
 /* Elegant serif stack */
@@ -614,7 +619,8 @@ pre code {
 
    ```css
    body {
-     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+     font-family:
+       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
    }
    ```
 

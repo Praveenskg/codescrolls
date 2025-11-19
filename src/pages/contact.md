@@ -1,6 +1,8 @@
 ---
 title: Contact Us
-description: Get in touch with the CodeScrolls team – feedback, contributions, support, and more.
+description:
+  Get in touch with the CodeScrolls team – feedback, contributions, support, and
+  more.
 keywords:
   [
     contact codescrolls,
@@ -14,9 +16,11 @@ keywords:
 
 # 📬 Contact CodeScrolls
 
-Have a question, suggestion, or want to collaborate? We’d love to hear from you! 🤝
+Have a question, suggestion, or want to collaborate? We’d love to hear from you!
+🤝
 
-Whether it’s feedback, corrections, contributions, or partnership ideas — feel free to reach out.
+Whether it’s feedback, corrections, contributions, or partnership ideas — feel
+free to reach out.
 
 ---
 

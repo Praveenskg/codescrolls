@@ -184,10 +184,10 @@ export default function Home(): ReactNode {
               insights.
             </p>
             <div className={styles.buttonGroup}>
-              <Link className={styles.btnPrimary} href='/docs'>
+              <Link className={styles.btnPrimary} href="/docs">
                 🚀 Start Learning
               </Link>
-              <Link className={styles.btnSecondary} to='/blog'>
+              <Link className={styles.btnSecondary} to="/blog">
                 📖 Read Blog
               </Link>
             </div>
@@ -239,7 +239,7 @@ export default function Home(): ReactNode {
                   src={useBaseUrl(icon)}
                   alt={name}
                   className={styles.categoryIcon}
-                  loading='lazy'
+                  loading="lazy"
                 />
                 <span className={styles.categoryName}>{name}</span>
                 <p className={styles.categoryDescription}>{description}</p>
@@ -264,7 +264,7 @@ export default function Home(): ReactNode {
             ))}
           </div>
           <div className={styles.ctaCenter}>
-            <Link className={styles.btnOutline} to='/blog'>
+            <Link className={styles.btnOutline} to="/blog">
               View All Posts
             </Link>
           </div>
@@ -306,14 +306,14 @@ export default function Home(): ReactNode {
               with CodeScrolls. Start your journey today &ndash; it&apos;s completely free!
             </p>
             <div className={styles.ctaButtons}>
-              <Link className={styles.btnPrimary} href='/docs/javascript'>
+              <Link className={styles.btnPrimary} href="/docs/javascript">
                 Get Started Now
               </Link>
               <Link
                 className={styles.btnOutlineLight}
-                to='https://github.com/praveenskg/codescrolls'
-                target='_blank'
-                rel='noopener noreferrer'
+                to="https://github.com/praveenskg/codescrolls"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 ⭐ Star on GitHub
               </Link>

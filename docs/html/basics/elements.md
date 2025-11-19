@@ -1,7 +1,9 @@
 ---
 id: html-elements
 title: HTML Elements - Complete Reference Guide
-description: Master all HTML elements with practical examples. Learn semantic elements, inline vs block elements, and best practices for structuring web content.
+description:
+  Master all HTML elements with practical examples. Learn semantic elements,
+  inline vs block elements, and best practices for structuring web content.
 keywords:
   [
     html elements,
@@ -18,11 +20,14 @@ sidebar_position: 1
 
 # 🏗️ HTML Elements
 
-HTML elements are the building blocks of web pages. They define the structure and content of your website using tags that tell browsers how to display different types of content.
+HTML elements are the building blocks of web pages. They define the structure
+and content of your website using tags that tell browsers how to display
+different types of content.
 
 ## 📖 What are HTML Elements?
 
-HTML elements are represented by **tags** - opening tags `<tag>`, closing tags `</tag>`, and sometimes self-closing tags `<tag />`.
+HTML elements are represented by **tags** - opening tags `<tag>`, closing tags
+`</tag>`, and sometimes self-closing tags `<tag />`.
 
 ```html
 <!-- Opening and closing tags -->
@@ -313,10 +318,14 @@ Creates lists of terms and descriptions.
 ```html
 <dl>
   <dt>HTML</dt>
-  <dd>HyperText Markup Language - the standard markup language for web pages</dd>
+  <dd>
+    HyperText Markup Language - the standard markup language for web pages
+  </dd>
 
   <dt>CSS</dt>
-  <dd>Cascading Style Sheets - used to describe the presentation of a document</dd>
+  <dd>
+    Cascading Style Sheets - used to describe the presentation of a document
+  </dd>
 
   <dt>JavaScript</dt>
   <dd>A programming language that enables interactive web pages</dd>
@@ -360,7 +369,11 @@ Embeds images in the page.
 <img src="logo.png" alt="Company Logo" width="200" height="100" />
 
 <!-- Responsive image -->
-<img src="photo.jpg" alt="Beautiful landscape" style="max-width: 100%; height: auto;" />
+<img
+  src="photo.jpg"
+  alt="Beautiful landscape"
+  style="max-width: 100%; height: auto;"
+/>
 
 <!-- Image with fallback -->
 <img src="primary.jpg" alt="Main image" onerror="this.src='fallback.jpg'" />
@@ -617,7 +630,9 @@ Container for form controls.
     <main>
       <section id="home">
         <h2>Home Section</h2>
-        <p>This is the <span class="highlight">main content</span> of the page.</p>
+        <p>
+          This is the <span class="highlight">main content</span> of the page.
+        </p>
 
         <article>
           <h3>Article Title</h3>

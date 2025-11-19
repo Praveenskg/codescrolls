@@ -1,7 +1,9 @@
 ---
 sidebar_position: 4
 title: JavaScript DOM Manipulation - Complete Guide
-description: Master DOM manipulation in JavaScript. Learn to select, create, modify, and remove elements. Handle events and build dynamic web applications.
+description:
+  Master DOM manipulation in JavaScript. Learn to select, create, modify, and
+  remove elements. Handle events and build dynamic web applications.
 keywords:
   [
     javascript dom,
@@ -22,13 +24,16 @@ tags:
 
 # DOM Manipulation
 
-The **Document Object Model (DOM)** is a programming interface for HTML documents. Master DOM manipulation to create dynamic, interactive web applications!
+The **Document Object Model (DOM)** is a programming interface for HTML
+documents. Master DOM manipulation to create dynamic, interactive web
+applications!
 
 ---
 
 ## 🎯 What is the DOM?
 
-The DOM represents your HTML document as a tree of objects that JavaScript can manipulate.
+The DOM represents your HTML document as a tree of objects that JavaScript can
+manipulate.
 
 ```html
 <!DOCTYPE html>
@@ -89,7 +94,7 @@ const allLinks = document.querySelectorAll('a');
 
 // Convert to array for array methods
 const linksArray = Array.from(allLinks);
-linksArray.forEach((link) => {
+linksArray.forEach(link => {
   console.log(link.href);
 });
 ```
@@ -130,7 +135,7 @@ element.innerText = 'Visible Text Only';
 
 ```js
 // Update multiple elements
-document.querySelectorAll('.price').forEach((el) => {
+document.querySelectorAll('.price').forEach(el => {
   const price = parseFloat(el.textContent);
   el.textContent = `$${price.toFixed(2)}`;
 });
@@ -355,7 +360,7 @@ button.addEventListener('click', function (event) {
 });
 
 // Arrow function
-button.addEventListener('click', (e) => {
+button.addEventListener('click', e => {
   console.log('Clicked at:', e.clientX, e.clientY);
 });
 ```
@@ -393,7 +398,7 @@ window.addEventListener('scroll', handler);
 ### Event Object
 
 ```js
-button.addEventListener('click', (event) => {
+button.addEventListener('click', event => {
   // Prevent default behavior
   event.preventDefault();
 
@@ -442,7 +447,7 @@ class TodoApp {
     this.list = document.querySelector('#todoList');
     this.form = document.querySelector('#todoForm');
 
-    this.form.addEventListener('submit', (e) => {
+    this.form.addEventListener('submit', e => {
       e.preventDefault();
       this.addTodo();
     });
@@ -482,7 +487,7 @@ class TodoApp {
 
     // Delete button
     li.querySelector('.delete-btn').addEventListener('click', () => {
-      this.todos = this.todos.filter((t) => t.id !== todo.id);
+      this.todos = this.todos.filter(t => t.id !== todo.id);
       li.remove();
     });
 
@@ -504,10 +509,15 @@ function createDynamicForm() {
   const fields = [
     { type: 'text', name: 'username', placeholder: 'Username', required: true },
     { type: 'email', name: 'email', placeholder: 'Email', required: true },
-    { type: 'password', name: 'password', placeholder: 'Password', required: true },
+    {
+      type: 'password',
+      name: 'password',
+      placeholder: 'Password',
+      required: true,
+    },
   ];
 
-  fields.forEach((field) => {
+  fields.forEach(field => {
     const input = document.createElement('input');
     input.type = field.type;
     input.name = field.name;
@@ -521,7 +531,7 @@ function createDynamicForm() {
   submit.textContent = 'Submit';
   form.appendChild(submit);
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
@@ -601,7 +611,8 @@ class ImageGallery {
   }
 
   prev() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.currentIndex =
+      (this.currentIndex - 1 + this.images.length) % this.images.length;
     this.updateImage();
   }
 
@@ -639,12 +650,12 @@ function updateItems() {
 
 ```js
 // ❌ Bad - listener on each item
-items.forEach((item) => {
+items.forEach(item => {
   item.addEventListener('click', handleClick);
 });
 
 // ✅ Good - single listener on parent
-container.addEventListener('click', (e) => {
+container.addEventListener('click', e => {
   if (e.target.matches('.item')) {
     handleClick(e);
   }

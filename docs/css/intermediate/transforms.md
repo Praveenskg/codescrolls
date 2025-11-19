@@ -1,7 +1,10 @@
 ---
 id: css-transforms
 title: CSS Transforms - Complete Guide
-description: Master CSS transforms including translate, rotate, scale, skew, and 3D transforms. Learn transform-origin, perspective, and create stunning visual effects.
+description:
+  Master CSS transforms including translate, rotate, scale, skew, and 3D
+  transforms. Learn transform-origin, perspective, and create stunning visual
+  effects.
 keywords:
   [
     css transforms,
@@ -20,11 +23,13 @@ sidebar_position: 7
 
 # 🔄 CSS Transforms
 
-CSS transforms allow you to rotate, scale, skew, or translate elements in 2D and 3D space, creating dynamic and engaging visual effects without JavaScript.
+CSS transforms allow you to rotate, scale, skew, or translate elements in 2D and
+3D space, creating dynamic and engaging visual effects without JavaScript.
 
 ## 📖 What are Transforms?
 
-Transforms modify the coordinate space of an element, changing its position, size, rotation, or shape.
+Transforms modify the coordinate space of an element, changing its position,
+size, rotation, or shape.
 
 ```css
 .element {

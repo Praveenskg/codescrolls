@@ -1,7 +1,9 @@
 ---
 id: type-aliases
 title: Type Aliases
-description: Learn how to define and use type aliases in TypeScript to create custom, reusable type definitions and simplify complex types.
+description:
+  Learn how to define and use type aliases in TypeScript to create custom,
+  reusable type definitions and simplify complex types.
 keywords:
   - typescript
   - type alias
@@ -16,7 +18,8 @@ tags: [typescript, type alias, basics]
 
 # Type Aliases in TypeScript
 
-A **type alias** allows you to create a new name for a type. It's like defining a custom label for complex or repeated types.
+A **type alias** allows you to create a new name for a type. It's like defining
+a custom label for complex or repeated types.
 
 ## Syntax
 

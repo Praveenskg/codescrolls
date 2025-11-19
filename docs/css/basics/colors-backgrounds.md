@@ -1,7 +1,9 @@
 ---
 id: css-colors-backgrounds
 title: CSS Colors & Backgrounds - Complete Guide
-description: Master CSS colors (HEX, RGB, HSL, Named), background properties, gradients, images, and advanced background techniques for stunning web designs.
+description:
+  Master CSS colors (HEX, RGB, HSL, Named), background properties, gradients,
+  images, and advanced background techniques for stunning web designs.
 keywords:
   [
     css colors,
@@ -20,7 +22,9 @@ sidebar_position: 3
 
 # 🎨 CSS Colors & Backgrounds
 
-Colors and backgrounds are essential for creating visually appealing websites. Learn how to use different color formats, background properties, gradients, and images effectively.
+Colors and backgrounds are essential for creating visually appealing websites.
+Learn how to use different color formats, background properties, gradients, and
+images effectively.
 
 ## 🎨 Color Formats
 
@@ -352,7 +356,14 @@ a:hover {
 
 /* Multiple color stops */
 .element {
-  background: linear-gradient(to right, red 0%, yellow 25%, green 50%, blue 75%, purple 100%);
+  background: linear-gradient(
+    to right,
+    red 0%,
+    yellow 25%,
+    green 50%,
+    blue 75%,
+    purple 100%
+  );
 }
 
 /* Practical gradients */
@@ -426,12 +437,24 @@ a:hover {
 ```css
 /* Repeating linear */
 .stripes {
-  background: repeating-linear-gradient(45deg, #fff 0px, #fff 10px, #000 10px, #000 20px);
+  background: repeating-linear-gradient(
+    45deg,
+    #fff 0px,
+    #fff 10px,
+    #000 10px,
+    #000 20px
+  );
 }
 
 /* Repeating radial */
 .rings {
-  background: repeating-radial-gradient(circle, #fff 0px, #fff 10px, #000 10px, #000 20px);
+  background: repeating-radial-gradient(
+    circle,
+    #fff 0px,
+    #fff 10px,
+    #000 10px,
+    #000 20px
+  );
 }
 ```
 

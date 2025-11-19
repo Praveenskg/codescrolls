@@ -1,7 +1,10 @@
 ---
 sidebar_position: 5
 title: JavaScript Error Handling - Complete Guide
-description: Master error handling in JavaScript with try/catch, custom errors, error boundaries, async error handling, and debugging techniques. Learn to build robust applications.
+description:
+  Master error handling in JavaScript with try/catch, custom errors, error
+  boundaries, async error handling, and debugging techniques. Learn to build
+  robust applications.
 keywords:
   [
     javascript error handling,
@@ -22,7 +25,8 @@ tags:
 
 # JavaScript Error Handling
 
-Proper error handling makes your applications **robust, user-friendly, and maintainable**. Learn to handle errors gracefully!
+Proper error handling makes your applications **robust, user-friendly, and
+maintainable**. Learn to handle errors gracefully!
 
 ---
 
@@ -314,14 +318,14 @@ async function loadUser() {
 
 ```js live
 fetchUser(123)
-  .then((user) => {
+  .then(user => {
     console.log('User:', user);
     return fetchPosts(user.id);
   })
-  .then((posts) => {
+  .then(posts => {
     console.log('Posts:', posts);
   })
-  .catch((error) => {
+  .catch(error => {
     // Catches all errors in chain
     console.error('Error in chain:', error);
   })
@@ -340,9 +344,13 @@ async function fetchAllData() {
     fetchUser(3), // May fail
   ]);
 
-  const successful = results.filter((r) => r.status === 'fulfilled').map((r) => r.value);
+  const successful = results
+    .filter(r => r.status === 'fulfilled')
+    .map(r => r.value);
 
-  const failed = results.filter((r) => r.status === 'rejected').map((r) => r.reason);
+  const failed = results
+    .filter(r => r.status === 'rejected')
+    .map(r => r.reason);
 
   console.log('Successful:', successful.length);
   console.log('Failed:', failed.length);
@@ -371,7 +379,8 @@ class FormValidator {
       }
 
       if (fieldRules.minLength && value.length < fieldRules.minLength) {
-        errors[field] = `${field} must be at least ${fieldRules.minLength} characters`;
+        errors[field] =
+          `${field} must be at least ${fieldRules.minLength} characters`;
       }
 
       if (fieldRules.pattern && !fieldRules.pattern.test(value)) {
@@ -492,7 +501,12 @@ async function loadData() {
 ### Example 3: Retry Pattern with Backoff
 
 ```js live
-async function fetchWithRetry(url, options = {}, maxRetries = 3, backoff = 1000) {
+async function fetchWithRetry(
+  url,
+  options = {},
+  maxRetries = 3,
+  backoff = 1000,
+) {
   let lastError;
 
   for (let i = 0; i < maxRetries; i++) {
@@ -515,7 +529,7 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3, backoff = 1000)
       if (i < maxRetries - 1) {
         const delay = backoff * Math.pow(2, i); // Exponential backoff
         console.log(`Retrying in ${delay}ms...`);
-        await new Promise((resolve) => setTimeout(resolve, delay));
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
   }
@@ -525,8 +539,8 @@ async function fetchWithRetry(url, options = {}, maxRetries = 3, backoff = 1000)
 
 // Usage
 fetchWithRetry('/api/data')
-  .then((data) => console.log('Success:', data))
-  .catch((error) => console.error('Failed:', error.message));
+  .then(data => console.log('Success:', data))
+  .catch(error => console.error('Failed:', error.message));
 ```
 
 ### Example 4: Global Error Handler
@@ -546,7 +560,7 @@ class ErrorHandler {
     this.logError(error, context);
 
     // Run custom handlers
-    this.handlers.forEach((handler) => {
+    this.handlers.forEach(handler => {
       try {
         handler(error, context);
       } catch (handlerError) {
@@ -587,7 +601,7 @@ class ErrorHandler {
 }
 
 // Register custom handler
-ErrorHandler.register((error) => {
+ErrorHandler.register(error => {
   if (error instanceof NetworkError) {
     // Show offline indicator
     document.body.classList.add('offline');
@@ -602,11 +616,11 @@ try {
 }
 
 // Global handlers
-window.addEventListener('error', (event) => {
+window.addEventListener('error', event => {
   ErrorHandler.handle(event.error, { type: 'global' });
 });
 
-window.addEventListener('unhandledrejection', (event) => {
+window.addEventListener('unhandledrejection', event => {
   ErrorHandler.handle(event.reason, { type: 'unhandledPromise' });
 });
 ```

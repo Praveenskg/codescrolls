@@ -1,7 +1,9 @@
 ---
 sidebar_position: 8
 title: JavaScript Local Storage - Complete Guide
-description: Master browser storage with localStorage and sessionStorage. Learn to store, retrieve, and manage data in the browser with practical examples.
+description:
+  Master browser storage with localStorage and sessionStorage. Learn to store,
+  retrieve, and manage data in the browser with practical examples.
 keywords:
   [
     javascript localstorage,
@@ -21,7 +23,9 @@ tags:
 
 # Local Storage & Session Storage
 
-**Web Storage API** provides mechanisms to store key-value pairs in the browser. Perfect for caching data, saving user preferences, and building offline-capable apps!
+**Web Storage API** provides mechanisms to store key-value pairs in the browser.
+Perfect for caching data, saving user preferences, and building offline-capable
+apps!
 
 ---
 
@@ -200,7 +204,7 @@ class ShoppingCart {
 
   addItem(product) {
     const items = this.getItems();
-    const existing = items.find((item) => item.id === product.id);
+    const existing = items.find(item => item.id === product.id);
 
     if (existing) {
       existing.quantity += 1;
@@ -214,14 +218,14 @@ class ShoppingCart {
 
   removeItem(productId) {
     const items = this.getItems();
-    const filtered = items.filter((item) => item.id !== productId);
+    const filtered = items.filter(item => item.id !== productId);
     this.save(filtered);
     return filtered;
   }
 
   updateQuantity(productId, quantity) {
     const items = this.getItems();
-    const item = items.find((item) => item.id === productId);
+    const item = items.find(item => item.id === productId);
 
     if (item) {
       if (quantity <= 0) {
@@ -394,7 +398,9 @@ class RecentSearches {
     const searches = this.getAll();
 
     // Remove if already exists
-    const filtered = searches.filter((term) => term.toLowerCase() !== searchTerm.toLowerCase());
+    const filtered = searches.filter(
+      term => term.toLowerCase() !== searchTerm.toLowerCase(),
+    );
 
     // Add to beginning
     filtered.unshift(searchTerm);
@@ -479,7 +485,7 @@ if (!isStorageAvailable()) {
 Listen for changes in localStorage from other tabs/windows.
 
 ```js
-window.addEventListener('storage', (event) => {
+window.addEventListener('storage', event => {
   console.log('Storage changed:');
   console.log('Key:', event.key);
   console.log('Old value:', event.oldValue);
@@ -505,7 +511,7 @@ class SyncedState {
     }
 
     // Listen for changes from other tabs
-    window.addEventListener('storage', (e) => {
+    window.addEventListener('storage', e => {
       if (e.key === this.key) {
         const newValue = JSON.parse(e.newValue);
         this.notifyListeners(newValue);
@@ -528,14 +534,14 @@ class SyncedState {
   }
 
   notifyListeners(value) {
-    this.listeners.forEach((callback) => callback(value));
+    this.listeners.forEach(callback => callback(value));
   }
 }
 
 // Usage
 const theme = new SyncedState('theme', 'light');
 
-theme.onChange((newTheme) => {
+theme.onChange(newTheme => {
   console.log('Theme changed to:', newTheme);
   document.body.className = newTheme;
 });

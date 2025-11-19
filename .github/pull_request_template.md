@@ -14,7 +14,8 @@ Closes #(issue number)
 
 - [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
 - [ ] ✨ New feature (non-breaking change which adds functionality)
-- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality
+      to not work as expected)
 - [ ] 📚 Documentation update
 - [ ] 🎨 Style update (formatting, renaming)
 - [ ] ♻️ Code refactoring (no functional changes)
@@ -78,4 +79,5 @@ Closes #(issue number)
 
 - [ ] I have read and agree to the [Contributing Guidelines](../CONTRIBUTING.md)
 - [ ] I have read and agree to the [Code of Conduct](../CODE_OF_CONDUCT.md)
-- [ ] My contribution is original and I have the right to submit it under the project's license
+- [ ] My contribution is original and I have the right to submit it under the
+      project's license

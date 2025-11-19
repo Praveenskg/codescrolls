@@ -1,7 +1,10 @@
 ---
 id: html-overview
 title: HTML Complete Guide - From Basics to Advanced
-description: Master HTML from fundamentals to advanced features. Learn semantic HTML, forms, multimedia, accessibility, and modern HTML5 APIs with practical examples.
+description:
+  Master HTML from fundamentals to advanced features. Learn semantic HTML,
+  forms, multimedia, accessibility, and modern HTML5 APIs with practical
+  examples.
 keywords:
   [
     html tutorial,
@@ -21,11 +24,15 @@ sidebar_position: 1
 
 # 🌐 HTML Complete Guide
 
-Welcome to the most comprehensive HTML learning resource! This guide will take you from absolute beginner to HTML expert with **200+ practical examples**, best practices, and real-world projects.
+Welcome to the most comprehensive HTML learning resource! This guide will take
+you from absolute beginner to HTML expert with **200+ practical examples**, best
+practices, and real-world projects.
 
 ## 📖 What is HTML?
 
-**HTML (HyperText Markup Language)** is the backbone of every website. It's the markup language that structures web content and defines the meaning and structure of web content.
+**HTML (HyperText Markup Language)** is the backbone of every website. It's the
+markup language that structures web content and defines the meaning and
+structure of web content.
 
 ```html
 <!DOCTYPE html>
@@ -84,13 +91,15 @@ Welcome to the most comprehensive HTML learning resource! This guide will take y
 
 ## 📚 Complete Course Structure
 
-This guide is organized into **13 comprehensive topics** across three difficulty levels:
+This guide is organized into **13 comprehensive topics** across three difficulty
+levels:
 
 ### 🟢 Basics (5 Topics)
 
 1. **[HTML Elements](./basics/elements.md)** - Core HTML elements and their uses
 2. **[HTML Attributes](./basics/attributes.md)** - Adding properties to elements
-3. **[Semantic HTML](./basics/semantic-html.md)** - Meaningful structure for accessibility
+3. **[Semantic HTML](./basics/semantic-html.md)** - Meaningful structure for
+   accessibility
 4. **[HTML Forms](./basics/forms.md)** - Creating interactive forms
 5. **[HTML Tables](./basics/tables.md)** - Organizing data in tables
 
@@ -99,14 +108,19 @@ This guide is organized into **13 comprehensive topics** across three difficulty
 6. **[HTML5 APIs](./intermediate/html5-apis.md)** - Modern browser APIs
 7. **[Canvas](./intermediate/canvas.md)** - Drawing graphics with JavaScript
 8. **[SVG](./intermediate/svg.md)** - Scalable vector graphics
-9. **[Multimedia](./intermediate/multimedia.md)** - Audio, video, and embedded content
-10. **[Meta Tags & SEO](./intermediate/meta-seo.md)** - Optimization and metadata
+9. **[Multimedia](./intermediate/multimedia.md)** - Audio, video, and embedded
+   content
+10. **[Meta Tags & SEO](./intermediate/meta-seo.md)** - Optimization and
+    metadata
 
 ### 🔴 Advanced (3 Topics)
 
-11. **[Web Components](./advanced/web-components.md)** - Reusable custom elements
-12. **[Shadow DOM](./advanced/shadow-dom.md)** - Encapsulated styling and behavior
-13. **[Accessibility](./advanced/accessibility.md)** - Building inclusive websites
+11. **[Web Components](./advanced/web-components.md)** - Reusable custom
+    elements
+12. **[Shadow DOM](./advanced/shadow-dom.md)** - Encapsulated styling and
+    behavior
+13. **[Accessibility](./advanced/accessibility.md)** - Building inclusive
+    websites
 
 ---
 
@@ -213,4 +227,5 @@ Ready to begin? Start here:
 
 **Let's start your HTML journey! 🌐✨**
 
-_Choose your starting point above and begin creating beautiful, semantic web experiences._
+_Choose your starting point above and begin creating beautiful, semantic web
+experiences._

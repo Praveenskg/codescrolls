@@ -1,7 +1,9 @@
 ---
 id: css-performance
 title: CSS Performance Optimization - Complete Guide
-description: Master CSS performance optimization. Learn to minify, reduce file size, optimize selectors, use critical CSS, and create fast-loading websites.
+description:
+  Master CSS performance optimization. Learn to minify, reduce file size,
+  optimize selectors, use critical CSS, and create fast-loading websites.
 keywords:
   [
     css performance,
@@ -18,7 +20,8 @@ sidebar_position: 4
 
 # ⚡ CSS Performance Optimization
 
-Optimize CSS for faster page loads, better user experience, and improved SEO rankings.
+Optimize CSS for faster page loads, better user experience, and improved SEO
+rankings.
 
 ## 🎯 Performance Best Practices
 
@@ -106,7 +109,12 @@ Load critical CSS inline, defer non-critical CSS.
 </style>
 
 <!-- Defer non-critical CSS -->
-<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<link
+  rel="preload"
+  href="styles.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 <noscript><link rel="stylesheet" href="styles.css" /></noscript>
 ```
 
@@ -190,7 +198,12 @@ margin: 10px 20px;
 ### 1. Async CSS Loading
 
 ```html
-<link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<link
+  rel="preload"
+  href="styles.css"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 ```
 
 ### 2. Media Query Optimization
@@ -249,8 +262,7 @@ margin: 10px 20px;
 
 Congratulations! You've completed the **complete CSS guide**! 🎉
 
-Return to:
-👉 [CSS Overview →](../index.md)  
+Return to: 👉 [CSS Overview →](../index.md)  
 👉 [Documentation Home →](../../index.mdx)
 
 Master CSS performance for lightning-fast websites! ⚡

@@ -3,7 +3,10 @@ id: index
 title: TypeScript Overview
 sidebar_position: 1
 sidebar_label: TypeScript Overview
-description: Complete TypeScript guide from basics to advanced - types, interfaces, generics, utility types, modules, compiler options, and React integration with 500+ examples.
+description:
+  Complete TypeScript guide from basics to advanced - types, interfaces,
+  generics, utility types, modules, compiler options, and React integration with
+  500+ examples.
 keywords:
   [
     typescript,
@@ -29,7 +32,9 @@ tags:
 
 # TypeScript Documentation
 
-TypeScript is a **typed superset of JavaScript** that adds static type-checking and advanced language features. Developed by **Microsoft**, it's designed to help you build more reliable and maintainable applications.
+TypeScript is a **typed superset of JavaScript** that adds static type-checking
+and advanced language features. Developed by **Microsoft**, it's designed to
+help you build more reliable and maintainable applications.
 
 ---
 
@@ -51,13 +56,20 @@ TypeScript is a **typed superset of JavaScript** that adds static type-checking 
 
 Master the fundamentals of TypeScript:
 
-1. **[Variables](/docs/typescript/basics/variables)** - `let`, `const`, `var`, and type annotations
-2. **[Data Types](/docs/typescript/basics/datatypes)** - Primitive and complex types
-3. **[Functions](/docs/typescript/basics/functions)** - Function types, parameters, and return types
-4. **[Objects](/docs/typescript/basics/objects)** - Object types and type annotations
-5. **[Arrays & Tuples](/docs/typescript/basics/arrays-tuples)** - Array types and fixed-length tuples
-6. **[Type Aliases](/docs/typescript/basics/type-aliases)** - Creating reusable type definitions
-7. **[Interfaces](/docs/typescript/basics/interfaces)** - Defining object shapes and contracts
+1. **[Variables](/docs/typescript/basics/variables)** - `let`, `const`, `var`,
+   and type annotations
+2. **[Data Types](/docs/typescript/basics/datatypes)** - Primitive and complex
+   types
+3. **[Functions](/docs/typescript/basics/functions)** - Function types,
+   parameters, and return types
+4. **[Objects](/docs/typescript/basics/objects)** - Object types and type
+   annotations
+5. **[Arrays & Tuples](/docs/typescript/basics/arrays-tuples)** - Array types
+   and fixed-length tuples
+6. **[Type Aliases](/docs/typescript/basics/type-aliases)** - Creating reusable
+   type definitions
+7. **[Interfaces](/docs/typescript/basics/interfaces)** - Defining object shapes
+   and contracts
 
 ---
 
@@ -65,10 +77,14 @@ Master the fundamentals of TypeScript:
 
 Advance your TypeScript skills:
 
-1. **[Union & Intersection Types](/docs/typescript/intermediate/union-intersection)** - Combining types
-2. **[Type Guards](/docs/typescript/intermediate/type-guards)** - Runtime type checking
-3. **[Type Narrowing](/docs/typescript/intermediate/narrowing)** - Refining types in control flow
-4. **[Literal Types](/docs/typescript/intermediate/literal-types)** - Exact value types
+1. **[Union & Intersection Types](/docs/typescript/intermediate/union-intersection)** -
+   Combining types
+2. **[Type Guards](/docs/typescript/intermediate/type-guards)** - Runtime type
+   checking
+3. **[Type Narrowing](/docs/typescript/intermediate/narrowing)** - Refining
+   types in control flow
+4. **[Literal Types](/docs/typescript/intermediate/literal-types)** - Exact
+   value types
 
 ---
 
@@ -76,13 +92,20 @@ Advance your TypeScript skills:
 
 Master advanced TypeScript patterns:
 
-1. **[Generics](/docs/typescript/advanced/generics)** - Reusable, type-safe components
-2. **[Utility Types](/docs/typescript/advanced/utility-types)** - Built-in type transformations
-3. **[Enums](/docs/typescript/advanced/enums)** - Named constants and enumerations
-4. **[Module System](/docs/typescript/advanced/modules)** - ES6 modules and organization
-5. **[Compiler Options](/docs/typescript/advanced/compiler-options)** - tsconfig.json configuration
-6. **[TypeScript with React](/docs/typescript/advanced/typescript-react)** - Type-safe React apps
-7. **[Advanced Types](/docs/typescript/advanced/advanced-types)** - Mapped, conditional, and template types
+1. **[Generics](/docs/typescript/advanced/generics)** - Reusable, type-safe
+   components
+2. **[Utility Types](/docs/typescript/advanced/utility-types)** - Built-in type
+   transformations
+3. **[Enums](/docs/typescript/advanced/enums)** - Named constants and
+   enumerations
+4. **[Module System](/docs/typescript/advanced/modules)** - ES6 modules and
+   organization
+5. **[Compiler Options](/docs/typescript/advanced/compiler-options)** -
+   tsconfig.json configuration
+6. **[TypeScript with React](/docs/typescript/advanced/typescript-react)** -
+   Type-safe React apps
+7. **[Advanced Types](/docs/typescript/advanced/advanced-types)** - Mapped,
+   conditional, and template types
 
 ---
 
@@ -143,7 +166,8 @@ For production-ready applications:
 ### **Advanced Features**
 
 - **Generics** - Type-safe reusable components
-- **Utility Types** - Built-in type transformations (Partial, Required, Pick, Omit, etc.)
+- **Utility Types** - Built-in type transformations (Partial, Required, Pick,
+  Omit, etc.)
 - **Enums** - Named constants
 - **Modules** - Code organization
 - **Decorators** - Metadata annotations (experimental)
@@ -236,9 +260,12 @@ interface Product {
 
 ### **Type Operations**
 
-- [Union Types](/docs/typescript/intermediate/union-intersection) - Multiple possible types
-- [Intersection Types](/docs/typescript/intermediate/union-intersection) - Combining types
-- [Type Guards](/docs/typescript/intermediate/type-guards) - Runtime type checking
+- [Union Types](/docs/typescript/intermediate/union-intersection) - Multiple
+  possible types
+- [Intersection Types](/docs/typescript/intermediate/union-intersection) -
+  Combining types
+- [Type Guards](/docs/typescript/intermediate/type-guards) - Runtime type
+  checking
 - [Type Narrowing](/docs/typescript/intermediate/narrowing) - Refining types
 
 ### **Reusable Types**
@@ -246,14 +273,18 @@ interface Product {
 - [Type Aliases](/docs/typescript/basics/type-aliases) - Custom type definitions
 - [Interfaces](/docs/typescript/basics/interfaces) - Object contracts
 - [Generics](/docs/typescript/advanced/generics) - Parameterized types
-- [Utility Types](/docs/typescript/advanced/utility-types) - Type transformations
+- [Utility Types](/docs/typescript/advanced/utility-types) - Type
+  transformations
 
 ### **Advanced Patterns**
 
-- [Mapped Types](/docs/typescript/advanced/advanced-types) - Transform object types
+- [Mapped Types](/docs/typescript/advanced/advanced-types) - Transform object
+  types
 - [Conditional Types](/docs/typescript/advanced/advanced-types) - Type logic
-- [Template Literals](/docs/typescript/advanced/advanced-types) - String type manipulation
-- [Recursive Types](/docs/typescript/advanced/advanced-types) - Self-referencing types
+- [Template Literals](/docs/typescript/advanced/advanced-types) - String type
+  manipulation
+- [Recursive Types](/docs/typescript/advanced/advanced-types) - Self-referencing
+  types
 
 ### **Configuration**
 
@@ -263,7 +294,8 @@ interface Product {
 
 ### **Framework Integration**
 
-- [TypeScript with React](/docs/typescript/advanced/typescript-react) - Component typing
+- [TypeScript with React](/docs/typescript/advanced/typescript-react) -
+  Component typing
 - React Hooks - useState, useEffect, useContext
 - Event Handling - Type-safe events
 - Props & State - Component types
@@ -358,11 +390,13 @@ tsc
 
 - [React Documentation](/docs/react) - React fundamentals
 - [React Hooks](/docs/react/intermediate/hooks) - Hook patterns
-- [TypeScript with React](/docs/typescript/advanced/typescript-react) - Type-safe React
+- [TypeScript with React](/docs/typescript/advanced/typescript-react) -
+  Type-safe React
 
 ### **Interviews**
 
-- [TypeScript Interview Questions](/docs/interviews/typescript) - Common questions
+- [TypeScript Interview Questions](/docs/interviews/typescript) - Common
+  questions
 - [React Interview Questions](/docs/interviews/react) - React + TypeScript
 
 ---
@@ -377,7 +411,8 @@ tsc
 
 ### **Community**
 
-- [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) - Type definitions
+- [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) - Type
+  definitions
 - [TypeScript GitHub](https://github.com/microsoft/TypeScript) - Source code
 - [TypeScript Discord](https://discord.gg/typescript) - Community chat
 
@@ -432,14 +467,16 @@ tsc
 
 ---
 
-> **Prerequisite:** Familiarity with JavaScript is recommended before diving into TypeScript.
+> **Prerequisite:** Familiarity with JavaScript is recommended before diving
+> into TypeScript.
 
 ---
 
 ## Feedback
 
 Want a topic added or corrected?  
-[Open a GitHub issue](https://github.com/praveenskg/codescrolls/issues/new) or send a PR!
+[Open a GitHub issue](https://github.com/praveenskg/codescrolls/issues/new) or
+send a PR!
 
 ---
 

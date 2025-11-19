@@ -1,7 +1,9 @@
 ---
 sidebar_position: 6
 title: JavaScript Regular Expressions - Complete Guide
-description: Master Regular Expressions (RegEx) in JavaScript. Learn patterns, flags, methods, and practical use cases for text matching and validation.
+description:
+  Master Regular Expressions (RegEx) in JavaScript. Learn patterns, flags,
+  methods, and practical use cases for text matching and validation.
 keywords:
   [
     javascript regex,
@@ -22,7 +24,9 @@ tags:
 
 # Regular Expressions
 
-**Regular Expressions (RegEx)** are patterns used to match character combinations in strings. Master RegEx to validate, search, and manipulate text efficiently!
+**Regular Expressions (RegEx)** are patterns used to match character
+combinations in strings. Master RegEx to validate, search, and manipulate text
+efficiently!
 
 ---
 
@@ -199,7 +203,9 @@ const newStr = str.replace(/world/i, 'JavaScript');
 console.log(newStr); // 'Hello JavaScript'
 
 // With function
-const censored = 'damn hell'.replace(/damn|hell/gi, (match) => '*'.repeat(match.length));
+const censored = 'damn hell'.replace(/damn|hell/gi, match =>
+  '*'.repeat(match.length),
+);
 console.log(censored); // '**** ****'
 ```
 
@@ -284,7 +290,7 @@ function validatePassword(password) {
     special: /[!@#$%^&*]/.test(password),
   };
 
-  const isValid = Object.values(checks).every((check) => check);
+  const isValid = Object.values(checks).every(check => check);
 
   return {
     isValid,
@@ -433,7 +439,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const tests = ['test@example.com', 'invalid', 'test@', '@example.com'];
 
-tests.forEach((test) => {
+tests.forEach(test => {
   console.log(`${test}: ${emailRegex.test(test)}`);
 });
 ```

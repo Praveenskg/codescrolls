@@ -1,7 +1,10 @@
 ---
 sidebar_position: 2
 title: JavaScript Data Types - Complete Guide with Examples
-description: Master JavaScript data types including primitives (string, number, boolean, null, undefined, symbol, bigint) and objects. Learn with practical examples and type checking methods.
+description:
+  Master JavaScript data types including primitives (string, number, boolean,
+  null, undefined, symbol, bigint) and objects. Learn with practical examples
+  and type checking methods.
 keywords:
   [
     javascript data types,
@@ -595,7 +598,8 @@ validateForm({ name: 'John Doe', age: 30, agreed: true });
 
 ## 🔗 What's Next?
 
-Now that you know data types, let's learn how to work with them using **operators**!
+Now that you know data types, let's learn how to work with them using
+**operators**!
 
 👉 [Next: Operators »](./operators.md)
 

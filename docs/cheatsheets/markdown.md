@@ -2,7 +2,9 @@
 id: markdown
 title: Markdown CheatSheet
 sidebar_label: Markdown CheatSheet
-description: Complete Markdown syntax guide with examples - headings, lists, code blocks, tables, links, images, and advanced features.
+description:
+  Complete Markdown syntax guide with examples - headings, lists, code blocks,
+  tables, links, images, and advanced features.
 keywords:
   [
     markdown,
@@ -17,7 +19,8 @@ keywords:
 
 # Markdown CheatSheet
 
-Master Markdown syntax with this quick reference. Perfect for writing blogs, docs, READMEs, and more.
+Master Markdown syntax with this quick reference. Perfect for writing blogs,
+docs, READMEs, and more.
 
 ---
 
@@ -56,10 +59,7 @@ Master Markdown syntax with this quick reference. Perfect for writing blogs, doc
 ## Text Formatting
 
 ```markdown
-**Bold**
-_Italic_
-~~Strikethrough~~
-**_Bold & Italic_**
+**Bold** _Italic_ ~~Strikethrough~~ **_Bold & Italic_**
 ```
 
 **Output:**  
@@ -119,8 +119,7 @@ _Italic_
 ![Alt Text](/img/blog/react.png)
 ```
 
-**Output:**
-![Sample Image](/img/blog/react.png)
+**Output:** ![Sample Image](/img/blog/react.png)
 
 ---
 
@@ -216,10 +215,7 @@ console.log('With title!');
 | Cell   | Data        |
 ```
 
-**Output**:
-| Syntax | Description |
-| ------ | ----------- |
-| Header | Title |
+**Output**: | Syntax | Description | | ------ | ----------- | | Header | Title |
 | Cell | Data |
 
 ### Table Alignment
@@ -241,8 +237,7 @@ console.log('With title!');
 ## Escaping Characters
 
 ```markdown
-\*Not italic\*
-\# Not a heading
+\*Not italic\* \# Not a heading
 ```
 
 **Output:**
@@ -271,11 +266,9 @@ X<sup>2</sup>
 ## Definition Lists
 
 ```markdown
-Term 1
-: Definition 1
+Term 1 : Definition 1
 
-Term 2
-: Definition 2
+Term 2 : Definition 2
 ```
 
 **Output (works in Docusaurus, Markdown-it, not GitHub):**
@@ -334,47 +327,26 @@ Term 2
 ## Callouts (Docusaurus)
 
 ```markdown
-:::note
-This is a note.
-:::
+:::note This is a note. :::
 
-:::tip
-This is a tip.
-:::
+:::tip This is a tip. :::
 
-:::warning
-This is a warning.
-:::
+:::warning This is a warning. :::
 
-:::info
-This is an info.
-:::
+:::info This is an info. :::
 
-:::danger
-This is a danger.
-:::
+:::danger This is a danger. :::
 ```
 
-**Output:**
-:::note
-This is a note.
-:::
+**Output:** :::note This is a note. :::
 
-:::tip
-This is a tip.
-:::
+:::tip This is a tip. :::
 
-:::info
-This is some information.
-:::
+:::info This is some information. :::
 
-:::warning
-This is a warning.
-:::
+:::warning This is a warning. :::
 
-:::danger
-This is a danger alert!
-:::
+:::danger This is a danger alert! :::
 
 ---
 
@@ -402,8 +374,7 @@ https://github.com
 ## Navigation Links (Docusaurus)
 
 ```markdown
-[← Previous Page](/docs/previous)
-[Next Page →](/docs/next)
+[← Previous Page](/docs/previous) [Next Page →](/docs/next)
 ```
 
 ---
@@ -465,7 +436,7 @@ console.log(message);
 
 ````markdown
 ```js title="JavaScript"
-const greet = (name) => `Hello, ${name}!`;
+const greet = name => `Hello, ${name}!`;
 ```
 
 ```python title="Python"
@@ -600,8 +571,7 @@ echo "Hello, World!"
 ### Reference-Style Links
 
 ```markdown
-[Google][1] is a search engine.
-[GitHub][github] is a code repository.
+[Google][1] is a search engine. [GitHub][github] is a code repository.
 
 [1]: https://google.com
 [github]: https://github.com 'GitHub Homepage'
@@ -609,8 +579,7 @@ echo "Hello, World!"
 
 **Output:**
 
-[Google][1] is a search engine.
-[GitHub][github] is a code repository.
+[Google][1] is a search engine. [GitHub][github] is a code repository.
 
 [1]: https://google.com
 [github]: https://github.com 'GitHub Homepage'
@@ -628,8 +597,7 @@ echo "Hello, World!"
 ### Auto-links with Custom Text
 
 ```markdown
-<https://codescrolls.site>
-<email@example.com>
+<https://codescrolls.site> <email@example.com>
 ```
 
 **Output:**
@@ -693,48 +661,28 @@ $$
 ### Admonitions with Titles
 
 ```markdown
-:::note Important
-This is an important note with a custom title.
-:::
+:::note Important This is an important note with a custom title. :::
 
-:::tip Pro Tip
-Here's a professional tip for you!
-:::
+:::tip Pro Tip Here's a professional tip for you! :::
 
-:::warning Deprecated
-This feature is deprecated and will be removed in v2.0
-:::
+:::warning Deprecated This feature is deprecated and will be removed in v2.0 :::
 
-:::danger Security Warning
-Never commit API keys to version control!
-:::
+:::danger Security Warning Never commit API keys to version control! :::
 
-:::info Did You Know?
-Markdown was created by John Gruber in 2004.
-:::
+:::info Did You Know? Markdown was created by John Gruber in 2004. :::
 ```
 
 **Output:**
 
-:::note Important
-This is an important note with a custom title.
-:::
+:::note Important This is an important note with a custom title. :::
 
-:::tip Pro Tip
-Here's a professional tip for you!
-:::
+:::tip Pro Tip Here's a professional tip for you! :::
 
-:::warning Deprecated
-This feature is deprecated and will be removed in v2.0
-:::
+:::warning Deprecated This feature is deprecated and will be removed in v2.0 :::
 
-:::danger Security Warning
-Never commit API keys to version control!
-:::
+:::danger Security Warning Never commit API keys to version control! :::
 
-:::info Did You Know?
-Markdown was created by John Gruber in 2004.
-:::
+:::info Did You Know? Markdown was created by John Gruber in 2004. :::
 
 ---
 
@@ -800,10 +748,7 @@ More content.
 
 <!-- ❌ Bad: Inconsistent spacing -->
 
-##Section Title
-Content here with no spacing.
-###Subsection
-More content.
+##Section Title Content here with no spacing. ###Subsection More content.
 ```
 
 ### 2. Meaningful Link Text

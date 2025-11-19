@@ -1,7 +1,9 @@
 ---
 id: shadow-dom
 title: Shadow DOM - Encapsulated Component Styling
-description: Master Shadow DOM for creating encapsulated, reusable web components with isolated styles and behavior.
+description:
+  Master Shadow DOM for creating encapsulated, reusable web components with
+  isolated styles and behavior.
 keywords:
   [
     shadow dom,
@@ -18,16 +20,22 @@ sidebar_position: 12
 
 # 🌑 Shadow DOM
 
-Shadow DOM provides encapsulation for web components, allowing you to create isolated DOM trees with their own styles and behavior that don't interfere with the rest of the document.
+Shadow DOM provides encapsulation for web components, allowing you to create
+isolated DOM trees with their own styles and behavior that don't interfere with
+the rest of the document.
 
 ## 📖 What is Shadow DOM?
 
-Shadow DOM is a web standard that allows you to attach a hidden, separate DOM to an element. This separate DOM is called the "shadow DOM" and the element it's attached to is called the "shadow host".
+Shadow DOM is a web standard that allows you to attach a hidden, separate DOM to
+an element. This separate DOM is called the "shadow DOM" and the element it's
+attached to is called the "shadow host".
 
 ### Key Benefits:
 
-- **Style Encapsulation**: Styles inside shadow DOM don't leak out, and external styles don't affect shadow DOM
-- **DOM Isolation**: Shadow DOM elements are not accessible via regular DOM queries from outside
+- **Style Encapsulation**: Styles inside shadow DOM don't leak out, and external
+  styles don't affect shadow DOM
+- **DOM Isolation**: Shadow DOM elements are not accessible via regular DOM
+  queries from outside
 - **Scoped CSS**: CSS selectors are scoped to the shadow DOM tree
 - **Simplified CSS**: No need for complex selectors to avoid conflicts
 
@@ -584,7 +592,7 @@ console.log(element.shadowRoot); // ShadowRoot (open mode)
 
     connectedCallback() {
       // Events from shadow DOM can bubble up
-      this.button.addEventListener('click', (event) => {
+      this.button.addEventListener('click', event => {
         console.log('Shadow button clicked');
         this.logEvent('Shadow button clicked');
 
@@ -608,9 +616,11 @@ console.log(element.shadowRoot); // ShadowRoot (open mode)
   customElements.define('event-demo', EventDemo);
 
   // Listen for custom events from shadow DOM
-  document.querySelector('event-demo').addEventListener('shadow-click', (event) => {
-    console.log('Custom event received:', event.detail);
-  });
+  document
+    .querySelector('event-demo')
+    .addEventListener('shadow-click', event => {
+      console.log('Custom event received:', event.detail);
+    });
 </script>
 ```
 
@@ -743,7 +753,7 @@ console.log(element.shadowRoot); // ShadowRoot (open mode)
     }
 
     connectedCallback() {
-      this.form.addEventListener('submit', (event) => {
+      this.form.addEventListener('submit', event => {
         event.preventDefault();
 
         const formData = new FormData(this.form);
@@ -784,7 +794,7 @@ console.log(shadowElement);
 
 // Get all shadow DOM styles
 const styles = element.shadowRoot.querySelectorAll('style');
-styles.forEach((style) => console.log(style.textContent));
+styles.forEach(style => console.log(style.textContent));
 ```
 
 ### Programmatic Inspection
@@ -895,7 +905,8 @@ const shadow = this.attachShadow({ mode: 'closed' }); // Avoid
 
 ## 🚀 What's Next?
 
-You've completed all HTML Advanced topics! Now explore **Accessibility** for inclusive web development:
+You've completed all HTML Advanced topics! Now explore **Accessibility** for
+inclusive web development:
 
 👉 [Next: Accessibility →](./accessibility.md)
 

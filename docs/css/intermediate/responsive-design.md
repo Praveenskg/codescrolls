@@ -1,7 +1,9 @@
 ---
 id: css-responsive-design
 title: CSS Responsive Design - Complete Guide
-description: Master responsive design with media queries, mobile-first approach, breakpoints, viewport units, and create websites that work on all devices.
+description:
+  Master responsive design with media queries, mobile-first approach,
+  breakpoints, viewport units, and create websites that work on all devices.
 keywords:
   [
     responsive design,
@@ -19,7 +21,9 @@ sidebar_position: 4
 
 # 📱 CSS Responsive Design
 
-Responsive design ensures websites work perfectly on all devices - from phones to tablets to desktops. Master media queries, breakpoints, and mobile-first approach.
+Responsive design ensures websites work perfectly on all devices - from phones
+to tablets to desktops. Master media queries, breakpoints, and mobile-first
+approach.
 
 ## 🎯 Core Concepts
 

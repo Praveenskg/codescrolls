@@ -1,7 +1,9 @@
 ---
 id: narrowing
 title: Type Narrowing
-description: Learn how TypeScript narrows down union types into more specific ones using various techniques.
+description:
+  Learn how TypeScript narrows down union types into more specific ones using
+  various techniques.
 sidebar_position: 4
 keywords:
   - typescript narrowing
@@ -13,15 +15,18 @@ keywords:
 
 # Narrowing in TypeScript
 
-**Type Narrowing** means refining a value from a broader type (like a union) to a more specific one at runtime.
+**Type Narrowing** means refining a value from a broader type (like a union) to
+a more specific one at runtime.
 
-When working with union types, TypeScript lets you write code that narrows the possible type based on runtime checks.
+When working with union types, TypeScript lets you write code that narrows the
+possible type based on runtime checks.
 
 ---
 
 ## Why Narrowing?
 
-Without narrowing, you'd get limited IntelliSense and would have to use type assertions. Narrowing makes your code safer and smarter.
+Without narrowing, you'd get limited IntelliSense and would have to use type
+assertions. Narrowing makes your code safer and smarter.
 
 ---
 

@@ -1,7 +1,10 @@
 ---
 id: html-tables
 title: HTML Tables - Complete Guide
-description: Master HTML tables with accessibility, responsive design, and semantic structure. Learn table elements, styling, and best practices for data presentation.
+description:
+  Master HTML tables with accessibility, responsive design, and semantic
+  structure. Learn table elements, styling, and best practices for data
+  presentation.
 keywords:
   [
     html tables,
@@ -17,7 +20,8 @@ sidebar_position: 5
 
 # 📊 HTML Tables
 
-HTML tables organize and display data in rows and columns. Modern tables include accessibility features, responsive design, and semantic structure.
+HTML tables organize and display data in rows and columns. Modern tables include
+accessibility features, responsive design, and semantic structure.
 
 ## 📖 Table Basics
 
@@ -235,8 +239,8 @@ HTML tables organize and display data in rows and columns. Modern tables include
 ```html
 <table aria-describedby="table-summary">
   <caption id="table-summary">
-    This table shows quarterly sales data for three products across four regions. Data is in
-    thousands of dollars.
+    This table shows quarterly sales data for three products across four
+    regions. Data is in thousands of dollars.
   </caption>
   <!-- Table content -->
 </table>
@@ -526,7 +530,7 @@ HTML tables organize and display data in rows and columns. Modern tables include
 
 <script>
   // Simple sort functionality
-  document.querySelectorAll('.sortable-table th').forEach((header) => {
+  document.querySelectorAll('.sortable-table th').forEach(header => {
     header.addEventListener('click', () => {
       const table = header.closest('table');
       const tbody = table.querySelector('tbody');
@@ -538,7 +542,7 @@ HTML tables organize and display data in rows and columns. Modern tables include
         return aVal.localeCompare(bVal);
       });
 
-      rows.forEach((row) => tbody.appendChild(row));
+      rows.forEach(row => tbody.appendChild(row));
     });
   });
 </script>
@@ -863,8 +867,18 @@ HTML tables organize and display data in rows and columns. Modern tables include
             <td>2023-01-15</td>
             <td>
               <div class="action-buttons">
-                <button class="btn btn-primary" onclick="editEmployee('EMP001')">Edit</button>
-                <button class="btn btn-danger" onclick="deleteEmployee('EMP001')">Delete</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="editEmployee('EMP001')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteEmployee('EMP001')"
+                >
+                  Delete
+                </button>
               </div>
             </td>
           </tr>
@@ -878,8 +892,18 @@ HTML tables organize and display data in rows and columns. Modern tables include
             <td>2023-03-20</td>
             <td>
               <div class="action-buttons">
-                <button class="btn btn-primary" onclick="editEmployee('EMP002')">Edit</button>
-                <button class="btn btn-danger" onclick="deleteEmployee('EMP002')">Delete</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="editEmployee('EMP002')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteEmployee('EMP002')"
+                >
+                  Delete
+                </button>
               </div>
             </td>
           </tr>
@@ -893,8 +917,18 @@ HTML tables organize and display data in rows and columns. Modern tables include
             <td>2025-01-10</td>
             <td>
               <div class="action-buttons">
-                <button class="btn btn-primary" onclick="editEmployee('EMP003')">Edit</button>
-                <button class="btn btn-danger" onclick="deleteEmployee('EMP003')">Delete</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="editEmployee('EMP003')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteEmployee('EMP003')"
+                >
+                  Delete
+                </button>
               </div>
             </td>
           </tr>
@@ -908,8 +942,18 @@ HTML tables organize and display data in rows and columns. Modern tables include
             <td>2022-11-05</td>
             <td>
               <div class="action-buttons">
-                <button class="btn btn-primary" onclick="editEmployee('EMP004')">Edit</button>
-                <button class="btn btn-danger" onclick="deleteEmployee('EMP004')">Delete</button>
+                <button
+                  class="btn btn-primary"
+                  onclick="editEmployee('EMP004')"
+                >
+                  Edit
+                </button>
+                <button
+                  class="btn btn-danger"
+                  onclick="deleteEmployee('EMP004')"
+                >
+                  Delete
+                </button>
               </div>
             </td>
           </tr>

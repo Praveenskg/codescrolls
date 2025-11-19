@@ -1,7 +1,10 @@
 ---
 id: css-positioning
 title: CSS Positioning - Complete Guide
-description: Master CSS positioning including static, relative, absolute, fixed, and sticky. Learn z-index, stacking context, and create overlays, modals, and sticky headers.
+description:
+  Master CSS positioning including static, relative, absolute, fixed, and
+  sticky. Learn z-index, stacking context, and create overlays, modals, and
+  sticky headers.
 keywords:
   [
     css positioning,
@@ -19,7 +22,9 @@ sidebar_position: 3
 
 # 📍 CSS Positioning
 
-CSS positioning controls where elements appear on the page. Understanding positioning is crucial for creating overlays, modals, tooltips, sticky headers, and complex layouts.
+CSS positioning controls where elements appear on the page. Understanding
+positioning is crucial for creating overlays, modals, tooltips, sticky headers,
+and complex layouts.
 
 ## 🎯 Position Types
 

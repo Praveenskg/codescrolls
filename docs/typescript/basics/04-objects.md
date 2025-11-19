@@ -1,7 +1,9 @@
 ---
 id: objects
 title: Objects
-description: Learn how to define object types, use inline and reusable type annotations, and handle optional and nested properties in TypeScript.
+description:
+  Learn how to define object types, use inline and reusable type annotations,
+  and handle optional and nested properties in TypeScript.
 keywords:
   - typescript objects
   - object types
@@ -16,7 +18,8 @@ tags: [typescript, objects, type aliases, basics]
 
 # Objects in TypeScript
 
-In TypeScript, objects are more strictly typed than in JavaScript. You can define the shape of an object using inline types, type aliases, or interfaces.
+In TypeScript, objects are more strictly typed than in JavaScript. You can
+define the shape of an object using inline types, type aliases, or interfaces.
 
 ---
 
@@ -132,4 +135,5 @@ function printUser(user: { name: string; age: number }) {
 
 - Use `?` for optional fields.
 
-- Use index signatures for flexible keys, but carefully (can lead to less strict typing).
+- Use index signatures for flexible keys, but carefully (can lead to less strict
+  typing).

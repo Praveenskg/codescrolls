@@ -2,7 +2,9 @@
 sidebar_position: 3
 id: javascript-operators
 title: JavaScript Operators - Complete Guide
-description: Master all JavaScript operators including arithmetic, comparison, logical, assignment, and modern operators with practical examples and best practices.
+description:
+  Master all JavaScript operators including arithmetic, comparison, logical,
+  assignment, and modern operators with practical examples and best practices.
 keywords:
   [
     javascript operators,
@@ -22,7 +24,9 @@ tags:
 
 # JavaScript Operators
 
-JavaScript includes a wide range of **operators** used to perform operations on variables and values. Mastering operators is fundamental to writing effective JavaScript code!
+JavaScript includes a wide range of **operators** used to perform operations on
+variables and values. Mastering operators is fundamental to writing effective
+JavaScript code!
 
 ---
 

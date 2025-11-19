@@ -1,7 +1,10 @@
 ---
 sidebar_position: 1
 title: JavaScript Functions - Complete Guide with Examples
-description: Master JavaScript functions including function declarations, expressions, arrow functions, callbacks, higher-order functions, closures, and best practices with practical examples.
+description:
+  Master JavaScript functions including function declarations, expressions,
+  arrow functions, callbacks, higher-order functions, closures, and best
+  practices with practical examples.
 keywords:
   [
     javascript functions,
@@ -22,7 +25,9 @@ tags:
 
 # JavaScript Functions
 
-Functions are **reusable blocks of code** that perform specific tasks. They are the heart of JavaScript programming and allow you to write modular, maintainable code.
+Functions are **reusable blocks of code** that perform specific tasks. They are
+the heart of JavaScript programming and allow you to write modular, maintainable
+code.
 
 ---
 
@@ -76,7 +81,8 @@ console.log(calculateTotal(10, 3, 0.1)); // 33
 
 ### Hoisting
 
-Function declarations are **hoisted** - you can call them before they're defined!
+Function declarations are **hoisted** - you can call them before they're
+defined!
 
 ```js live
 // This works!
@@ -158,8 +164,8 @@ console.log(add3(5, 3)); // 8
 
 ```js live
 // Parentheses optional for single parameter
-const square = (x) => x * x;
-const cube = (x) => x ** 3;
+const square = x => x * x;
+const cube = x => x ** 3;
 
 console.log(square(5)); // 25
 console.log(cube(3)); // 27
@@ -314,11 +320,11 @@ processUser('Alice', welcomeUser);
 const numbers = [1, 2, 3, 4, 5];
 
 // map
-const doubled = numbers.map((n) => n * 2);
+const doubled = numbers.map(n => n * 2);
 console.log('Doubled:', doubled); // [2, 4, 6, 8, 10]
 
 // filter
-const evens = numbers.filter((n) => n % 2 === 0);
+const evens = numbers.filter(n => n % 2 === 0);
 console.log('Evens:', evens); // [2, 4]
 
 // reduce
@@ -326,7 +332,7 @@ const sum = numbers.reduce((total, n) => total + n, 0);
 console.log('Sum:', sum); // 15
 
 // forEach
-numbers.forEach((n) => console.log(`Number: ${n}`));
+numbers.forEach(n => console.log(`Number: ${n}`));
 ```
 
 ---
@@ -501,7 +507,7 @@ const doubled = numbers.map(function (n) {
 });
 
 // ✅ Concise
-const doubled2 = numbers.map((n) => n * 2);
+const doubled2 = numbers.map(n => n * 2);
 ```
 
 ---
@@ -591,8 +597,8 @@ function processArray(arr, callback) {
 }
 
 const numbers = [1, 2, 3, 4, 5];
-console.log(processArray(numbers, (n) => n * 2)); // [2, 4, 6, 8, 10]
-console.log(processArray(numbers, (n) => n ** 2)); // [1, 4, 9, 16, 25]
+console.log(processArray(numbers, n => n * 2)); // [2, 4, 6, 8, 10]
+console.log(processArray(numbers, n => n ** 2)); // [1, 4, 9, 16, 25]
 ```
 
 </details>
@@ -613,7 +619,9 @@ function createValidator() {
       return /^\d{10}$/.test(phone.replace(/\D/g, ''));
     },
     isStrongPassword(password) {
-      return password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password);
+      return (
+        password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password)
+      );
     },
   };
 }
@@ -648,8 +656,8 @@ function createDataProcessor(data) {
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const result = createDataProcessor(numbers)
-  .filter((n) => n % 2 === 0) // [2, 4, 6, 8, 10]
-  .map((n) => n * 2) // [4, 8, 12, 16, 20]
+  .filter(n => n % 2 === 0) // [2, 4, 6, 8, 10]
+  .map(n => n * 2) // [4, 8, 12, 16, 20]
   .reduce((sum, n) => sum + n, 0); // 60
 
 console.log('Result:', result);

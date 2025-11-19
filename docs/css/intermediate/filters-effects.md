@@ -1,7 +1,9 @@
 ---
 id: css-filters-effects
 title: CSS Filters & Effects - Complete Guide
-description: Master CSS filters including blur, brightness, contrast, grayscale, and more. Learn backdrop-filter, blend modes, and create stunning visual effects.
+description:
+  Master CSS filters including blur, brightness, contrast, grayscale, and more.
+  Learn backdrop-filter, blend modes, and create stunning visual effects.
 keywords:
   [
     css filters,
@@ -20,11 +22,13 @@ sidebar_position: 8
 
 # ✨ CSS Filters & Effects
 
-CSS filters apply visual effects to elements like blur, brightness, contrast, and more. Create stunning designs without images or JavaScript!
+CSS filters apply visual effects to elements like blur, brightness, contrast,
+and more. Create stunning designs without images or JavaScript!
 
 ## 📖 What are Filters?
 
-Filters modify the rendering of an element before it's displayed, allowing you to apply graphical effects like blur, color shifting, and more.
+Filters modify the rendering of an element before it's displayed, allowing you
+to apply graphical effects like blur, color shifting, and more.
 
 ```css
 .element {
@@ -359,7 +363,8 @@ Adds a shadow to an element (respects transparency).
 
 /* Neon text */
 .neon {
-  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #fff) drop-shadow(0 0 20px #ff00ff);
+  filter: drop-shadow(0 0 5px #fff) drop-shadow(0 0 10px #fff)
+    drop-shadow(0 0 20px #ff00ff);
 }
 ```
 
@@ -521,7 +526,8 @@ Controls how background images blend together.
 ```css
 /* Gradient overlay on image */
 .hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero.jpg');
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hero.jpg');
   background-blend-mode: normal;
   background-size: cover;
   background-position: center;
@@ -593,7 +599,8 @@ Controls how background images blend together.
 }
 
 .neon-button:hover {
-  filter: drop-shadow(0 0 15px #0ff) drop-shadow(0 0 30px #0ff) drop-shadow(0 0 45px #0ff);
+  filter: drop-shadow(0 0 15px #0ff) drop-shadow(0 0 30px #0ff)
+    drop-shadow(0 0 45px #0ff);
 }
 ```
 
@@ -643,7 +650,8 @@ Controls how background images blend together.
 
    /* Avoid: Too many filters */
    .image {
-     filter: blur(1px) brightness(110%) contrast(120%) saturate(150%) hue-rotate(10deg);
+     filter: blur(1px) brightness(110%) contrast(120%) saturate(150%)
+       hue-rotate(10deg);
    }
    ```
 

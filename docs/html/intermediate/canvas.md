@@ -1,7 +1,9 @@
 ---
 id: canvas
 title: HTML5 Canvas - Complete Graphics Guide
-description: Master HTML5 Canvas API for 2D graphics, animations, games, and interactive visualizations with practical examples.
+description:
+  Master HTML5 Canvas API for 2D graphics, animations, games, and interactive
+  visualizations with practical examples.
 keywords:
   [
     html5 canvas,
@@ -19,14 +21,20 @@ sidebar_position: 7
 
 # 🎨 HTML5 Canvas
 
-The HTML5 Canvas API provides a powerful way to draw graphics, create animations, build games, and generate visual content dynamically using JavaScript.
+The HTML5 Canvas API provides a powerful way to draw graphics, create
+animations, build games, and generate visual content dynamically using
+JavaScript.
 
 ## 📖 What is Canvas?
 
-Canvas is an HTML element that provides a drawable region in your web page. It's like a blank canvas where you can draw shapes, text, images, and create animations using JavaScript.
+Canvas is an HTML element that provides a drawable region in your web page. It's
+like a blank canvas where you can draw shapes, text, images, and create
+animations using JavaScript.
 
 ```html
-<canvas id="myCanvas" width="800" height="600"> Your browser doesn't support HTML5 Canvas. </canvas>
+<canvas id="myCanvas" width="800" height="600">
+  Your browser doesn't support HTML5 Canvas.
+</canvas>
 
 <script>
   const canvas = document.getElementById('myCanvas');
@@ -46,12 +54,20 @@ Canvas is an HTML element that provides a drawable region in your web page. It's
 
 ```html
 <!-- Canvas with explicit dimensions -->
-<canvas id="gameCanvas" width="800" height="600" style="border: 1px solid #ccc;">
+<canvas
+  id="gameCanvas"
+  width="800"
+  height="600"
+  style="border: 1px solid #ccc;"
+>
   Canvas not supported in your browser.
 </canvas>
 
 <!-- Responsive canvas -->
-<canvas id="responsiveCanvas" style="width: 100%; max-width: 800px; height: auto;">
+<canvas
+  id="responsiveCanvas"
+  style="width: 100%; max-width: 800px; height: auto;"
+>
   Canvas not supported.
 </canvas>
 ```
@@ -439,7 +455,12 @@ function drawTextWithBackground(text, x, y, padding = 10) {
 
   // Draw background
   ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-  ctx.fillRect(x - padding, y - height + padding, metrics.width + padding * 2, height + padding);
+  ctx.fillRect(
+    x - padding,
+    y - height + padding,
+    metrics.width + padding * 2,
+    height + padding,
+  );
 
   // Draw text
   ctx.fillStyle = 'black';
@@ -589,7 +610,7 @@ animate();
 const canvas = document.getElementById('interactiveCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.addEventListener('mousemove', (event) => {
+canvas.addEventListener('mousemove', event => {
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
@@ -609,7 +630,7 @@ canvas.addEventListener('mousemove', (event) => {
   ctx.fillText(`X: ${Math.round(x)}, Y: ${Math.round(y)}`, 10, 30);
 });
 
-canvas.addEventListener('click', (event) => {
+canvas.addEventListener('click', event => {
   // Add permanent circle on click
   const rect = canvas.getBoundingClientRect();
   const x = event.clientX - rect.left;
@@ -628,7 +649,7 @@ canvas.addEventListener('click', (event) => {
 const canvas = document.getElementById('touchCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.addEventListener('touchstart', (event) => {
+canvas.addEventListener('touchstart', event => {
   event.preventDefault();
   const touch = event.touches[0];
   const rect = canvas.getBoundingClientRect();
@@ -642,7 +663,7 @@ canvas.addEventListener('touchstart', (event) => {
   ctx.fill();
 });
 
-canvas.addEventListener('touchmove', (event) => {
+canvas.addEventListener('touchmove', event => {
   event.preventDefault();
   const touch = event.touches[0];
   const rect = canvas.getBoundingClientRect();
@@ -662,7 +683,12 @@ canvas.addEventListener('touchmove', (event) => {
 ## 🎮 Simple Game Example
 
 ```html
-<canvas id="gameCanvas" width="400" height="300" style="border: 1px solid #ccc;"></canvas>
+<canvas
+  id="gameCanvas"
+  width="400"
+  height="300"
+  style="border: 1px solid #ccc;"
+></canvas>
 <div>
   <p>Score: <span id="score">0</span></p>
   <button onclick="resetGame()">Reset Game</button>
@@ -711,7 +737,7 @@ canvas.addEventListener('touchmove', (event) => {
   }
 
   // Mouse controls
-  canvas.addEventListener('mousemove', (event) => {
+  canvas.addEventListener('mousemove', event => {
     const rect = canvas.getBoundingClientRect();
     const relativeX = event.clientX - rect.left;
 
@@ -730,7 +756,12 @@ canvas.addEventListener('touchmove', (event) => {
 
   function drawPaddle() {
     ctx.beginPath();
-    ctx.rect(paddle.x, canvas.height - paddle.height, paddle.width, paddle.height);
+    ctx.rect(
+      paddle.x,
+      canvas.height - paddle.height,
+      paddle.width,
+      paddle.height,
+    );
     ctx.fillStyle = '#0095DD';
     ctx.fill();
     ctx.closePath();
@@ -799,7 +830,10 @@ canvas.addEventListener('touchmove', (event) => {
     ball.y += ball.dy;
 
     // Wall collisions
-    if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
+    if (
+      ball.x + ball.dx > canvas.width - ball.radius ||
+      ball.x + ball.dx < ball.radius
+    ) {
       ball.dx = -ball.dx;
     }
 

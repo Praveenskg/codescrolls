@@ -1,7 +1,9 @@
 ---
 id: css-multi-column
 title: CSS Multi-column Layout - Complete Guide
-description: Master CSS multi-column layout for magazine-style designs. Learn column-count, column-width, column-gap, column-span, and create beautiful text layouts.
+description:
+  Master CSS multi-column layout for magazine-style designs. Learn column-count,
+  column-width, column-gap, column-span, and create beautiful text layouts.
 keywords:
   [
     css multi-column,
@@ -20,11 +22,14 @@ sidebar_position: 9
 
 # 📰 CSS Multi-column Layout
 
-CSS multi-column layout allows you to create magazine-style layouts where content flows naturally across multiple columns, perfect for long-form text and newspaper-style designs.
+CSS multi-column layout allows you to create magazine-style layouts where
+content flows naturally across multiple columns, perfect for long-form text and
+newspaper-style designs.
 
 ## 📖 What is Multi-column Layout?
 
-Multi-column layout splits content into multiple vertical columns, similar to newspaper or magazine layouts, with text flowing from one column to the next.
+Multi-column layout splits content into multiple vertical columns, similar to
+newspaper or magazine layouts, with text flowing from one column to the next.
 
 ```css
 .article {

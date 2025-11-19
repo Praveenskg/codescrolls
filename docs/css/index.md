@@ -1,7 +1,10 @@
 ---
 id: css-overview
 title: CSS Complete Guide - From Basics to Advanced
-description: Master CSS from fundamentals to advanced techniques. Learn selectors, box model, Flexbox, Grid, animations, responsive design, and modern CSS features with practical examples.
+description:
+  Master CSS from fundamentals to advanced techniques. Learn selectors, box
+  model, Flexbox, Grid, animations, responsive design, and modern CSS features
+  with practical examples.
 keywords:
   [
     css tutorial,
@@ -22,11 +25,15 @@ sidebar_position: 1
 
 # 🎨 CSS Complete Guide
 
-Welcome to the most comprehensive CSS learning resource! This guide will take you from absolute beginner to CSS expert with **100+ hands-on examples**, best practices, and real-world projects.
+Welcome to the most comprehensive CSS learning resource! This guide will take
+you from absolute beginner to CSS expert with **100+ hands-on examples**, best
+practices, and real-world projects.
 
 ## 📖 What is CSS?
 
-**CSS (Cascading Style Sheets)** is the language used to style and layout web pages. While HTML provides the structure, CSS brings your websites to life with colors, layouts, animations, and responsive designs.
+**CSS (Cascading Style Sheets)** is the language used to style and layout web
+pages. While HTML provides the structure, CSS brings your websites to life with
+colors, layouts, animations, and responsive designs.
 
 ```css
 /* Your first CSS */
@@ -57,34 +64,47 @@ body {
 
 ## 📚 Complete Course Structure
 
-This guide is organized into **19 comprehensive topics** across three difficulty levels:
+This guide is organized into **19 comprehensive topics** across three difficulty
+levels:
 
 ### 🟢 Basics (6 Topics)
 
-1. **[Selectors](./basics/selectors.md)** - Target HTML elements (Element, Class, ID, Attribute)
+1. **[Selectors](./basics/selectors.md)** - Target HTML elements (Element,
+   Class, ID, Attribute)
 2. **[Box Model](./basics/box-model.md)** - Content, Padding, Border, Margin
-3. **[Colors & Backgrounds](./basics/colors-backgrounds.md)** - RGB, HEX, HSL, gradients, images
+3. **[Colors & Backgrounds](./basics/colors-backgrounds.md)** - RGB, HEX, HSL,
+   gradients, images
 4. **[Typography](./basics/typography.md)** - Fonts, text styling, web fonts
 5. **[Units & Values](./basics/units-values.md)** - px, em, rem, %, vh, vw
-6. **[Display & Visibility](./basics/display-visibility.md)** - Block, inline, inline-block, none
+6. **[Display & Visibility](./basics/display-visibility.md)** - Block, inline,
+   inline-block, none
 
 ### 🟡 Intermediate (9 Topics)
 
 7. **[Flexbox](./intermediate/flexbox.md)** - One-dimensional layouts
 8. **[CSS Grid](./intermediate/grid.md)** - Two-dimensional layouts
-9. **[Positioning](./intermediate/positioning.md)** - Static, relative, absolute, fixed, sticky
-10. **[Responsive Design](./intermediate/responsive-design.md)** - Media queries, mobile-first
+9. **[Positioning](./intermediate/positioning.md)** - Static, relative,
+   absolute, fixed, sticky
+10. **[Responsive Design](./intermediate/responsive-design.md)** - Media
+    queries, mobile-first
 11. **[Transitions](./intermediate/transitions.md)** - Smooth property changes
-12. **[Animations](./intermediate/animations.md)** - Keyframes, complex animations
-13. **[Transforms](./intermediate/transforms.md)** ⭐ NEW - 2D/3D transforms, rotate, scale, perspective
-14. **[Filters & Effects](./intermediate/filters-effects.md)** ⭐ NEW - Blur, brightness, blend modes
-15. **[Multi-column Layout](./intermediate/multi-column.md)** ⭐ NEW - Magazine-style layouts
+12. **[Animations](./intermediate/animations.md)** - Keyframes, complex
+    animations
+13. **[Transforms](./intermediate/transforms.md)** ⭐ NEW - 2D/3D transforms,
+    rotate, scale, perspective
+14. **[Filters & Effects](./intermediate/filters-effects.md)** ⭐ NEW - Blur,
+    brightness, blend modes
+15. **[Multi-column Layout](./intermediate/multi-column.md)** ⭐ NEW -
+    Magazine-style layouts
 
 ### 🔴 Advanced (4 Topics)
 
-16. **[CSS Variables](./advanced/css-variables.md)** - Custom properties, theming
-17. **[Preprocessors](./advanced/preprocessors.md)** - SASS/SCSS, variables, mixins
-18. **[CSS Architecture](./advanced/architecture.md)** - BEM, SMACSS, organization
+16. **[CSS Variables](./advanced/css-variables.md)** - Custom properties,
+    theming
+17. **[Preprocessors](./advanced/preprocessors.md)** - SASS/SCSS, variables,
+    mixins
+18. **[CSS Architecture](./advanced/architecture.md)** - BEM, SMACSS,
+    organization
 19. **[Performance](./advanced/performance.md)** - Optimization, best practices
 
 ## 🎯 Learning Paths

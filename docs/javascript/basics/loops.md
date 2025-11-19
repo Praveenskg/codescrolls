@@ -2,7 +2,10 @@
 sidebar_position: 5
 id: javascript-loops
 title: JavaScript Loops - Complete Guide
-description: Master JavaScript loops including for, while, for...of, forEach, map, filter, and reduce. Learn iteration patterns with practical examples and best practices.
+description:
+  Master JavaScript loops including for, while, for...of, forEach, map, filter,
+  and reduce. Learn iteration patterns with practical examples and best
+  practices.
 keywords:
   [
     javascript loops,
@@ -23,7 +26,8 @@ tags:
 
 # JavaScript Loops
 
-Loops allow you to **execute code multiple times** efficiently. Master loops to work with collections, repeat tasks, and process data!
+Loops allow you to **execute code multiple times** efficiently. Master loops to
+work with collections, repeat tasks, and process data!
 
 ---
 
@@ -291,10 +295,10 @@ numbers.forEach((num, index) => {
 ```js live
 const numbers = [1, 2, 3, 4, 5];
 
-const doubled = numbers.map((num) => num * 2);
+const doubled = numbers.map(num => num * 2);
 console.log('Doubled:', doubled); // [2, 4, 6, 8, 10]
 
-const squares = numbers.map((num) => num ** 2);
+const squares = numbers.map(num => num ** 2);
 console.log('Squares:', squares); // [1, 4, 9, 16, 25]
 ```
 
@@ -303,10 +307,10 @@ console.log('Squares:', squares); // [1, 4, 9, 16, 25]
 ```js live
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const evens = numbers.filter((num) => num % 2 === 0);
+const evens = numbers.filter(num => num % 2 === 0);
 console.log('Evens:', evens); // [2, 4, 6, 8, 10]
 
-const greaterThan5 = numbers.filter((num) => num > 5);
+const greaterThan5 = numbers.filter(num => num > 5);
 console.log('Greater than 5:', greaterThan5); // [6, 7, 8, 9, 10]
 ```
 
@@ -334,8 +338,8 @@ console.log('Max:', max); // 5
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const result = numbers
-  .filter((num) => num % 2 === 0) // [2, 4, 6, 8, 10]
-  .map((num) => num * 2) // [4, 8, 12, 16, 20]
+  .filter(num => num % 2 === 0) // [2, 4, 6, 8, 10]
+  .map(num => num * 2) // [4, 8, 12, 16, 20]
   .reduce((sum, num) => sum + num, 0); // 60
 
 console.log('Result:', result); // 60
@@ -545,17 +549,17 @@ for (const key in object) {
 }
 
 // ✅ forEach for side effects
-array.forEach((item) => console.log(item));
+array.forEach(item => console.log(item));
 
 // ✅ map/filter/reduce for transformations
-const doubled = array.map((n) => n * 2);
+const doubled = array.map(n => n * 2);
 ```
 
 ### 2. Use Functional Methods
 
 ```js
 // ✅ Good - declarative
-const evens = numbers.filter((n) => n % 2 === 0);
+const evens = numbers.filter(n => n % 2 === 0);
 
 // ❌ Verbose - imperative
 const evens2 = [];
@@ -623,7 +627,7 @@ for (let i = 0; i < numbers.length; i++) {
 }
 
 // ✅ Correct - use filter
-const odds = numbers.filter((n) => n % 2 !== 0);
+const odds = numbers.filter(n => n % 2 !== 0);
 console.log(odds); // [1, 3, 5]
 ```
 

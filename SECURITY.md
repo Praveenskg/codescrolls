@@ -2,7 +2,8 @@
 
 ## 🚨 Reporting Security Vulnerabilities
 
-We take the security of CodeScrolls seriously. If you discover a security vulnerability, please help us by reporting it responsibly.
+We take the security of CodeScrolls seriously. If you discover a security
+vulnerability, please help us by reporting it responsibly.
 
 ### 📧 How to Report
 
@@ -88,7 +89,9 @@ We kindly ask that you:
 
 ### 🙏 Recognition
 
-We appreciate security researchers who help keep our project safe. With your permission, we'll acknowledge your contribution in our security advisory and add you to our Hall of Fame.
+We appreciate security researchers who help keep our project safe. With your
+permission, we'll acknowledge your contribution in our security advisory and add
+you to our Hall of Fame.
 
 ### 📜 Security Advisories
 
@@ -108,4 +111,5 @@ Past security advisories and fixes can be found in our:
 
 **Thank you for helping keep CodeScrolls secure! 🛡️**
 
-_This security policy is inspired by industry best practices and the [OpenSSF Security Policy template](https://github.com/ossf/security-policy-template)._
+_This security policy is inspired by industry best practices and the
+[OpenSSF Security Policy template](https://github.com/ossf/security-policy-template)._

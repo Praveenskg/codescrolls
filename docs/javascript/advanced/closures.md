@@ -1,7 +1,9 @@
 ---
 sidebar_position: 6
 title: JavaScript Closures - Complete Guide
-description: Master JavaScript closures with practical examples. Learn lexical scoping, data privacy, factory functions, and common closure patterns in depth.
+description:
+  Master JavaScript closures with practical examples. Learn lexical scoping,
+  data privacy, factory functions, and common closure patterns in depth.
 keywords:
   [
     javascript closures,
@@ -21,7 +23,9 @@ tags:
 
 # JavaScript Closures
 
-A **closure** is a function that has access to variables from its outer (enclosing) scope, even after the outer function has finished executing. Closures are one of JavaScript's most powerful features!
+A **closure** is a function that has access to variables from its outer
+(enclosing) scope, even after the outer function has finished executing.
+Closures are one of JavaScript's most powerful features!
 
 ---
 
@@ -42,13 +46,15 @@ const myFunction = outer();
 myFunction(); // 'Hello' - closure in action!
 ```
 
-**Key Point:** `inner()` "remembers" the `message` variable even though `outer()` has finished execution.
+**Key Point:** `inner()` "remembers" the `message` variable even though
+`outer()` has finished execution.
 
 ---
 
 ## 📦 Lexical Scoping
 
-Closures are based on **lexical scoping** - where a variable is defined determines where it can be accessed.
+Closures are based on **lexical scoping** - where a variable is defined
+determines where it can be accessed.
 
 ```js
 const global = 'I am global';
@@ -415,13 +421,13 @@ function debounce(fn, delay) {
 }
 
 // Usage with search
-const search = debounce((query) => {
+const search = debounce(query => {
   console.log('Searching for:', query);
   // Make API call
 }, 300);
 
 // User types: only last call executes after 300ms pause
-searchInput.addEventListener('input', (e) => search(e.target.value));
+searchInput.addEventListener('input', e => search(e.target.value));
 ```
 
 ### Example 5: Module Pattern
@@ -451,7 +457,7 @@ const userModule = (function () {
     },
 
     getUser(id) {
-      return users.find((u) => u.id === id);
+      return users.find(u => u.id === id);
     },
 
     getAllUsers() {
@@ -459,7 +465,7 @@ const userModule = (function () {
     },
 
     removeUser(id) {
-      const index = users.findIndex((u) => u.id === id);
+      const index = users.findIndex(u => u.id === id);
       if (index !== -1) {
         return users.splice(index, 1)[0];
       }
@@ -542,7 +548,7 @@ function createUser(name) {
 
   return {
     getName: () => _name,
-    setName: (newName) => (_name = newName),
+    setName: newName => (_name = newName),
   };
 }
 ```

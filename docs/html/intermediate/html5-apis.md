@@ -1,7 +1,9 @@
 ---
 id: html5-apis
 title: HTML5 APIs - Complete Guide
-description: Master HTML5 APIs including Geolocation, Web Storage, Notifications, File API, and modern browser capabilities.
+description:
+  Master HTML5 APIs including Geolocation, Web Storage, Notifications, File API,
+  and modern browser capabilities.
 keywords:
   [
     html5 apis,
@@ -21,11 +23,15 @@ sidebar_position: 6
 
 # 🌐 HTML5 APIs
 
-HTML5 introduces powerful JavaScript APIs that extend browser capabilities beyond traditional web pages. These APIs enable modern web applications with native-like features.
+HTML5 introduces powerful JavaScript APIs that extend browser capabilities
+beyond traditional web pages. These APIs enable modern web applications with
+native-like features.
 
 ## 📖 What are HTML5 APIs?
 
-HTML5 APIs provide JavaScript interfaces to access device capabilities, store data locally, handle user interactions, and more. They work alongside HTML5 markup to create rich web experiences.
+HTML5 APIs provide JavaScript interfaces to access device capabilities, store
+data locally, handle user interactions, and more. They work alongside HTML5
+markup to create rich web experiences.
 
 ---
 
@@ -40,12 +46,12 @@ Access the user's geographical location.
 if ('geolocation' in navigator) {
   // Get current position
   navigator.geolocation.getCurrentPosition(
-    (position) => {
+    position => {
       const { latitude, longitude, accuracy } = position.coords;
       console.log(`Location: ${latitude}, ${longitude}`);
       console.log(`Accuracy: ${accuracy} meters`);
     },
-    (error) => {
+    error => {
       console.error('Error getting location:', error.message);
     },
   );
@@ -64,7 +70,7 @@ const options = {
 };
 
 navigator.geolocation.getCurrentPosition(
-  (position) => {
+  position => {
     const { latitude, longitude, altitude, heading, speed } = position.coords;
 
     console.log(`Latitude: ${latitude}`);
@@ -73,7 +79,7 @@ navigator.geolocation.getCurrentPosition(
     console.log(`Heading: ${heading || 'Not available'}`);
     console.log(`Speed: ${speed || 'Not available'}`);
   },
-  (error) => {
+  error => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         console.error('User denied location access');
@@ -98,12 +104,12 @@ let watchId;
 function startTracking() {
   if ('geolocation' in navigator) {
     watchId = navigator.geolocation.watchPosition(
-      (position) => {
+      position => {
         const { latitude, longitude, speed } = position.coords;
         updateMap(latitude, longitude);
         updateSpeed(speed);
       },
-      (error) => console.error('Tracking error:', error),
+      error => console.error('Tracking error:', error),
       { enableHighAccuracy: true },
     );
   }
@@ -232,16 +238,19 @@ localStorage.setItem('user', JSON.stringify(storedUser));
 
 ```javascript
 // Listen for storage changes (works across tabs)
-window.addEventListener('storage', (event) => {
+window.addEventListener('storage', event => {
   console.log('Storage changed:');
   console.log('Key:', event.key);
   console.log('Old value:', event.oldValue);
   console.log('New value:', event.newValue);
-  console.log('Storage area:', event.storageArea === localStorage ? 'Local' : 'Session');
+  console.log(
+    'Storage area:',
+    event.storageArea === localStorage ? 'Local' : 'Session',
+  );
 });
 
 // Example: Update UI when settings change in another tab
-window.addEventListener('storage', (event) => {
+window.addEventListener('storage', event => {
   if (event.key === 'theme') {
     updateTheme(event.newValue);
   }
@@ -324,7 +333,7 @@ Show native browser notifications.
 // Check if notifications are supported
 if ('Notification' in window) {
   // Request permission
-  Notification.requestPermission().then((permission) => {
+  Notification.requestPermission().then(permission => {
     if (permission === 'granted') {
       console.log('Notification permission granted');
 
@@ -380,7 +389,7 @@ function showAdvancedNotification() {
   const notification = new Notification('New Message', options);
 
   // Handle action clicks
-  notification.onclick = (event) => {
+  notification.onclick = event => {
     if (event.action === 'reply') {
       openReplyWindow(notification.data);
     } else if (event.action === 'view') {
@@ -486,7 +495,7 @@ Handle file uploads and manipulation.
 <div id="file-info"></div>
 
 <script>
-  document.getElementById('file-input').addEventListener('change', (event) => {
+  document.getElementById('file-input').addEventListener('change', event => {
     const files = event.target.files;
     const fileInfo = document.getElementById('file-info');
 
@@ -600,12 +609,12 @@ function readFileAsDataURL(file) {
   });
 
   // Handle file input change
-  fileInput.addEventListener('change', (event) => {
+  fileInput.addEventListener('change', event => {
     handleFiles(event.target.files);
   });
 
   // Drag and drop events
-  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((eventName) => {
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropZone.addEventListener(eventName, preventDefaults, false);
   });
 
@@ -614,11 +623,11 @@ function readFileAsDataURL(file) {
     e.stopPropagation();
   }
 
-  ['dragenter', 'dragover'].forEach((eventName) => {
+  ['dragenter', 'dragover'].forEach(eventName => {
     dropZone.addEventListener(eventName, highlight, false);
   });
 
-  ['dragleave', 'drop'].forEach((eventName) => {
+  ['dragleave', 'drop'].forEach(eventName => {
     dropZone.addEventListener(eventName, unhighlight, false);
   });
 
@@ -641,7 +650,7 @@ function readFileAsDataURL(file) {
   function handleFiles(files) {
     fileList.innerHTML = '';
 
-    Array.from(files).forEach((file) => {
+    Array.from(files).forEach(file => {
       const item = document.createElement('div');
       item.innerHTML = `
       <strong>${file.name}</strong> (${formatFileSize(file.size)})
@@ -655,7 +664,9 @@ function readFileAsDataURL(file) {
   }
 
   function simulateUpload(file) {
-    const progressSpan = document.getElementById(`progress-${file.name.replace(/\./g, '-')}`);
+    const progressSpan = document.getElementById(
+      `progress-${file.name.replace(/\./g, '-')}`,
+    );
     let progress = 0;
 
     const interval = setInterval(() => {
@@ -711,7 +722,9 @@ async function pasteFromClipboard() {
 // Copy complex data
 async function copyImage(imageBlob) {
   try {
-    await navigator.clipboard.write([new ClipboardItem({ 'image/png': imageBlob })]);
+    await navigator.clipboard.write([
+      new ClipboardItem({ 'image/png': imageBlob }),
+    ]);
     console.log('Image copied to clipboard');
   } catch (error) {
     console.error('Failed to copy image:', error);
@@ -761,7 +774,7 @@ function showNotificationWithVibration() {
 }
 
 // Form submission feedback
-document.querySelector('form').addEventListener('submit', (e) => {
+document.querySelector('form').addEventListener('submit', e => {
   e.preventDefault();
 
   // Submit form logic here
@@ -776,7 +789,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
 ```javascript
 // Get battery information
 if ('getBattery' in navigator) {
-  navigator.getBattery().then((battery) => {
+  navigator.getBattery().then(battery => {
     console.log('Battery level:', battery.level * 100 + '%');
     console.log('Charging:', battery.charging);
     console.log('Charging time:', battery.chargingTime);
@@ -833,17 +846,17 @@ if ('geolocation' in navigator) {
 
 // Handle errors gracefully
 navigator.geolocation.getCurrentPosition(
-  (position) => {
+  position => {
     // Success handler
   },
-  (error) => {
+  error => {
     console.error('Geolocation error:', error.message);
     // Show user-friendly message
   },
 );
 
 // Request permissions when needed
-Notification.requestPermission().then((permission) => {
+Notification.requestPermission().then(permission => {
   if (permission === 'granted') {
     // Show notification
   }

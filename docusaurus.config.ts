@@ -50,29 +50,29 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        'name': 'CodeScrolls',
-        'alternateName': 'CodeScrolls - Web Development Documentation',
-        'url': 'https://codescrolls.site',
-        'logo': {
+        name: 'CodeScrolls',
+        alternateName: 'CodeScrolls - Web Development Documentation',
+        url: 'https://codescrolls.site',
+        logo: {
           '@type': 'ImageObject',
-          'url': 'https://codescrolls.site/img/logo.png',
-          'width': 512,
-          'height': 512,
+          url: 'https://codescrolls.site/img/logo.png',
+          width: 512,
+          height: 512,
         },
-        'description':
+        description:
           'Comprehensive web development documentation covering JavaScript, React, TypeScript, and modern web technologies.',
-        'foundingDate': '2024',
-        'founder': {
+        foundingDate: '2024',
+        founder: {
           '@type': 'Person',
-          'name': 'Praveen Singh',
-          'url': 'https://linkedin.com/in/praveenskg',
+          name: 'Praveen Singh',
+          url: 'https://linkedin.com/in/praveenskg',
         },
-        'contactPoint': {
+        contactPoint: {
           '@type': 'ContactPoint',
-          'contactType': 'Technical Support',
-          'url': 'https://codescrolls.site/contact',
+          contactType: 'Technical Support',
+          url: 'https://codescrolls.site/contact',
         },
-        'sameAs': [
+        sameAs: [
           'https://github.com/Praveenskg',
           'https://x.com/its_praveen_s',
           'https://twitter.com/its_praveen_s',
@@ -87,27 +87,27 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        'name': 'CodeScrolls',
-        'url': 'https://codescrolls.site',
-        'description':
+        name: 'CodeScrolls',
+        url: 'https://codescrolls.site',
+        description:
           'Learn web development with clear documentation, tutorials, and guides for JavaScript, React, TypeScript, and more.',
-        'publisher': {
+        publisher: {
           '@type': 'Organization',
-          'name': 'CodeScrolls',
-          'logo': {
+          name: 'CodeScrolls',
+          logo: {
             '@type': 'ImageObject',
-            'url': 'https://codescrolls.site/img/logo.png',
+            url: 'https://codescrolls.site/img/logo.png',
           },
         },
-        'potentialAction': {
+        potentialAction: {
           '@type': 'SearchAction',
-          'target': {
+          target: {
             '@type': 'EntryPoint',
-            'urlTemplate': 'https://codescrolls.site/search?q={search_term_string}',
+            urlTemplate: 'https://codescrolls.site/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
-        'inLanguage': 'en-US',
+        inLanguage: 'en-US',
       }),
     },
     // Educational Organization Schema
@@ -117,55 +117,55 @@ const config: Config = {
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'EducationalOrganization',
-        'name': 'CodeScrolls',
-        'url': 'https://codescrolls.site',
-        'description': 'Free educational resource for learning web development technologies.',
-        'educationalCredentialAwarded': 'Web Development Knowledge',
-        'hasOfferCatalog': {
+        name: 'CodeScrolls',
+        url: 'https://codescrolls.site',
+        description: 'Free educational resource for learning web development technologies.',
+        educationalCredentialAwarded: 'Web Development Knowledge',
+        hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          'name': 'Web Development Courses',
-          'itemListElement': [
+          name: 'Web Development Courses',
+          itemListElement: [
             {
               '@type': 'Offer',
-              'itemOffered': {
+              itemOffered: {
                 '@type': 'Course',
-                'name': 'JavaScript Documentation',
-                'description': 'Comprehensive JavaScript tutorials and guides',
-                'provider': {
+                name: 'JavaScript Documentation',
+                description: 'Comprehensive JavaScript tutorials and guides',
+                provider: {
                   '@type': 'Organization',
-                  'name': 'CodeScrolls',
+                  name: 'CodeScrolls',
                 },
               },
-              'price': '0',
-              'priceCurrency': 'USD',
+              price: '0',
+              priceCurrency: 'USD',
             },
             {
               '@type': 'Offer',
-              'itemOffered': {
+              itemOffered: {
                 '@type': 'Course',
-                'name': 'React Documentation',
-                'description': 'Complete React.js documentation and tutorials',
-                'provider': {
+                name: 'React Documentation',
+                description: 'Complete React.js documentation and tutorials',
+                provider: {
                   '@type': 'Organization',
-                  'name': 'CodeScrolls',
+                  name: 'CodeScrolls',
                 },
               },
-              'price': '0',
-              'priceCurrency': 'USD',
+              price: '0',
+              priceCurrency: 'USD',
             },
             {
               '@type': 'Offer',
-              'itemOffered': {
+              itemOffered: {
                 '@type': 'Course',
-                'name': 'TypeScript Documentation',
-                'description': 'TypeScript guides and best practices',
-                'provider': {
+                name: 'TypeScript Documentation',
+                description: 'TypeScript guides and best practices',
+                provider: {
                   '@type': 'Organization',
-                  'name': 'CodeScrolls',
+                  name: 'CodeScrolls',
                 },
               },
-              'price': '0',
-              'priceCurrency': 'USD',
+              price: '0',
+              priceCurrency: 'USD',
             },
           ],
         },
@@ -240,10 +240,10 @@ const config: Config = {
           priority: 0.5,
           ignorePatterns: ['/tags/**'],
           filename: 'sitemap.xml',
-          createSitemapItems: async (params) => {
+          createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter((item) => !item.url.includes('/page/'));
+            return items.filter(item => !item.url.includes('/page/'));
           },
         },
       } satisfies Preset.Options,
@@ -413,9 +413,9 @@ const config: Config = {
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
-          'href': 'https://github.com/Praveenskg/codescrolls',
-          'position': 'right',
-          'className': 'header-github-link',
+          href: 'https://github.com/Praveenskg/codescrolls',
+          position: 'right',
+          className: 'header-github-link',
           'aria-label': 'GitHub repository',
         },
       ],

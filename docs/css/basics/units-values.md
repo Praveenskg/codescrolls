@@ -1,7 +1,9 @@
 ---
 id: css-units-values
 title: CSS Units & Values - Complete Guide
-description: Master CSS units including px, em, rem, %, vh, vw, and more. Learn when to use absolute vs relative units for responsive, accessible designs.
+description:
+  Master CSS units including px, em, rem, %, vh, vw, and more. Learn when to use
+  absolute vs relative units for responsive, accessible designs.
 keywords:
   [
     css units,
@@ -22,7 +24,8 @@ sidebar_position: 5
 
 # 📏 CSS Units & Values
 
-Understanding CSS units is crucial for creating responsive, accessible websites. Learn when to use pixels, ems, rems, percentages, and viewport units.
+Understanding CSS units is crucial for creating responsive, accessible websites.
+Learn when to use pixels, ems, rems, percentages, and viewport units.
 
 ## 📊 Unit Categories
 

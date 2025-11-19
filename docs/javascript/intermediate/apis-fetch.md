@@ -1,7 +1,9 @@
 ---
 sidebar_position: 5
 title: JavaScript APIs & Fetch - Complete Guide
-description: Master the Fetch API for making HTTP requests. Learn GET, POST, PUT, DELETE, error handling, headers, and async data fetching in JavaScript.
+description:
+  Master the Fetch API for making HTTP requests. Learn GET, POST, PUT, DELETE,
+  error handling, headers, and async data fetching in JavaScript.
 keywords:
   [
     javascript fetch,
@@ -22,20 +24,22 @@ tags:
 
 # APIs & Fetch
 
-The **Fetch API** provides a modern way to make HTTP requests. Learn to fetch data, handle responses, and build connected applications!
+The **Fetch API** provides a modern way to make HTTP requests. Learn to fetch
+data, handle responses, and build connected applications!
 
 ---
 
 ## 🎯 What is Fetch?
 
-Fetch is a **promise-based** API for making network requests. It replaces the old `XMLHttpRequest`.
+Fetch is a **promise-based** API for making network requests. It replaces the
+old `XMLHttpRequest`.
 
 ```js
 // Simple GET request
 fetch('https://api.example.com/data')
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => console.error('Error:', error));
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 ```
 
 ---
@@ -140,7 +144,7 @@ async function uploadFile(file) {
 
 // Usage
 const fileInput = document.querySelector('#fileInput');
-fileInput.addEventListener('change', (e) => {
+fileInput.addEventListener('change', e => {
   const file = e.target.files[0];
   uploadFile(file);
 });
@@ -231,7 +235,7 @@ fetch('/api/data', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer YOUR_TOKEN_HERE',
+    Authorization: 'Bearer YOUR_TOKEN_HERE',
     'X-Custom-Header': 'value',
   },
 });
@@ -332,8 +336,8 @@ async function fetchWithTimeout(url, timeout = 5000) {
 
 // Usage
 fetchWithTimeout('/api/data', 3000)
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error.message));
+  .then(data => console.log(data))
+  .catch(error => console.error(error.message));
 ```
 
 ### Manual Abort
@@ -345,9 +349,9 @@ const controller = new AbortController();
 fetch('/api/data', {
   signal: controller.signal,
 })
-  .then((response) => response.json())
-  .then((data) => console.log(data))
-  .catch((error) => {
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => {
     if (error.name === 'AbortError') {
       console.log('Request was aborted');
     }
@@ -478,7 +482,9 @@ async function loadPosts() {
     errorDiv.style.display = 'none';
 
     // Fetch data
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+    const response = await fetch(
+      'https://jsonplaceholder.typicode.com/posts?_limit=5',
+    );
 
     if (!response.ok) {
       throw new Error('Failed to load posts');
@@ -490,7 +496,7 @@ async function loadPosts() {
     container.innerHTML = '';
 
     // Render posts
-    posts.forEach((post) => {
+    posts.forEach(post => {
       const article = document.createElement('article');
       article.innerHTML = `
         <h2>${post.title}</h2>
@@ -541,14 +547,16 @@ async function searchUsers(query) {
 
 function displayResults(users) {
   const results = document.querySelector('#results');
-  results.innerHTML = users.map((user) => `<div class="user">${user.name}</div>`).join('');
+  results.innerHTML = users
+    .map(user => `<div class="user">${user.name}</div>`)
+    .join('');
 }
 
 // Setup search input
 const searchInput = document.querySelector('#search');
 const debouncedSearch = debounce(searchUsers, 300);
 
-searchInput.addEventListener('input', (e) => {
+searchInput.addEventListener('input', e => {
   debouncedSearch(e.target.value);
 });
 ```
@@ -560,9 +568,9 @@ async function loadDashboardData() {
   try {
     // Fetch multiple endpoints in parallel
     const [users, posts, stats] = await Promise.all([
-      fetch('/api/users').then((r) => r.json()),
-      fetch('/api/posts').then((r) => r.json()),
-      fetch('/api/stats').then((r) => r.json()),
+      fetch('/api/users').then(r => r.json()),
+      fetch('/api/posts').then(r => r.json()),
+      fetch('/api/stats').then(r => r.json()),
     ]);
 
     return {
@@ -577,7 +585,7 @@ async function loadDashboardData() {
 }
 
 // Usage
-loadDashboardData().then((data) => {
+loadDashboardData().then(data => {
   console.log('Dashboard data:', data);
   renderDashboard(data);
 });
@@ -601,7 +609,8 @@ class InfiniteScroll {
     window.addEventListener('scroll', () => {
       if (this.loading || !this.hasMore) return;
 
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
 
       // Load more when 200px from bottom
       if (scrollTop + clientHeight >= scrollHeight - 200) {
@@ -635,7 +644,7 @@ class InfiniteScroll {
   }
 
   renderPosts(posts) {
-    posts.forEach((post) => {
+    posts.forEach(post => {
       const article = document.createElement('article');
       article.innerHTML = `
         <h2>${post.title}</h2>
@@ -659,12 +668,12 @@ new InfiniteScroll();
 ```js
 // ✅ Good
 fetch('/api/data')
-  .then((response) => {
+  .then(response => {
     if (!response.ok) throw new Error('Failed');
     return response.json();
   })
-  .then((data) => console.log(data))
-  .catch((error) => console.error(error));
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 ```
 
 ### 2. Use Async/Await

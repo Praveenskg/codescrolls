@@ -1,7 +1,9 @@
 ---
 id: html-forms
 title: HTML Forms - Complete Guide
-description: Master HTML forms with validation, accessibility, and best practices. Learn form elements, input types, form submission, and user experience.
+description:
+  Master HTML forms with validation, accessibility, and best practices. Learn
+  form elements, input types, form submission, and user experience.
 keywords:
   [
     html forms,
@@ -18,7 +20,8 @@ sidebar_position: 4
 
 # 📝 HTML Forms
 
-HTML forms enable user interaction by collecting and submitting data. Modern HTML5 forms provide rich input types, validation, and accessibility features.
+HTML forms enable user interaction by collecting and submitting data. Modern
+HTML5 forms provide rich input types, validation, and accessibility features.
 
 ## 📖 Form Basics
 
@@ -279,7 +282,12 @@ Clickable button.
 <input type="password" name="password" minlength="8" maxlength="20" required />
 
 <!-- Pattern matching -->
-<input type="text" name="zipcode" pattern="[0-9]{5}" title="Five digit zip code" />
+<input
+  type="text"
+  name="zipcode"
+  pattern="[0-9]{5}"
+  title="Five digit zip code"
+/>
 
 <!-- Email validation -->
 <input type="email" name="email" required />
@@ -370,7 +378,9 @@ Clickable button.
     aria-describedby="password-error"
     aria-invalid="true"
   />
-  <div id="password-error" class="error">Password must be at least 8 characters long</div>
+  <div id="password-error" class="error">
+    Password must be at least 8 characters long
+  </div>
 </div>
 ```
 
@@ -505,7 +515,7 @@ Clickable button.
 </form>
 
 <script>
-  document.getElementById('myForm').addEventListener('submit', async (e) => {
+  document.getElementById('myForm').addEventListener('submit', async e => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -611,7 +621,13 @@ Clickable button.
 
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required autocomplete="email" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+          />
           <div class="error" id="email-error" aria-live="polite"></div>
         </div>
 

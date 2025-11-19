@@ -1,7 +1,9 @@
 ---
 id: functions
 title: Functions
-description: Learn how to define functions, type parameters and return values, use optional and default parameters, and master arrow functions in TypeScript.
+description:
+  Learn how to define functions, type parameters and return values, use optional
+  and default parameters, and master arrow functions in TypeScript.
 keywords:
   - typescript functions
   - arrow functions
@@ -17,7 +19,8 @@ tags: [typescript, functions, parameters, basics]
 
 # Functions in TypeScript
 
-Functions in TypeScript are similar to JavaScript but with **type annotations** that make them safer and more predictable.
+Functions in TypeScript are similar to JavaScript but with **type annotations**
+that make them safer and more predictable.
 
 ---
 
@@ -109,7 +112,8 @@ function square(n: number) {
 
 ## 8. `never` Return Type
 
-Functions that never return (e.g., always throw errors or loop forever) can use the `never` type.
+Functions that never return (e.g., always throw errors or loop forever) can use
+the `never` type.
 
 ```ts
 function throwError(msg: string): never {

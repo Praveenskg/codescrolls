@@ -1,7 +1,9 @@
 ---
 id: type-guards
 title: Type Guards
-description: Learn how Type Guards help in narrowing types and ensuring type safety during runtime checks in TypeScript.
+description:
+  Learn how Type Guards help in narrowing types and ensuring type safety during
+  runtime checks in TypeScript.
 keywords:
   - typescript
   - type guards
@@ -16,7 +18,8 @@ tags: [typescript, type guards, narrowing, safety]
 
 # Type Guards in TypeScript
 
-Type guards allow you to narrow down the type of a variable within a conditional block.  
+Type guards allow you to narrow down the type of a variable within a conditional
+block.  
 They’re especially useful when dealing with union types (`|`) or `unknown`.
 
 ---

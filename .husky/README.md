@@ -1,10 +1,12 @@
 # Git Hooks Documentation
 
-This directory contains Git hooks managed by [Husky](https://typicode.github.io/husky/).
+This directory contains Git hooks managed by
+[Husky](https://typicode.github.io/husky/).
 
 ## 🎯 Purpose
 
-These hooks ensure code quality and consistency by automatically running checks before commits.
+These hooks ensure code quality and consistency by automatically running checks
+before commits.
 
 ---
 

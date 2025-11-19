@@ -1,7 +1,9 @@
 ---
 id: web-components
 title: Web Components - Reusable Custom HTML Elements
-description: Master Web Components with Custom Elements, Shadow DOM, and HTML Templates for building reusable, encapsulated UI components.
+description:
+  Master Web Components with Custom Elements, Shadow DOM, and HTML Templates for
+  building reusable, encapsulated UI components.
 keywords:
   [
     web components,
@@ -18,7 +20,8 @@ sidebar_position: 11
 
 # 🧩 Web Components
 
-Web Components are a set of web platform APIs that allow you to create reusable custom HTML elements with encapsulated functionality and styling.
+Web Components are a set of web platform APIs that allow you to create reusable
+custom HTML elements with encapsulated functionality and styling.
 
 ## 📖 What are Web Components?
 
@@ -303,7 +306,10 @@ console.log(closedEl.shadowRoot); // null
 </script>
 
 <!-- Usage -->
-<my-card title="Hello World" content="This is a reusable card component"></my-card>
+<my-card
+  title="Hello World"
+  content="This is a reusable card component"
+></my-card>
 ```
 
 ### Template with Slots
@@ -565,7 +571,8 @@ console.log(closedEl.shadowRoot); // null
       // Update profile info
       shadow.querySelector('.profile-name').textContent =
         this.getAttribute('name') || 'Unknown User';
-      shadow.querySelector('.profile-title').textContent = this.getAttribute('title') || 'No Title';
+      shadow.querySelector('.profile-title').textContent =
+        this.getAttribute('title') || 'No Title';
       shadow.querySelector('.profile-avatar').src =
         this.getAttribute('avatar') || '/default-avatar.png';
       shadow.querySelector('.email').textContent =
@@ -574,19 +581,28 @@ console.log(closedEl.shadowRoot); // null
         this.getAttribute('phone') || 'No phone provided';
       shadow.querySelector('.location').textContent =
         this.getAttribute('location') || 'No location provided';
-      shadow.querySelector('.bio').textContent = this.getAttribute('bio') || 'No bio provided';
+      shadow.querySelector('.bio').textContent =
+        this.getAttribute('bio') || 'No bio provided';
     }
 
     attachEventListeners() {
       const shadow = this.shadowRoot;
-      shadow.querySelector('.btn-primary').addEventListener('click', this.handleMessage);
-      shadow.querySelector('.btn-secondary').addEventListener('click', this.handleFollow);
+      shadow
+        .querySelector('.btn-primary')
+        .addEventListener('click', this.handleMessage);
+      shadow
+        .querySelector('.btn-secondary')
+        .addEventListener('click', this.handleFollow);
     }
 
     removeEventListeners() {
       const shadow = this.shadowRoot;
-      shadow.querySelector('.btn-primary').removeEventListener('click', this.handleMessage);
-      shadow.querySelector('.btn-secondary').removeEventListener('click', this.handleFollow);
+      shadow
+        .querySelector('.btn-primary')
+        .removeEventListener('click', this.handleMessage);
+      shadow
+        .querySelector('.btn-secondary')
+        .removeEventListener('click', this.handleFollow);
     }
 
     handleMessage() {
@@ -738,7 +754,7 @@ customElements.define('counter-element', CounterElement);
 
 // Usage
 const counter = document.querySelector('counter-element');
-counter.addEventListener('count-changed', (event) => {
+counter.addEventListener('count-changed', event => {
   console.log('Count changed:', event.detail);
 });
 
@@ -888,7 +904,7 @@ class ModalElement extends BaseComponent {
 
   connectedCallback() {
     this.closeBtn.addEventListener('click', () => this.close());
-    this.shadowRoot.addEventListener('click', (e) => {
+    this.shadowRoot.addEventListener('click', e => {
       if (e.target.dataset.action === 'cancel') this.close();
       if (e.target.dataset.action === 'confirm') this.confirm();
     });
@@ -1046,9 +1062,9 @@ class ComponentFactory {
   static create(elementName, options = {}) {
     const element = document.createElement(elementName);
 
-    Object.keys(options).forEach((key) => {
+    Object.keys(options).forEach(key => {
       if (key === 'children') {
-        options.children.forEach((child) => element.appendChild(child));
+        options.children.forEach(child => element.appendChild(child));
       } else {
         element.setAttribute(key, options[key]);
       }

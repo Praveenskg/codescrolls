@@ -1,7 +1,10 @@
 ---
 sidebar_position: 3
 title: ES6+ Modern JavaScript Features
-description: Master ES6+ features including destructuring, spread/rest operators, template literals, modules, classes, and more. Learn modern JavaScript syntax with practical examples.
+description:
+  Master ES6+ features including destructuring, spread/rest operators, template
+  literals, modules, classes, and more. Learn modern JavaScript syntax with
+  practical examples.
 keywords:
   [
     es6 javascript,
@@ -23,7 +26,8 @@ tags:
 
 # ES6+ Modern JavaScript Features
 
-ES6 (ECMAScript 2015) and beyond brought **revolutionary changes** to JavaScript. These features make code more concise, readable, and powerful!
+ES6 (ECMAScript 2015) and beyond brought **revolutionary changes** to
+JavaScript. These features make code more concise, readable, and powerful!
 
 ---
 
@@ -188,7 +192,7 @@ console.log(sum(1, 2, 3, 4, 5)); // 15
 
 // Mix with normal parameters
 function multiply(multiplier, ...numbers) {
-  return numbers.map((n) => n * multiplier);
+  return numbers.map(n => n * multiplier);
 }
 
 console.log(multiply(2, 1, 2, 3)); // [2, 4, 6]
@@ -466,7 +470,7 @@ const activeUsers = users
 console.log('Active:', activeUsers);
 
 // Spread to add properties
-const enrichedUsers = users.map((user) => ({
+const enrichedUsers = users.map(user => ({
   ...user,
   displayName: `User: ${user.name}`,
 }));
@@ -478,7 +482,11 @@ console.log('Enriched:', enrichedUsers);
 
 ```js live
 function handleResponse(response = {}) {
-  const { data = [], meta: { page = 1, total = 0 } = {}, error = null } = response;
+  const {
+    data = [],
+    meta: { page = 1, total = 0 } = {},
+    error = null,
+  } = response;
 
   if (error) {
     return { success: false, message: error };

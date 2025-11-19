@@ -1,7 +1,10 @@
 ---
 id: css-transitions
 title: CSS Transitions - Complete Guide
-description: Master CSS transitions for smooth property changes. Learn transition-property, duration, timing functions, delays, and create beautiful hover effects and UI interactions.
+description:
+  Master CSS transitions for smooth property changes. Learn transition-property,
+  duration, timing functions, delays, and create beautiful hover effects and UI
+  interactions.
 keywords:
   [
     css transitions,
@@ -18,7 +21,8 @@ sidebar_position: 5
 
 # ⚡ CSS Transitions
 
-CSS transitions enable smooth changes between property values, creating polished user interfaces and delightful interactions.
+CSS transitions enable smooth changes between property values, creating polished
+user interfaces and delightful interactions.
 
 ## 🎯 Transition Properties
 

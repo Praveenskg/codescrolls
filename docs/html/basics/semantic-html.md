@@ -1,7 +1,9 @@
 ---
 id: semantic-html
 title: Semantic HTML - Complete Guide
-description: Master semantic HTML elements for better accessibility, SEO, and maintainability. Learn proper document structure and semantic markup.
+description:
+  Master semantic HTML elements for better accessibility, SEO, and
+  maintainability. Learn proper document structure and semantic markup.
 keywords:
   [
     semantic html,
@@ -18,7 +20,8 @@ sidebar_position: 3
 
 # 🎯 Semantic HTML
 
-Semantic HTML uses meaningful elements that clearly describe their purpose to browsers, developers, and assistive technologies.
+Semantic HTML uses meaningful elements that clearly describe their purpose to
+browsers, developers, and assistive technologies.
 
 ## 📖 Why Semantic HTML Matters?
 
@@ -279,7 +282,10 @@ Proper heading hierarchy is crucial for accessibility.
 <p>According to the documentation:</p>
 
 <blockquote cite="https://developer.mozilla.org/">
-  <p>The blockquote element represents content that is quoted from another source.</p>
+  <p>
+    The blockquote element represents content that is quoted from another
+    source.
+  </p>
   <footer>— MDN Web Docs</footer>
 </blockquote>
 ```
@@ -290,7 +296,10 @@ Proper heading hierarchy is crucial for accessibility.
 <p>The book <cite>The Pragmatic Programmer</cite> is highly recommended.</p>
 
 <blockquote>
-  <p>Programs must be written for people to read, and only incidentally for machines to execute.</p>
+  <p>
+    Programs must be written for people to read, and only incidentally for
+    machines to execute.
+  </p>
 </blockquote>
 <p>— <cite>The Structure and Interpretation of Computer Programs</cite></p>
 ```
@@ -305,7 +314,8 @@ Proper heading hierarchy is crucial for accessibility.
   </header>
 
   <p>
-    The conference will be held on <time datetime="2025-06-01T09:00">June 1, 2025 at 9:00 AM</time>.
+    The conference will be held on
+    <time datetime="2025-06-01T09:00">June 1, 2025 at 9:00 AM</time>.
   </p>
 </article>
 ```
@@ -337,7 +347,10 @@ Creates collapsible content.
 ```html
 <details>
   <summary>What is HTML?</summary>
-  <p>HTML (HyperText Markup Language) is the standard markup language for web pages.</p>
+  <p>
+    HTML (HyperText Markup Language) is the standard markup language for web
+    pages.
+  </p>
 </details>
 
 <details open>
@@ -352,7 +365,9 @@ Creates collapsible content.
 ### `<mark>` Highlighted Text
 
 ```html
-<p>The most important point is <mark>semantic HTML improves accessibility</mark>.</p>
+<p>
+  The most important point is <mark>semantic HTML improves accessibility</mark>.
+</p>
 
 <p>
   Search results: <mark>semantic</mark> HTML is better than generic
@@ -405,8 +420,13 @@ Creates collapsible content.
           <p>Semantic HTML provides meaning to web content...</p>
 
           <figure>
-            <img src="semantic-html-diagram.jpg" alt="Diagram showing semantic HTML structure" />
-            <figcaption>Visual representation of semantic HTML elements</figcaption>
+            <img
+              src="semantic-html-diagram.jpg"
+              alt="Diagram showing semantic HTML structure"
+            />
+            <figcaption>
+              Visual representation of semantic HTML elements
+            </figcaption>
           </figure>
 
           <h4>Why Semantic HTML Matters</h4>
@@ -418,7 +438,9 @@ Creates collapsible content.
 
           <aside>
             <h5>Quick Tip</h5>
-            <p>Use semantic elements instead of generic divs whenever possible.</p>
+            <p>
+              Use semantic elements instead of generic divs whenever possible.
+            </p>
           </aside>
 
           <footer>

@@ -5,7 +5,9 @@
 [![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
 
-CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus 3](https://docusaurus.io/). It provides well-organized technical notes, comprehensive cheat sheets, tutorials, and guides for web developers.
+CodeScrolls is a comprehensive, modern documentation site built with
+[Docusaurus 3](https://docusaurus.io/). It provides well-organized technical
+notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 > 🧠 Learn faster. 📚 Refer anytime. 🚀 Level up your dev journey.
 
@@ -20,7 +22,8 @@ CodeScrolls is a comprehensive, modern documentation site built with [Docusaurus
 - 📚 **Comprehensive Documentation** - JavaScript, TypeScript, React, and more
 - 📝 **Detailed Cheat Sheets** - Git, Linux, VSCode, Markdown, MDX, JavaScript
 - ✍️ **Technical Blog** - Tutorials, guides, and best practices
-- 💼 **Interview Questions** - 50+ questions each for HTML, CSS, JavaScript, React, TypeScript, Node.js
+- 💼 **Interview Questions** - 50+ questions each for HTML, CSS, JavaScript,
+  React, TypeScript, Node.js
 - 🎯 **Code Examples** - Practical, runnable code snippets
 
 ### **Technical**
@@ -293,10 +296,14 @@ codescrolls/
 
 ### **Plugins & Features**
 
-- **[@docusaurus/plugin-pwa](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-pwa)** - PWA support
-- **[@docusaurus/theme-live-codeblock](https://docusaurus.io/docs/api/themes/@docusaurus/theme-live-codeblock)** - Live code editing
-- **[@easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)** - Local search
-- **[@docusaurus/plugin-vercel-analytics](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-vercel-analytics)** - Analytics
+- **[@docusaurus/plugin-pwa](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-pwa)** -
+  PWA support
+- **[@docusaurus/theme-live-codeblock](https://docusaurus.io/docs/api/themes/@docusaurus/theme-live-codeblock)** -
+  Live code editing
+- **[@easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local)** -
+  Local search
+- **[@docusaurus/plugin-vercel-analytics](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-vercel-analytics)** -
+  Analytics
 
 ### **Styling**
 
@@ -350,7 +357,8 @@ vercel
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! Please see our
+[Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ### **How to Contribute**
 
@@ -453,9 +461,12 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## 🔗 Links
 
 - **Website:** [https://codescrolls.site](https://codescrolls.site)
-- **Repository:** [https://github.com/Praveenskg/codescrolls](https://github.com/Praveenskg/codescrolls)
-- **Issues:** [https://github.com/Praveenskg/codescrolls/issues](https://github.com/Praveenskg/codescrolls/issues)
-- **Discussions:** [https://github.com/Praveenskg/codescrolls/discussions](https://github.com/Praveenskg/codescrolls/discussions)
+- **Repository:**
+  [https://github.com/Praveenskg/codescrolls](https://github.com/Praveenskg/codescrolls)
+- **Issues:**
+  [https://github.com/Praveenskg/codescrolls/issues](https://github.com/Praveenskg/codescrolls/issues)
+- **Discussions:**
+  [https://github.com/Praveenskg/codescrolls/discussions](https://github.com/Praveenskg/codescrolls/discussions)
 
 ---
 
@@ -473,7 +484,8 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ## 📜 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE)
+file for details.
 
 ---
 

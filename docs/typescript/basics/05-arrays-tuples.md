@@ -1,7 +1,9 @@
 ---
 id: arrays-tuples
 title: Arrays & Tuples
-description: Learn how to work with arrays and tuples in TypeScript, including readonly arrays, tuple types, rest elements, and key differences.
+description:
+  Learn how to work with arrays and tuples in TypeScript, including readonly
+  arrays, tuple types, rest elements, and key differences.
 keywords:
   - typescript arrays
   - typescript tuples
@@ -43,7 +45,8 @@ const readonlyNums: readonly number[] = [1, 2, 3];
 
 # Tuples
 
-Tuples are fixed-length arrays where the type of each element is known and can differ.
+Tuples are fixed-length arrays where the type of each element is known and can
+differ.
 
 ```ts
 let tuple: [string, number];

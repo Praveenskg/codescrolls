@@ -1,7 +1,10 @@
 ---
 id: css-animations
 title: CSS Animations - Complete Guide
-description: Master CSS keyframe animations for complex, multi-step animations. Learn @keyframes, animation properties, timing, iteration, and create stunning visual effects.
+description:
+  Master CSS keyframe animations for complex, multi-step animations. Learn
+  @keyframes, animation properties, timing, iteration, and create stunning
+  visual effects.
 keywords:
   [
     css animations,
@@ -18,7 +21,8 @@ sidebar_position: 6
 
 # 🎬 CSS Animations
 
-CSS animations allow complex, multi-step animations using `@keyframes`. Create loading spinners, attention-grabbers, and delightful UI effects.
+CSS animations allow complex, multi-step animations using `@keyframes`. Create
+loading spinners, attention-grabbers, and delightful UI effects.
 
 ## 🎯 @keyframes
 
@@ -123,7 +127,8 @@ Define animation steps.
 
 ```css
 .element {
-  animation: name duration timing-function delay iteration-count direction fill-mode;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
 
   /* Example */
   animation: slidein 2s ease-in-out 0s infinite alternate both;

@@ -1,7 +1,10 @@
 ---
 id: css-box-model
 title: CSS Box Model - Complete Guide
-description: Master the CSS Box Model including content, padding, border, and margin. Learn box-sizing, collapsing margins, and how to control element dimensions effectively.
+description:
+  Master the CSS Box Model including content, padding, border, and margin. Learn
+  box-sizing, collapsing margins, and how to control element dimensions
+  effectively.
 keywords:
   [
     css box model,
@@ -20,7 +23,9 @@ sidebar_position: 2
 
 # 📦 CSS Box Model
 
-The **CSS Box Model** is fundamental to understanding layout and spacing in CSS. Every HTML element is a rectangular box with content, padding, border, and margin.
+The **CSS Box Model** is fundamental to understanding layout and spacing in CSS.
+Every HTML element is a rectangular box with content, padding, border, and
+margin.
 
 ## 📖 What is the Box Model?
 
@@ -337,7 +342,8 @@ margin: 10px 20px 30px 40px; /* top | right | bottom | left */
 
 ## 📏 Margin Collapse
 
-When **vertical margins** of two elements touch, they **collapse** into a single margin.
+When **vertical margins** of two elements touch, they **collapse** into a single
+margin.
 
 ### How It Works
 
@@ -688,4 +694,5 @@ Now that you understand the box model, learn about **Colors & Backgrounds**:
 
 👉 [Next: Colors & Backgrounds →](./colors-backgrounds.md)
 
-Master the box model and you'll have complete control over spacing and layout! 📦
+Master the box model and you'll have complete control over spacing and layout!
+📦

@@ -1,7 +1,10 @@
 ---
 sidebar_position: 1
 title: JavaScript Promises - Complete Guide
-description: Master JavaScript Promises for asynchronous programming. Learn Promise creation, chaining, error handling, Promise.all, Promise.race, and practical async patterns.
+description:
+  Master JavaScript Promises for asynchronous programming. Learn Promise
+  creation, chaining, error handling, Promise.all, Promise.race, and practical
+  async patterns.
 keywords:
   [
     javascript promises,
@@ -22,7 +25,8 @@ tags:
 
 # JavaScript Promises
 
-Promises represent the **eventual completion or failure** of an asynchronous operation. They're the foundation of modern async JavaScript!
+Promises represent the **eventual completion or failure** of an asynchronous
+operation. They're the foundation of modern async JavaScript!
 
 ---
 
@@ -44,10 +48,10 @@ getData(function (a) {
 
 // ✅ Promises - much cleaner!
 getData()
-  .then((a) => getMoreData(a))
-  .then((b) => getMoreData(b))
-  .then((c) => getMoreData(c))
-  .then((d) => {
+  .then(a => getMoreData(a))
+  .then(b => getMoreData(b))
+  .then(c => getMoreData(c))
+  .then(d => {
     // Result!
   });
 ```
@@ -69,7 +73,9 @@ const myPromise = new Promise((resolve, reject) => {
   }
 });
 
-myPromise.then((result) => console.log(result)).catch((error) => console.error(error));
+myPromise
+  .then(result => console.log(result))
+  .catch(error => console.error(error));
 ```
 
 ### Async Operation Example
@@ -93,8 +99,8 @@ function fetchUserData(userId) {
 }
 
 fetchUserData(1)
-  .then((user) => console.log('User:', user))
-  .catch((error) => console.error('Error:', error.message));
+  .then(user => console.log('User:', user))
+  .catch(error => console.error('Error:', error.message));
 ```
 
 ---
@@ -107,33 +113,33 @@ Chain multiple async operations.
 
 ```js live
 function step1() {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve('Step 1 complete'), 500);
   });
 }
 
 function step2(prevResult) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(prevResult + ' → Step 2 complete'), 500);
   });
 }
 
 function step3(prevResult) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => resolve(prevResult + ' → Step 3 complete'), 500);
   });
 }
 
 step1()
-  .then((result1) => {
+  .then(result1 => {
     console.log(result1);
     return step2(result1);
   })
-  .then((result2) => {
+  .then(result2 => {
     console.log(result2);
     return step3(result2);
   })
-  .then((result3) => {
+  .then(result3 => {
     console.log('Final:', result3);
   });
 ```
@@ -142,9 +148,9 @@ step1()
 
 ```js live
 Promise.resolve(5)
-  .then((num) => num * 2) // 10
-  .then((num) => num + 3) // 13
-  .then((num) => {
+  .then(num => num * 2) // 10
+  .then(num => num + 3) // 13
+  .then(num => {
     console.log('Result:', num); // 13
     return num;
   });
@@ -171,8 +177,8 @@ function riskyOperation() {
 }
 
 riskyOperation()
-  .then((result) => console.log(result))
-  .catch((error) => console.error('Caught:', error.message));
+  .then(result => console.log(result))
+  .catch(error => console.error('Caught:', error.message));
 ```
 
 ### .finally() Method
@@ -181,11 +187,11 @@ riskyOperation()
 let isLoading = true;
 
 fetchData()
-  .then((data) => {
+  .then(data => {
     console.log('Data:', data);
     // Process data
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('Error:', error);
     // Handle error
   })
@@ -200,19 +206,19 @@ fetchData()
 
 ```js live
 Promise.resolve('start')
-  .then((value) => {
+  .then(value => {
     console.log(value);
     throw new Error('Something went wrong!');
   })
-  .then((value) => {
+  .then(value => {
     // This won't run
     console.log('This will not execute');
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('Caught error:', error.message);
     return 'recovered'; // Recover from error
   })
-  .then((value) => {
+  .then(value => {
     console.log('Recovered:', value); // This runs!
   });
 ```
@@ -227,24 +233,28 @@ Wait for all promises to resolve (or any to reject).
 
 ```js live
 const promise1 = Promise.resolve(3);
-const promise2 = new Promise((resolve) => setTimeout(() => resolve(42), 100));
+const promise2 = new Promise(resolve => setTimeout(() => resolve(42), 100));
 const promise3 = Promise.resolve('foo');
 
 Promise.all([promise1, promise2, promise3])
-  .then((results) => {
+  .then(results => {
     console.log('All resolved:', results);
     // [3, 42, 'foo']
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('One failed:', error);
   });
 
 // If any fails, all fails
-const failingPromises = [Promise.resolve(1), Promise.reject('Error!'), Promise.resolve(3)];
+const failingPromises = [
+  Promise.resolve(1),
+  Promise.reject('Error!'),
+  Promise.resolve(3),
+];
 
 Promise.all(failingPromises)
-  .then((results) => console.log(results))
-  .catch((error) => console.error('Failed:', error)); // 'Failed: Error!'
+  .then(results => console.log(results))
+  .catch(error => console.error('Failed:', error)); // 'Failed: Error!'
 ```
 
 ### Promise.allSettled()
@@ -258,7 +268,7 @@ const promises = [
   Promise.resolve('Success 2'),
 ];
 
-Promise.allSettled(promises).then((results) => {
+Promise.allSettled(promises).then(results => {
   console.log('All settled:', results);
   // [
   //   { status: 'fulfilled', value: 'Success 1' },
@@ -281,10 +291,10 @@ Promise.allSettled(promises).then((results) => {
 Return first promise to settle.
 
 ```js live
-const slow = new Promise((resolve) => setTimeout(() => resolve('Slow'), 2000));
-const fast = new Promise((resolve) => setTimeout(() => resolve('Fast'), 500));
+const slow = new Promise(resolve => setTimeout(() => resolve('Slow'), 2000));
+const fast = new Promise(resolve => setTimeout(() => resolve('Fast'), 500));
 
-Promise.race([slow, fast]).then((result) => {
+Promise.race([slow, fast]).then(result => {
   console.log('Winner:', result); // 'Fast'
 });
 
@@ -306,15 +316,15 @@ Return first promise to resolve (ignore rejections).
 ```js live
 const promises = [
   Promise.reject('Error 1'),
-  new Promise((resolve) => setTimeout(() => resolve('Success!'), 500)),
+  new Promise(resolve => setTimeout(() => resolve('Success!'), 500)),
   Promise.reject('Error 2'),
 ];
 
 Promise.any(promises)
-  .then((result) => {
+  .then(result => {
     console.log('First success:', result); // 'Success!'
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('All failed:', error);
   });
 ```
@@ -339,7 +349,7 @@ function fetchUser(id) {
 }
 
 function fetchPosts(userId) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(() => {
       resolve([
         { id: 1, title: 'Post 1', userId },
@@ -351,14 +361,14 @@ function fetchPosts(userId) {
 
 // Chain API calls
 fetchUser(123)
-  .then((user) => {
+  .then(user => {
     console.log('User:', user);
     return fetchPosts(user.id);
   })
-  .then((posts) => {
+  .then(posts => {
     console.log('Posts:', posts);
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('Error:', error.message);
   });
 ```
@@ -367,9 +377,9 @@ fetchUser(123)
 
 ```js live
 function fetchUserData() {
-  const userPromise = fetch('/api/user').then((r) => r.json());
-  const postsPromise = fetch('/api/posts').then((r) => r.json());
-  const commentsPromise = fetch('/api/comments').then((r) => r.json());
+  const userPromise = fetch('/api/user').then(r => r.json());
+  const postsPromise = fetch('/api/posts').then(r => r.json());
+  const commentsPromise = fetch('/api/comments').then(r => r.json());
 
   return Promise.all([userPromise, postsPromise, commentsPromise]).then(
     ([user, posts, comments]) => ({
@@ -382,10 +392,10 @@ function fetchUserData() {
 
 // Usage
 fetchUserData()
-  .then((data) => {
+  .then(data => {
     console.log('All data loaded:', data);
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('Failed to load data:', error);
   });
 ```
@@ -394,7 +404,7 @@ fetchUserData()
 
 ```js live
 function fetchWithRetry(url, retries = 3) {
-  return fetch(url).catch((error) => {
+  return fetch(url).catch(error => {
     if (retries > 0) {
       console.log(`Retrying... (${retries} attempts left)`);
       return fetchWithRetry(url, retries - 1);
@@ -405,9 +415,9 @@ function fetchWithRetry(url, retries = 3) {
 
 // Usage
 fetchWithRetry('/api/data', 3)
-  .then((response) => response.json())
-  .then((data) => console.log('Data:', data))
-  .catch((error) => console.error('All retries failed:', error));
+  .then(response => response.json())
+  .then(data => console.log('Data:', data))
+  .catch(error => console.error('All retries failed:', error));
 ```
 
 ### Example 4: Promise Queue
@@ -471,11 +481,11 @@ promise.then(handleSuccess);
 ```js
 // ✅ Good
 promise
-  .then((data) => processData(data)) // Returns promise
-  .then((result) => saveResult(result));
+  .then(data => processData(data)) // Returns promise
+  .then(result => saveResult(result));
 
 // ❌ Bad - breaks chain
-promise.then((data) => {
+promise.then(data => {
   processData(data); // Promise not returned
 });
 ```
@@ -501,17 +511,17 @@ fetch1()
 ```js
 // ❌ Wrong
 getData()
-  .then((data) => {
+  .then(data => {
     processData(data); // Not returned!
   })
-  .then((result) => {
+  .then(result => {
     console.log(result); // undefined
   });
 
 // ✅ Correct
 getData()
-  .then((data) => processData(data)) // Returned
-  .then((result) => {
+  .then(data => processData(data)) // Returned
+  .then(result => {
     console.log(result); // Has value
   });
 ```
@@ -520,16 +530,16 @@ getData()
 
 ```js
 // ❌ Wrong - nesting
-getData().then((data) => {
-  getMoreData(data).then((moreData) => {
+getData().then(data => {
+  getMoreData(data).then(moreData => {
     // ...
   });
 });
 
 // ✅ Correct - chaining
 getData()
-  .then((data) => getMoreData(data))
-  .then((moreData) => {
+  .then(data => getMoreData(data))
+  .then(moreData => {
     // ...
   });
 ```

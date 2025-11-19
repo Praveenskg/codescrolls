@@ -3,7 +3,8 @@
 All notable changes to **CodeScrolls** will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+and this project adheres to
+[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
@@ -17,25 +18,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🚀 Added
 
-- **Major Release** of CodeScrolls v1.1.0 - Enhanced web development documentation platform
-- 🔒 **Security Policy**: Comprehensive SECURITY.md with vulnerability reporting guidelines
+- **Major Release** of CodeScrolls v1.1.0 - Enhanced web development
+  documentation platform
+- 🔒 **Security Policy**: Comprehensive SECURITY.md with vulnerability reporting
+  guidelines
 - 💰 **Sponsorship Support**: FUNDING.yml for GitHub Sponsors integration
 - 📊 **Enhanced Analytics**: Google Analytics 4 and Vercel Analytics integration
 - 🏷️ **Advanced Blog System**: Rich tagging system with 20+ technical categories
-- 📚 **Expanded Documentation**: 116+ comprehensive documentation pages across all technologies
+- 📚 **Expanded Documentation**: 116+ comprehensive documentation pages across
+  all technologies
 - 🔧 **Developer Tools**: Husky pre-commit hooks for code quality enforcement
 - **Complete Documentation Suite (116+ pages):**
-  - HTML: Basics, Intermediate, Advanced topics with comprehensive guides and accessibility
-  - CSS: Layout systems, animations, responsive design, Flexbox, Grid, and modern features
-  - JavaScript: ES6+, async programming, DOM manipulation, closures, hoisting, promises
-  - React: Components, hooks, state management, Context API, routing, and best practices
-  - TypeScript: Type system, interfaces, generics, utility types, and advanced patterns
-  - Node.js: Server-side JavaScript, APIs, file system, Express.js, and backend essentials
+  - HTML: Basics, Intermediate, Advanced topics with comprehensive guides and
+    accessibility
+  - CSS: Layout systems, animations, responsive design, Flexbox, Grid, and
+    modern features
+  - JavaScript: ES6+, async programming, DOM manipulation, closures, hoisting,
+    promises
+  - React: Components, hooks, state management, Context API, routing, and best
+    practices
+  - TypeScript: Type system, interfaces, generics, utility types, and advanced
+    patterns
+  - Node.js: Server-side JavaScript, APIs, file system, Express.js, and backend
+    essentials
 
 - **Comprehensive Cheat Sheets (14 guides):**
-  - HTML: Elements, attributes, semantic structure, accessibility, forms, multimedia
-  - CSS: Selectors, layouts, animations, Flexbox, Grid, responsive design, modern features
-  - JavaScript: Syntax, ES6+ features, async programming, DOM manipulation, patterns
+  - HTML: Elements, attributes, semantic structure, accessibility, forms,
+    multimedia
+  - CSS: Selectors, layouts, animations, Flexbox, Grid, responsive design,
+    modern features
+  - JavaScript: Syntax, ES6+ features, async programming, DOM manipulation,
+    patterns
   - React: Components, hooks, state management, Context API, routing patterns
   - TypeScript: Types, interfaces, generics, utility types, advanced patterns
   - Node.js: Server development, APIs, file operations, Express.js patterns
@@ -65,14 +78,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🔧 Changed
 
-- 📦 **Dependency Management**: Updated to latest stable versions with automated security scanning
-- 🚀 **Build Optimization**: Removed redundant CI build steps (Vercel handles deployment)
+- 📦 **Dependency Management**: Updated to latest stable versions with automated
+  security scanning
+- 🚀 **Build Optimization**: Removed redundant CI build steps (Vercel handles
+  deployment)
 - 🎨 **UI/UX Improvements**: Enhanced responsive design and mobile navigation
-- 📖 **Content Structure**: Reorganized documentation with improved navigation and SEO
+- 📖 **Content Structure**: Reorganized documentation with improved navigation
+  and SEO
 
 ### 🐛 Fixed
 
-- 🔗 **Broken Links**: Resolved all documentation link issues and anchor references
+- 🔗 **Broken Links**: Resolved all documentation link issues and anchor
+  references
 - 🏷️ **Blog Tags**: Fixed missing tag definitions and categorization
 - 📱 **Responsive Issues**: Fixed navbar shrinking on tablets and mobile devices
 - 🔍 **Search Functionality**: Improved local search indexing and performance
@@ -95,18 +112,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### **Documentation (116+ pages)**
 
-- **HTML**: Complete guide covering basics, intermediate, and advanced topics with accessibility focus
-- **CSS**: Comprehensive coverage of layouts, animations, Flexbox, Grid, and modern CSS features
-- **JavaScript**: In-depth exploration of ES6+, async programming, closures, hoisting, and advanced concepts
-- **React**: Full coverage of components, hooks, state management, Context API, and best practices
-- **TypeScript**: Advanced type system, interfaces, generics, utility types, and compiler options
-- **Node.js**: Server-side development, APIs, file operations, Express.js, and backend patterns
+- **HTML**: Complete guide covering basics, intermediate, and advanced topics
+  with accessibility focus
+- **CSS**: Comprehensive coverage of layouts, animations, Flexbox, Grid, and
+  modern CSS features
+- **JavaScript**: In-depth exploration of ES6+, async programming, closures,
+  hoisting, and advanced concepts
+- **React**: Full coverage of components, hooks, state management, Context API,
+  and best practices
+- **TypeScript**: Advanced type system, interfaces, generics, utility types, and
+  compiler options
+- **Node.js**: Server-side development, APIs, file operations, Express.js, and
+  backend patterns
 
 #### **Cheat Sheets (14 comprehensive guides)**
 
-- **HTML**: Elements, attributes, semantic structure, accessibility, forms, multimedia
-- **CSS**: Selectors, layouts, animations, Flexbox, Grid, responsive design, modern features
-- **JavaScript**: Syntax, ES6+ features, async programming, DOM manipulation, patterns
+- **HTML**: Elements, attributes, semantic structure, accessibility, forms,
+  multimedia
+- **CSS**: Selectors, layouts, animations, Flexbox, Grid, responsive design,
+  modern features
+- **JavaScript**: Syntax, ES6+ features, async programming, DOM manipulation,
+  patterns
 - **TypeScript**: Types, interfaces, generics, utility types, advanced patterns
 - **React**: Components, hooks, state management, Context API, routing patterns
 - **Node.js**: Server development, APIs, file operations, Express.js patterns
@@ -153,8 +179,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **📱 Responsive Design**: Mobile-first approach with tablet optimization
 - **🌙 Theme Support**: Light/dark mode with Mermaid diagram integration
-- **🔍 Advanced Search**: Local full-text search with highlighting and performance
-- **📊 Analytics**: Google Analytics 4 + Vercel Analytics for comprehensive tracking
+- **🔍 Advanced Search**: Local full-text search with highlighting and
+  performance
+- **📊 Analytics**: Google Analytics 4 + Vercel Analytics for comprehensive
+  tracking
 - **🚀 Performance**: Optimized for Core Web Vitals with Vercel deployment
 - **♿ Accessibility**: WCAG 2.1 AA compliance with semantic HTML
 - **🔒 Security**: HTTPS, CSP headers, automated security scanning
@@ -209,7 +237,8 @@ This project uses [Semantic Versioning](https://semver.org/):
 
 ## Security Updates
 
-Security-related changes are documented separately and prioritized for immediate release.
+Security-related changes are documented separately and prioritized for immediate
+release.
 
 ---
 

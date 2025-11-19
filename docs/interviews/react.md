@@ -1,13 +1,16 @@
 ---
 title: React Interview Questions
-description: 50 React interview questions and answers – from basics to advanced – with examples for interview preparation.
+description:
+  50 React interview questions and answers – from basics to advanced – with
+  examples for interview preparation.
 sidebar_position: 6
 ---
 
 # React Interview Questions
 
 Welcome to the **React Interview Questions** hub! 🚀  
-We’ve structured the questions into **three levels** — _Basic_, _Intermediate_, and _Advanced_.
+We’ve structured the questions into **three levels** — _Basic_, _Intermediate_,
+and _Advanced_.
 
 ## Use this as a quick revision guide or a preparation sheet for your next interview.
 
@@ -43,7 +46,7 @@ function Greeting({ name }) {
   return <p>Hello {name}</p>;
 }
 
-<Greeting name='Praveen' />;
+<Greeting name="Praveen" />;
 ```
 
 ---
@@ -108,7 +111,8 @@ Fragments let you group elements without extra DOM nodes.
 
 ### 10. What is Virtual DOM?
 
-A lightweight copy of DOM where React applies **diffing algorithm** for fast updates.
+A lightweight copy of DOM where React applies **diffing algorithm** for fast
+updates.
 
 ---
 
@@ -118,7 +122,8 @@ _Hooks, context, routing, and state management._
 
 ### 11. What are React Hooks?
 
-Hooks are functions (like `useState`, `useEffect`) to use **state and lifecycle** in functional components.
+Hooks are functions (like `useState`, `useEffect`) to use **state and
+lifecycle** in functional components.
 
 ---
 
@@ -143,7 +148,7 @@ const ThemeContext = React.createContext('light');
 
 function App() {
   return (
-    <ThemeContext.Provider value='dark'>
+    <ThemeContext.Provider value="dark">
       <Toolbar />
     </ThemeContext.Provider>
   );
@@ -161,8 +166,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 <BrowserRouter>
   <Routes>
-    <Route path='/' element={<Home />} />
-    <Route path='/about' element={<About />} />
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
   </Routes>
 </BrowserRouter>;
 ```
@@ -438,4 +443,5 @@ React batches multiple state updates into one re-render.
 
 ---
 
-This completes the **50 React Interview Questions** with explanations and code snippets.
+This completes the **50 React Interview Questions** with explanations and code
+snippets.

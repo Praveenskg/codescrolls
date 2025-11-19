@@ -1,7 +1,9 @@
 ---
 id: svg
 title: SVG - Scalable Vector Graphics Complete Guide
-description: Master SVG for scalable vector graphics, animations, and interactive visualizations. Learn SVG syntax, paths, gradients, and animations.
+description:
+  Master SVG for scalable vector graphics, animations, and interactive
+  visualizations. Learn SVG syntax, paths, gradients, and animations.
 keywords:
   [
     svg,
@@ -19,11 +21,14 @@ sidebar_position: 8
 
 # 🔷 SVG - Scalable Vector Graphics
 
-SVG (Scalable Vector Graphics) is an XML-based format for describing vector graphics that scales perfectly at any size. Unlike raster images, SVG graphics remain crisp and clear at any resolution.
+SVG (Scalable Vector Graphics) is an XML-based format for describing vector
+graphics that scales perfectly at any size. Unlike raster images, SVG graphics
+remain crisp and clear at any resolution.
 
 ## 📖 What is SVG?
 
-SVG is a markup language for describing two-dimensional graphics using XML. It's part of HTML5 and can be styled with CSS and animated with JavaScript.
+SVG is a markup language for describing two-dimensional graphics using XML. It's
+part of HTML5 and can be styled with CSS and animated with JavaScript.
 
 ```html
 <!-- Inline SVG -->
@@ -44,7 +49,12 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
 ### Basic SVG Structure
 
 ```html
-<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="400"
+  height="300"
+  viewBox="0 0 400 300"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <!-- SVG content goes here -->
 
   <!-- Metadata -->
@@ -56,7 +66,9 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
   <circle cx="50" cy="50" r="40" fill="blue" />
 
   <!-- Text -->
-  <text x="150" y="50" font-family="Arial" font-size="20" fill="black">Hello SVG</text>
+  <text x="150" y="50" font-family="Arial" font-size="20" fill="black">
+    Hello SVG
+  </text>
 </svg>
 ```
 
@@ -69,7 +81,12 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
 </svg>
 
 <!-- Preserving aspect ratio -->
-<svg width="200" height="100" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+<svg
+  width="200"
+  height="100"
+  viewBox="0 0 200 100"
+  preserveAspectRatio="xMidYMid meet"
+>
   <!-- Content centered and scaled -->
 </svg>
 
@@ -94,7 +111,15 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
   <rect x="200" y="50" width="100" height="60" rx="10" ry="10" fill="red" />
 
   <!-- With stroke -->
-  <rect x="50" y="150" width="100" height="30" fill="yellow" stroke="black" stroke-width="2" />
+  <rect
+    x="50"
+    y="150"
+    width="100"
+    height="30"
+    fill="yellow"
+    stroke="black"
+    stroke-width="2"
+  />
 
   <!-- Transparent fill -->
   <rect
@@ -143,7 +168,14 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
   <ellipse cx="350" cy="100" rx="20" ry="60" fill="pink" />
 
   <!-- Ellipse with rotation -->
-  <ellipse cx="100" cy="150" rx="40" ry="20" fill="orange" transform="rotate(30 100 150)" />
+  <ellipse
+    cx="100"
+    cy="150"
+    rx="40"
+    ry="20"
+    fill="orange"
+    transform="rotate(30 100 150)"
+  />
 </svg>
 ```
 
@@ -155,17 +187,40 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
   <line x1="50" y1="50" x2="250" y2="50" stroke="black" stroke-width="2" />
 
   <!-- Dashed line -->
-  <line x1="50" y1="80" x2="250" y2="80" stroke="blue" stroke-width="3" stroke-dasharray="5,5" />
+  <line
+    x1="50"
+    y1="80"
+    x2="250"
+    y2="80"
+    stroke="blue"
+    stroke-width="3"
+    stroke-dasharray="5,5"
+  />
 
   <!-- Line with rounded caps -->
-  <line x1="50" y1="110" x2="250" y2="110" stroke="red" stroke-width="4" stroke-linecap="round" />
+  <line
+    x1="50"
+    y1="110"
+    x2="250"
+    y2="110"
+    stroke="red"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
 
   <!-- Diagonal line -->
   <line x1="50" y1="140" x2="250" y2="180" stroke="green" stroke-width="2" />
 
   <!-- Arrowhead effect -->
   <defs>
-    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <marker
+      id="arrowhead"
+      markerWidth="10"
+      markerHeight="7"
+      refX="9"
+      refY="3.5"
+      orient="auto"
+    >
       <polygon points="0 0, 10 3.5, 0 7" fill="red" />
     </marker>
   </defs>
@@ -219,7 +274,12 @@ SVG is a markup language for describing two-dimensional graphics using XML. It's
   <polygon points="50,150 100,50 150,150" fill="red" />
 
   <!-- Quadrilateral -->
-  <polygon points="200,50 250,30 270,100 220,120" fill="blue" stroke="darkblue" stroke-width="2" />
+  <polygon
+    points="200,50 250,30 270,100 220,120"
+    fill="blue"
+    stroke="darkblue"
+    stroke-width="2"
+  />
 
   <!-- Hexagon -->
   <polygon
@@ -258,10 +318,20 @@ The most powerful SVG element for creating complex shapes.
        m, l, h, v, z = relative versions -->
 
   <!-- Simple shape -->
-  <path d="M 50 50 L 150 50 L 150 150 L 50 150 Z" fill="lightblue" stroke="blue" stroke-width="2" />
+  <path
+    d="M 50 50 L 150 50 L 150 150 L 50 150 Z"
+    fill="lightblue"
+    stroke="blue"
+    stroke-width="2"
+  />
 
   <!-- Curved path -->
-  <path d="M 200 50 Q 250 25 300 50 T 400 50" fill="none" stroke="red" stroke-width="3" />
+  <path
+    d="M 200 50 Q 250 25 300 50 T 400 50"
+    fill="none"
+    stroke="red"
+    stroke-width="3"
+  />
 
   <!-- Complex path -->
   <path
@@ -355,7 +425,15 @@ The most powerful SVG element for creating complex shapes.
   <circle cx="190" cy="50" r="30" fill="hsl(240, 100%, 50%)" />
 
   <!-- Stroke properties -->
-  <rect x="250" y="20" width="60" height="60" fill="none" stroke="#333" stroke-width="3" />
+  <rect
+    x="250"
+    y="20"
+    width="60"
+    height="60"
+    fill="none"
+    stroke="#333"
+    stroke-width="3"
+  />
 
   <rect
     x="320"
@@ -432,15 +510,30 @@ The most powerful SVG element for creating complex shapes.
 ```html
 <svg width="400" height="150" viewBox="0 0 400 150">
   <!-- Basic text -->
-  <text x="50" y="50" font-family="Arial" font-size="24" fill="black">Hello SVG</text>
+  <text x="50" y="50" font-family="Arial" font-size="24" fill="black">
+    Hello SVG
+  </text>
 
   <!-- Styled text -->
-  <text x="50" y="80" font-family="Georgia" font-size="18" fill="blue" font-weight="bold">
+  <text
+    x="50"
+    y="80"
+    font-family="Georgia"
+    font-size="18"
+    fill="blue"
+    font-weight="bold"
+  >
     Styled Text
   </text>
 
   <!-- Rotated text -->
-  <text x="200" y="100" font-size="16" fill="green" transform="rotate(30 200 100)">
+  <text
+    x="200"
+    y="100"
+    font-size="16"
+    fill="green"
+    transform="rotate(30 200 100)"
+  >
     Rotated Text
   </text>
 
@@ -524,13 +617,29 @@ The most powerful SVG element for creating complex shapes.
 <svg width="300" height="100" viewBox="0 0 300 100">
   <!-- Moving circle -->
   <circle cx="50" cy="50" r="15" fill="orange">
-    <animateMotion dur="3s" repeatCount="indefinite" path="M 0 0 L 200 0 L 200 50 L 0 50 Z" />
+    <animateMotion
+      dur="3s"
+      repeatCount="indefinite"
+      path="M 0 0 L 200 0 L 200 50 L 0 50 Z"
+    />
   </circle>
 
   <!-- Scaling rectangle -->
   <rect x="50" y="60" width="20" height="20" fill="green">
-    <animate attributeName="width" from="20" to="100" dur="2s" repeatCount="indefinite" />
-    <animate attributeName="height" from="20" to="30" dur="2s" repeatCount="indefinite" />
+    <animate
+      attributeName="width"
+      from="20"
+      to="100"
+      dur="2s"
+      repeatCount="indefinite"
+    />
+    <animate
+      attributeName="height"
+      from="20"
+      to="30"
+      dur="2s"
+      repeatCount="indefinite"
+    />
   </rect>
 
   <!-- Color changing circle -->
@@ -573,7 +682,9 @@ The most powerful SVG element for creating complex shapes.
   <!-- Clickable button -->
   <g class="button" onclick="alert('Button clicked!')">
     <rect x="240" y="50" width="40" height="30" fill="green" rx="5" />
-    <text x="260" y="68" text-anchor="middle" font-size="12" fill="white">Go</text>
+    <text x="260" y="68" text-anchor="middle" font-size="12" fill="white">
+      Go
+    </text>
   </g>
 </svg>
 ```
@@ -598,14 +709,14 @@ The most powerful SVG element for creating complex shapes.
   let dragOffset = { x: 0, y: 0 };
 
   // Make circle draggable
-  circle.addEventListener('mousedown', (e) => {
+  circle.addEventListener('mousedown', e => {
     isDragging = true;
     const rect = circle.getBoundingClientRect();
     dragOffset.x = e.clientX - rect.left - rect.width / 2;
     dragOffset.y = e.clientY - rect.top - rect.height / 2;
   });
 
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', e => {
     if (isDragging) {
       const svgRect = svg.getBoundingClientRect();
       const x = e.clientX - svgRect.left - dragOffset.x;
@@ -629,7 +740,8 @@ The most powerful SVG element for creating complex shapes.
     const newColor = colors[colorIndex];
 
     rect.setAttribute('fill', newColor);
-    colorText.textContent = newColor.charAt(0).toUpperCase() + newColor.slice(1);
+    colorText.textContent =
+      newColor.charAt(0).toUpperCase() + newColor.slice(1);
   });
 </script>
 ```
@@ -673,7 +785,12 @@ The most powerful SVG element for creating complex shapes.
 
     <!-- Drop shadow -->
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="4" dy="4" stdDeviation="3" flood-color="rgba(0,0,0,0.3)" />
+      <feDropShadow
+        dx="4"
+        dy="4"
+        stdDeviation="3"
+        flood-color="rgba(0,0,0,0.3)"
+      />
     </filter>
 
     <!-- Glow effect -->
@@ -689,7 +806,14 @@ The most powerful SVG element for creating complex shapes.
   <!-- Apply filters -->
   <rect x="20" y="20" width="80" height="60" fill="blue" filter="url(#blur)" />
   <circle cx="150" cy="50" r="30" fill="red" filter="url(#shadow)" />
-  <rect x="220" y="20" width="80" height="60" fill="green" filter="url(#glow)" />
+  <rect
+    x="220"
+    y="20"
+    width="80"
+    height="60"
+    fill="green"
+    filter="url(#glow)"
+  />
 </svg>
 ```
 
@@ -733,7 +857,9 @@ The most powerful SVG element for creating complex shapes.
   <text x="295" y="260" text-anchor="middle" font-size="12">May</text>
 
   <!-- Title -->
-  <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold">Monthly Sales</text>
+  <text x="200" y="30" text-anchor="middle" font-size="18" font-weight="bold">
+    Monthly Sales
+  </text>
 </svg>
 ```
 

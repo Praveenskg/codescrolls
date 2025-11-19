@@ -2,7 +2,10 @@
 sidebar_position: 4
 id: javascript-control-flow
 title: JavaScript Control Flow - Complete Guide
-description: Master JavaScript control flow with if/else, switch statements, ternary operators, and best practices. Learn to write clean conditional logic with practical examples.
+description:
+  Master JavaScript control flow with if/else, switch statements, ternary
+  operators, and best practices. Learn to write clean conditional logic with
+  practical examples.
 keywords:
   [
     javascript control flow,
@@ -22,7 +25,8 @@ tags:
 
 # Control Flow
 
-Control flow determines the **order in which code is executed**. Master these structures to build dynamic, responsive applications!
+Control flow determines the **order in which code is executed**. Master these
+structures to build dynamic, responsive applications!
 
 ---
 
@@ -370,7 +374,9 @@ function validateForm(formData) {
 }
 
 // Test
-console.log(validateForm({ email: 'test@example.com', password: 'password123' }));
+console.log(
+  validateForm({ email: 'test@example.com', password: 'password123' }),
+);
 // { valid: true }
 
 console.log(validateForm({ email: 'invalid', password: 'pass' }));

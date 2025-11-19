@@ -1,7 +1,9 @@
 ---
 id: typescript
 title: TypeScript Interview Questions
-description: 50 essential TypeScript interview questions with clear explanations and runnable examples, organized from basic to advanced.
+description:
+  50 essential TypeScript interview questions with clear explanations and
+  runnable examples, organized from basic to advanced.
 sidebar_position: 5
 keywords:
   - typescript interview questions
@@ -15,7 +17,8 @@ keywords:
 
 # TypeScript Interview Questions
 
-This set is structured as **Basic → Intermediate → Advanced**. Each question includes a short answer and a minimal example.
+This set is structured as **Basic → Intermediate → Advanced**. Each question
+includes a short answer and a minimal example.
 
 ---
 
@@ -23,7 +26,9 @@ This set is structured as **Basic → Intermediate → Advanced**. Each question
 
 ### 1) What is TypeScript and why use it?
 
-**Answer:** TypeScript is a superset of JavaScript that adds static typing, better tooling, and language features (like interfaces, generics). It helps catch errors early and improves IDE support.
+**Answer:** TypeScript is a superset of JavaScript that adds static typing,
+better tooling, and language features (like interfaces, generics). It helps
+catch errors early and improves IDE support.
 
 **Example:**
 
@@ -35,7 +40,9 @@ let name: string = 'Praveen'; // compile-time type checking
 
 ### 2) How is TypeScript different from JavaScript?
 
-**Answer:** TypeScript adds a type system, compiles to JavaScript, and introduces features like enums, interfaces, generics, and advanced type operators.
+**Answer:** TypeScript adds a type system, compiles to JavaScript, and
+introduces features like enums, interfaces, generics, and advanced type
+operators.
 
 **Example:**
 
@@ -50,7 +57,8 @@ function greet(user: { name: string }) {
 
 ### 3) What are basic/primitive types in TS?
 
-**Answer:** `string`, `number`, `boolean`, `null`, `undefined`, `symbol`, `bigint`. Non-primitive: `object`, arrays, functions, etc.
+**Answer:** `string`, `number`, `boolean`, `null`, `undefined`, `symbol`,
+`bigint`. Non-primitive: `object`, arrays, functions, etc.
 
 **Example:**
 
@@ -64,7 +72,8 @@ let c: bigint = 10n;
 
 ### 4) `any` vs `unknown`?
 
-**Answer:** `any` disables type checking; `unknown` is safer—you must narrow before use.
+**Answer:** `any` disables type checking; `unknown` is safer—you must narrow
+before use.
 
 **Example:**
 
@@ -77,7 +86,8 @@ if (typeof x === 'string') console.log(x.toUpperCase()); // ok
 
 ### 5) `void` vs `never`?
 
-**Answer:** `void` is for functions that return no value. `never` is for functions that never return (throw or infinite loop).
+**Answer:** `void` is for functions that return no value. `never` is for
+functions that never return (throw or infinite loop).
 
 **Example:**
 
@@ -94,7 +104,8 @@ function fail(msg: string): never {
 
 ### 6) What is type inference?
 
-**Answer:** TS infers types when not explicitly annotated, based on usage and initialization.
+**Answer:** TS infers types when not explicitly annotated, based on usage and
+initialization.
 
 **Example:**
 
@@ -107,7 +118,8 @@ let n = 3; // inferred number
 
 ### 7) Type assertion vs “casting”?
 
-**Answer:** Type assertions tell the compiler to treat a value as a specific type; no runtime change.
+**Answer:** Type assertions tell the compiler to treat a value as a specific
+type; no runtime change.
 
 **Example:**
 
@@ -120,7 +132,8 @@ el.innerText = 'Ready';
 
 ### 8) Interface vs Type alias?
 
-**Answer:** Both can model shapes. `interface` is extendable/mergeable; `type` is more flexible (unions, mapped/conditional types).
+**Answer:** Both can model shapes. `interface` is extendable/mergeable; `type`
+is more flexible (unions, mapped/conditional types).
 
 **Example:**
 
@@ -152,7 +165,8 @@ interface Post {
 
 ### 10) What are enums (numeric vs string)?
 
-**Answer:** Enums create named constants. String enums are safer and more explicit.
+**Answer:** Enums create named constants. String enums are safer and more
+explicit.
 
 **Example:**
 
@@ -168,7 +182,8 @@ const r: Role = Role.Admin;
 
 ### 11) Unions and intersections?
 
-**Answer:** Union (`A | B`) means one of several types. Intersection (`A & B`) combines types.
+**Answer:** Union (`A | B`) means one of several types. Intersection (`A & B`)
+combines types.
 
 **Example:**
 
@@ -446,7 +461,8 @@ declare const __APP_VERSION__: string;
 
 ### 30) Namespaces vs ES modules
 
-**Answer:** Namespaces are legacy internal modules; prefer ES modules (`import/export`).
+**Answer:** Namespaces are legacy internal modules; prefer ES modules
+(`import/export`).
 
 **Example:**
 
@@ -459,7 +475,8 @@ export const x = 1;
 
 ### 31) Classes: `public`, `private`, `protected`, `readonly`
 
-**Answer:** Access modifiers control visibility; `readonly` prevents reassigning properties.
+**Answer:** Access modifiers control visibility; `readonly` prevents reassigning
+properties.
 
 **Example:**
 
@@ -477,7 +494,8 @@ class Person {
 
 ### 32) Abstract classes vs interfaces
 
-**Answer:** Abstract classes can have implementation & state; interfaces are contracts only.
+**Answer:** Abstract classes can have implementation & state; interfaces are
+contracts only.
 
 **Example:**
 
@@ -518,7 +536,8 @@ class User extends Timestamped(Model) {}
 
 ### 34) Decorators (experimental)
 
-**Answer:** Functions to annotate/modify classes/members; requires `experimentalDecorators`.
+**Answer:** Functions to annotate/modify classes/members; requires
+`experimentalDecorators`.
 
 **Example:**
 
@@ -535,7 +554,8 @@ class Svc {
 
 ### 35) `strictNullChecks` and strict mode
 
-**Answer:** Enables strict handling of `null`/`undefined` and other strict options to catch bugs.
+**Answer:** Enables strict handling of `null`/`undefined` and other strict
+options to catch bugs.
 
 **Example (`tsconfig.json`):**
 
@@ -639,7 +659,8 @@ const Button: React.FC<ButtonProps> = ({ onClick, children }) => <button onClick
 
 ### 42) Context/Redux typing basics
 
-**Answer:** Create typed state, actions, and selectors; use `Dispatch`, `ThunkAction` as needed.
+**Answer:** Create typed state, actions, and selectors; use `Dispatch`,
+`ThunkAction` as needed.
 
 **Example:**
 
@@ -655,7 +676,8 @@ function reducer(s: State, a: Action): State {
 
 ### 43) Async/await & Promises typing
 
-**Answer:** `Promise<T>` for async results; `async` functions return `Promise<ReturnType>`.
+**Answer:** `Promise<T>` for async results; `async` functions return
+`Promise<ReturnType>`.
 
 **Example:**
 
@@ -669,7 +691,8 @@ async function getUser(): Promise<{ id: string }> {
 
 ### 44) DOM/event typing
 
-**Answer:** Use correct event types, e.g., `MouseEvent`, `KeyboardEvent`, `ChangeEvent`.
+**Answer:** Use correct event types, e.g., `MouseEvent`, `KeyboardEvent`,
+`ChangeEvent`.
 
 **Example (React):**
 
@@ -710,12 +733,16 @@ function assertString(v: unknown): asserts v is string {
 
 ### 47) The `satisfies` operator
 
-**Answer:** Ensures a value conforms to a type **without** widening or changing its inferred type.
+**Answer:** Ensures a value conforms to a type **without** widening or changing
+its inferred type.
 
 **Example:**
 
 ```ts
-const cfg = { mode: 'dev', port: 3000 } as const satisfies { mode: 'dev' | 'prod'; port: number };
+const cfg = { mode: 'dev', port: 3000 } as const satisfies {
+  mode: 'dev' | 'prod';
+  port: number;
+};
 ```
 
 ---
@@ -735,7 +762,8 @@ type Color = (typeof colors)[number]; // "red" | "green" | "blue"
 
 ### 49) Key compiler options to know
 
-**Answer:** `target`, `module`, `moduleResolution`, `strict`, `noImplicitAny`, `esModuleInterop`, `resolveJsonModule`, `skipLibCheck`.
+**Answer:** `target`, `module`, `moduleResolution`, `strict`, `noImplicitAny`,
+`esModuleInterop`, `resolveJsonModule`, `skipLibCheck`.
 
 **Example (`tsconfig.json`):**
 
@@ -747,7 +775,8 @@ type Color = (typeof colors)[number]; // "red" | "green" | "blue"
 
 ### 50) Project references & build optimization
 
-**Answer:** Use project references (`composite`) to speed up large monorepos and incremental builds.
+**Answer:** Use project references (`composite`) to speed up large monorepos and
+incremental builds.
 
 **Example (`tsconfig.build.json`):**
 

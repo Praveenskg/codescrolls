@@ -1,7 +1,10 @@
 ---
 sidebar_position: 1
 title: JavaScript Variables - var, let, const
-description: Learn JavaScript variables with var, let, and const. Understand scope, hoisting, and best practices with practical examples for modern JavaScript development.
+description:
+  Learn JavaScript variables with var, let, and const. Understand scope,
+  hoisting, and best practices with practical examples for modern JavaScript
+  development.
 keywords:
   [
     javascript variables,
@@ -21,9 +24,11 @@ tags:
 
 # Variables in JavaScript
 
-Variables are **containers for storing data values** in JavaScript. Think of them as labeled boxes where you can store information and retrieve it later.
+Variables are **containers for storing data values** in JavaScript. Think of
+them as labeled boxes where you can store information and retrieve it later.
 
-In modern JavaScript, you can declare variables using three keywords: `var`, `let`, and `const`.
+In modern JavaScript, you can declare variables using three keywords: `var`,
+`let`, and `const`.
 
 ---
 
@@ -42,7 +47,8 @@ In modern JavaScript, you can declare variables using three keywords: `var`, `le
 
 ## 1️⃣ var (Legacy - Avoid)
 
-The `var` keyword is the **old way** of declaring variables. It has some quirks that can lead to bugs.
+The `var` keyword is the **old way** of declaring variables. It has some quirks
+that can lead to bugs.
 
 ### Basic Syntax
 
@@ -186,7 +192,8 @@ const email = 'test@example.com'; // ✅ Correct
 
 ### Objects and Arrays with const
 
-**Important:** `const` prevents reassignment, but **doesn't make objects immutable**.
+**Important:** `const` prevents reassignment, but **doesn't make objects
+immutable**.
 
 ```js live
 // You CAN modify object properties
@@ -411,7 +418,8 @@ console.log(authenticateUser('john_doe', 'securePass123')); // Valid
 
 ## 🔗 What's Next?
 
-Now that you understand variables, let's learn about different **data types** you can store in them!
+Now that you understand variables, let's learn about different **data types**
+you can store in them!
 
 👉 [Next: Data Types »](./datatypes.md)
 

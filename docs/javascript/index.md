@@ -2,7 +2,10 @@
 id: index
 title: JavaScript - Complete Learning Path
 sidebar_position: 1
-description: Master JavaScript from basics to advanced with our comprehensive guide covering 19+ topics. Learn variables, functions, arrays, ES6+, async/await, DOM, APIs, closures, and more with 120+ practical examples.
+description:
+  Master JavaScript from basics to advanced with our comprehensive guide
+  covering 19+ topics. Learn variables, functions, arrays, ES6+, async/await,
+  DOM, APIs, closures, and more with 120+ practical examples.
 keywords:
   [
     javascript,
@@ -26,15 +29,19 @@ tags:
 
 # 🚀 JavaScript - Complete Learning Path
 
-JavaScript is a **high-level, interpreted programming language** that's one of the core technologies of the **web**, alongside HTML and CSS.
+JavaScript is a **high-level, interpreted programming language** that's one of
+the core technologies of the **web**, alongside HTML and CSS.
 
-From interactive websites to full-scale applications, JavaScript powers the modern web. This comprehensive guide covers **everything** from absolute basics to advanced concepts with **120+ practical examples**!
+From interactive websites to full-scale applications, JavaScript powers the
+modern web. This comprehensive guide covers **everything** from absolute basics
+to advanced concepts with **120+ practical examples**!
 
 ---
 
 ## 📌 What is JavaScript?
 
-JavaScript (JS) was created by **Brendan Eich** in 1995 and has grown to become the **most popular programming language** in the world.
+JavaScript (JS) was created by **Brendan Eich** in 1995 and has grown to become
+the **most popular programming language** in the world.
 
 - 🌐 Initially designed for web browsers
 - ⚙️ Now used on both **frontend** and **backend** (Node.js)
@@ -76,10 +83,14 @@ JavaScript (JS) was created by **Brendan Eich** in 1995 and has grown to become 
 Perfect for beginners! Learn fundamental concepts and syntax.
 
 1. **[Variables](./basics/variable.md)** - var, let, const, scope, hoisting
-2. **[Data Types](./basics/datatypes.md)** - primitives, objects, type conversion
-3. **[Operators](./basics/operators.md)** - arithmetic, comparison, logical, ternary
-4. **[Control Flow](./basics/control-flow.md)** - if/else, switch, ternary, guard clauses
-5. **[Loops](./basics/loops.md)** - for, while, for...of, forEach, map, filter, reduce
+2. **[Data Types](./basics/datatypes.md)** - primitives, objects, type
+   conversion
+3. **[Operators](./basics/operators.md)** - arithmetic, comparison, logical,
+   ternary
+4. **[Control Flow](./basics/control-flow.md)** - if/else, switch, ternary,
+   guard clauses
+5. **[Loops](./basics/loops.md)** - for, while, for...of, forEach, map, filter,
+   reduce
 
 ---
 
@@ -87,14 +98,21 @@ Perfect for beginners! Learn fundamental concepts and syntax.
 
 Take your skills to the next level with modern JavaScript.
 
-6. **[Functions](./intermediate/functions.md)** - declarations, expressions, arrows, callbacks
-7. **[Arrays & Objects](./intermediate/arrays-objects.md)** - methods, destructuring, spread/rest
-8. **[ES6+ Features](./intermediate/es6-features.md)** - template literals, destructuring, modules
-9. **[DOM Manipulation](./intermediate/dom-manipulation.md)** - selecting, creating, modifying elements
-10. **[APIs & Fetch](./intermediate/apis-fetch.md)** - HTTP requests, REST APIs, async data
-11. **[Regular Expressions](./intermediate/regex.md)** - patterns, validation, text processing
+6. **[Functions](./intermediate/functions.md)** - declarations, expressions,
+   arrows, callbacks
+7. **[Arrays & Objects](./intermediate/arrays-objects.md)** - methods,
+   destructuring, spread/rest
+8. **[ES6+ Features](./intermediate/es6-features.md)** - template literals,
+   destructuring, modules
+9. **[DOM Manipulation](./intermediate/dom-manipulation.md)** - selecting,
+   creating, modifying elements
+10. **[APIs & Fetch](./intermediate/apis-fetch.md)** - HTTP requests, REST APIs,
+    async data
+11. **[Regular Expressions](./intermediate/regex.md)** - patterns, validation,
+    text processing
 12. **[JSON](./intermediate/json.md)** - parse, stringify, data exchange
-13. **[Local Storage](./intermediate/local-storage.md)** - browser storage, caching, persistence
+13. **[Local Storage](./intermediate/local-storage.md)** - browser storage,
+    caching, persistence
 
 ---
 
@@ -102,12 +120,18 @@ Take your skills to the next level with modern JavaScript.
 
 Master advanced concepts and patterns used by professionals.
 
-14. **[Promises](./advanced/promises.md)** - async patterns, chaining, Promise.all/race
-15. **[Async/Await](./advanced/async-await.md)** - modern async, error handling, parallel execution
-16. **[Classes](./advanced/classes.md)** - OOP, inheritance, encapsulation, private fields
-17. **[Modules](./advanced/modules.md)** - import/export, code organization, dynamic imports
-18. **[Error Handling](./advanced/error-handling.md)** - try/catch, custom errors, debugging
-19. **[Closures](./advanced/closures.md)** - lexical scope, data privacy, factory functions
+14. **[Promises](./advanced/promises.md)** - async patterns, chaining,
+    Promise.all/race
+15. **[Async/Await](./advanced/async-await.md)** - modern async, error handling,
+    parallel execution
+16. **[Classes](./advanced/classes.md)** - OOP, inheritance, encapsulation,
+    private fields
+17. **[Modules](./advanced/modules.md)** - import/export, code organization,
+    dynamic imports
+18. **[Error Handling](./advanced/error-handling.md)** - try/catch, custom
+    errors, debugging
+19. **[Closures](./advanced/closures.md)** - lexical scope, data privacy,
+    factory functions
 
 ---
 
@@ -211,7 +235,8 @@ Ready to begin your JavaScript journey?
 
 After completing this guide, continue your learning:
 
-- 📘 [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - comprehensive reference
+- 📘 [MDN JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) -
+  comprehensive reference
 - 📗 [JavaScript.info](https://javascript.info/) - detailed tutorials
 - 📙 [Eloquent JavaScript](https://eloquentjavascript.net/) - free book
 - 🎥 [FreeCodeCamp](https://www.freecodecamp.org/) - interactive learning
@@ -219,6 +244,7 @@ After completing this guide, continue your learning:
 
 ---
 
-> 💡 **Remember:** Everyone learns at their own pace. Don't rush! Focus on understanding concepts deeply rather than moving quickly.
+> 💡 **Remember:** Everyone learns at their own pace. Don't rush! Focus on
+> understanding concepts deeply rather than moving quickly.
 
 **Let's build something amazing together!** 🚀

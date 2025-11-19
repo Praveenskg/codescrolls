@@ -1,7 +1,9 @@
 ---
 id: javascript
 title: JavaScript Interview Questions
-description: Master JavaScript interview questions from beginner to advanced level. Covers ES6+, async, closures, hoisting, event loop, and more.
+description:
+  Master JavaScript interview questions from beginner to advanced level. Covers
+  ES6+, async, closures, hoisting, event loop, and more.
 sidebar_position: 4
 keywords:
   - javascript interview questions
@@ -15,7 +17,8 @@ keywords:
 # JavaScript Interview Questions
 
 Welcome to the **JavaScript Interview Hub** 🚀  
-Here you'll find a collection of **50 essential JavaScript interview questions** covering basic, intermediate, and advanced levels with examples.
+Here you'll find a collection of **50 essential JavaScript interview questions**
+covering basic, intermediate, and advanced levels with examples.
 
 ---
 
@@ -23,7 +26,8 @@ Here you'll find a collection of **50 essential JavaScript interview questions**
 
 ### 1. What is JavaScript?
 
-JavaScript is a lightweight, interpreted programming language primarily used for creating interactive web pages.
+JavaScript is a lightweight, interpreted programming language primarily used for
+creating interactive web pages.
 
 ```js
 console.log('Hello, JavaScript!');
@@ -54,7 +58,8 @@ let arr = [1, 2, 3];
 
 ### 4. What is hoisting?
 
-Hoisting is JavaScript's default behavior of moving declarations to the top of the scope.
+Hoisting is JavaScript's default behavior of moving declarations to the top of
+the scope.
 
 ```js
 console.log(a); // undefined
@@ -125,7 +130,8 @@ const add = (a, b) => a + b;
 
 ### 11. What are closures?
 
-A closure is when a function remembers its lexical scope even when executed outside of it.
+A closure is when a function remembers its lexical scope even when executed
+outside of it.
 
 ```js
 function outer() {
@@ -140,7 +146,8 @@ console.log(counter()); // 1
 
 ### 12. Explain the event loop.
 
-The event loop handles asynchronous callbacks by moving them from the task queue to the call stack when it’s empty.
+The event loop handles asynchronous callbacks by moving them from the task queue
+to the call stack when it’s empty.
 
 ### 13. Difference between `map()`, `forEach()`, and `filter()`?
 
@@ -150,8 +157,8 @@ The event loop handles asynchronous callbacks by moving them from the task queue
 
 ```js
 let nums = [1, 2, 3];
-console.log(nums.map((n) => n * 2)); // [2,4,6]
-console.log(nums.filter((n) => n > 1)); // [2,3]
+console.log(nums.map(n => n * 2)); // [2,4,6]
+console.log(nums.filter(n => n > 1)); // [2,3]
 ```
 
 ### 14. What is a promise?
@@ -159,7 +166,7 @@ console.log(nums.filter((n) => n > 1)); // [2,3]
 A promise represents a value that may be available now, later, or never.
 
 ```js
-const fetchData = new Promise((resolve) => {
+const fetchData = new Promise(resolve => {
   setTimeout(() => resolve('Done!'), 1000);
 });
 ```
@@ -171,7 +178,8 @@ const fetchData = new Promise((resolve) => {
 
 ### 16. Explain async/await.
 
-`async/await` is syntactic sugar over promises for writing cleaner asynchronous code.
+`async/await` is syntactic sugar over promises for writing cleaner asynchronous
+code.
 
 ```js
 async function fetchData() {
@@ -214,11 +222,12 @@ greet.call(user, 'Hello');
 
 ### 20. What is currying?
 
-Transforming a function with multiple arguments into a sequence of functions each taking one argument.
+Transforming a function with multiple arguments into a sequence of functions
+each taking one argument.
 
 ```js
 function curry(a) {
-  return (b) => (c) => a + b + c;
+  return b => c => a + b + c;
 }
 ```
 
@@ -307,7 +316,7 @@ let deep = JSON.parse(JSON.stringify(obj));
 Using a parent to handle events for its children.
 
 ```js
-document.getElementById('list').addEventListener('click', (e) => {
+document.getElementById('list').addEventListener('click', e => {
   if (e.target.tagName === 'LI') console.log('Clicked', e.target.innerText);
 });
 ```
@@ -430,7 +439,7 @@ let big = 123456789012345678901234567890n;
 Lazy loading modules.
 
 ```js
-import('./module.js').then((m) => m.fn());
+import('./module.js').then(m => m.fn());
 ```
 
 ### 44. Explain Service Workers.

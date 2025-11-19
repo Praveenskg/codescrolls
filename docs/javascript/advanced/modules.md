@@ -1,7 +1,10 @@
 ---
 sidebar_position: 4
 title: JavaScript Modules (ES6) - Complete Guide
-description: Master JavaScript ES6 modules with import/export, named exports, default exports, dynamic imports, and module patterns. Learn modern JavaScript module system.
+description:
+  Master JavaScript ES6 modules with import/export, named exports, default
+  exports, dynamic imports, and module patterns. Learn modern JavaScript module
+  system.
 keywords:
   [
     javascript modules,
@@ -22,7 +25,9 @@ tags:
 
 # JavaScript Modules
 
-Modules let you **split code into separate files** and organize your application. They enable better code reusability, maintainability, and encapsulation!
+Modules let you **split code into separate files** and organize your
+application. They enable better code reusability, maintainability, and
+encapsulation!
 
 ---
 
@@ -177,7 +182,7 @@ console.log(user.greet());
 ```js
 // api.js
 export default function fetchData(url) {
-  return fetch(url).then((r) => r.json());
+  return fetch(url).then(r => r.json());
 }
 
 export function post(url, data) {
@@ -243,7 +248,7 @@ async function loadModule() {
 }
 
 // Or with .then()
-import('./module.js').then((module) => {
+import('./module.js').then(module => {
   module.init();
 });
 ```
@@ -440,7 +445,7 @@ export function subscribe(listener) {
 }
 
 function notifyListeners() {
-  listeners.forEach((listener) => listener(currentUser));
+  listeners.forEach(listener => listener(currentUser));
 }
 ```
 
@@ -449,7 +454,7 @@ function notifyListeners() {
 import { setUser, getUser, subscribe } from './store/userStore.js';
 
 // Subscribe to changes
-const unsubscribe = subscribe((user) => {
+const unsubscribe = subscribe(user => {
   console.log('User changed:', user);
 });
 

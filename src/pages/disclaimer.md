@@ -1,6 +1,7 @@
 ---
 title: Disclaimer
-description: Important disclaimers and limitations for CodeScrolls content and services.
+description:
+  Important disclaimers and limitations for CodeScrolls content and services.
 slug: /disclaimer
 keywords:
   [
@@ -17,13 +18,19 @@ keywords:
 
 **Effective Date:** October 8, 2025
 
-Please read this disclaimer carefully before using **CodeScrolls** at [https://codescrolls.site](https://codescrolls.site).
+Please read this disclaimer carefully before using **CodeScrolls** at
+[https://codescrolls.site](https://codescrolls.site).
 
 ---
 
 ## 📚 General Information
 
-The information provided on CodeScrolls is for general informational and educational purposes only. While we strive to keep the information up-to-date and accurate, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website.
+The information provided on CodeScrolls is for general informational and
+educational purposes only. While we strive to keep the information up-to-date
+and accurate, we make no representations or warranties of any kind, express or
+implied, about the completeness, accuracy, reliability, suitability, or
+availability of the information, products, services, or related graphics
+contained on the website.
 
 ---
 
@@ -37,7 +44,8 @@ All content on CodeScrolls, including but not limited to:
 - Blog posts
 - Cheat sheets
 
-is provided for **educational purposes only**. The content is meant to help developers learn and improve their skills.
+is provided for **educational purposes only**. The content is meant to help
+developers learn and improve their skills.
 
 ---
 
@@ -45,7 +53,8 @@ is provided for **educational purposes only**. The content is meant to help deve
 
 ### Technical Advice
 
-The content on this website does not constitute professional technical advice. Always:
+The content on this website does not constitute professional technical advice.
+Always:
 
 - Test code in a safe environment before production use
 - Consult official documentation
@@ -54,14 +63,16 @@ The content on this website does not constitute professional technical advice. A
 
 ### Legal or Financial Advice
 
-CodeScrolls does not provide legal, financial, or professional advice. Any information regarding:
+CodeScrolls does not provide legal, financial, or professional advice. Any
+information regarding:
 
 - Software licenses
 - Business decisions
 - Career advice
 - Financial matters
 
-should not be relied upon as professional advice. Consult appropriate professionals for such matters.
+should not be relied upon as professional advice. Consult appropriate
+professionals for such matters.
 
 ---
 
@@ -78,7 +89,8 @@ While we make every effort to provide accurate and working code examples:
 
 ### No Warranty
 
-We provide code examples "as is" without warranty of any kind. We are not responsible for:
+We provide code examples "as is" without warranty of any kind. We are not
+responsible for:
 
 - Errors or bugs in code examples
 - Compatibility issues
@@ -98,7 +110,8 @@ You are responsible for:
 
 ## 🔗 External Links
 
-CodeScrolls may contain links to external websites that are not provided or maintained by us. We:
+CodeScrolls may contain links to external websites that are not provided or
+maintained by us. We:
 
 - Do not guarantee the accuracy of external content
 - Are not responsible for external website content
@@ -131,7 +144,8 @@ We use Google AdSense to display advertisements. Please note:
 
 ### Transparency
 
-We are committed to transparency. Any sponsored content or paid partnerships will be clearly disclosed.
+We are committed to transparency. Any sponsored content or paid partnerships
+will be clearly disclosed.
 
 ---
 
@@ -151,11 +165,13 @@ We shall not be liable for any:
 
 ### Use at Your Own Risk
 
-Your use of CodeScrolls is at your sole risk. We provide the website on an "as is" and "as available" basis.
+Your use of CodeScrolls is at your sole risk. We provide the website on an "as
+is" and "as available" basis.
 
 ### Maximum Liability
 
-In no event shall our total liability to you exceed the amount you paid us (if any) for accessing the website.
+In no event shall our total liability to you exceed the amount you paid us (if
+any) for accessing the website.
 
 ---
 
@@ -170,7 +186,8 @@ In no event shall our total liability to you exceed the amount you paid us (if a
 
 ### Technology Changes
 
-Technology evolves rapidly. Information that was accurate when published may become outdated. Always:
+Technology evolves rapidly. Information that was accurate when published may
+become outdated. Always:
 
 - Check official documentation for the latest information
 - Verify compatibility with your specific versions
@@ -180,7 +197,8 @@ Technology evolves rapidly. Information that was accurate when published may bec
 
 ## 🌍 Jurisdiction
 
-This disclaimer is governed by the laws of the United States. Any disputes shall be resolved in accordance with applicable laws.
+This disclaimer is governed by the laws of the United States. Any disputes shall
+be resolved in accordance with applicable laws.
 
 ---
 
@@ -207,7 +225,9 @@ If you believe any content on our website infringes your rights:
 
 ## ✅ Your Acceptance
 
-By using CodeScrolls, you acknowledge that you have read this disclaimer and agree to its terms. If you do not agree with any part of this disclaimer, please do not use our website.
+By using CodeScrolls, you acknowledge that you have read this disclaimer and
+agree to its terms. If you do not agree with any part of this disclaimer, please
+do not use our website.
 
 ---
 

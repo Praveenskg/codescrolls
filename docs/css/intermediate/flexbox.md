@@ -1,7 +1,9 @@
 ---
 id: css-flexbox
 title: CSS Flexbox - Complete Guide
-description: Master CSS Flexbox for one-dimensional layouts. Learn flex containers, flex items, alignment, ordering, and build responsive layouts with ease.
+description:
+  Master CSS Flexbox for one-dimensional layouts. Learn flex containers, flex
+  items, alignment, ordering, and build responsive layouts with ease.
 keywords:
   [
     css flexbox,
@@ -20,7 +22,9 @@ sidebar_position: 1
 
 # 📦 CSS Flexbox
 
-Flexbox (Flexible Box Layout) is a powerful **one-dimensional** layout system for arranging items in rows or columns. It makes creating responsive layouts incredibly easy.
+Flexbox (Flexible Box Layout) is a powerful **one-dimensional** layout system
+for arranging items in rows or columns. It makes creating responsive layouts
+incredibly easy.
 
 ## 📖 What is Flexbox?
 
@@ -780,9 +784,11 @@ Controls the **visual order** of flex items.
 display: flex;
 flex-direction: row | column | row-reverse | column-reverse;
 flex-wrap: nowrap | wrap | wrap-reverse;
-justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+justify-content: flex-start | flex-end | center | space-between | space-around |
+  space-evenly;
 align-items: stretch | flex-start | flex-end | center | baseline;
-align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+align-content: flex-start | flex-end | center | space-between | space-around |
+  stretch;
 gap: 1rem;
 
 /* Item Properties */
@@ -798,7 +804,8 @@ order: 0;
 
 ## 🚀 What's Next?
 
-Now that you understand Flexbox, learn about **CSS Grid** for two-dimensional layouts:
+Now that you understand Flexbox, learn about **CSS Grid** for two-dimensional
+layouts:
 
 👉 [Next: CSS Grid →](./grid.md)
 

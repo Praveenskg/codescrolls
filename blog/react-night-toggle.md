@@ -1,7 +1,9 @@
 ---
 slug: react-night-toggle
 title: 'Introducing react-night-toggle – A Dark/Light Mode Switch for React'
-description: 'A lightweight, customizable React component for dark/light mode toggle with smooth animations and TypeScript support.'
+description:
+  'A lightweight, customizable React component for dark/light mode toggle with
+  smooth animations and TypeScript support.'
 authors: praveen
 tags: [react, javascript, darkmode, opensource]
 image: /img/blog/react.png
@@ -17,8 +19,12 @@ keywords:
   ]
 ---
 
-We all love dark mode, but implementing a clean and customizable toggle can be a bit annoying.  
-That’s why I built **[react-night-toggle](https://www.npmjs.com/package/react-night-toggle)** – a lightweight, flexible React component that makes switching between dark and light mode super easy.
+We all love dark mode, but implementing a clean and customizable toggle can be a
+bit annoying.  
+That’s why I built
+**[react-night-toggle](https://www.npmjs.com/package/react-night-toggle)** – a
+lightweight, flexible React component that makes switching between dark and
+light mode super easy.
 
 <!-- truncate -->
 
@@ -63,8 +69,8 @@ export default function App() {
       <DarkModeSwitch
         checked={dark}
         onChange={toggleDarkMode}
-        sunColor='orange' // optional, defaults to currentColor
-        moonColor='black' // optional, defaults to currentColor
+        sunColor="orange" // optional, defaults to currentColor
+        moonColor="black" // optional, defaults to currentColor
       />
       <h1>{dark ? '🌙 Dark Mode' : '☀️ Light Mode'}</h1>
     </div>
@@ -103,7 +109,8 @@ export default function App() {
 
 ### 3️⃣ Follow System Theme Example
 
-You can automatically follow the user’s system color scheme by setting `followSystem` to `true`:
+You can automatically follow the user’s system color scheme by setting
+`followSystem` to `true`:
 
 ```tsx
 import { useState } from 'react';
@@ -114,7 +121,12 @@ export default function App() {
 
   return (
     <div>
-      <DarkModeSwitch followSystem checked={dark} onChange={setDark} size={40} />
+      <DarkModeSwitch
+        followSystem
+        checked={dark}
+        onChange={setDark}
+        size={40}
+      />
       <h2>{dark ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️'}</h2>
     </div>
   );
@@ -138,8 +150,8 @@ export default function App() {
         checked={dark}
         onChange={setDark}
         size={56}
-        sunColor='orange'
-        moonColor='blueviolet'
+        sunColor="orange"
+        moonColor="blueviolet"
       />
       <h2>{dark ? 'Dark Mode Enabled 🌙' : 'Light Mode Enabled ☀️'}</h2>
     </div>
@@ -149,7 +161,8 @@ export default function App() {
 
 ### 5️⃣ Large Toggle Example
 
-You can increase the size of the toggle button by passing a numeric value or a string:
+You can increase the size of the toggle button by passing a numeric value or a
+string:
 
 ```tsx
 import { useState } from 'react';
@@ -167,7 +180,8 @@ export default function App() {
 }
 ```
 
-✨ This way you can use **any React node** (Lucide, Material UI, custom SVGs, etc.) for icons.
+✨ This way you can use **any React node** (Lucide, Material UI, custom SVGs,
+etc.) for icons.
 
 ---
 

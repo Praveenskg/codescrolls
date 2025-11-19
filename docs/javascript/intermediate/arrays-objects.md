@@ -1,7 +1,10 @@
 ---
 sidebar_position: 2
 title: JavaScript Arrays & Objects - Complete Guide
-description: Master JavaScript arrays and objects with methods, destructuring, spread operator, and practical examples. Learn array methods like map, filter, reduce, and object manipulation techniques.
+description:
+  Master JavaScript arrays and objects with methods, destructuring, spread
+  operator, and practical examples. Learn array methods like map, filter,
+  reduce, and object manipulation techniques.
 keywords:
   [
     javascript arrays,
@@ -22,7 +25,8 @@ tags:
 
 # JavaScript Arrays & Objects
 
-Arrays and objects are the **core data structures** in JavaScript. Master them to become an effective JavaScript developer!
+Arrays and objects are the **core data structures** in JavaScript. Master them
+to become an effective JavaScript developer!
 
 ---
 
@@ -110,11 +114,11 @@ console.log('Modified:', numbers); // [1, 2, 10, 20, 5]
 const numbers = [1, 2, 3, 4, 5];
 
 // map - transform each element
-const doubled = numbers.map((n) => n * 2);
+const doubled = numbers.map(n => n * 2);
 console.log('Doubled:', doubled); // [2, 4, 6, 8, 10]
 
 // filter - keep elements that match condition
-const evens = numbers.filter((n) => n % 2 === 0);
+const evens = numbers.filter(n => n % 2 === 0);
 console.log('Evens:', evens); // [2, 4]
 
 // reduce - combine into single value
@@ -123,8 +127,8 @@ console.log('Sum:', sum); // 15
 
 // Chain methods
 const result = numbers
-  .filter((n) => n > 2) // [3, 4, 5]
-  .map((n) => n * 2) // [6, 8, 10]
+  .filter(n => n > 2) // [3, 4, 5]
+  .map(n => n * 2) // [6, 8, 10]
   .reduce((sum, n) => sum + n, 0); // 24
 
 console.log('Chained result:', result); // 24
@@ -140,19 +144,19 @@ const users = [
 ];
 
 // find - first matching element
-const user = users.find((u) => u.age > 28);
+const user = users.find(u => u.age > 28);
 console.log('Found:', user); // { id: 2, name: 'Bob', age: 30 }
 
 // findIndex - index of first match
-const index = users.findIndex((u) => u.name === 'Charlie');
+const index = users.findIndex(u => u.name === 'Charlie');
 console.log('Index:', index); // 2
 
 // some - check if any match
-const hasYoung = users.some((u) => u.age < 30);
+const hasYoung = users.some(u => u.age < 30);
 console.log('Has young:', hasYoung); // true
 
 // every - check if all match
-const allAdults = users.every((u) => u.age >= 18);
+const allAdults = users.every(u => u.age >= 18);
 console.log('All adults:', allAdults); // true
 ```
 
@@ -218,8 +222,8 @@ console.log(obj.greet()); // 'Hello'
 
 ```js live
 const user = {
-  'name': 'Alice',
-  'age': 25,
+  name: 'Alice',
+  age: 25,
   'favorite color': 'blue', // key with spaces
 };
 
@@ -401,7 +405,7 @@ function createShoppingCart() {
 
   return {
     addItem(product, quantity = 1) {
-      const existing = items.find((item) => item.id === product.id);
+      const existing = items.find(item => item.id === product.id);
       if (existing) {
         existing.quantity += quantity;
       } else {
@@ -411,12 +415,15 @@ function createShoppingCart() {
     },
 
     removeItem(productId) {
-      items = items.filter((item) => item.id !== productId);
+      items = items.filter(item => item.id !== productId);
       return this;
     },
 
     getTotal() {
-      return items.reduce((total, item) => total + item.price * item.quantity, 0);
+      return items.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0,
+      );
     },
 
     getItems() {
@@ -445,11 +452,12 @@ const students = [
 ];
 
 // Get all A students
-const aStudents = students.filter((s) => s.grade === 'A').map((s) => s.name);
+const aStudents = students.filter(s => s.grade === 'A').map(s => s.name);
 console.log('A Students:', aStudents); // ['Bob', 'Diana']
 
 // Calculate average score
-const avgScore = students.reduce((sum, s) => sum + s.score, 0) / students.length;
+const avgScore =
+  students.reduce((sum, s) => sum + s.score, 0) / students.length;
 console.log('Average:', avgScore.toFixed(1)); // 87.5
 
 // Group by grade

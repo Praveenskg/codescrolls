@@ -1,7 +1,9 @@
 ---
 id: css-architecture
 title: CSS Architecture - BEM & Best Practices
-description: Master CSS architecture methodologies including BEM, SMACSS, and OOCSS. Learn how to organize, structure, and scale CSS for large projects.
+description:
+  Master CSS architecture methodologies including BEM, SMACSS, and OOCSS. Learn
+  how to organize, structure, and scale CSS for large projects.
 keywords:
   [
     css architecture,
@@ -19,7 +21,8 @@ sidebar_position: 3
 
 # 🏗️ CSS Architecture
 
-Learn methodologies and best practices for organizing and structuring CSS in large-scale projects.
+Learn methodologies and best practices for organizing and structuring CSS in
+large-scale projects.
 
 ## 🎯 BEM (Block Element Modifier)
 

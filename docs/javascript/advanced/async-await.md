@@ -1,7 +1,10 @@
 ---
 sidebar_position: 2
 title: Async/Await - Modern JavaScript
-description: Master async/await for clean asynchronous code. Learn async functions, await keyword, error handling, parallel execution, and best practices for modern async JavaScript.
+description:
+  Master async/await for clean asynchronous code. Learn async functions, await
+  keyword, error handling, parallel execution, and best practices for modern
+  async JavaScript.
 keywords:
   [
     async await javascript,
@@ -21,7 +24,8 @@ tags:
 
 # Async/Await
 
-**Async/await** is syntactic sugar over Promises, making asynchronous code look and behave like synchronous code!
+**Async/await** is syntactic sugar over Promises, making asynchronous code look
+and behave like synchronous code!
 
 ---
 
@@ -32,13 +36,13 @@ tags:
 ```js
 // ❌ Promises - still has callbacks
 fetchUser()
-  .then((user) => {
+  .then(user => {
     return fetchPosts(user.id);
   })
-  .then((posts) => {
+  .then(posts => {
     console.log(posts);
   })
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
   });
 
@@ -77,7 +81,7 @@ console.log(regularFunction()); // 'Hello'
 console.log(asyncFunction()); // Promise { 'Hello' }
 
 // Use .then() to get value
-asyncFunction().then((value) => console.log(value)); // 'Hello'
+asyncFunction().then(value => console.log(value)); // 'Hello'
 ```
 
 ### Different Async Syntaxes
@@ -122,7 +126,7 @@ obj.getData().then(console.log);
 
 ```js live
 function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function demo() {
@@ -188,8 +192,8 @@ async function fetchData() {
 
 // Usage
 fetchData()
-  .then((data) => console.log('Success:', data))
-  .catch((error) => console.error('Error:', error));
+  .then(data => console.log('Success:', data))
+  .catch(error => console.error('Error:', error));
 ```
 
 ### Multiple Try/Catch
@@ -220,7 +224,11 @@ async function processData() {
 
 ```js live
 async function fetchAllData() {
-  const results = await Promise.allSettled([fetchUser(), fetchPosts(), fetchComments()]);
+  const results = await Promise.allSettled([
+    fetchUser(),
+    fetchPosts(),
+    fetchComments(),
+  ]);
 
   const [userResult, postsResult, commentsResult] = results;
 
@@ -318,9 +326,9 @@ async function loadUserProfile(userId) {
 
     // Fetch related data in parallel
     const [posts, followers, following] = await Promise.all([
-      fetch(`/api/users/${userId}/posts`).then((r) => r.json()),
-      fetch(`/api/users/${userId}/followers`).then((r) => r.json()),
-      fetch(`/api/users/${userId}/following`).then((r) => r.json()),
+      fetch(`/api/users/${userId}/posts`).then(r => r.json()),
+      fetch(`/api/users/${userId}/followers`).then(r => r.json()),
+      fetch(`/api/users/${userId}/following`).then(r => r.json()),
     ]);
 
     return {
@@ -339,10 +347,10 @@ async function loadUserProfile(userId) {
 
 // Usage
 loadUserProfile(123)
-  .then((profile) => {
+  .then(profile => {
     displayProfile(profile);
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('Failed to load profile:', error);
   });
 ```
@@ -383,7 +391,7 @@ async function handleFormSubmit(event) {
 }
 
 // Usage
-document.querySelector('#myForm').addEventListener('submit', async (e) => {
+document.querySelector('#myForm').addEventListener('submit', async e => {
   try {
     await handleFormSubmit(e);
   } catch (error) {
@@ -409,7 +417,7 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
       if (i === retries - 1) throw error; // Last attempt
 
       // Wait before retry
-      await new Promise((resolve) => setTimeout(resolve, delay));
+      await new Promise(resolve => setTimeout(resolve, delay));
       delay *= 2; // Exponential backoff
     }
   }
@@ -417,8 +425,8 @@ async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
 
 // Usage
 fetchWithRetry('/api/data', {}, 3, 1000)
-  .then((data) => console.log('Success:', data))
-  .catch((error) => console.error('All retries failed:', error));
+  .then(data => console.log('Success:', data))
+  .catch(error => console.error('All retries failed:', error));
 ```
 
 ### Example 4: Concurrent Requests with Limit
@@ -429,11 +437,13 @@ async function fetchWithConcurrencyLimit(urls, limit = 3) {
   const executing = [];
 
   for (const url of urls) {
-    const promise = fetch(url).then((r) => r.json());
+    const promise = fetch(url).then(r => r.json());
     results.push(promise);
 
     if (limit <= urls.length) {
-      const execute = promise.then(() => executing.splice(executing.indexOf(execute), 1));
+      const execute = promise.then(() =>
+        executing.splice(executing.indexOf(execute), 1),
+      );
       executing.push(execute);
 
       if (executing.length >= limit) {
@@ -447,7 +457,7 @@ async function fetchWithConcurrencyLimit(urls, limit = 3) {
 
 // Usage: Fetch 10 URLs but only 3 at a time
 const urls = Array.from({ length: 10 }, (_, i) => `/api/data/${i}`);
-fetchWithConcurrencyLimit(urls, 3).then((results) => {
+fetchWithConcurrencyLimit(urls, 3).then(results => {
   console.log('All fetched:', results);
 });
 ```
@@ -517,7 +527,7 @@ for (const id of ids) {
 }
 
 // ✅ Good - parallel
-const users = await Promise.all(ids.map((id) => fetchUser(id)));
+const users = await Promise.all(ids.map(id => fetchUser(id)));
 ```
 
 ### 4. Handle Cleanup with Finally
@@ -581,14 +591,14 @@ async function loadData() {
 
 ```js
 // ❌ Wrong - doesn't wait
-const results = items.map(async (item) => {
+const results = items.map(async item => {
   return await processItem(item);
 });
 console.log(results); // Array of Promises!
 
 // ✅ Correct
 const results = await Promise.all(
-  items.map(async (item) => {
+  items.map(async item => {
     return await processItem(item);
   }),
 );

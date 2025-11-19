@@ -1,7 +1,10 @@
 ---
 id: multimedia
 title: HTML Multimedia - Audio, Video, and Embedded Content
-description: Master HTML multimedia elements including audio, video, tracks, and embedded content. Learn responsive media, accessibility, and cross-browser compatibility.
+description:
+  Master HTML multimedia elements including audio, video, tracks, and embedded
+  content. Learn responsive media, accessibility, and cross-browser
+  compatibility.
 keywords:
   [
     html multimedia,
@@ -19,13 +22,16 @@ sidebar_position: 9
 
 # 🎵 HTML Multimedia
 
-HTML5 provides powerful elements for embedding audio, video, and other multimedia content. These elements offer native browser support with customizable controls and accessibility features.
+HTML5 provides powerful elements for embedding audio, video, and other
+multimedia content. These elements offer native browser support with
+customizable controls and accessibility features.
 
 ## 📖 Multimedia Basics
 
 ### Why Use HTML5 Multimedia?
 
-Before HTML5, multimedia required plugins like Flash. HTML5 provides native support with:
+Before HTML5, multimedia required plugins like Flash. HTML5 provides native
+support with:
 
 - Better performance
 - Mobile compatibility
@@ -89,7 +95,8 @@ Before HTML5, multimedia required plugins like Flash. HTML5 provides native supp
 
   <!-- Fallback message -->
   <p>
-    Your browser doesn't support HTML5 video. <a href="movie.mp4">Download the video</a> instead.
+    Your browser doesn't support HTML5 video.
+    <a href="movie.mp4">Download the video</a> instead.
   </p>
 </video>
 ```
@@ -144,12 +151,27 @@ Before HTML5, multimedia required plugins like Flash. HTML5 provides native supp
     <button onclick="playAudio()">▶️ Play</button>
     <button onclick="pauseAudio()">⏸️ Pause</button>
     <button onclick="stopAudio()">⏹️ Stop</button>
-    <input type="range" id="volume" min="0" max="1" step="0.1" value="1" onchange="setVolume()" />
+    <input
+      type="range"
+      id="volume"
+      min="0"
+      max="1"
+      step="0.1"
+      value="1"
+      onchange="setVolume()"
+    />
   </div>
 
   <div class="progress">
     <span id="current-time">0:00</span>
-    <input type="range" id="seek" min="0" max="100" value="0" onchange="seekAudio()" />
+    <input
+      type="range"
+      id="seek"
+      min="0"
+      max="100"
+      value="0"
+      onchange="seekAudio()"
+    />
     <span id="duration">0:00</span>
   </div>
 </div>
@@ -186,13 +208,19 @@ Before HTML5, multimedia required plugins like Flash. HTML5 provides native supp
     const progress = (audio.currentTime / audio.duration) * 100;
     seekBar.value = progress;
 
-    document.getElementById('current-time').textContent = formatTime(audio.currentTime);
-    document.getElementById('duration').textContent = formatTime(audio.duration);
+    document.getElementById('current-time').textContent = formatTime(
+      audio.currentTime,
+    );
+    document.getElementById('duration').textContent = formatTime(
+      audio.duration,
+    );
   });
 
   // Set duration when metadata loads
   audio.addEventListener('loadedmetadata', () => {
-    document.getElementById('duration').textContent = formatTime(audio.duration);
+    document.getElementById('duration').textContent = formatTime(
+      audio.duration,
+    );
   });
 
   function formatTime(seconds) {
@@ -209,13 +237,20 @@ Before HTML5, multimedia required plugins like Flash. HTML5 provides native supp
 
 ### WebVTT Format
 
-WebVTT (Web Video Text Tracks) is the standard format for video subtitles and captions.
+WebVTT (Web Video Text Tracks) is the standard format for video subtitles and
+captions.
 
 ```html
 <!-- Basic subtitles -->
 <video controls width="640" height="360">
   <source src="movie.mp4" type="video/mp4" />
-  <track src="subtitles.vtt" kind="subtitles" srclang="en" label="English" default />
+  <track
+    src="subtitles.vtt"
+    kind="subtitles"
+    srclang="en"
+    label="English"
+    default
+  />
   <track src="subtitles-es.vtt" kind="subtitles" srclang="es" label="Español" />
 </video>
 ```
@@ -252,13 +287,24 @@ Narrator: Welcome to our tutorial.
   <track src="subtitles-en.vtt" kind="subtitles" srclang="en" label="English" />
 
   <!-- Captions for accessibility -->
-  <track src="captions.vtt" kind="captions" srclang="en" label="English Captions" default />
+  <track
+    src="captions.vtt"
+    kind="captions"
+    srclang="en"
+    label="English Captions"
+    default
+  />
 
   <!-- Chapters for navigation -->
   <track src="chapters.vtt" kind="chapters" srclang="en" label="Chapters" />
 
   <!-- Descriptions for screen readers -->
-  <track src="descriptions.vtt" kind="descriptions" srclang="en" label="Audio Description" />
+  <track
+    src="descriptions.vtt"
+    kind="descriptions"
+    srclang="en"
+    label="Audio Description"
+  />
 
   <!-- Metadata (not visible to users) -->
   <track src="metadata.vtt" kind="metadata" />
@@ -426,7 +472,7 @@ Narrator: Welcome to our tutorial.
     totalTimeSpan.textContent = formatTime(audio.duration);
   });
 
-  progressBar.addEventListener('click', (e) => {
+  progressBar.addEventListener('click', e => {
     const rect = progressBar.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = clickX / rect.width;
@@ -458,7 +504,9 @@ const video = document.querySelector('video');
 video.addEventListener('loadstart', () => console.log('Loading started'));
 video.addEventListener('loadedmetadata', () => console.log('Metadata loaded'));
 video.addEventListener('canplay', () => console.log('Can start playing'));
-video.addEventListener('canplaythrough', () => console.log('Can play without buffering'));
+video.addEventListener('canplaythrough', () =>
+  console.log('Can play without buffering'),
+);
 
 // Playback events
 video.addEventListener('play', () => console.log('Video started playing'));
@@ -635,7 +683,7 @@ media.playbackRate = 0.5; // Half speed
 
   video.addEventListener('loadedmetadata', updateTimeDisplay);
 
-  progressContainer.addEventListener('click', (e) => {
+  progressContainer.addEventListener('click', e => {
     const rect = progressContainer.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = clickX / rect.width;
@@ -672,7 +720,12 @@ media.playbackRate = 0.5; // Half speed
 
 ```html
 <!-- Basic iframe -->
-<iframe src="https://example.com" width="600" height="400" title="Example Website">
+<iframe
+  src="https://example.com"
+  width="600"
+  height="400"
+  title="Example Website"
+>
   Your browser doesn't support iframes.
 </iframe>
 
@@ -704,7 +757,12 @@ media.playbackRate = 0.5; // Half speed
 
 ```html
 <!-- Flash content (legacy) -->
-<object data="movie.swf" type="application/x-shockwave-flash" width="400" height="300">
+<object
+  data="movie.swf"
+  type="application/x-shockwave-flash"
+  width="400"
+  height="300"
+>
   <param name="movie" value="movie.swf" />
   <param name="quality" value="high" />
 </object>
@@ -715,7 +773,12 @@ media.playbackRate = 0.5; // Half speed
 </object>
 
 <!-- Generic embed -->
-<embed src="animation.swf" type="application/x-shockwave-flash" width="400" height="300" />
+<embed
+  src="animation.swf"
+  type="application/x-shockwave-flash"
+  width="400"
+  height="300"
+/>
 ```
 
 ---
@@ -737,13 +800,25 @@ media.playbackRate = 0.5; // Half speed
   <source src="demo.webm" type="video/webm" />
 
   <!-- Multiple caption tracks -->
-  <track src="captions-en.vtt" kind="captions" srclang="en" label="English" default />
+  <track
+    src="captions-en.vtt"
+    kind="captions"
+    srclang="en"
+    label="English"
+    default
+  />
   <track src="captions-es.vtt" kind="captions" srclang="es" label="Español" />
-  <track src="descriptions.vtt" kind="descriptions" srclang="en" label="Audio Description" />
+  <track
+    src="descriptions.vtt"
+    kind="descriptions"
+    srclang="en"
+    label="Audio Description"
+  />
 
   <!-- Transcript for screen readers -->
   <div id="video-description" class="sr-only">
-    This video demonstrates how to use our product. It shows the main features and user interface.
+    This video demonstrates how to use our product. It shows the main features
+    and user interface.
   </div>
 </video>
 
@@ -758,7 +833,7 @@ media.playbackRate = 0.5; // Half speed
 
 ```javascript
 // Add keyboard controls to media
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
   const video = document.querySelector('video');
 
   switch (e.code) {

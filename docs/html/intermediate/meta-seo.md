@@ -1,7 +1,9 @@
 ---
 id: meta-seo
 title: Meta Tags & SEO - Complete HTML Optimization Guide
-description: Master HTML meta tags, Open Graph, Twitter Cards, structured data, and SEO best practices for better search engine visibility and social sharing.
+description:
+  Master HTML meta tags, Open Graph, Twitter Cards, structured data, and SEO
+  best practices for better search engine visibility and social sharing.
 keywords:
   [
     html meta tags,
@@ -19,7 +21,8 @@ sidebar_position: 10
 
 # 🔍 Meta Tags & SEO
 
-Meta tags and SEO optimization are crucial for making your website discoverable by search engines and properly displayed when shared on social media platforms.
+Meta tags and SEO optimization are crucial for making your website discoverable
+by search engines and properly displayed when shared on social media platforms.
 
 ## 📖 Why Meta Tags Matter?
 
@@ -105,19 +108,26 @@ Meta tags provide information about your web page to:
 
 ## 🌐 Open Graph Protocol
 
-Open Graph tags control how your content appears when shared on Facebook, LinkedIn, and other social platforms.
+Open Graph tags control how your content appears when shared on Facebook,
+LinkedIn, and other social platforms.
 
 ### Basic Open Graph Tags
 
 ```html
 <head>
   <!-- Required Open Graph tags -->
-  <meta property="og:title" content="Complete HTML Guide - Learn Web Development" />
+  <meta
+    property="og:title"
+    content="Complete HTML Guide - Learn Web Development"
+  />
   <meta
     property="og:description"
     content="Master HTML from basics to advanced with practical examples, SEO optimization, and modern web standards."
   />
-  <meta property="og:image" content="https://codescrolls.com/img/html-guide-og.png" />
+  <meta
+    property="og:image"
+    content="https://codescrolls.com/img/html-guide-og.png"
+  />
   <meta property="og:url" content="https://codescrolls.com/html" />
   <meta property="og:type" content="website" />
 
@@ -184,8 +194,8 @@ Open Graph tags control how your content appears when shared on Facebook, Linked
 
   // Example usage
   fetch('/api/page-metadata')
-    .then((response) => response.json())
-    .then((data) => updateOpenGraph(data));
+    .then(response => response.json())
+    .then(data => updateOpenGraph(data));
 </script>
 ```
 
@@ -201,12 +211,18 @@ Twitter Cards control how your content appears when shared on Twitter (now X).
 <head>
   <!-- Twitter Card meta tags -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Complete HTML Guide - Learn Web Development" />
+  <meta
+    name="twitter:title"
+    content="Complete HTML Guide - Learn Web Development"
+  />
   <meta
     name="twitter:description"
     content="Master HTML from basics to advanced with practical examples, SEO optimization, and modern web standards."
   />
-  <meta name="twitter:image" content="https://codescrolls.com/img/html-guide-twitter.png" />
+  <meta
+    name="twitter:image"
+    content="https://codescrolls.com/img/html-guide-twitter.png"
+  />
   <meta name="twitter:image:alt" content="HTML tutorial preview" />
 </head>
 ```
@@ -221,7 +237,10 @@ Twitter Cards control how your content appears when shared on Twitter (now X).
     name="twitter:description"
     content="Master HTML with comprehensive tutorials, examples, and best practices."
   />
-  <meta name="twitter:image" content="https://codescrolls.com/img/html-large-card.png" />
+  <meta
+    name="twitter:image"
+    content="https://codescrolls.com/img/html-large-card.png"
+  />
   <meta name="twitter:image:alt" content="HTML tutorial with code examples" />
 </head>
 ```
@@ -232,8 +251,14 @@ Twitter Cards control how your content appears when shared on Twitter (now X).
 <head>
   <meta name="twitter:card" content="app" />
   <meta name="twitter:title" content="CodeScrolls HTML App" />
-  <meta name="twitter:description" content="Learn HTML with interactive examples" />
-  <meta name="twitter:image" content="https://codescrolls.com/img/app-icon.png" />
+  <meta
+    name="twitter:description"
+    content="Learn HTML with interactive examples"
+  />
+  <meta
+    name="twitter:image"
+    content="https://codescrolls.com/img/app-icon.png"
+  />
 
   <!-- iOS App -->
   <meta name="twitter:app:id:iphone" content="123456789" />
@@ -253,14 +278,26 @@ Twitter Cards control how your content appears when shared on Twitter (now X).
 <head>
   <meta name="twitter:card" content="player" />
   <meta name="twitter:title" content="HTML Tutorial Video" />
-  <meta name="twitter:description" content="Watch our comprehensive HTML tutorial" />
-  <meta name="twitter:image" content="https://codescrolls.com/img/video-thumbnail.png" />
+  <meta
+    name="twitter:description"
+    content="Watch our comprehensive HTML tutorial"
+  />
+  <meta
+    name="twitter:image"
+    content="https://codescrolls.com/img/video-thumbnail.png"
+  />
 
   <!-- Player configuration -->
-  <meta name="twitter:player" content="https://codescrolls.com/embed/html-tutorial" />
+  <meta
+    name="twitter:player"
+    content="https://codescrolls.com/embed/html-tutorial"
+  />
   <meta name="twitter:player:width" content="640" />
   <meta name="twitter:player:height" content="360" />
-  <meta name="twitter:player:stream" content="https://codescrolls.com/video/html-tutorial.mp4" />
+  <meta
+    name="twitter:player:stream"
+    content="https://codescrolls.com/video/html-tutorial.mp4"
+  />
   <meta name="twitter:player:stream:content_type" content="video/mp4" />
 </head>
 ```
@@ -269,7 +306,8 @@ Twitter Cards control how your content appears when shared on Twitter (now X).
 
 ## 📊 Structured Data (JSON-LD)
 
-Structured data helps search engines understand your content and can enable rich snippets in search results.
+Structured data helps search engines understand your content and can enable rich
+snippets in search results.
 
 ### Article Schema
 
@@ -437,7 +475,10 @@ Structured data helps search engines understand your content and can enable rich
 
   <!-- iOS specific -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
   <meta name="apple-mobile-web-app-title" content="CodeScrolls" />
   <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
 
@@ -490,8 +531,8 @@ Structured data helps search engines understand your content and can enable rich
 
   <!-- Too long (gets truncated) -->
   <title>
-    Complete and Comprehensive HTML Tutorial Guide for Beginners and Advanced Developers with
-    Examples and Best Practices
+    Complete and Comprehensive HTML Tutorial Guide for Beginners and Advanced
+    Developers with Examples and Best Practices
   </title>
 
   <!-- With branding -->
@@ -561,12 +602,12 @@ Structured data helps search engines understand your content and can enable rich
 
     console.log('=== Meta Tag Analysis ===');
 
-    required.forEach((tag) => {
+    required.forEach(tag => {
       const element = document.querySelector(`meta[name="${tag}"]`);
       console.log(`${tag}: ${element ? '✅' : '❌'}`);
     });
 
-    recommended.forEach((tag) => {
+    recommended.forEach(tag => {
       const element =
         document.querySelector(`meta[property="${tag}"]`) ||
         document.querySelector(`meta[name="${tag}"]`);
@@ -596,17 +637,27 @@ Structured data helps search engines understand your content and can enable rich
 <script>
   function updateSocialPreview() {
     // Open Graph
-    const ogTitle = document.querySelector('meta[property="og:title"]')?.content;
-    const ogDesc = document.querySelector('meta[property="og:description"]')?.content;
-    const ogImage = document.querySelector('meta[property="og:image"]')?.content;
+    const ogTitle = document.querySelector(
+      'meta[property="og:title"]',
+    )?.content;
+    const ogDesc = document.querySelector(
+      'meta[property="og:description"]',
+    )?.content;
+    const ogImage = document.querySelector(
+      'meta[property="og:image"]',
+    )?.content;
     const ogUrl = document.querySelector('meta[property="og:url"]')?.content;
 
     // Update preview
-    document.getElementById('preview-title').textContent = ogTitle || document.title;
+    document.getElementById('preview-title').textContent =
+      ogTitle || document.title;
     document.getElementById('preview-description').textContent =
-      ogDesc || document.querySelector('meta[name="description"]')?.content || '';
+      ogDesc ||
+      document.querySelector('meta[name="description"]')?.content ||
+      '';
     document.getElementById('preview-image').src = ogImage || '';
-    document.getElementById('preview-url').textContent = ogUrl || window.location.href;
+    document.getElementById('preview-url').textContent =
+      ogUrl || window.location.href;
   }
 
   // Update on load and when meta tags change
@@ -638,7 +689,9 @@ Structured data helps search engines understand your content and can enable rich
     ogTags: {
       check: () => {
         const ogTitle = document.querySelector('meta[property="og:title"]');
-        const ogDesc = document.querySelector('meta[property="og:description"]');
+        const ogDesc = document.querySelector(
+          'meta[property="og:description"]',
+        );
         const ogImage = document.querySelector('meta[property="og:image"]');
         return ogTitle && ogDesc && ogImage;
       },
@@ -696,12 +749,18 @@ Structured data helps search engines understand your content and can enable rich
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://codescrolls.com/html" />
-    <meta property="og:title" content="Complete HTML Guide - Learn Web Development" />
+    <meta
+      property="og:title"
+      content="Complete HTML Guide - Learn Web Development"
+    />
     <meta
       property="og:description"
       content="Master HTML from basics to advanced with practical examples, SEO optimization, and modern web standards."
     />
-    <meta property="og:image" content="https://codescrolls.com/img/html-guide-og.png" />
+    <meta
+      property="og:image"
+      content="https://codescrolls.com/img/html-guide-og.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="CodeScrolls" />
@@ -710,17 +769,26 @@ Structured data helps search engines understand your content and can enable rich
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://codescrolls.com/html" />
-    <meta name="twitter:title" content="Complete HTML Guide - Learn Web Development" />
+    <meta
+      name="twitter:title"
+      content="Complete HTML Guide - Learn Web Development"
+    />
     <meta
       name="twitter:description"
       content="Master HTML from basics to advanced with practical examples, SEO optimization, and modern web standards."
     />
-    <meta name="twitter:image" content="https://codescrolls.com/img/html-guide-twitter.png" />
+    <meta
+      name="twitter:image"
+      content="https://codescrolls.com/img/html-guide-twitter.png"
+    />
 
     <!-- Mobile & Performance -->
     <meta name="theme-color" content="#007bff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
 
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -774,7 +842,10 @@ Structured data helps search engines understand your content and can enable rich
 
 <!-- Include Open Graph tags for social sharing -->
 <meta property="og:title" content="HTML Forms Guide" />
-<meta property="og:description" content="Learn HTML forms with practical examples" />
+<meta
+  property="og:description"
+  content="Learn HTML forms with practical examples"
+/>
 <meta property="og:image" content="https://example.com/og-image.png" />
 
 <!-- Add structured data for rich snippets -->
@@ -799,7 +870,10 @@ Structured data helps search engines understand your content and can enable rich
 <!-- Too generic -->
 
 <!-- Don't keyword stuff -->
-<meta name="description" content="html html html tutorial tutorial tutorial learn learn learn" />
+<meta
+  name="description"
+  content="html html html tutorial tutorial tutorial learn learn learn"
+/>
 
 <!-- Don't forget image alt text in Open Graph -->
 <meta property="og:image" content="/image.jpg" />

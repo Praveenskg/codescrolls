@@ -1,7 +1,9 @@
 ---
 id: css-preprocessors
 title: CSS Preprocessors - SASS/SCSS Guide
-description: Learn CSS preprocessors including SASS/SCSS. Master variables, nesting, mixins, functions, and write more maintainable, DRY CSS code.
+description:
+  Learn CSS preprocessors including SASS/SCSS. Master variables, nesting,
+  mixins, functions, and write more maintainable, DRY CSS code.
 keywords:
   [
     css preprocessors,
@@ -20,7 +22,8 @@ sidebar_position: 2
 
 # 🎨 CSS Preprocessors (SASS/SCSS)
 
-CSS preprocessors extend CSS with features like variables, nesting, mixins, and functions, making CSS more maintainable and powerful.
+CSS preprocessors extend CSS with features like variables, nesting, mixins, and
+functions, making CSS more maintainable and powerful.
 
 ## 🎯 SASS vs SCSS
 

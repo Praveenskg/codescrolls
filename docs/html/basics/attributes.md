@@ -1,7 +1,9 @@
 ---
 id: html-attributes
 title: HTML Attributes - Complete Guide
-description: Master HTML attributes with practical examples. Learn global attributes, element-specific attributes, data attributes, and best practices.
+description:
+  Master HTML attributes with practical examples. Learn global attributes,
+  element-specific attributes, data attributes, and best practices.
 keywords:
   [
     html attributes,
@@ -19,11 +21,13 @@ sidebar_position: 2
 
 # 🏷️ HTML Attributes
 
-HTML attributes provide additional information about HTML elements. They modify the behavior, appearance, or functionality of elements.
+HTML attributes provide additional information about HTML elements. They modify
+the behavior, appearance, or functionality of elements.
 
 ## 📖 What are HTML Attributes?
 
-Attributes are **name-value pairs** that provide additional information about HTML elements.
+Attributes are **name-value pairs** that provide additional information about
+HTML elements.
 
 ```html
 <!-- Basic attribute syntax -->
@@ -209,7 +213,12 @@ Custom data attributes for JavaScript access.
 
 ```html
 <!-- Text input -->
-<input type="text" name="username" placeholder="Enter username" maxlength="50" />
+<input
+  type="text"
+  name="username"
+  placeholder="Enter username"
+  maxlength="50"
+/>
 
 <!-- Email input -->
 <input type="email" name="email" required autocomplete="email" />
@@ -385,7 +394,14 @@ Custom data attributes for JavaScript access.
 <div id="email-error">Please enter a valid email address</div>
 
 <!-- Progress bar -->
-<div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% complete</div>
+<div
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+>
+  75% complete
+</div>
 ```
 
 ---
@@ -435,7 +451,10 @@ if (element.hasAttribute('data-article-id')) {
 
 ```html
 <button onclick="alert('Clicked!')">Click me</button>
-<div onmouseover="this.style.background='yellow'" onmouseout="this.style.background='white'">
+<div
+  onmouseover="this.style.background='yellow'"
+  onmouseout="this.style.background='white'"
+>
   Hover me
 </div>
 ```
@@ -485,10 +504,14 @@ if (element.hasAttribute('data-article-id')) {
 
 ```html
 <!-- Application-specific data -->
-<div data-widget-id="widget-123" data-widget-type="chart" data-chart-type="bar">Chart widget</div>
+<div data-widget-id="widget-123" data-widget-type="chart" data-chart-type="bar">
+  Chart widget
+</div>
 
 <!-- User preferences -->
-<button data-theme="dark" data-language="en" data-font-size="large">Settings</button>
+<button data-theme="dark" data-language="en" data-font-size="large">
+  Settings
+</button>
 ```
 
 ---
@@ -559,7 +582,9 @@ if (element.hasAttribute('data-article-id')) {
       <nav role="navigation" aria-label="Main navigation">
         <ul>
           <li><a href="#basics" aria-describedby="basics-desc">Basics</a></li>
-          <li><a href="#advanced" aria-describedby="advanced-desc">Advanced</a></li>
+          <li>
+            <a href="#advanced" aria-describedby="advanced-desc">Advanced</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -615,7 +640,9 @@ if (element.hasAttribute('data-article-id')) {
             autocomplete="email"
             spellcheck="false"
           />
-          <div id="email-help" class="help-text">We'll never share your email with anyone.</div>
+          <div id="email-help" class="help-text">
+            We'll never share your email with anyone.
+          </div>
 
           <button
             type="submit"

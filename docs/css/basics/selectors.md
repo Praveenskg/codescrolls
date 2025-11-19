@@ -1,7 +1,10 @@
 ---
 id: css-selectors
 title: CSS Selectors - Complete Guide
-description: Master CSS selectors including element, class, ID, attribute, pseudo-class, and combinators. Learn how to target HTML elements with precision and efficiency.
+description:
+  Master CSS selectors including element, class, ID, attribute, pseudo-class,
+  and combinators. Learn how to target HTML elements with precision and
+  efficiency.
 keywords:
   [
     css selectors,
@@ -19,11 +22,13 @@ sidebar_position: 1
 
 # 🎯 CSS Selectors
 
-CSS selectors are **patterns** used to select and style HTML elements. Mastering selectors is fundamental to writing efficient and maintainable CSS.
+CSS selectors are **patterns** used to select and style HTML elements. Mastering
+selectors is fundamental to writing efficient and maintainable CSS.
 
 ## 📖 What are Selectors?
 
-Selectors tell the browser which HTML elements to style. They form the first part of a CSS rule.
+Selectors tell the browser which HTML elements to style. They form the first
+part of a CSS rule.
 
 ```css
 /* Selector { Property: Value; } */
@@ -513,13 +518,15 @@ p::first-line {
 
 ## 🎯 CSS Specificity
 
-When multiple rules target the same element, **specificity** determines which wins.
+When multiple rules target the same element, **specificity** determines which
+wins.
 
 ### Specificity Hierarchy (Highest to Lowest)
 
 1. **Inline styles**: `style="color: red"` (1,0,0,0)
 2. **IDs**: `#header` (0,1,0,0)
-3. **Classes, Attributes, Pseudo-classes**: `.button`, `[type="text"]`, `:hover` (0,0,1,0)
+3. **Classes, Attributes, Pseudo-classes**: `.button`, `[type="text"]`, `:hover`
+   (0,0,1,0)
 4. **Elements, Pseudo-elements**: `p`, `::before` (0,0,0,1)
 
 ### Calculating Specificity

@@ -89,12 +89,12 @@ const cheatsheets = [
 
 export default function CheatSheetGrid() {
   return (
-    <div className='cheatsheet-grid'>
+    <div className="cheatsheet-grid">
       {cheatsheets.map(({ title, href, icon, description }) => (
-        <Link key={title} href={href} className='cheatsheet-card'>
-          <img src={icon} alt={`${title} icon`} className='cheatsheet-icon' loading='lazy' />
-          <strong className='cheatsheet-title'>{title}</strong>
-          <p className='cheatsheet-description'>{description}</p>
+        <Link key={title} href={href} className="cheatsheet-card">
+          <img src={icon} alt={`${title} icon`} className="cheatsheet-icon" loading="lazy" />
+          <strong className="cheatsheet-title">{title}</strong>
+          <p className="cheatsheet-description">{description}</p>
         </Link>
       ))}
     </div>

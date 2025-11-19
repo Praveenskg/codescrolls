@@ -1,7 +1,10 @@
 ---
 sidebar_position: 3
 title: JavaScript Classes - Complete Guide
-description: Master JavaScript classes with constructor, methods, inheritance, static methods, getters/setters, and modern OOP patterns. Learn class-based programming in JavaScript.
+description:
+  Master JavaScript classes with constructor, methods, inheritance, static
+  methods, getters/setters, and modern OOP patterns. Learn class-based
+  programming in JavaScript.
 keywords:
   [
     javascript classes,
@@ -22,7 +25,8 @@ tags:
 
 # JavaScript Classes
 
-Classes are **templates for creating objects**. They encapsulate data and behavior in a clean, reusable structure!
+Classes are **templates for creating objects**. They encapsulate data and
+behavior in a clean, reusable structure!
 
 ---
 
@@ -390,7 +394,7 @@ class TodoList {
   }
 
   removeTodo(id) {
-    const index = this.todos.findIndex((t) => t.id === id);
+    const index = this.todos.findIndex(t => t.id === id);
     if (index !== -1) {
       return this.todos.splice(index, 1)[0];
     }
@@ -398,7 +402,7 @@ class TodoList {
   }
 
   toggleTodo(id) {
-    const todo = this.todos.find((t) => t.id === id);
+    const todo = this.todos.find(t => t.id === id);
     if (todo) {
       todo.completed = !todo.completed;
     }
@@ -406,11 +410,11 @@ class TodoList {
   }
 
   get completedCount() {
-    return this.todos.filter((t) => t.completed).length;
+    return this.todos.filter(t => t.completed).length;
   }
 
   get pendingCount() {
-    return this.todos.filter((t) => !t.completed).length;
+    return this.todos.filter(t => !t.completed).length;
   }
 
   getAll() {
@@ -475,7 +479,7 @@ class BankAccount {
   }
 
   getStatement() {
-    return this.transactions.map((t) => `${t.type}: $${t.amount}`).join('\n');
+    return this.transactions.map(t => `${t.type}: $${t.amount}`).join('\n');
   }
 }
 
@@ -506,14 +510,16 @@ class EventEmitter {
   off(event, listenerToRemove) {
     if (!this.events[event]) return this;
 
-    this.events[event] = this.events[event].filter((listener) => listener !== listenerToRemove);
+    this.events[event] = this.events[event].filter(
+      listener => listener !== listenerToRemove,
+    );
     return this;
   }
 
   emit(event, ...args) {
     if (!this.events[event]) return false;
 
-    this.events[event].forEach((listener) => {
+    this.events[event].forEach(listener => {
       listener(...args);
     });
     return true;
@@ -530,8 +536,8 @@ class EventEmitter {
 
 const emitter = new EventEmitter();
 
-emitter.on('message', (msg) => console.log('Received:', msg));
-emitter.on('message', (msg) => console.log('Also got:', msg));
+emitter.on('message', msg => console.log('Received:', msg));
+emitter.on('message', msg => console.log('Also got:', msg));
 
 emitter.emit('message', 'Hello!');
 // Received: Hello!

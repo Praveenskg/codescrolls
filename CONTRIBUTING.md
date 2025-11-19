@@ -15,7 +15,8 @@ Thank you for your interest in contributing to CodeScrolls! 🎉
 
 ## 📜 Code of Conduct
 
-This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
+This project and everyone participating in it is governed by our Code of
+Conduct. By participating, you are expected to uphold this code.
 
 ---
 
@@ -232,13 +233,15 @@ Before submitting a PR:
 
 ## 📄 License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By contributing, you agree that your contributions will be licensed under the
+MIT License.
 
 ---
 
 ## 🙏 Thank You!
 
-Your contributions make CodeScrolls better for everyone. Thank you for taking the time to contribute! 🎉
+Your contributions make CodeScrolls better for everyone. Thank you for taking
+the time to contribute! 🎉
 
 ---
 

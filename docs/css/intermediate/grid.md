@@ -1,7 +1,10 @@
 ---
 id: css-grid
 title: CSS Grid - Complete Guide
-description: Master CSS Grid for two-dimensional layouts. Learn grid containers, grid items, grid-template columns/rows, areas, and build complex responsive layouts easily.
+description:
+  Master CSS Grid for two-dimensional layouts. Learn grid containers, grid
+  items, grid-template columns/rows, areas, and build complex responsive layouts
+  easily.
 keywords:
   [
     css grid,
@@ -19,7 +22,8 @@ sidebar_position: 2
 
 # 🎯 CSS Grid
 
-CSS Grid is a powerful **two-dimensional** layout system for creating complex layouts with rows and columns. Perfect for page layouts and component designs.
+CSS Grid is a powerful **two-dimensional** layout system for creating complex
+layouts with rows and columns. Perfect for page layouts and component designs.
 
 ## 📖 What is CSS Grid?
 
@@ -160,8 +164,10 @@ Align the entire grid within container.
 
 ```css
 .grid {
-  justify-content: start | end | center | stretch | space-between | space-around | space-evenly;
-  align-content: start | end | center | stretch | space-between | space-around | space-evenly;
+  justify-content: start | end | center | stretch | space-between | space-around
+    | space-evenly;
+  align-content: start | end | center | stretch | space-between | space-around |
+    space-evenly;
 }
 ```
 

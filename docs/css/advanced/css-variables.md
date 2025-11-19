@@ -1,7 +1,10 @@
 ---
 id: css-variables
 title: CSS Variables (Custom Properties) - Complete Guide
-description: Master CSS Variables for dynamic styling, theming, and maintainable code. Learn custom properties, var() function, scope, fallbacks, and build design systems.
+description:
+  Master CSS Variables for dynamic styling, theming, and maintainable code.
+  Learn custom properties, var() function, scope, fallbacks, and build design
+  systems.
 keywords:
   [
     css variables,
@@ -19,7 +22,8 @@ sidebar_position: 1
 
 # 🎨 CSS Variables (Custom Properties)
 
-CSS Variables (Custom Properties) enable dynamic, reusable values in CSS. Perfect for theming, design systems, and maintainable code.
+CSS Variables (Custom Properties) enable dynamic, reusable values in CSS.
+Perfect for theming, design systems, and maintainable code.
 
 ## 🎯 Defining Variables
 

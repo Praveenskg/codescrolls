@@ -3,7 +3,9 @@ id: index
 title: React Overview
 sidebar_position: 1
 sidebar_label: React Overview
-description: Master React - learn components, hooks, state management, props, Context API, and modern React patterns for building interactive UIs.
+description:
+  Master React - learn components, hooks, state management, props, Context API,
+  and modern React patterns for building interactive UIs.
 keywords:
   [
     react,
@@ -19,16 +21,20 @@ keywords:
 
 # ⚛️ Introduction to React
 
-React is a **JavaScript library** for building **user interfaces**, maintained by Facebook. It allows developers to create large web applications that update and render efficiently in response to data changes.
+React is a **JavaScript library** for building **user interfaces**, maintained
+by Facebook. It allows developers to create large web applications that update
+and render efficiently in response to data changes.
 
 ---
 
 ## 🎯 Why Use React?
 
-- ✅ **Component-Based**: Build encapsulated components that manage their own state
+- ✅ **Component-Based**: Build encapsulated components that manage their own
+  state
 - ⚡ **Declarative**: Design simple views for each state in your application
 - 🚀 **Fast & Efficient**: Virtual DOM improves rendering performance
-- 🌐 **Ecosystem & Community**: Huge community and ecosystem of tools and libraries
+- 🌐 **Ecosystem & Community**: Huge community and ecosystem of tools and
+  libraries
 
 ---
 
@@ -77,7 +83,8 @@ React is a **JavaScript library** for building **user interfaces**, maintained b
 - Advanced Patterns
 - Production Best Practices
 
-> Before you begin, make sure you're comfortable with JavaScript fundamentals like variables, functions, and ES6 syntax.
+> Before you begin, make sure you're comfortable with JavaScript fundamentals
+> like variables, functions, and ES6 syntax.
 
 ---
 

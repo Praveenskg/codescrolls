@@ -1,7 +1,9 @@
 ---
 sidebar_position: 7
 title: JavaScript JSON - Complete Guide
-description: Master JSON (JavaScript Object Notation) for data exchange. Learn JSON.parse, JSON.stringify, error handling, and practical data manipulation techniques.
+description:
+  Master JSON (JavaScript Object Notation) for data exchange. Learn JSON.parse,
+  JSON.stringify, error handling, and practical data manipulation techniques.
 keywords:
   [
     javascript json,
@@ -22,7 +24,8 @@ tags:
 
 # JSON (JavaScript Object Notation)
 
-**JSON** is a lightweight data interchange format. It's easy for humans to read and write, and easy for machines to parse and generate!
+**JSON** is a lightweight data interchange format. It's easy for humans to read
+and write, and easy for machines to parse and generate!
 
 ---
 
@@ -381,7 +384,7 @@ class DataManager {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
 
-      reader.onload = (e) => {
+      reader.onload = e => {
         try {
           const data = JSON.parse(e.target.result);
           resolve(data);
@@ -404,7 +407,7 @@ const data = { users: [{ name: 'Alice' }, { name: 'Bob' }] };
 manager.exportData(data, 'users.json');
 
 // Import
-document.querySelector('#fileInput').addEventListener('change', async (e) => {
+document.querySelector('#fileInput').addEventListener('change', async e => {
   const file = e.target.files[0];
   try {
     const importedData = await manager.importData(file);
@@ -438,7 +441,7 @@ function formToJSON(form) {
 }
 
 // Usage
-document.querySelector('#myForm').addEventListener('submit', (e) => {
+document.querySelector('#myForm').addEventListener('submit', e => {
   e.preventDefault();
   const data = formToJSON(e.target);
   const jsonString = JSON.stringify(data, null, 2);

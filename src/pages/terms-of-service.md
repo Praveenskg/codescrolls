@@ -17,7 +17,9 @@ keywords:
 
 Effective Date: July 19, 2025
 
-By accessing **CodeScrolls** at [https://www.codescrolls.site](https://www.codescrolls.site), you agree to the following terms and conditions.
+By accessing **CodeScrolls** at
+[https://www.codescrolls.site](https://www.codescrolls.site), you agree to the
+following terms and conditions.
 
 ---
 
@@ -33,7 +35,8 @@ You agree not to:
 
 ## 📚 Intellectual Property
 
-All content on this site (unless otherwise stated) is the intellectual property of **CodeScrolls** and its contributors.
+All content on this site (unless otherwise stated) is the intellectual property
+of **CodeScrolls** and its contributors.
 
 You may:
 
@@ -49,19 +52,22 @@ You may not:
 
 ## 🧰 External Links
 
-We may link to third-party websites. We are not responsible for their content or policies.
+We may link to third-party websites. We are not responsible for their content or
+policies.
 
 ---
 
 ## 📈 Monetization
 
-We may use affiliate links or display ads (e.g., Google AdSense). These are used to support the site and are clearly marked where applicable.
+We may use affiliate links or display ads (e.g., Google AdSense). These are used
+to support the site and are clearly marked where applicable.
 
 ---
 
 ## 📅 Changes to Terms
 
-We reserve the right to update these Terms at any time. Continued use of the site indicates your agreement to the current terms.
+We reserve the right to update these Terms at any time. Continued use of the
+site indicates your agreement to the current terms.
 
 ---
 

@@ -1,7 +1,9 @@
 ---
 id: union-intersection
 title: Union and Intersection Types
-description: Master the use of union (|) and intersection (&) types in TypeScript to create flexible and composable type structures.
+description:
+  Master the use of union (|) and intersection (&) types in TypeScript to create
+  flexible and composable type structures.
 keywords:
   - typescript
   - union types
@@ -51,7 +53,8 @@ function display(value: string | number) {
 
 ## Intersection Types (`&`)
 
-Intersection types merge multiple types into one. The result must satisfy all the types
+Intersection types merge multiple types into one. The result must satisfy all
+the types
 
 ```ts
 type Person = {

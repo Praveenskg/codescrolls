@@ -1,7 +1,9 @@
 ---
 id: css-display-visibility
 title: CSS Display & Visibility - Complete Guide
-description: Master CSS display property including block, inline, inline-block, flex, grid, none. Learn visibility, opacity, and how elements render on the page.
+description:
+  Master CSS display property including block, inline, inline-block, flex, grid,
+  none. Learn visibility, opacity, and how elements render on the page.
 keywords:
   [
     css display,
@@ -20,7 +22,8 @@ sidebar_position: 6
 
 # 👁️ CSS Display & Visibility
 
-The `display` property is one of the most important CSS properties, controlling how elements are rendered and how they interact with other elements.
+The `display` property is one of the most important CSS properties, controlling
+how elements are rendered and how they interact with other elements.
 
 ## 📦 Display Property
 
@@ -736,7 +739,8 @@ opacity: 0; /* Hidden, takes space, still accessible */
 
 ## 🚀 What's Next?
 
-Congratulations! You've completed the CSS Basics. Now move to **Intermediate CSS**:
+Congratulations! You've completed the CSS Basics. Now move to **Intermediate
+CSS**:
 
 👉 [Next: Flexbox →](../intermediate/flexbox.md)
 

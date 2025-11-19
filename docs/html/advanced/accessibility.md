@@ -1,7 +1,9 @@
 ---
 id: accessibility
 title: HTML Accessibility - Building Inclusive Web Experiences
-description: Master HTML accessibility with ARIA attributes, semantic markup, keyboard navigation, and WCAG compliance for inclusive web experiences.
+description:
+  Master HTML accessibility with ARIA attributes, semantic markup, keyboard
+  navigation, and WCAG compliance for inclusive web experiences.
 keywords:
   [
     html accessibility,
@@ -19,7 +21,9 @@ sidebar_position: 13
 
 # ♿ HTML Accessibility
 
-Accessibility (often abbreviated as a11y) ensures that web content is usable by people with disabilities. HTML provides semantic elements, ARIA attributes, and best practices for creating inclusive web experiences.
+Accessibility (often abbreviated as a11y) ensures that web content is usable by
+people with disabilities. HTML provides semantic elements, ARIA attributes, and
+best practices for creating inclusive web experiences.
 
 ## 📖 Why Accessibility Matters?
 
@@ -148,14 +152,22 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
 
 <!-- Widget roles -->
 <div role="tablist" aria-label="Product tabs">
-  <button role="tab" aria-selected="true" aria-controls="panel1" id="tab1">Overview</button>
-  <button role="tab" aria-selected="false" aria-controls="panel2" id="tab2">Features</button>
+  <button role="tab" aria-selected="true" aria-controls="panel1" id="tab1">
+    Overview
+  </button>
+  <button role="tab" aria-selected="false" aria-controls="panel2" id="tab2">
+    Features
+  </button>
 </div>
 
-<div role="tabpanel" aria-labelledby="tab1" id="panel1">Product overview content</div>
+<div role="tabpanel" aria-labelledby="tab1" id="panel1">
+  Product overview content
+</div>
 
 <!-- Live regions -->
-<div role="status" aria-live="polite" aria-atomic="true">File upload progress: 50%</div>
+<div role="status" aria-live="polite" aria-atomic="true">
+  File upload progress: 50%
+</div>
 ```
 
 ### ARIA Properties and States
@@ -164,7 +176,11 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
 <!-- Basic properties -->
 <button aria-label="Close dialog window">×</button>
 
-<img src="chart.png" alt="Sales chart for Q1 2025" aria-describedby="chart-description" />
+<img
+  src="chart.png"
+  alt="Sales chart for Q1 2025"
+  aria-describedby="chart-description"
+/>
 
 <div id="chart-description" class="sr-only">
   This chart shows sales increasing from January to March 2025.
@@ -182,7 +198,14 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
 <div id="error-message" role="alert">Please enter a valid email address.</div>
 
 <!-- Progress indication -->
-<div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% complete</div>
+<div
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+>
+  75% complete
+</div>
 ```
 
 ### ARIA Labels and Descriptions
@@ -194,13 +217,23 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
 <!-- aria-labelledby for associating labels -->
 <div>
   <h3 id="billing-address">Billing Address</h3>
-  <input type="text" aria-labelledby="billing-address" placeholder="Street address" />
+  <input
+    type="text"
+    aria-labelledby="billing-address"
+    placeholder="Street address"
+  />
 </div>
 
 <!-- aria-describedby for additional information -->
-<input type="password" aria-describedby="password-requirements" aria-invalid="true" />
+<input
+  type="password"
+  aria-describedby="password-requirements"
+  aria-invalid="true"
+/>
 
-<div id="password-requirements">Password must be at least 8 characters and contain numbers.</div>
+<div id="password-requirements">
+  Password must be at least 8 characters and contain numbers.
+</div>
 
 <!-- aria-details for complex relationships -->
 <button aria-details="tooltip-content">Help</button>
@@ -286,11 +319,12 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
       this.firstElement = this.focusableElements[0];
-      this.lastElement = this.focusableElements[this.focusableElements.length - 1];
+      this.lastElement =
+        this.focusableElements[this.focusableElements.length - 1];
     }
 
     trap() {
-      this.element.addEventListener('keydown', (e) => {
+      this.element.addEventListener('keydown', e => {
         if (e.key === 'Tab') {
           if (e.shiftKey) {
             // Shift + Tab
@@ -372,7 +406,12 @@ Accessibility (often abbreviated as a11y) ensures that web content is usable by 
 
     <div class="form-group">
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" aria-describedby="message-help"></textarea>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        aria-describedby="message-help"
+      ></textarea>
       <div id="message-help" class="help">Tell us how we can help you.</div>
     </div>
   </fieldset>
@@ -399,7 +438,7 @@ const emailInput = document.getElementById('email');
 const nameError = document.getElementById('name-error');
 const emailError = document.getElementById('email-error');
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', e => {
   e.preventDefault();
   let isValid = true;
 
@@ -467,11 +506,15 @@ emailInput.addEventListener('blur', () => {
 <img src="chart.png" alt="Sales increased by 25% in Q1 2025" />
 
 <!-- Complex images with descriptions -->
-<img src="diagram.png" alt="Process flow diagram" aria-describedby="diagram-description" />
+<img
+  src="diagram.png"
+  alt="Process flow diagram"
+  aria-describedby="diagram-description"
+/>
 
 <div id="diagram-description">
-  The diagram shows data flowing from input through processing to output, with error handling at
-  each step.
+  The diagram shows data flowing from input through processing to output, with
+  error handling at each step.
 </div>
 
 <!-- Images with captions -->
@@ -628,18 +671,29 @@ emailInput.addEventListener('blur', () => {
   <source src="demo.webm" type="video/webm" />
 
   <!-- Multiple subtitle tracks -->
-  <track src="captions-en.vtt" kind="captions" srclang="en" label="English" default />
+  <track
+    src="captions-en.vtt"
+    kind="captions"
+    srclang="en"
+    label="English"
+    default
+  />
   <track src="captions-es.vtt" kind="captions" srclang="es" label="Español" />
 
   <!-- Audio descriptions -->
-  <track src="descriptions.vtt" kind="descriptions" srclang="en" label="Audio Description" />
+  <track
+    src="descriptions.vtt"
+    kind="descriptions"
+    srclang="en"
+    label="Audio Description"
+  />
 
   <!-- Chapters for navigation -->
   <track src="chapters.vtt" kind="chapters" srclang="en" label="Chapters" />
 
   <div id="video-description">
-    This video demonstrates the key features of our product, including setup, configuration, and
-    usage examples.
+    This video demonstrates the key features of our product, including setup,
+    configuration, and usage examples.
   </div>
 </video>
 ```
@@ -664,7 +718,9 @@ emailInput.addEventListener('blur', () => {
     <source src="ambient-music.mp3" type="audio/mpeg" />
   </audio>
 
-  <button onclick="toggleAudio()" aria-label="Toggle background music">🔊</button>
+  <button onclick="toggleAudio()" aria-label="Toggle background music">
+    🔊
+  </button>
 </div>
 ```
 
@@ -736,7 +792,7 @@ function getContrastRatio(color1, color2) {
 
   // Calculate luminance
   function getLuminance(r, g, b) {
-    const [rs, gs, bs] = [r, g, b].map((c) => {
+    const [rs, gs, bs] = [r, g, b].map(c => {
       c = c / 255;
       return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
     });
@@ -805,7 +861,9 @@ function runAccessibilityAudit() {
   headings.forEach((heading, index) => {
     const level = parseInt(heading.tagName.charAt(1));
     if (level - lastLevel > 1) {
-      results.warnings.push(`Heading hierarchy skipped at heading ${index + 1}`);
+      results.warnings.push(
+        `Heading hierarchy skipped at heading ${index + 1}`,
+      );
     }
     lastLevel = level;
   });
@@ -819,7 +877,9 @@ function runAccessibilityAudit() {
 
     // This is a simplified check - use proper tools for production
     if (color && backgroundColor && color !== backgroundColor) {
-      results.passed.push(`Element ${index + 1} has different text and background colors`);
+      results.passed.push(
+        `Element ${index + 1} has different text and background colors`,
+      );
     }
   });
 
@@ -842,7 +902,9 @@ console.log('Accessibility Audit Results:', auditResults);
   <button onclick="announce('Button clicked')">Test Announcement</button>
 
   <!-- Test live regions -->
-  <div aria-live="polite" aria-atomic="true" id="live-region">Status updates appear here</div>
+  <div aria-live="polite" aria-atomic="true" id="live-region">
+    Status updates appear here
+  </div>
 
   <button onclick="updateLiveRegion()">Update Live Region</button>
 

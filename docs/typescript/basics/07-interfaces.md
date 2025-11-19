@@ -1,7 +1,9 @@
 ---
 id: interfaces
 title: Interfaces
-description: Understand how interfaces work in TypeScript to define object shapes, enforce structure, and enable code reusability and type safety.
+description:
+  Understand how interfaces work in TypeScript to define object shapes, enforce
+  structure, and enable code reusability and type safety.
 keywords:
   - typescript
   - interfaces
@@ -16,7 +18,8 @@ tags: [typescript, interfaces, basics]
 
 # TypeScript Interfaces
 
-An `interface` defines the **shape of an object**. It is used to describe the structure of data, including properties and method signatures.
+An `interface` defines the **shape of an object**. It is used to describe the
+structure of data, including properties and method signatures.
 
 ## Basic Interface
 
@@ -93,4 +96,5 @@ const pet: Dog = {
 
 - `type` is more flexible (can define unions, intersections, etc).
 
-Use `interface` when modeling objects or classes, and `type` for more complex or functional types.
+Use `interface` when modeling objects or classes, and `type` for more complex or
+functional types.
