@@ -172,7 +172,7 @@ best practices for creating inclusive web experiences.
 
 ### ARIA Properties and States
 
-```html
+````html
 <!-- Basic properties -->
 <button aria-label="Close dialog window">×</button>
 
@@ -196,6 +196,182 @@ best practices for creating inclusive web experiences.
 <!-- Form states -->
 <input type="text" aria-invalid="true" aria-describedby="error-message" />
 <div id="error-message" role="alert">Please enter a valid email address.</div>
+
+### Modern ARIA Attributes #### ARIA Busy Indicates that an element is being
+modified. ```html
+<!-- Loading state -->
+<div aria-busy="true" aria-live="polite">Loading content...</div>
+
+<!-- Form submission -->
+<form aria-busy="true">
+  <button type="submit">Submitting...</button>
+</form>
+
+<!-- Dynamic content update -->
+<div aria-busy="true" id="content-area">Updating...</div>
+
+<script>
+  // Set busy state
+  document.getElementById('content-area').setAttribute('aria-busy', 'true');
+
+  // Update content
+  fetch('/data').then(data => {
+    document.getElementById('content-area').innerHTML = data;
+    document.getElementById('content-area').setAttribute('aria-busy', 'false');
+  });
+</script>
+````
+
+#### ARIA Current
+
+Indicates the current item in a set.
+
+```html
+<!-- Current page in navigation -->
+<nav aria-label="Main navigation">
+  <a href="/" aria-current="page">Home</a>
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+</nav>
+
+<!-- Current step in process -->
+<ol role="list">
+  <li aria-current="step">Step 1: Enter details</li>
+  <li>Step 2: Review</li>
+  <li>Step 3: Confirm</li>
+</ol>
+
+<!-- Current date -->
+<div role="grid">
+  <div role="row">
+    <div role="gridcell" aria-current="date">15</div>
+    <div role="gridcell">16</div>
+    <div role="gridcell">17</div>
+  </div>
+</div>
+
+<!-- Current time -->
+<div role="tablist">
+  <button role="tab" aria-current="time" aria-selected="true">Now</button>
+  <button role="tab" aria-selected="false">Later</button>
+</div>
+```
+
+#### ARIA Description
+
+Provides additional descriptive text.
+
+```html
+<!-- Button with description -->
+<button
+  aria-label="Delete"
+  aria-description="Permanently delete this item. This action cannot be undone."
+>
+  Delete
+</button>
+
+<!-- Form field with description -->
+<input
+  type="password"
+  aria-label="Password"
+  aria-description="Password must be at least 8 characters with uppercase, lowercase, and numbers"
+/>
+
+<!-- Complex control -->
+<div
+  role="slider"
+  aria-label="Volume"
+  aria-description="Adjust the volume level from 0 to 100"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="50"
+></div>
+```
+
+#### ARIA Key Shortcuts
+
+Documents keyboard shortcuts.
+
+```html
+<!-- Keyboard shortcut hint -->
+<button aria-keyshortcuts="Ctrl+K" aria-label="Search">Search</button>
+
+<!-- Multiple shortcuts -->
+<button aria-keyshortcuts="Ctrl+S Alt+S" aria-label="Save">Save</button>
+
+<!-- Complex shortcuts -->
+<button aria-keyshortcuts="Meta+K" aria-label="Command Palette">⌘K</button>
+```
+
+#### ARIA Role Description
+
+Provides a human-readable description of the role.
+
+```html
+<!-- Custom widget -->
+<div role="button" aria-roledescription="Card" aria-label="User profile card">
+  <h3>John Doe</h3>
+  <p>Software Developer</p>
+</div>
+
+<!-- Custom slider -->
+<div
+  role="slider"
+  aria-roledescription="Volume control"
+  aria-label="Volume"
+  aria-valuemin="0"
+  aria-valuemax="100"
+></div>
+
+<!-- Custom menu -->
+<div role="menu" aria-roledescription="Context menu" aria-label="File actions">
+  <div role="menuitem">Open</div>
+  <div role="menuitem">Save</div>
+</div>
+```
+
+#### ARIA Set Size and Position
+
+Indicates position within a set.
+
+```html
+<!-- List items -->
+<ul role="listbox" aria-label="Countries">
+  <li role="option" aria-setsize="195" aria-posinset="1">Afghanistan</li>
+  <li role="option" aria-setsize="195" aria-posinset="2">Albania</li>
+  <li role="option" aria-setsize="195" aria-posinset="3">Algeria</li>
+  <!-- ... -->
+</ul>
+
+<!-- Pagination -->
+<nav aria-label="Pagination">
+  <ol role="list">
+    <li>
+      <a href="/page-1" aria-setsize="10" aria-posinset="1">1</a>
+    </li>
+    <li>
+      <a href="/page-2" aria-setsize="10" aria-posinset="2" aria-current="page"
+        >2</a
+      >
+    </li>
+    <li>
+      <a href="/page-3" aria-setsize="10" aria-posinset="3">3</a>
+    </li>
+  </ol>
+</nav>
+
+<!-- Table rows -->
+<table>
+  <tbody>
+    <tr aria-setsize="100" aria-posinset="1">
+      <td>Row 1</td>
+    </tr>
+    <tr aria-setsize="100" aria-posinset="2">
+      <td>Row 2</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 <!-- Progress indication -->
 <div

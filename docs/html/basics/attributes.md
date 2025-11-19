@@ -156,6 +156,123 @@ Custom data attributes for JavaScript access.
 <button data-action="save" data-target="#form">Save</button>
 ```
 
+### `popover`
+
+Native popover functionality without JavaScript.
+
+```html
+<!-- Basic popover -->
+<button popovertarget="myPopover">Toggle Popover</button>
+<div id="myPopover" popover>
+  <p>This is a popover!</p>
+</div>
+
+<!-- Auto popover (closes when clicking outside) -->
+<button popovertarget="autoPopover">Show Auto Popover</button>
+<div id="autoPopover" popover="auto">
+  <p>This closes when you click outside.</p>
+</div>
+
+<!-- Manual popover (requires explicit close) -->
+<button popovertarget="manualPopover">Show Manual Popover</button>
+<div id="manualPopover" popover="manual">
+  <p>This requires a close button.</p>
+  <button popovertarget="manualPopover" popovertargetaction="hide">
+    Close
+  </button>
+</div>
+
+<!-- Popover with anchor positioning -->
+<button popovertarget="anchoredPopover">Menu</button>
+<div id="anchoredPopover" popover anchor="menu-button">
+  <ul>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/settings">Settings</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+</div>
+```
+
+**Popover JavaScript API:**
+
+```javascript
+const popover = document.getElementById('myPopover');
+
+// Show popover
+popover.showPopover();
+
+// Hide popover
+popover.hidePopover();
+
+// Toggle popover
+popover.togglePopover();
+
+// Check if popover is open
+if (popover.matches(':popover-open')) {
+  console.log('Popover is open');
+}
+
+// Listen for popover events
+popover.addEventListener('toggle', event => {
+  if (event.newState === 'open') {
+    console.log('Popover opened');
+  } else {
+    console.log('Popover closed');
+  }
+});
+```
+
+### `inert`
+
+Disables interactive elements and their descendants.
+
+```html
+<!-- Disable entire section -->
+<div inert>
+  <button>This button is disabled</button>
+  <input type="text" placeholder="This input is disabled" />
+  <a href="/link">This link is disabled</a>
+</div>
+
+<!-- Modal backdrop pattern -->
+<div id="modal-backdrop" inert>
+  <!-- Content behind modal is not interactive -->
+  <button>Can't click this</button>
+</div>
+
+<dialog id="modal">
+  <h2>Modal Content</h2>
+  <button onclick="document.getElementById('modal').close()">Close</button>
+</dialog>
+
+<script>
+  const modal = document.getElementById('modal');
+  const backdrop = document.getElementById('modal-backdrop');
+
+  function openModal() {
+    backdrop.setAttribute('inert', '');
+    modal.showModal();
+  }
+
+  function closeModal() {
+    modal.close();
+    backdrop.removeAttribute('inert');
+  }
+</script>
+
+<!-- Conditional inert -->
+<div id="loading-section" inert>
+  <p>Loading...</p>
+</div>
+
+<script>
+  // Remove inert when content is loaded
+  fetch('/data').then(() => {
+    document.getElementById('loading-section').removeAttribute('inert');
+  });
+</script>
+```
+
 ---
 
 ## 🎯 Element-Specific Attributes

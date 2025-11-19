@@ -148,6 +148,110 @@ Container for form controls and submission.
 <input type="hidden" name="csrf-token" value="abc123" />
 ```
 
+### Modern Form Features
+
+#### File Input with Capture
+
+```html
+<!-- Capture from camera -->
+<input type="file" accept="image/*" capture="environment" name="photo" />
+<!-- environment = back camera, user = front camera -->
+
+<!-- Capture audio -->
+<input type="file" accept="audio/*" capture="microphone" name="audio" />
+
+<!-- Capture video -->
+<input type="file" accept="video/*" capture="environment" name="video" />
+```
+
+#### Input Mode for Mobile Keyboards
+
+```html
+<!-- Numeric keyboard -->
+<input type="text" inputmode="numeric" pattern="[0-9]*" name="phone" />
+
+<!-- Decimal keyboard -->
+<input type="text" inputmode="decimal" name="price" />
+
+<!-- Email keyboard -->
+<input type="text" inputmode="email" name="email" />
+
+<!-- URL keyboard -->
+<input type="text" inputmode="url" name="website" />
+
+<!-- Telephone keyboard -->
+<input type="text" inputmode="tel" name="phone" />
+
+<!-- Search keyboard -->
+<input type="text" inputmode="search" name="query" />
+
+<!-- No keyboard (for voice input) -->
+<input type="text" inputmode="none" name="voice-input" />
+```
+
+#### Button Form Attributes
+
+Buttons can override form attributes.
+
+```html
+<form action="/submit" method="post" enctype="multipart/form-data">
+  <input type="text" name="title" />
+
+  <!-- Default submit -->
+  <button type="submit">Save</button>
+
+  <!-- Submit to different endpoint -->
+  <button type="submit" formaction="/save-draft" formmethod="post">
+    Save Draft
+  </button>
+
+  <!-- Submit without validation -->
+  <button type="submit" formnovalidate formaction="/preview">Preview</button>
+
+  <!-- Submit with different encoding -->
+  <button type="submit" formenctype="application/json" formaction="/api/submit">
+    Submit as JSON
+  </button>
+
+  <!-- Submit to new window -->
+  <button type="submit" formtarget="_blank" formaction="/print">Print</button>
+</form>
+```
+
+#### Enhanced Autocomplete
+
+```html
+<!-- Name fields -->
+<input type="text" name="name" autocomplete="name" />
+<input type="text" name="given-name" autocomplete="given-name" />
+<input type="text" name="family-name" autocomplete="family-name" />
+
+<!-- Address fields -->
+<input type="text" name="street" autocomplete="street-address" />
+<input type="text" name="city" autocomplete="address-level2" />
+<input type="text" name="state" autocomplete="address-level1" />
+<input type="text" name="zip" autocomplete="postal-code" />
+<input type="text" name="country" autocomplete="country" />
+
+<!-- Credit card -->
+<input type="text" name="cc-number" autocomplete="cc-number" />
+<input type="text" name="cc-exp" autocomplete="cc-exp" />
+<input type="text" name="cc-csc" autocomplete="cc-csc" />
+
+<!-- One-time codes -->
+<input type="text" name="otp" autocomplete="one-time-code" />
+
+<!-- New password -->
+<input type="password" name="new-password" autocomplete="new-password" />
+
+<!-- Current password -->
+<input
+  type="password"
+  name="current-password"
+  autocomplete="current-password"
+/>
+```
+
 ---
 
 ## 📋 Form Elements

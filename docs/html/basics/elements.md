@@ -84,6 +84,44 @@ Contains metadata about the document.
 </head>
 ```
 
+### Modern Script Loading
+
+Enhanced script loading with modules and security.
+
+```html
+<!-- ES Modules (modern JavaScript) -->
+<script type="module" src="/app.js"></script>
+
+<!-- Fallback for older browsers -->
+<script nomodule src="/app-legacy.js"></script>
+
+<!-- Subresource Integrity (SRI) -->
+<script
+  src="https://cdn.example.com/library.js"
+  integrity="sha384-abc123..."
+  crossorigin="anonymous"
+></script>
+
+<!-- Defer vs Async -->
+<script src="script.js" defer></script>
+<!-- Executes after HTML parsing -->
+<script src="analytics.js" async></script>
+<!-- Executes immediately when loaded -->
+
+<!-- Module with import map -->
+<script type="importmap">
+  {
+    "imports": {
+      "lodash": "https://cdn.example.com/lodash.js"
+    }
+  }
+</script>
+<script type="module">
+  import _ from 'lodash';
+  // Use lodash
+</script>
+```
+
 ### `<body>`
 
 Contains all the visible content of the web page.
@@ -390,6 +428,31 @@ Groups media content with captions.
 </figure>
 ```
 
+### Modern Image Attributes
+
+Enhanced image loading and performance.
+
+```html
+<!-- Priority loading -->
+<img src="hero.jpg" alt="Hero image" loading="eager" fetchpriority="high" />
+
+<!-- Async decoding for better performance -->
+<img src="photo.jpg" alt="Photo" decoding="async" />
+
+<!-- Referrer policy -->
+<img src="external.jpg" alt="External image" referrerpolicy="no-referrer" />
+
+<!-- Combined modern attributes -->
+<img
+  src="image.jpg"
+  alt="Description"
+  loading="lazy"
+  fetchpriority="low"
+  decoding="async"
+  referrerpolicy="strict-origin-when-cross-origin"
+/>
+```
+
 ---
 
 ## 📊 Block vs Inline Elements
@@ -453,6 +516,149 @@ Generic inline container.
 
 ```html
 <p>This is <span class="highlight">important</span> text.</p>
+```
+
+---
+
+## 🎭 Modern Interactive Elements
+
+### Dialog (`<dialog>`)
+
+Native modal dialogs without JavaScript frameworks.
+
+```html
+<!-- Basic dialog -->
+<dialog id="myDialog">
+  <h2>Dialog Title</h2>
+  <p>Dialog content goes here.</p>
+  <form method="dialog">
+    <button>Close</button>
+  </form>
+</dialog>
+
+<button onclick="document.getElementById('myDialog').showModal()">
+  Open Dialog
+</button>
+
+<!-- Modal dialog (blocks interaction) -->
+<dialog id="modalDialog">
+  <h2>Important Notice</h2>
+  <p>This is a modal dialog that blocks page interaction.</p>
+  <form method="dialog">
+    <button value="cancel">Cancel</button>
+    <button value="confirm">Confirm</button>
+  </form>
+</dialog>
+
+<!-- Non-modal dialog -->
+<dialog id="infoDialog">
+  <h2>Information</h2>
+  <p>This dialog doesn't block interaction.</p>
+  <button onclick="document.getElementById('infoDialog').close()">Close</button>
+</dialog>
+```
+
+**Dialog Methods:**
+
+```javascript
+// Show as modal (blocks interaction)
+dialog.showModal();
+
+// Show as non-modal
+dialog.show();
+
+// Close dialog
+dialog.close();
+
+// Close with return value
+dialog.close('user-confirmed');
+```
+
+**Dialog Events:**
+
+```javascript
+dialog.addEventListener('close', () => {
+  console.log('Dialog closed');
+  console.log('Return value:', dialog.returnValue);
+});
+
+dialog.addEventListener('cancel', () => {
+  console.log('Dialog cancelled (ESC key)');
+});
+```
+
+### Search (`<search>`)
+
+Semantic container for search functionality.
+
+```html
+<!-- Basic search -->
+<search>
+  <form role="search" action="/search" method="get">
+    <label for="search-input">Search</label>
+    <input type="search" id="search-input" name="q" />
+    <button type="submit">Search</button>
+  </form>
+</search>
+
+<!-- Search with results -->
+<search>
+  <form role="search">
+    <input type="search" name="q" placeholder="Search..." />
+    <button type="submit">🔍</button>
+  </form>
+
+  <section aria-label="Search results">
+    <!-- Search results appear here -->
+  </section>
+</search>
+```
+
+### Template (`<template>`)
+
+Client-side templating for reusable HTML content.
+
+```html
+<!-- Template definition -->
+<template id="user-card">
+  <div class="user-card">
+    <h3 class="user-name"></h3>
+    <p class="user-email"></p>
+    <img class="user-avatar" src="" alt="" />
+  </div>
+</template>
+
+<!-- Using template with JavaScript -->
+<script>
+  const template = document.getElementById('user-card');
+  const clone = template.content.cloneNode(true);
+
+  clone.querySelector('.user-name').textContent = 'John Doe';
+  clone.querySelector('.user-email').textContent = 'john@example.com';
+  clone.querySelector('.user-avatar').src = 'avatar.jpg';
+  clone.querySelector('.user-avatar').alt = 'John Doe avatar';
+
+  document.body.appendChild(clone);
+</script>
+
+<!-- Multiple template instances -->
+<template id="list-item">
+  <li class="item">
+    <span class="item-title"></span>
+    <button class="delete-btn">Delete</button>
+  </li>
+</template>
+
+<script>
+  function addItem(title) {
+    const template = document.getElementById('list-item');
+    const clone = template.content.cloneNode(true);
+    clone.querySelector('.item-title').textContent = title;
+
+    const list = document.querySelector('ul');
+    list.appendChild(clone);
+  }
+</script>
 ```
 
 ---

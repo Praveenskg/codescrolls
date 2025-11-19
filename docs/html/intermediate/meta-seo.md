@@ -70,11 +70,231 @@ Meta tags provide information about your web page to:
     <!-- Content type and viewport -->
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Theme color (browser UI) -->
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Color scheme (dark/light mode) -->
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Format detection (disable auto-linking) -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Apple mobile web app -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="CodeScrolls" />
   </head>
   <body>
     <!-- Content -->
   </body>
 </html>
+```
+
+### Modern Meta Tags
+
+#### Theme Color
+
+Controls browser UI color (address bar, etc.).
+
+```html
+<!-- Single theme color -->
+<meta name="theme-color" content="#000000" />
+
+<!-- Media query for dark mode -->
+<meta
+  name="theme-color"
+  content="#ffffff"
+  media="(prefers-color-scheme: light)"
+/>
+<meta
+  name="theme-color"
+  content="#000000"
+  media="(prefers-color-scheme: dark)"
+/>
+```
+
+#### Color Scheme
+
+Hints to browser about supported color schemes.
+
+```html
+<!-- Supports both light and dark -->
+<meta name="color-scheme" content="light dark" />
+
+<!-- Light only -->
+<meta name="color-scheme" content="light" />
+
+<!-- Dark only -->
+<meta name="color-scheme" content="dark" />
+```
+
+#### Format Detection
+
+Controls automatic detection and formatting of phone numbers, addresses, etc.
+
+```html
+<!-- Disable phone number detection -->
+<meta name="format-detection" content="telephone=no" />
+
+<!-- Disable address detection -->
+<meta name="format-detection" content="address=no" />
+
+<!-- Disable email detection -->
+<meta name="format-detection" content="email=no" />
+
+<!-- Disable all auto-detection -->
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+```
+
+#### Apple Mobile Web App
+
+iOS-specific meta tags for web apps.
+
+```html
+<!-- Enable standalone mode -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+<!-- Status bar style -->
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<!-- Options: default, black, black-translucent -->
+
+<!-- App title -->
+<meta name="apple-mobile-web-app-title" content="My App" />
+
+<!-- App icons -->
+<link rel="apple-touch-icon" href="/icon-180.png" sizes="180x180" />
+<link rel="apple-touch-icon" href="/icon-152.png" sizes="152x152" />
+<link rel="apple-touch-icon" href="/icon-120.png" sizes="120x120" />
+```
+
+### Modern Link Relations
+
+Performance and resource hints.
+
+```html
+<head>
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://api.example.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- DNS prefetch -->
+  <link rel="dns-prefetch" href="https://cdn.example.com" />
+
+  <!-- Preload critical resources -->
+  <link
+    rel="preload"
+    href="/font.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  <link rel="preload" href="/hero-image.jpg" as="image" />
+  <link rel="preload" href="/critical.css" as="style" />
+  <link rel="preload" href="/app.js" as="script" />
+
+  <!-- Prefetch for likely next page -->
+  <link rel="prefetch" href="/next-page.html" />
+  <link rel="prefetch" href="/api/data.json" as="fetch" crossorigin />
+
+  <!-- Module preload for ES modules -->
+  <link rel="modulepreload" href="/app.js" />
+  <link rel="modulepreload" href="/vendor.js" />
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json" />
+</head>
+```
+
+**Preconnect vs DNS-Prefetch:**
+
+```html
+<!-- Preconnect: Full connection (DNS + TCP + TLS) -->
+<link rel="preconnect" href="https://api.example.com" />
+
+<!-- DNS-Prefetch: DNS lookup only (lighter) -->
+<link rel="dns-prefetch" href="https://cdn.example.com" />
+```
+
+**Preload Examples:**
+
+```html
+<!-- Critical font -->
+<link
+  rel="preload"
+  href="/fonts/main.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin="anonymous"
+/>
+
+<!-- Critical image -->
+<link
+  rel="preload"
+  href="/hero.jpg"
+  as="image"
+  imagesrcset="/hero-small.jpg 480w, /hero-large.jpg 1024w"
+  imagesizes="(max-width: 480px) 100vw, 1024px"
+/>
+
+<!-- Critical CSS -->
+<link rel="preload" href="/critical.css" as="style" />
+<link rel="stylesheet" href="/critical.css" />
+```
+
+### Content Security Policy (CSP)
+
+Security meta tag for preventing XSS attacks.
+
+```html
+<!-- Basic CSP -->
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+/>
+
+<!-- Strict CSP with nonce -->
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' 'nonce-{random}'; style-src 'self' 'nonce-{random}';"
+/>
+
+<!-- CSP with external sources -->
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self' https://cdn.example.com; img-src 'self' data: https:;"
+/>
+
+<!-- Report-only mode (testing) -->
+<meta
+  http-equiv="Content-Security-Policy-Report-Only"
+  content="default-src 'self'; report-uri /csp-report"
+/>
+```
+
+**Common CSP Directives:**
+
+```html
+<!-- Allow from same origin only -->
+default-src 'self'
+
+<!-- Allow inline scripts (less secure) -->
+script-src 'self' 'unsafe-inline'
+
+<!-- Allow specific external domains -->
+script-src 'self' https://cdn.example.com
+
+<!-- Allow data URIs for images -->
+img-src 'self' data: https:
+
+<!-- No inline styles -->
+style-src 'self'
+
+<!-- Allow fonts from Google -->
+font-src 'self' https://fonts.googleapis.com
 ```
 
 ### Search Engine Directives
