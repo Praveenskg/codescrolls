@@ -322,19 +322,23 @@ tsc
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "esnext",
-    "lib": ["ES2020", "DOM"],
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "noEmit": true
   }
 }
 ```
+
+**Note:** Modern projects typically use `moduleResolution: "bundler"`
+(TypeScript 5.0+) for better compatibility with modern bundlers.
 
 **Learn more:** [Compiler Options](/docs/typescript/advanced/compiler-options)
 

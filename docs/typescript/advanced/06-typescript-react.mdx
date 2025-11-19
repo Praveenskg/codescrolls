@@ -100,7 +100,7 @@ interface ButtonProps {
 
 function Button({ label, onClick, disabled = false, variant = 'primary' }: ButtonProps) {
   return (
-    <button onClick={onClick} disabled={disabled} className={variant}>
+    <button onClick={onClick} disabled={disabled}>
       {label}
     </button>
   );
@@ -117,7 +117,7 @@ interface CardProps {
 
 function Card({ title, children }: CardProps) {
   return (
-    <div className="card">
+    <div>
       <h2>{title}</h2>
       <div>{children}</div>
     </div>
@@ -139,7 +139,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 function Button({ variant = 'primary', children, ...props }: ButtonProps) {
   return (
-    <button className={variant} {...props}>
+    <button {...props}>
       {children}
     </button>
   );
@@ -580,16 +580,25 @@ const [count, setCount] = useState<number>(0);
 ### 2. **Avoid `React.FC` for New Code**
 
 ```typescript
-// Preferred
+// ✅ Preferred - Modern approach
 function Button({ label }: { label: string }) {
   return <button>{label}</button>;
 }
 
-// Avoid (has limitations)
+// ❌ Avoid - React.FC has limitations
+// - Implicitly adds children prop
+// - Doesn't work well with generics
+// - Can cause issues with defaultProps
 const Button: React.FC<{ label: string }> = ({ label }) => {
   return <button>{label}</button>;
 };
 ```
+
+**Why avoid React.FC:**
+- Implicitly adds `children?: React.ReactNode` prop
+- Doesn't work well with generic components
+- Can cause issues with `defaultProps` (deprecated in React 19)
+- Less flexible than regular function components
 
 ### 3. **Use Discriminated Unions for State**
 

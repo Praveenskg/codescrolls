@@ -384,6 +384,33 @@ type FetchedUser = Awaited<ReturnType<typeof fetchUser>>;
 // User
 ```
 
+## NoInfer\<T\> (TypeScript 5.4+)
+
+Prevents TypeScript from inferring a type parameter, forcing explicit type.
+
+```typescript
+function createStore<T>(config: {
+  initialState: T;
+  reducer: (state: NoInfer<T>, action: any) => T;
+}) {
+  // Implementation
+}
+
+// Without NoInfer, TypeScript might infer T incorrectly
+// With NoInfer, you must explicitly provide T
+createStore<{ count: number }>({
+  initialState: { count: 0 },
+  reducer: (state, action) => ({ count: state.count + 1 })
+});
+```
+
+**Use Cases:**
+- Prevent incorrect type inference in generic functions
+- Force explicit type parameters
+- Better control over generic type resolution
+
+**Browser Support**: TypeScript 5.4+
+
 ---
 
 ## Combining Utility Types
@@ -531,6 +558,7 @@ type User = ApiEntity<{
 | `ReturnType<T>` | Get function return type | `ReturnType<typeof fn>` |
 | `Parameters<T>` | Get function parameters | `Parameters<typeof fn>` |
 | `Awaited<T>` | Unwrap Promise | `Awaited<Promise<string>>` |
+| `NoInfer<T>` | Prevent inference | `NoInfer<T>` (TS 5.4+) |
 
 ---
 

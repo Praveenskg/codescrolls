@@ -103,8 +103,7 @@ function Navigation() {
   return (
     <nav>
       <NavLink 
-        to="/" 
-        className={({ isActive }) => isActive ? 'active' : ''}
+        to="/"
       >
         Home
       </NavLink>
@@ -523,7 +522,6 @@ const Dashboard = lazy(() => import('./Dashboard'));
 // ✅ Good - Active styling
 <NavLink 
   to="/dashboard"
-  className={({ isActive }) => isActive ? 'active' : ''}
 >
   Dashboard
 </NavLink>

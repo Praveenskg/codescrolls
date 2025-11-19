@@ -506,6 +506,75 @@ class Calculator {
 
 ---
 
+## 🆕 `const` Type Parameters (TypeScript 5.0+)
+
+Make type parameters constant to preserve literal types in generic functions.
+
+### Basic Usage
+
+```typescript
+// Without const type parameter
+function getValue<T>(value: T): T {
+  return value;
+}
+
+const result = getValue('hello');
+// Type: string (literal type lost)
+
+// With const type parameter
+function getValue<const T>(value: T): T {
+  return value;
+}
+
+const result = getValue('hello');
+// Type: "hello" (literal type preserved!)
+```
+
+### Array and Tuple Preservation
+
+```typescript
+// Without const - loses tuple structure
+function getArray<T extends readonly unknown[]>(arr: T): T {
+  return arr;
+}
+
+const arr = getArray([1, 2, 3] as const);
+// Type: readonly [1, 2, 3] (works, but requires 'as const')
+
+// With const type parameter - preserves tuples automatically
+function getArray<const T extends readonly unknown[]>(arr: T): T {
+  return arr;
+}
+
+const arr = getArray([1, 2, 3]);
+// Type: readonly [1, 2, 3] (preserves tuple without 'as const'!)
+```
+
+### Object Preservation
+
+```typescript
+function getConfig<const T extends Record<string, unknown>>(config: T): T {
+  return config;
+}
+
+const config = getConfig({
+  theme: 'dark',
+  fontSize: 14
+});
+// Type: { theme: "dark"; fontSize: 14 }
+// Literal types preserved!
+```
+
+**Benefits:**
+- ✅ Preserves literal types automatically
+- ✅ Better type inference for tuples
+- ✅ More precise return types
+- ✅ Less need for `as const` assertions
+
+**Browser Support**: TypeScript 5.0+
+
+---
+
 ## Summary
 
 - **Generics** enable type-safe reusable code

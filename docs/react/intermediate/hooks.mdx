@@ -17,11 +17,12 @@ React Hooks let you **use state and other React features** without writing a cla
 
 ## 📦 Commonly Used Hooks
 
-| Hook        | Description                                  |
-| ----------- | -------------------------------------------- |
-| `useState`  | Adds local state to functional components    |
-| `useEffect` | Performs side effects in function components |
-| `useRef`    | Access DOM nodes or persist values           |
+| Hook            | Description                                  |
+| --------------- | -------------------------------------------- |
+| `useState`      | Adds local state to functional components    |
+| `useEffect`     | Performs side effects in function components |
+| `useRef`        | Access DOM nodes or persist values           |
+| `useEffectEvent`| Stable event callback (React 19.2+)          |
 
 ---
 
@@ -140,7 +141,212 @@ function ThemeSwitcher() {
 
 ---
 
-## 📘 What’s Next?
+---
+
+## 🆕 React 19 Hooks
+
+### useActionState
+
+Manages the state of action-based functions (form actions, mutations).
+
+```jsx
+import { useActionState } from 'react';
+
+async function updateName(prevState, formData) {
+  const name = formData.get('name');
+  
+  try {
+    await updateUser(name);
+    return { success: true, message: 'Name updated!' };
+  } catch (error) {
+    return { success: false, message: 'Failed to update name' };
+  }
+}
+
+function UpdateNameForm() {
+  const [state, formAction, isPending] = useActionState(updateName, {
+    success: false,
+    message: '',
+  });
+
+  return (
+    <form action={formAction}>
+      <input name="name" placeholder="Enter name" />
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Updating...' : 'Update Name'}
+      </button>
+      {state.message && (
+        <p>
+          {state.message}
+        </p>
+      )}
+    </form>
+  );
+}
+```
+
+**Browser Support**: React 19+
+
+### useFormStatus
+
+Tracks the submission state of forms (used inside form actions).
+
+```jsx
+import { useFormStatus } from 'react-dom';
+
+function SubmitButton() {
+  const { pending, data, method, action } = useFormStatus();
+
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Submitting...' : 'Submit'}
+    </button>
+  );
+}
+
+function ContactForm() {
+  async function submitForm(formData) {
+    'use server';
+    // Server action
+    await saveContact(formData);
+  }
+
+  return (
+    <form action={submitForm}>
+      <input name="email" type="email" />
+      <input name="message" />
+      <SubmitButton />
+    </form>
+  );
+}
+```
+
+**Note**: `useFormStatus` must be used inside a `<form>` element with an action.
+
+**Browser Support**: React 19+
+
+### useOptimistic
+
+Enables optimistic UI updates for better perceived performance.
+
+```jsx
+import { useOptimistic, useState } from 'react';
+
+function TodoList({ todos }) {
+  const [optimisticTodos, addOptimisticTodo] = useOptimistic(
+    todos,
+    (state, newTodo) => [...state, { ...newTodo, pending: true }]
+  );
+
+  async function addTodo(formData) {
+    const newTodo = {
+      id: Date.now(),
+      text: formData.get('text'),
+    };
+
+    // Optimistically add to UI immediately
+    addOptimisticTodo(newTodo);
+
+    // Actually save to server
+    await saveTodo(newTodo);
+  }
+
+  return (
+    <>
+      {optimisticTodos.map(todo => (
+        <div key={todo.id}>
+          {todo.text}
+        </div>
+      ))}
+      <form action={addTodo}>
+        <input name="text" />
+        <button type="submit">Add Todo</button>
+      </form>
+    </>
+  );
+}
+```
+
+**Browser Support**: React 19+
+
+### use() Hook
+
+Reads the value of a Promise or Context directly in render.
+
+```jsx
+import { use, Suspense } from 'react';
+
+// With Promise
+function UserProfile({ userPromise }) {
+  const user = use(userPromise);
+  return <div>{user.name}</div>;
+}
+
+function App() {
+  const userPromise = fetchUser();
+  
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <UserProfile userPromise={userPromise} />
+    </Suspense>
+  );
+}
+
+// With Context
+const ThemeContext = createContext();
+
+function ThemedButton() {
+  const theme = use(ThemeContext);
+  return <button>Click me</button>;
+}
+```
+
+**Browser Support**: React 19+
+
+### useEffectEvent (React 19.2)
+
+Provides a stable event callback that always accesses the latest props and state without causing re-renders.
+
+```jsx
+import { useEffect, useEffectEvent } from 'react';
+
+function ChatRoom({ roomId }) {
+  const [messages, setMessages] = useState([]);
+
+  // Stable callback that always has latest roomId
+  const onMessage = useEffectEvent((message) => {
+    setMessages(prev => [...prev, message]);
+    // Always uses latest roomId, but doesn't cause re-render
+    console.log('Received message in room:', roomId);
+  });
+
+  useEffect(() => {
+    const connection = createConnection(roomId);
+    
+    connection.on('message', onMessage);
+    connection.connect();
+
+    return () => {
+      connection.off('message', onMessage);
+      connection.disconnect();
+    };
+  }, [roomId]); // Only re-run when roomId changes
+
+  return <div>{/* Chat UI */}</div>;
+}
+```
+
+**Benefits:**
+- ✅ Stable reference - doesn't change between renders
+- ✅ Always accesses latest props/state
+- ✅ Prevents unnecessary effect re-runs
+- ✅ Perfect for WebSocket handlers, analytics
+
+**Browser Support**: React 19.2+
+
+---
+
+## 📘 What's Next?
 
 - Dive into [Context API](./context-api)
 - Learn how to handle [Forms](../basics/forms)

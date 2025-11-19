@@ -40,7 +40,8 @@ Specifies ECMAScript target version.
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020"  // ES3, ES5, ES6/ES2015, ES2016, ES2017, ES2018, ES2019, ES2020, ES2021, ES2022, ESNext
+    "target": "ES2020"  // ES5, ES6/ES2015, ES2016, ES2017, ES2018, ES2019, ES2020, ES2021, ES2022, ES2023, ES2024, ESNext
+    // Note: ES3 is deprecated and should not be used
   }
 }
 ```
@@ -245,10 +246,16 @@ function logName(this: { name: string }) {
 ```json
 {
   "compilerOptions": {
-    "moduleResolution": "node"  // node, classic, node16, nodenext
+    "moduleResolution": "bundler"  // bundler (TS 5.0+), node, node16, nodenext, classic
   }
 }
 ```
+
+**Modern Options:**
+- **`bundler`** (TypeScript 5.0+) - For modern bundlers (Vite, esbuild, etc.)
+- **`node16`** / **`nodenext`** - For Node.js with ESM support
+- **`node`** - Legacy Node.js resolution (still common)
+- **`classic`** - Legacy resolution (avoid)
 
 ### baseUrl
 
@@ -597,11 +604,11 @@ Allow JavaScript files.
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -619,6 +626,8 @@ Allow JavaScript files.
   "exclude": ["node_modules"]
 }
 ```
+
+**Note:** `moduleResolution: "bundler"` is recommended for modern React projects using Vite, esbuild, or similar bundlers (TypeScript 5.0+).
 
 ### Node.js Project
 
@@ -652,9 +661,9 @@ Allow JavaScript files.
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "esnext",
-    "lib": ["ES2020"],
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022"],
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",
@@ -663,13 +672,15 @@ Allow JavaScript files.
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
 ```
+
+**Note:** For libraries, `moduleResolution: "bundler"` works well with modern tooling. Use `node16` or `nodenext` if you need Node.js-specific resolution.
 
 ---
 

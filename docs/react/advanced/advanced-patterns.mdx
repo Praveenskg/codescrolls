@@ -31,7 +31,7 @@ function Tabs({ children }) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="tabs">
+    <div>
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           isActive: index === activeTab,
@@ -47,7 +47,6 @@ function Tab({ title, isActive, onSelect, children }) {
     <div>
       <button 
         onClick={onSelect}
-        className={isActive ? 'active' : ''}
       >
         {title}
       </button>
@@ -74,13 +73,13 @@ function Tabs({ children }) {
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div className="tabs">{children}</div>
+      <div>{children}</div>
     </TabsContext.Provider>
   );
 }
 
 function TabList({ children }) {
-  return <div className="tab-list">{children}</div>;
+  return <div>{children}</div>;
 }
 
 function Tab({ index, children }) {
@@ -89,7 +88,6 @@ function Tab({ index, children }) {
   return (
     <button
       onClick={() => setActiveTab(index)}
-      className={activeTab === index ? 'active' : ''}
     >
       {children}
     </button>
@@ -240,8 +238,8 @@ function Modal({ children, isOpen }) {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="modal-overlay">
-      <div className="modal">
+    <div>
+      <div>
         {children}
       </div>
     </div>,
@@ -282,7 +280,6 @@ function Tooltip({ children, content }) {
       
       {isVisible && createPortal(
         <div 
-          className="tooltip"
           style={{ left: position.x, top: position.y }}
         >
           {content}
@@ -528,6 +525,218 @@ function useTheme() {
   return context;
 }
 ```
+
+---
+
+## 🆕 React 19: Server Components
+
+Server Components allow you to render components on the server, reducing client-side JavaScript.
+
+### What Are Server Components?
+
+- ✅ **Rendered on server** - Execute on server, not client
+- ✅ **Zero JavaScript** - No JS sent to client
+- ✅ **Direct data access** - Access databases, APIs directly
+- ✅ **Better performance** - Smaller bundle sizes
+
+### Basic Server Component
+
+```jsx
+// app/users/page.jsx (Next.js example)
+// This is a Server Component by default
+
+async function UsersPage() {
+  // Direct database access - no API needed!
+  const users = await db.users.findMany();
+
+  return (
+    <div>
+      <h1>Users</h1>
+      {users.map(user => (
+        <div key={user.id}>
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default UsersPage;
+```
+
+### Client Components
+
+Use `'use client'` directive for interactive components:
+
+```jsx
+'use client'; // This is a Client Component
+
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+### Mixing Server and Client Components
+
+```jsx
+// Server Component
+async function UserProfile({ userId }) {
+  const user = await fetchUser(userId);
+  
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <UserActions userId={userId} /> {/* Client Component */}
+    </div>
+  );
+}
+
+// Client Component
+'use client';
+function UserActions({ userId }) {
+  const [liked, setLiked] = useState(false);
+  
+  return (
+    <button onClick={() => setLiked(!liked)}>
+      {liked ? '❤️' : '🤍'}
+    </button>
+  );
+}
+```
+
+### Benefits
+
+- ✅ **Smaller bundles** - Less JavaScript to download
+- ✅ **Faster initial load** - Content ready immediately
+- ✅ **Better SEO** - Fully rendered HTML
+- ✅ **Secure** - API keys stay on server
+
+**Browser Support**: React 19+ (with Next.js 13+ or compatible framework)
+
+### Partial Pre-rendering (React 19.2)
+
+Pre-render static parts on the server while deferring dynamic components to the client.
+
+```jsx
+// Static parts rendered on server
+function ProductPage({ productId }) {
+  return (
+    <div>
+      {/* Static - pre-rendered */}
+      <ProductHeader />
+      <ProductDescription />
+      
+      {/* Dynamic - deferred to client */}
+      <Suspense fallback={<Loading />}>
+        <ProductReviews productId={productId} />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+**Benefits:**
+- ✅ Faster initial load - static content ready immediately
+- ✅ Better SEO - static content fully rendered
+- ✅ Progressive enhancement - dynamic parts load as needed
+
+### cacheSignal API (React 19.2)
+
+Detect when cached fetch calls expire in Server Components.
+
+```jsx
+import { cacheSignal } from 'react';
+
+async function fetchUserData(userId) {
+  const signal = cacheSignal();
+  
+  const response = await fetch(`/api/users/${userId}`, {
+    signal: signal.abort, // Abort if cache expires
+  });
+  
+  // Cleanup when cache expires
+  signal.addEventListener('abort', () => {
+    console.log('Cache expired, cleaning up');
+  });
+  
+  return response.json();
+}
+```
+
+**Use Cases:**
+- Cleanup fetch requests when cache expires
+- Abort side effects when data no longer needed
+- Resource management in Server Components
+
+**Browser Support**: React 19.2+
+
+### Batching Suspense Boundaries (React 19.2)
+
+Multiple Suspense boundaries reveal together for smoother SSR.
+
+```jsx
+function App() {
+  return (
+    <div>
+      {/* These boundaries batch together */}
+      <Suspense fallback={<Loading1 />}>
+        <Component1 />
+      </Suspense>
+      
+      <Suspense fallback={<Loading2 />}>
+        <Component2 />
+      </Suspense>
+      
+      <Suspense fallback={<Loading3 />}>
+        <Component3 />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+**Benefits:**
+- ✅ Reduced flickering
+- ✅ Consistent server/client behavior
+- ✅ Better visual consistency
+
+### Web Streams Integration (React 19.2)
+
+Progressive rendering as content arrives from server.
+
+```jsx
+// Server-side streaming
+async function* streamData() {
+  for (const chunk of dataChunks) {
+    yield chunk;
+    await delay(100);
+  }
+}
+
+function StreamingComponent() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <StreamedContent stream={streamData()} />
+    </Suspense>
+  );
+}
+```
+
+**Benefits:**
+- ✅ Progressive content loading
+- ✅ Better performance on slow networks
+- ✅ Improved perceived performance
+
+**Browser Support**: React 19.2+
 
 ---
 

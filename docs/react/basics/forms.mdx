@@ -329,7 +329,7 @@ function LoginForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
         />
-        {errors.email && <span className="error">{errors.email}</span>}
+        {errors.email && <span>{errors.email}</span>}
       </div>
 
       <div>
@@ -339,7 +339,7 @@ function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        {errors.password && <span className="error">{errors.password}</span>}
+        {errors.password && <span>{errors.password}</span>}
       </div>
 
       <button type="submit">Login</button>
@@ -378,7 +378,7 @@ function SignupForm() {
         onChange={handleChange}
         placeholder="Username"
       />
-      {error && <span className="error">{error}</span>}
+      {error && <span>{error}</span>}
     </div>
   );
 }
@@ -434,10 +434,10 @@ function ContactForm() {
       </button>
 
       {submitStatus === 'success' && (
-        <div className="success">Form submitted successfully!</div>
+        <div>Form submitted successfully!</div>
       )}
       {submitStatus === 'error' && (
-        <div className="error">Failed to submit form. Please try again.</div>
+        <div>Failed to submit form. Please try again.</div>
       )}
     </form>
   );
@@ -571,7 +571,7 @@ const handleSubmit = (e) => {
 
 ```jsx
 {errors.email && (
-  <span className="error" role="alert">
+  <span role="alert">
     {errors.email}
   </span>
 )}
@@ -623,6 +623,111 @@ formData.name = 'New Name';
 // ✅ Correct
 setFormData({ ...formData, name: 'New Name' });
 ```
+
+---
+
+## 🆕 React 19: Form Actions
+
+React 19 introduces **Actions** - a modern way to handle form submissions with automatic state management.
+
+### Basic Form Action
+
+```jsx
+async function submitForm(formData) {
+  'use server'; // Server action (Next.js)
+  
+  const name = formData.get('name');
+  const email = formData.get('email');
+  
+  // Save to database
+  await saveUser({ name, email });
+  
+  return { success: true };
+}
+
+function UserForm() {
+  return (
+    <form action={submitForm}>
+      <input name="name" placeholder="Name" required />
+      <input name="email" type="email" placeholder="Email" required />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+### With useActionState
+
+```jsx
+import { useActionState } from 'react';
+
+async function createUser(prevState, formData) {
+  const name = formData.get('name');
+  
+  try {
+    await saveUser(name);
+    return { success: true, message: 'User created!' };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+}
+
+function CreateUserForm() {
+  const [state, formAction, isPending] = useActionState(createUser, null);
+
+  return (
+    <form action={formAction}>
+      <input name="name" required />
+      <button type="submit" disabled={isPending}>
+        {isPending ? 'Creating...' : 'Create User'}
+      </button>
+      {state?.message && (
+        <p>
+          {state.message}
+        </p>
+      )}
+    </form>
+  );
+}
+```
+
+### With useFormStatus
+
+```jsx
+import { useFormStatus } from 'react-dom';
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? 'Submitting...' : 'Submit'}
+    </button>
+  );
+}
+
+function ContactForm() {
+  async function handleSubmit(formData) {
+    await sendEmail(formData);
+  }
+
+  return (
+    <form action={handleSubmit}>
+      <input name="email" type="email" />
+      <textarea name="message" />
+      <SubmitButton />
+    </form>
+  );
+}
+```
+
+**Benefits:**
+- ✅ Automatic loading states
+- ✅ Built-in error handling
+- ✅ Progressive enhancement
+- ✅ Less boilerplate code
+
+**Browser Support**: React 19+
 
 ---
 

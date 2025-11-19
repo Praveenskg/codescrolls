@@ -184,16 +184,16 @@ function StatusBadge({ status }) {
 
   switch (status) {
     case 'success':
-      badge = <span className="badge-success">✓ Success</span>;
+      badge = <span>✓ Success</span>;
       break;
     case 'error':
-      badge = <span className="badge-error">✗ Error</span>;
+      badge = <span>✗ Error</span>;
       break;
     case 'warning':
-      badge = <span className="badge-warning">⚠ Warning</span>;
+      badge = <span>⚠ Warning</span>;
       break;
     default:
-      badge = <span className="badge-info">ℹ Info</span>;
+      badge = <span>ℹ Info</span>;
   }
 
   return <div>{badge}</div>;
@@ -205,10 +205,10 @@ function StatusBadge({ status }) {
 ```jsx
 function StatusBadge({ status }) {
   const badges = {
-    success: <span className="badge-success">✓ Success</span>,
-    error: <span className="badge-error">✗ Error</span>,
-    warning: <span className="badge-warning">⚠ Warning</span>,
-    info: <span className="badge-info">ℹ Info</span>
+    success: <span>✓ Success</span>,
+    error: <span>✗ Error</span>,
+    warning: <span>⚠ Warning</span>,
+    info: <span>ℹ Info</span>
   };
 
   return <div>{badges[status] || badges.info}</div>;
@@ -224,9 +224,7 @@ function StatusBadge({ status }) {
 ```jsx
 function Button({ isPrimary, isDisabled }) {
   return (
-    <button 
-      className={`btn ${isPrimary ? 'btn-primary' : 'btn-secondary'} ${isDisabled ? 'disabled' : ''}`}
-    >
+    <button>
       Click Me
     </button>
   );
@@ -240,14 +238,7 @@ import classNames from 'classnames';
 
 function Button({ isPrimary, isDisabled, isLarge }) {
   return (
-    <button 
-      className={classNames('btn', {
-        'btn-primary': isPrimary,
-        'btn-secondary': !isPrimary,
-        'disabled': isDisabled,
-        'btn-large': isLarge
-      })}
-    >
+    <button>
       Click Me
     </button>
   );
@@ -338,8 +329,8 @@ function DataDisplay({ data, isLoading }) {
 function UserProfile({ user, isLoading, error }) {
   if (isLoading) {
     return (
-      <div className="spinner-container">
-        <div className="spinner"></div>
+      <div>
+        <div></div>
         <p>Loading user data...</p>
       </div>
     );
@@ -347,7 +338,7 @@ function UserProfile({ user, isLoading, error }) {
 
   if (error) {
     return (
-      <div className="error">
+      <div>
         <p>Error: {error.message}</p>
         <button onClick={retry}>Retry</button>
       </div>

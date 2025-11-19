@@ -55,6 +55,9 @@ and render efficiently in response to data changes.
 - **Props**: Pass data to components
 - **State**: Handle dynamic data
 - **Hooks**: Functional component features (`useState`, `useEffect`, etc.)
+- **React 19**: Latest features including Actions, new hooks, and React Compiler
+- **React 19.2**: Activity component, useEffectEvent, cacheSignal, and SSR
+  improvements
 
 ---
 

@@ -99,6 +99,50 @@ const appName = 'CodeScrolls'; // inferred as string
 
 ---
 
+## 🆕 `satisfies` Operator (TypeScript 4.9+)
+
+The `satisfies` operator ensures a value matches a type without changing the inferred type.
+
+```typescript
+// Without satisfies - loses specific literal types
+const config = {
+  theme: 'dark',
+  fontSize: 14
+} as const;
+// Type: { readonly theme: "dark"; readonly fontSize: 14 }
+
+// With satisfies - preserves type while checking
+const config = {
+  theme: 'dark',
+  fontSize: 14
+} satisfies { theme: string; fontSize: number };
+// Type: { theme: "dark"; fontSize: 14 } (preserves literal types!)
+
+// Example: API configuration
+const apiConfig = {
+  baseUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3
+} satisfies {
+  baseUrl: string;
+  timeout: number;
+  retries: number;
+};
+
+// TypeScript checks the shape but preserves literal types
+console.log(apiConfig.baseUrl); // Type: "https://api.example.com" (not just string)
+```
+
+**Benefits:**
+- ✅ Type checking without losing literal types
+- ✅ Better autocomplete
+- ✅ Catches errors early
+- ✅ Preserves specific values
+
+**Browser Support**: TypeScript 4.9+
+
+---
+
 ## 7. Best Practices
 
 - Prefer const over let

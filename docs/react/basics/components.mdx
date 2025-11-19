@@ -99,6 +99,67 @@ function App() {
 
 ---
 
+## 🆕 React 19.2: Activity Component
+
+The `<Activity />` component manages UI segments by controlling their visibility and resource usage without unmounting them.
+
+### Basic Usage
+
+```jsx
+import { Activity } from 'react';
+
+function App() {
+  const [showDetails, setShowDetails] = useState(true);
+
+  return (
+    <div>
+      <button onClick={() => setShowDetails(!showDetails)}>
+        Toggle Details
+      </button>
+      
+      <Activity visible={showDetails}>
+        <ExpensiveComponent />
+      </Activity>
+    </div>
+  );
+}
+```
+
+### Two Modes
+
+```jsx
+import { Activity } from 'react';
+
+function Dashboard() {
+  const [activeTab, setActiveTab] = useState('home');
+
+  return (
+    <div>
+      {/* Visible: Renders, mounts effects, processes updates */}
+      <Activity visible={activeTab === 'home'}>
+        <HomeTab />
+      </Activity>
+
+      {/* Hidden: Hides, unmounts effects, defers updates */}
+      <Activity visible={activeTab === 'analytics'}>
+        <AnalyticsTab />
+      </Activity>
+    </div>
+  );
+}
+```
+
+### Use Cases
+
+- **Pre-rendering** - Render content before user navigates
+- **State preservation** - Keep component state when hidden
+- **Performance** - Defer updates for hidden components
+- **Resource management** - Unmount effects when not visible
+
+**Browser Support**: React 19.2+
+
+---
+
 > ⚡ Components should always be **pure functions** — given the same props, they must return the same UI output.
 
 ---

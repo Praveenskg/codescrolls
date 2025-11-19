@@ -63,7 +63,7 @@ function Modal() {
     <div>
       <button onClick={setTrue}>Open Modal</button>
       {isOpen && (
-        <div className="modal">
+        <div>
           <button onClick={setFalse}>Close</button>
         </div>
       )}
@@ -293,7 +293,7 @@ function Dropdown() {
   return (
     <div ref={dropdownRef}>
       <button onClick={() => setIsOpen(!isOpen)}>Toggle</button>
-      {isOpen && <div className="dropdown-menu">Menu items...</div>}
+      {isOpen && <div>Menu items...</div>}
     </div>
   );
 }

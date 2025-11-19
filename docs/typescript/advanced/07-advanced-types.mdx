@@ -559,6 +559,84 @@ type ApiCall = "GET /users" | "POST /users" | ...;
 
 ---
 
+## 🆕 Modern TypeScript Features
+
+### `satisfies` Operator (TypeScript 4.9+)
+
+Ensures a value matches a type without changing the inferred type.
+
+```typescript
+// Problem: Type assertion loses literal types
+const colors = {
+  primary: '#ff0000',
+  secondary: '#00ff00'
+} as const;
+// Type is too narrow: { readonly primary: "#ff0000"; readonly secondary: "#00ff00" }
+
+// Solution: satisfies preserves types while checking
+const colors = {
+  primary: '#ff0000',
+  secondary: '#00ff00'
+} satisfies Record<string, string>;
+// Type: { primary: "#ff0000"; secondary: "#00ff00" }
+// Still has literal types, but satisfies Record<string, string>
+
+// Example: Configuration with validation
+const config = {
+  apiUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3
+} satisfies {
+  apiUrl: string;
+  timeout: number;
+  retries: number;
+};
+
+// TypeScript checks shape, preserves literal types
+function getApiUrl() {
+  return config.apiUrl; // Type: "https://api.example.com" (not just string)
+}
+```
+
+### `const` Type Parameters (TypeScript 5.0+)
+
+Make type parameters constant to preserve literal types.
+
+```typescript
+// Without const type parameter
+function getValue<T>(value: T): T {
+  return value;
+}
+
+const result = getValue('hello');
+// Type: string (not "hello")
+
+// With const type parameter
+function getValue<const T>(value: T): T {
+  return value;
+}
+
+const result = getValue('hello');
+// Type: "hello" (preserves literal!)
+
+// Array example
+function getArray<const T extends readonly unknown[]>(arr: T): T {
+  return arr;
+}
+
+const arr = getArray([1, 2, 3] as const);
+// Type: readonly [1, 2, 3] (preserves tuple!)
+```
+
+**Use Cases:**
+- Preserve literal types in generic functions
+- Better type inference for tuples
+- More precise return types
+
+**Browser Support**: TypeScript 5.0+
+
+---
+
 ## Summary
 
 - **Mapped types** transform object types

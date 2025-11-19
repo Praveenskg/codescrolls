@@ -12,6 +12,93 @@ keywords: [react performance, optimization, react memo, useMemo, useCallback, co
 
 ---
 
+## 🆕 React 19: React Compiler
+
+React 19 introduces the **React Compiler** - an automatic optimization tool that handles memoization for you.
+
+### What It Does
+
+The React Compiler automatically:
+- ✅ Memoizes components and values
+- ✅ Optimizes re-renders
+- ✅ Reduces need for manual `useMemo`/`useCallback`
+- ✅ Improves build-time performance
+
+### Before React Compiler
+
+```jsx
+// Manual optimization required
+function ProductList({ products, filter }) {
+  const filteredProducts = useMemo(() => {
+    return products.filter(p => p.category === filter);
+  }, [products, filter]);
+
+  const handleClick = useCallback(() => {
+    // Handle click
+  }, []);
+
+  return (
+    <div>
+      {filteredProducts.map(product => (
+        <ProductCard key={product.id} product={product} onClick={handleClick} />
+      ))}
+    </div>
+  );
+}
+```
+
+### With React Compiler
+
+```jsx
+// React Compiler handles optimization automatically!
+function ProductList({ products, filter }) {
+  // Compiler automatically memoizes this
+  const filteredProducts = products.filter(p => p.category === filter);
+
+  // Compiler automatically memoizes this
+  const handleClick = () => {
+    // Handle click
+  };
+
+  return (
+    <div>
+      {filteredProducts.map(product => (
+        <ProductCard key={product.id} product={product} onClick={handleClick} />
+      ))}
+    </div>
+  );
+}
+```
+
+### Automatic Batching
+
+React 19 automatically batches state updates, even outside event handlers:
+
+```jsx
+// React 18: Multiple re-renders
+setTimeout(() => {
+  setCount(c => c + 1); // Re-render 1
+  setFlag(f => !f);     // Re-render 2
+  setName('New');       // Re-render 3
+}, 1000);
+
+// React 19: Single batched re-render
+setTimeout(() => {
+  setCount(c => c + 1); // All batched together
+  setFlag(f => !f);
+  setName('New');
+}, 1000);
+```
+
+**Benefits:**
+- ✅ Fewer re-renders
+- ✅ Better performance
+- ✅ Less manual optimization needed
+
+**Browser Support**: React 19+ (with compiler enabled)
+
+---
+
 ## 📌 Why Optimize?
 
 Common performance issues:
@@ -370,7 +457,6 @@ function ProgressiveImage({ placeholder, src, alt }) {
     <img 
       src={imageSrc}
       alt={alt}
-      className={imageLoaded ? 'loaded' : 'loading'}
     />
   );
 }
