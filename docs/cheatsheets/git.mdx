@@ -67,10 +67,16 @@ git branch
 # Create a new branch
 git branch new-feature
 
-# Switch to a branch
+# Switch to a branch (modern way)
+git switch new-feature
+
+# Switch to a branch (legacy way, still works)
 git checkout new-feature
 
-# Create and switch in one step
+# Create and switch in one step (modern way)
+git switch -c new-feature
+
+# Create and switch in one step (legacy way)
 git checkout -b new-feature
 ```
 
@@ -91,10 +97,19 @@ git rebase main
 ## Push and Pull
 
 ```bash
-# Push to remote
+# Push to remote and set upstream (recommended)
+git push -u origin branch-name
+
+# Push to remote (after upstream is set)
+git push
+
+# Push to remote (explicit)
 git push origin branch-name
 
-# Pull from remote
+# Pull from remote with rebase (recommended)
+git pull --rebase origin branch-name
+
+# Pull from remote (merge strategy)
 git pull origin branch-name
 ```
 
@@ -103,10 +118,16 @@ git pull origin branch-name
 ## Clean and Undo
 
 ```bash
-# Discard local changes
+# Discard local changes (modern way)
+git restore filename
+
+# Discard local changes (legacy way)
 git checkout -- filename
 
-# Unstage a file
+# Unstage a file (modern way)
+git restore --staged filename
+
+# Unstage a file (legacy way)
 git reset filename
 
 # Undo last commit but keep changes
@@ -134,11 +155,11 @@ git blame filename
 
 ```bash
 # 1. Update your main branch
-git checkout main
-git pull origin main
+git switch main
+git pull --rebase origin main
 
 # 2. Create a new branch for the fix
-git checkout -b fix/bug-description
+git switch -c fix/bug-description  # or: git checkout -b fix/bug-description
 
 # 3. Make your changes...
 
@@ -146,8 +167,8 @@ git checkout -b fix/bug-description
 git add .
 git commit -m "fix: describe the bug fix"
 
-# 5. Push the branch to origin
-git push origin fix/bug-description
+# 5. Push the branch to origin and set upstream
+git push -u origin fix/bug-description
 
 # 6. Open a Pull Request on GitHub
 
@@ -189,7 +210,10 @@ git revert <commit-hash>
 # Show history of HEAD changes (including resets & checkouts)
 git reflog
 
-# Restore a deleted branch/commit
+# Restore a deleted branch/commit (modern way)
+git switch -c recovered-branch <commit-hash>
+
+# Restore a deleted branch/commit (legacy way)
 git checkout <commit-hash>
 ```
 
@@ -237,8 +261,11 @@ git tag v1.0.0
 # Create an annotated tag
 git tag -a v1.0.0 -m "Release v1.0.0"
 
-# Push tags to remote
+# Push tags to remote (all tags)
 git push origin --tags
+
+# Push tags with commits (recommended - only pushes tags for commits being pushed)
+git push --follow-tags
 ```
 ### Manual Release Workflow (Git + npm)
 
@@ -249,7 +276,10 @@ npm version patch   # or minor / major
 # 2. Create a Git tag (auto created by npm version also)
 git tag v1.0.0 -m "Release v1.0.0"
 
-# 3. Push commits and tags to remote
+# 3. Push commits and tags to remote (recommended)
+git push --follow-tags origin main
+
+# Alternative: Push separately
 git push origin main
 git push origin --tags
 
@@ -305,10 +335,16 @@ git rebase --continue
 
 ```bash
 # You are on a commit, not a branch
-# To return to a branch
+# To return to a branch (modern way)
+git switch main
+
+# To return to a branch (legacy way)
 git checkout main
 
-# Or create a new branch from this commit
+# Or create a new branch from this commit (modern way)
+git switch -c new-branch
+
+# Or create a new branch from this commit (legacy way)
 git checkout -b new-branch
 ```
 
@@ -328,7 +364,10 @@ git push origin main
 # Find commit in reflog
 git reflog
 
-# Restore the branch
+# Restore the branch (modern way)
+git switch -c branch-name <commit-hash>
+
+# Restore the branch (legacy way)
 git checkout -b branch-name <commit-hash>
 ```
 
@@ -338,7 +377,10 @@ git checkout -b branch-name <commit-hash>
 # Recover changes if lost
 git reflog
 
-# Check out a previous commit with your changes
+# Check out a previous commit with your changes (modern way)
+git switch -c recovered-branch <commit-hash>
+
+# Check out a previous commit with your changes (legacy way)
 git checkout <commit-hash>
 ```
 
@@ -440,10 +482,11 @@ chmod +x .git/hooks/pre-commit
 ```bash
 # Create commit-msg hook for conventional commits
 echo '#!/bin/sh
-commit_regex="^(feat|fix|docs|style|refactor|test|chore)(\(.+\))?: .{1,50}"
+commit_regex="^(feat|fix|docs|style|refactor|perf|test|build|chore)(\(.+\))?: .{1,50}"
 if ! grep -qE "$commit_regex" "$1"; then
     echo "Invalid commit message format!"
     echo "Use: type(scope): description"
+    echo "Types: feat, fix, docs, style, refactor, perf, test, build, chore"
     exit 1
 fi
 ' > .git/hooks/commit-msg
@@ -490,8 +533,11 @@ chmod +x .git/hooks/commit-msg
     # Interactive rebase for last N commits
     rebasei = "!f() { git rebase -i HEAD~$1; }; f"
     
-    # Create and switch to new branch
-    new = "!f() { git checkout -b $1; }; f"
+    # Create and switch to new branch (modern way)
+    new = "!f() { git switch -c $1; }; f"
+    
+    # Create and switch to new branch (legacy way)
+    # new = "!f() { git checkout -b $1; }; f"
     
     # Delete merged branches
     cleanup = "!git branch --merged | grep -v '\\*\\|main\\|develop' | xargs -n 1 git branch -d"
@@ -524,20 +570,20 @@ git flow release finish 1.0.0
 
 ```bash
 # 1. Create feature branch from main
-git checkout main
-git pull origin main
-git checkout -b feature/new-feature
+git switch main
+git pull --rebase origin main
+git switch -c feature/new-feature
 
 # 2. Make changes and commit
 git add .
 git commit -m "feat: add new feature"
 
 # 3. Push and create PR
-git push origin feature/new-feature
+git push -u origin feature/new-feature
 
 # 4. After PR merge, clean up
-git checkout main
-git pull origin main
+git switch main
+git pull --rebase origin main
 git branch -d feature/new-feature
 ```
 
@@ -545,16 +591,16 @@ git branch -d feature/new-feature
 
 ```bash
 # 1. Create branch from main
-git checkout main
-git pull origin main
-git checkout -b feature/new-feature
+git switch main
+git pull --rebase origin main
+git switch -c feature/new-feature
 
 # 2. Work on feature
 git add .
 git commit -m "feat: implement new feature"
 
 # 3. Push to feature branch
-git push origin feature/new-feature
+git push -u origin feature/new-feature
 
 # 4. Create merge request
 # 5. After merge, delete branch
@@ -651,10 +697,16 @@ git branch -a
 # List remote branches
 git branch -r
 
-# Create branch from specific commit
+# Create branch from specific commit (modern way)
+git switch -c new-branch <commit-hash>
+
+# Create branch from specific commit (legacy way)
 git checkout -b new-branch <commit-hash>
 
-# Create branch from remote branch
+# Create branch from remote branch (modern way)
+git switch -c local-branch origin/remote-branch
+
+# Create branch from remote branch (legacy way)
 git checkout -b local-branch origin/remote-branch
 
 # Set upstream for existing branch
@@ -676,7 +728,10 @@ git merge --no-ff feature-branch
 # Merge with squash
 git merge --squash feature-branch
 
-# Merge specific files from another branch
+# Merge specific files from another branch (modern way)
+git restore --source=feature-branch -- file1 file2
+
+# Merge specific files from another branch (legacy way)
 git checkout feature-branch -- file1 file2
 
 # Merge with custom merge tool
@@ -728,8 +783,13 @@ git config --global merge.tool vscode
 git config --global core.autocrlf input  # Linux/Mac
 git config --global core.autocrlf true   # Windows
 
-# Set credential helper
-git config --global credential.helper store
+# Set credential helper (platform-specific, more secure)
+git config --global credential.helper cache  # Linux/Mac (temporary, 15 min default)
+git config --global credential.helper manager  # Windows (Git Credential Manager)
+git config --global credential.helper osxkeychain  # macOS (Keychain)
+
+# Store credentials permanently (less secure, not recommended)
+# git config --global credential.helper store
 
 # Set push default
 git config --global push.default simple
@@ -774,6 +834,7 @@ style:    Changes that do not affect the meaning of the code
 refactor: A code change that neither fixes a bug nor adds a feature
 perf:     A code change that improves performance
 test:     Adding missing tests or correcting existing tests
+build:    Changes that affect the build system or external dependencies
 chore:    Changes to the build process or auxiliary tools
 ```
 
