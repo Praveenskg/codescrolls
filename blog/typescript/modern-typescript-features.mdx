@@ -1,0 +1,767 @@
+---
+title: 'Modern TypeScript Features: A Complete Guide to Type Safety in 2025'
+description: 'Master modern TypeScript features including satisfies operator, const type parameters, NoInfer utility type, and best practices for type-safe development. Learn when to use these features and avoid common pitfalls.'
+slug: modern-typescript-features
+tags: [typescript, javascript, frontend, tutorial, web-development]
+authors: praveen
+image: /img/blog/react.png
+keywords: ['typescript', 'type safety', 'satisfies operator', 'const type parameters', 'NoInfer', 'typescript 5', 'type inference', 'generics', 'utility types']
+---
+
+![Modern TypeScript Features](/img/blog/react.png)
+
+TypeScript continues to evolve with powerful new features that make type-safe development more intuitive and expressive. This comprehensive guide covers the latest TypeScript features that every developer should know, from the `satisfies` operator to `const` type parameters and the `NoInfer` utility type.
+
+{/* truncate */}
+
+## 📋 Table of Contents
+
+1. [The `satisfies` Operator](#the-satisfies-operator)
+2. [Const Type Parameters](#const-type-parameters)
+3. [NoInfer Utility Type](#noinfer-utility-type)
+4. [Modern Compiler Options](#modern-compiler-options)
+5. [TypeScript Best Practices](#typescript-best-practices)
+6. [Common Patterns](#common-patterns)
+7. [Migration Tips](#migration-tips)
+8. [Real-World Examples](#real-world-examples)
+
+---
+
+## ✨ The `satisfies` Operator
+
+The `satisfies` operator is one of the most powerful additions to TypeScript. It allows you to validate that a value matches a type without changing the inferred type of that value.
+
+### The Problem It Solves
+
+Before `satisfies`, you had to choose between type safety and type inference:
+
+```typescript
+// ❌ Problem: Loses type inference
+const colors: Record<string, string> = {
+  red: '#ff0000',
+  green: '#00ff00',
+  blue: '#0000ff',
+};
+
+// Type is string, not the literal '#ff0000'
+const redColor = colors.red; // string
+
+// ❌ Problem: No type checking
+const colors = {
+  red: '#ff0000',
+  green: '#00ff00',
+  blue: '#0000ff',
+} as Record<string, string>;
+
+// No error if you misspell a key
+const purple = colors.purple; // undefined, but no error
+```
+
+### The Solution: `satisfies`
+
+```typescript
+// ✅ Best of both worlds: Type checking + inference
+const colors = {
+  red: '#ff0000',
+  green: '#00ff00',
+  blue: '#0000ff',
+} satisfies Record<string, string>;
+
+// Type is the literal '#ff0000', not just string
+const redColor = colors.red; // '#ff0000'
+
+// TypeScript catches typos
+const purple = colors.purple; // Error: Property 'purple' does not exist
+```
+
+### Real-World Example: Configuration Objects
+
+```typescript
+interface ApiConfig {
+  baseUrl: string;
+  timeout: number;
+  retries: number;
+}
+
+const config = {
+  baseUrl: 'https://api.example.com',
+  timeout: 5000,
+  retries: 3,
+  // TypeScript ensures all required properties exist
+} satisfies ApiConfig;
+
+// You get autocomplete and type checking
+const url = config.baseUrl; // string (literal type preserved)
+const timeout = config.timeout; // number (literal 5000)
+
+// But you also get type safety
+const invalidConfig = {
+  baseUrl: 'https://api.example.com',
+  // Error: Property 'timeout' is missing
+} satisfies ApiConfig;
+```
+
+### Using `satisfies` with Complex Types
+
+```typescript
+type Theme = {
+  colors: {
+    primary: string;
+    secondary: string;
+  };
+  spacing: {
+    small: number;
+    medium: number;
+    large: number;
+  };
+};
+
+const theme = {
+  colors: {
+    primary: '#007bff',
+    secondary: '#6c757d',
+  },
+  spacing: {
+    small: 8,
+    medium: 16,
+    large: 24,
+  },
+} satisfies Theme;
+
+// Preserves literal types while ensuring structure
+const primaryColor = theme.colors.primary; // '#007bff' (literal)
+const smallSpacing = theme.spacing.small; // 8 (literal)
+```
+
+---
+
+## 🔒 Const Type Parameters
+
+`const` type parameters allow you to infer the most specific type possible from function arguments, preserving literal types and readonly modifiers.
+
+### The Problem
+
+```typescript
+// Without const type parameters
+function identity<T>(value: T): T {
+  return value;
+}
+
+const result = identity(['hello', 'world']);
+// Type: string[] (not readonly, not tuple)
+```
+
+### The Solution
+
+```typescript
+// With const type parameters
+function identity<const T>(value: T): T {
+  return value;
+}
+
+const result = identity(['hello', 'world']);
+// Type: readonly ['hello', 'world'] (tuple with literal types)
+```
+
+### Real-World Example: API Response Handlers
+
+```typescript
+// Before: Loses specific types
+function createEndpoint<T>(config: {
+  path: string;
+  method: string;
+  handler: (data: T) => void;
+}) {
+  return config;
+}
+
+const endpoint = createEndpoint({
+  path: '/users',
+  method: 'GET',
+  handler: (data) => {
+    // data is unknown, no type safety
+  },
+});
+
+// After: Preserves types
+function createEndpoint<const T>(config: {
+  path: string;
+  method: string;
+  handler: (data: T) => void;
+}) {
+  return config;
+}
+
+const endpoint = createEndpoint({
+  path: '/users',
+  method: 'GET',
+  handler: (data) => {
+    // data is inferred from usage
+    console.log(data.id); // TypeScript knows the shape
+  },
+});
+```
+
+### Using `const` with Arrays and Objects
+
+```typescript
+function processItems<const T extends readonly any[]>(items: T) {
+  return items.map(item => ({ value: item }));
+}
+
+const result = processItems(['apple', 'banana', 'cherry']);
+// T is inferred as readonly ['apple', 'banana', 'cherry']
+// Each item is a string literal type
+```
+
+---
+
+## 🚫 NoInfer Utility Type
+
+`NoInfer` prevents TypeScript from inferring a type parameter, forcing you to explicitly provide it. This is useful when you want to control type inference more precisely.
+
+### The Problem
+
+```typescript
+function createState<T>(initial: T, updater: (current: T) => T) {
+  return { value: initial, update: updater };
+}
+
+// TypeScript infers T from initial, which might not be what you want
+const state = createState(
+  { count: 0 },
+  (current) => ({ count: current.count + 1 })
+);
+// T is inferred as { count: number }
+// But what if you want T to be a more specific type?
+```
+
+### The Solution: `NoInfer`
+
+```typescript
+function createState<T>(
+  initial: NoInfer<T>,
+  updater: (current: T) => T
+): { value: T; update: (updater: (current: T) => T) => void } {
+  return {
+    value: initial as T,
+    update: updater,
+  };
+}
+
+// Now you must explicitly provide T
+const state = createState<{ count: number }>(
+  { count: 0 },
+  (current) => ({ count: current.count + 1 })
+);
+```
+
+### Practical Example: Form Validation
+
+```typescript
+type ValidationRule<T> = {
+  validate: (value: T) => boolean;
+  message: string;
+};
+
+function createValidator<T>(
+  rules: ValidationRule<NoInfer<T>>[]
+): (value: T) => string[] {
+  return (value) => {
+    return rules
+      .filter(rule => !rule.validate(value as NoInfer<T>))
+      .map(rule => rule.message);
+  };
+}
+
+// Forces explicit type specification
+const emailValidator = createValidator<string>([
+  {
+    validate: (value) => value.includes('@'),
+    message: 'Invalid email format',
+  },
+]);
+```
+
+---
+
+## ⚙️ Modern Compiler Options
+
+TypeScript 5.x introduces modern compiler options that reflect current best practices.
+
+### Modern `moduleResolution`
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler"
+  }
+}
+```
+
+The `bundler` option is designed for modern bundlers (Vite, esbuild, Rollup) and provides better type resolution:
+
+```typescript
+// Works seamlessly with modern bundlers
+import { Component } from './components';
+import utils from './utils/index.js'; // .js extension supported
+```
+
+### Deprecated Options
+
+```json
+{
+  "compilerOptions": {
+    // ❌ Deprecated: ES3 target
+    "target": "ES3", // Use ES2015 or higher
+    
+    // ✅ Modern approach
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  }
+}
+```
+
+### Recommended Modern `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+```
+
+---
+
+## ✅ TypeScript Best Practices
+
+### 1. Avoid `React.FC` in React Components
+
+```typescript
+// ❌ Avoid: React.FC is deprecated
+const Component: React.FC<Props> = ({ prop }) => {
+  return <div>{prop}</div>;
+};
+
+// ✅ Prefer: Direct function declaration
+function Component({ prop }: Props) {
+  return <div>{prop}</div>;
+}
+
+// ✅ Or: Arrow function with explicit return type
+const Component = ({ prop }: Props): JSX.Element => {
+  return <div>{prop}</div>;
+};
+```
+
+**Why avoid `React.FC`?**
+- Adds implicit `children` prop (even when not needed)
+- Doesn't work well with generics
+- Makes component signatures less explicit
+- The React team recommends avoiding it
+
+### 2. Use `satisfies` for Configuration Objects
+
+```typescript
+// ✅ Good: Type checking + inference
+const config = {
+  api: {
+    baseUrl: 'https://api.example.com',
+    timeout: 5000,
+  },
+  features: {
+    darkMode: true,
+    analytics: false,
+  },
+} satisfies AppConfig;
+
+// ❌ Avoid: Loses literal types
+const config: AppConfig = {
+  api: {
+    baseUrl: 'https://api.example.com',
+    timeout: 5000,
+  },
+  // ...
+};
+```
+
+### 3. Leverage `const` Type Parameters for Better Inference
+
+```typescript
+// ✅ Good: Preserves literal types
+function createRoute<const T extends string>(path: T) {
+  return {
+    path,
+    match: (url: string) => url === path,
+  };
+}
+
+const route = createRoute('/users/:id');
+// path is '/users/:id' (literal), not string
+
+// ❌ Avoid: Loses specificity
+function createRoute<T extends string>(path: T) {
+  return { path };
+}
+```
+
+### 4. Use Type Guards for Runtime Safety
+
+```typescript
+// ✅ Good: Type guard function
+function isUser(obj: unknown): obj is User {
+  return (
+    typeof obj === 'object' &&
+    obj !== null &&
+    'id' in obj &&
+    'name' in obj &&
+    typeof (obj as User).id === 'string' &&
+    typeof (obj as User).name === 'string'
+  );
+}
+
+function processUser(data: unknown) {
+  if (isUser(data)) {
+    // TypeScript knows data is User here
+    console.log(data.name);
+  }
+}
+```
+
+### 5. Prefer Type Aliases for Complex Types
+
+```typescript
+// ✅ Good: Clear and reusable
+type ApiResponse<T> = {
+  data: T;
+  status: number;
+  message: string;
+};
+
+type UserResponse = ApiResponse<User>;
+type ProductResponse = ApiResponse<Product>;
+
+// ❌ Avoid: Inline complex types
+function fetchUser(): {
+  data: User;
+  status: number;
+  message: string;
+} {
+  // ...
+}
+```
+
+---
+
+## 🎯 Common Patterns
+
+### Pattern 1: Builder Pattern with Type Safety
+
+```typescript
+class QueryBuilder<T> {
+  private filters: Array<(item: T) => boolean> = [];
+
+  where<const K extends keyof T>(
+    key: K,
+    value: T[K]
+  ): QueryBuilder<T> {
+    this.filters.push((item) => item[key] === value);
+    return this;
+  }
+
+  build(): (items: T[]) => T[] {
+    return (items) => items.filter(item =>
+      this.filters.every(filter => filter(item))
+    );
+  }
+}
+
+const builder = new QueryBuilder<User>()
+  .where('role', 'admin')
+  .where('active', true);
+
+const filter = builder.build();
+```
+
+### Pattern 2: Event Emitter with Type Safety
+
+```typescript
+type EventMap = {
+  userCreated: { id: string; name: string };
+  userDeleted: { id: string };
+  orderPlaced: { orderId: string; amount: number };
+};
+
+class TypedEventEmitter {
+  private listeners: {
+    [K in keyof EventMap]?: Array<(data: EventMap[K]) => void>;
+  } = {};
+
+  on<const K extends keyof EventMap>(
+    event: K,
+    handler: (data: EventMap[K]) => void
+  ) {
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
+    }
+    this.listeners[event]!.push(handler);
+  }
+
+  emit<const K extends keyof EventMap>(
+    event: K,
+    data: EventMap[K]
+  ) {
+    this.listeners[event]?.forEach(handler => handler(data));
+  }
+}
+
+const emitter = new TypedEventEmitter();
+
+emitter.on('userCreated', (data) => {
+  // data is { id: string; name: string }
+  console.log(data.id, data.name);
+});
+
+emitter.emit('userCreated', { id: '1', name: 'John' });
+```
+
+### Pattern 3: API Client with Type Inference
+
+```typescript
+type ApiEndpoints = {
+  '/users': { GET: User[]; POST: { body: CreateUserDto; response: User } };
+  '/posts': { GET: Post[]; POST: { body: CreatePostDto; response: Post } };
+};
+
+class ApiClient {
+  async get<const K extends keyof ApiEndpoints>(
+    endpoint: K
+  ): Promise<ApiEndpoints[K]['GET']> {
+    const response = await fetch(endpoint);
+    return response.json();
+  }
+
+  async post<const K extends keyof ApiEndpoints>(
+    endpoint: K,
+    body: ApiEndpoints[K]['POST']['body']
+  ): Promise<ApiEndpoints[K]['POST']['response']> {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    return response.json();
+  }
+}
+
+const api = new ApiClient();
+
+// Fully typed!
+const users = await api.get('/users'); // User[]
+const newUser = await api.post('/users', {
+  name: 'John',
+  email: 'john@example.com',
+}); // User
+```
+
+---
+
+## 🔄 Migration Tips
+
+### Migrating to `satisfies`
+
+```typescript
+// Before
+const config: ConfigType = {
+  // ...
+};
+
+// After
+const config = {
+  // ...
+} satisfies ConfigType;
+```
+
+### Migrating to `const` Type Parameters
+
+```typescript
+// Before
+function createArray<T>(items: T[]): T[] {
+  return items;
+}
+
+// After
+function createArray<const T extends readonly any[]>(items: T): T {
+  return items;
+}
+```
+
+### Updating `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    // Update deprecated options
+    "target": "ES2022", // Was: "ES3" or "ES5"
+    "moduleResolution": "bundler", // Was: "node" or "node16"
+    
+    // Add modern features
+    "strict": true,
+    "noUncheckedIndexedAccess": true, // Makes indexing safer
+    "exactOptionalPropertyTypes": true // Stricter optional properties
+  }
+}
+```
+
+---
+
+## 🌟 Real-World Examples
+
+### Example 1: Form Validation Library
+
+```typescript
+type ValidationResult = {
+  isValid: boolean;
+  errors: string[];
+};
+
+type FieldValidator<T> = {
+  validate: (value: T) => boolean;
+  message: string;
+};
+
+function createFormValidator<const T extends Record<string, any>>(
+  validators: {
+    [K in keyof T]: FieldValidator<T[K]>;
+  }
+) {
+  return (data: T): ValidationResult => {
+    const errors: string[] = [];
+    
+    for (const key in validators) {
+      const validator = validators[key];
+      if (!validator.validate(data[key])) {
+        errors.push(validator.message);
+      }
+    }
+    
+    return {
+      isValid: errors.length === 0,
+      errors,
+    };
+  };
+}
+
+const validateUserForm = createFormValidator({
+  email: {
+    validate: (value) => value.includes('@'),
+    message: 'Invalid email',
+  },
+  age: {
+    validate: (value) => value >= 18,
+    message: 'Must be 18 or older',
+  },
+});
+
+const result = validateUserForm({
+  email: 'user@example.com',
+  age: 25,
+});
+```
+
+### Example 2: State Management with Type Safety
+
+```typescript
+type State = {
+  user: { id: string; name: string } | null;
+  theme: 'light' | 'dark';
+  count: number;
+};
+
+class TypedStore {
+  private state: State;
+  private listeners: Set<() => void> = new Set();
+
+  constructor(initialState: State) {
+    this.state = initialState;
+  }
+
+  getState(): State {
+    return this.state;
+  }
+
+  setState<const K extends keyof State>(
+    key: K,
+    value: State[K]
+  ) {
+    this.state[key] = value;
+    this.notifyListeners();
+  }
+
+  subscribe(listener: () => void) {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
+
+  private notifyListeners() {
+    this.listeners.forEach(listener => listener());
+  }
+}
+
+const store = new TypedStore({
+  user: null,
+  theme: 'light',
+  count: 0,
+});
+
+// Fully typed!
+store.setState('theme', 'dark');
+store.setState('count', 42);
+```
+
+---
+
+## 🎯 Conclusion
+
+Modern TypeScript features like `satisfies`, `const` type parameters, and `NoInfer` provide powerful tools for writing more expressive and type-safe code:
+
+- **`satisfies`**: Get type checking without losing type inference
+- **`const` type parameters**: Preserve literal types and readonly modifiers
+- **`NoInfer`**: Control type inference precisely when needed
+- **Modern compiler options**: Use `bundler` module resolution and avoid deprecated options
+
+### Key Takeaways
+
+1. Use `satisfies` when you need both type checking and type inference
+2. Leverage `const` type parameters to preserve literal types
+3. Use `NoInfer` to control inference in complex generic scenarios
+4. Update your `tsconfig.json` to use modern compiler options
+5. Avoid deprecated patterns like `React.FC`
+
+These features make TypeScript more powerful and your code more maintainable. Start incorporating them into your projects today!
+
+---
+
+## 📚 Further Reading
+
+- [TypeScript 5.0 Release Notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [TypeScript Playground](https://www.typescriptlang.org/play)
+
+---
+
+**Happy type-safe coding! 🚀**
+
