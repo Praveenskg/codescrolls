@@ -1,0 +1,1158 @@
+---
+title: 'Modern CSS Features: A Complete Guide to Cutting-Edge Styling in 2025'
+description: 'Master modern CSS features including Container Queries, :has() selector, CSS Nesting, Subgrid, Cascade Layers, View Transitions API, and modern color functions. Learn when and how to use these powerful features.'
+slug: modern-css-features
+tags: [css, frontend, web-development, tutorial, design]
+authors: praveen
+image: /img/blog/react.png
+keywords: ['css', 'container queries', 'has selector', 'css nesting', 'subgrid', 'cascade layers', 'view transitions', 'modern css', 'css 2025', 'responsive design']
+---
+
+![Modern CSS Features](/img/blog/react.png)
+
+CSS has evolved dramatically in recent years, introducing powerful features that make styling more intuitive, maintainable, and performant. This comprehensive guide covers the latest CSS features that are revolutionizing how we build modern web interfaces, from Container Queries to the `:has()` selector and beyond.
+
+{/* truncate */}
+
+## 📋 Table of Contents
+
+1. [Container Queries](#container-queries)
+2. [The `:has()` Selector](#the-has-selector)
+3. [CSS Nesting](#css-nesting)
+4. [CSS Subgrid](#css-subgrid)
+5. [Cascade Layers (@layer)](#cascade-layers-layer)
+6. [The @scope Rule](#the-scope-rule)
+7. [Modern Color Functions](#modern-color-functions)
+8. [View Transitions API](#view-transitions-api)
+9. [Modern Typography](#modern-typography)
+10. [The @property Rule](#the-property-rule)
+11. [Best Practices](#best-practices)
+12. [Browser Support](#browser-support)
+
+---
+
+## 📦 Container Queries
+
+Container Queries are one of the most revolutionary CSS features, allowing you to style elements based on their container's size rather than the viewport. This enables true component-based responsive design.
+
+### The Problem with Media Queries
+
+```css
+/* ❌ Problem: Media queries are viewport-based */
+@media (min-width: 768px) {
+  .card {
+    /* Changes based on VIEWPORT, not card container */
+    display: flex;
+  }
+}
+
+/* If card is in a narrow sidebar, it still gets desktop styles! */
+```
+
+### The Solution: Container Queries
+
+```css
+/* ✅ Define container context */
+.card-container {
+  container-type: inline-size;
+  /* Or: container-type: size; (for both width and height) */
+}
+
+/* Query based on container width */
+@container (min-width: 400px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .card-image {
+    width: 200px;
+  }
+}
+
+@container (min-width: 600px) {
+  .card {
+    padding: 2rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+```
+
+### Named Containers
+
+```css
+/* Define named containers */
+.sidebar {
+  container-type: inline-size;
+  container-name: sidebar;
+}
+
+.main-content {
+  container-type: inline-size;
+  container-name: main;
+}
+
+/* Query specific container */
+@container sidebar (min-width: 300px) {
+  .widget {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@container main (min-width: 800px) {
+  .article {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+```
+
+### Container Query Units
+
+```css
+.card-container {
+  container-type: inline-size;
+}
+
+.card {
+  /* Container-relative units */
+  padding: 5cqw;      /* 5% of container width */
+  font-size: 2cqh;    /* 2% of container height */
+  margin: 1cqi;       /* 1% of inline size */
+  border-radius: 0.5cqb; /* 0.5% of block size */
+  
+  /* Available units:
+   * cqw = container query width
+   * cqh = container query height
+   * cqi = container query inline-size
+   * cqb = container query block-size
+   * cqmin = smaller of cqi or cqb
+   * cqmax = larger of cqi or cqb
+   */
+}
+```
+
+### Real-World Example: Responsive Card Component
+
+```html
+<div class="card-wrapper">
+  <div class="card">
+    <img src="image.jpg" alt="Card image" class="card-image">
+    <div class="card-content">
+      <h2 class="card-title">Card Title</h2>
+      <p class="card-text">Card description text...</p>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.card-wrapper {
+  container-type: inline-size;
+}
+
+/* Mobile: Stacked layout */
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container is wide: Horizontal layout */
+@container (min-width: 400px) {
+  .card {
+    flex-direction: row;
+  }
+  
+  .card-image {
+    width: 200px;
+    height: auto;
+  }
+}
+
+/* Container is very wide: Larger layout */
+@container (min-width: 600px) {
+  .card {
+    padding: 2rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+}
+```
+
+**Browser Support**: Chrome 105+, Firefox 110+, Safari 16.0+
+
+---
+
+## 🎯 The `:has()` Selector
+
+The `:has()` pseudo-class (also called the "parent selector") allows you to select elements based on their descendants. This was a long-requested feature that enables powerful styling patterns.
+
+### Basic Usage
+
+```css
+/* Select card that contains an image */
+.card:has(img) {
+  border: 2px solid blue;
+}
+
+/* Select form that has invalid input */
+form:has(input:invalid) {
+  border-color: red;
+}
+
+/* Select list item that has a link */
+li:has(a) {
+  font-weight: bold;
+}
+
+/* Select article that has h2 */
+article:has(h2) {
+  padding: 2rem;
+}
+```
+
+### Complex Examples
+
+```css
+/* Select parent with hovered child */
+.card:has(img:hover) {
+  transform: scale(1.05);
+}
+
+/* Select nav that has active link */
+nav:has(a.active) {
+  background-color: #f0f00f;
+}
+
+/* Select container without specific child */
+.container:not(:has(.error)) {
+  border-color: green;
+}
+
+/* Select fieldset that has required field */
+fieldset:has(input[required]) {
+  border-color: orange;
+}
+```
+
+### Real-World Example: Form Validation Styling
+
+```css
+/* Style form based on validation state */
+form:has(input:invalid) {
+  border: 2px solid red;
+}
+
+form:has(input:valid) {
+  border: 2px solid green;
+}
+
+/* Show error message container only when errors exist */
+.error-container:not(:has(.error-message)) {
+  display: none;
+}
+
+/* Highlight fieldset with errors */
+fieldset:has(input:invalid) {
+  background-color: #fff5f5;
+}
+```
+
+### Combining with Other Selectors
+
+```css
+/* Select card that has both image and button */
+.card:has(img):has(button) {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Select parent of focused input */
+.form-group:has(input:focus) {
+  background-color: #f0f9ff;
+}
+
+/* Select table row that has selected checkbox */
+tr:has(input[type="checkbox"]:checked) {
+  background-color: #e0f2fe;
+}
+```
+
+**Browser Support**: Chrome 105+, Firefox 121+, Safari 15.4+
+
+---
+
+## 🎨 CSS Nesting
+
+Native CSS nesting allows you to write cleaner, more maintainable stylesheets without preprocessors. It's now supported natively in modern browsers!
+
+### Basic Nesting
+
+```css
+/* ✅ Native CSS nesting */
+.card {
+  padding: 1rem;
+  background: white;
+  
+  /* Nested selector */
+  .title {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .content {
+    margin-top: 1rem;
+  }
+  
+  /* Pseudo-classes */
+  &:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Media queries */
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
+}
+```
+
+### Advanced Nesting Patterns
+
+```css
+/* Nested media queries */
+.button {
+  padding: 0.5rem 1rem;
+  background: blue;
+  
+  @media (min-width: 768px) {
+    padding: 0.75rem 1.5rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1rem 2rem;
+  }
+}
+
+/* Nested pseudo-elements */
+.card {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+/* Multiple levels of nesting */
+.nav {
+  display: flex;
+  
+  .nav-item {
+    padding: 1rem;
+    
+    .nav-link {
+      color: blue;
+      
+      &:hover {
+        color: darkblue;
+      }
+    }
+  }
+}
+```
+
+### Combining with Container Queries
+
+```css
+.card-container {
+  container-type: inline-size;
+}
+
+.card {
+  padding: 1rem;
+  
+  @container (min-width: 400px) {
+    padding: 1.5rem;
+    
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @container (min-width: 600px) {
+    padding: 2rem;
+    
+    .title {
+      font-size: 2rem;
+    }
+  }
+}
+```
+
+**Browser Support**: Chrome 112+, Firefox 117+, Safari 16.5+
+
+---
+
+## 🔲 CSS Subgrid
+
+Subgrid allows grid items to participate in their parent grid's layout, enabling more flexible and powerful grid designs.
+
+### The Problem
+
+```css
+/* ❌ Without subgrid: Grid items can't align with parent */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  display: grid;
+  grid-template-columns: subgrid; /* Not aligned with parent */
+}
+```
+
+### The Solution: Subgrid
+
+```css
+/* ✅ Define parent grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* Child inherits parent's grid */
+.grid-item {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: span 3; /* Spans 3 columns of parent */
+}
+
+/* Now nested items align with parent grid! */
+.grid-item > * {
+  /* These align with parent's columns */
+}
+```
+
+### Real-World Example: Card Grid with Aligned Content
+
+```css
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: subgrid;
+  grid-column: span 1;
+  
+  .card-image {
+    grid-row: 1;
+  }
+  
+  .card-content {
+    grid-row: 2;
+  }
+  
+  .card-footer {
+    grid-row: 3;
+  }
+}
+
+/* All card images align horizontally across cards! */
+```
+
+### Subgrid with Named Lines
+
+```css
+.page-layout {
+  display: grid;
+  grid-template-columns: [sidebar-start] 250px [sidebar-end main-start] 1fr [main-end];
+  grid-template-rows: [header] auto [content] 1fr [footer] auto;
+}
+
+.sidebar {
+  grid-column: sidebar;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.main-content {
+  grid-column: main;
+  display: grid;
+  grid-template-columns: subgrid;
+}
+```
+
+**Browser Support**: Chrome 117+, Firefox 71+, Safari 16.0+
+
+---
+
+## 📚 Cascade Layers (@layer)
+
+Cascade Layers allow you to organize CSS into layers with defined precedence, reducing specificity conflicts and making stylesheets more maintainable.
+
+### Basic Layers
+
+```css
+/* Define layer order */
+@layer reset, base, components, utilities;
+
+/* Reset layer (lowest priority) */
+@layer reset {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Base layer */
+@layer base {
+  body {
+    font-family: Arial, sans-serif;
+  }
+}
+
+/* Components layer */
+@layer components {
+  .button {
+    padding: 0.5rem 1rem;
+    background-color: blue;
+  }
+}
+
+/* Utilities layer (highest priority) */
+@layer utilities {
+  .text-center {
+    text-align: center;
+  }
+}
+```
+
+### Layer Order Matters
+
+```css
+/* Later layers win, regardless of specificity */
+@layer first, second, third;
+
+@layer third {
+  .element {
+    color: red; /* This wins */
+  }
+}
+
+@layer first {
+  .element {
+    color: blue; /* Lower priority */
+  }
+}
+```
+
+### Nested Layers
+
+```css
+@layer framework {
+  @layer reset {
+    * {
+      margin: 0;
+    }
+  }
+  
+  @layer base {
+    body {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Reference nested layer */
+@layer framework.reset {
+  html {
+    box-sizing: border-box;
+  }
+}
+```
+
+### Import into Layers
+
+```css
+@import url('reset.css') layer(reset);
+@import url('components.css') layer(components);
+```
+
+### Real-World Example: Organizing Styles
+
+```css
+/* Define architecture */
+@layer reset, base, components, utilities, overrides;
+
+/* Reset */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Base styles */
+@layer base {
+  body {
+    font-family: system-ui, sans-serif;
+    line-height: 1.5;
+  }
+}
+
+/* Components */
+@layer components {
+  .card {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .mt-4 {
+    margin-top: 1rem;
+  }
+}
+
+/* Overrides (highest priority) */
+@layer overrides {
+  .special-card {
+    /* Can override anything */
+  }
+}
+```
+
+**Browser Support**: Chrome 99+, Firefox 97+, Safari 15.4+
+
+---
+
+## 🎯 The @scope Rule
+
+The `@scope` rule confines CSS rules to a specific section of the DOM, preventing style leakage and enabling better component encapsulation.
+
+### Basic Scoping
+
+```css
+/* Scope styles to specific section */
+@scope (.card) {
+  .title {
+    font-size: 1.5rem;
+    /* Only affects .title inside .card */
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+}
+
+/* Title outside card is not affected */
+.title {
+  font-size: 2rem; /* Different style */
+}
+```
+
+### Scope with Limits
+
+```css
+/* Scope with upper limit */
+@scope (.card) to (.footer) {
+  .content {
+    /* Only affects .content inside .card, but stops at .footer */
+  }
+}
+
+/* Example HTML:
+ * <div class="card">
+ *   <div class="content">Affected</div>
+ *   <div class="footer">
+ *     <div class="content">Not affected</div>
+ *   </div>
+ * </div>
+ */
+```
+
+### Real-World Example: Component Scoping
+
+```css
+/* Scope component styles */
+@scope (.modal) {
+  .header {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .body {
+    padding: 1.5rem;
+  }
+  
+  .footer {
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+/* Styles don't leak to other components */
+```
+
+**Browser Support**: Chrome 118+, Firefox (in development), Safari (in development)
+
+---
+
+## 🎨 Modern Color Functions
+
+Modern CSS introduces powerful new color functions that provide better color manipulation and more perceptually uniform color spaces.
+
+### color-mix()
+
+```css
+/* Mix two colors */
+.button {
+  background-color: color-mix(in srgb, blue 50%, red);
+  /* 50% blue + 50% red */
+}
+
+/* Mix with percentages */
+.card {
+  background-color: color-mix(in srgb, white 80%, blue);
+  /* 80% white + 20% blue = light blue */
+}
+
+/* Mix in different color spaces */
+.element {
+  background: color-mix(in oklch, red 30%, blue);
+  /* Better perceptual mixing */
+}
+```
+
+### oklch() - Perceptually Uniform Colors
+
+```css
+/* OKLCH: Better color manipulation */
+.button {
+  /* L = Lightness (0-1), C = Chroma, H = Hue */
+  background-color: oklch(0.7 0.15 250);
+  /* Lightness 70%, Chroma 0.15, Hue 250° */
+}
+
+/* Easy to adjust lightness */
+.button:hover {
+  background-color: oklch(0.8 0.15 250); /* Lighter */
+}
+
+.button:active {
+  background-color: oklch(0.6 0.15 250); /* Darker */
+}
+```
+
+### lab() - CIELAB Color Space
+
+```css
+/* LAB: Device-independent color */
+.element {
+  /* L = Lightness, a = green-red, b = blue-yellow */
+  color: lab(70% 20 -30);
+}
+```
+
+### Relative Color Syntax
+
+```css
+/* Create variations from a base color */
+:root {
+  --primary: #007bff;
+}
+
+.button {
+  /* Make primary color lighter */
+  background-color: oklch(from var(--primary) l c h / 0.9);
+  
+  /* Make primary color more saturated */
+  background-color: oklch(from var(--primary) l calc(c * 1.2) h);
+}
+```
+
+**Browser Support**: 
+- `color-mix()`: Chrome 111+, Firefox 113+, Safari 16.2+
+- `oklch()`: Chrome 111+, Firefox 113+, Safari 15.4+
+- `lab()`: Chrome 111+, Firefox 113+, Safari 15.4+
+
+---
+
+## ✨ View Transitions API
+
+The View Transitions API enables smooth transitions between page states, creating native-like app experiences.
+
+### Basic Page Transitions
+
+```css
+/* Enable view transitions */
+@view-transition {
+  navigation: auto;
+}
+
+/* Or in JavaScript */
+document.startViewTransition(() => {
+  // Update DOM
+});
+```
+
+### Named Transitions
+
+```css
+/* Define transition for specific element */
+::view-transition-old(root) {
+  animation: fade-out 0.3s;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.3s;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+```
+
+### Element-Specific Transitions
+
+```css
+/* Transition specific elements */
+.header {
+  view-transition-name: header;
+}
+
+.content {
+  view-transition-name: content;
+}
+
+/* Style the transition */
+::view-transition-old(header),
+::view-transition-new(header) {
+  animation-duration: 0.5s;
+}
+```
+
+### JavaScript Integration
+
+```javascript
+// Smooth page transitions
+function navigate(url) {
+  document.startViewTransition(() => {
+    // Update content
+    document.querySelector('.content').innerHTML = newContent;
+  });
+}
+
+// Element transitions
+function updateCard(card, newContent) {
+  card.style.viewTransitionName = 'card';
+  
+  document.startViewTransition(() => {
+    card.innerHTML = newContent;
+    card.style.viewTransitionName = '';
+  });
+}
+```
+
+**Browser Support**: Chrome 111+, Firefox (in development), Safari (in development)
+
+---
+
+## 📝 Modern Typography
+
+Modern CSS introduces new typography features for better text layout and control.
+
+### text-wrap
+
+```css
+/* Control text wrapping */
+.heading {
+  text-wrap: balance;
+  /* Balances lines for better readability */
+}
+
+.paragraph {
+  text-wrap: pretty;
+  /* Prevents orphans and widows */
+}
+
+.code {
+  text-wrap: nowrap;
+  /* Prevents wrapping */
+}
+```
+
+### text-box-trim
+
+```css
+/* Trim leading/trailing whitespace */
+.heading {
+  text-box-trim: trim-both;
+  /* Removes extra space above and below */
+}
+
+/* Options:
+ * trim-start: Remove leading space
+ * trim-end: Remove trailing space
+ * trim-both: Remove both
+ */
+```
+
+**Browser Support**: 
+- `text-wrap`: Chrome 114+, Firefox (in development), Safari (in development)
+- `text-box-trim`: Chrome 118+, Firefox (in development), Safari (in development)
+
+---
+
+## 🔧 The @property Rule
+
+The `@property` rule allows you to define custom CSS properties with types, enabling better animations and transitions.
+
+### Defining Custom Properties
+
+```css
+@property --gradient-position {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+.element {
+  background: linear-gradient(
+    90deg,
+    blue var(--gradient-position),
+    red var(--gradient-position)
+  );
+  animation: gradient-shift 3s infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    --gradient-position: 0%;
+  }
+  100% {
+    --gradient-position: 100%;
+  }
+}
+```
+
+### Type-Safe Custom Properties
+
+```css
+@property --rotation {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.element {
+  transform: rotate(var(--rotation));
+  transition: --rotation 0.3s;
+}
+
+.element:hover {
+  --rotation: 45deg;
+}
+```
+
+**Browser Support**: Chrome 85+, Firefox 72+, Safari 16.4+
+
+---
+
+## ✅ Best Practices
+
+### 1. Use Container Queries for Components
+
+```css
+/* ✅ Good: Component-based responsive design */
+.card-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    /* Component adapts to its container */
+  }
+}
+
+/* ❌ Avoid: Viewport-based for components */
+@media (min-width: 768px) {
+  .card {
+    /* Breaks in narrow containers */
+  }
+}
+```
+
+### 2. Combine Features for Powerful Patterns
+
+```css
+/* Combine nesting, container queries, and :has() */
+.card-container {
+  container-type: inline-size;
+}
+
+.card {
+  padding: 1rem;
+  
+  &:has(img) {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @container (min-width: 400px) {
+    &:has(img) {
+      flex-direction: row;
+    }
+  }
+}
+```
+
+### 3. Organize with Cascade Layers
+
+```css
+/* ✅ Good: Organized architecture */
+@layer reset, base, components, utilities;
+
+@layer components {
+  .card {
+    /* Component styles */
+  }
+}
+
+/* ❌ Avoid: Everything in one layer */
+.card {
+  /* Mixed concerns */
+}
+```
+
+### 4. Use Modern Color Functions
+
+```css
+/* ✅ Good: Perceptually uniform colors */
+.button {
+  background: oklch(0.7 0.15 250);
+}
+
+.button:hover {
+  background: oklch(0.8 0.15 250); /* Easy to lighten */
+}
+
+/* ❌ Avoid: Hard to manipulate */
+.button {
+  background: #4a90e2;
+}
+
+.button:hover {
+  background: #6ba3e8; /* Manual calculation */
+}
+```
+
+### 5. Progressive Enhancement
+
+```css
+/* Provide fallbacks for modern features */
+.card {
+  /* Fallback */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modern enhancement */
+@container (min-width: 400px) {
+  .card {
+    flex-direction: row;
+  }
+}
+```
+
+---
+
+## 🌐 Browser Support
+
+| Feature | Chrome | Firefox | Safari | Status |
+|---------|--------|---------|--------|--------|
+| Container Queries | 105+ | 110+ | 16.0+ | ✅ Stable |
+| `:has()` Selector | 105+ | 121+ | 15.4+ | ✅ Stable |
+| CSS Nesting | 112+ | 117+ | 16.5+ | ✅ Stable |
+| Subgrid | 117+ | 71+ | 16.0+ | ✅ Stable |
+| Cascade Layers | 99+ | 97+ | 15.4+ | ✅ Stable |
+| `@scope` | 118+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
+| `color-mix()` | 111+ | 113+ | 16.2+ | ✅ Stable |
+| `oklch()` | 111+ | 113+ | 15.4+ | ✅ Stable |
+| View Transitions | 111+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
+| `text-wrap` | 114+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
+| `@property` | 85+ | 72+ | 16.4+ | ✅ Stable |
+
+**Legend**: ✅ Stable | 🚧 In Progress | 🔄 Dev (Development)
+
+---
+
+## 🎯 Conclusion
+
+Modern CSS features are transforming how we build web interfaces:
+
+- **Container Queries**: Component-based responsive design
+- **`:has()` Selector**: Parent-based styling patterns
+- **CSS Nesting**: Cleaner, more maintainable stylesheets
+- **Subgrid**: Aligned grid layouts
+- **Cascade Layers**: Organized, conflict-free styles
+- **Modern Colors**: Better color manipulation
+- **View Transitions**: Smooth state changes
+
+### Key Takeaways
+
+1. Use Container Queries for component responsiveness
+2. Leverage `:has()` for parent-based styling
+3. Organize styles with Cascade Layers
+4. Use modern color functions for better manipulation
+5. Provide fallbacks for progressive enhancement
+
+These features make CSS more powerful and your code more maintainable. Start incorporating them into your projects today!
+
+---
+
+## 📚 Further Reading
+
+- [MDN CSS Documentation](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Can I Use](https://caniuse.com/) - Browser support checker
+- [CSS-Tricks](https://css-tricks.com/) - CSS tutorials and guides
+- [Web.dev CSS](https://web.dev/learn/css/) - Modern CSS learning resources
+
+---
+
+**Happy styling with modern CSS! 🎨**
+
