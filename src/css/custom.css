@@ -87,12 +87,135 @@
   background-color: var(--ifm-navbar-link-hover-color);
 }
 
+/* ============================================
+   RESPONSIVE NAVBAR STYLES
+   ============================================ */
+
+/* Mobile Devices (up to 767px) */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navbar__title {
+    font-size: 1.25rem;
+  }
+
+  .navbar__logo {
+    height: 32px;
+    width: 32px;
+  }
+
+  .navbar__item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet and iPad Portrait Mode (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+    min-height: 64px;
+  }
+
+  /* Ensure brand has enough space and doesn't truncate */
+  .navbar__brand {
+    flex-shrink: 0;
+    margin-right: 1rem;
+    min-width: auto;
+  }
+
+  .navbar__title {
+    font-size: 1.375rem;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none;
+  }
+
+  .navbar__logo {
+    height: 36px;
+    width: 36px;
+    flex-shrink: 0;
+  }
+
+  /* Reduce navbar item padding to create more space */
+  .navbar__item {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  /* Ensure navbar items container doesn't push brand out */
+  .navbar__items--left {
+    flex-wrap: nowrap;
+    overflow: visible;
+    gap: 0.25rem;
+  }
+
+  /* Reduce spacing between items on iPad */
+  .navbar__items {
+    gap: 0.25rem;
+  }
+
+  /* Make sure GitHub link doesn't take too much space */
+  .header-github-link {
+    width: 36px;
+    height: 36px;
+    padding: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .header-github-link::before {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* iPad Portrait Specific (768px - 834px) - iPad Air M2 portrait is typically 820px */
+@media (min-width: 768px) and (max-width: 834px) and (orientation: portrait) {
+  .navbar {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .navbar__title {
+    font-size: 1.3rem;
+    letter-spacing: 0.3px;
+  }
+
+  .navbar__logo {
+    height: 34px;
+    width: 34px;
+  }
+
+  /* Further reduce item padding for portrait mode */
+  .navbar__item {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.9rem;
+  }
+
+  .navbar__items--left {
+    gap: 0.125rem;
+  }
+}
+
+/* Desktop (997px and above) */
 @media (min-width: 997px) {
   .navbar {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: background 0.3s ease;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.75rem 1.5rem;
+  }
+
+  .navbar__title {
+    font-size: 1.5rem;
+  }
+
+  .navbar__items--left {
+    gap: 0.5rem;
   }
 }
 
@@ -104,6 +227,44 @@
   font-weight: 800;
   font-size: 1.5rem;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Navbar Brand - Ensure full title visibility */
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  min-width: fit-content;
+  max-width: none;
+}
+
+.navbar__brand .navbar__title {
+  flex-shrink: 0;
+  max-width: none;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Navbar Container - Prevent truncation */
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.navbar__inner > .navbar__brand {
+  flex: 0 0 auto;
+}
+
+.navbar__inner > .navbar__items {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .navbar__item {
