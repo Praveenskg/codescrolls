@@ -2,13 +2,23 @@
 id: advanced-types
 title: Advanced Types in TypeScript
 sidebar_position: 7
-description: Master advanced TypeScript types including mapped types, conditional types, template literal types, and advanced type manipulation.
-keywords: [typescript advanced types, mapped types, conditional types, template literal types, typescript type manipulation]
+description:
+  Master advanced TypeScript types including mapped types, conditional types,
+  template literal types, and advanced type manipulation.
+keywords:
+  [
+    typescript advanced types,
+    mapped types,
+    conditional types,
+    template literal types,
+    typescript type manipulation,
+  ]
 ---
 
 # Advanced Types in TypeScript
 
-Master **advanced type patterns** in TypeScript including mapped types, conditional types, template literals, and complex type transformations.
+Master **advanced type patterns** in TypeScript including mapped types,
+conditional types, template literals, and complex type transformations.
 
 ---
 
@@ -75,23 +85,27 @@ type Required<T> = {
 ```typescript
 type IsString<T> = T extends string ? true : false;
 
-type A = IsString<string>;  // true
-type B = IsString<number>;  // false
+type A = IsString<string>; // true
+type B = IsString<number>; // false
 ```
 
 ### Nested Conditional Types
 
 ```typescript
-type TypeName<T> =
-  T extends string ? "string" :
-  T extends number ? "number" :
-  T extends boolean ? "boolean" :
-  T extends undefined ? "undefined" :
-  T extends Function ? "function" :
-  "object";
+type TypeName<T> = T extends string
+  ? 'string'
+  : T extends number
+    ? 'number'
+    : T extends boolean
+      ? 'boolean'
+      : T extends undefined
+        ? 'undefined'
+        : T extends Function
+          ? 'function'
+          : 'object';
 
-type T1 = TypeName<string>;    // "string"
-type T2 = TypeName<number>;    // "number"
+type T1 = TypeName<string>; // "string"
+type T2 = TypeName<number>; // "number"
 type T3 = TypeName<() => void>; // "function"
 ```
 
@@ -111,7 +125,7 @@ type StrOrNumArray = ToArray<string | number>;
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 
 function getUser() {
-  return { id: 1, name: "John" };
+  return { id: 1, name: 'John' };
 }
 
 type User = ReturnType<typeof getUser>;
@@ -139,15 +153,15 @@ type SyncString = UnwrapPromise<AsyncString>; // string
 ```typescript
 type Greeting = `Hello ${string}`;
 
-const greeting1: Greeting = "Hello World"; // OK
-const greeting2: Greeting = "Hi World";    // Error
+const greeting1: Greeting = 'Hello World'; // OK
+const greeting2: Greeting = 'Hi World'; // Error
 ```
 
 ### Union in Template Literals
 
 ```typescript
-type Color = "red" | "blue" | "green";
-type Quantity = "one" | "two";
+type Color = 'red' | 'blue' | 'green';
+type Quantity = 'one' | 'two';
 
 type ColoredQuantity = `${Quantity} ${Color}`;
 // "one red" | "one blue" | "one green" | "two red" | "two blue" | "two green"
@@ -161,16 +175,16 @@ type Lowercase<S extends string> = intrinsic;
 type Capitalize<S extends string> = intrinsic;
 type Uncapitalize<S extends string> = intrinsic;
 
-type Loud = Uppercase<"hello">;        // "HELLO"
-type Quiet = Lowercase<"HELLO">;       // "hello"
-type Proper = Capitalize<"hello">;     // "Hello"
-type Casual = Uncapitalize<"Hello">;   // "hello"
+type Loud = Uppercase<'hello'>; // "HELLO"
+type Quiet = Lowercase<'HELLO'>; // "hello"
+type Proper = Capitalize<'hello'>; // "Hello"
+type Casual = Uncapitalize<'Hello'>; // "hello"
 ```
 
 ### Event Names
 
 ```typescript
-type EventName = "click" | "focus" | "blur";
+type EventName = 'click' | 'focus' | 'blur';
 type HandlerName = `on${Capitalize<EventName>}`;
 // "onClick" | "onFocus" | "onBlur"
 
@@ -184,8 +198,8 @@ interface Events {
 ### CSS Properties
 
 ```typescript
-type CSSProperty = "margin" | "padding";
-type Side = "top" | "right" | "bottom" | "left";
+type CSSProperty = 'margin' | 'padding';
+type Side = 'top' | 'right' | 'bottom' | 'left';
 
 type CSSPropertyWithSide = `${CSSProperty}-${Side}`;
 // "margin-top" | "margin-right" | ... | "padding-left"
@@ -202,20 +216,20 @@ interface User {
   email: string;
 }
 
-type UserId = User["id"];        // number
-type UserName = User["name"];    // string
-type UserKeys = User["id" | "name"]; // number | string
+type UserId = User['id']; // number
+type UserName = User['name']; // string
+type UserKeys = User['id' | 'name']; // number | string
 ```
 
 ### With Arrays
 
 ```typescript
 const users = [
-  { id: 1, name: "John" },
-  { id: 2, name: "Jane" }
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' },
 ];
 
-type User = typeof users[number];
+type User = (typeof users)[number];
 // { id: number; name: string }
 ```
 
@@ -235,13 +249,13 @@ type JSONValue =
   | { [key: string]: JSONValue };
 
 const data: JSONValue = {
-  name: "John",
+  name: 'John',
   age: 30,
-  hobbies: ["reading", "coding"],
+  hobbies: ['reading', 'coding'],
   address: {
-    city: "NYC",
-    zip: 10001
-  }
+    city: 'NYC',
+    zip: 10001,
+  },
 };
 ```
 
@@ -259,12 +273,9 @@ const tree: TreeNode<number> = {
     { value: 2 },
     {
       value: 3,
-      children: [
-        { value: 4 },
-        { value: 5 }
-      ]
-    }
-  ]
+      children: [{ value: 4 }, { value: 5 }],
+    },
+  ],
 };
 ```
 
@@ -300,12 +311,12 @@ function makeSound(animal: Dog | Cat) {
 
 ```typescript
 interface Square {
-  kind: "square";
+  kind: 'square';
   size: number;
 }
 
 interface Rectangle {
-  kind: "rectangle";
+  kind: 'rectangle';
   width: number;
   height: number;
 }
@@ -313,7 +324,7 @@ interface Rectangle {
 type Shape = Square | Rectangle;
 
 function area(shape: Shape): number {
-  if ("size" in shape) {
+  if ('size' in shape) {
     return shape.size * shape.size;
   } else {
     return shape.width * shape.height;
@@ -327,31 +338,31 @@ function area(shape: Shape): number {
 
 ```typescript
 interface Success {
-  type: "success";
+  type: 'success';
   data: string;
 }
 
 interface Error {
-  type: "error";
+  type: 'error';
   error: string;
 }
 
 interface Loading {
-  type: "loading";
+  type: 'loading';
 }
 
 type State = Success | Error | Loading;
 
 function handleState(state: State) {
   switch (state.type) {
-    case "success":
+    case 'success':
       console.log(state.data); // TypeScript knows state.data exists
       break;
-    case "error":
+    case 'error':
       console.log(state.error); // TypeScript knows state.error exists
       break;
-    case "loading":
-      console.log("Loading..."); // No data or error
+    case 'loading':
+      console.log('Loading...'); // No data or error
       break;
   }
 }
@@ -380,9 +391,9 @@ interface Config {
 
 const partialConfig: DeepPartial<Config> = {
   server: {
-    host: "localhost"
+    host: 'localhost',
     // port is optional
-  }
+  },
   // database is optional
 };
 ```
@@ -402,8 +413,8 @@ interface User {
 }
 
 const user: DeepReadonly<User> = {
-  name: "John",
-  address: { city: "NYC" }
+  name: 'John',
+  address: { city: 'NYC' },
 };
 
 // user.name = "Jane"; // Error
@@ -415,8 +426,8 @@ const user: DeepReadonly<User> = {
 ```typescript
 type Flatten<T> = T extends Array<infer U> ? U : T;
 
-type Str = Flatten<string[]>;     // string
-type Num = Flatten<number>;       // number
+type Str = Flatten<string[]>; // string
+type Num = Flatten<number>; // number
 type Nested = Flatten<string[][]>; // string[]
 ```
 
@@ -437,17 +448,17 @@ type SyncNumber = PromiseType<AsyncNumber>; // number
 
 ```typescript
 type ApiResponse<T> =
-  | { status: "success"; data: T }
-  | { status: "error"; error: string }
-  | { status: "loading" };
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: string }
+  | { status: 'loading' };
 
 function handleResponse<T>(response: ApiResponse<T>) {
   switch (response.status) {
-    case "success":
+    case 'success':
       return response.data;
-    case "error":
+    case 'error':
       throw new Error(response.error);
-    case "loading":
+    case 'loading':
       return null;
   }
 }
@@ -466,12 +477,12 @@ interface LoginForm {
 }
 
 const rules: ValidationRule<LoginForm> = {
-  email: (value) => {
-    return value.includes("@") ? null : "Invalid email";
+  email: value => {
+    return value.includes('@') ? null : 'Invalid email';
   },
-  password: (value) => {
-    return value.length >= 8 ? null : "Password too short";
-  }
+  password: value => {
+    return value.length >= 8 ? null : 'Password too short';
+  },
 };
 ```
 
@@ -506,11 +517,11 @@ class EventEmitter<T extends EventMap> {
 // Usage
 const emitter = new EventEmitter<EventMap>();
 
-emitter.on("click", (data) => {
+emitter.on('click', data => {
   console.log(data.x, data.y); // TypeScript knows data has x and y
 });
 
-emitter.emit("click", { x: 10, y: 20 });
+emitter.emit('click', { x: 10, y: 20 });
 ```
 
 ---
@@ -522,13 +533,13 @@ emitter.emit("click", { x: 10, y: 20 });
 ```typescript
 // Good
 type State =
-  | { status: "idle" }
-  | { status: "loading" }
-  | { status: "success"; data: string };
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: string };
 
 // Bad
 interface State {
-  status: "idle" | "loading" | "success";
+  status: 'idle' | 'loading' | 'success';
   data?: string;
 }
 ```
@@ -538,7 +549,7 @@ interface State {
 ```typescript
 // Good
 function isDog(animal: Animal): animal is Dog {
-  return "bark" in animal;
+  return 'bark' in animal;
 }
 
 // Bad
@@ -569,14 +580,14 @@ Ensures a value matches a type without changing the inferred type.
 // Problem: Type assertion loses literal types
 const colors = {
   primary: '#ff0000',
-  secondary: '#00ff00'
+  secondary: '#00ff00',
 } as const;
 // Type is too narrow: { readonly primary: "#ff0000"; readonly secondary: "#00ff00" }
 
 // Solution: satisfies preserves types while checking
 const colors = {
   primary: '#ff0000',
-  secondary: '#00ff00'
+  secondary: '#00ff00',
 } satisfies Record<string, string>;
 // Type: { primary: "#ff0000"; secondary: "#00ff00" }
 // Still has literal types, but satisfies Record<string, string>
@@ -585,7 +596,7 @@ const colors = {
 const config = {
   apiUrl: 'https://api.example.com',
   timeout: 5000,
-  retries: 3
+  retries: 3,
 } satisfies {
   apiUrl: string;
   timeout: number;
@@ -629,6 +640,7 @@ const arr = getArray([1, 2, 3] as const);
 ```
 
 **Use Cases:**
+
 - Preserve literal types in generic functions
 - Better type inference for tuples
 - More precise return types
@@ -658,4 +670,4 @@ const arr = getArray([1, 2, 3] as const);
 
 ---
 
-**Master advanced types to unlock TypeScript's full potential!** 
+**Master advanced types to unlock TypeScript's full potential!**

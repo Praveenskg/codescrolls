@@ -2,8 +2,21 @@
 id: api
 title: API/REST Cheatsheet
 sidebar_label: API/REST CheatSheet
-description: Complete guide to REST APIs, HTTP methods, status codes, authentication, error handling, and API design best practices
-keywords: [api, rest, http, authentication, status codes, restful, api design, http methods, api testing]
+description:
+  Complete guide to REST APIs, HTTP methods, status codes, authentication, error
+  handling, and API design best practices
+keywords:
+  [
+    api,
+    rest,
+    http,
+    authentication,
+    status codes,
+    restful,
+    api design,
+    http methods,
+    api testing,
+  ]
 sidebar_position: 8
 ---
 
@@ -11,17 +24,19 @@ import LiveCodeBlock from '@theme/LiveCodeBlock';
 
 # 🔗 API/REST Cheatsheet
 
-A comprehensive quick reference guide for REST APIs, HTTP protocols, authentication, and API design best practices.
+A comprehensive quick reference guide for REST APIs, HTTP protocols,
+authentication, and API design best practices.
 
 ---
 
-:::info
-REST (Representational State Transfer) is the most common architectural style for building web APIs. This cheatsheet covers everything you need to design, consume, and test RESTful APIs.
-:::
+:::info REST (Representational State Transfer) is the most common architectural
+style for building web APIs. This cheatsheet covers everything you need to
+design, consume, and test RESTful APIs. :::
 
 ## 🌐 HTTP Methods
 
 ### **Core HTTP Methods**
+
 ```http
 GET     /users          # Retrieve data (safe, idempotent)
 POST    /users          # Create new resource (not idempotent)
@@ -33,21 +48,23 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ```
 
 ### **Method Properties**
-| Method | Safe | Idempotent | Cacheable |
-|--------|------|------------|-----------|
-| GET    | ✅   | ✅         | ✅        |
-| HEAD   | ✅   | ✅         | ✅        |
-| OPTIONS| ✅   | ✅         | ❌        |
-| PUT    | ❌   | ✅         | ❌        |
-| DELETE | ❌   | ✅         | ❌        |
-| POST   | ❌   | ❌         | ❌        |
-| PATCH  | ❌   | ❌         | ❌        |
+
+| Method  | Safe | Idempotent | Cacheable |
+| ------- | ---- | ---------- | --------- |
+| GET     | ✅   | ✅         | ✅        |
+| HEAD    | ✅   | ✅         | ✅        |
+| OPTIONS | ✅   | ✅         | ❌        |
+| PUT     | ❌   | ✅         | ❌        |
+| DELETE  | ❌   | ✅         | ❌        |
+| POST    | ❌   | ❌         | ❌        |
+| PATCH   | ❌   | ❌         | ❌        |
 
 ---
 
 ## 📊 HTTP Status Codes
 
 ### **1xx Informational**
+
 ```http
 100 Continue           # Client should continue request
 101 Switching Protocols # Server switching protocols
@@ -55,6 +72,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ```
 
 ### **2xx Success**
+
 ```http
 200 OK                 # Request successful
 201 Created           # Resource created successfully
@@ -69,6 +87,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ```
 
 ### **3xx Redirection**
+
 ```http
 300 Multiple Choices   # Multiple options available
 301 Moved Permanently  # Resource moved permanently
@@ -81,6 +100,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ```
 
 ### **4xx Client Errors**
+
 ```http
 400 Bad Request        # Invalid request syntax
 401 Unauthorized      # Authentication required
@@ -114,6 +134,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ```
 
 ### **5xx Server Errors**
+
 ```http
 500 Internal Server Error  # Unexpected server error
 501 Not Implemented       # Feature not implemented
@@ -133,6 +154,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 ## 🔐 Authentication Methods
 
 ### **API Key Authentication**
+
 ```http
 # Query Parameter
 GET /api/users?api_key=your_api_key_here
@@ -146,6 +168,7 @@ Authorization: Basic base64(api_key:)
 ```
 
 ### **Bearer Token (JWT)**
+
 ```http
 # Most common for modern APIs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -155,6 +178,7 @@ Authorization: Bearer abc123def456
 ```
 
 ### **Basic Authentication**
+
 ```http
 # Username:Password encoded in Base64
 Authorization: Basic dXNlcjpwYXNz
@@ -165,6 +189,7 @@ Authorization: Basic YWRtaW46c2VjcmV0
 ```
 
 ### **OAuth 2.0 Flow**
+
 ```http
 # 1. Authorization Request
 GET /oauth/authorize?response_type=code&client_id=123&redirect_uri=https://app.com/callback&scope=read+write
@@ -189,6 +214,7 @@ grant_type=authorization_code&code=abc123&redirect_uri=https://app.com/callback&
 ```
 
 ### **Digest Authentication**
+
 ```http
 # Challenge from server
 WWW-Authenticate: Digest realm="api@example.com", nonce="abc123", algorithm=MD5, qop="auth"
@@ -204,6 +230,7 @@ Authorization: Digest username="user", realm="api@example.com", nonce="abc123", 
 ### **RESTful Resource Naming**
 
 #### **Basic Resources**
+
 ```http
 GET    /users           # List users
 GET    /users/123       # Get specific user
@@ -214,6 +241,7 @@ DELETE /users/123       # Delete user
 ```
 
 #### **Nested Resources**
+
 ```http
 GET    /users/123/posts       # User's posts
 GET    /users/123/posts/456   # Specific post
@@ -223,6 +251,7 @@ DELETE /users/123/posts/456   # Delete user's post
 ```
 
 #### **Actions on Resources**
+
 ```http
 POST   /users/123/activate    # Action endpoints
 POST   /users/123/deactivate
@@ -234,6 +263,7 @@ PUT    /users/123/avatar
 ### **Query Parameters**
 
 #### **Pagination**
+
 ```http
 GET /users?page=1&limit=10&sort=name&order=asc
 GET /users?offset=20&limit=10
@@ -241,6 +271,7 @@ GET /users?cursor=eyJpZCI6MTIzfQ==&limit=10
 ```
 
 #### **Filtering**
+
 ```http
 GET /users?status=active
 GET /users?age[gte]=18&age[lte]=65
@@ -250,6 +281,7 @@ GET /posts?published=true&author=john&tags=javascript,react
 ```
 
 #### **Searching & Sorting**
+
 ```http
 GET /users?search=john&fields=name,email,role
 GET /products?q=laptop&sort=price&order=desc
@@ -257,6 +289,7 @@ GET /articles?tags=javascript&sort=published_at&order=desc
 ```
 
 #### **Field Selection**
+
 ```http
 GET /users?fields=id,name,email,created_at
 GET /users?include=posts,comments
@@ -266,6 +299,7 @@ GET /users?exclude=password,deleted_at
 ### **Content Negotiation**
 
 #### **Accept Header**
+
 ```http
 # Request specific format
 GET /users/123
@@ -279,6 +313,7 @@ Accept: text/csv
 ```
 
 #### **Content-Type Header**
+
 ```http
 # Specify request body format
 POST /users
@@ -295,6 +330,7 @@ Content-Type: application/json
 ## 📦 Request/Response Formats
 
 ### **JSON API Response Structure**
+
 ```json
 // Success Response
 {
@@ -326,6 +362,7 @@ Content-Type: application/json
 ```
 
 ### **List Response with Pagination**
+
 ```json
 {
   "success": true,
@@ -355,6 +392,7 @@ Content-Type: application/json
 ```
 
 ### **Error Response Formats**
+
 ```json
 // Simple error
 {
@@ -396,6 +434,7 @@ Content-Type: application/json
 ## 🧪 API Testing Tools
 
 ### **cURL Commands**
+
 ```bash
 # GET request
 curl -X GET "https://api.example.com/users" \
@@ -429,6 +468,7 @@ curl -v -X GET "https://api.example.com/users"
 ```
 
 ### **HTTPie Commands**
+
 ```bash
 # Simple GET
 http GET https://api.example.com/users
@@ -451,6 +491,7 @@ http --download GET https://api.example.com/files/document.pdf
 ```
 
 ### **Postman Collection Examples**
+
 ```json
 {
   "info": {
@@ -494,6 +535,7 @@ http --download GET https://api.example.com/files/document.pdf
 ## ⚡ Performance & Caching
 
 ### **HTTP Caching Headers**
+
 ```http
 # Cache-Control directives
 Cache-Control: no-cache              # Revalidate before using
@@ -512,6 +554,7 @@ If-Modified-Since: Wed, 21 Oct 2023 07:28:00 GMT
 ```
 
 ### **Rate Limiting Headers**
+
 ```http
 # Rate limit information
 X-RateLimit-Limit: 1000         # Max requests per hour
@@ -525,6 +568,7 @@ Retry-After: Wed, 21 Oct 2023 08:28:00 GMT  # Date
 ```
 
 ### **Compression**
+
 ```http
 # Request compression
 Accept-Encoding: gzip, deflate, br
@@ -542,6 +586,7 @@ Vary: Accept-Encoding
 ## 🛡️ Security Best Practices
 
 ### **HTTPS Always**
+
 ```http
 # Redirect HTTP to HTTPS
 HTTP/1.1 301 Moved Permanently
@@ -552,6 +597,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 ```
 
 ### **CORS Configuration**
+
 ```http
 # CORS headers
 Access-Control-Allow-Origin: https://yourapp.com
@@ -568,6 +614,7 @@ Access-Control-Request-Headers: X-Custom-Header
 ```
 
 ### **Input Validation**
+
 ```json
 // Whitelist validation
 {
@@ -586,6 +633,7 @@ Access-Control-Request-Headers: X-Custom-Header
 ```
 
 ### **API Keys Security**
+
 ```http
 # Never expose API keys in URLs
 ❌ GET /api/data?api_key=secret123
@@ -607,6 +655,7 @@ EXPIRY_DATE=2024-12-31
 ## 🔄 API Versioning
 
 ### **URL Versioning**
+
 ```http
 # Version in path
 GET /v1/users
@@ -618,6 +667,7 @@ GET https://v2.api.example.com/users
 ```
 
 ### **Header Versioning**
+
 ```http
 # Accept header
 GET /users
@@ -630,12 +680,14 @@ X-API-Version: 2023-01-01
 ```
 
 ### **Query Parameter Versioning**
+
 ```http
 GET /users?version=1
 GET /users?api_version=2.1
 ```
 
 ### **Content-Type Versioning**
+
 ```http
 # Media type versioning
 GET /users
@@ -650,6 +702,7 @@ Content-Type: application/vnd.company.api.v1+json
 ## 📚 Advanced API Patterns
 
 ### **GraphQL vs REST**
+
 ```graphql
 # GraphQL Query
 query GetUser($id: ID!) {
@@ -677,6 +730,7 @@ GET /comments/789/author
 ```
 
 ### **Webhooks**
+
 ```http
 # Webhook payload
 POST /webhooks/order-created
@@ -696,6 +750,7 @@ X-Webhook-Signature: sha256=abc123...
 ```
 
 ### **File Upload APIs**
+
 ```http
 # Single file upload
 POST /upload/avatar
@@ -731,6 +786,7 @@ Content-Type: multipart/form-data
 ## 🧪 Testing Strategies
 
 ### **API Testing Checklist**
+
 ```bash
 # Status Code Testing
 ✓ 200 OK for successful GET
@@ -755,6 +811,7 @@ Content-Type: multipart/form-data
 ```
 
 ### **Load Testing Commands**
+
 ```bash
 # Apache Bench (simple load testing)
 ab -n 1000 -c 10 https://api.example.com/users
@@ -767,6 +824,7 @@ curl -w "@curl-format.txt" -o /dev/null -s https://api.example.com/users
 ```
 
 ### **Monitoring & Observability**
+
 ```http
 # Health check endpoint
 GET /health
@@ -792,6 +850,7 @@ Content-Type: application/json
 ## 🎯 API Design Best Practices
 
 ### **RESTful Principles**
+
 ```http
 # 1. Use nouns for resources
 ✅ GET /users/123/posts
@@ -815,6 +874,7 @@ Content-Type: application/json
 ```
 
 ### **Error Handling**
+
 ```json
 // Consistent error format
 {
@@ -836,6 +896,7 @@ Content-Type: application/json
 ```
 
 ### **Documentation Standards**
+
 ```yaml
 # OpenAPI/Swagger specification
 openapi: 3.0.0
@@ -868,4 +929,5 @@ paths:
 
 ---
 
-**🎉 Master these API patterns and you'll build robust, scalable web services that developers love to use! 🚀**
+**🎉 Master these API patterns and you'll build robust, scalable web services
+that developers love to use! 🚀**

@@ -2,8 +2,11 @@
 id: sql
 title: SQL Cheatsheet
 sidebar_label: SQL CheatSheet
-description: Essential SQL commands, database design, queries, joins, and best practices for relational databases
-keywords: [sql, database, mysql, postgresql, queries, joins, ddl, dml, database design]
+description:
+  Essential SQL commands, database design, queries, joins, and best practices
+  for relational databases
+keywords:
+  [sql, database, mysql, postgresql, queries, joins, ddl, dml, database design]
 sidebar_position: 12
 ---
 
@@ -11,17 +14,19 @@ import LiveCodeBlock from '@theme/LiveCodeBlock';
 
 # 🗄️ SQL Cheatsheet
 
-A comprehensive quick reference guide for SQL queries, database design, and relational database management.
+A comprehensive quick reference guide for SQL queries, database design, and
+relational database management.
 
 ---
 
-:::info
-SQL (Structured Query Language) is the standard language for managing relational databases. This cheatsheet covers essential commands for MySQL, PostgreSQL, SQLite, and other SQL databases.
-:::
+:::info SQL (Structured Query Language) is the standard language for managing
+relational databases. This cheatsheet covers essential commands for MySQL,
+PostgreSQL, SQLite, and other SQL databases. :::
 
 ## 🏗️ Database Basics
 
 ### **Connecting to Database**
+
 ```bash
 # MySQL
 mysql -h hostname -u username -p database_name
@@ -34,6 +39,7 @@ sqlite3 database.db
 ```
 
 ### **Database Operations**
+
 ```sql
 -- Create database
 CREATE DATABASE mydatabase;
@@ -55,6 +61,7 @@ DROP DATABASE mydatabase;
 ## 📋 Data Definition Language (DDL)
 
 ### **Creating Tables**
+
 ```sql
 -- Basic table creation
 CREATE TABLE users (
@@ -83,6 +90,7 @@ CREATE TABLE orders (
 ```
 
 ### **Altering Tables**
+
 ```sql
 -- Add column
 ALTER TABLE users ADD COLUMN phone VARCHAR(20);
@@ -104,6 +112,7 @@ ALTER TABLE users ADD FOREIGN KEY (department_id) REFERENCES departments(id);
 ```
 
 ### **Dropping Tables**
+
 ```sql
 -- Drop table
 DROP TABLE users;
@@ -116,6 +125,7 @@ DROP TABLE users CASCADE;
 ```
 
 ### **Indexes**
+
 ```sql
 -- Create index
 CREATE INDEX idx_users_email ON users(email);
@@ -134,6 +144,7 @@ DROP INDEX idx_users_email;  -- PostgreSQL (different syntax might apply)
 ## 🔍 Data Query Language (DQL)
 
 ### **Basic SELECT Statements**
+
 ```sql
 -- Select all columns
 SELECT * FROM users;
@@ -152,6 +163,7 @@ SELECT name, age, age * 2 AS double_age FROM users;
 ```
 
 ### **WHERE Clause**
+
 ```sql
 -- Basic conditions
 SELECT * FROM users WHERE age > 18;
@@ -180,6 +192,7 @@ SELECT * FROM users WHERE phone IS NOT NULL;
 ```
 
 ### **ORDER BY Clause**
+
 ```sql
 -- Single column sorting
 SELECT * FROM users ORDER BY name ASC;
@@ -193,6 +206,7 @@ SELECT * FROM users ORDER BY LENGTH(name) DESC;
 ```
 
 ### **LIMIT and OFFSET**
+
 ```sql
 -- Limit results
 SELECT * FROM users LIMIT 10;
@@ -209,6 +223,7 @@ SELECT * FROM users ORDER BY score DESC LIMIT 5;
 ## 🔗 JOIN Operations
 
 ### **INNER JOIN**
+
 ```sql
 -- Basic inner join
 SELECT users.name, orders.total, orders.status
@@ -224,6 +239,7 @@ INNER JOIN products p ON oi.product_id = p.id;
 ```
 
 ### **LEFT JOIN (LEFT OUTER JOIN)**
+
 ```sql
 -- Users with their orders (including users with no orders)
 SELECT u.name, o.total, o.status
@@ -238,6 +254,7 @@ WHERE o.id IS NULL;
 ```
 
 ### **RIGHT JOIN (RIGHT OUTER JOIN)**
+
 ```sql
 -- All orders with user info (including orders with missing users)
 SELECT u.name, o.total
@@ -246,6 +263,7 @@ RIGHT JOIN orders o ON u.id = o.user_id;
 ```
 
 ### **FULL OUTER JOIN**
+
 ```sql
 -- All records from both tables
 SELECT u.name, o.total
@@ -254,6 +272,7 @@ FULL OUTER JOIN orders o ON u.id = o.user_id;
 ```
 
 ### **CROSS JOIN**
+
 ```sql
 -- Cartesian product (all combinations)
 SELECT u.name, p.name AS product_name
@@ -262,6 +281,7 @@ CROSS JOIN products p;
 ```
 
 ### **Self JOIN**
+
 ```sql
 -- Employees and their managers
 SELECT e.name AS employee, m.name AS manager
@@ -274,6 +294,7 @@ LEFT JOIN employees m ON e.manager_id = m.id;
 ## 📊 Aggregate Functions & GROUP BY
 
 ### **Aggregate Functions**
+
 ```sql
 -- COUNT
 SELECT COUNT(*) FROM users;                    -- Total users
@@ -298,6 +319,7 @@ SELECT VARIANCE(salary) AS salary_variance FROM employees;
 ```
 
 ### **GROUP BY Clause**
+
 ```sql
 -- Group by single column
 SELECT department, COUNT(*) AS employee_count
@@ -320,6 +342,7 @@ ORDER BY order_date DESC;
 ```
 
 ### **HAVING Clause**
+
 ```sql
 -- Filter groups
 SELECT department, COUNT(*) AS employee_count
@@ -342,6 +365,7 @@ HAVING SUM(total) > 1000 AND COUNT(*) >= 3;
 ## ✏️ Data Manipulation Language (DML)
 
 ### **INSERT Statements**
+
 ```sql
 -- Insert single row
 INSERT INTO users (name, email, age)
@@ -361,6 +385,7 @@ WHERE created_at > '2024-01-01';
 ```
 
 ### **UPDATE Statements**
+
 ```sql
 -- Update single column
 UPDATE users SET age = 31 WHERE id = 1;
@@ -382,6 +407,7 @@ WHERE id = (SELECT user_id FROM login_attempts ORDER BY created_at DESC LIMIT 1)
 ```
 
 ### **DELETE Statements**
+
 ```sql
 -- Delete specific records
 DELETE FROM users WHERE id = 1;
@@ -404,6 +430,7 @@ DELETE FROM users WHERE active = false;
 ## 🔧 Advanced SQL Features
 
 ### **Subqueries**
+
 ```sql
 -- Scalar subquery
 SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count
@@ -428,6 +455,7 @@ FROM users;
 ```
 
 ### **Common Table Expressions (CTEs)**
+
 ```sql
 -- Basic CTE
 WITH active_users AS (
@@ -453,6 +481,7 @@ SELECT * FROM employee_hierarchy ORDER BY level, name;
 ```
 
 ### **Window Functions**
+
 ```sql
 -- ROW_NUMBER
 SELECT name, salary,
@@ -481,6 +510,7 @@ FROM daily_sales;
 ## 🔐 Data Control Language (DCL)
 
 ### **User Management**
+
 ```sql
 -- Create user
 CREATE USER 'app_user'@'localhost' IDENTIFIED BY 'password';  -- MySQL
@@ -503,6 +533,7 @@ DROP USER app_user;
 ```
 
 ### **Transactions**
+
 ```sql
 -- Start transaction
 START TRANSACTION;  -- MySQL
@@ -529,6 +560,7 @@ ROLLBACK TO my_savepoint;
 ### **Normalization Examples**
 
 #### **First Normal Form (1NF)**
+
 ```sql
 -- ❌ Not normalized
 CREATE TABLE user_contacts (
@@ -552,6 +584,7 @@ CREATE TABLE user_emails (
 ```
 
 #### **Third Normal Form (3NF)**
+
 ```sql
 -- ❌ Not normalized
 CREATE TABLE orders (
@@ -591,6 +624,7 @@ CREATE TABLE orders (
 ## 🐛 Common SQL Problems & Solutions
 
 ### **Performance Issues**
+
 ```sql
 -- ❌ Slow query
 SELECT * FROM users WHERE UPPER(name) LIKE 'JOHN%';
@@ -612,6 +646,7 @@ CREATE INDEX idx_orders_customer_date ON orders(customer_id, created_at);
 ```
 
 ### **Data Integrity Issues**
+
 ```sql
 -- ❌ No foreign key constraints
 CREATE TABLE orders (
@@ -643,6 +678,7 @@ CREATE TABLE users (
 ## 🛠️ Database-Specific Syntax
 
 ### **MySQL Specific**
+
 ```sql
 -- Auto increment
 CREATE TABLE users (
@@ -659,6 +695,7 @@ SELECT * FROM users LIMIT 10 OFFSET 20;
 ```
 
 ### **PostgreSQL Specific**
+
 ```sql
 -- Serial auto increment
 CREATE TABLE users (
@@ -684,6 +721,7 @@ SELECT * FROM user_profiles WHERE profile_data->>'city' = 'New York';
 ```
 
 ### **SQLite Specific**
+
 ```sql
 -- Autoincrement
 CREATE TABLE users (
@@ -704,6 +742,7 @@ SELECT * FROM other.users;
 ## 📊 Useful SQL Queries
 
 ### **Analytics & Reporting**
+
 ```sql
 -- Monthly sales report
 SELECT
@@ -741,6 +780,7 @@ LIMIT 10;
 ```
 
 ### **Data Cleanup & Maintenance**
+
 ```sql
 -- Remove duplicates
 DELETE FROM users
@@ -768,14 +808,16 @@ WHERE p.last_activity > u.last_login;
 ## 🎯 Best Practices
 
 ### **Query Optimization**
+
 1. **Use EXPLAIN** to analyze query plans
 2. **Create appropriate indexes** for WHERE, JOIN, and ORDER BY clauses
-3. **Avoid SELECT *** in production
+3. **Avoid SELECT \*** in production
 4. **Use LIMIT** for large result sets
 5. **Prefer INNER JOIN** over complex subqueries when possible
 6. **Use UNION ALL** instead of UNION when duplicates aren't an issue
 
 ### **Database Design**
+
 1. **Normalize** your data (1NF, 2NF, 3NF)
 2. **Use appropriate data types** (don't use VARCHAR for dates)
 3. **Add constraints** (NOT NULL, UNIQUE, CHECK, FOREIGN KEY)
@@ -783,6 +825,7 @@ WHERE p.last_activity > u.last_login;
 5. **Plan for scalability** from the beginning
 
 ### **Security**
+
 1. **Use parameterized queries** to prevent SQL injection
 2. **Grant minimal permissions** to database users
 3. **Regular backups** and testing restore procedures
@@ -790,6 +833,7 @@ WHERE p.last_activity > u.last_login;
 5. **Monitor and audit** database activity
 
 ### **Maintenance**
+
 1. **Regular VACUUM** (PostgreSQL) or OPTIMIZE (MySQL)
 2. **Monitor slow queries** and optimize them
 3. **Update statistics** for query planners
@@ -797,4 +841,5 @@ WHERE p.last_activity > u.last_login;
 
 ---
 
-**🎉 Happy querying! Master these SQL fundamentals and you'll handle any database challenge!**
+**🎉 Happy querying! Master these SQL fundamentals and you'll handle any
+database challenge!**

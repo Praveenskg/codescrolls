@@ -1,7 +1,7 @@
 ---
-description: Master CSS interview questions from beginner to advanced
-  level. Covers selectors, flexbox, grid, animations, responsive design,
-  and more.
+description:
+  Master CSS interview questions from beginner to advanced level. Covers
+  selectors, flexbox, grid, animations, responsive design, and more.
 id: css
 keywords:
   [
@@ -16,23 +16,22 @@ title: CSS Interview Questions
 sidebar_position: 3
 ---
 
-#  CSS Interview Questions
+# CSS Interview Questions
 
 Welcome to the **CSS Interview Hub** 🚀\
-Here you'll find a collection of **50 essential CSS interview
-questions** covering basic, intermediate, and advanced levels with
-examples.
+Here you'll find a collection of **50 essential CSS interview questions**
+covering basic, intermediate, and advanced levels with examples.
 
-------------------------------------------------------------------------
+---
 
 ## 🟢 Basic Level
 
 ### 1. What is CSS?
 
-CSS (Cascading Style Sheets) is used to style HTML elements (colors,
-fonts, layout).
+CSS (Cascading Style Sheets) is used to style HTML elements (colors, fonts,
+layout).
 
-``` css
+```css
 p {
   color: blue;
   font-size: 16px;
@@ -41,90 +40,110 @@ p {
 
 ### 2. Difference between inline, internal, and external CSS?
 
--   Inline: `style` attribute.\
--   Internal: `<style>` in `<head>`.\
--   External: Linked stylesheet.
+- Inline: `style` attribute.\
+- Internal: `<style>` in `<head>`.\
+- External: Linked stylesheet.
 
-``` html
+```html
 <p style="color:red;">Inline</p>
-<style>p { color: blue; }</style>
-<link rel="stylesheet" href="style.css">
+<style>
+  p {
+    color: blue;
+  }
+</style>
+<link rel="stylesheet" href="style.css" />
 ```
 
 ### 3. What are CSS selectors?
 
 Selectors target elements for styling:\
+
 - Universal `*`\
 - Element `p`\
 - Class `.class`\
 - ID `#id`
 
-``` css
-* { margin: 0; }
-#id { color: red; }
-.class { color: blue; }
+```css
+* {
+  margin: 0;
+}
+#id {
+  color: red;
+}
+.class {
+  color: blue;
+}
 ```
 
 ### 4. Difference between relative, absolute, and fixed units?
 
--   Relative: `%`, `em`, `rem`.\
--   Absolute: `px`, `cm`.\
--   Fixed: `vh`, `vw`.
+- Relative: `%`, `em`, `rem`.\
+- Absolute: `px`, `cm`.\
+- Fixed: `vh`, `vw`.
 
 ### 5. What is the difference between `relative`, `absolute`, `fixed`, and `sticky` positioning?
 
--   Relative: Moves relative to itself.\
--   Absolute: Positioned relative to parent.\
--   Fixed: Stays in viewport.\
--   Sticky: Switches between relative and fixed.
+- Relative: Moves relative to itself.\
+- Absolute: Positioned relative to parent.\
+- Fixed: Stays in viewport.\
+- Sticky: Switches between relative and fixed.
 
-``` css
-div { position: sticky; top: 0; }
+```css
+div {
+  position: sticky;
+  top: 0;
+}
 ```
 
 ### 6. What is the difference between inline, block, and inline-block elements?
 
--   Block: Full width (`div`, `p`).\
--   Inline: No width/height (`span`).\
--   Inline-block: Inline + supports width/height.
+- Block: Full width (`div`, `p`).\
+- Inline: No width/height (`span`).\
+- Inline-block: Inline + supports width/height.
 
 ### 7. What is the difference between `em` and `rem` units?
 
--   `em`: Relative to parent font-size.\
--   `rem`: Relative to root (`html`) font-size.
+- `em`: Relative to parent font-size.\
+- `rem`: Relative to root (`html`) font-size.
 
 ### 8. What is the difference between absolute and relative paths in CSS `url()`?
 
--   Absolute: Full path.\
--   Relative: Relative to CSS file location.
+- Absolute: Full path.\
+- Relative: Relative to CSS file location.
 
 ### 9. What are pseudo-classes in CSS?
 
 Define states like `:hover`, `:focus`, `:nth-child`.
 
-``` css
-a:hover { color: red; }
+```css
+a:hover {
+  color: red;
+}
 ```
 
 ### 10. What are pseudo-elements?
 
 Create virtual elements like `::before`, `::after`.
 
-``` css
-p::before { content: "👉 "; }
+```css
+p::before {
+  content: '👉 ';
+}
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🟡 Intermediate Level
 
 ### 11. Difference between `inline-style` and `!important`?
 
--   Inline overrides external styles.\
--   `!important` overrides everything.
+- Inline overrides external styles.\
+- `!important` overrides everything.
 
-``` css
-p { color: blue !important; }
+```css
+p {
+  color: blue !important;
+}
 ```
 
 ### 12. What is the difference between relative and absolute length units?
@@ -133,22 +152,26 @@ p { color: blue !important; }
 
 ### 13. What is the difference between `min-width`, `max-width`, and `width`?
 
--   `width`: Fixed width.\
--   `min-width`: Minimum allowed.\
--   `max-width`: Maximum allowed.
+- `width`: Fixed width.\
+- `min-width`: Minimum allowed.\
+- `max-width`: Maximum allowed.
 
 ### 14. What is the difference between CSS Grid and Flexbox?
 
--   Grid: 2D (rows + columns).\
--   Flexbox: 1D (row or column).
+- Grid: 2D (rows + columns).\
+- Flexbox: 1D (row or column).
 
 ### 15. What are CSS variables (custom properties)?
 
 Reusable values declared with `--`.
 
-``` css
-:root { --main-color: blue; }
-p { color: var(--main-color); }
+```css
+:root {
+  --main-color: blue;
+}
+p {
+  color: var(--main-color);
+}
 ```
 
 ### 16. What is difference between relative and absolute positioning?
@@ -161,26 +184,37 @@ p { color: var(--main-color); }
 
 ### 18. What is difference between `transition` and `animation`?
 
--   Transition: Changes between two states.\
--   Animation: Keyframes with multiple states.
+- Transition: Changes between two states.\
+- Animation: Keyframes with multiple states.
 
-``` css
-div { transition: all 0.3s; }
-@keyframes fade { from {opacity:0;} to {opacity:1;} }
+```css
+div {
+  transition: all 0.3s;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 ```
 
 ### 19. What is difference between responsive design and adaptive design?
 
--   Responsive: Fluid, flexible.\
--   Adaptive: Fixed breakpoints.
+- Responsive: Fluid, flexible.\
+- Adaptive: Fixed breakpoints.
 
 ### 20. What are media queries in CSS?
 
 Allow responsive design.
 
-``` css
+```css
 @media (max-width: 600px) {
-  body { background: lightblue; }
+  body {
+    background: lightblue;
+  }
 }
 ```
 
@@ -190,63 +224,67 @@ Allow responsive design.
 
 ### 22. What is difference between CSS reset and normalize?
 
--   Reset: Removes all default styles.\
--   Normalize: Keeps useful defaults, fixes inconsistencies.
+- Reset: Removes all default styles.\
+- Normalize: Keeps useful defaults, fixes inconsistencies.
 
 ### 23. What are z-index and stacking context?
 
--   z-index: Defines stack order.\
--   Stacking context: Hierarchy of elements.
+- z-index: Defines stack order.\
+- Stacking context: Hierarchy of elements.
 
-``` css
-div { z-index: 10; }
+```css
+div {
+  z-index: 10;
+}
 ```
 
 ### 24. What is difference between `opacity:0` and `visibility:hidden`?
 
--   `opacity:0`: Invisible but clickable.\
--   `visibility:hidden`: Invisible, not clickable.
+- `opacity:0`: Invisible but clickable.\
+- `visibility:hidden`: Invisible, not clickable.
 
 ### 25. What is difference between relative, static, and absolute positions?
 
--   Static: Default.\
--   Relative: Relative to itself.\
--   Absolute: Relative to parent.
+- Static: Default.\
+- Relative: Relative to itself.\
+- Absolute: Relative to parent.
 
-------------------------------------------------------------------------
+---
 
 ## 🔴 Advanced Level
 
 ### 26. What is difference between transform and translate?
 
--   `transform`: Applies multiple transformations.\
--   `translate`: Moves element.
+- `transform`: Applies multiple transformations.\
+- `translate`: Moves element.
 
-``` css
-div { transform: translateX(50px) rotate(45deg); }
+```css
+div {
+  transform: translateX(50px) rotate(45deg);
+}
 ```
 
 ### 27. What is difference between CSS Grid auto-fill and auto-fit?
 
--   auto-fill: Fills available space even with empty tracks.\
--   auto-fit: Collapses empty tracks.
+- auto-fill: Fills available space even with empty tracks.\
+- auto-fit: Collapses empty tracks.
 
 ### 28. What is difference between inline SVG and background-image?
 
--   SVG: Vector, scalable, interactive.\
--   Background-image: Decorative.
+- SVG: Vector, scalable, interactive.\
+- Background-image: Decorative.
 
 ### 29. What are CSS combinators?
 
--   Descendant `div p`\
--   Child `div > p`\
--   Adjacent sibling `div + p`\
--   General sibling `div ~ p`
+- Descendant `div p`\
+- Child `div > p`\
+- Adjacent sibling `div + p`\
+- General sibling `div ~ p`
 
 ### 30. What is difference between `nth-child()` and `nth-of-type()`?
 
--   nth-child: Based on all children.\
--   nth-of-type: Based on specific element type.
+- nth-child: Based on all children.\
+- nth-of-type: Based on specific element type.
 
 ### 31. What are CSS preprocessors?
 
@@ -260,36 +298,45 @@ Prebuilt styles (Bootstrap, Tailwind, Foundation).
 
 Properties adapting to writing modes.
 
-``` css
+```css
 margin-inline: 10px;
 ```
 
 ### 34. What is difference between relative units `em`, `rem`, `%`?
 
--   em: Relative to parent.\
--   rem: Relative to root.\
--   %: Relative to parent container.
+- em: Relative to parent.\
+- rem: Relative to root.\
+- %: Relative to parent container.
 
 ### 35. What is difference between CSS isolation techniques (BEM, OOCSS, SMACSS)?
 
--   BEM: Block-Element-Modifier.\
--   OOCSS: Object-oriented CSS.\
--   SMACSS: Scalable modular CSS.
+- BEM: Block-Element-Modifier.\
+- OOCSS: Object-oriented CSS.\
+- SMACSS: Scalable modular CSS.
 
 ### 36. What are CSS transitions?
 
 Smooth property changes.
 
-``` css
-div { transition: all 0.5s ease-in-out; }
+```css
+div {
+  transition: all 0.5s ease-in-out;
+}
 ```
 
 ### 37. What are CSS animations?
 
 More complex than transitions with keyframes.
 
-``` css
-@keyframes slide { from{left:0;} to{left:100px;} }
+```css
+@keyframes slide {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100px;
+  }
+}
 ```
 
 ### 38. What is difference between relative, absolute, and sticky positions?
@@ -298,68 +345,91 @@ More complex than transitions with keyframes.
 
 ### 39. What is difference between inline-flex and block-flex?
 
--   inline-flex: Flex container inline.\
--   block-flex: Flex container block.
+- inline-flex: Flex container inline.\
+- block-flex: Flex container block.
 
 ### 40. What are CSS multi-column layouts?
 
 Create newspaper-style layouts.
 
-``` css
-div { column-count: 3; column-gap: 20px; }
+```css
+div {
+  column-count: 3;
+  column-gap: 20px;
+}
 ```
 
 ### 41. What is difference between object-fit and background-size?
 
--   object-fit: For images/videos.\
--   background-size: For background images.
+- object-fit: For images/videos.\
+- background-size: For background images.
 
-``` css
-img { object-fit: cover; }
-div { background-size: cover; }
+```css
+img {
+  object-fit: cover;
+}
+div {
+  background-size: cover;
+}
 ```
 
 ### 42. What are CSS writing modes?
 
 Control text direction.
 
-``` css
-div { writing-mode: vertical-rl; }
+```css
+div {
+  writing-mode: vertical-rl;
+}
 ```
 
 ### 43. What are CSS blend modes?
 
 Mix colors.
 
-``` css
-div { mix-blend-mode: multiply; }
+```css
+div {
+  mix-blend-mode: multiply;
+}
 ```
 
 ### 44. What are CSS filters?
 
 Apply effects.
 
-``` css
-img { filter: blur(5px) grayscale(50%); }
+```css
+img {
+  filter: blur(5px) grayscale(50%);
+}
 ```
 
 ### 45. What are CSS shape-outside and clip-path?
 
--   shape-outside: Wrap text around shapes.\
--   clip-path: Clip elements.
+- shape-outside: Wrap text around shapes.\
+- clip-path: Clip elements.
 
-``` css
-img { shape-outside: circle(50%); float:left; }
-div { clip-path: polygon(0 0, 100% 0, 100% 100%); }
+```css
+img {
+  shape-outside: circle(50%);
+  float: left;
+}
+div {
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
 ```
 
 ### 46. What are CSS counters?
 
 Custom counters.
 
-``` css
-ol { counter-reset: section; }
-li::before { counter-increment: section; content: counters(section, "."); }
+```css
+ol {
+  counter-reset: section;
+}
+li::before {
+  counter-increment: section;
+  content: counters(section, '.');
+}
 ```
 
 ### 47. What is difference between `relative`, `absolute`, and `fixed` z-index stacking?
@@ -374,15 +444,20 @@ Using `transform: translateZ(0)` triggers GPU rendering.
 
 Name grid cells.
 
-``` css
-.grid { display: grid; grid-template-areas: "header header" "sidebar main"; }
+```css
+.grid {
+  display: grid;
+  grid-template-areas: 'header header' 'sidebar main';
+}
 ```
 
 ### 50. What is difference between responsive and fluid typography?
 
--   Responsive: Changes via media queries.\
--   Fluid: Changes with viewport width using `clamp()`.
+- Responsive: Changes via media queries.\
+- Fluid: Changes with viewport width using `clamp()`.
 
-``` css
-h1 { font-size: clamp(1.5rem, 5vw, 3rem); }
+```css
+h1 {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
 ```

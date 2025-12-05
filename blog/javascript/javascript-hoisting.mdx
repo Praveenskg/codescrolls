@@ -1,28 +1,42 @@
 ---
 slug: javascript-hoisting
 title: Understanding JavaScript Hoisting with Examples
-description: A beginner-friendly explanation of JavaScript Hoisting with practical examples.
+description:
+  A beginner-friendly explanation of JavaScript Hoisting with practical
+  examples.
 authors: praveen
 date: 2025-08-17
 tags: [javascript, concepts, beginners]
 image: /img/blog/js-hoisting.png
-keywords: ['javascript hoisting', 'js hoisting', 'hoisting explained', 'var hoisting', 'function hoisting', 'let const hoisting']
+keywords:
+  [
+    'javascript hoisting',
+    'js hoisting',
+    'hoisting explained',
+    'var hoisting',
+    'function hoisting',
+    'let const hoisting',
+  ]
 ---
 
-Have you ever wondered why some JavaScript variables and functions work even before they're declared? 🤔  
+Have you ever wondered why some JavaScript variables and functions work even
+before they're declared? 🤔  
 That's the magic of **Hoisting**!
 
-In this blog post, we'll break down **JavaScript Hoisting** with simple examples, so you can finally understand what's happening behind the scenes.
+In this blog post, we'll break down **JavaScript Hoisting** with simple
+examples, so you can finally understand what's happening behind the scenes.
 
 {/* truncate */}
 
 ## 🚀 What is Hoisting?
 
-Hoisting is JavaScript's default behavior of **moving declarations to the top** of the current scope (script or function).
+Hoisting is JavaScript's default behavior of **moving declarations to the top**
+of the current scope (script or function).
 
 In simple words:
 
-> JavaScript **scans your code before executing** and **"hoists" variable and function declarations** to the top of their scope.
+> JavaScript **scans your code before executing** and **"hoists" variable and
+> function declarations** to the top of their scope.
 
 ---
 
@@ -54,7 +68,8 @@ console.log(y); // ReferenceError: Cannot access 'y' before initialization
 let y = 5;
 ```
 
-> `let` and `const` are **hoisted** but stay in a **"Temporal Dead Zone (TDZ)"**, so accessing them before declaration throws an error.
+> `let` and `const` are **hoisted** but stay in a **"Temporal Dead Zone
+> (TDZ)"**, so accessing them before declaration throws an error.
 
 ---
 

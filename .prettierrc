@@ -28,7 +28,8 @@
       "files": ["*.md", "*.mdx"],
       "options": {
         "printWidth": 80,
-        "proseWrap": "always"
+        "proseWrap": "always",
+        "parser": "mdx"
       }
     },
     {
@@ -39,8 +40,28 @@
       }
     },
     {
-      "files": ["**/*.{css,scss,html,vue,jsx,tsx}"],
-      "options": {}
+      "files": ["*.ts", "*.tsx"],
+      "options": {
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "options": {
+        "parser": "babel"
+      }
+    },
+    {
+      "files": ["*.css", "*.scss"],
+      "options": {
+        "parser": "css"
+      }
+    },
+    {
+      "files": ["*.html"],
+      "options": {
+        "parser": "html"
+      }
     }
   ]
 }

@@ -1,11 +1,24 @@
 ---
 title: 'API Design Best Practices Every Developer Should Know'
-description: 'Master the art of designing clean, scalable, and maintainable APIs. Learn RESTful principles, versioning strategies, authentication, documentation, and common pitfalls to avoid.'
+description:
+  'Master the art of designing clean, scalable, and maintainable APIs. Learn
+  RESTful principles, versioning strategies, authentication, documentation, and
+  common pitfalls to avoid.'
 slug: api-design-best-practices
 authors: praveen
 image: /img/blog/react.png
 date: 2025-10-13
-keywords: ['api design', 'rest api', 'api best practices', 'backend development', 'web development', 'api versioning', 'authentication', 'documentation']
+keywords:
+  [
+    'api design',
+    'rest api',
+    'api best practices',
+    'backend development',
+    'web development',
+    'api versioning',
+    'authentication',
+    'documentation',
+  ]
 tags: [api, backend, rest, design, best-practices, development]
 ---
 
@@ -13,7 +26,10 @@ import CodeBlock from '@theme/CodeBlock';
 
 # 🚀 API Design Best Practices Every Developer Should Know
 
-APIs are the backbone of modern web applications. A well-designed API can make or break your application's success. In this comprehensive guide, we'll explore the essential principles, patterns, and best practices that every developer should master when designing APIs.
+APIs are the backbone of modern web applications. A well-designed API can make
+or break your application's success. In this comprehensive guide, we'll explore
+the essential principles, patterns, and best practices that every developer
+should master when designing APIs.
 
 {/* truncate */}
 
@@ -62,11 +78,13 @@ GET /api/v1/users/123?include=posts&exclude=comments
 
 ## 🎯 RESTful Principles {#restful-principles}
 
-REST (Representational State Transfer) provides a set of architectural principles for designing networked applications.
+REST (Representational State Transfer) provides a set of architectural
+principles for designing networked applications.
 
 ### **Core REST Principles**
 
 #### **1. Stateless Communication**
+
 Each request contains all information needed to process it.
 
 ```http
@@ -89,9 +107,11 @@ Content-Type: application/json
 ```
 
 #### **2. Client-Server Architecture**
+
 Clear separation between client and server responsibilities.
 
 #### **3. Cacheable Responses**
+
 Responses should be cacheable when appropriate.
 
 ```http
@@ -105,9 +125,11 @@ Cache-Control: no-cache
 ```
 
 #### **4. Uniform Interface**
+
 Consistent interface across all endpoints.
 
 #### **5. Layered System**
+
 Ability to add layers (load balancers, proxies) without affecting clients.
 
 ---
@@ -155,17 +177,18 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 
 ### **Standard HTTP Methods**
 
-| Method | Purpose | Safe | Idempotent |
-|--------|---------|------|------------|
-| `GET` | Retrieve data | ✅ | ✅ |
-| `POST` | Create new resource | ❌ | ❌ |
-| `PUT` | Update/replace resource | ❌ | ✅ |
-| `PATCH` | Partial update | ❌ | ❌ |
-| `DELETE` | Remove resource | ❌ | ✅ |
+| Method   | Purpose                 | Safe | Idempotent |
+| -------- | ----------------------- | ---- | ---------- |
+| `GET`    | Retrieve data           | ✅   | ✅         |
+| `POST`   | Create new resource     | ❌   | ❌         |
+| `PUT`    | Update/replace resource | ❌   | ✅         |
+| `PATCH`  | Partial update          | ❌   | ❌         |
+| `DELETE` | Remove resource         | ❌   | ✅         |
 
 ### **HTTP Status Code Categories**
 
 #### **2xx - Success**
+
 ```http
 200 OK           # Request succeeded
 201 Created      # Resource created successfully
@@ -173,6 +196,7 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 ```
 
 #### **3xx - Redirection**
+
 ```http
 301 Moved Permanently  # Resource moved permanently
 302 Found             # Resource moved temporarily
@@ -180,6 +204,7 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 ```
 
 #### **4xx - Client Errors**
+
 ```http
 400 Bad Request       # Invalid request syntax
 401 Unauthorized      # Authentication required
@@ -190,6 +215,7 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 ```
 
 #### **5xx - Server Errors**
+
 ```http
 500 Internal Server Error  # Unexpected server error
 502 Bad Gateway           # Invalid response from upstream
@@ -204,6 +230,7 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 ### **Versioning Methods**
 
 #### **1. URL Path Versioning** (Recommended)
+
 ```http
 /api/v1/users
 /api/v2/users
@@ -211,18 +238,21 @@ GET /api/v1/countries/india/states/karnataka/cities/bangalore/streets/mgroad/bui
 ```
 
 #### **2. Query Parameter Versioning**
+
 ```http
 /api/users?version=1
 /api/users?version=2
 ```
 
 #### **3. Header Versioning**
+
 ```http
 GET /api/users
 Accept: application/vnd.api+json; version=1
 ```
 
 #### **4. Content Negotiation**
+
 ```http
 GET /api/users
 Accept: application/vnd.company.api.v1+json
@@ -246,6 +276,7 @@ Accept: application/vnd.company.api.v1+json
 ### **Common Authentication Methods**
 
 #### **1. API Keys**
+
 ```http
 # Header-based
 GET /api/users
@@ -256,6 +287,7 @@ GET /api/users?api_key=your-key
 ```
 
 #### **2. JWT (JSON Web Tokens)**
+
 ```http
 # Authorization header
 GET /api/users
@@ -263,6 +295,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
 #### **3. OAuth 2.0**
+
 ```http
 # Access token
 GET /api/protected-resource
@@ -270,6 +303,7 @@ Authorization: Bearer access_token_here
 ```
 
 #### **4. Basic Authentication**
+
 ```http
 GET /api/users
 Authorization: Basic dXNlcjpwYXNzd29yZA==
@@ -295,6 +329,7 @@ GET /api/users/456/posts // Forbidden (403)
 ### **Request Design Principles**
 
 #### **1. Use JSON for Data Exchange**
+
 ```http
 # ✅ Standard JSON structure
 POST /api/users
@@ -310,6 +345,7 @@ Content-Type: application/json
 ```
 
 #### **2. Consistent Field Naming**
+
 ```javascript
 // ✅ Consistent conventions
 {
@@ -324,6 +360,7 @@ Content-Type: application/json
 ```
 
 #### **3. Input Validation**
+
 ```http
 # ✅ Server-side validation with clear error messages
 POST /api/users
@@ -341,6 +378,7 @@ POST /api/users
 ### **Response Design Patterns**
 
 #### **1. Consistent Response Structure**
+
 ```javascript
 // ✅ Standardized response format
 {
@@ -358,6 +396,7 @@ POST /api/users
 ```
 
 #### **2. Pagination for Large Datasets**
+
 ```http
 # ✅ Pagination metadata
 {
@@ -380,6 +419,7 @@ POST /api/users
 ```
 
 #### **3. Filtering, Sorting, Searching**
+
 ```http
 # ✅ Query parameters for operations
 GET /api/users?search=john&sort=name&order=asc&limit=10&page=1
@@ -418,12 +458,12 @@ GET /api/posts?tags=javascript,react&published=true
 
 ```javascript
 // ✅ Semantic error codes
-VALIDATION_ERROR    // Input validation failed
-AUTHENTICATION_ERROR // Invalid credentials
-AUTHORIZATION_ERROR  // Insufficient permissions
-RESOURCE_NOT_FOUND   // Entity doesn't exist
-RATE_LIMIT_EXCEEDED  // Too many requests
-INTERNAL_ERROR       // Unexpected server error
+VALIDATION_ERROR; // Input validation failed
+AUTHENTICATION_ERROR; // Invalid credentials
+AUTHORIZATION_ERROR; // Insufficient permissions
+RESOURCE_NOT_FOUND; // Entity doesn't exist
+RATE_LIMIT_EXCEEDED; // Too many requests
+INTERNAL_ERROR; // Unexpected server error
 ```
 
 ---
@@ -465,6 +505,7 @@ POST /api/orders         // 50 requests/hour
 ### **API Documentation Standards**
 
 #### **1. OpenAPI/Swagger Specification**
+
 ```yaml
 openapi: 3.0.3
 info:
@@ -496,11 +537,13 @@ paths:
 ```
 
 #### **2. Interactive Documentation**
+
 - **Swagger UI** - Web-based API documentation
 - **Postman Collections** - Pre-built API requests
 - **Code Examples** - Multiple language examples
 
 #### **3. Clear Endpoint Documentation**
+
 ```http
 /**
  * GET /api/users/{id}
@@ -520,6 +563,7 @@ paths:
 ### **API Testing Strategy**
 
 #### **1. Unit Tests**
+
 ```http
 # Test individual API functions
 describe('User API', () => {
@@ -537,6 +581,7 @@ describe('User API', () => {
 ```
 
 #### **2. Integration Tests**
+
 ```http
 # Test complete request/response cycles
 describe('User Registration Flow', () => {
@@ -566,6 +611,7 @@ describe('User Registration Flow', () => {
 ```
 
 #### **3. Load Testing**
+
 ```http
 # Test performance under load
 import autocannon from 'autocannon';
@@ -630,7 +676,7 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = [
       'https://yourdomain.com',
-      'https://app.yourdomain.com'
+      'https://app.yourdomain.com',
     ];
     if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
@@ -640,7 +686,7 @@ const corsOptions = {
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
@@ -798,12 +844,14 @@ DELETE /api/users/123
 ## 🎯 Implementation Checklist
 
 ### **Planning Phase**
+
 - [ ] Define API requirements and use cases
 - [ ] Choose appropriate architectural style (REST, GraphQL, etc.)
 - [ ] Design resource relationships and hierarchies
 - [ ] Plan authentication and authorization strategy
 
 ### **Design Phase**
+
 - [ ] Establish URL structure and naming conventions
 - [ ] Define request/response formats
 - [ ] Design error handling strategy
@@ -811,6 +859,7 @@ DELETE /api/users/123
 - [ ] Create API documentation structure
 
 ### **Development Phase**
+
 - [ ] Implement input validation
 - [ ] Add authentication/authorization
 - [ ] Implement proper HTTP status codes
@@ -819,6 +868,7 @@ DELETE /api/users/123
 - [ ] Add logging and monitoring
 
 ### **Testing Phase**
+
 - [ ] Unit tests for all endpoints
 - [ ] Integration tests for workflows
 - [ ] Load testing for performance
@@ -826,6 +876,7 @@ DELETE /api/users/123
 - [ ] Cross-browser and cross-device testing
 
 ### **Deployment Phase**
+
 - [ ] API documentation (OpenAPI/Swagger)
 - [ ] Rate limiting configuration
 - [ ] Monitoring and alerting setup
@@ -871,7 +922,8 @@ GET /api/health
 
 ## 🚀 Final Thoughts
 
-Great API design is both an art and a science. It requires careful consideration of:
+Great API design is both an art and a science. It requires careful consideration
+of:
 
 - **User Experience** - Intuitive and easy to use
 - **Maintainability** - Easy to modify and extend
@@ -879,15 +931,20 @@ Great API design is both an art and a science. It requires careful consideration
 - **Security** - Safe from attacks and abuse
 - **Scalability** - Can handle growth
 
-Remember, APIs are contracts between different systems. Breaking changes can have cascading effects across multiple applications. Always prioritize backward compatibility and proper versioning.
+Remember, APIs are contracts between different systems. Breaking changes can
+have cascading effects across multiple applications. Always prioritize backward
+compatibility and proper versioning.
 
-**The best APIs are invisible to users but essential to developers.** They work reliably, perform well, and provide exactly what clients need without unnecessary complexity.
+**The best APIs are invisible to users but essential to developers.** They work
+reliably, perform well, and provide exactly what clients need without
+unnecessary complexity.
 
 ---
 
 **Happy API designing! 🎉**
 
-*Want to learn more? Check out these excellent resources:*
+_Want to learn more? Check out these excellent resources:_
+
 - [REST API Tutorial](https://restfulapi.net/)
 - [API Design Guide](https://apiguide.readthedocs.io/)
 - [HTTP Status Codes](https://httpstatuses.com/)

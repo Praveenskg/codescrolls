@@ -2,8 +2,11 @@
 id: css
 title: CSS Cheatsheet
 sidebar_label: CSS CheatSheet
-description: Essential CSS properties, selectors, layouts, animations, and responsive design patterns
-keywords: [css, cheatsheet, styling, layout, responsive, animations, flexbox, grid]
+description:
+  Essential CSS properties, selectors, layouts, animations, and responsive
+  design patterns
+keywords:
+  [css, cheatsheet, styling, layout, responsive, animations, flexbox, grid]
 sidebar_position: 3
 ---
 
@@ -11,55 +14,101 @@ import LiveCodeBlock from '@theme/LiveCodeBlock';
 
 # 🎨 CSS Cheatsheet
 
-A comprehensive quick reference guide for CSS properties, selectors, layouts, animations, and modern CSS features.
+A comprehensive quick reference guide for CSS properties, selectors, layouts,
+animations, and modern CSS features.
 
 ---
 
-:::info
-CSS (Cascading Style Sheets) is the language used to style web pages and create beautiful user interfaces.
-:::
+:::info CSS (Cascading Style Sheets) is the language used to style web pages and
+create beautiful user interfaces. :::
 
 ## 🎯 Selectors
 
 ```css
 /* Element Selector */
-div { color: blue; }
+div {
+  color: blue;
+}
 
 /* Class Selector */
-.my-class { font-size: 16px; }
+.my-class {
+  font-size: 16px;
+}
 
 /* ID Selector */
-#my-id { background: red; }
+#my-id {
+  background: red;
+}
 
 /* Universal Selector */
-* { margin: 0; }
+* {
+  margin: 0;
+}
 
 /* Attribute Selectors */
-[data-type="primary"] { background: blue; }
-[href^="https"] { color: green; }
-[class~="btn"] { padding: 10px; }
-[class|="nav"] { margin: 0; }
+[data-type='primary'] {
+  background: blue;
+}
+[href^='https'] {
+  color: green;
+}
+[class~='btn'] {
+  padding: 10px;
+}
+[class|='nav'] {
+  margin: 0;
+}
 
 /* Pseudo-classes */
-:hover { opacity: 0.8; }
-:focus { outline: 2px solid blue; }
-:nth-child(2n) { background: #f0f0f0; }
-:first-child { font-weight: bold; }
-:last-child { margin-bottom: 0; }
-:only-child { text-align: center; }
+:hover {
+  opacity: 0.8;
+}
+:focus {
+  outline: 2px solid blue;
+}
+:nth-child(2n) {
+  background: #f0f0f0;
+}
+:first-child {
+  font-weight: bold;
+}
+:last-child {
+  margin-bottom: 0;
+}
+:only-child {
+  text-align: center;
+}
 
 /* Pseudo-elements */
-::before { content: "→"; }
-::after { content: "←"; }
-::first-letter { font-size: 2em; }
-::first-line { text-transform: uppercase; }
-::selection { background: yellow; }
+::before {
+  content: '→';
+}
+::after {
+  content: '←';
+}
+::first-letter {
+  font-size: 2em;
+}
+::first-line {
+  text-transform: uppercase;
+}
+::selection {
+  background: yellow;
+}
 
 /* Combinators */
-.parent .child { color: red; }        /* Descendant */
-.parent > .child { border: 1px; }     /* Direct child */
-.sibling + .sibling { margin-left: 10px; }  /* Adjacent sibling */
-.sibling ~ .sibling { opacity: 0.5; } /* General sibling */
+.parent .child {
+  color: red;
+} /* Descendant */
+.parent > .child {
+  border: 1px;
+} /* Direct child */
+.sibling + .sibling {
+  margin-left: 10px;
+} /* Adjacent sibling */
+.sibling ~ .sibling {
+  opacity: 0.5;
+} /* General sibling */
 ```
 
 ---
@@ -78,15 +127,29 @@ div { color: blue; }
 }
 
 /* Display Properties */
-.block-element { display: block; }
-.inline-element { display: inline; }
-.inline-block { display: inline-block; }
-.none-element { display: none; }
-.flex-container { display: flex; }
-.grid-container { display: grid; }
+.block-element {
+  display: block;
+}
+.inline-element {
+  display: inline;
+}
+.inline-block {
+  display: inline-block;
+}
+.none-element {
+  display: none;
+}
+.flex-container {
+  display: flex;
+}
+.grid-container {
+  display: grid;
+}
 
 /* Positioning */
-.static-pos { position: static; }
+.static-pos {
+  position: static;
+}
 .relative-pos {
   position: relative;
   top: 10px;
@@ -108,9 +171,15 @@ div { color: blue; }
 }
 
 /* Z-Index */
-.layer-1 { z-index: 1; }
-.layer-2 { z-index: 2; }
-.layer-top { z-index: 999; }
+.layer-1 {
+  z-index: 1;
+}
+.layer-2 {
+  z-index: 2;
+}
+.layer-top {
+  z-index: 999;
+}
 ```
 
 ---
@@ -119,21 +188,35 @@ div { color: blue; }
 
 ```css
 /* Color Properties */
-.text-red { color: #ff0000; }
-.text-blue { color: rgb(0, 0, 255); }
-.text-green { color: hsl(120, 100%, 50%); }
-.text-transparent { color: transparent; }
-.text-inherit { color: inherit; }
+.text-red {
+  color: #ff0000;
+}
+.text-blue {
+  color: rgb(0, 0, 255);
+}
+.text-green {
+  color: hsl(120, 100%, 50%);
+}
+.text-transparent {
+  color: transparent;
+}
+.text-inherit {
+  color: inherit;
+}
 
 /* Background Properties */
-.bg-solid { background-color: #f0f0f0; }
+.bg-solid {
+  background-color: #f0f0f0;
+}
 .bg-gradient {
   background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
 }
 .bg-radial {
   background: radial-gradient(circle, #ff6b6b, #4ecdc4);
 }
-.bg-image { background-image: url('image.jpg'); }
+.bg-image {
+  background-image: url('image.jpg');
+}
 .bg-pattern {
   background: repeating-linear-gradient(
     45deg,
@@ -146,10 +229,15 @@ div { color: blue; }
 
 /* Background Advanced */
 .bg-advanced {
-  background-image: url('pattern.png'), linear-gradient(to right, #ff6b6b, #4ecdc4);
-  background-size: 50px 50px, cover;
+  background-image:
+    url('pattern.png'), linear-gradient(to right, #ff6b6b, #4ecdc4);
+  background-size:
+    50px 50px,
+    cover;
   background-repeat: repeat, no-repeat;
-  background-position: 0 0, center;
+  background-position:
+    0 0,
+    center;
   background-attachment: scroll;
 }
 ```
@@ -184,7 +272,7 @@ div { color: blue; }
 /* Advanced Typography */
 .typography-advanced {
   font-variant: small-caps;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -257,9 +345,9 @@ div { color: blue; }
   grid-template-columns: 1fr 2fr 1fr; /* or repeat(3, 1fr) */
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header header header"
-    "sidebar main aside"
-    "footer footer footer";
+    'header header header'
+    'sidebar main aside'
+    'footer footer footer';
   gap: 20px;
   justify-items: stretch; /* start, center, end, stretch */
   align-items: stretch; /* start, center, end, stretch */
@@ -374,8 +462,12 @@ html {
 
 /* Keyframe Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideIn {
@@ -390,7 +482,11 @@ html {
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -475,7 +571,7 @@ html {
 /* Logical Properties */
 .logical-properties {
   margin-inline-start: 20px; /* margin-left in LTR, margin-right in RTL */
-  padding-block-end: 10px;  /* padding-bottom */
+  padding-block-end: 10px; /* padding-bottom */
   border-inline-start: 2px solid black;
 }
 
@@ -512,22 +608,24 @@ html {
 
 ```css
 /* Avoid expensive selectors */
-.good-selector .element { }        /* ✅ Fast */
-.bad-selector * .element { }       /* ❌ Slow */
+.good-selector .element {
+} /* ✅ Fast */
+.bad-selector * .element {
+} /* ❌ Slow */
 
 /* Use transform instead of changing dimensions */
 .good-animation {
-  transform: translateY(-10px);    /* ✅ Uses GPU */
+  transform: translateY(-10px); /* ✅ Uses GPU */
 }
 
 .bad-animation {
-  margin-top: -10px;               /* ❌ Causes reflow */
+  margin-top: -10px; /* ❌ Causes reflow */
 }
 
 /* Minimize repaints */
 .efficient-updates {
-  transform: translateX(100px);    /* Only repaints */
-  opacity: 0.5;                    /* Only repaints */
+  transform: translateX(100px); /* Only repaints */
+  opacity: 0.5; /* Only repaints */
   /* Avoid changing: width, height, margin, padding, etc. */
 }
 ```
@@ -536,9 +634,12 @@ html {
 
 ```css
 /* Use consistent naming */
-.btn-primary { }       /* ✅ BEM-like */
-.btnSecondary { }      /* ❌ Inconsistent */
-.secondaryButton { }   /* ❌ Inconsistent */
+.btn-primary {
+} /* ✅ BEM-like */
+.btnSecondary {
+} /* ❌ Inconsistent */
+.secondaryButton {
+} /* ❌ Inconsistent */
 
 /* Group related properties */
 .organized-styles {
@@ -557,7 +658,7 @@ html {
 
   /* Visual */
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Use CSS custom properties for theming */
@@ -657,6 +758,7 @@ html {
 ## 📚 CSS Resources
 
 ### **Learning Resources**
+
 - **MDN Web Docs**: Comprehensive CSS reference
 - **CSS-Tricks**: Practical CSS tutorials and guides
 - **Smashing Magazine**: Advanced CSS articles
@@ -664,6 +766,7 @@ html {
 - **Flexbox Froggy**: Interactive Flexbox learning game
 
 ### **Tools & Utilities**
+
 - **Browser DevTools**: Inspect and debug CSS
 - **CSS Validator**: Check CSS syntax
 - **Autoprefixer**: Add vendor prefixes automatically
@@ -677,7 +780,7 @@ html {
 .modern-btn {
   --btn-bg: #007bff;
   --btn-color: white;
-  --btn-shadow: 0 2px 4px rgba(0,123,255,0.2);
+  --btn-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 
   display: inline-flex;
   align-items: center;
@@ -697,12 +800,12 @@ html {
 .modern-btn:hover {
   --btn-bg: #0056b3;
   transform: translateY(-1px);
-  --btn-shadow: 0 4px 8px rgba(0,123,255,0.3);
+  --btn-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
 }
 
 .modern-btn:active {
   transform: translateY(0);
-  --btn-shadow: 0 1px 2px rgba(0,123,255,0.2);
+  --btn-shadow: 0 1px 2px rgba(0, 123, 255, 0.2);
 }
 
 /* Modern Card Component */

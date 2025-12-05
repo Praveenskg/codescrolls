@@ -2,19 +2,32 @@
 id: advanced-patterns
 title: Advanced React Patterns
 sidebar_position: 2
-description: Master advanced React patterns including compound components, render props, HOCs, portals, and more for building flexible, reusable components.
-keywords: [react patterns, compound components, render props, hoc, higher order components, react portals, advanced react]
+description:
+  Master advanced React patterns including compound components, render props,
+  HOCs, portals, and more for building flexible, reusable components.
+keywords:
+  [
+    react patterns,
+    compound components,
+    render props,
+    hoc,
+    higher order components,
+    react portals,
+    advanced react,
+  ]
 ---
 
 # Advanced React Patterns
 
-**Advanced patterns** help you build flexible, reusable, and maintainable React components. Learn industry-standard patterns used in production applications.
+**Advanced patterns** help you build flexible, reusable, and maintainable React
+components. Learn industry-standard patterns used in production applications.
 
 ---
 
 ## 📌 Why Learn Patterns?
 
 Benefits:
+
 - **Reusability** - Write once, use everywhere
 - **Flexibility** - Adapt to different use cases
 - **Maintainability** - Easier to understand and modify
@@ -35,8 +48,8 @@ function Tabs({ children }) {
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
           isActive: index === activeTab,
-          onSelect: () => setActiveTab(index)
-        })
+          onSelect: () => setActiveTab(index),
+        }),
       )}
     </div>
   );
@@ -45,11 +58,7 @@ function Tabs({ children }) {
 function Tab({ title, isActive, onSelect, children }) {
   return (
     <div>
-      <button 
-        onClick={onSelect}
-      >
-        {title}
-      </button>
+      <button onClick={onSelect}>{title}</button>
       {isActive && <div>{children}</div>}
     </div>
   );
@@ -60,7 +69,7 @@ function Tab({ title, isActive, onSelect, children }) {
   <Tab title="Tab 1">Content 1</Tab>
   <Tab title="Tab 2">Content 2</Tab>
   <Tab title="Tab 3">Content 3</Tab>
-</Tabs>
+</Tabs>;
 ```
 
 ### With Context
@@ -84,14 +93,8 @@ function TabList({ children }) {
 
 function Tab({ index, children }) {
   const { activeTab, setActiveTab } = useContext(TabsContext);
-  
-  return (
-    <button
-      onClick={() => setActiveTab(index)}
-    >
-      {children}
-    </button>
-  );
+
+  return <button onClick={() => setActiveTab(index)}>{children}</button>;
 }
 
 function TabPanels({ children }) {
@@ -113,7 +116,7 @@ function TabPanel({ children }) {
     <TabPanel>Content 1</TabPanel>
     <TabPanel>Content 2</TabPanel>
   </TabPanels>
-</Tabs>
+</Tabs>;
 ```
 
 ---
@@ -126,23 +129,21 @@ function TabPanel({ children }) {
 function MouseTracker({ render }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     setPosition({ x: e.clientX, y: e.clientY });
   };
 
-  return (
-    <div onMouseMove={handleMouseMove}>
-      {render(position)}
-    </div>
-  );
+  return <div onMouseMove={handleMouseMove}>{render(position)}</div>;
 }
 
 // Usage
-<MouseTracker 
+<MouseTracker
   render={({ x, y }) => (
-    <h1>Mouse position: {x}, {y}</h1>
+    <h1>
+      Mouse position: {x}, {y}
+    </h1>
   )}
-/>
+/>;
 ```
 
 ### With Children Function
@@ -166,10 +167,10 @@ function DataFetcher({ url, children }) {
 
 // Usage
 <DataFetcher url="/api/users">
-  {({ data, loading }) => (
+  {({ data, loading }) =>
     loading ? <div>Loading...</div> : <div>{data.name}</div>
-  )}
-</DataFetcher>
+  }
+</DataFetcher>;
 ```
 
 ---
@@ -191,7 +192,7 @@ function withLoading(Component) {
 // Usage
 const UserListWithLoading = withLoading(UserList);
 
-<UserListWithLoading isLoading={loading} users={users} />
+<UserListWithLoading isLoading={loading} users={users} />;
 ```
 
 ### HOC with Props
@@ -216,11 +217,7 @@ const ProtectedDashboard = withAuth(Dashboard);
 ### Composing HOCs
 
 ```jsx
-const enhance = compose(
-  withAuth,
-  withLoading,
-  withErrorBoundary
-);
+const enhance = compose(withAuth, withLoading, withErrorBoundary);
 
 const EnhancedComponent = enhance(MyComponent);
 ```
@@ -239,11 +236,9 @@ function Modal({ children, isOpen }) {
 
   return createPortal(
     <div>
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
     </div>,
-    document.body
+    document.body,
   );
 }
 
@@ -251,7 +246,7 @@ function Modal({ children, isOpen }) {
 <Modal isOpen={isOpen}>
   <h2>Modal Content</h2>
   <button onClick={() => setIsOpen(false)}>Close</button>
-</Modal>
+</Modal>;
 ```
 
 ### Tooltip Portal
@@ -262,7 +257,7 @@ function Tooltip({ children, content }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const ref = useRef(null);
 
-  const handleMouseEnter = (e) => {
+  const handleMouseEnter = e => {
     const rect = e.target.getBoundingClientRect();
     setPosition({ x: rect.left, y: rect.bottom + 5 });
     setIsVisible(true);
@@ -277,15 +272,12 @@ function Tooltip({ children, content }) {
       >
         {children}
       </span>
-      
-      {isVisible && createPortal(
-        <div 
-          style={{ left: position.x, top: position.y }}
-        >
-          {content}
-        </div>,
-        document.body
-      )}
+
+      {isVisible &&
+        createPortal(
+          <div style={{ left: position.x, top: position.y }}>{content}</div>,
+          document.body,
+        )}
     </>
   );
 }
@@ -304,7 +296,7 @@ function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -325,7 +317,7 @@ function useTheme() {
 // Usage
 <ThemeProvider>
   <App />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ---
@@ -347,12 +339,12 @@ function UserListContainer() {
     });
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = id => {
     setUsers(users.filter(u => u.id !== id));
   };
 
   return (
-    <UserListPresentation 
+    <UserListPresentation
       users={users}
       loading={loading}
       onDelete={handleDelete}
@@ -530,7 +522,8 @@ function useTheme() {
 
 ## 🆕 React 19: Server Components
 
-Server Components allow you to render components on the server, reducing client-side JavaScript.
+Server Components allow you to render components on the server, reducing
+client-side JavaScript.
 
 ### What Are Server Components?
 
@@ -576,12 +569,8 @@ import { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
-  
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </button>
-  );
+
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
 }
 ```
 
@@ -591,7 +580,7 @@ function Counter() {
 // Server Component
 async function UserProfile({ userId }) {
   const user = await fetchUser(userId);
-  
+
   return (
     <div>
       <h1>{user.name}</h1>
@@ -601,14 +590,12 @@ async function UserProfile({ userId }) {
 }
 
 // Client Component
-'use client';
+('use client');
 function UserActions({ userId }) {
   const [liked, setLiked] = useState(false);
-  
+
   return (
-    <button onClick={() => setLiked(!liked)}>
-      {liked ? '❤️' : '🤍'}
-    </button>
+    <button onClick={() => setLiked(!liked)}>{liked ? '❤️' : '🤍'}</button>
   );
 }
 ```
@@ -624,7 +611,8 @@ function UserActions({ userId }) {
 
 ### Partial Pre-rendering (React 19.2)
 
-Pre-render static parts on the server while deferring dynamic components to the client.
+Pre-render static parts on the server while deferring dynamic components to the
+client.
 
 ```jsx
 // Static parts rendered on server
@@ -634,7 +622,7 @@ function ProductPage({ productId }) {
       {/* Static - pre-rendered */}
       <ProductHeader />
       <ProductDescription />
-      
+
       {/* Dynamic - deferred to client */}
       <Suspense fallback={<Loading />}>
         <ProductReviews productId={productId} />
@@ -645,6 +633,7 @@ function ProductPage({ productId }) {
 ```
 
 **Benefits:**
+
 - ✅ Faster initial load - static content ready immediately
 - ✅ Better SEO - static content fully rendered
 - ✅ Progressive enhancement - dynamic parts load as needed
@@ -658,21 +647,22 @@ import { cacheSignal } from 'react';
 
 async function fetchUserData(userId) {
   const signal = cacheSignal();
-  
+
   const response = await fetch(`/api/users/${userId}`, {
     signal: signal.abort, // Abort if cache expires
   });
-  
+
   // Cleanup when cache expires
   signal.addEventListener('abort', () => {
     console.log('Cache expired, cleaning up');
   });
-  
+
   return response.json();
 }
 ```
 
 **Use Cases:**
+
 - Cleanup fetch requests when cache expires
 - Abort side effects when data no longer needed
 - Resource management in Server Components
@@ -691,11 +681,11 @@ function App() {
       <Suspense fallback={<Loading1 />}>
         <Component1 />
       </Suspense>
-      
+
       <Suspense fallback={<Loading2 />}>
         <Component2 />
       </Suspense>
-      
+
       <Suspense fallback={<Loading3 />}>
         <Component3 />
       </Suspense>
@@ -705,6 +695,7 @@ function App() {
 ```
 
 **Benefits:**
+
 - ✅ Reduced flickering
 - ✅ Consistent server/client behavior
 - ✅ Better visual consistency
@@ -732,6 +723,7 @@ function StreamingComponent() {
 ```
 
 **Benefits:**
+
 - ✅ Progressive content loading
 - ✅ Better performance on slow networks
 - ✅ Improved perceived performance

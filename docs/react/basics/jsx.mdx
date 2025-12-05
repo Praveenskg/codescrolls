@@ -1,7 +1,9 @@
 ---
 id: jsx
 title: JSX in React
-description: Learn how JSX works in React – the syntax extension that lets you write HTML in JavaScript.
+description:
+  Learn how JSX works in React – the syntax extension that lets you write HTML
+  in JavaScript.
 slug: /docs/react/basics/jsx
 sidebar_position: 1
 keywords:
@@ -18,7 +20,9 @@ image: /img/cover.png
 
 # 🎨 JSX – JavaScript XML
 
-JSX is a **syntax extension** for JavaScript that lets you write **HTML-like code inside JavaScript**. It's used in React to describe what the UI should look like.
+JSX is a **syntax extension** for JavaScript that lets you write **HTML-like
+code inside JavaScript**. It's used in React to describe what the UI should look
+like.
 
 ---
 
@@ -62,11 +66,7 @@ function GreetingWithName() {
 
 ```jsx live
 function ButtonExample() {
-  return (
-    <button  onClick={() => alert('Clicked!')}>
-      Click Me
-    </button>
-  );
+  return <button onClick={() => alert('Clicked!')}>Click Me</button>;
 }
 ```
 
@@ -124,4 +124,5 @@ React.createElement('h1', null, 'Hello');
 
 ---
 
-> 🔍 Tip: Use an online converter like [transform.tools](https://transform.tools/html-to-jsx) to convert HTML to JSX.
+> 🔍 Tip: Use an online converter like
+> [transform.tools](https://transform.tools/html-to-jsx) to convert HTML to JSX.

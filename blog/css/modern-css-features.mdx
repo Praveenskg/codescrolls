@@ -1,16 +1,35 @@
 ---
 title: 'Modern CSS Features: A Complete Guide to Cutting-Edge Styling in 2025'
-description: 'Master modern CSS features including Container Queries, :has() selector, CSS Nesting, Subgrid, Cascade Layers, View Transitions API, and modern color functions. Learn when and how to use these powerful features.'
+description:
+  'Master modern CSS features including Container Queries, :has() selector, CSS
+  Nesting, Subgrid, Cascade Layers, View Transitions API, and modern color
+  functions. Learn when and how to use these powerful features.'
 slug: modern-css-features
 tags: [css, frontend, web-development, tutorial, design]
 authors: praveen
 image: /img/blog/react.png
-keywords: ['css', 'container queries', 'has selector', 'css nesting', 'subgrid', 'cascade layers', 'view transitions', 'modern css', 'css 2025', 'responsive design']
+keywords:
+  [
+    'css',
+    'container queries',
+    'has selector',
+    'css nesting',
+    'subgrid',
+    'cascade layers',
+    'view transitions',
+    'modern css',
+    'css 2025',
+    'responsive design',
+  ]
 ---
 
 ![Modern CSS Features](/img/blog/react.png)
 
-CSS has evolved dramatically in recent years, introducing powerful features that make styling more intuitive, maintainable, and performant. This comprehensive guide covers the latest CSS features that are revolutionizing how we build modern web interfaces, from Container Queries to the `:has()` selector and beyond.
+CSS has evolved dramatically in recent years, introducing powerful features that
+make styling more intuitive, maintainable, and performant. This comprehensive
+guide covers the latest CSS features that are revolutionizing how we build
+modern web interfaces, from Container Queries to the `:has()` selector and
+beyond.
 
 {/* truncate */}
 
@@ -33,7 +52,9 @@ CSS has evolved dramatically in recent years, introducing powerful features that
 
 ## 📦 Container Queries {#container-queries}
 
-Container Queries are one of the most revolutionary CSS features, allowing you to style elements based on their container's size rather than the viewport. This enables true component-based responsive design.
+Container Queries are one of the most revolutionary CSS features, allowing you
+to style elements based on their container's size rather than the viewport. This
+enables true component-based responsive design.
 
 ### The Problem with Media Queries
 
@@ -64,7 +85,7 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
     display: flex;
     flex-direction: row;
   }
-  
+
   .card-image {
     width: 200px;
   }
@@ -74,7 +95,7 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
   .card {
     padding: 2rem;
   }
-  
+
   .card-title {
     font-size: 1.5rem;
   }
@@ -120,11 +141,11 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
 
 .card {
   /* Container-relative units */
-  padding: 5cqw;      /* 5% of container width */
-  font-size: 2cqh;    /* 2% of container height */
-  margin: 1cqi;       /* 1% of inline size */
+  padding: 5cqw; /* 5% of container width */
+  font-size: 2cqh; /* 2% of container height */
+  margin: 1cqi; /* 1% of inline size */
   border-radius: 0.5cqb; /* 0.5% of block size */
-  
+
   /* Available units:
    * cqw = container query width
    * cqh = container query height
@@ -141,7 +162,7 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
 ```html
 <div class="card-wrapper">
   <div class="card">
-    <img src="image.jpg" alt="Card image" class="card-image">
+    <img src="image.jpg" alt="Card image" class="card-image" />
     <div class="card-content">
       <h2 class="card-title">Card Title</h2>
       <p class="card-text">Card description text...</p>
@@ -166,7 +187,7 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
   .card {
     flex-direction: row;
   }
-  
+
   .card-image {
     width: 200px;
     height: auto;
@@ -178,7 +199,7 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
   .card {
     padding: 2rem;
   }
-  
+
   .card-title {
     font-size: 1.5rem;
   }
@@ -191,7 +212,9 @@ Container Queries are one of the most revolutionary CSS features, allowing you t
 
 ## 🎯 The `:has()` Selector {#the-has-selector}
 
-The `:has()` pseudo-class (also called the "parent selector") allows you to select elements based on their descendants. This was a long-requested feature that enables powerful styling patterns.
+The `:has()` pseudo-class (also called the "parent selector") allows you to
+select elements based on their descendants. This was a long-requested feature
+that enables powerful styling patterns.
 
 ### Basic Usage
 
@@ -279,7 +302,7 @@ fieldset:has(input:invalid) {
 }
 
 /* Select table row that has selected checkbox */
-tr:has(input[type="checkbox"]:checked) {
+tr:has(input[type='checkbox']:checked) {
   background-color: #e0f2fe;
 }
 ```
@@ -290,7 +313,8 @@ tr:has(input[type="checkbox"]:checked) {
 
 ## 🎨 CSS Nesting {#css-nesting}
 
-Native CSS nesting allows you to write cleaner, more maintainable stylesheets without preprocessors. It's now supported natively in modern browsers!
+Native CSS nesting allows you to write cleaner, more maintainable stylesheets
+without preprocessors. It's now supported natively in modern browsers!
 
 ### Basic Nesting
 
@@ -299,22 +323,22 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 .card {
   padding: 1rem;
   background: white;
-  
+
   /* Nested selector */
   .title {
     font-size: 1.5rem;
     color: #333;
   }
-  
+
   .content {
     margin-top: 1rem;
   }
-  
+
   /* Pseudo-classes */
   &:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Media queries */
   @media (max-width: 768px) {
     padding: 0.5rem;
@@ -329,11 +353,11 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 .button {
   padding: 0.5rem 1rem;
   background: blue;
-  
+
   @media (min-width: 768px) {
     padding: 0.75rem 1.5rem;
   }
-  
+
   @media (min-width: 1024px) {
     padding: 1rem 2rem;
   }
@@ -342,14 +366,14 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 /* Nested pseudo-elements */
 .card {
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
   }
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -361,13 +385,13 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 /* Multiple levels of nesting */
 .nav {
   display: flex;
-  
+
   .nav-item {
     padding: 1rem;
-    
+
     .nav-link {
       color: blue;
-      
+
       &:hover {
         color: darkblue;
       }
@@ -385,18 +409,18 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 
 .card {
   padding: 1rem;
-  
+
   @container (min-width: 400px) {
     padding: 1.5rem;
-    
+
     .title {
       font-size: 1.5rem;
     }
   }
-  
+
   @container (min-width: 600px) {
     padding: 2rem;
-    
+
     .title {
       font-size: 2rem;
     }
@@ -410,7 +434,8 @@ Native CSS nesting allows you to write cleaner, more maintainable stylesheets wi
 
 ## 🔲 CSS Subgrid {#css-subgrid}
 
-Subgrid allows grid items to participate in their parent grid's layout, enabling more flexible and powerful grid designs.
+Subgrid allows grid items to participate in their parent grid's layout, enabling
+more flexible and powerful grid designs.
 
 ### The Problem
 
@@ -465,15 +490,15 @@ Subgrid allows grid items to participate in their parent grid's layout, enabling
   grid-template-rows: auto 1fr auto;
   grid-template-columns: subgrid;
   grid-column: span 1;
-  
+
   .card-image {
     grid-row: 1;
   }
-  
+
   .card-content {
     grid-row: 2;
   }
-  
+
   .card-footer {
     grid-row: 3;
   }
@@ -510,7 +535,8 @@ Subgrid allows grid items to participate in their parent grid's layout, enabling
 
 ## 📚 Cascade Layers (@layer) {#cascade-layers-layer}
 
-Cascade Layers allow you to organize CSS into layers with defined precedence, reducing specificity conflicts and making stylesheets more maintainable.
+Cascade Layers allow you to organize CSS into layers with defined precedence,
+reducing specificity conflicts and making stylesheets more maintainable.
 
 ### Basic Layers
 
@@ -577,7 +603,7 @@ Cascade Layers allow you to organize CSS into layers with defined precedence, re
       margin: 0;
     }
   }
-  
+
   @layer base {
     body {
       font-size: 16px;
@@ -654,7 +680,8 @@ Cascade Layers allow you to organize CSS into layers with defined precedence, re
 
 ## 🎯 The @scope Rule {#the-scope-rule}
 
-The `@scope` rule confines CSS rules to a specific section of the DOM, preventing style leakage and enabling better component encapsulation.
+The `@scope` rule confines CSS rules to a specific section of the DOM,
+preventing style leakage and enabling better component encapsulation.
 
 ### Basic Scoping
 
@@ -665,7 +692,7 @@ The `@scope` rule confines CSS rules to a specific section of the DOM, preventin
     font-size: 1.5rem;
     /* Only affects .title inside .card */
   }
-  
+
   .content {
     padding: 1rem;
   }
@@ -706,11 +733,11 @@ The `@scope` rule confines CSS rules to a specific section of the DOM, preventin
     padding: 1rem;
     border-bottom: 1px solid #e0e0e0;
   }
-  
+
   .body {
     padding: 1.5rem;
   }
-  
+
   .footer {
     padding: 1rem;
     border-top: 1px solid #e0e0e0;
@@ -720,13 +747,15 @@ The `@scope` rule confines CSS rules to a specific section of the DOM, preventin
 /* Styles don't leak to other components */
 ```
 
-**Browser Support**: Chrome 118+, Firefox (in development), Safari (in development)
+**Browser Support**: Chrome 118+, Firefox (in development), Safari (in
+development)
 
 ---
 
 ## 🎨 Modern Color Functions {#modern-color-functions}
 
-Modern CSS introduces powerful new color functions that provide better color manipulation and more perceptually uniform color spaces.
+Modern CSS introduces powerful new color functions that provide better color
+manipulation and more perceptually uniform color spaces.
 
 ### color-mix()
 
@@ -791,13 +820,14 @@ Modern CSS introduces powerful new color functions that provide better color man
 .button {
   /* Make primary color lighter */
   background-color: oklch(from var(--primary) l c h / 0.9);
-  
+
   /* Make primary color more saturated */
   background-color: oklch(from var(--primary) l calc(c * 1.2) h);
 }
 ```
 
-**Browser Support**: 
+**Browser Support**:
+
 - `color-mix()`: Chrome 111+, Firefox 113+, Safari 16.2+
 - `oklch()`: Chrome 111+, Firefox 113+, Safari 15.4+
 - `lab()`: Chrome 111+, Firefox 113+, Safari 15.4+
@@ -806,7 +836,8 @@ Modern CSS introduces powerful new color functions that provide better color man
 
 ## ✨ View Transitions API {#view-transitions-api}
 
-The View Transitions API enables smooth transitions between page states, creating native-like app experiences.
+The View Transitions API enables smooth transitions between page states,
+creating native-like app experiences.
 
 ### Basic Page Transitions
 
@@ -880,7 +911,7 @@ function navigate(url) {
 // Element transitions
 function updateCard(card, newContent) {
   card.style.viewTransitionName = 'card';
-  
+
   document.startViewTransition(() => {
     card.innerHTML = newContent;
     card.style.viewTransitionName = '';
@@ -888,13 +919,15 @@ function updateCard(card, newContent) {
 }
 ```
 
-**Browser Support**: Chrome 111+, Firefox (in development), Safari (in development)
+**Browser Support**: Chrome 111+, Firefox (in development), Safari (in
+development)
 
 ---
 
 ## 📝 Modern Typography {#modern-typography}
 
-Modern CSS introduces new typography features for better text layout and control.
+Modern CSS introduces new typography features for better text layout and
+control.
 
 ### text-wrap
 
@@ -932,15 +965,18 @@ Modern CSS introduces new typography features for better text layout and control
  */
 ```
 
-**Browser Support**: 
+**Browser Support**:
+
 - `text-wrap`: Chrome 114+, Firefox (in development), Safari (in development)
-- `text-box-trim`: Chrome 118+, Firefox (in development), Safari (in development)
+- `text-box-trim`: Chrome 118+, Firefox (in development), Safari (in
+  development)
 
 ---
 
 ## 🔧 The @property Rule {#the-property-rule}
 
-The `@property` rule allows you to define custom CSS properties with types, enabling better animations and transitions.
+The `@property` rule allows you to define custom CSS properties with types,
+enabling better animations and transitions.
 
 ### Defining Custom Properties
 
@@ -1027,12 +1063,12 @@ The `@property` rule allows you to define custom CSS properties with types, enab
 
 .card {
   padding: 1rem;
-  
+
   &:has(img) {
     display: flex;
     flex-direction: column;
   }
-  
+
   @container (min-width: 400px) {
     &:has(img) {
       flex-direction: row;
@@ -1103,19 +1139,19 @@ The `@property` rule allows you to define custom CSS properties with types, enab
 
 ## 🌐 Browser Support {#browser-support}
 
-| Feature | Chrome | Firefox | Safari | Status |
-|---------|--------|---------|--------|--------|
-| Container Queries | 105+ | 110+ | 16.0+ | ✅ Stable |
-| `:has()` Selector | 105+ | 121+ | 15.4+ | ✅ Stable |
-| CSS Nesting | 112+ | 117+ | 16.5+ | ✅ Stable |
-| Subgrid | 117+ | 71+ | 16.0+ | ✅ Stable |
-| Cascade Layers | 99+ | 97+ | 15.4+ | ✅ Stable |
-| `@scope` | 118+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
-| `color-mix()` | 111+ | 113+ | 16.2+ | ✅ Stable |
-| `oklch()` | 111+ | 113+ | 15.4+ | ✅ Stable |
-| View Transitions | 111+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
-| `text-wrap` | 114+ | 🔄 Dev | 🔄 Dev | 🚧 In Progress |
-| `@property` | 85+ | 72+ | 16.4+ | ✅ Stable |
+| Feature           | Chrome | Firefox | Safari | Status         |
+| ----------------- | ------ | ------- | ------ | -------------- |
+| Container Queries | 105+   | 110+    | 16.0+  | ✅ Stable      |
+| `:has()` Selector | 105+   | 121+    | 15.4+  | ✅ Stable      |
+| CSS Nesting       | 112+   | 117+    | 16.5+  | ✅ Stable      |
+| Subgrid           | 117+   | 71+     | 16.0+  | ✅ Stable      |
+| Cascade Layers    | 99+    | 97+     | 15.4+  | ✅ Stable      |
+| `@scope`          | 118+   | 🔄 Dev  | 🔄 Dev | 🚧 In Progress |
+| `color-mix()`     | 111+   | 113+    | 16.2+  | ✅ Stable      |
+| `oklch()`         | 111+   | 113+    | 15.4+  | ✅ Stable      |
+| View Transitions  | 111+   | 🔄 Dev  | 🔄 Dev | 🚧 In Progress |
+| `text-wrap`       | 114+   | 🔄 Dev  | 🔄 Dev | 🚧 In Progress |
+| `@property`       | 85+    | 72+     | 16.4+  | ✅ Stable      |
 
 **Legend**: ✅ Stable | 🚧 In Progress | 🔄 Dev (Development)
 
@@ -1141,7 +1177,8 @@ Modern CSS features are transforming how we build web interfaces:
 4. Use modern color functions for better manipulation
 5. Provide fallbacks for progressive enhancement
 
-These features make CSS more powerful and your code more maintainable. Start incorporating them into your projects today!
+These features make CSS more powerful and your code more maintainable. Start
+incorporating them into your projects today!
 
 ---
 
@@ -1155,4 +1192,3 @@ These features make CSS more powerful and your code more maintainable. Start inc
 ---
 
 **Happy styling with modern CSS! 🎨**
-

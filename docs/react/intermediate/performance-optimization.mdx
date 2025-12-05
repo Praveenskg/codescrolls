@@ -2,23 +2,39 @@
 id: performance-optimization
 title: Performance Optimization
 sidebar_position: 3
-description: Learn React performance optimization techniques including React.memo, useMemo, useCallback, code splitting, and lazy loading.
-keywords: [react performance, optimization, react memo, useMemo, useCallback, code splitting, lazy loading, react profiler]
+description:
+  Learn React performance optimization techniques including React.memo, useMemo,
+  useCallback, code splitting, and lazy loading.
+keywords:
+  [
+    react performance,
+    optimization,
+    react memo,
+    useMemo,
+    useCallback,
+    code splitting,
+    lazy loading,
+    react profiler,
+  ]
 ---
 
 # Performance Optimization in React
 
-**Performance optimization** ensures your React app runs smoothly and efficiently. Learn techniques to prevent unnecessary re-renders and improve load times.
+**Performance optimization** ensures your React app runs smoothly and
+efficiently. Learn techniques to prevent unnecessary re-renders and improve load
+times.
 
 ---
 
 ## 🆕 React 19: React Compiler
 
-React 19 introduces the **React Compiler** - an automatic optimization tool that handles memoization for you.
+React 19 introduces the **React Compiler** - an automatic optimization tool that
+handles memoization for you.
 
 ### What It Does
 
 The React Compiler automatically:
+
 - ✅ Memoizes components and values
 - ✅ Optimizes re-renders
 - ✅ Reduces need for manual `useMemo`/`useCallback`
@@ -78,8 +94,8 @@ React 19 automatically batches state updates, even outside event handlers:
 // React 18: Multiple re-renders
 setTimeout(() => {
   setCount(c => c + 1); // Re-render 1
-  setFlag(f => !f);     // Re-render 2
-  setName('New');       // Re-render 3
+  setFlag(f => !f); // Re-render 2
+  setName('New'); // Re-render 3
 }, 1000);
 
 // React 19: Single batched re-render
@@ -91,6 +107,7 @@ setTimeout(() => {
 ```
 
 **Benefits:**
+
 - ✅ Fewer re-renders
 - ✅ Better performance
 - ✅ Less manual optimization needed
@@ -102,6 +119,7 @@ setTimeout(() => {
 ## 📌 Why Optimize?
 
 Common performance issues:
+
 - Unnecessary re-renders
 - Large bundle sizes
 - Slow initial load
@@ -121,11 +139,13 @@ import { memo } from 'react';
 
 const ExpensiveComponent = memo(function ExpensiveComponent({ data }) {
   console.log('Rendering ExpensiveComponent');
-  
+
   return (
     <div>
       {/* Complex rendering logic */}
-      {data.map(item => <div key={item.id}>{item.name}</div>)}
+      {data.map(item => (
+        <div key={item.id}>{item.name}</div>
+      ))}
     </div>
   );
 });
@@ -141,7 +161,7 @@ const UserCard = memo(
   (prevProps, nextProps) => {
     // Return true if props are equal (skip re-render)
     return prevProps.user.id === nextProps.user.id;
-  }
+  },
 );
 ```
 
@@ -181,10 +201,13 @@ function Parent() {
   const config = { theme: 'dark', count };
 
   // ✅ Good - Memoized object
-  const config = useMemo(() => ({
-    theme: 'dark',
-    count
-  }), [count]);
+  const config = useMemo(
+    () => ({
+      theme: 'dark',
+      count,
+    }),
+    [count],
+  );
 
   return <Child config={config} />;
 }
@@ -222,20 +245,19 @@ function Parent() {
 function TodoList({ todos }) {
   const [filter, setFilter] = useState('all');
 
-  const handleToggle = useCallback((id) => {
-    // Function recreated only when todos change
-    const todo = todos.find(t => t.id === id);
-    console.log('Toggling:', todo);
-  }, [todos]);
+  const handleToggle = useCallback(
+    id => {
+      // Function recreated only when todos change
+      const todo = todos.find(t => t.id === id);
+      console.log('Toggling:', todo);
+    },
+    [todos],
+  );
 
   return (
     <div>
       {todos.map(todo => (
-        <TodoItem 
-          key={todo.id}
-          todo={todo}
-          onToggle={handleToggle}
-        />
+        <TodoItem key={todo.id} todo={todo} onToggle={handleToggle} />
       ))}
     </div>
   );
@@ -307,9 +329,7 @@ import { FixedSizeList } from 'react-window';
 
 function VirtualList({ items }) {
   const Row = ({ index, style }) => (
-    <div style={style}>
-      {items[index].name}
-    </div>
+    <div style={style}>{items[index].name}</div>
   );
 
   return (
@@ -335,9 +355,7 @@ function InfiniteList({ items }) {
     <Virtuoso
       style={{ height: '600px' }}
       data={items}
-      itemContent={(index, item) => (
-        <div>{item.name}</div>
-      )}
+      itemContent={(index, item) => <div>{item.name}</div>}
     />
   );
 }
@@ -378,9 +396,9 @@ function SearchBox() {
   }, [debouncedSearchTerm]);
 
   return (
-    <input 
+    <input
       value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      onChange={e => setSearchTerm(e.target.value)}
       placeholder="Search..."
     />
   );
@@ -426,14 +444,7 @@ function ScrollTracker() {
 
 ```jsx
 function LazyImage({ src, alt }) {
-  return (
-    <img 
-      src={src}
-      alt={alt}
-      loading="lazy"
-      decoding="async"
-    />
-  );
+  return <img src={src} alt={alt} loading="lazy" decoding="async" />;
 }
 ```
 
@@ -453,12 +464,7 @@ function ProgressiveImage({ placeholder, src, alt }) {
     };
   }, [src]);
 
-  return (
-    <img 
-      src={imageSrc}
-      alt={alt}
-    />
-  );
+  return <img src={imageSrc} alt={alt} />;
 }
 ```
 
@@ -501,7 +507,7 @@ function onRenderCallback(
   actualDuration,
   baseDuration,
   startTime,
-  commitTime
+  commitTime,
 ) {
   console.log(`${id} (${phase}) took ${actualDuration}ms`);
 }
@@ -523,35 +529,39 @@ function App() {
 
 ```jsx
 // ❌ Bad - New function on every render
-<button onClick={() => handleClick(id)}>Click</button>
+<button onClick={() => handleClick(id)}>Click</button>;
 
 // ✅ Good - Memoized function
 const handleClick = useCallback(() => {
   doSomething(id);
 }, [id]);
 
-<button onClick={handleClick}>Click</button>
+<button onClick={handleClick}>Click</button>;
 ```
 
 ### 2. **Use Keys Properly**
 
 ```jsx
 // ❌ Bad - Index as key
-{items.map((item, index) => <div key={index}>{item}</div>)}
+{
+  items.map((item, index) => <div key={index}>{item}</div>);
+}
 
 // ✅ Good - Unique ID
-{items.map(item => <div key={item.id}>{item}</div>)}
+{
+  items.map(item => <div key={item.id}>{item}</div>);
+}
 ```
 
 ### 3. **Avoid Creating Objects in Render**
 
 ```jsx
 // ❌ Bad - New object every render
-<Component style={{ margin: 10 }} />
+<Component style={{ margin: 10 }} />;
 
 // ✅ Good - Define outside or use useMemo
 const style = { margin: 10 };
-<Component style={style} />
+<Component style={style} />;
 ```
 
 ### 4. **Use Production Build**
@@ -583,8 +593,8 @@ const About = lazy(() => import('./About'));
 const value = useMemo(() => x + y, [x, y]); // Overkill for simple calc
 
 // ✅ Optimize when needed
-const filteredList = useMemo(() => 
-  items.filter(expensive computation), 
+const filteredList = useMemo(() =>
+  items.filter(expensive computation),
   [items]
 );
 ```

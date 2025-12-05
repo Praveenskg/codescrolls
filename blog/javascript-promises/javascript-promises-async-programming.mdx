@@ -1,19 +1,38 @@
 ---
 title: 'JavaScript Promises: From Callback Hell to Async/Await Mastery'
-description: 'Master asynchronous JavaScript with Promises, async/await, error handling, and advanced patterns. Learn to write clean, maintainable async code with practical examples and best practices.'
+description:
+  'Master asynchronous JavaScript with Promises, async/await, error handling,
+  and advanced patterns. Learn to write clean, maintainable async code with
+  practical examples and best practices.'
 slug: javascript-promises-async-programming
 authors: praveen
 image: /img/blog/js-closures-banner.png
 date: 2025-10-15
-keywords: ['javascript promises', 'async await', 'asynchronous programming', 'callback hell', 'promise chaining', 'error handling', 'javascript async', 'promise.all', 'promise.race']
-tags: [javascript, promises, async, await, asynchronous, callbacks, error-handling]
+keywords:
+  [
+    'javascript promises',
+    'async await',
+    'asynchronous programming',
+    'callback hell',
+    'promise chaining',
+    'error handling',
+    'javascript async',
+    'promise.all',
+    'promise.race',
+  ]
+tags:
+  [javascript, promises, async, await, asynchronous, callbacks, error-handling]
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 
 # 🔄 JavaScript Promises: From Callback Hell to Async/Await Mastery
 
-Asynchronous programming is at the heart of modern JavaScript applications. Whether you're fetching data from APIs, reading files, or handling user interactions, understanding asynchronous patterns is crucial for writing efficient, maintainable code. In this comprehensive guide, we'll journey from the dreaded "callback hell" through Promises to the elegance of async/await.
+Asynchronous programming is at the heart of modern JavaScript applications.
+Whether you're fetching data from APIs, reading files, or handling user
+interactions, understanding asynchronous patterns is crucial for writing
+efficient, maintainable code. In this comprehensive guide, we'll journey from
+the dreaded "callback hell" through Promises to the elegance of async/await.
 
 {/* truncate */}
 
@@ -40,6 +59,7 @@ Asynchronous programming is at the heart of modern JavaScript applications. Whet
 ## ⚡ The Problem: Synchronous vs Asynchronous {#the-problem-synchronous-vs-asynchronous}
 
 ### **Synchronous Code**
+
 ```javascript
 // Synchronous: Each line executes sequentially
 console.log('Start');
@@ -49,6 +69,7 @@ console.log('End');
 ```
 
 ### **Asynchronous Code**
+
 ```javascript
 // Asynchronous: Operations don't block execution
 console.log('Start');
@@ -74,33 +95,52 @@ console.log('End');
 
 ### **What is Callback Hell?**
 
-Callback hell (also known as "pyramid of doom") occurs when you nest multiple asynchronous operations using callbacks, creating deeply nested, hard-to-read code.
+Callback hell (also known as "pyramid of doom") occurs when you nest multiple
+asynchronous operations using callbacks, creating deeply nested, hard-to-read
+code.
 
 ```javascript
 // ❌ Callback Hell Example
-getUser(userId, function(user) {
-  getPosts(user.id, function(posts) {
-    getComments(posts[0].id, function(comments) {
-      getLikes(comments[0].id, function(likes) {
-        console.log('User:', user.name);
-        console.log('Post:', posts[0].title);
-        console.log('Comment:', comments[0].text);
-        console.log('Likes:', likes.length);
-      }, function(error) {
-        console.error('Error getting likes:', error);
-      });
-    }, function(error) {
-      console.error('Error getting comments:', error);
-    });
-  }, function(error) {
-    console.error('Error getting posts:', error);
-  });
-}, function(error) {
-  console.error('Error getting user:', error);
-});
+getUser(
+  userId,
+  function (user) {
+    getPosts(
+      user.id,
+      function (posts) {
+        getComments(
+          posts[0].id,
+          function (comments) {
+            getLikes(
+              comments[0].id,
+              function (likes) {
+                console.log('User:', user.name);
+                console.log('Post:', posts[0].title);
+                console.log('Comment:', comments[0].text);
+                console.log('Likes:', likes.length);
+              },
+              function (error) {
+                console.error('Error getting likes:', error);
+              },
+            );
+          },
+          function (error) {
+            console.error('Error getting comments:', error);
+          },
+        );
+      },
+      function (error) {
+        console.error('Error getting posts:', error);
+      },
+    );
+  },
+  function (error) {
+    console.error('Error getting user:', error);
+  },
+);
 ```
 
 ### **Problems with Callbacks**
+
 - **Difficult to read** - Deep nesting and indentation
 - **Error handling** - Repetitive error callbacks
 - **Control flow** - Complex conditional logic
@@ -113,7 +153,8 @@ getUser(userId, function(user) {
 
 ### **What is a Promise?**
 
-A Promise represents the eventual completion (or failure) of an asynchronous operation and its resulting value.
+A Promise represents the eventual completion (or failure) of an asynchronous
+operation and its resulting value.
 
 ```javascript
 // Promise anatomy
@@ -150,6 +191,7 @@ getUser(userId)
 ```
 
 ### **Promise Benefits**
+
 - **Flat structure** - No more deep nesting
 - **Better error handling** - Single `.catch()` for all errors
 - **Chainable** - Easy to compose operations
@@ -168,9 +210,9 @@ const promise = new Promise((resolve, reject) => {
   setTimeout(() => {
     const success = Math.random() > 0.5;
     if (success) {
-      resolve('Success!');  // State: Fulfilled
+      resolve('Success!'); // State: Fulfilled
     } else {
-      reject('Error!');     // State: Rejected
+      reject('Error!'); // State: Rejected
     }
   }, 1000);
 });
@@ -182,11 +224,13 @@ promise
 ```
 
 ### **Promise State Transitions**
+
 - **Pending** → **Fulfilled** (via `resolve()`)
 - **Pending** → **Rejected** (via `reject()`)
 - **Fulfilled/Rejected** states are **immutable**
 
 ### **Settled vs Unsettled**
+
 ```javascript
 // Once settled, state cannot change
 const promise = Promise.resolve('done');
@@ -243,13 +287,12 @@ readFilePromise('data.txt')
 
 ```javascript
 function fetchUser(userId) {
-  return fetch(`https://api.example.com/users/${userId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    });
+  return fetch(`https://api.example.com/users/${userId}`).then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  });
 }
 
 // Usage
@@ -266,9 +309,9 @@ fetchUser(123)
 
 ```javascript
 promise
-  .then(onFulfilled, onRejected)  // Both handlers (optional onRejected)
-  .then(onFulfilled)               // Only success handler
-  .catch(onRejected)               // Only error handler
+  .then(onFulfilled, onRejected) // Both handlers (optional onRejected)
+  .then(onFulfilled) // Only success handler
+  .catch(onRejected); // Only error handler
 ```
 
 ### **Multiple Handlers**
@@ -291,8 +334,8 @@ promise.then(result => console.log('Handler 3:', result));
 ```javascript
 // Each .then() can transform the value
 Promise.resolve(5)
-  .then(value => value * 2)        // 10
-  .then(value => value + 10)       // 20
+  .then(value => value * 2) // 10
+  .then(value => value + 10) // 20
   .then(value => `Result: ${value}`) // "Result: 20"
   .then(result => console.log(result));
 ```
@@ -305,18 +348,15 @@ Promise.resolve(5)
 
 ```javascript
 // ❌ Without chaining
-getUser(userId)
-  .then(user => {
-    console.log('User:', user);
-    getPosts(user.id)
-      .then(posts => {
-        console.log('Posts:', posts);
-        getComments(posts[0].id)
-          .then(comments => {
-            console.log('Comments:', comments);
-          });
-      });
+getUser(userId).then(user => {
+  console.log('User:', user);
+  getPosts(user.id).then(posts => {
+    console.log('Posts:', posts);
+    getComments(posts[0].id).then(comments => {
+      console.log('Comments:', comments);
+    });
   });
+});
 
 // ✅ With chaining
 getUser(userId)
@@ -421,7 +461,8 @@ function fetchDataWithRetry(url, maxRetries = 3) {
 
 ### **What is Async/Await?**
 
-Async/await is syntactic sugar over Promises, making asynchronous code look synchronous.
+Async/await is syntactic sugar over Promises, making asynchronous code look
+synchronous.
 
 ```javascript
 // Without async/await
@@ -454,9 +495,15 @@ async function getUserData() {
 
 ```javascript
 // ✅ Valid async function declarations
-async function myFunction() { /* ... */ }
-const myFunction = async () => { /* ... */ }
-const myFunction = async function() { /* ... */ }
+async function myFunction() {
+  /* ... */
+}
+const myFunction = async () => {
+  /* ... */
+};
+const myFunction = async function () {
+  /* ... */
+};
 
 // Async functions always return Promises
 async function getData() {
@@ -506,7 +553,7 @@ async function fetchMultipleResources() {
     const [users, posts, comments] = await Promise.all([
       fetchUsers(),
       fetchPosts(),
-      fetchComments()
+      fetchComments(),
     ]);
     return { users, posts, comments };
   } catch (error) {
@@ -528,7 +575,7 @@ const promises = [
   fetchUser(2),
   fetchUser(3),
   fetchPosts(),
-  fetchComments()
+  fetchComments(),
 ];
 
 Promise.all(promises)
@@ -547,21 +594,20 @@ Promise.all(promises)
 ```javascript
 // Wait for all promises to settle (resolve or reject)
 const promises = [
-  fetchUser(1),    // Might succeed
-  fetchUser(999),  // Might fail (user not found)
-  fetchPosts()     // Might succeed
+  fetchUser(1), // Might succeed
+  fetchUser(999), // Might fail (user not found)
+  fetchPosts(), // Might succeed
 ];
 
-Promise.allSettled(promises)
-  .then(results => {
-    results.forEach((result, index) => {
-      if (result.status === 'fulfilled') {
-        console.log(`Promise ${index} succeeded:`, result.value);
-      } else {
-        console.log(`Promise ${index} failed:`, result.reason);
-      }
-    });
+Promise.allSettled(promises).then(results => {
+  results.forEach((result, index) => {
+    if (result.status === 'fulfilled') {
+      console.log(`Promise ${index} succeeded:`, result.value);
+    } else {
+      console.log(`Promise ${index} failed:`, result.reason);
+    }
   });
+});
 ```
 
 ### **Promise.race() - First to Complete**
@@ -569,9 +615,9 @@ Promise.allSettled(promises)
 ```javascript
 // Return the first promise that settles
 const promises = [
-  fetchFromCDN(),      // Fast but might fail
-  fetchFromOrigin(),   // Slower but reliable
-  timeoutPromise(5000) // Timeout after 5 seconds
+  fetchFromCDN(), // Fast but might fail
+  fetchFromOrigin(), // Slower but reliable
+  timeoutPromise(5000), // Timeout after 5 seconds
 ];
 
 Promise.race(promises)
@@ -588,9 +634,9 @@ Promise.race(promises)
 ```javascript
 // Return the first promise that fulfills (ignores rejections)
 const promises = [
-  fetchFromCDN(),     // Fast but unreliable
-  fetchFromCache(),   // Medium speed
-  fetchFromOrigin()   // Slow but reliable
+  fetchFromCDN(), // Fast but unreliable
+  fetchFromCache(), // Medium speed
+  fetchFromOrigin(), // Slow but reliable
 ];
 
 Promise.any(promises)
@@ -619,9 +665,9 @@ class ApiService {
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        ...options.headers
+        ...options.headers,
       },
-      ...options
+      ...options,
     };
 
     try {
@@ -647,7 +693,7 @@ class ApiService {
   async createUser(userData) {
     return this.request('/users', {
       method: 'POST',
-      body: JSON.stringify(userData)
+      body: JSON.stringify(userData),
     });
   }
 }
@@ -663,7 +709,7 @@ async function uploadFile(file, onProgress) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
 
-    xhr.upload.addEventListener('progress', (event) => {
+    xhr.upload.addEventListener('progress', event => {
       if (event.lengthComputable && onProgress) {
         const percentComplete = (event.loaded / event.total) * 100;
         onProgress(percentComplete);
@@ -696,11 +742,11 @@ async function uploadFile(file, onProgress) {
 const fileInput = document.getElementById('fileInput');
 const progressBar = document.getElementById('progressBar');
 
-fileInput.addEventListener('change', async (event) => {
+fileInput.addEventListener('change', async event => {
   const file = event.target.files[0];
   if (file) {
     try {
-      const result = await uploadFile(file, (progress) => {
+      const result = await uploadFile(file, progress => {
         progressBar.style.width = `${progress}%`;
       });
       console.log('Upload successful:', result);
@@ -723,7 +769,8 @@ class DatabaseService {
     // Simulate database connection
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (Math.random() > 0.1) { // 90% success rate
+        if (Math.random() > 0.1) {
+          // 90% success rate
           resolve({ connected: true });
         } else {
           reject(new Error('Connection failed'));
@@ -739,7 +786,10 @@ class DatabaseService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (sql.includes('SELECT')) {
-          resolve([{ id: 1, name: 'John' }, { id: 2, name: 'Jane' }]);
+          resolve([
+            { id: 1, name: 'John' },
+            { id: 2, name: 'Jane' },
+          ]);
         } else if (sql.includes('INSERT')) {
           resolve({ insertId: 3, affectedRows: 1 });
         } else {
@@ -779,7 +829,7 @@ async function transferMoney(fromAccount, toAccount, amount) {
     // Check balance
     const [fromBalance] = await db.query(
       'SELECT balance FROM accounts WHERE id = ?',
-      [fromAccount]
+      [fromAccount],
     );
 
     if (fromBalance.balance < amount) {
@@ -787,16 +837,16 @@ async function transferMoney(fromAccount, toAccount, amount) {
     }
 
     // Deduct from sender
-    await db.query(
-      'UPDATE accounts SET balance = balance - ? WHERE id = ?',
-      [amount, fromAccount]
-    );
+    await db.query('UPDATE accounts SET balance = balance - ? WHERE id = ?', [
+      amount,
+      fromAccount,
+    ]);
 
     // Add to receiver
-    await db.query(
-      'UPDATE accounts SET balance = balance + ? WHERE id = ?',
-      [amount, toAccount]
-    );
+    await db.query('UPDATE accounts SET balance = balance + ? WHERE id = ?', [
+      amount,
+      toAccount,
+    ]);
 
     return { success: true, amount };
   });
@@ -841,7 +891,7 @@ async function fetchUserProfile(userId) {
 
     return {
       user: userData,
-      profile: profileData
+      profile: profileData,
     };
   } catch (error) {
     throw new Error(`Failed to fetch user profile: ${error.message}`);
@@ -893,7 +943,7 @@ async function loadDashboardData(userId) {
   const [user, posts, notifications] = await Promise.all([
     fetchUser(userId),
     fetchUserPosts(userId),
-    fetchNotifications(userId)
+    fetchNotifications(userId),
   ]);
 
   return { user, posts, notifications };
@@ -1158,16 +1208,18 @@ function complexChain() {
 
 ## 🎯 Final Thoughts
 
-Mastering asynchronous JavaScript is essential for modern web development. Here's your roadmap:
+Mastering asynchronous JavaScript is essential for modern web development.
+Here's your roadmap:
 
-**1. Understand the Problem** - Why synchronous code doesn't work for I/O
-**2. Learn Callbacks** - Basic async pattern (but avoid callback hell)
-**3. Master Promises** - Clean async code with chaining and error handling
-**4. Embrace Async/Await** - Write async code that looks synchronous
-**5. Learn Advanced Patterns** - Promise.all, Promise.race, error recovery
-**6. Apply Best Practices** - Error handling, performance, maintainability
+**1. Understand the Problem** - Why synchronous code doesn't work for I/O **2.
+Learn Callbacks** - Basic async pattern (but avoid callback hell) **3. Master
+Promises** - Clean async code with chaining and error handling **4. Embrace
+Async/Await** - Write async code that looks synchronous **5. Learn Advanced
+Patterns** - Promise.all, Promise.race, error recovery **6. Apply Best
+Practices** - Error handling, performance, maintainability
 
 **Key Takeaways:**
+
 - **Promises eliminate callback hell** with clean, chainable syntax
 - **Async/await makes async code readable** like synchronous code
 - **Always handle errors** with try/catch or .catch()
@@ -1175,11 +1227,13 @@ Mastering asynchronous JavaScript is essential for modern web development. Here'
 - **Create utility functions** for common async patterns
 - **Test async code thoroughly** - timing matters!
 
-**Remember:** Asynchronous programming is not just about syntax—it's about understanding execution flow, error handling, and performance optimization.
+**Remember:** Asynchronous programming is not just about syntax—it's about
+understanding execution flow, error handling, and performance optimization.
 
 **Happy async coding! 🎉**
 
-*Recommended Resources:*
+_Recommended Resources:_
+
 - [MDN Promise Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 - [JavaScript Info: Promises](https://javascript.info/promise-basics)
 - [Async/Await Guide](https://javascript.info/async-await)

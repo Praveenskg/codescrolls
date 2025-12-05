@@ -2,19 +2,33 @@
 id: refs
 title: Refs in React
 sidebar_position: 8
-description: Learn how to use refs in React to access DOM elements and component instances, including useRef, forwardRef, and useImperativeHandle.
-keywords: [react refs, useRef, forwardRef, useImperativeHandle, dom manipulation, react reference, ref callback]
+description:
+  Learn how to use refs in React to access DOM elements and component instances,
+  including useRef, forwardRef, and useImperativeHandle.
+keywords:
+  [
+    react refs,
+    useRef,
+    forwardRef,
+    useImperativeHandle,
+    dom manipulation,
+    react reference,
+    ref callback,
+  ]
 ---
 
 # Refs in React
 
-**Refs** provide a way to access DOM nodes or React elements directly. They're useful when you need to interact with the DOM imperatively or store mutable values that don't trigger re-renders.
+**Refs** provide a way to access DOM nodes or React elements directly. They're
+useful when you need to interact with the DOM imperatively or store mutable
+values that don't trigger re-renders.
 
 ---
 
 ## 📌 What are Refs?
 
 Refs allow you to:
+
 - Access DOM elements directly
 - Store mutable values that persist across renders
 - Interact with third-party libraries
@@ -52,7 +66,7 @@ const myRef = useRef(initialValue);
 
 // myRef = { current: initialValue }
 console.log(myRef.current); // Access the value
-myRef.current = newValue;   // Update the value
+myRef.current = newValue; // Update the value
 ```
 
 ---
@@ -81,18 +95,18 @@ function ScrollToSection() {
   const sectionRef = useRef(null);
 
   const scrollToSection = () => {
-    sectionRef.current.scrollIntoView({ 
+    sectionRef.current.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start',
     });
   };
 
   return (
     <div>
       <button onClick={scrollToSection}>Scroll to Section</button>
-      
+
       <div style={{ height: '1000px' }}>Content...</div>
-      
+
       <div ref={sectionRef}>
         <h2>Target Section</h2>
       </div>
@@ -120,7 +134,9 @@ function MeasureElement() {
       <div ref={elementRef} style={{ padding: '20px', background: '#f0f0f0' }}>
         Measure me!
       </div>
-      <p>Width: {dimensions.width}px, Height: {dimensions.height}px</p>
+      <p>
+        Width: {dimensions.width}px, Height: {dimensions.height}px
+      </p>
     </div>
   );
 }
@@ -144,7 +160,7 @@ function VideoPlayer() {
       <video ref={videoRef} width="400">
         <source src="video.mp4" type="video/mp4" />
       </video>
-      
+
       <div>
         <button onClick={play}>Play</button>
         <button onClick={pause}>Pause</button>
@@ -247,17 +263,14 @@ function ExpensiveComponent() {
 function DynamicList({ items }) {
   const itemRefs = useRef({});
 
-  const scrollToItem = (id) => {
+  const scrollToItem = id => {
     itemRefs.current[id]?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div>
       {items.map(item => (
-        <div 
-          key={item.id}
-          ref={(el) => itemRefs.current[item.id] = el}
-        >
+        <div key={item.id} ref={el => (itemRefs.current[item.id] = el)}>
           {item.name}
         </div>
       ))}
@@ -329,11 +342,9 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput = forwardRef<HTMLInputElement, InputProps>(
-  (props, ref) => {
-    return <input ref={ref} {...props} />;
-  }
-);
+const CustomInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  return <input ref={ref} {...props} />;
+});
 ```
 
 ---
@@ -357,7 +368,7 @@ const FancyInput = forwardRef((props, ref) => {
     },
     getValue: () => {
       return inputRef.current.value;
-    }
+    },
   }));
 
   return <input ref={inputRef} {...props} />;
@@ -390,7 +401,7 @@ const Modal = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
-    toggle: () => setIsOpen(prev => !prev)
+    toggle: () => setIsOpen(prev => !prev),
   }));
 
   if (!isOpen) return null;
@@ -411,7 +422,7 @@ function App() {
   return (
     <div>
       <button onClick={() => modalRef.current.open()}>Open Modal</button>
-      
+
       <Modal ref={modalRef}>
         <h2>Modal Content</h2>
       </Modal>
@@ -430,7 +441,7 @@ function App() {
 function Form() {
   const formRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
     const data = Object.fromEntries(formData);
@@ -446,7 +457,9 @@ function Form() {
       <input name="username" placeholder="Username" />
       <input name="email" type="email" placeholder="Email" />
       <button type="submit">Submit</button>
-      <button type="button" onClick={resetForm}>Reset</button>
+      <button type="button" onClick={resetForm}>
+        Reset
+      </button>
     </form>
   );
 }
@@ -482,7 +495,7 @@ function MapComponent() {
     // Initialize map library
     mapInstanceRef.current = new MapLibrary(mapRef.current, {
       center: { lat: 0, lng: 0 },
-      zoom: 10
+      zoom: 10,
     });
 
     return () => {
@@ -499,13 +512,13 @@ function MapComponent() {
 
 ## 🔸 Refs vs State
 
-| Feature | Refs | State |
-|---------|------|-------|
-| **Triggers re-render** | ❌ No | ✅ Yes |
-| **Mutable** | ✅ Yes | ❌ No (use setState) |
-| **Async updates** | ❌ No (immediate) | ✅ Yes |
-| **Use case** | DOM access, timers | UI data |
-| **Persistence** | ✅ Across renders | ✅ Across renders |
+| Feature                | Refs               | State                |
+| ---------------------- | ------------------ | -------------------- |
+| **Triggers re-render** | ❌ No              | ✅ Yes               |
+| **Mutable**            | ✅ Yes             | ❌ No (use setState) |
+| **Async updates**      | ❌ No (immediate)  | ✅ Yes               |
+| **Use case**           | DOM access, timers | UI data              |
+| **Persistence**        | ✅ Across renders  | ✅ Across renders    |
 
 ### When to Use Refs
 
@@ -573,7 +586,7 @@ useEffect(() => {
   const timer = setInterval(() => {
     // Do something
   }, 1000);
-  
+
   timerRef.current = timer;
 
   return () => {
@@ -600,7 +613,7 @@ const getValue = () => inputRef.current.value;
 
 // ✅ Good - Controlled component
 const [value, setValue] = useState('');
-<input value={value} onChange={(e) => setValue(e.target.value)} />
+<input value={value} onChange={e => setValue(e.target.value)} />;
 ```
 
 ---

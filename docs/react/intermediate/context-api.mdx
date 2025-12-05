@@ -1,7 +1,9 @@
 ---
 id: context-api
 title: React Context API
-description: Learn how to manage global state in React using Context API with practical examples and live code.
+description:
+  Learn how to manage global state in React using Context API with practical
+  examples and live code.
 keywords: [react, context api, global state, state management, hooks]
 sidebar_position: 2
 ---
@@ -11,7 +13,9 @@ import TabItem from '@theme/TabItem';
 
 # 🧩 React Context API
 
-React's Context API is a way to manage **global state** across your app — like theme, auth, or user preferences — without passing props manually at every level.
+React's Context API is a way to manage **global state** across your app — like
+theme, auth, or user preferences — without passing props manually at every
+level.
 
 ---
 
@@ -43,7 +47,11 @@ const ThemeContext = createContext();
 function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 ```
 
@@ -60,7 +68,9 @@ function ThemeSwitcher() {
   return (
     <div>
       <p>Current theme: {theme}</p>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>Toggle Theme</button>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        Toggle Theme
+      </button>
     </div>
   );
 }
@@ -90,7 +100,8 @@ function App() {
 
 ---
 
-> 💡 **Context is perfect for global, read-heavy data**. For dynamic or large apps, you may consider libraries like Redux or Zustand.
+> 💡 **Context is perfect for global, read-heavy data**. For dynamic or large
+> apps, you may consider libraries like Redux or Zustand.
 
 ---
 

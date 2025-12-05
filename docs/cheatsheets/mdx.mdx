@@ -14,13 +14,16 @@ import Link from '@docusaurus/Link';
 
 # 📘 MDX Cheatsheet
 
-A quick reference guide to writing MDX – Markdown + JSX. Perfect for Docusaurus, Next.js, and other static site generators that support interactive documentation.
+A quick reference guide to writing MDX – Markdown + JSX. Perfect for Docusaurus,
+Next.js, and other static site generators that support interactive
+documentation.
 
 ---
 
 ## 🔍 What is MDX?
 
-MDX lets you use **JSX (React components)** directly in Markdown files. It's like Markdown supercharged with interactivity.
+MDX lets you use **JSX (React components)** directly in Markdown files. It's
+like Markdown supercharged with interactivity.
 
 ---
 
@@ -45,7 +48,7 @@ _Italic_
 > This is a blockquote
 
 | Column 1 | Column 2 |
-|----------|----------|
+| -------- | -------- |
 | Data 1   | Data 2   |
 
 - [x] Completed task
@@ -76,54 +79,33 @@ import MyComponent from '../components/MyComponent';
 ## 💡 Admonitions
 
 ```md
-:::note
-This is a note.
-:::
+:::note This is a note. :::
 
-:::tip
-This is a tip.
-:::
+:::tip This is a tip. :::
 
-:::info
-This is some information.
-:::
+:::info This is some information. :::
 
-:::warning
-This is a warning.
-:::
+:::warning This is a warning. :::
 
-:::danger
-This is a danger alert!
-:::
+:::danger This is a danger alert! :::
 ```
 
-| Type       | Syntax Example | Color  |
-| ---------- | -------------- | ------ |
-| note     | `:::note`       | Gray  |
+| Type    | Syntax Example | Color  |
+| ------- | -------------- | ------ |
+| note    | `:::note`      | Gray   |
 | Tip     | `:::tip`       | Green  |
 | Info    | `:::info`      | Blue   |
 | Warning | `:::warning`   | Orange |
 | Danger  | `:::danger`    | Red    |
 
-**Output:**
-:::note
-This is a note.
-:::
+**Output:** :::note This is a note. :::
 
-:::tip
-This is a tip.
-:::
-:::info
-This is some information.
-:::
+:::tip This is a tip. ::: :::info This is some information. :::
 
-:::warning
-This is a warning.
-:::
+:::warning This is a warning. :::
 
-:::danger
-This is a danger alert!
-:::
+:::danger This is a danger alert! :::
+
 ---
 
 ## 🧪 Code Blocks
@@ -131,7 +113,7 @@ This is a danger alert!
 ### Static Code Block
 
 ```js
-const greet = (name) => `Hello, ${name}`;
+const greet = name => `Hello, ${name}`;
 ```
 
 ### Live Code Block (Docusaurus)
@@ -139,7 +121,7 @@ const greet = (name) => `Hello, ${name}`;
 ```mdx
 import LiveCodeBlock from '@theme/LiveCodeBlock';
 
-<LiveCodeBlock language='js'>{`
+<LiveCodeBlock language="js">{`
 function Hello() {
   return 'Hi!';
 }
@@ -155,7 +137,7 @@ console.log(Hello());
 // MyCard.jsx
 export default function MyCard({ title, children }) {
   return (
-    <div className='p-4 rounded-xl bg-blue-50 shadow'>
+    <div className="p-4 rounded-xl bg-blue-50 shadow">
       <h3>{title}</h3>
       <div>{children}</div>
     </div>
@@ -168,7 +150,7 @@ Usage in MDX:
 ```mdx
 import MyCard from '../components/MyCard';
 
-<MyCard title='Note'>This is a custom note card.</MyCard>
+<MyCard title="Note">This is a custom note card.</MyCard>
 ```
 
 ---
@@ -191,17 +173,17 @@ image: /img/cover.png
 
 ### Common Frontmatter Fields
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `id` | Unique identifier | `hello-mdx` |
-| `title` | Page title | `Hello from MDX` |
-| `sidebar_label` | Sidebar display name | `Hello MDX` |
-| `description` | Meta description | `MDX frontmatter example` |
-| `keywords` | SEO keywords | `[mdx, markdown, react]` |
-| `tags` | Content tags | `[tutorial, guide]` |
-| `authors` | Author references | `[author-name]` |
-| `date` | Publication date | `2024-01-15` |
-| `image` | Featured image | `/img/cover.png` |
+| Field           | Description          | Example                   |
+| --------------- | -------------------- | ------------------------- |
+| `id`            | Unique identifier    | `hello-mdx`               |
+| `title`         | Page title           | `Hello from MDX`          |
+| `sidebar_label` | Sidebar display name | `Hello MDX`               |
+| `description`   | Meta description     | `MDX frontmatter example` |
+| `keywords`      | SEO keywords         | `[mdx, markdown, react]`  |
+| `tags`          | Content tags         | `[tutorial, guide]`       |
+| `authors`       | Author references    | `[author-name]`           |
+| `date`          | Publication date     | `2024-01-15`              |
+| `image`         | Featured image       | `/img/cover.png`          |
 
 ---
 
@@ -210,25 +192,27 @@ image: /img/cover.png
 ### Basic Images
 
 ```mdx
-![Alt text](/img/example.png "Optional title")
+![Alt text](/img/example.png 'Optional title')
 ```
 
 ### Responsive Images
 
 ```jsx
-<img 
-  src="/img/example.png" 
-  alt="Description" 
-  style={{maxWidth: '100%', height: 'auto'}}
+<img
+  src="/img/example.png"
+  alt="Description"
+  style={{ maxWidth: '100%', height: 'auto' }}
 />
 ```
 
 ### Image with Caption
 
 ```jsx
-<div style={{textAlign: 'center'}}>
+<div style={{ textAlign: 'center' }}>
   <img src="/img/example.png" alt="Description" />
-  <p><em>Caption text</em></p>
+  <p>
+    <em>Caption text</em>
+  </p>
 </div>
 ```
 
@@ -243,11 +227,11 @@ import { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
-  
+
   return (
-    <div style={{textAlign: 'center', padding: '20px'}}>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
       <h3>Count: {count}</h3>
-      <button 
+      <button
         onClick={() => setCount(count + 1)}
         style={{
           padding: '10px 20px',
@@ -256,12 +240,12 @@ function Counter() {
           color: 'white',
           border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         Increment
       </button>
-      <button 
+      <button
         onClick={() => setCount(count - 1)}
         style={{
           padding: '10px 20px',
@@ -270,7 +254,7 @@ function Counter() {
           color: 'white',
           border: 'none',
           borderRadius: '4px',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
         Decrement
@@ -279,7 +263,7 @@ function Counter() {
   );
 }
 
-<Counter></Counter>
+<Counter></Counter>;
 ```
 
 ---
@@ -290,7 +274,7 @@ function Counter() {
 
 ````mdx
 ```js title="JavaScript Example"
-const greet = (name) => {
+const greet = name => {
   return `Hello, ${name}!`;
 };
 ```
@@ -326,19 +310,15 @@ function example() {
 ## 📊 Tables
 
 ```md
-| Feature | MDX | Markdown |
-|---------|-----|----------|
-| JSX Support | ✅ | ❌ |
-| Components | ✅ | ❌ |
-| Interactivity | ✅ | ❌ |
+| Feature       | MDX | Markdown |
+| ------------- | --- | -------- |
+| JSX Support   | ✅  | ❌       |
+| Components    | ✅  | ❌       |
+| Interactivity | ✅  | ❌       |
 ```
 
-**Output:**
-| Feature | MDX | Markdown |
-|---------|-----|----------|
-| JSX Support | ✅ | ❌ |
-| Components | ✅ | ❌ |
-| Interactivity | ✅ | ❌ |
+**Output:** | Feature | MDX | Markdown | |---------|-----|----------| | JSX
+Support | ✅ | ❌ | | Components | ✅ | ❌ | | Interactivity | ✅ | ❌ |
 
 ---
 
@@ -352,6 +332,7 @@ function example() {
 ```
 
 **Output:**
+
 - [x] Learn MDX basics
 - [x] Create custom components
 - [ ] Deploy to production
@@ -380,9 +361,8 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 ```
 
-**Output:**
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+**Output:** import Tabs from '@theme/Tabs'; import TabItem from
+'@theme/TabItem';
 
 <Tabs>
   <TabItem value="apple" label="Apple" default>
@@ -396,7 +376,6 @@ import TabItem from '@theme/TabItem';
   </TabItem>
 </Tabs>
 
-
 ### Collapsible Sections
 
 ```mdx
@@ -404,9 +383,7 @@ import Details from '@theme/Details';
 
 <Details>
   <summary>Click to expand</summary>
-  <div>
-    This content is hidden by default and can be expanded.
-  </div>
+  <div>This content is hidden by default and can be expanded.</div>
 </Details>
 ```
 
@@ -416,7 +393,9 @@ import Details from '@theme/Details';
 import Link from '@docusaurus/Link';
 
 <Link to="/docs/intro">Go to Introduction</Link>
-<Link to="/blog" target="_blank">External Blog Link</Link>
+<Link to="/blog" target="_blank">
+  External Blog Link
+</Link>
 ```
 
 ---
@@ -430,7 +409,7 @@ import { useState } from 'react';
 
 function ToggleContent() {
   const [show, setShow] = useState(false);
-  
+
   return (
     <div>
       <button onClick={() => setShow(!show)}>
@@ -441,7 +420,7 @@ function ToggleContent() {
   );
 }
 
-<ToggleContent></ToggleContent>
+<ToggleContent></ToggleContent>;
 ```
 
 ### Dynamic Imports
@@ -451,13 +430,13 @@ import { useState, useEffect } from 'react';
 
 function DynamicComponent() {
   const [Component, setComponent] = useState(null);
-  
+
   useEffect(() => {
     import('./MyComponent').then(module => {
       setComponent(() => module.default);
     });
   }, []);
-  
+
   return Component ? <Component></Component> : <div>Loading...</div>;
 }
 ```
@@ -470,24 +449,21 @@ export default function InfoBox({ type = 'info', children }) {
   const colors = {
     info: 'bg-blue-50 border-blue-200',
     warning: 'bg-yellow-50 border-yellow-200',
-    error: 'bg-red-50 border-red-200'
+    error: 'bg-red-50 border-red-200',
   };
-  
+
   return (
-    <div className={`p-4 border rounded-lg ${colors[type]}`}>
-      {children}
-    </div>
+    <div className={`p-4 border rounded-lg ${colors[type]}`}>{children}</div>
   );
 }
 ```
 
 Usage:
+
 ```mdx
 import InfoBox from '../components/InfoBox';
 
-<InfoBox type="warning">
-  This is a warning message!
-</InfoBox>
+<InfoBox type="warning">This is a warning message!</InfoBox>
 ```
 
 ---
@@ -526,7 +502,8 @@ module.exports = {
     mdx: {
       components: {
         // Global components available in all MDX files
-        MyGlobalComponent: require.resolve('./src/components/MyGlobalComponent'),
+        MyGlobalComponent:
+          require.resolve('./src/components/MyGlobalComponent'),
       },
     },
   },
@@ -560,18 +537,14 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'));
 
 <Suspense fallback={<div>Loading...</div>}>
   <HeavyComponent></HeavyComponent>
-</Suspense>
+</Suspense>;
 ```
 
 ### 3. Accessibility
 
 ```jsx
 // ✅ Good: Accessible components
-<button 
-  onClick={handleClick}
-  aria-label="Close dialog"
-  role="button"
->
+<button onClick={handleClick} aria-label="Close dialog" role="button">
   ×
 </button>
 ```
@@ -581,16 +554,22 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'));
 ## 🐛 Common Issues & Solutions
 
 ### Issue: JSX not rendering
+
 **Solution:** Ensure you're using `.mdx` extension, not `.md`
 
 ### Issue: Components not found
+
 **Solution:** Check import paths and ensure components are exported correctly
 
 ### Issue: Styling not applied
-**Solution:** Use `className` instead of `class`, and ensure CSS is properly imported
+
+**Solution:** Use `className` instead of `class`, and ensure CSS is properly
+imported
 
 ### Issue: Build errors
-**Solution:** Check for syntax errors in JSX and ensure all dependencies are installed
+
+**Solution:** Check for syntax errors in JSX and ensure all dependencies are
+installed
 
 ---
 

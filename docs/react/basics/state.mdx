@@ -2,19 +2,33 @@
 id: state
 title: State in React
 sidebar_position: 3
-description: Learn how to manage component state in React using useState hook, state updates, and best practices for state management.
-keywords: [react state, useState, state management, component state, react hooks, state updates]
+description:
+  Learn how to manage component state in React using useState hook, state
+  updates, and best practices for state management.
+keywords:
+  [
+    react state,
+    useState,
+    state management,
+    component state,
+    react hooks,
+    state updates,
+  ]
 ---
 
 # State in React
 
-**State** is data that changes over time in your component. Unlike props, state is **managed within the component** and can be updated, causing the component to re-render.
+**State** is data that changes over time in your component. Unlike props, state
+is **managed within the component** and can be updated, causing the component to
+re-render.
 
 ---
 
 ## 📌 What is State?
 
-State is a JavaScript object that holds data that may change during the component's lifecycle. When state changes, React re-renders the component to reflect the new data.
+State is a JavaScript object that holds data that may change during the
+component's lifecycle. When state changes, React re-renders the component to
+reflect the new data.
 
 ```jsx
 import { useState } from 'react';
@@ -25,9 +39,7 @@ function Counter() {
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );
 }
@@ -59,10 +71,7 @@ function TextInput() {
 
   return (
     <div>
-      <input 
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
+      <input value={text} onChange={e => setText(e.target.value)} />
       <p>You typed: {text}</p>
     </div>
   );
@@ -83,20 +92,20 @@ function UserForm() {
 
   return (
     <form>
-      <input 
+      <input
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={e => setName(e.target.value)}
         placeholder="Name"
       />
-      <input 
+      <input
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
         placeholder="Email"
       />
-      <input 
+      <input
         type="number"
         value={age}
-        onChange={(e) => setAge(Number(e.target.value))}
+        onChange={e => setAge(Number(e.target.value))}
         placeholder="Age"
       />
     </form>
@@ -135,12 +144,12 @@ const toggle = () => setIsOpen(!isOpen);
 const [items, setItems] = useState(['Apple', 'Banana']);
 
 // Add item
-const addItem = (item) => {
+const addItem = item => {
   setItems([...items, item]);
 };
 
 // Remove item
-const removeItem = (index) => {
+const removeItem = index => {
   setItems(items.filter((_, i) => i !== index));
 };
 ```
@@ -151,11 +160,11 @@ const removeItem = (index) => {
 const [user, setUser] = useState({
   name: 'John',
   age: 25,
-  email: 'john@example.com'
+  email: 'john@example.com',
 });
 
 // Update single property
-const updateName = (newName) => {
+const updateName = newName => {
   setUser({ ...user, name: newName });
 };
 ```
@@ -205,11 +214,7 @@ function Counter() {
     setCount(prev => prev + 1);
   };
 
-  return (
-    <button onClick={incrementThreeTimes}>
-      Count: {count}
-    </button>
-  );
+  return <button onClick={incrementThreeTimes}>Count: {count}</button>;
 }
 ```
 
@@ -222,7 +227,7 @@ function Counter() {
 ```jsx
 const [todos, setTodos] = useState([]);
 
-const addTodo = (text) => {
+const addTodo = text => {
   setTodos([...todos, { id: Date.now(), text }]);
 };
 ```
@@ -230,7 +235,7 @@ const addTodo = (text) => {
 ### Remove Item
 
 ```jsx
-const removeTodo = (id) => {
+const removeTodo = id => {
   setTodos(todos.filter(todo => todo.id !== id));
 };
 ```
@@ -239,9 +244,9 @@ const removeTodo = (id) => {
 
 ```jsx
 const updateTodo = (id, newText) => {
-  setTodos(todos.map(todo => 
-    todo.id === id ? { ...todo, text: newText } : todo
-  ));
+  setTodos(
+    todos.map(todo => (todo.id === id ? { ...todo, text: newText } : todo)),
+  );
 };
 ```
 
@@ -259,33 +264,34 @@ function TodoList() {
     }
   };
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo
-    ));
+  const toggleTodo = id => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo,
+      ),
+    );
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = id => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
     <div>
-      <input 
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+      <input value={input} onChange={e => setInput(e.target.value)} />
       <button onClick={addTodo}>Add</button>
-      
+
       <ul>
         {todos.map(todo => (
           <li key={todo.id}>
-            <input 
+            <input
               type="checkbox"
               checked={todo.done}
               onChange={() => toggleTodo(todo.id)}
             />
-            <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+            <span
+              style={{ textDecoration: todo.done ? 'line-through' : 'none' }}
+            >
               {todo.text}
             </span>
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
@@ -307,7 +313,7 @@ function TodoList() {
 const [user, setUser] = useState({
   name: 'John',
   age: 25,
-  email: 'john@example.com'
+  email: 'john@example.com',
 });
 
 // Update name
@@ -321,8 +327,8 @@ const [user, setUser] = useState({
   name: 'John',
   address: {
     city: 'New York',
-    country: 'USA'
-  }
+    country: 'USA',
+  },
 });
 
 // Update nested property
@@ -330,8 +336,8 @@ setUser({
   ...user,
   address: {
     ...user.address,
-    city: 'Los Angeles'
-  }
+    city: 'Los Angeles',
+  },
 });
 ```
 
@@ -342,37 +348,37 @@ function UserForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    age: 0
+    age: 0,
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log('Form data:', formData);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input 
+      <input
         name="name"
         value={formData.name}
         onChange={handleChange}
         placeholder="Name"
       />
-      <input 
+      <input
         name="email"
         value={formData.email}
         onChange={handleChange}
         placeholder="Email"
       />
-      <input 
+      <input
         name="age"
         type="number"
         value={formData.age}
@@ -417,12 +423,12 @@ function Component() {
 
 ## 🔸 State vs Props
 
-| Feature | State | Props |
-|---------|-------|-------|
-| **Ownership** | Owned by component | Passed from parent |
-| **Mutability** | Can be changed | Read-only |
-| **Purpose** | Internal data | External data |
-| **Updates** | Triggers re-render | Received from parent |
+| Feature        | State              | Props                |
+| -------------- | ------------------ | -------------------- |
+| **Ownership**  | Owned by component | Passed from parent   |
+| **Mutability** | Can be changed     | Read-only            |
+| **Purpose**    | Internal data      | External data        |
+| **Updates**    | Triggers re-render | Received from parent |
 
 ### Example
 
@@ -431,9 +437,7 @@ function Component() {
 function Parent() {
   const [count, setCount] = useState(0);
 
-  return (
-    <Child count={count} onIncrement={() => setCount(count + 1)} />
-  );
+  return <Child count={count} onIncrement={() => setCount(count + 1)} />;
 }
 
 // Child component (receives props)
@@ -484,7 +488,7 @@ const [email, setEmail] = useState('');
 const [user, setUser] = useState({
   firstName: '',
   lastName: '',
-  email: ''
+  email: '',
 });
 ```
 
@@ -555,7 +559,7 @@ const [user, setUser] = useState({
   name: '',
   email: '',
   age: 0,
-  address: ''
+  address: '',
 });
 ```
 
@@ -581,4 +585,5 @@ const [user, setUser] = useState({
 
 ---
 
-**State is the heart of React components. Master it to build dynamic, interactive UIs!** 🚀
+**State is the heart of React components. Master it to build dynamic,
+interactive UIs!** 🚀

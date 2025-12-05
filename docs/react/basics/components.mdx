@@ -1,21 +1,32 @@
 ---
 id: components
 title: React Components
-description: Learn how to build and use functional components, pass props, and manage state in React with practical live examples.
-keywords: [react, components, functional components, jsx, props, state, hooks, ui development]
+description:
+  Learn how to build and use functional components, pass props, and manage state
+  in React with practical live examples.
+keywords:
+  [
+    react,
+    components,
+    functional components,
+    jsx,
+    props,
+    state,
+    hooks,
+    ui development,
+  ]
 sidebar_position: 2
 ---
 
 # 🧱 React Components
 
-React components are the **building blocks** of every React application. They help structure your UI into reusable, independent pieces.
+React components are the **building blocks** of every React application. They
+help structure your UI into reusable, independent pieces.
 
-:::info Types of Components
-React has two primary types of components:
+:::info Types of Components React has two primary types of components:
 
 - 🧠 **Functional Components** – modern and most commonly used.
-- 🏗️ **Class Components** – older, but still work in legacy codebases.
-  :::
+- 🏗️ **Class Components** – older, but still work in legacy codebases. :::
 
 ---
 
@@ -38,7 +49,7 @@ function GreetUser({ name }) {
   return <h2>Hello, {name} 👋</h2>;
 }
 
-<GreetUser name='Praveen' />;
+<GreetUser name="Praveen" />;
 ```
 
 ---
@@ -50,7 +61,7 @@ function Button({ label, onClick }) {
   return <button onClick={onClick}>{label}</button>;
 }
 
-<Button label='Click Me' onClick={() => alert('Clicked!')} />;
+<Button label="Click Me" onClick={() => alert('Clicked!')} />;
 ```
 
 ---
@@ -88,8 +99,14 @@ function Card({ title, content }) {
 function App() {
   return (
     <>
-      <Card title='Intro to React' content='Learn to build UIs with components.' />
-      <Card title='Next Steps' content='Explore hooks, state, props, and more.' />
+      <Card
+        title="Intro to React"
+        content="Learn to build UIs with components."
+      />
+      <Card
+        title="Next Steps"
+        content="Explore hooks, state, props, and more."
+      />
     </>
   );
 }
@@ -101,7 +118,8 @@ function App() {
 
 ## 🆕 React 19.2: Activity Component
 
-The `<Activity />` component manages UI segments by controlling their visibility and resource usage without unmounting them.
+The `<Activity />` component manages UI segments by controlling their visibility
+and resource usage without unmounting them.
 
 ### Basic Usage
 
@@ -116,7 +134,7 @@ function App() {
       <button onClick={() => setShowDetails(!showDetails)}>
         Toggle Details
       </button>
-      
+
       <Activity visible={showDetails}>
         <ExpensiveComponent />
       </Activity>
@@ -160,7 +178,8 @@ function Dashboard() {
 
 ---
 
-> ⚡ Components should always be **pure functions** — given the same props, they must return the same UI output.
+> ⚡ Components should always be **pure functions** — given the same props, they
+> must return the same UI output.
 
 ---
 

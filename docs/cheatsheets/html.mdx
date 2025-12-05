@@ -11,29 +11,29 @@ import LiveCodeBlock from '@theme/LiveCodeBlock';
 
 # 🌐 HTML Cheatsheet
 
-A comprehensive reference guide for HTML elements, attributes, semantic markup, and best practices.
+A comprehensive reference guide for HTML elements, attributes, semantic markup,
+and best practices.
 
 ---
 
-:::info
-HTML (HyperText Markup Language) is the standard markup language for creating web pages and web applications.
-:::
+:::info HTML (HyperText Markup Language) is the standard markup language for
+creating web pages and web applications. :::
 
 ## 📄 Basic HTML Structure
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document Title</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Content goes here -->
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Title</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Content goes here -->
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -97,8 +97,8 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
 <sub>Subscript</sub>
 
 <!-- Line break & horizontal rule -->
-<br>
-<hr>
+<br />
+<hr />
 ```
 
 ---
@@ -140,33 +140,33 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
 
 ```html
 <!-- Basic image -->
-<img src="image.jpg" alt="Description of image">
+<img src="image.jpg" alt="Description of image" />
 
 <!-- Image with dimensions -->
-<img src="image.jpg" alt="Description" width="300" height="200">
+<img src="image.jpg" alt="Description" width="300" height="200" />
 
 <!-- Responsive image -->
-<img src="image.jpg" alt="Description" style="max-width: 100%; height: auto;">
+<img src="image.jpg" alt="Description" style="max-width: 100%; height: auto;" />
 
 <!-- Image with title -->
-<img src="image.jpg" alt="Description" title="Hover text">
+<img src="image.jpg" alt="Description" title="Hover text" />
 
 <!-- Figure with caption -->
 <figure>
-  <img src="diagram.jpg" alt="Process diagram">
+  <img src="diagram.jpg" alt="Process diagram" />
   <figcaption>Figure 1: Process flow diagram</figcaption>
 </figure>
 
 <!-- Video -->
 <video controls>
-  <source src="video.mp4" type="video/mp4">
-  <source src="video.webm" type="video/webm">
+  <source src="video.mp4" type="video/mp4" />
+  <source src="video.webm" type="video/webm" />
   Your browser does not support the video tag.
 </video>
 
 <!-- Audio -->
 <audio controls>
-  <source src="audio.mp3" type="audio/mpeg">
+  <source src="audio.mp3" type="audio/mpeg" />
   Your browser does not support the audio element.
 </audio>
 ```
@@ -179,7 +179,8 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
 <!-- Unordered list -->
 <ul>
   <li>First item</li>
-  <li>Second item
+  <li>
+    Second item
     <ul>
       <li>Nested item</li>
       <li>Another nested item</li>
@@ -216,7 +217,9 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
 
 ```html
 <table>
-  <caption>Employee Information</caption>
+  <caption>
+    Employee Information
+  </caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -252,23 +255,23 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
 <form action="/submit" method="post">
   <!-- Text input -->
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
+  <input type="text" id="name" name="name" required />
 
   <!-- Email input -->
   <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
+  <input type="email" id="email" name="email" required />
 
   <!-- Password input -->
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required>
+  <input type="password" id="password" name="password" required />
 
   <!-- Number input -->
   <label for="age">Age:</label>
-  <input type="number" id="age" name="age" min="1" max="120">
+  <input type="number" id="age" name="age" min="1" max="120" />
 
   <!-- Date input -->
   <label for="birthdate">Birth Date:</label>
-  <input type="date" id="birthdate" name="birthdate">
+  <input type="date" id="birthdate" name="birthdate" />
 
   <!-- Textarea -->
   <label for="message">Message:</label>
@@ -285,21 +288,27 @@ HTML (HyperText Markup Language) is the standard markup language for creating we
   <!-- Radio buttons -->
   <fieldset>
     <legend>Gender:</legend>
-    <label><input type="radio" name="gender" value="male"> Male</label>
-    <label><input type="radio" name="gender" value="female"> Female</label>
+    <label><input type="radio" name="gender" value="male" /> Male</label>
+    <label><input type="radio" name="gender" value="female" /> Female</label>
   </fieldset>
 
   <!-- Checkboxes -->
   <fieldset>
     <legend>Interests:</legend>
-    <label><input type="checkbox" name="interests" value="coding"> Coding</label>
-    <label><input type="checkbox" name="interests" value="design"> Design</label>
-    <label><input type="checkbox" name="interests" value="writing"> Writing</label>
+    <label
+      ><input type="checkbox" name="interests" value="coding" /> Coding</label
+    >
+    <label
+      ><input type="checkbox" name="interests" value="design" /> Design</label
+    >
+    <label
+      ><input type="checkbox" name="interests" value="writing" /> Writing</label
+    >
   </fieldset>
 
   <!-- File upload -->
   <label for="file">Upload File:</label>
-  <input type="file" id="file" name="file" accept=".jpg,.png,.pdf">
+  <input type="file" id="file" name="file" accept=".jpg,.png,.pdf" />
 
   <!-- Submit button -->
   <button type="submit">Submit</button>
@@ -381,7 +390,9 @@ function greet(name) {
 </code></pre>
 
 <!-- Abbreviations -->
-<p>The <abbr title="World Wide Web Consortium">W3C</abbr> sets web standards.</p>
+<p>
+  The <abbr title="World Wide Web Consortium">W3C</abbr> sets web standards.
+</p>
 
 <!-- Citations -->
 <p>As stated in <cite>The Art of War</cite>, strategy is key.</p>
@@ -394,34 +405,37 @@ function greet(name) {
 ```html
 <head>
   <!-- Basic meta tags -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO meta tags -->
   <title>Page Title - Site Name</title>
-  <meta name="description" content="Brief description of the page content (150-160 characters)">
-  <meta name="keywords" content="keyword1, keyword2, keyword3">
-  <meta name="author" content="Author Name">
+  <meta
+    name="description"
+    content="Brief description of the page content (150-160 characters)"
+  />
+  <meta name="keywords" content="keyword1, keyword2, keyword3" />
+  <meta name="author" content="Author Name" />
 
   <!-- Open Graph meta tags (Facebook) -->
-  <meta property="og:title" content="Page Title">
-  <meta property="og:description" content="Description for social sharing">
-  <meta property="og:image" content="https://example.com/image.jpg">
-  <meta property="og:url" content="https://example.com/page">
-  <meta property="og:type" content="website">
+  <meta property="og:title" content="Page Title" />
+  <meta property="og:description" content="Description for social sharing" />
+  <meta property="og:image" content="https://example.com/image.jpg" />
+  <meta property="og:url" content="https://example.com/page" />
+  <meta property="og:type" content="website" />
 
   <!-- Twitter Card meta tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Page Title">
-  <meta name="twitter:description" content="Description for Twitter">
-  <meta name="twitter:image" content="https://example.com/image.jpg">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Page Title" />
+  <meta name="twitter:description" content="Description for Twitter" />
+  <meta name="twitter:image" content="https://example.com/image.jpg" />
 
   <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- External resources -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 ```
@@ -446,7 +460,15 @@ function greet(name) {
 
 <!-- Meter (gauge) -->
 <label for="meter">Storage used:</label>
-<meter id="meter" value="0.8" min="0" max="1" low="0.2" high="0.8" optimum="0.5">
+<meter
+  id="meter"
+  value="0.8"
+  min="0"
+  max="1"
+  low="0.2"
+  high="0.8"
+  optimum="0.5"
+>
   80%
 </meter>
 
@@ -465,25 +487,26 @@ function greet(name) {
 
 ```html
 <!-- Responsive images -->
-<img src="image.jpg" alt="Responsive image"
-     srcset="image-480w.jpg 480w,
-             image-768w.jpg 768w,
-             image-1024w.jpg 1024w"
-     sizes="(max-width: 480px) 100vw,
+<img
+  src="image.jpg"
+  alt="Responsive image"
+  srcset="image-480w.jpg 480w, image-768w.jpg 768w, image-1024w.jpg 1024w"
+  sizes="(max-width: 480px) 100vw,
             (max-width: 768px) 80vw,
-            50vw">
+            50vw"
+/>
 
 <!-- Responsive video -->
 <video controls>
-  <source media="(min-width: 768px)" src="video-large.mp4">
-  <source media="(max-width: 767px)" src="video-small.mp4">
+  <source media="(min-width: 768px)" src="video-large.mp4" />
+  <source media="(max-width: 767px)" src="video-small.mp4" />
 </video>
 
 <!-- Picture element -->
 <picture>
-  <source media="(min-width: 768px)" srcset="image-large.jpg">
-  <source media="(max-width: 767px)" srcset="image-small.jpg">
-  <img src="image-fallback.jpg" alt="Responsive image">
+  <source media="(min-width: 768px)" srcset="image-large.jpg" />
+  <source media="(max-width: 767px)" srcset="image-small.jpg" />
+  <img src="image-fallback.jpg" alt="Responsive image" />
 </picture>
 ```
 
@@ -498,11 +521,11 @@ function greet(name) {
 <h3>Sub-subheading</h3>
 
 <!-- Alt text for images -->
-<img src="logo.png" alt="Company Logo">
+<img src="logo.png" alt="Company Logo" />
 
 <!-- Labels for form inputs -->
 <label for="email">Email Address:</label>
-<input type="email" id="email" name="email">
+<input type="email" id="email" name="email" />
 
 <!-- ARIA attributes -->
 <button aria-label="Close menu" aria-expanded="false">
@@ -527,11 +550,11 @@ function greet(name) {
 <!-- Geolocation -->
 <button onclick="getLocation()">Get Location</button>
 <script>
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    }
   }
-}
 </script>
 
 <!-- Local Storage -->
@@ -561,7 +584,11 @@ function getLocation() {
 </script>
 
 <!-- Drag and Drop -->
-<div id="drop-zone" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+<div
+  id="drop-zone"
+  ondrop="dropHandler(event)"
+  ondragover="dragOverHandler(event)"
+>
   Drop files here
 </div>
 <script>
@@ -578,21 +605,36 @@ function getLocation() {
 
 ```html
 <!-- Common entities -->
-&nbsp;   <!-- Non-breaking space -->
-&lt;     <!-- Less than (<) -->
-&gt;     <!-- Greater than (>) -->
-&amp;     <!-- Ampersand (&) -->
-&quot;     <!-- Double quote (") -->
-&apos;     <!-- Single quote (') -->
-&copy;  <!-- Copyright (©) -->
-&reg;   <!-- Registered trademark (®) -->
-&trade; <!-- Trademark (™) -->
-&hellip; <!-- Horizontal ellipsis (…) -->
-&mdash;  <!-- Em dash (—) -->
-&ndash;  <!-- En dash (–) -->
-&bull;  <!-- Bullet (•) -->
-&deg;   <!-- Degree (°) -->
-&frac12; <!-- Fraction 1/2 (½) -->
+&nbsp;
+<!-- Non-breaking space -->
+&lt;
+<!-- Less than (<) -->
+&gt;
+<!-- Greater than (>) -->
+&amp;
+<!-- Ampersand (&) -->
+&quot;
+<!-- Double quote (") -->
+&apos;
+<!-- Single quote (') -->
+&copy;
+<!-- Copyright (©) -->
+&reg;
+<!-- Registered trademark (®) -->
+&trade;
+<!-- Trademark (™) -->
+&hellip;
+<!-- Horizontal ellipsis (…) -->
+&mdash;
+<!-- Em dash (—) -->
+&ndash;
+<!-- En dash (–) -->
+&bull;
+<!-- Bullet (•) -->
+&deg;
+<!-- Degree (°) -->
+&frac12;
+<!-- Fraction 1/2 (½) -->
 ```
 
 ---
@@ -600,30 +642,35 @@ function getLocation() {
 ## 🔍 Quick Reference
 
 ### **DOCTYPE & Basic Structure**
+
 - `<!DOCTYPE html>` - HTML5 document type
 - `<html>` - Root element
 - `<head>` - Document head
 - `<body>` - Document body
 
 ### **Text Content**
+
 - `<h1>`-`<h6>` - Headings
 - `<p>` - Paragraph
 - `<br>` - Line break
 - `<hr>` - Horizontal rule
 
 ### **Links & Media**
+
 - `<a>` - Hyperlink
 - `<img>` - Image
 - `<video>` - Video
 - `<audio>` - Audio
 
 ### **Lists**
+
 - `<ul>` - Unordered list
 - `<ol>` - Ordered list
 - `<li>` - List item
 - `<dl>` - Definition list
 
 ### **Forms**
+
 - `<form>` - Form container
 - `<input>` - Input field
 - `<textarea>` - Multi-line text
@@ -631,6 +678,7 @@ function getLocation() {
 - `<button>` - Button
 
 ### **Semantic Elements**
+
 - `<header>` - Header content
 - `<nav>` - Navigation
 - `<main>` - Main content

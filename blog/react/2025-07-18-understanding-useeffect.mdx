@@ -1,17 +1,22 @@
 ---
 title: 'Understanding useEffect Hook in React — With Practical Examples'
-description: 'Learn how useEffect works in React, common pitfalls, and how to use it like a pro with real-world examples.'
+description:
+  'Learn how useEffect works in React, common pitfalls, and how to use it like a
+  pro with real-world examples.'
 slug: react-useeffect-hook
 tags: [react, hooks, useEffect, beginners]
 authors: praveen
 image: /img/blog/react.png
 date: 2025-08-18
-keywords: ['react useeffect', 'useeffect hook', 'react hooks', 'side effects in react']
+keywords:
+  ['react useeffect', 'useeffect hook', 'react hooks', 'side effects in react']
 ---
 
 ![React useEffect Cover](/img/blog/react.png)
 
-React introduced Hooks in version 16.8 to make functional components powerful. Among them, `useEffect` is one of the most commonly used (and misunderstood) hooks.
+React introduced Hooks in version 16.8 to make functional components powerful.
+Among them, `useEffect` is one of the most commonly used (and misunderstood)
+hooks.
 
 {/* truncate */}
 
@@ -29,7 +34,8 @@ In this post, we’ll explore:
 
 ## What is `useEffect`?
 
-`useEffect` lets you perform **side effects** in functional components — things like data fetching, DOM manipulation, or subscriptions.
+`useEffect` lets you perform **side effects** in functional components — things
+like data fetching, DOM manipulation, or subscriptions.
 
 ```tsx
 useEffect(() => {
@@ -101,7 +107,8 @@ useEffect(() => {
    This runs on every re-render, which might not be what you want.
 
 2. **Using wrong dependencies**  
-   If you use variables inside `useEffect`, they should be in the dependency array.
+   If you use variables inside `useEffect`, they should be in the dependency
+   array.
 
 3. **Not cleaning up subscriptions**  
    Leads to memory leaks.
@@ -128,7 +135,7 @@ function UserList() {
 
   return (
     <ul>
-      {users.map((user) => (
+      {users.map(user => (
         <li key={user.id}>{user.name}</li>
       ))}
     </ul>
@@ -140,10 +147,14 @@ function UserList() {
 
 ## Conclusion
 
-`useEffect` is powerful but must be used carefully. Always understand **when** and **why** it's running. Once you master it, your functional components become truly powerful.
+`useEffect` is powerful but must be used carefully. Always understand **when**
+and **why** it's running. Once you master it, your functional components become
+truly powerful.
 
 ---
 
-Stay tuned for more React content. Next time, we’ll explore `useMemo` and `useCallback`.
+Stay tuned for more React content. Next time, we’ll explore `useMemo` and
+`useCallback`.
 
-If you found this article helpful, consider sharing it with your peers or bookmarking it for later.
+If you found this article helpful, consider sharing it with your peers or
+bookmarking it for later.

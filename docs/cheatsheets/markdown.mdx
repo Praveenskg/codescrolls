@@ -325,8 +325,6 @@ Term 2
 
 ---
 
-
-
 ## Automatic Links
 
 ```markdown
@@ -343,7 +341,7 @@ https://github.com
 ```markdown
 [comment]: # 'This will not be rendered'
 
-{/* This will not show in MDX - use JSX comments */}
+{/_ This will not show in MDX - use JSX comments _/}
 ```
 
 ---
@@ -630,8 +628,6 @@ $$
 
 {/* Math equations require a math plugin (e.g., remark-math, rehype-katex) */}
 
-
-
 ---
 
 ## Advanced HTML Integration
@@ -670,7 +666,8 @@ $$
 
 This content is hidden by default and can be expanded.
 
-{/* Code example inside details */}
+{/_ Code example inside details _/}
+
 ```js
 console.log('Code inside details');
 ```
@@ -684,8 +681,8 @@ console.log('Code inside details');
 
 ### 1. Consistent Formatting
 
-````markdown
-{/* ✅ Good: Consistent spacing */}
+```markdown
+{/_ ✅ Good: Consistent spacing _/}
 
 ## Section Title
 
@@ -695,39 +692,39 @@ Content here with proper spacing.
 
 More content.
 
-{/* ❌ Bad: Inconsistent spacing */}
+{/_ ❌ Bad: Inconsistent spacing _/}
 
 ##Section Title Content here with no spacing. ###Subsection More content.
-````
+```
 
 ### 2. Meaningful Link Text
 
-````markdown
-{/* ✅ Good: Descriptive link text */}
+```markdown
+{/_ ✅ Good: Descriptive link text _/}
 
 [Read our comprehensive React guide](/docs/react)
 
-{/* ❌ Bad: Generic link text */}
+{/_ ❌ Bad: Generic link text _/}
 
 [Click here](/docs/react)
-````
+```
 
 ### 3. Alt Text for Images
 
-````markdown
-{/* ✅ Good: Descriptive alt text */}
+```markdown
+{/_ ✅ Good: Descriptive alt text _/}
 
 ![React component lifecycle diagram](/img/react-lifecycle.png)
 
-{/* ❌ Bad: Generic alt text */}
+{/_ ❌ Bad: Generic alt text _/}
 
 ![Image](/img/react-lifecycle.png)
-````
+```
 
 ### 4. Code Block Language Specification
 
 ````markdown
-{/* ✅ Good: Specify language */}
+{/_ ✅ Good: Specify language _/}
 
 ```js
 const message = 'Hello, World!';
@@ -746,16 +743,16 @@ const message = "Hello, World!";
 
 ## Common Markdown Flavors
 
-| Feature | GitHub | GitLab | Docusaurus | CommonMark |
-|---------|--------|--------|------------|------------|
-| Tables | ✅ | ✅ | ✅ | ✅ |
-| Task Lists | ✅ | ✅ | ✅ | ❌ |
-| Strikethrough | ✅ | ✅ | ✅ | ❌ |
-| Autolinks | ✅ | ✅ | ✅ | ✅ |
-| Footnotes | ✅ | ✅ | ✅ | ❌ |
-| Definition Lists | ❌ | ✅ | ✅ | ❌ |
-| Math | ❌ | ✅ | ✅ | ❌ |
-| Admonitions | ❌ | ❌ | ✅ | ❌ |
+| Feature          | GitHub | GitLab | Docusaurus | CommonMark |
+| ---------------- | ------ | ------ | ---------- | ---------- |
+| Tables           | ✅     | ✅     | ✅         | ✅         |
+| Task Lists       | ✅     | ✅     | ✅         | ❌         |
+| Strikethrough    | ✅     | ✅     | ✅         | ❌         |
+| Autolinks        | ✅     | ✅     | ✅         | ✅         |
+| Footnotes        | ✅     | ✅     | ✅         | ❌         |
+| Definition Lists | ❌     | ✅     | ✅         | ❌         |
+| Math             | ❌     | ✅     | ✅         | ❌         |
+| Admonitions      | ❌     | ❌     | ✅         | ❌         |
 
 ---
 
@@ -766,4 +763,7 @@ const message = "Hello, World!";
 - [GitHub Flavored Markdown](https://github.github.com/gfm/)
 - [CommonMark Specification](https://spec.commonmark.org/)
 - [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+
+```
+
 ```

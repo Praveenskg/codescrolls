@@ -2,19 +2,31 @@
 id: custom-hooks
 title: Custom Hooks
 sidebar_position: 4
-description: Learn how to create reusable custom hooks in React to share logic across components, including common patterns and best practices.
-keywords: [react custom hooks, useHooks, reusable hooks, hook patterns, react hooks tutorial, custom react hooks]
+description:
+  Learn how to create reusable custom hooks in React to share logic across
+  components, including common patterns and best practices.
+keywords:
+  [
+    react custom hooks,
+    useHooks,
+    reusable hooks,
+    hook patterns,
+    react hooks tutorial,
+    custom react hooks,
+  ]
 ---
 
 # Custom Hooks in React
 
-**Custom hooks** let you extract component logic into reusable functions. They follow the same rules as built-in hooks and start with "use".
+**Custom hooks** let you extract component logic into reusable functions. They
+follow the same rules as built-in hooks and start with "use".
 
 ---
 
 ## 📌 Why Custom Hooks?
 
 Benefits:
+
 - **Reuse logic** across components
 - **Cleaner components** - separate concerns
 - **Easier testing** - test logic independently
@@ -90,9 +102,10 @@ function useLocalStorage(key, initialValue) {
     }
   });
 
-  const setValue = (value) => {
+  const setValue = value => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
@@ -108,9 +121,9 @@ function App() {
   const [name, setName] = useLocalStorage('name', '');
 
   return (
-    <input 
+    <input
       value={name}
-      onChange={(e) => setName(e.target.value)}
+      onChange={e => setName(e.target.value)}
       placeholder="Your name"
     />
   );
@@ -189,10 +202,7 @@ function SearchBox() {
   }, [debouncedSearchTerm]);
 
   return (
-    <input 
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
+    <input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
   );
 }
 ```
@@ -203,14 +213,14 @@ function SearchBox() {
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
   });
 
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       });
     };
 
@@ -225,11 +235,7 @@ function useWindowSize() {
 function ResponsiveComponent() {
   const { width } = useWindowSize();
 
-  return (
-    <div>
-      {width < 768 ? <MobileView /> : <DesktopView />}
-    </div>
-  );
+  return <div>{width < 768 ? <MobileView /> : <DesktopView />}</div>;
 }
 ```
 
@@ -266,7 +272,7 @@ function Counter() {
 ```jsx
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
-    const listener = (event) => {
+    const listener = event => {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
@@ -365,12 +371,12 @@ function useForm(initialValues) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (callback) => (e) => {
+  const handleSubmit = callback => e => {
     e.preventDefault();
     callback(values);
   };
@@ -386,7 +392,7 @@ function useForm(initialValues) {
     handleChange,
     handleSubmit,
     reset,
-    setErrors
+    setErrors,
   };
 }
 
@@ -394,21 +400,17 @@ function useForm(initialValues) {
 function LoginForm() {
   const { values, handleChange, handleSubmit } = useForm({
     email: '',
-    password: ''
+    password: '',
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
     console.log('Form data:', data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input 
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-      />
-      <input 
+      <input name="email" value={values.email} onChange={handleChange} />
+      <input
         name="password"
         type="password"
         value={values.password}
@@ -458,20 +460,23 @@ function useAsync(asyncFunction) {
           return state;
       }
     },
-    { loading: false, data: null, error: null }
+    { loading: false, data: null, error: null },
   );
 
-  const execute = useCallback(async (...params) => {
-    dispatch({ type: 'loading' });
-    try {
-      const data = await asyncFunction(...params);
-      dispatch({ type: 'success', payload: data });
-      return data;
-    } catch (error) {
-      dispatch({ type: 'error', payload: error });
-      throw error;
-    }
-  }, [asyncFunction]);
+  const execute = useCallback(
+    async (...params) => {
+      dispatch({ type: 'loading' });
+      try {
+        const data = await asyncFunction(...params);
+        dispatch({ type: 'success', payload: data });
+        return data;
+      } catch (error) {
+        dispatch({ type: 'error', payload: error });
+        throw error;
+      }
+    },
+    [asyncFunction],
+  );
 
   return { ...state, execute };
 }
@@ -485,12 +490,12 @@ function useAsync(asyncFunction) {
 
 ```jsx
 // ✅ Good
-function useCounter() { }
-function useFetch() { }
+function useCounter() {}
+function useFetch() {}
 
 // ❌ Bad
-function counter() { }
-function fetchData() { }
+function counter() {}
+function fetchData() {}
 ```
 
 ### 2. **Follow Hook Rules**
@@ -543,7 +548,7 @@ function useForm(initialValues) {
 function useEventListener(eventName, handler, element = window) {
   useEffect(() => {
     element.addEventListener(eventName, handler);
-    
+
     // Cleanup
     return () => {
       element.removeEventListener(eventName, handler);

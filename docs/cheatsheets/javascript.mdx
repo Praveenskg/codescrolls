@@ -15,9 +15,8 @@ A quick reference guide for essential JavaScript syntax, features, and patterns.
 
 ---
 
-:::info
-JavaScript is a versatile language used both on the frontend and backend.
-:::
+:::info JavaScript is a versatile language used both on the frontend and
+backend. :::
 
 ## 🧠 Variables
 
@@ -187,18 +186,18 @@ const allPositive = numbers.every(n => n > 0);
 ```js
 const str = 'Hello World';
 
-str.length;                    // 11
-str.toUpperCase();             // 'HELLO WORLD'
-str.toLowerCase();             // 'hello world'
-str.includes('World');         // true
-str.startsWith('Hello');       // true
-str.endsWith('World');         // true
-str.indexOf('World');          // 6
-str.slice(0, 5);              // 'Hello'
-str.split(' ');               // ['Hello', 'World']
-str.replace('World', 'JS');   // 'Hello JS'
-str.trim();                   // Remove whitespace
-str.repeat(2);                // 'Hello WorldHello World'
+str.length; // 11
+str.toUpperCase(); // 'HELLO WORLD'
+str.toLowerCase(); // 'hello world'
+str.includes('World'); // true
+str.startsWith('Hello'); // true
+str.endsWith('World'); // true
+str.indexOf('World'); // 6
+str.slice(0, 5); // 'Hello'
+str.split(' '); // ['Hello', 'World']
+str.replace('World', 'JS'); // 'Hello JS'
+str.trim(); // Remove whitespace
+str.repeat(2); // 'Hello WorldHello World'
 ```
 
 ---
@@ -212,7 +211,8 @@ const [first, second, ...rest] = [1, 2, 3, 4, 5];
 // first = 1, second = 2, rest = [3, 4, 5]
 
 // Swapping variables
-let a = 1, b = 2;
+let a = 1,
+  b = 2;
 [a, b] = [b, a];
 ```
 
@@ -330,8 +330,8 @@ greet('Alice'); // 'Hello, Alice!'
 const user = {
   name: 'Alice',
   address: {
-    city: 'NYC'
-  }
+    city: 'NYC',
+  },
 };
 
 // Safe property access
@@ -410,7 +410,7 @@ newDiv.textContent = 'Hello';
 document.body.appendChild(newDiv);
 
 // Event listeners
-element.addEventListener('click', (e) => {
+element.addEventListener('click', e => {
   console.log('Clicked!', e.target);
 });
 ```
@@ -440,13 +440,13 @@ const pretty = JSON.stringify(obj, null, 2);
 ```js
 const now = new Date();
 
-now.getFullYear();        // 2025
-now.getMonth();           // 0-11 (January = 0)
-now.getDate();            // 1-31
-now.getDay();             // 0-6 (Sunday = 0)
-now.getHours();           // 0-23
-now.getMinutes();         // 0-59
-now.getTime();            // Timestamp in milliseconds
+now.getFullYear(); // 2025
+now.getMonth(); // 0-11 (January = 0)
+now.getDate(); // 1-31
+now.getDay(); // 0-6 (Sunday = 0)
+now.getHours(); // 0-23
+now.getMinutes(); // 0-59
+now.getTime(); // Timestamp in milliseconds
 
 // Create specific date
 const date = new Date('2025-01-15');
@@ -455,7 +455,7 @@ const date2 = new Date(2025, 0, 15); // Month is 0-indexed
 // Format date
 now.toLocaleDateString(); // '1/15/2025'
 now.toLocaleTimeString(); // '10:30:45 AM'
-now.toISOString();        // '2025-01-15T10:30:45.000Z'
+now.toISOString(); // '2025-01-15T10:30:45.000Z'
 ```
 
 ---
@@ -463,15 +463,15 @@ now.toISOString();        // '2025-01-15T10:30:45.000Z'
 ## 🔢 Math Operations
 
 ```js
-Math.round(4.7);      // 5
-Math.ceil(4.1);       // 5
-Math.floor(4.9);      // 4
-Math.abs(-5);         // 5
-Math.max(1, 5, 3);    // 5
-Math.min(1, 5, 3);    // 1
-Math.random();        // 0 to 1 (exclusive)
-Math.pow(2, 3);       // 8
-Math.sqrt(16);        // 4
+Math.round(4.7); // 5
+Math.ceil(4.1); // 5
+Math.floor(4.9); // 4
+Math.abs(-5); // 5
+Math.max(1, 5, 3); // 5
+Math.min(1, 5, 3); // 1
+Math.random(); // 0 to 1 (exclusive)
+Math.pow(2, 3); // 8
+Math.sqrt(16); // 4
 
 // Random integer between min and max
 const randomInt = (min, max) => {
@@ -491,14 +491,14 @@ function counter() {
   return {
     increment: () => ++count,
     decrement: () => --count,
-    getCount: () => count
+    getCount: () => count,
   };
 }
 
 const myCounter = counter();
 myCounter.increment(); // 1
 myCounter.increment(); // 2
-myCounter.getCount();  // 2
+myCounter.getCount(); // 2
 ```
 
 ### Debounce
@@ -506,14 +506,14 @@ myCounter.getCount();  // 2
 ```js
 function debounce(func, delay) {
   let timeoutId;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func.apply(this, args), delay);
   };
 }
 
 // Usage
-const handleSearch = debounce((query) => {
+const handleSearch = debounce(query => {
   console.log('Searching for:', query);
 }, 300);
 ```
@@ -523,11 +523,11 @@ const handleSearch = debounce((query) => {
 ```js
 function throttle(func, limit) {
   let inThrottle;
-  return function(...args) {
+  return function (...args) {
     if (!inThrottle) {
       func.apply(this, args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }
@@ -546,14 +546,14 @@ function throttle(func, limit) {
 ---
 
 :::tip Pro Tip
+
 - Use `const` by default, `let` if reassigning, avoid `var`
 - Use `===` instead of `==` for safer comparisons
 - Use arrow functions for shorter syntax and lexical `this`
 - Prefer array methods (`map`, `filter`, `reduce`) over loops
 - Use `async/await` for cleaner asynchronous code
-- Always handle errors with try/catch in async functions
-:::
+- Always handle errors with try/catch in async functions :::
 
-:::note Modern JavaScript
-ES6+ features like destructuring, spread operator, and optional chaining make JavaScript code more concise and readable. Use them whenever possible!
-:::
+:::note Modern JavaScript ES6+ features like destructuring, spread operator, and
+optional chaining make JavaScript code more concise and readable. Use them
+whenever possible! :::

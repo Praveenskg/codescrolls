@@ -2,19 +2,33 @@
 id: props
 title: Props in React
 sidebar_position: 2
-description: Learn how to pass data between React components using props, including prop types, default props, and best practices.
-keywords: [react props, component props, passing data, react data flow, prop types, default props]
+description:
+  Learn how to pass data between React components using props, including prop
+  types, default props, and best practices.
+keywords:
+  [
+    react props,
+    component props,
+    passing data,
+    react data flow,
+    prop types,
+    default props,
+  ]
 ---
 
 # Props in React
 
-**Props** (short for "properties") are how you pass data from parent components to child components in React. They are **read-only** and help make components reusable.
+**Props** (short for "properties") are how you pass data from parent components
+to child components in React. They are **read-only** and help make components
+reusable.
 
 ---
 
 ## 📌 What are Props?
 
-Props are arguments passed into React components, similar to function parameters. They allow you to pass data and event handlers down the component tree.
+Props are arguments passed into React components, similar to function
+parameters. They allow you to pass data and event handlers down the component
+tree.
 
 ```jsx
 function Welcome(props) {
@@ -22,7 +36,7 @@ function Welcome(props) {
 }
 
 // Usage
-<Welcome name="Praveen" />
+<Welcome name="Praveen" />;
 ```
 
 ---
@@ -61,13 +75,7 @@ function UserCard(props) {
 }
 
 function App() {
-  return (
-    <UserCard 
-      name="Praveen Singh" 
-      age={26} 
-      role="Full Stack Developer" 
-    />
-  );
+  return <UserCard name="Praveen Singh" age={26} role="Full Stack Developer" />;
 }
 ```
 
@@ -147,7 +155,7 @@ function List({ items }) {
   );
 }
 
-<List items={['Apple', 'Banana', 'Orange']} />
+<List items={['Apple', 'Banana', 'Orange']} />;
 ```
 
 ### Object Props
@@ -162,7 +170,7 @@ function Profile({ user }) {
   );
 }
 
-<Profile user={{ name: 'John', email: 'john@example.com' }} />
+<Profile user={{ name: 'John', email: 'john@example.com' }} />;
 ```
 
 ### Function Props (Callbacks)
@@ -185,15 +193,12 @@ function App() {
 
 ## 🔸 Children Props
 
-The special `children` prop allows you to pass components or elements between opening and closing tags:
+The special `children` prop allows you to pass components or elements between
+opening and closing tags:
 
 ```jsx
 function Card({ children }) {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }
 
 function App() {
@@ -222,7 +227,7 @@ function Layout({ children }) {
 <Layout>
   <h1>Welcome</h1>
   <p>This is the main content</p>
-</Layout>
+</Layout>;
 ```
 
 ---
@@ -234,7 +239,7 @@ You can set default values for props:
 ### Using Default Parameters (Modern)
 
 ```jsx
-function Button({ text = "Click Me", color = "blue" }) {
+function Button({ text = 'Click Me', color = 'blue' }) {
   return <button style={{ color }}>{text}</button>;
 }
 ```
@@ -247,8 +252,8 @@ function Button({ text, color }) {
 }
 
 Button.defaultProps = {
-  text: "Click Me",
-  color: "blue"
+  text: 'Click Me',
+  color: 'blue',
 };
 ```
 
@@ -271,9 +276,9 @@ function UserCard({ name, age, role }) {
 
 function App() {
   const user = {
-    name: "Praveen",
+    name: 'Praveen',
     age: 26,
-    role: "Developer"
+    role: 'Developer',
   };
 
   return <UserCard {...user} />;
@@ -304,11 +309,11 @@ UserCard.propTypes = {
   name: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
   email: PropTypes.string,
-  isActive: PropTypes.bool
+  isActive: PropTypes.bool,
 };
 
 UserCard.defaultProps = {
-  isActive: true
+  isActive: true,
 };
 ```
 
@@ -325,27 +330,24 @@ Component.propTypes = {
   func: PropTypes.func,
   array: PropTypes.array,
   object: PropTypes.object,
-  
+
   // Required prop
   requiredProp: PropTypes.string.isRequired,
-  
+
   // Specific values
   enum: PropTypes.oneOf(['small', 'medium', 'large']),
-  
+
   // Array of specific type
   arrayOfNumbers: PropTypes.arrayOf(PropTypes.number),
-  
+
   // Object with specific shape
   user: PropTypes.shape({
     name: PropTypes.string,
-    age: PropTypes.number
+    age: PropTypes.number,
   }),
-  
+
   // One of many types
-  multi: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  multi: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 ```
 
@@ -363,12 +365,14 @@ interface ButtonProps {
   variant?: 'primary' | 'secondary';
 }
 
-function Button({ text, onClick, disabled = false, variant = 'primary' }: ButtonProps) {
+function Button({
+  text,
+  onClick,
+  disabled = false,
+  variant = 'primary',
+}: ButtonProps) {
   return (
-    <button 
-      onClick={onClick} 
-      disabled={disabled}
-    >
+    <button onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );
@@ -401,11 +405,7 @@ function Card({ title, children }: CardProps) {
 
 ```jsx
 function Button({ isPrimary, children }) {
-  return (
-    <button>
-      {children}
-    </button>
-  );
+  return <button>{children}</button>;
 }
 ```
 
@@ -414,7 +414,7 @@ function Button({ isPrimary, children }) {
 ```jsx
 function UserGreeting({ firstName, lastName }) {
   const fullName = `${firstName} ${lastName}`;
-  
+
   return <h1>Welcome, {fullName}!</h1>;
 }
 ```
@@ -425,24 +425,21 @@ function UserGreeting({ firstName, lastName }) {
 function SearchBox({ onSearch }) {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     onSearch(query);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input 
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      <input value={query} onChange={e => setQuery(e.target.value)} />
       <button type="submit">Search</button>
     </form>
   );
 }
 
 // Usage
-<SearchBox onSearch={(query) => console.log('Searching for:', query)} />
+<SearchBox onSearch={query => console.log('Searching for:', query)} />;
 ```
 
 ---
@@ -487,7 +484,7 @@ function Button({ size = 'medium', variant = 'primary' }) {
 // Use PropTypes or TypeScript
 UserCard.propTypes = {
   name: PropTypes.string.isRequired,
-  age: PropTypes.number
+  age: PropTypes.number,
 };
 ```
 
@@ -530,21 +527,25 @@ function Component({ user }) {
 
 ```jsx
 // ❌ Wrong
-{items.map(item => <div>{item}</div>)}
+{
+  items.map(item => <div>{item}</div>);
+}
 
 // ✅ Correct
-{items.map((item, index) => <div key={index}>{item}</div>)}
+{
+  items.map((item, index) => <div key={index}>{item}</div>);
+}
 ```
 
 ### 3. **Passing Objects Inline**
 
 ```jsx
 // ❌ Bad - Creates new object on every render
-<UserCard user={{ name: 'John', age: 25 }} />
+<UserCard user={{ name: 'John', age: 25 }} />;
 
 // ✅ Good - Define outside or use useMemo
 const user = { name: 'John', age: 25 };
-<UserCard user={user} />
+<UserCard user={user} />;
 ```
 
 ---
@@ -569,4 +570,5 @@ const user = { name: 'John', age: 25 };
 
 ---
 
-**Props are the foundation of React's data flow. Master them to build flexible, reusable components!** 🚀
+**Props are the foundation of React's data flow. Master them to build flexible,
+reusable components!** 🚀

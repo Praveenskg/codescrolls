@@ -2,13 +2,23 @@
 id: compiler-options
 title: TypeScript Compiler Options
 sidebar_position: 5
-description: Master TypeScript compiler options in tsconfig.json including strict mode, module resolution, and essential configuration settings.
-keywords: [typescript compiler, tsconfig.json, typescript strict mode, compiler options, typescript configuration]
+description:
+  Master TypeScript compiler options in tsconfig.json including strict mode,
+  module resolution, and essential configuration settings.
+keywords:
+  [
+    typescript compiler,
+    tsconfig.json,
+    typescript strict mode,
+    compiler options,
+    typescript configuration,
+  ]
 ---
 
 # TypeScript Compiler Options
 
-The **`tsconfig.json`** file configures how TypeScript compiles your code. Understanding compiler options is crucial for type safety and optimal builds.
+The **`tsconfig.json`** file configures how TypeScript compiles your code.
+Understanding compiler options is crucial for type safety and optimal builds.
 
 ---
 
@@ -40,7 +50,7 @@ Specifies ECMAScript target version.
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020"  // ES5, ES6/ES2015, ES2016, ES2017, ES2018, ES2019, ES2020, ES2021, ES2022, ES2023, ES2024, ESNext
+    "target": "ES2020" // ES5, ES6/ES2015, ES2016, ES2017, ES2018, ES2019, ES2020, ES2021, ES2022, ES2023, ES2024, ESNext
     // Note: ES3 is deprecated and should not be used
   }
 }
@@ -65,20 +75,20 @@ Specifies module code generation.
 ```json
 {
   "compilerOptions": {
-    "module": "commonjs"  // commonjs, amd, umd, system, es6/es2015, es2020, esnext, node16, nodenext
+    "module": "commonjs" // commonjs, amd, umd, system, es6/es2015, es2020, esnext, node16, nodenext
   }
 }
 ```
 
 ```typescript
 // Source
-export const name = "John";
+export const name = 'John';
 
 // With module: "commonjs"
-exports.name = "John";
+exports.name = 'John';
 
 // With module: "es2015"
-export const name = "John";
+export const name = 'John';
 ```
 
 ### Lib
@@ -104,7 +114,7 @@ Enables all strict type checking options.
 ```json
 {
   "compilerOptions": {
-    "strict": true  // Enables all strict options below
+    "strict": true // Enables all strict options below
   }
 }
 ```
@@ -171,8 +181,8 @@ function greet(name: string, age: number) {
 }
 
 // With strictBindCallApply: true
-greet.call(undefined, "John", 30); // OK
-greet.call(undefined, "John", "30"); // Error
+greet.call(undefined, 'John', 30); // OK
+greet.call(undefined, 'John', '30'); // Error
 ```
 
 ### strictPropertyInitialization
@@ -205,7 +215,8 @@ class User {
 
 ```typescript
 // With noImplicitAny: true
-function add(a, b) { // Error: Parameter 'a' implicitly has an 'any' type
+function add(a, b) {
+  // Error: Parameter 'a' implicitly has an 'any' type
   return a + b;
 }
 
@@ -246,12 +257,13 @@ function logName(this: { name: string }) {
 ```json
 {
   "compilerOptions": {
-    "moduleResolution": "bundler"  // bundler (TS 5.0+), node, node16, nodenext, classic
+    "moduleResolution": "bundler" // bundler (TS 5.0+), node, node16, nodenext, classic
   }
 }
 ```
 
 **Modern Options:**
+
 - **`bundler`** (TypeScript 5.0+) - For modern bundlers (Vite, esbuild, etc.)
 - **`node16`** / **`nodenext`** - For Node.js with ESM support
 - **`node`** - Legacy Node.js resolution (still common)
@@ -394,7 +406,7 @@ Don't emit output (useful for type checking only).
 
 ```typescript
 function greet(name: string) {
-  const unused = "hello"; // Error: 'unused' is declared but never used
+  const unused = 'hello'; // Error: 'unused' is declared but never used
   return `Hello, ${name}`;
 }
 ```
@@ -410,7 +422,8 @@ function greet(name: string) {
 ```
 
 ```typescript
-function greet(name: string, age: number) { // Error: 'age' is declared but never used
+function greet(name: string, age: number) {
+  // Error: 'age' is declared but never used
   return `Hello, ${name}`;
 }
 
@@ -434,7 +447,7 @@ function greet(name: string, _age: number) {
 // Error: Not all code paths return a value
 function getStatus(status: number): string {
   if (status === 200) {
-    return "OK";
+    return 'OK';
   }
   // Missing return
 }
@@ -442,9 +455,9 @@ function getStatus(status: number): string {
 // Fix
 function getStatus(status: number): string {
   if (status === 200) {
-    return "OK";
+    return 'OK';
   }
-  return "Error";
+  return 'Error';
 }
 ```
 
@@ -463,11 +476,11 @@ function getStatus(status: number): string {
 function getDay(day: number): string {
   switch (day) {
     case 1:
-      return "Monday";
+      return 'Monday';
     case 2:
-      console.log("Tuesday"); // Missing return or break
+      console.log('Tuesday'); // Missing return or break
     case 3:
-      return "Wednesday";
+      return 'Wednesday';
   }
 }
 ```
@@ -531,7 +544,7 @@ Skip type checking of declaration files.
 ```json
 {
   "compilerOptions": {
-    "skipLibCheck": true  // Faster compilation
+    "skipLibCheck": true // Faster compilation
   }
 }
 ```
@@ -551,7 +564,7 @@ Skip type checking of declaration files.
 ```json
 {
   "compilerOptions": {
-    "isolatedModules": true  // Required for Babel
+    "isolatedModules": true // Required for Babel
   }
 }
 ```
@@ -564,7 +577,7 @@ Allow JavaScript files.
 {
   "compilerOptions": {
     "allowJs": true,
-    "checkJs": true  // Type check JS files
+    "checkJs": true // Type check JS files
   }
 }
 ```
@@ -588,10 +601,7 @@ Allow JavaScript files.
 
 ```json
 {
-  "references": [
-    { "path": "./packages/core" },
-    { "path": "./packages/utils" }
-  ]
+  "references": [{ "path": "./packages/core" }, { "path": "./packages/utils" }]
 }
 ```
 
@@ -627,7 +637,8 @@ Allow JavaScript files.
 }
 ```
 
-**Note:** `moduleResolution: "bundler"` is recommended for modern React projects using Vite, esbuild, or similar bundlers (TypeScript 5.0+).
+**Note:** `moduleResolution: "bundler"` is recommended for modern React projects
+using Vite, esbuild, or similar bundlers (TypeScript 5.0+).
 
 ### Node.js Project
 
@@ -680,7 +691,8 @@ Allow JavaScript files.
 }
 ```
 
-**Note:** For libraries, `moduleResolution: "bundler"` works well with modern tooling. Use `node16` or `nodenext` if you need Node.js-specific resolution.
+**Note:** For libraries, `moduleResolution: "bundler"` works well with modern
+tooling. Use `node16` or `nodenext` if you need Node.js-specific resolution.
 
 ---
 
@@ -691,7 +703,7 @@ Allow JavaScript files.
 ```json
 {
   "compilerOptions": {
-    "strict": true  // Catch more errors
+    "strict": true // Catch more errors
   }
 }
 ```
@@ -753,4 +765,4 @@ Allow JavaScript files.
 
 ---
 
-**Master compiler options for optimal TypeScript configuration!** 
+**Master compiler options for optimal TypeScript configuration!**

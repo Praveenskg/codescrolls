@@ -1,16 +1,21 @@
 ---
 id: events
 title: Handling Events in React
-description: Learn how to handle events in React like onClick, onChange, and more using JSX syntax.
-keywords: [react, events, onclick, onchange, form events, event handling, react events]
+description:
+  Learn how to handle events in React like onClick, onChange, and more using JSX
+  syntax.
+keywords:
+  [react, events, onclick, onchange, form events, event handling, react events]
 sidebar_position: 3
 ---
 
 # React Events
 
-React uses a **synthetic event system** to handle DOM events across all browsers, making your event handling consistent and reliable.
+React uses a **synthetic event system** to handle DOM events across all
+browsers, making your event handling consistent and reliable.
 
-Just like in HTML, you can use events like `onClick`, `onChange`, `onSubmit`, etc., but with **camelCase** in JSX.
+Just like in HTML, you can use events like `onClick`, `onChange`, `onSubmit`,
+etc., but with **camelCase** in JSX.
 
 ---
 
@@ -39,7 +44,7 @@ function GreetUser({ name }) {
   return <button onClick={() => sayHello(name)}>Greet {name}</button>;
 }
 
-<GreetUser name='Praveen' />;
+<GreetUser name="Praveen" />;
 ```
 
 ---
@@ -56,7 +61,12 @@ function NameInput() {
 
   return (
     <>
-      <input type='text' placeholder='Enter name' value={name} onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Enter name"
+        value={name}
+        onChange={handleChange}
+      />
       <p>Hello, {name || 'Stranger'} 👋</p>
     </>
   );
@@ -79,12 +89,12 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type='email'
-        placeholder='Enter email'
+        type="email"
+        placeholder="Enter email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
       />
-      <button type='submit'>Subscribe</button>
+      <button type="submit">Subscribe</button>
     </form>
   );
 }
@@ -97,9 +107,10 @@ function ContactForm() {
 :::tip Important
 
 - Use **camelCase** for event names (`onClick`, `onChange`, `onSubmit`)
-- Don't use `return false` to prevent default behavior — use `event.preventDefault()` instead
-- Event handlers are **functions**, not strings (`onClick="alert('hi')"` vs `onClick={() => alert('hi')}`)
-  :::
+- Don't use `return false` to prevent default behavior — use
+  `event.preventDefault()` instead
+- Event handlers are **functions**, not strings (`onClick="alert('hi')"` vs
+  `onClick={() => alert('hi')}`) :::
 
 ---
 

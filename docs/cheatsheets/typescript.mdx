@@ -2,20 +2,21 @@
 id: typescript
 title: TypeScript Cheatsheet
 sidebar_label: TypeScript CheatSheet
-description: Essential TypeScript syntax, types, and patterns - Quick reference guide
+description:
+  Essential TypeScript syntax, types, and patterns - Quick reference guide
 keywords: [typescript, cheatsheet, ts, types, reference, static typing]
 sidebar_position: 7
 ---
 
 # 📘 TypeScript Cheatsheet
 
-A quick reference guide for essential TypeScript syntax, types, interfaces, and patterns.
+A quick reference guide for essential TypeScript syntax, types, interfaces, and
+patterns.
 
 ---
 
-:::info
-TypeScript is a superset of JavaScript that adds static typing and powerful tooling.
-:::
+:::info TypeScript is a superset of JavaScript that adds static typing and
+powerful tooling. :::
 
 ## 🔢 Basic Types
 
@@ -403,7 +404,7 @@ function add(a: number, b: number) {
 
 // Contextual typing
 const names = ['Alice', 'Bob', 'Charlie'];
-names.forEach((name) => {
+names.forEach(name => {
   console.log(name.toUpperCase()); // name inferred as string
 });
 ```
@@ -599,9 +600,18 @@ typeof, keyof, in, extends, infer, as, is
 ### Utility Types
 
 ```ts
-Partial<T>, Required<T>, Readonly<T>, Pick<T, K>, Omit<T, K>,
-Record<K, T>, Exclude<T, U>, Extract<T, U>, NonNullable<T>,
-ReturnType<T>, Parameters<T>, InstanceType<T>
+(Partial<T>,
+  Required<T>,
+  Readonly<T>,
+  Pick<T, K>,
+  Omit<T, K>,
+  Record<K, T>,
+  Exclude<T, U>,
+  Extract<T, U>,
+  NonNullable<T>,
+  ReturnType<T>,
+  Parameters<T>,
+  InstanceType<T>);
 ```
 
 ---
@@ -609,10 +619,10 @@ ReturnType<T>, Parameters<T>, InstanceType<T>
 ## 🚀 Resources
 
 - **Official Docs**: [typescriptlang.org](https://www.typescriptlang.org/)
-- **Handbook**: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- **Handbook**:
+  [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - **Playground**: [TypeScript Playground](https://www.typescriptlang.org/play)
 
 ---
 
 **Master TypeScript for type-safe JavaScript development!** 🎯
-

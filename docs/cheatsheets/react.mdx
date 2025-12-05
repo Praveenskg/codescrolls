@@ -2,20 +2,21 @@
 id: react
 title: React Cheatsheet
 sidebar_label: React CheatSheet
-description: Essential React hooks, components, and patterns - Quick reference guide
+description:
+  Essential React hooks, components, and patterns - Quick reference guide
 keywords: [react, cheatsheet, hooks, components, jsx, reference]
 sidebar_position: 6
 ---
 
 # ⚛️ React Cheatsheet
 
-A quick reference guide for essential React concepts, hooks, components, and patterns.
+A quick reference guide for essential React concepts, hooks, components, and
+patterns.
 
 ---
 
-:::info
-React is a JavaScript library for building user interfaces with components.
-:::
+:::info React is a JavaScript library for building user interfaces with
+components. :::
 
 ## 🎨 JSX Basics
 
@@ -28,11 +29,11 @@ const name = 'Alice';
 const greeting = <h1>Hello, {name}!</h1>;
 
 // JSX attributes
-const image = <img src='/logo.png' alt='Logo' className='logo' />;
+const image = <img src="/logo.png" alt="Logo" className="logo" />;
 
 // JSX children
 const container = (
-  <div className='container'>
+  <div className="container">
     <h1>Title</h1>
     <p>Paragraph</p>
   </div>
@@ -75,15 +76,15 @@ const Greeting = ({ name, age }) => {
 // Component with children
 function Card({ children, title }) {
   return (
-    <div className='card'>
+    <div className="card">
       <h3>{title}</h3>
-      <div className='card-content'>{children}</div>
+      <div className="card-content">{children}</div>
     </div>
   );
 }
 
 // Usage
-<Card title='My Card'>
+<Card title="My Card">
   <p>Card content goes here</p>
 </Card>;
 
@@ -126,7 +127,7 @@ function Form() {
     email: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setUser({
       ...user,
       [e.target.name]: e.target.value,
@@ -135,8 +136,8 @@ function Form() {
 
   return (
     <form>
-      <input name='name' value={user.name} onChange={handleChange} />
-      <input name='email' value={user.email} onChange={handleChange} />
+      <input name="name" value={user.name} onChange={handleChange} />
+      <input name="email" value={user.email} onChange={handleChange} />
     </form>
   );
 }
@@ -145,12 +146,16 @@ function Form() {
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
-  const addTodo = (text) => {
+  const addTodo = text => {
     setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)));
+  const toggleTodo = id => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
   };
 
   return <div>{/* Render todos */}</div>;
@@ -193,8 +198,8 @@ function UserProfile({ userId }) {
   useEffect(() => {
     setLoading(true);
     fetch(`/api/users/${userId}`)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setUser(data);
         setLoading(false);
       });
@@ -223,7 +228,11 @@ function ThemeProvider({ children }) {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
 
 // Consumer component
@@ -263,7 +272,7 @@ function TextInput() {
     inputRef.current.focus(); // Focus input on mount
   }, []);
 
-  return <input ref={inputRef} type='text' />;
+  return <input ref={inputRef} type="text" />;
 }
 
 // Store mutable value (doesn't cause re-render)
@@ -273,7 +282,7 @@ function Timer() {
 
   const start = () => {
     intervalRef.current = setInterval(() => {
-      setCount((c) => c + 1);
+      setCount(c => c + 1);
     }, 1000);
   };
 
@@ -371,12 +380,12 @@ function useFetch(url) {
 
   useEffect(() => {
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setData(data);
         setLoading(false);
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err);
         setLoading(false);
       });
@@ -419,21 +428,26 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log({ email, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
       <input
-        type='password'
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder='Password'
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        placeholder="Email"
       />
-      <button type='submit'>Login</button>
+      <input
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
     </form>
   );
 }
@@ -455,7 +469,7 @@ function RegisterForm() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length === 0) {
@@ -484,7 +498,9 @@ function Mailbox({ unreadMessages }) {
   return (
     <div>
       <h1>Hello!</h1>
-      {unreadMessages.length > 0 && <h2>You have {unreadMessages.length} unread messages.</h2>}
+      {unreadMessages.length > 0 && (
+        <h2>You have {unreadMessages.length} unread messages.</h2>
+      )}
     </div>
   );
 }
@@ -528,7 +544,7 @@ function UserProfile({ user }) {
 function TodoList({ todos }) {
   return (
     <ul>
-      {todos.map((todo) => (
+      {todos.map(todo => (
         <li key={todo.id}>{todo.text}</li>
       ))}
     </ul>
@@ -539,7 +555,7 @@ function TodoList({ todos }) {
 function UserList({ users }) {
   return (
     <div>
-      {users.map((user) => (
+      {users.map(user => (
         <UserCard key={user.id} user={user} />
       ))}
     </div>
@@ -586,8 +602,8 @@ function handleSubmit(e) {
 <input
   onFocus={() => console.log('Focus')}
   onBlur={() => console.log('Blur')}
-  onChange={(e) => console.log(e.target.value)}
-  onKeyDown={(e) => console.log(e.key)}
+  onChange={e => console.log(e.target.value)}
+  onKeyDown={e => console.log(e.key)}
 />;
 ```
 
@@ -632,7 +648,7 @@ const styles = { margin: 10 };
 <div style={{ color: 'blue', fontSize: '16px' }}>Text</div>;
 
 // CSS classes
-<div className='container'>Content</div>;
+<div className="container">Content</div>;
 
 // Conditional classes
 <div className={isActive ? 'active' : 'inactive'}>Content</div>;
@@ -697,8 +713,14 @@ class ErrorBoundary extends React.Component {
 ### Common Hooks
 
 ```jsx
-useState, useEffect, useContext, useRef, useMemo,
-useCallback, useReducer, useLayoutEffect
+(useState,
+  useEffect,
+  useContext,
+  useRef,
+  useMemo,
+  useCallback,
+  useReducer,
+  useLayoutEffect);
 ```
 
 ### Lifecycle (with hooks)
@@ -761,4 +783,3 @@ function MyComponent() {
 ---
 
 **Master React for building modern user interfaces!** ⚛️
-

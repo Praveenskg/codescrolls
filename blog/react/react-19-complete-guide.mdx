@@ -1,16 +1,35 @@
 ---
 title: 'React 19 Complete Guide: New Features, Hooks, and Best Practices'
-description: 'Explore React 19 and 19.2 features including React Compiler, Actions, new hooks (useActionState, useFormStatus, useOptimistic, useEffectEvent), Server Components, and performance improvements.'
+description:
+  'Explore React 19 and 19.2 features including React Compiler, Actions, new
+  hooks (useActionState, useFormStatus, useOptimistic, useEffectEvent), Server
+  Components, and performance improvements.'
 slug: react-19-complete-guide
 tags: [react, react19, hooks, frontend, javascript, typescript, tutorial]
 authors: praveen
 image: /img/blog/react.png
-keywords: ['react 19', 'react compiler', 'server components', 'useActionState', 'useFormStatus', 'useOptimistic', 'useEffectEvent', 'react actions', 'react 19.2', 'performance optimization']
+keywords:
+  [
+    'react 19',
+    'react compiler',
+    'server components',
+    'useActionState',
+    'useFormStatus',
+    'useOptimistic',
+    'useEffectEvent',
+    'react actions',
+    'react 19.2',
+    'performance optimization',
+  ]
 ---
 
 ![React 19 Complete Guide](/img/blog/react.png)
 
-React 19 represents a significant evolution in the React ecosystem, introducing powerful new features that simplify development, improve performance, and enhance the developer experience. This comprehensive guide covers everything you need to know about React 19 and 19.2, from new hooks and form handling to the React Compiler and Server Components.
+React 19 represents a significant evolution in the React ecosystem, introducing
+powerful new features that simplify development, improve performance, and
+enhance the developer experience. This comprehensive guide covers everything you
+need to know about React 19 and 19.2, from new hooks and form handling to the
+React Compiler and Server Components.
 
 {/* truncate */}
 
@@ -51,7 +70,9 @@ React 19 brings several groundbreaking features:
 
 ## ⚡ React Compiler {#react-compiler}
 
-The React Compiler automatically optimizes your components by memoizing values and callbacks, eliminating the need for manual `useMemo`, `useCallback`, and `React.memo` in most cases.
+The React Compiler automatically optimizes your components by memoizing values
+and callbacks, eliminating the need for manual `useMemo`, `useCallback`, and
+`React.memo` in most cases.
 
 ### Before React Compiler
 
@@ -60,28 +81,21 @@ import { useState, useMemo, useCallback } from 'react';
 
 function ProductList({ products }) {
   const [filter, setFilter] = useState('');
-  
+
   // Manual memoization required
   const filteredProducts = useMemo(() => {
     return products.filter(p => p.name.includes(filter));
   }, [products, filter]);
-  
-  const handleClick = useCallback((id) => {
+
+  const handleClick = useCallback(id => {
     console.log('Clicked:', id);
   }, []);
-  
+
   return (
     <div>
-      <input 
-        value={filter} 
-        onChange={(e) => setFilter(e.target.value)} 
-      />
+      <input value={filter} onChange={e => setFilter(e.target.value)} />
       {filteredProducts.map(product => (
-        <Product 
-          key={product.id} 
-          product={product}
-          onClick={handleClick}
-        />
+        <Product key={product.id} product={product} onClick={handleClick} />
       ))}
     </div>
   );
@@ -95,56 +109,52 @@ import { useState } from 'react';
 
 function ProductList({ products }) {
   const [filter, setFilter] = useState('');
-  
+
   // React Compiler automatically memoizes this
   const filteredProducts = products.filter(p => p.name.includes(filter));
-  
+
   // React Compiler automatically memoizes this callback
-  const handleClick = (id) => {
+  const handleClick = id => {
     console.log('Clicked:', id);
   };
-  
+
   return (
     <div>
-      <input 
-        value={filter} 
-        onChange={(e) => setFilter(e.target.value)} 
-      />
+      <input value={filter} onChange={e => setFilter(e.target.value)} />
       {filteredProducts.map(product => (
-        <Product 
-          key={product.id} 
-          product={product}
-          onClick={handleClick}
-        />
+        <Product key={product.id} product={product} onClick={handleClick} />
       ))}
     </div>
   );
 }
 ```
 
-The React Compiler analyzes your code and automatically applies optimizations, making your code cleaner and more performant without manual intervention.
+The React Compiler analyzes your code and automatically applies optimizations,
+making your code cleaner and more performant without manual intervention.
 
 ---
 
 ## 📝 Form Actions & New Hooks {#form-actions--new-hooks}
 
-React 19 introduces a powerful new way to handle forms with server actions and several new hooks that simplify form state management.
+React 19 introduces a powerful new way to handle forms with server actions and
+several new hooks that simplify form state management.
 
 ### Form Actions
 
-Form Actions allow you to handle form submissions directly with server functions, reducing the need for client-side state management.
+Form Actions allow you to handle form submissions directly with server
+functions, reducing the need for client-side state management.
 
 ```tsx
 // Server Action (Next.js App Router example)
 async function createUser(formData: FormData) {
   'use server';
-  
+
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
-  
+
   // Validate and save to database
   await db.users.create({ name, email });
-  
+
   return { success: true, message: 'User created successfully' };
 }
 
@@ -162,14 +172,15 @@ function UserForm() {
 
 ### useActionState {#useactionstate}
 
-`useActionState` (formerly `useFormState`) manages form state and handles action results.
+`useActionState` (formerly `useFormState`) manages form state and handles action
+results.
 
 ```tsx
 import { useActionState } from 'react';
 
 async function updateProfile(prevState, formData) {
   const name = formData.get('name');
-  
+
   try {
     await updateUserProfile(name);
     return { success: true, message: 'Profile updated!' };
@@ -180,7 +191,7 @@ async function updateProfile(prevState, formData) {
 
 function ProfileForm() {
   const [state, formAction, isPending] = useActionState(updateProfile, null);
-  
+
   return (
     <form action={formAction}>
       <input name="name" type="text" required />
@@ -199,14 +210,15 @@ function ProfileForm() {
 
 ### useFormStatus {#useformstatus}
 
-`useFormStatus` provides form submission status within form components, perfect for showing loading states.
+`useFormStatus` provides form submission status within form components, perfect
+for showing loading states.
 
 ```tsx
 import { useFormStatus } from 'react';
 
 function SubmitButton() {
   const { pending, data, method, action } = useFormStatus();
-  
+
   return (
     <button type="submit" disabled={pending}>
       {pending ? 'Submitting...' : 'Submit'}
@@ -219,7 +231,7 @@ function ContactForm() {
     'use server';
     // Handle form submission
   }
-  
+
   return (
     <form action={submitForm}>
       <input name="email" type="email" required />
@@ -232,7 +244,8 @@ function ContactForm() {
 
 ### useOptimistic {#useoptimistic}
 
-`useOptimistic` enables optimistic UI updates, showing immediate feedback before server confirmation.
+`useOptimistic` enables optimistic UI updates, showing immediate feedback before
+server confirmation.
 
 ```tsx
 import { useOptimistic, useActionState } from 'react';
@@ -248,16 +261,16 @@ async function addComment(formData) {
 function CommentList({ comments }) {
   const [optimisticComments, addOptimisticComment] = useOptimistic(
     comments,
-    (state, newComment) => [...state, { ...newComment, pending: true }]
+    (state, newComment) => [...state, { ...newComment, pending: true }],
   );
-  
+
   async function formAction(formData) {
     addOptimisticComment({ id: 'temp', text: formData.get('comment') });
     return await addComment(formData);
   }
-  
+
   const [state, action] = useActionState(formAction, null);
-  
+
   return (
     <div>
       <form action={action}>
@@ -281,7 +294,8 @@ function CommentList({ comments }) {
 
 ## 🎣 The `use()` Hook {#the-use-hook}
 
-The `use()` hook allows you to read the value of a Promise or Context directly in components, including conditional usage.
+The `use()` hook allows you to read the value of a Promise or Context directly
+in components, including conditional usage.
 
 ```tsx
 import { use, Suspense } from 'react';
@@ -289,7 +303,7 @@ import { use, Suspense } from 'react';
 function UserProfile({ userPromise }) {
   // Can be used conditionally, unlike hooks before
   const user = use(userPromise);
-  
+
   return (
     <div>
       <h1>{user.name}</h1>
@@ -300,7 +314,7 @@ function UserProfile({ userPromise }) {
 
 function App() {
   const userPromise = fetchUser();
-  
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <UserProfile userPromise={userPromise} />
@@ -319,12 +333,8 @@ const ThemeContext = createContext(null);
 function ThemedButton() {
   // Can be used conditionally
   const theme = use(ThemeContext);
-  
-  return (
-    <button style={{ background: theme.primary }}>
-      Themed Button
-    </button>
-  );
+
+  return <button style={{ background: theme.primary }}>Themed Button</button>;
 }
 ```
 
@@ -332,14 +342,15 @@ function ThemedButton() {
 
 ## 🖥️ Server Components {#server-components}
 
-React 19 includes built-in support for Server Components, allowing you to fetch data and render on the server.
+React 19 includes built-in support for Server Components, allowing you to fetch
+data and render on the server.
 
 ```tsx
 // Server Component (Next.js App Router)
 async function ProductPage({ id }) {
   // This runs on the server
   const product = await fetchProduct(id);
-  
+
   return (
     <div>
       <h1>{product.name}</h1>
@@ -350,17 +361,17 @@ async function ProductPage({ id }) {
 }
 
 // Client Component (marked with 'use client')
-'use client';
+('use client');
 
 function AddToCartButton({ productId }) {
   const [isAdding, setIsAdding] = useState(false);
-  
+
   async function handleAddToCart() {
     setIsAdding(true);
     await addToCart(productId);
     setIsAdding(false);
   }
-  
+
   return (
     <button onClick={handleAddToCart} disabled={isAdding}>
       {isAdding ? 'Adding...' : 'Add to Cart'}
@@ -377,7 +388,8 @@ React 19.2 introduces additional features that enhance the developer experience.
 
 ### Activity Component {#activity-component}
 
-The `<Activity />` component provides a standardized way to show loading and activity states.
+The `<Activity />` component provides a standardized way to show loading and
+activity states.
 
 ```tsx
 import { Activity } from 'react';
@@ -385,51 +397,49 @@ import { Activity } from 'react';
 function DataFetcher() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   useEffect(() => {
     fetchData().then(result => {
       setData(result);
       setIsLoading(false);
     });
   }, []);
-  
+
   if (isLoading) {
     return <Activity />;
   }
-  
+
   return <div>{/* Render data */}</div>;
 }
 ```
 
 ### useEffectEvent Hook {#useeffectevent-hook}
 
-`useEffectEvent` allows you to define event handlers that don't need to be in the dependency array.
+`useEffectEvent` allows you to define event handlers that don't need to be in
+the dependency array.
 
 ```tsx
 import { useEffect, useEffectEvent, useState } from 'react';
 
 function ChatRoom({ roomId }) {
   const [message, setMessage] = useState('');
-  
+
   // This function doesn't need to be in dependencies
   const onConnected = useEffectEvent(() => {
     showNotification('Connected to ' + roomId);
   });
-  
+
   useEffect(() => {
     const connection = createConnection(roomId);
     connection.on('connected', onConnected);
     connection.connect();
-    
+
     return () => connection.disconnect();
   }, [roomId]); // onConnected is not needed here
-  
+
   return (
     <div>
-      <input 
-        value={message} 
-        onChange={(e) => setMessage(e.target.value)} 
-      />
+      <input value={message} onChange={e => setMessage(e.target.value)} />
     </div>
   );
 }
@@ -437,7 +447,8 @@ function ChatRoom({ roomId }) {
 
 ### cacheSignal API {#cachesignal-api}
 
-`cacheSignal` provides a way to cache signals for better performance in concurrent rendering.
+`cacheSignal` provides a way to cache signals for better performance in
+concurrent rendering.
 
 ```tsx
 import { cacheSignal } from 'react';
@@ -447,7 +458,7 @@ function ExpensiveComponent({ data }) {
     // Expensive computation
     return processData(data);
   });
-  
+
   return <div>{cachedData.value}</div>;
 }
 ```
@@ -458,38 +469,40 @@ function ExpensiveComponent({ data }) {
 
 ### Automatic Batching
 
-React 19 automatically batches more state updates, including updates from promises, timeouts, and native event handlers.
+React 19 automatically batches more state updates, including updates from
+promises, timeouts, and native event handlers.
 
 ```tsx
 function App() {
   const [count, setCount] = useState(0);
   const [flag, setFlag] = useState(false);
-  
+
   function handleClick() {
     // These are automatically batched in React 19
     setCount(c => c + 1);
     setFlag(f => !f);
-    
+
     // Even async updates are batched
     setTimeout(() => {
       setCount(c => c + 1);
       setFlag(f => !f);
     }, 1000);
   }
-  
+
   return <button onClick={handleClick}>Click me</button>;
 }
 ```
 
 ### Enhanced SSR
 
-React 19 improves Server-Side Rendering with better streaming, selective hydration, and reduced JavaScript bundle size.
+React 19 improves Server-Side Rendering with better streaming, selective
+hydration, and reduced JavaScript bundle size.
 
 ```tsx
 // Server Component with streaming
 async function BlogPost({ slug }) {
   const post = await fetchPost(slug);
-  
+
   return (
     <article>
       <h1>{post.title}</h1>
@@ -505,7 +518,8 @@ async function BlogPost({ slug }) {
 
 ## 📘 TypeScript Integration {#typescript-integration}
 
-React 19 improves TypeScript support with better type inference and error messages.
+React 19 improves TypeScript support with better type inference and error
+messages.
 
 ### Improved Type Inference
 
@@ -513,19 +527,20 @@ React 19 improves TypeScript support with better type inference and error messag
 // Better inference for refs
 function MyComponent() {
   const inputRef = useRef<HTMLInputElement>(null);
-  
+
   useEffect(() => {
     // TypeScript knows inputRef.current is HTMLInputElement | null
     inputRef.current?.focus();
   }, []);
-  
+
   return <input ref={inputRef} />;
 }
 ```
 
 ### Better Error Messages
 
-React 19 provides more helpful TypeScript error messages that guide you to the correct solution.
+React 19 provides more helpful TypeScript error messages that guide you to the
+correct solution.
 
 ---
 
@@ -534,11 +549,13 @@ React 19 provides more helpful TypeScript error messages that guide you to the c
 ### Upgrading to React 19
 
 1. **Update Dependencies**
+
 ```bash
 npm install react@19 react-dom@19
 ```
 
 2. **Update TypeScript Types** (if using TypeScript)
+
 ```bash
 npm install --save-dev @types/react@19 @types/react-dom@19
 ```
@@ -548,6 +565,7 @@ npm install --save-dev @types/react@19 @types/react-dom@19
    - Check your codebase for warnings
 
 4. **Enable React Compiler** (optional)
+
 ```json
 {
   "compilerOptions": {
@@ -595,7 +613,7 @@ const callback = () => doSomething(a);
 <form action={serverAction}>
   <input name="email" />
   <button type="submit">Submit</button>
-</form>
+</form>;
 
 // ❌ Avoid: Manual form state management when not needed
 const [email, setEmail] = useState('');
@@ -625,7 +643,7 @@ async function Page() {
 }
 
 // ❌ Avoid: Fetching in Client Component when not needed
-'use client';
+('use client');
 function Page() {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -672,7 +690,8 @@ async function action(formData) {
 React 19 and 19.2 bring significant improvements to the React ecosystem:
 
 - **Simplified Development**: Form Actions and new hooks reduce boilerplate
-- **Better Performance**: React Compiler and automatic batching optimize your apps
+- **Better Performance**: React Compiler and automatic batching optimize your
+  apps
 - **Enhanced DX**: Better TypeScript support and error messages
 - **Modern Patterns**: Server Components and improved SSR capabilities
 
@@ -680,11 +699,14 @@ React 19 and 19.2 bring significant improvements to the React ecosystem:
 
 1. **React Compiler** eliminates the need for manual memoization in most cases
 2. **Form Actions** simplify form handling with server-side logic
-3. **New Hooks** (`useActionState`, `useFormStatus`, `useOptimistic`, `use()`) provide powerful patterns
+3. **New Hooks** (`useActionState`, `useFormStatus`, `useOptimistic`, `use()`)
+   provide powerful patterns
 4. **Server Components** enable better performance and SEO
 5. **React 19.2** adds polish with `useEffectEvent` and `<Activity />`
 
-Start migrating your React applications to take advantage of these powerful new features. The React team has made significant improvements that will make your code cleaner, faster, and more maintainable.
+Start migrating your React applications to take advantage of these powerful new
+features. The React team has made significant improvements that will make your
+code cleaner, faster, and more maintainable.
 
 ---
 
@@ -698,4 +720,3 @@ Start migrating your React applications to take advantage of these powerful new 
 ---
 
 **Happy coding with React 19! 🚀**
-

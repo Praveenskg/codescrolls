@@ -2,36 +2,50 @@
 id: generics
 title: Generics in TypeScript
 sidebar_position: 1
-description: Master TypeScript generics to write reusable, type-safe code with generic functions, classes, interfaces, and constraints.
-keywords: [typescript generics, generic types, generic functions, generic classes, type parameters, typescript constraints]
+description:
+  Master TypeScript generics to write reusable, type-safe code with generic
+  functions, classes, interfaces, and constraints.
+keywords:
+  [
+    typescript generics,
+    generic types,
+    generic functions,
+    generic classes,
+    type parameters,
+    typescript constraints,
+  ]
 ---
 
 # Generics in TypeScript
 
-**Generics** allow you to write reusable code that works with multiple types while maintaining type safety. They're one of TypeScript's most powerful features.
+**Generics** allow you to write reusable code that works with multiple types
+while maintaining type safety. They're one of TypeScript's most powerful
+features.
 
 ---
 
 ## Why Generics?
 
 Without generics:
+
 ```typescript
 function identity(arg: any): any {
   return arg;
 }
 
 // Lost type information
-const result = identity("hello"); // result is 'any'
+const result = identity('hello'); // result is 'any'
 ```
 
 With generics:
+
 ```typescript
 function identity<T>(arg: T): T {
   return arg;
 }
 
 // Type preserved
-const result = identity("hello"); // result is 'string'
+const result = identity('hello'); // result is 'string'
 ```
 
 ---
@@ -47,7 +61,7 @@ function identity<T>(arg: T): T {
 
 // Usage
 const num = identity<number>(42);
-const str = identity<string>("hello");
+const str = identity<string>('hello');
 const bool = identity<boolean>(true);
 
 // Type inference (recommended)
@@ -61,11 +75,11 @@ function pair<T, U>(first: T, second: U): [T, U] {
   return [first, second];
 }
 
-const result = pair<string, number>("age", 25);
+const result = pair<string, number>('age', 25);
 // result: [string, number]
 
 // With inference
-const result2 = pair("age", 25); // TypeScript infers types
+const result2 = pair('age', 25); // TypeScript infers types
 ```
 
 ### Generic Array Functions
@@ -78,7 +92,7 @@ function firstElement<T>(arr: T[]): T | undefined {
 const numbers = [1, 2, 3];
 const first = firstElement(numbers); // first: number | undefined
 
-const strings = ["a", "b", "c"];
+const strings = ['a', 'b', 'c'];
 const firstStr = firstElement(strings); // firstStr: string | undefined
 ```
 
@@ -94,7 +108,7 @@ interface Box<T> {
 }
 
 const numberBox: Box<number> = { value: 42 };
-const stringBox: Box<string> = { value: "hello" };
+const stringBox: Box<string> = { value: 'hello' };
 ```
 
 ### Generic Interface with Methods
@@ -158,22 +172,25 @@ numberStack.push(2);
 console.log(numberStack.pop()); // 2
 
 const stringStack = new Stack<string>();
-stringStack.push("hello");
-stringStack.push("world");
+stringStack.push('hello');
+stringStack.push('world');
 ```
 
 ### Generic Class with Constructor
 
 ```typescript
 class Pair<T, U> {
-  constructor(public first: T, public second: U) {}
+  constructor(
+    public first: T,
+    public second: U,
+  ) {}
 
   swap(): Pair<U, T> {
     return new Pair(this.second, this.first);
   }
 }
 
-const pair = new Pair("age", 25);
+const pair = new Pair('age', 25);
 const swapped = pair.swap(); // Pair<number, string>
 ```
 
@@ -192,7 +209,7 @@ function logLength<T extends HasLength>(arg: T): void {
   console.log(arg.length);
 }
 
-logLength("hello"); // string has length
+logLength('hello'); // string has length
 logLength([1, 2, 3]); // array has length
 logLength({ length: 10 }); // object has length
 // logLength(42); // Error: number doesn't have length
@@ -223,12 +240,12 @@ function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
 }
 
 const person = {
-  name: "John",
-  age: 30
+  name: 'John',
+  age: 30,
 };
 
-const name = getProperty(person, "name"); // string
-const age = getProperty(person, "age"); // number
+const name = getProperty(person, 'name'); // string
+const age = getProperty(person, 'age'); // number
 // getProperty(person, "invalid"); // Error
 ```
 
@@ -247,13 +264,13 @@ type Result<T> = {
 
 const userResult: Result<User> = {
   success: true,
-  data: { id: 1, name: "John" }
+  data: { id: 1, name: 'John' },
 };
 
 const errorResult: Result<null> = {
   success: false,
   data: null,
-  error: "User not found"
+  error: 'User not found',
 };
 ```
 
@@ -284,14 +301,14 @@ interface Response<T = any> {
 
 // With default
 const response1: Response = {
-  data: "anything",
-  status: 200
+  data: 'anything',
+  status: 200,
 };
 
 // With specific type
 const response2: Response<User> = {
-  data: { id: 1, name: "John" },
-  status: 200
+  data: { id: 1, name: 'John' },
+  status: 200,
 };
 ```
 
@@ -315,7 +332,7 @@ const strings = map(numbers, n => n.toString()); // string[]
 ```typescript
 function filter<T, S extends T>(
   arr: T[],
-  predicate: (item: T) => item is S
+  predicate: (item: T) => item is S,
 ): S[] {
   return arr.filter(predicate);
 }
@@ -332,7 +349,9 @@ function isDog(animal: Animal): animal is Dog {
   return 'bark' in animal;
 }
 
-const animals: Animal[] = [/* ... */];
+const animals: Animal[] = [
+  /* ... */
+];
 const dogs = filter(animals, isDog); // Dog[]
 ```
 
@@ -352,7 +371,7 @@ class ApiClient {
   async post<T, U>(url: string, data: T): Promise<U> {
     const response = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     return response.json();
   }
@@ -362,8 +381,8 @@ class ApiClient {
 const client = new ApiClient();
 const user = await client.get<User>('/api/users/1');
 const result = await client.post<CreateUserDto, User>('/api/users', {
-  name: "John",
-  email: "john@example.com"
+  name: 'John',
+  email: 'john@example.com',
 });
 ```
 
@@ -383,7 +402,7 @@ class Store<T> {
     this.state = {
       data: initialData,
       loading: false,
-      error: null
+      error: null,
     };
   }
 
@@ -409,20 +428,20 @@ userStore.setState(users => [...users, newUser]);
 
 ```typescript
 // Bad - Single letter for complex types
-function process<T, U, V>(a: T, b: U): V { }
+function process<T, U, V>(a: T, b: U): V {}
 
 // Good - Descriptive names
 function transform<Input, Output, Config>(
   input: Input,
-  config: Config
-): Output { }
+  config: Config,
+): Output {}
 ```
 
 ### 2. **Constrain When Necessary**
 
 ```typescript
 // Too loose
-function sort<T>(arr: T[]): T[] { }
+function sort<T>(arr: T[]): T[] {}
 
 // Constrained
 function sort<T extends { value: number }>(arr: T[]): T[] {
@@ -434,10 +453,10 @@ function sort<T extends { value: number }>(arr: T[]): T[] {
 
 ```typescript
 // Verbose
-const result = identity<string>("hello");
+const result = identity<string>('hello');
 
 // Let TypeScript infer
-const result = identity("hello");
+const result = identity('hello');
 ```
 
 ### 4. **Avoid Over-Generalization**
@@ -559,13 +578,14 @@ function getConfig<const T extends Record<string, unknown>>(config: T): T {
 
 const config = getConfig({
   theme: 'dark',
-  fontSize: 14
+  fontSize: 14,
 });
 // Type: { theme: "dark"; fontSize: 14 }
 // Literal types preserved!
 ```
 
 **Benefits:**
+
 - ✅ Preserves literal types automatically
 - ✅ Better type inference for tuples
 - ✅ More precise return types
@@ -597,4 +617,4 @@ const config = getConfig({
 
 ---
 
-**Master generics to write flexible, reusable TypeScript code!** 
+**Master generics to write flexible, reusable TypeScript code!**

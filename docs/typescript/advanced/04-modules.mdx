@@ -2,13 +2,24 @@
 id: modules
 title: Module System in TypeScript
 sidebar_position: 4
-description: Master TypeScript modules with ES6 imports/exports, default exports, namespaces, and module resolution strategies.
-keywords: [typescript modules, es6 modules, import export, typescript namespaces, module resolution, typescript imports]
+description:
+  Master TypeScript modules with ES6 imports/exports, default exports,
+  namespaces, and module resolution strategies.
+keywords:
+  [
+    typescript modules,
+    es6 modules,
+    import export,
+    typescript namespaces,
+    module resolution,
+    typescript imports,
+  ]
 ---
 
 # Module System in TypeScript
 
-TypeScript uses **ES6 module syntax** for organizing code into reusable pieces. Modules help maintain code organization, encapsulation, and reusability.
+TypeScript uses **ES6 module syntax** for organizing code into reusable pieces.
+Modules help maintain code organization, encapsulation, and reusability.
 
 ---
 
@@ -44,7 +55,7 @@ export interface User {
 }
 
 export function getUser(id: number): User {
-  return { id, name: "John" };
+  return { id, name: 'John' };
 }
 
 export const MAX_USERS = 100;
@@ -138,7 +149,7 @@ export default function log(message: string): void {
 import Logger from './logger';
 
 const logger = new Logger();
-logger.log("Hello");
+logger.log('Hello');
 
 // Can use any name
 import MyLogger from './logger';
@@ -149,14 +160,14 @@ import MyLogger from './logger';
 ```typescript
 // api.ts
 export default class ApiClient {
-  get(url: string) { }
+  get(url: string) {}
 }
 
 export interface ApiConfig {
   baseUrl: string;
 }
 
-export const API_VERSION = "v1";
+export const API_VERSION = 'v1';
 ```
 
 ```typescript
@@ -164,7 +175,7 @@ export const API_VERSION = "v1";
 import ApiClient, { ApiConfig, API_VERSION } from './api';
 
 const client = new ApiClient();
-const config: ApiConfig = { baseUrl: "https://api.example.com" };
+const config: ApiConfig = { baseUrl: 'https://api.example.com' };
 ```
 
 ---
@@ -206,7 +217,7 @@ export { Post as PostModel } from './post';
 
 ```typescript
 // logger.ts
-export default class Logger { }
+export default class Logger {}
 
 // index.ts
 export { default as Logger } from './logger';
@@ -232,7 +243,7 @@ export interface User {
 import type { User } from './types';
 
 // Can only use as type, not as value
-const user: User = { id: 1, name: "John" };
+const user: User = { id: 1, name: 'John' };
 ```
 
 ### Type-Only Export
@@ -266,7 +277,7 @@ const user: User = getUser(1);
 async function loadModule() {
   const { default: Logger } = await import('./logger');
   const logger = new Logger();
-  logger.log("Loaded dynamically");
+  logger.log('Loaded dynamically');
 }
 ```
 
@@ -356,9 +367,7 @@ import { User } from '@models/user';
 
 ## Namespaces (Legacy)
 
-:::caution
-Namespaces are legacy. Prefer ES6 modules for new code.
-:::
+:::caution Namespaces are legacy. Prefer ES6 modules for new code. :::
 
 ### Basic Namespace
 
@@ -393,7 +402,7 @@ namespace App {
   export namespace Services {
     export class UserService {
       getUser(id: number): Models.User {
-        return { id, name: "John" };
+        return { id, name: 'John' };
       }
     }
   }
@@ -447,7 +456,7 @@ declare global {
 export {};
 
 // Usage
-window.myApp.version = "1.0.0";
+window.myApp.version = '1.0.0';
 ```
 
 ---
@@ -547,7 +556,7 @@ export function calculateTax(amount: number): number {
 }
 
 // Less clear
-export default function(amount: number): number {
+export default function (amount: number): number {
   return amount * 0.1;
 }
 ```
@@ -615,8 +624,8 @@ export class B {
 
 // Good - Break the cycle
 // interfaces.ts
-export interface IA { }
-export interface IB { }
+export interface IA {}
+export interface IB {}
 
 // a.ts
 import type { IB } from './interfaces';
@@ -639,11 +648,11 @@ import { formatDate, formatCurrency } from './utils';
 
 ```typescript
 // Confusing
-export default class User { }
+export default class User {}
 export const MAX_USERS = 100;
 
 // Consistent
-export class User { }
+export class User {}
 export const MAX_USERS = 100;
 ```
 
@@ -671,4 +680,4 @@ export const MAX_USERS = 100;
 
 ---
 
-**Master modules to write organized, maintainable TypeScript code!** 
+**Master modules to write organized, maintainable TypeScript code!**

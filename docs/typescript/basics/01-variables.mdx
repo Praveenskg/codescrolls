@@ -1,7 +1,9 @@
 ---
 id: variables
 title: Variables
-description: Learn how to declare variables in TypeScript using let, const, and var. Understand scoping rules, immutability, and best practices.
+description:
+  Learn how to declare variables in TypeScript using let, const, and var.
+  Understand scoping rules, immutability, and best practices.
 sidebar_position: 1
 keywords:
   [
@@ -20,7 +22,9 @@ tags: [typescript, variables, basics]
 
 # Variables in TypeScript
 
-TypeScript provides powerful static typing capabilities to JavaScript. When declaring variables, we can explicitly define their types to catch bugs early and improve developer experience.
+TypeScript provides powerful static typing capabilities to JavaScript. When
+declaring variables, we can explicitly define their types to catch bugs early
+and improve developer experience.
 
 ---
 
@@ -56,7 +60,8 @@ let framework: string = 'React';
 
 ## 3. Explicit Typing
 
-You can annotate the type manually, even if you don’t initialize the variable immediately:
+You can annotate the type manually, even if you don’t initialize the variable
+immediately:
 
 ```ts
 let isActive: boolean;
@@ -104,20 +109,21 @@ const appName = 'CodeScrolls'; // inferred as string
 
 ## 🆕 `satisfies` Operator (TypeScript 4.9+)
 
-The `satisfies` operator ensures a value matches a type without changing the inferred type.
+The `satisfies` operator ensures a value matches a type without changing the
+inferred type.
 
 ```typescript
 // Without satisfies - loses specific literal types
 const config = {
   theme: 'dark',
-  fontSize: 14
+  fontSize: 14,
 } as const;
 // Type: { readonly theme: "dark"; readonly fontSize: 14 }
 
 // With satisfies - preserves type while checking
 const config = {
   theme: 'dark',
-  fontSize: 14
+  fontSize: 14,
 } satisfies { theme: string; fontSize: number };
 // Type: { theme: "dark"; fontSize: 14 } (preserves literal types!)
 
@@ -125,7 +131,7 @@ const config = {
 const apiConfig = {
   baseUrl: 'https://api.example.com',
   timeout: 5000,
-  retries: 3
+  retries: 3,
 } satisfies {
   baseUrl: string;
   timeout: number;
@@ -137,6 +143,7 @@ console.log(apiConfig.baseUrl); // Type: "https://api.example.com" (not just str
 ```
 
 **Benefits:**
+
 - ✅ Type checking without losing literal types
 - ✅ Better autocomplete
 - ✅ Catches errors early
@@ -173,5 +180,4 @@ let config: { darkMode: boolean } = { darkMode: true };
 
 - TypeScript's type system helps catch bugs early.
 
-- Practice writing variables with and without inference.
-  :::
+- Practice writing variables with and without inference. :::

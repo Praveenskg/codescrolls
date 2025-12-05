@@ -179,14 +179,16 @@ git push -u origin fix/bug-description
 git branch -d fix/bug-description
 git push origin --delete fix/bug-description
 ```
-:::tip  Tips
+
+:::tip Tips
+
 - Use clear and conventional commit messages like `fix:`, `feat:`, or `chore:`.
 - Always pull the latest changes before creating new branches.
 - Keep commits small and focused for easier reviews.
 - Use `.gitignore` to avoid committing unnecessary files.
 - Use `git stash` to temporarily save work in progress.
-- Prefer SSH over HTTPS for authentication.
-:::
+- Prefer SSH over HTTPS for authentication. :::
+
 ---
 
 ## Advanced Git
@@ -268,6 +270,7 @@ git push origin --tags
 # Push tags with commits (recommended - only pushes tags for commits being pushed)
 git push --follow-tags
 ```
+
 ### Manual Release Workflow (Git + npm)
 
 ```bash
@@ -290,16 +293,17 @@ npm publish --access public
 # 5. (Optional) Create GitHub Release with changelog
 gh release create v1.0.0 --title "Release v1.0.0" --notes "Changelog details here"
 ```
+
 :::tip Notes
 
-Use `npm version patch` (or minor/major) instead of manually editing package.json version.
+Use `npm version patch` (or minor/major) instead of manually editing
+package.json version.
 
 This ensures commit + tag are created together.
 
 Always `run npm test && npm run build` before publishing.
 
-If using 2FA on npm, set it to Authorization only for CI/CD.
-:::
+If using 2FA on npm, set it to Authorization only for CI/CD. :::
 
 ### Submodules
 
@@ -463,7 +467,6 @@ gh gist list
 
 ---
 
-
 ## Git Hooks
 
 ### Pre-commit Hook
@@ -524,22 +527,22 @@ chmod +x .git/hooks/commit-msg
 [alias]
     # Show file changes in last commit
     lastdiff = diff HEAD~1 HEAD
-    
+
     # Show commits by author
     author = !git log --author="$1" --oneline
-    
+
     # Show files changed in last commit
     lastfiles = diff --name-only HEAD~1 HEAD
-    
+
     # Interactive rebase for last N commits
     rebasei = "!f() { git rebase -i HEAD~$1; }; f"
-    
+
     # Create and switch to new branch (modern way)
     new = "!f() { git switch -c $1; }; f"
-    
+
     # Create and switch to new branch (legacy way)
     # new = "!f() { git checkout -b $1; }; f"
-    
+
     # Delete merged branches
     cleanup = "!git branch --merged | grep -v '\\*\\|main\\|develop' | xargs -n 1 git branch -d"
 ```
@@ -943,10 +946,10 @@ git commit -S -m "Signed commit message"
 
 ## Resources
 
-- [Git Documentation](https://git-scm.com/doc)  
-- [Pro Git Book](https://git-scm.com/book/en/v2)  
+- [Git Documentation](https://git-scm.com/doc)
+- [Pro Git Book](https://git-scm.com/book/en/v2)
 - [GitHub CLI](https://cli.github.com/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)
 - [GitHub Flow](https://guides.github.com/introduction/flow/)
-- [GitLab Flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html)  
+- [GitLab Flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html)

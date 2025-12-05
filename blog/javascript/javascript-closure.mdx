@@ -1,19 +1,29 @@
 ---
 title: Understanding JavaScript Closures
 slug: javascript-closures
-description: A beginner-friendly yet technical dive into JavaScript closures — the hidden power of functions and scope.
+description:
+  A beginner-friendly yet technical dive into JavaScript closures — the hidden
+  power of functions and scope.
 authors: praveen
 tags: [javascript, closures, functions, beginners, scope]
 image: /img/blog/js-closures-banner.png
-date: 2025-08-16 
-keywords: ['javascript closures', 'js closures', 'understanding closures', 'javascript functions', 'scope in javascript']
+date: 2025-08-16
+keywords:
+  [
+    'javascript closures',
+    'js closures',
+    'understanding closures',
+    'javascript functions',
+    'scope in javascript',
+  ]
 ---
 
 import CodeBlock from '@theme/CodeBlock';
 
 # 🔒 Understanding JavaScript Closures: The Magic Behind the Scope
 
-JavaScript closures sound confusing — but they’re actually one of the most powerful features of the language.  
+JavaScript closures sound confusing — but they’re actually one of the most
+powerful features of the language.  
 Let’s break them down with some simple code and analogies.
 
 {/* truncate */}
@@ -23,7 +33,8 @@ Let’s break them down with some simple code and analogies.
 ## 🧠 What's a Closure Anyway?
 
 In simple terms:  
-A **closure** is when a function "remembers" the variables from where it was created, even if it’s used somewhere else later.
+A **closure** is when a function "remembers" the variables from where it was
+created, even if it’s used somewhere else later.
 
 That’s it. Seriously.
 
@@ -31,10 +42,13 @@ That’s it. Seriously.
 
 ## 👀 A Real-World Analogy
 
-Imagine you’re in a kitchen, and you pack a **lunchbox** (`function`) with some snacks (`variables`).  
-Later, you go on a trip (`outside scope`), open your lunchbox, and guess what — your snacks are still there!
+Imagine you’re in a kitchen, and you pack a **lunchbox** (`function`) with some
+snacks (`variables`).  
+Later, you go on a trip (`outside scope`), open your lunchbox, and guess what —
+your snacks are still there!
 
-That’s a closure: the function _keeps its own private snack stash_ from its original environment.
+That’s a closure: the function _keeps its own private snack stash_ from its
+original environment.
 
 ---
 
@@ -44,17 +58,11 @@ That’s a closure: the function _keeps its own private snack stash_ from its or
 {`function outer() {
   let count = 0;
 
-function inner() {
-count++;
-console.log(\`Count is: \${count}\`);
-}
+function inner() { count++; console.log(\`Count is: \${count}\`); }
 
-return inner;
-}
+return inner; }
 
-const counter = outer();
-counter(); // Count is: 1
-counter(); // Count is: 2
+const counter = outer(); counter(); // Count is: 1 counter(); // Count is: 2
 counter(); // Count is: 3`}
 
 </CodeBlock>
@@ -62,8 +70,10 @@ counter(); // Count is: 3`}
 ### What's Happening Here?
 
 - `outer()` defines a variable `count` and returns a function `inner()`.
-- Even though `outer()` finishes running, `inner()` **remembers** `count` because of the **closure**.
-- Every time you call `counter()`, it still has access to `count` and updates it.
+- Even though `outer()` finishes running, `inner()` **remembers** `count`
+  because of the **closure**.
+- Every time you call `counter()`, it still has access to `count` and updates
+  it.
 
 Mind. Blown. 💥
 
@@ -84,7 +94,7 @@ Closures power many cool JavaScript features:
 
 Closures can trap unexpected values inside loops. Here's a classic mistake:
 
-<CodeBlock language='js'>
+<CodeBlock language="js">
   {`for (var i = 0; i < 3; i++) {
   setTimeout(() => {
     console.log(i); // prints 3, 3, 3
@@ -94,7 +104,7 @@ Closures can trap unexpected values inside loops. Here's a classic mistake:
 
 Use `let` instead of `var`, and it works as expected:
 
-<CodeBlock language='js'>
+<CodeBlock language="js">
   {`for (let i = 0; i < 3; i++) {
   setTimeout(() => {
     console.log(i); // prints 0, 1, 2
@@ -106,11 +116,14 @@ Use `let` instead of `var`, and it works as expected:
 
 ## ✨ Final Thoughts
 
-Closures are like JavaScript's way of letting functions _carry their own backpack_.  
-Once you grasp this, you unlock a deeper understanding of how functions really work under the hood.
+Closures are like JavaScript's way of letting functions _carry their own
+backpack_.  
+Once you grasp this, you unlock a deeper understanding of how functions really
+work under the hood.
 
 Keep playing with it. Break things. Console log everything.  
-Closures may seem weird at first, but they’re one of the coolest things JS has to offer.
+Closures may seem weird at first, but they’re one of the coolest things JS has
+to offer.
 
 ---
 

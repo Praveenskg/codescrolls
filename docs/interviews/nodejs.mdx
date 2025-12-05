@@ -1,7 +1,7 @@
 ---
-description: Master Node.js interview questions from beginner to
-  advanced level. Covers event loop, async, streams, cluster,
-  Express.js, and more.
+description:
+  Master Node.js interview questions from beginner to advanced level. Covers
+  event loop, async, streams, cluster, Express.js, and more.
 id: nodejs
 keywords:
   [
@@ -16,68 +16,67 @@ title: Node.js Interview Questions
 sidebar_position: 7
 ---
 
-#  Node.js Interview Questions
+# Node.js Interview Questions
 
 Welcome to the **Node.js Interview Hub** 🚀\
-Here you'll find a collection of **50 essential Node.js interview
-questions** covering basic, intermediate, and advanced levels with
-examples.
+Here you'll find a collection of **50 essential Node.js interview questions**
+covering basic, intermediate, and advanced levels with examples.
 
-------------------------------------------------------------------------
+---
 
 ## 🟢 Basic Level
 
 ### 1. What is Node.js?
 
-Node.js is a JavaScript runtime built on Chrome's V8 engine that allows
-running JavaScript on the server.
+Node.js is a JavaScript runtime built on Chrome's V8 engine that allows running
+JavaScript on the server.
 
-``` js
-console.log("Hello from Node.js");
+```js
+console.log('Hello from Node.js');
 ```
 
 ### 2. What are the features of Node.js?
 
--   Non-blocking I/O\
--   Single-threaded event loop\
--   High scalability\
--   NPM ecosystem
+- Non-blocking I/O\
+- Single-threaded event loop\
+- High scalability\
+- NPM ecosystem
 
 ### 3. What is NPM?
 
 NPM (Node Package Manager) manages dependencies.
 
-``` bash
+```bash
 npm install express
 ```
 
 ### 4. Difference between Node.js and JavaScript in browser?
 
--   Browser JS: Runs in browser, limited APIs (DOM).\
--   Node.js: Runs on server, access to file system, OS.
+- Browser JS: Runs in browser, limited APIs (DOM).\
+- Node.js: Runs on server, access to file system, OS.
 
 ### 5. What is the difference between CommonJS and ES Modules?
 
--   CommonJS: `require`, `module.exports`.\
--   ES Modules: `import`, `export`.
+- CommonJS: `require`, `module.exports`.\
+- ES Modules: `import`, `export`.
 
-``` js
+```js
 // CommonJS
-const fs = require("fs");
+const fs = require('fs');
 // ES Modules
-import fs from "fs";
+import fs from 'fs';
 ```
 
 ### 6. What is the difference between synchronous and asynchronous in Node.js?
 
--   Sync: Blocks execution.\
--   Async: Non-blocking, event-driven.
+- Sync: Blocks execution.\
+- Async: Non-blocking, event-driven.
 
 ### 7. What is REPL in Node.js?
 
 Read-Eval-Print Loop interactive shell.
 
-``` bash
+```bash
 node
 > 2 + 3
 5
@@ -89,22 +88,22 @@ Configuration file containing dependencies, scripts, metadata.
 
 ### 9. What is difference between dependencies and devDependencies?
 
--   dependencies: Required in production.\
--   devDependencies: Required only in development.
+- dependencies: Required in production.\
+- devDependencies: Required only in development.
 
 ### 10. What is difference between global and local modules?
 
--   Global: Installed with `-g`.\
--   Local: Installed in project `node_modules`.
+- Global: Installed with `-g`.\
+- Local: Installed in project `node_modules`.
 
-------------------------------------------------------------------------
+---
 
 ## 🟡 Intermediate Level
 
 ### 11. What is event-driven architecture in Node.js?
 
-Node.js uses event-driven architecture where the event loop handles
-async operations.
+Node.js uses event-driven architecture where the event loop handles async
+operations.
 
 ### 12. Explain the Event Loop in Node.js.
 
@@ -114,8 +113,8 @@ Manages async operations with phases (timers, I/O, check, close).
 
 Functions passed as arguments, executed after async tasks.
 
-``` js
-fs.readFile("file.txt", (err, data) => {
+```js
+fs.readFile('file.txt', (err, data) => {
   if (err) throw err;
   console.log(data.toString());
 });
@@ -125,17 +124,17 @@ fs.readFile("file.txt", (err, data) => {
 
 Alternative to callbacks for handling async operations.
 
-``` js
-fs.promises.readFile("file.txt").then(console.log);
+```js
+fs.promises.readFile('file.txt').then(console.log);
 ```
 
 ### 15. Explain async/await in Node.js.
 
 Syntactic sugar over Promises for cleaner async code.
 
-``` js
+```js
 async function read() {
-  let data = await fs.promises.readFile("file.txt");
+  let data = await fs.promises.readFile('file.txt');
   console.log(data.toString());
 }
 ```
@@ -144,23 +143,23 @@ async function read() {
 
 Streams handle reading/writing large data chunks efficiently.
 
-``` js
-const fs = require("fs");
-const read = fs.createReadStream("file.txt");
-read.on("data", chunk => console.log(chunk.toString()));
+```js
+const fs = require('fs');
+const read = fs.createReadStream('file.txt');
+read.on('data', chunk => console.log(chunk.toString()));
 ```
 
 ### 17. Explain the difference between `process.nextTick()` and `setImmediate()`?
 
--   nextTick: Runs before next event loop phase.\
--   setImmediate: Runs in the check phase.
+- nextTick: Runs before next event loop phase.\
+- setImmediate: Runs in the check phase.
 
 ### 18. What are Buffers in Node.js?
 
 Buffers handle binary data.
 
-``` js
-const buf = Buffer.from("Hello");
+```js
+const buf = Buffer.from('Hello');
 console.log(buf.toString());
 ```
 
@@ -168,17 +167,17 @@ console.log(buf.toString());
 
 Functions that process requests before reaching routes.
 
-``` js
+```js
 app.use((req, res, next) => {
-  console.log("Middleware");
+  console.log('Middleware');
   next();
 });
 ```
 
 ### 20. Difference between `app.use()` and `app.get()` in Express?
 
--   app.use(): For middleware.\
--   app.get(): For handling GET routes.
+- app.use(): For middleware.\
+- app.get(): For handling GET routes.
 
 ### 21. What is CORS in Node.js?
 
@@ -188,14 +187,14 @@ Cross-Origin Resource Sharing allows resources from different origins.
 
 Configuration variables stored in `.env`.
 
-``` js
+```js
 process.env.PORT;
 ```
 
 ### 23. What is difference between cluster and worker threads?
 
--   Cluster: Multi-process.\
--   Worker Threads: Multi-thread within a process.
+- Cluster: Multi-process.\
+- Worker Threads: Multi-thread within a process.
 
 ### 24. What is Nodemon?
 
@@ -205,33 +204,33 @@ A tool that restarts Node.js app on file changes.
 
 A production process manager for Node.js apps.
 
-------------------------------------------------------------------------
+---
 
 ## 🔴 Advanced Level
 
 ### 26. What is difference between spawn, exec, and fork in Node.js?
 
--   spawn: Executes command, streams output.\
--   exec: Executes command, buffers output.\
--   fork: Creates new Node.js process.
+- spawn: Executes command, streams output.\
+- exec: Executes command, buffers output.\
+- fork: Creates new Node.js process.
 
 ### 27. What is the difference between blocking and non-blocking code?
 
--   Blocking: Stops execution until complete.\
--   Non-blocking: Async execution.
+- Blocking: Stops execution until complete.\
+- Non-blocking: Async execution.
 
 ### 28. What is JWT authentication in Node.js?
 
 JSON Web Tokens are used for authentication.
 
-``` js
-const token = jwt.sign({ id: user._id }, "secret");
+```js
+const token = jwt.sign({ id: user._id }, 'secret');
 ```
 
 ### 29. What is difference between authentication and authorization?
 
--   Authentication: Identity verification.\
--   Authorization: Access control.
+- Authentication: Identity verification.\
+- Authorization: Access control.
 
 ### 30. What is rate limiting in Node.js?
 
@@ -243,8 +242,8 @@ Middleware for securing HTTP headers.
 
 ### 32. What are cookies and sessions in Node.js?
 
--   Cookies: Client-side storage.\
--   Sessions: Server-side storage linked with cookies.
+- Cookies: Client-side storage.\
+- Sessions: Server-side storage linked with cookies.
 
 ### 33. What are microservices in Node.js?
 
@@ -256,8 +255,8 @@ A query language for APIs alternative to REST.
 
 ### 35. What is difference between REST and GraphQL?
 
--   REST: Fixed endpoints.\
--   GraphQL: Flexible queries.
+- REST: Fixed endpoints.\
+- GraphQL: Flexible queries.
 
 ### 36. What is WebSocket in Node.js?
 
@@ -281,8 +280,8 @@ Distributing requests across multiple servers.
 
 ### 41. What is difference between vertical and horizontal scaling in Node.js?
 
--   Vertical: Increase resources of one server.\
--   Horizontal: Add more servers.
+- Vertical: Increase resources of one server.\
+- Horizontal: Add more servers.
 
 ### 42. What are design patterns in Node.js?
 
@@ -292,11 +291,11 @@ Singleton, Observer, Factory, Middleware pattern.
 
 Core module that allows custom events.
 
-``` js
-const EventEmitter = require("events");
+```js
+const EventEmitter = require('events');
 const emitter = new EventEmitter();
-emitter.on("msg", () => console.log("Hello"));
-emitter.emit("msg");
+emitter.on('msg', () => console.log('Hello'));
+emitter.emit('msg');
 ```
 
 ### 44. What are process signals in Node.js?
@@ -305,34 +304,34 @@ Notifications like `SIGINT`, `SIGTERM` to manage processes.
 
 ### 45. What is difference between process.env and config files?
 
--   process.env: Dynamic values from environment.\
--   Config files: Static configurations.
+- process.env: Dynamic values from environment.\
+- Config files: Static configurations.
 
 ### 46. What is difference between synchronous and asynchronous error handling?
 
--   Sync: Try-catch.\
--   Async: Callbacks/Promises/async-await.
+- Sync: Try-catch.\
+- Async: Callbacks/Promises/async-await.
 
 ### 47. What are ORM/ODM libraries in Node.js?
 
--   ORM: Sequelize, TypeORM.\
--   ODM: Mongoose.
+- ORM: Sequelize, TypeORM.\
+- ODM: Mongoose.
 
 ### 48. What is difference between monolithic and microservices architecture?
 
--   Monolithic: Single codebase.\
--   Microservices: Independent services.
+- Monolithic: Single codebase.\
+- Microservices: Independent services.
 
 ### 49. What is difference between Redis and MongoDB in Node.js?
 
--   Redis: In-memory store.\
--   MongoDB: Document database.
+- Redis: In-memory store.\
+- MongoDB: Document database.
 
 ### 50. What are best practices for Node.js applications?
 
--   Use async/await\
--   Secure environment variables\
--   Error handling\
--   Caching\
--   Logging\
--   Use process managers
+- Use async/await\
+- Secure environment variables\
+- Error handling\
+- Caching\
+- Logging\
+- Use process managers

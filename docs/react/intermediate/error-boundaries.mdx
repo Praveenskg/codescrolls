@@ -2,24 +2,37 @@
 id: error-boundaries
 title: Error Boundaries
 sidebar_position: 5
-description: Learn how to handle errors gracefully in React using error boundaries, including implementation patterns and best practices.
-keywords: [react error boundaries, error handling, componentDidCatch, getDerivedStateFromError, react error, error recovery]
+description:
+  Learn how to handle errors gracefully in React using error boundaries,
+  including implementation patterns and best practices.
+keywords:
+  [
+    react error boundaries,
+    error handling,
+    componentDidCatch,
+    getDerivedStateFromError,
+    react error,
+    error recovery,
+  ]
 ---
 
 # Error Boundaries in React
 
-**Error boundaries** are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI.
+**Error boundaries** are React components that catch JavaScript errors anywhere
+in their child component tree, log those errors, and display a fallback UI.
 
 ---
 
 ## 📌 What are Error Boundaries?
 
 Error boundaries catch errors during:
+
 - Rendering
 - Lifecycle methods
 - Constructors of child components
 
 They **don't** catch errors in:
+
 - Event handlers
 - Asynchronous code (setTimeout, promises)
 - Server-side rendering
@@ -78,7 +91,7 @@ class ErrorBoundary extends React.Component {
     this.state = {
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     };
   }
 
@@ -89,7 +102,7 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     // Log to error reporting service
@@ -100,7 +113,7 @@ class ErrorBoundary extends React.Component {
     this.setState({
       hasError: false,
       error: null,
-      errorInfo: null
+      errorInfo: null,
     });
   };
 
@@ -152,7 +165,7 @@ function App() {
   return (
     <div>
       <Header />
-      
+
       <ErrorBoundary fallback={<div>Sidebar error</div>}>
         <Sidebar />
       </ErrorBoundary>
@@ -191,7 +204,7 @@ class ErrorBoundary extends React.Component {
 // Usage
 <ErrorBoundary fallback={<CustomErrorPage />}>
   <Component />
-</ErrorBoundary>
+</ErrorBoundary>;
 ```
 
 ---
@@ -207,9 +220,9 @@ function logErrorToService(error, errorInfo) {
     Sentry.captureException(error, {
       contexts: {
         react: {
-          componentStack: errorInfo.componentStack
-        }
-      }
+          componentStack: errorInfo.componentStack,
+        },
+      },
     });
   }
 }
@@ -232,10 +245,7 @@ const ErrorBoundary = Sentry.ErrorBoundary;
 
 function App() {
   return (
-    <ErrorBoundary 
-      fallback={<ErrorFallback />}
-      showDialog
-    >
+    <ErrorBoundary fallback={<ErrorFallback />} showDialog>
       <MyApp />
     </ErrorBoundary>
   );
@@ -311,7 +321,7 @@ function DataFetcher() {
 function useAsyncError() {
   const [, setError] = useState();
 
-  return useCallback((error) => {
+  return useCallback(error => {
     setError(() => {
       throw error;
     });
@@ -341,7 +351,7 @@ function MyComponent() {
 class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
-    retryCount: 0
+    retryCount: 0,
   };
 
   static getDerivedStateFromError(error) {
@@ -351,7 +361,7 @@ class ErrorBoundary extends React.Component {
   retry = () => {
     this.setState(prev => ({
       hasError: false,
-      retryCount: prev.retryCount + 1
+      retryCount: prev.retryCount + 1,
     }));
   };
 
@@ -385,11 +395,7 @@ function ErrorBoundaryWithReset({ children }) {
     setResetKey(prev => prev + 1);
   }, [location.pathname]);
 
-  return (
-    <ErrorBoundary key={resetKey}>
-      {children}
-    </ErrorBoundary>
-  );
+  return <ErrorBoundary key={resetKey}>{children}</ErrorBoundary>;
 }
 ```
 

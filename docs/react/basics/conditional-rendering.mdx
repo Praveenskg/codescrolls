@@ -2,19 +2,32 @@
 id: conditional-rendering
 title: Conditional Rendering
 sidebar_position: 5
-description: Learn different ways to conditionally render components in React using if-else, ternary operators, logical AND, and switch statements.
-keywords: [react conditional rendering, if else react, ternary operator, logical and, conditional jsx, react patterns]
+description:
+  Learn different ways to conditionally render components in React using
+  if-else, ternary operators, logical AND, and switch statements.
+keywords:
+  [
+    react conditional rendering,
+    if else react,
+    ternary operator,
+    logical and,
+    conditional jsx,
+    react patterns,
+  ]
 ---
 
 # Conditional Rendering in React
 
-**Conditional rendering** allows you to display different UI elements based on certain conditions. React provides several ways to conditionally render components.
+**Conditional rendering** allows you to display different UI elements based on
+certain conditions. React provides several ways to conditionally render
+components.
 
 ---
 
 ## 📌 Why Conditional Rendering?
 
 You often need to show different content based on:
+
 - User authentication status
 - Loading states
 - Error states
@@ -60,15 +73,12 @@ function UserDashboard({ user }) {
 
 ## 🔸 Ternary Operator
 
-The ternary operator (`condition ? true : false`) is perfect for inline conditional rendering:
+The ternary operator (`condition ? true : false`) is perfect for inline
+conditional rendering:
 
 ```jsx
 function LoginButton({ isLoggedIn }) {
-  return (
-    <button>
-      {isLoggedIn ? 'Logout' : 'Login'}
-    </button>
-  );
+  return <button>{isLoggedIn ? 'Logout' : 'Login'}</button>;
 }
 ```
 
@@ -78,11 +88,12 @@ function LoginButton({ isLoggedIn }) {
 function UserStatus({ status }) {
   return (
     <div>
-      Status: {
-        status === 'online' ? '🟢 Online' :
-        status === 'away' ? '🟡 Away' :
-        '🔴 Offline'
-      }
+      Status:{' '}
+      {status === 'online'
+        ? '🟢 Online'
+        : status === 'away'
+          ? '🟡 Away'
+          : '🔴 Offline'}
     </div>
   );
 }
@@ -92,15 +103,7 @@ function UserStatus({ status }) {
 
 ```jsx
 function App({ isLoggedIn }) {
-  return (
-    <div>
-      {isLoggedIn ? (
-        <Dashboard />
-      ) : (
-        <LoginForm />
-      )}
-    </div>
-  );
+  return <div>{isLoggedIn ? <Dashboard /> : <LoginForm />}</div>;
 }
 ```
 
@@ -142,13 +145,19 @@ function UserProfile({ user, isAdmin }) {
 
 ```jsx
 // ❌ Bad - Will render "0" if count is 0
-{count && <div>Count: {count}</div>}
+{
+  count && <div>Count: {count}</div>;
+}
 
 // ✅ Good - Explicitly check
-{count > 0 && <div>Count: {count}</div>}
+{
+  count > 0 && <div>Count: {count}</div>;
+}
 
 // ✅ Also good
-{count !== 0 && <div>Count: {count}</div>}
+{
+  count !== 0 && <div>Count: {count}</div>;
+}
 ```
 
 ---
@@ -208,7 +217,7 @@ function StatusBadge({ status }) {
     success: <span>✓ Success</span>,
     error: <span>✗ Error</span>,
     warning: <span>⚠ Warning</span>,
-    info: <span>ℹ Info</span>
+    info: <span>ℹ Info</span>,
   };
 
   return <div>{badges[status] || badges.info}</div>;
@@ -223,11 +232,7 @@ function StatusBadge({ status }) {
 
 ```jsx
 function Button({ isPrimary, isDisabled }) {
-  return (
-    <button>
-      Click Me
-    </button>
-  );
+  return <button>Click Me</button>;
 }
 ```
 
@@ -237,11 +242,7 @@ function Button({ isPrimary, isDisabled }) {
 import classNames from 'classnames';
 
 function Button({ isPrimary, isDisabled, isLarge }) {
-  return (
-    <button>
-      Click Me
-    </button>
-  );
+  return <button>Click Me</button>;
 }
 ```
 
@@ -257,7 +258,7 @@ function Alert({ type }) {
     padding: '10px',
     borderRadius: '5px',
     backgroundColor: type === 'error' ? '#ff0000' : '#00ff00',
-    color: 'white'
+    color: 'white',
   };
 
   return <div style={styles}>Alert message</div>;
@@ -270,20 +271,16 @@ function Alert({ type }) {
 function Box({ isHighlighted }) {
   const baseStyle = {
     padding: '20px',
-    border: '1px solid #ccc'
+    border: '1px solid #ccc',
   };
 
   const highlightStyle = {
     ...baseStyle,
     backgroundColor: '#ffeb3b',
-    border: '2px solid #fbc02d'
+    border: '2px solid #fbc02d',
   };
 
-  return (
-    <div style={isHighlighted ? highlightStyle : baseStyle}>
-      Content
-    </div>
-  );
+  return <div style={isHighlighted ? highlightStyle : baseStyle}>Content</div>;
 }
 ```
 
@@ -376,7 +373,7 @@ function ProtectedRoute({ isAuthenticated, children }) {
 // Usage
 <ProtectedRoute isAuthenticated={isLoggedIn}>
   <Dashboard />
-</ProtectedRoute>
+</ProtectedRoute>;
 ```
 
 ### Role-Based Rendering
@@ -409,15 +406,11 @@ function App({ features }) {
   return (
     <div>
       <Header />
-      
-      {features.newDashboard ? (
-        <NewDashboard />
-      ) : (
-        <OldDashboard />
-      )}
-      
+
+      {features.newDashboard ? <NewDashboard /> : <OldDashboard />}
+
       {features.betaFeatures && <BetaFeatures />}
-      
+
       <Footer />
     </div>
   );
@@ -432,14 +425,16 @@ function App({ features }) {
 
 ```jsx
 // ❌ Bad - Complex nested conditions
-{isLoggedIn && user && user.isPremium && user.hasAccess && (
-  <PremiumContent />
-)}
+{
+  isLoggedIn && user && user.isPremium && user.hasAccess && <PremiumContent />;
+}
 
 // ✅ Good - Extract to variable
 const canAccessPremium = isLoggedIn && user?.isPremium && user?.hasAccess;
 
-{canAccessPremium && <PremiumContent />}
+{
+  canAccessPremium && <PremiumContent />;
+}
 ```
 
 ### 2. **Use Early Returns**
@@ -466,7 +461,7 @@ function Component({ data }) {
 function Component({ data }) {
   if (!data) return <div>Loading...</div>;
   if (!data.items) return <div>No items</div>;
-  
+
   return <List items={data.items} />;
 }
 ```
@@ -475,14 +470,18 @@ function Component({ data }) {
 
 ```jsx
 // ❌ Bad
-{user && user.age >= 18 && user.hasLicense && !user.isSuspended && (
-  <DriveButton />
-)}
+{
+  user && user.age >= 18 && user.hasLicense && !user.isSuspended && (
+    <DriveButton />
+  );
+}
 
 // ✅ Good
 const canDrive = user?.age >= 18 && user?.hasLicense && !user?.isSuspended;
 
-{canDrive && <DriveButton />}
+{
+  canDrive && <DriveButton />;
+}
 ```
 
 ### 4. **Use Descriptive Variable Names**
@@ -504,27 +503,45 @@ const canEditPost = isAdmin || post.authorId === user?.id;
 
 ```jsx
 // ❌ Wrong - Renders "0"
-{items.length && <div>Items: {items.length}</div>}
+{
+  items.length && <div>Items: {items.length}</div>;
+}
 
 // ✅ Correct
-{items.length > 0 && <div>Items: {items.length}</div>}
+{
+  items.length > 0 && <div>Items: {items.length}</div>;
+}
 ```
 
 ### 2. **Not Handling Null/Undefined**
 
 ```jsx
 // ❌ Wrong - Can crash if user is null
-{user.name && <div>{user.name}</div>}
+{
+  user.name && <div>{user.name}</div>;
+}
 
 // ✅ Correct - Use optional chaining
-{user?.name && <div>{user.name}</div>}
+{
+  user?.name && <div>{user.name}</div>;
+}
 ```
 
 ### 3. **Too Many Ternaries**
 
 ```jsx
 // ❌ Bad - Hard to read
-{status === 'loading' ? <Spinner /> : status === 'error' ? <Error /> : status === 'success' ? <Success /> : <div>Unknown</div>}
+{
+  status === 'loading' ? (
+    <Spinner />
+  ) : status === 'error' ? (
+    <Error />
+  ) : status === 'success' ? (
+    <Success />
+  ) : (
+    <div>Unknown</div>
+  );
+}
 
 // ✅ Good - Use if-else or object mapping
 function StatusDisplay({ status }) {

@@ -15,9 +15,9 @@
     "url": "https://github.com/praveenskg/codescrolls/issues"
   },
   "scripts": {
-    "build": "docusaurus build",
+    "build": "DOCUSAURUS_IGNORE_SSG_WARNINGS=true docusaurus build",
     "clean": "docusaurus clear",
-    "deploy": "docusaurus deploy",
+    "deploy": "DOCUSAURUS_IGNORE_SSG_WARNINGS=true docusaurus deploy",
     "docusaurus": "docusaurus",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -25,8 +25,8 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "safe-upgrade": "npx npm-check-updates -u -t minor && npm install",
-    "serve": "docusaurus serve",
-    "start": "docusaurus start",
+    "serve": "DOCUSAURUS_IGNORE_SSG_WARNINGS=true docusaurus serve",
+    "start": "DOCUSAURUS_IGNORE_SSG_WARNINGS=true docusaurus start",
     "swizzle": "docusaurus swizzle",
     "typecheck": "tsc",
     "validate": "npm run typecheck && npm run lint && npm run format:check",

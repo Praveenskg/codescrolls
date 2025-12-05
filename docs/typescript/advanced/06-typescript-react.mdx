@@ -2,13 +2,23 @@
 id: typescript-react
 title: TypeScript with React
 sidebar_position: 6
-description: Master TypeScript with React including component typing, hooks, props, events, and best practices for type-safe React applications.
-keywords: [typescript react, react typescript, typed react components, react hooks typescript, react props types]
+description:
+  Master TypeScript with React including component typing, hooks, props, events,
+  and best practices for type-safe React applications.
+keywords:
+  [
+    typescript react,
+    react typescript,
+    typed react components,
+    react hooks typescript,
+    react props types,
+  ]
 ---
 
 # TypeScript with React
 
-TypeScript and React work together to provide **type-safe, maintainable** React applications. Learn how to type components, hooks, props, and events.
+TypeScript and React work together to provide **type-safe, maintainable** React
+applications. Learn how to type components, hooks, props, and events.
 
 ---
 
@@ -80,9 +90,8 @@ const Greeting: React.FC<GreetingProps> = ({ name, age }) => {
 export default Greeting;
 ```
 
-:::tip
-Modern React prefers **not using `React.FC`** as it has some limitations. Use regular function components instead.
-:::
+:::tip Modern React prefers **not using `React.FC`** as it has some limitations.
+Use regular function components instead. :::
 
 ---
 
@@ -595,6 +604,7 @@ const Button: React.FC<{ label: string }> = ({ label }) => {
 ```
 
 **Why avoid React.FC:**
+
 - Implicitly adds `children?: React.ReactNode` prop
 - Doesn't work well with generic components
 - Can cause issues with `defaultProps` (deprecated in React 19)
@@ -659,4 +669,4 @@ function UserList({ users }: { users: { id: number; name: string }[] }) {}
 
 ---
 
-**Master TypeScript with React for bulletproof applications!** 
+**Master TypeScript with React for bulletproof applications!**

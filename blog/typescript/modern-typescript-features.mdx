@@ -1,16 +1,33 @@
 ---
 title: 'Modern TypeScript Features: A Complete Guide to Type Safety in 2025'
-description: 'Master modern TypeScript features including satisfies operator, const type parameters, NoInfer utility type, and best practices for type-safe development. Learn when to use these features and avoid common pitfalls.'
+description:
+  'Master modern TypeScript features including satisfies operator, const type
+  parameters, NoInfer utility type, and best practices for type-safe
+  development. Learn when to use these features and avoid common pitfalls.'
 slug: modern-typescript-features
 tags: [typescript, javascript, frontend, tutorial, web-development]
 authors: praveen
 image: /img/blog/react.png
-keywords: ['typescript', 'type safety', 'satisfies operator', 'const type parameters', 'NoInfer', 'typescript 5', 'type inference', 'generics', 'utility types']
+keywords:
+  [
+    'typescript',
+    'type safety',
+    'satisfies operator',
+    'const type parameters',
+    'NoInfer',
+    'typescript 5',
+    'type inference',
+    'generics',
+    'utility types',
+  ]
 ---
 
 ![Modern TypeScript Features](/img/blog/react.png)
 
-TypeScript continues to evolve with powerful new features that make type-safe development more intuitive and expressive. This comprehensive guide covers the latest TypeScript features that every developer should know, from the `satisfies` operator to `const` type parameters and the `NoInfer` utility type.
+TypeScript continues to evolve with powerful new features that make type-safe
+development more intuitive and expressive. This comprehensive guide covers the
+latest TypeScript features that every developer should know, from the
+`satisfies` operator to `const` type parameters and the `NoInfer` utility type.
 
 {/* truncate */}
 
@@ -29,7 +46,9 @@ TypeScript continues to evolve with powerful new features that make type-safe de
 
 ## ✨ The `satisfies` Operator {#the-satisfies-operator}
 
-The `satisfies` operator is one of the most powerful additions to TypeScript. It allows you to validate that a value matches a type without changing the inferred type of that value.
+The `satisfies` operator is one of the most powerful additions to TypeScript. It
+allows you to validate that a value matches a type without changing the inferred
+type of that value.
 
 ### The Problem It Solves
 
@@ -137,7 +156,8 @@ const smallSpacing = theme.spacing.small; // 8 (literal)
 
 ## 🔒 Const Type Parameters {#const-type-parameters}
 
-`const` type parameters allow you to infer the most specific type possible from function arguments, preserving literal types and readonly modifiers.
+`const` type parameters allow you to infer the most specific type possible from
+function arguments, preserving literal types and readonly modifiers.
 
 ### The Problem
 
@@ -178,7 +198,7 @@ function createEndpoint<T>(config: {
 const endpoint = createEndpoint({
   path: '/users',
   method: 'GET',
-  handler: (data) => {
+  handler: data => {
     // data is unknown, no type safety
   },
 });
@@ -195,7 +215,7 @@ function createEndpoint<const T>(config: {
 const endpoint = createEndpoint({
   path: '/users',
   method: 'GET',
-  handler: (data) => {
+  handler: data => {
     // data is inferred from usage
     console.log(data.id); // TypeScript knows the shape
   },
@@ -218,7 +238,9 @@ const result = processItems(['apple', 'banana', 'cherry']);
 
 ## 🚫 NoInfer Utility Type {#noinfer-utility-type}
 
-`NoInfer` prevents TypeScript from inferring a type parameter, forcing you to explicitly provide it. This is useful when you want to control type inference more precisely.
+`NoInfer` prevents TypeScript from inferring a type parameter, forcing you to
+explicitly provide it. This is useful when you want to control type inference
+more precisely.
 
 ### The Problem
 
@@ -228,10 +250,9 @@ function createState<T>(initial: T, updater: (current: T) => T) {
 }
 
 // TypeScript infers T from initial, which might not be what you want
-const state = createState(
-  { count: 0 },
-  (current) => ({ count: current.count + 1 })
-);
+const state = createState({ count: 0 }, current => ({
+  count: current.count + 1,
+}));
 // T is inferred as { count: number }
 // But what if you want T to be a more specific type?
 ```
@@ -241,7 +262,7 @@ const state = createState(
 ```typescript
 function createState<T>(
   initial: NoInfer<T>,
-  updater: (current: T) => T
+  updater: (current: T) => T,
 ): { value: T; update: (updater: (current: T) => T) => void } {
   return {
     value: initial as T,
@@ -250,10 +271,9 @@ function createState<T>(
 }
 
 // Now you must explicitly provide T
-const state = createState<{ count: number }>(
-  { count: 0 },
-  (current) => ({ count: current.count + 1 })
-);
+const state = createState<{ count: number }>({ count: 0 }, current => ({
+  count: current.count + 1,
+}));
 ```
 
 ### Practical Example: Form Validation
@@ -265,9 +285,9 @@ type ValidationRule<T> = {
 };
 
 function createValidator<T>(
-  rules: ValidationRule<NoInfer<T>>[]
+  rules: ValidationRule<NoInfer<T>>[],
 ): (value: T) => string[] {
-  return (value) => {
+  return value => {
     return rules
       .filter(rule => !rule.validate(value as NoInfer<T>))
       .map(rule => rule.message);
@@ -277,7 +297,7 @@ function createValidator<T>(
 // Forces explicit type specification
 const emailValidator = createValidator<string>([
   {
-    validate: (value) => value.includes('@'),
+    validate: value => value.includes('@'),
     message: 'Invalid email format',
   },
 ]);
@@ -287,7 +307,8 @@ const emailValidator = createValidator<string>([
 
 ## ⚙️ Modern Compiler Options {#modern-compiler-options}
 
-TypeScript 5.x introduces modern compiler options that reflect current best practices.
+TypeScript 5.x introduces modern compiler options that reflect current best
+practices.
 
 ### Modern `moduleResolution`
 
@@ -299,7 +320,8 @@ TypeScript 5.x introduces modern compiler options that reflect current best prac
 }
 ```
 
-The `bundler` option is designed for modern bundlers (Vite, esbuild, Rollup) and provides better type resolution:
+The `bundler` option is designed for modern bundlers (Vite, esbuild, Rollup) and
+provides better type resolution:
 
 ```typescript
 // Works seamlessly with modern bundlers
@@ -314,7 +336,7 @@ import utils from './utils/index.js'; // .js extension supported
   "compilerOptions": {
     // ❌ Deprecated: ES3 target
     "target": "ES3", // Use ES2015 or higher
-    
+
     // ✅ Modern approach
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"]
@@ -369,6 +391,7 @@ const Component = ({ prop }: Props): JSX.Element => {
 ```
 
 **Why avoid `React.FC`?**
+
 - Adds implicit `children` prop (even when not needed)
 - Doesn't work well with generics
 - Makes component signatures less explicit
@@ -475,18 +498,14 @@ function fetchUser(): {
 class QueryBuilder<T> {
   private filters: Array<(item: T) => boolean> = [];
 
-  where<const K extends keyof T>(
-    key: K,
-    value: T[K]
-  ): QueryBuilder<T> {
-    this.filters.push((item) => item[key] === value);
+  where<const K extends keyof T>(key: K, value: T[K]): QueryBuilder<T> {
+    this.filters.push(item => item[key] === value);
     return this;
   }
 
   build(): (items: T[]) => T[] {
-    return (items) => items.filter(item =>
-      this.filters.every(filter => filter(item))
-    );
+    return items =>
+      items.filter(item => this.filters.every(filter => filter(item)));
   }
 }
 
@@ -513,7 +532,7 @@ class TypedEventEmitter {
 
   on<const K extends keyof EventMap>(
     event: K,
-    handler: (data: EventMap[K]) => void
+    handler: (data: EventMap[K]) => void,
   ) {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
@@ -521,17 +540,14 @@ class TypedEventEmitter {
     this.listeners[event]!.push(handler);
   }
 
-  emit<const K extends keyof EventMap>(
-    event: K,
-    data: EventMap[K]
-  ) {
+  emit<const K extends keyof EventMap>(event: K, data: EventMap[K]) {
     this.listeners[event]?.forEach(handler => handler(data));
   }
 }
 
 const emitter = new TypedEventEmitter();
 
-emitter.on('userCreated', (data) => {
+emitter.on('userCreated', data => {
   // data is { id: string; name: string }
   console.log(data.id, data.name);
 });
@@ -549,7 +565,7 @@ type ApiEndpoints = {
 
 class ApiClient {
   async get<const K extends keyof ApiEndpoints>(
-    endpoint: K
+    endpoint: K,
   ): Promise<ApiEndpoints[K]['GET']> {
     const response = await fetch(endpoint);
     return response.json();
@@ -557,7 +573,7 @@ class ApiClient {
 
   async post<const K extends keyof ApiEndpoints>(
     endpoint: K,
-    body: ApiEndpoints[K]['POST']['body']
+    body: ApiEndpoints[K]['POST']['body'],
   ): Promise<ApiEndpoints[K]['POST']['response']> {
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -617,7 +633,7 @@ function createArray<const T extends readonly any[]>(items: T): T {
     // Update deprecated options
     "target": "ES2022", // Was: "ES3" or "ES5"
     "moduleResolution": "bundler", // Was: "node" or "node16"
-    
+
     // Add modern features
     "strict": true,
     "noUncheckedIndexedAccess": true, // Makes indexing safer
@@ -643,21 +659,19 @@ type FieldValidator<T> = {
   message: string;
 };
 
-function createFormValidator<const T extends Record<string, any>>(
-  validators: {
-    [K in keyof T]: FieldValidator<T[K]>;
-  }
-) {
+function createFormValidator<const T extends Record<string, any>>(validators: {
+  [K in keyof T]: FieldValidator<T[K]>;
+}) {
   return (data: T): ValidationResult => {
     const errors: string[] = [];
-    
+
     for (const key in validators) {
       const validator = validators[key];
       if (!validator.validate(data[key])) {
         errors.push(validator.message);
       }
     }
-    
+
     return {
       isValid: errors.length === 0,
       errors,
@@ -667,11 +681,11 @@ function createFormValidator<const T extends Record<string, any>>(
 
 const validateUserForm = createFormValidator({
   email: {
-    validate: (value) => value.includes('@'),
+    validate: value => value.includes('@'),
     message: 'Invalid email',
   },
   age: {
-    validate: (value) => value >= 18,
+    validate: value => value >= 18,
     message: 'Must be 18 or older',
   },
 });
@@ -703,10 +717,7 @@ class TypedStore {
     return this.state;
   }
 
-  setState<const K extends keyof State>(
-    key: K,
-    value: State[K]
-  ) {
+  setState<const K extends keyof State>(key: K, value: State[K]) {
     this.state[key] = value;
     this.notifyListeners();
   }
@@ -736,12 +747,14 @@ store.setState('count', 42);
 
 ## 🎯 Conclusion
 
-Modern TypeScript features like `satisfies`, `const` type parameters, and `NoInfer` provide powerful tools for writing more expressive and type-safe code:
+Modern TypeScript features like `satisfies`, `const` type parameters, and
+`NoInfer` provide powerful tools for writing more expressive and type-safe code:
 
 - **`satisfies`**: Get type checking without losing type inference
 - **`const` type parameters**: Preserve literal types and readonly modifiers
 - **`NoInfer`**: Control type inference precisely when needed
-- **Modern compiler options**: Use `bundler` module resolution and avoid deprecated options
+- **Modern compiler options**: Use `bundler` module resolution and avoid
+  deprecated options
 
 ### Key Takeaways
 
@@ -751,7 +764,8 @@ Modern TypeScript features like `satisfies`, `const` type parameters, and `NoInf
 4. Update your `tsconfig.json` to use modern compiler options
 5. Avoid deprecated patterns like `React.FC`
 
-These features make TypeScript more powerful and your code more maintainable. Start incorporating them into your projects today!
+These features make TypeScript more powerful and your code more maintainable.
+Start incorporating them into your projects today!
 
 ---
 
@@ -764,4 +778,3 @@ These features make TypeScript more powerful and your code more maintainable. St
 ---
 
 **Happy type-safe coding! 🚀**
-

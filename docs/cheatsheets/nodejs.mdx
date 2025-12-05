@@ -2,20 +2,21 @@
 id: nodejs
 title: Node.js Cheatsheet
 sidebar_label: Node.js CheatSheet
-description: Essential Node.js APIs, modules, and patterns - Quick reference guide
+description:
+  Essential Node.js APIs, modules, and patterns - Quick reference guide
 keywords: [nodejs, cheatsheet, node, backend, javascript, reference]
 sidebar_position: 10
 ---
 
 # 🟢 Node.js Cheatsheet
 
-A quick reference guide for essential Node.js APIs, modules, patterns, and best practices.
+A quick reference guide for essential Node.js APIs, modules, patterns, and best
+practices.
 
 ---
 
-:::info
-Node.js is a JavaScript runtime built on Chrome's V8 engine for building server-side applications.
-:::
+:::info Node.js is a JavaScript runtime built on Chrome's V8 engine for building
+server-side applications. :::
 
 ## 📦 Modules System
 
@@ -74,7 +75,7 @@ const data = await fsPromises.readFile('file.txt', 'utf8');
 fs.writeFileSync('file.txt', 'Hello World');
 
 // Write file (async)
-fs.writeFile('file.txt', 'Hello World', (err) => {
+fs.writeFile('file.txt', 'Hello World', err => {
   if (err) throw err;
   console.log('File written');
 });
@@ -179,10 +180,10 @@ const server = http.createServer((req, res) => {
 });
 
 // Make HTTP request
-http.get('http://api.example.com', (res) => {
+http.get('http://api.example.com', res => {
   let data = '';
 
-  res.on('data', (chunk) => {
+  res.on('data', chunk => {
     data += chunk;
   });
 
@@ -212,7 +213,7 @@ myEmitter.on('event', () => {
 myEmitter.emit('event');
 
 // Event with data
-myEmitter.on('data', (data) => {
+myEmitter.on('data', data => {
   console.log('Received:', data);
 });
 
@@ -243,7 +244,7 @@ const { Transform } = require('stream');
 // Readable stream
 const readStream = fs.createReadStream('input.txt', 'utf8');
 
-readStream.on('data', (chunk) => {
+readStream.on('data', chunk => {
   console.log('Chunk:', chunk);
 });
 
@@ -272,7 +273,9 @@ const upperCaseTransform = new Transform({
   },
 });
 
-fs.createReadStream('input.txt').pipe(upperCaseTransform).pipe(fs.createWriteStream('output.txt'));
+fs.createReadStream('input.txt')
+  .pipe(upperCaseTransform)
+  .pipe(fs.createWriteStream('output.txt'));
 ```
 
 ---
@@ -446,7 +449,10 @@ const randomBytes = crypto.randomBytes(16).toString('hex');
 const hash = crypto.createHash('sha256').update('password123').digest('hex');
 
 // HMAC (Hash-based Message Authentication Code)
-const hmac = crypto.createHmac('sha256', 'secret-key').update('message').digest('hex');
+const hmac = crypto
+  .createHmac('sha256', 'secret-key')
+  .update('message')
+  .digest('hex');
 
 // Encrypt and decrypt
 const algorithm = 'aes-256-cbc';
@@ -492,11 +498,11 @@ process.exit(0); // Success
 process.exit(1); // Failure
 
 // Handle process events
-process.on('exit', (code) => {
+process.on('exit', code => {
   console.log(`Exiting with code ${code}`);
 });
 
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', err => {
   console.error('Uncaught exception:', err);
   process.exit(1);
 });
@@ -596,22 +602,22 @@ exec('ls -la', (error, stdout, stderr) => {
 // Spawn process
 const ls = spawn('ls', ['-la']);
 
-ls.stdout.on('data', (data) => {
+ls.stdout.on('data', data => {
   console.log(`Output: ${data}`);
 });
 
-ls.stderr.on('data', (data) => {
+ls.stderr.on('data', data => {
   console.error(`Error: ${data}`);
 });
 
-ls.on('close', (code) => {
+ls.on('close', code => {
   console.log(`Process exited with code ${code}`);
 });
 
 // Fork (for Node.js scripts)
 const child = fork('child-script.js');
 
-child.on('message', (msg) => {
+child.on('message', msg => {
   console.log('Message from child:', msg);
 });
 
@@ -687,7 +693,11 @@ async function processData() {
 
 // Parallel async operations
 async function fetchMultiple() {
-  const [users, posts, comments] = await Promise.all([getUsers(), getPosts(), getComments()]);
+  const [users, posts, comments] = await Promise.all([
+    getUsers(),
+    getPosts(),
+    getComments(),
+  ]);
 
   return { users, posts, comments };
 }
@@ -750,4 +760,3 @@ server.close(() => {
 ---
 
 **Master Node.js for building scalable server-side applications!** 🟢
-

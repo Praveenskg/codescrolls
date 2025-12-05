@@ -1,11 +1,24 @@
 ---
 title: 'CSS Grid vs Flexbox: Choosing the Right Layout Tool'
-description: 'Master CSS layout with Grid and Flexbox. Learn when to use each tool, their differences, and how to combine them for perfect layouts. Includes practical examples and best practices.'
+description:
+  'Master CSS layout with Grid and Flexbox. Learn when to use each tool, their
+  differences, and how to combine them for perfect layouts. Includes practical
+  examples and best practices.'
 slug: css-grid-vs-flexbox
 authors: praveen
 image: /img/blog/react.png
 date: 2025-10-16
-keywords: ['css grid', 'flexbox', 'css layout', 'responsive design', 'web layout', 'grid vs flexbox', 'css flexbox', 'layout systems']
+keywords:
+  [
+    'css grid',
+    'flexbox',
+    'css layout',
+    'responsive design',
+    'web layout',
+    'grid vs flexbox',
+    'css flexbox',
+    'layout systems',
+  ]
 tags: [css, grid, flexbox, layout, responsive, design, frontend]
 ---
 
@@ -13,7 +26,11 @@ import CodeBlock from '@theme/CodeBlock';
 
 # 🎨 CSS Grid vs Flexbox: Choosing the Right Layout Tool
 
-Modern CSS layout has evolved dramatically with the introduction of CSS Grid and Flexbox. These powerful layout systems have largely replaced float-based layouts, but developers often struggle with choosing between them. In this comprehensive guide, we'll explore both systems, their differences, and when to use each for optimal layouts.
+Modern CSS layout has evolved dramatically with the introduction of CSS Grid and
+Flexbox. These powerful layout systems have largely replaced float-based
+layouts, but developers often struggle with choosing between them. In this
+comprehensive guide, we'll explore both systems, their differences, and when to
+use each for optimal layouts.
 
 {/* truncate */}
 
@@ -67,7 +84,8 @@ Modern CSS layout has evolved dramatically with the introduction of CSS Grid and
 ### **Why We Need Both**
 
 - **Flexbox**: Perfect for **content-first** layouts (navigation, cards, forms)
-- **CSS Grid**: Ideal for **layout-first** designs (page structures, complex grids)
+- **CSS Grid**: Ideal for **layout-first** designs (page structures, complex
+  grids)
 - **Together**: Create sophisticated, responsive layouts
 
 ---
@@ -76,7 +94,8 @@ Modern CSS layout has evolved dramatically with the introduction of CSS Grid and
 
 ### **What is Flexbox?**
 
-Flexbox (Flexible Box Layout) is a one-dimensional layout system that distributes space along a single axis (horizontal or vertical).
+Flexbox (Flexible Box Layout) is a one-dimensional layout system that
+distributes space along a single axis (horizontal or vertical).
 
 ```css
 /* Basic Flexbox Setup */
@@ -96,6 +115,7 @@ Flexbox (Flexible Box Layout) is a one-dimensional layout system that distribute
 ### **Flexbox Properties**
 
 #### **Container Properties**
+
 ```css
 .flex-container {
   /* Display */
@@ -111,17 +131,20 @@ Flexbox (Flexible Box Layout) is a one-dimensional layout system that distribute
   flex-flow: row wrap;
 
   /* Main axis alignment */
-  justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+  justify-content: flex-start | flex-end | center | space-between | space-around
+    | space-evenly;
 
   /* Cross axis alignment */
   align-items: stretch | flex-start | flex-end | center | baseline;
 
   /* Multi-line cross axis alignment */
-  align-content: stretch | flex-start | flex-end | center | space-between | space-around;
+  align-content: stretch | flex-start | flex-end | center | space-between |
+    space-around;
 }
 ```
 
 #### **Item Properties**
+
 ```css
 .flex-item {
   /* Size */
@@ -147,6 +170,7 @@ Flexbox (Flexible Box Layout) is a one-dimensional layout system that distribute
 ### **Common Flexbox Patterns**
 
 #### **Navigation Bar**
+
 ```css
 .navbar {
   display: flex;
@@ -167,6 +191,7 @@ Flexbox (Flexible Box Layout) is a one-dimensional layout system that distribute
 ```
 
 #### **Card Layout**
+
 ```css
 .card {
   display: flex;
@@ -194,7 +219,8 @@ Flexbox (Flexible Box Layout) is a one-dimensional layout system that distribute
 
 ### **What is CSS Grid?**
 
-CSS Grid is a two-dimensional layout system that creates a grid of rows and columns, allowing precise control over both horizontal and vertical positioning.
+CSS Grid is a two-dimensional layout system that creates a grid of rows and
+columns, allowing precise control over both horizontal and vertical positioning.
 
 ```css
 /* Basic Grid Setup */
@@ -214,6 +240,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ### **Grid Properties**
 
 #### **Container Properties**
+
 ```css
 .grid-container {
   /* Display */
@@ -226,9 +253,10 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
   grid-template-rows: 100px auto 200px | repeat(2, 100px);
 
   /* Shorthand for rows and columns */
-  grid-template: "header header" 50px
-                 "sidebar main" 1fr
-                 "footer footer" 50px / 200px 1fr;
+  grid-template:
+    'header header' 50px
+    'sidebar main' 1fr
+    'footer footer' 50px / 200px 1fr;
 
   /* Gap between grid items */
   gap: 10px | 10px 20px; /* row-gap column-gap */
@@ -243,10 +271,12 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
   align-items: start | end | center | stretch;
 
   /* Justify grid content */
-  justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
+  justify-content: start | end | center | stretch | space-around | space-between
+    | space-evenly;
 
   /* Align grid content */
-  align-content: start | end | center | stretch | space-around | space-between | space-evenly;
+  align-content: start | end | center | stretch | space-around | space-between |
+    space-evenly;
 
   /* Auto placement */
   grid-auto-flow: row | column | dense;
@@ -258,6 +288,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **Item Properties**
+
 ```css
 .grid-item {
   /* Position by line numbers */
@@ -289,25 +320,37 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ### **Common Grid Patterns**
 
 #### **Holy Grail Layout**
+
 ```css
 .holy-grail {
   display: grid;
   grid-template:
-    "header header header" 60px
-    "nav main aside" 1fr
-    "footer footer footer" 60px
+    'header header header' 60px
+    'nav main aside' 1fr
+    'footer footer footer' 60px
     / 200px 1fr 200px;
   min-height: 100vh;
 }
 
-.header { grid-area: header; }
-.nav { grid-area: nav; }
-.main { grid-area: main; }
-.aside { grid-area: aside; }
-.footer { grid-area: footer; }
+.header {
+  grid-area: header;
+}
+.nav {
+  grid-area: nav;
+}
+.main {
+  grid-area: main;
+}
+.aside {
+  grid-area: aside;
+}
+.footer {
+  grid-area: footer;
+}
 ```
 
 #### **Card Grid**
+
 ```css
 .card-grid {
   display: grid;
@@ -330,20 +373,21 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 
 ### **Flexbox vs Grid: At a Glance**
 
-| Feature | Flexbox | CSS Grid |
-|---------|---------|----------|
-| **Dimensions** | 1D (row or column) | 2D (rows and columns) |
-| **Content vs Layout** | Content-first | Layout-first |
-| **Alignment** | Powerful alignment | Powerful positioning |
-| **Gaps** | Limited | Built-in gap support |
-| **Source Order** | Can reorder visually | Can reorder visually |
-| **Complex Layouts** | Difficult | Easy |
-| **Browser Support** | Excellent | Excellent |
-| **Learning Curve** | Gentle | Steeper |
+| Feature               | Flexbox              | CSS Grid              |
+| --------------------- | -------------------- | --------------------- |
+| **Dimensions**        | 1D (row or column)   | 2D (rows and columns) |
+| **Content vs Layout** | Content-first        | Layout-first          |
+| **Alignment**         | Powerful alignment   | Powerful positioning  |
+| **Gaps**              | Limited              | Built-in gap support  |
+| **Source Order**      | Can reorder visually | Can reorder visually  |
+| **Complex Layouts**   | Difficult            | Easy                  |
+| **Browser Support**   | Excellent            | Excellent             |
+| **Learning Curve**    | Gentle               | Steeper               |
 
 ### **Content-First vs Layout-First**
 
 #### **Flexbox (Content-First)**
+
 ```css
 /* Adapts to content size */
 .flex-container {
@@ -358,6 +402,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **Grid (Layout-First)**
+
 ```css
 /* Defines layout structure first */
 .grid-container {
@@ -375,6 +420,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ### **Perfect for Flexbox:**
 
 #### **1. Navigation Bars**
+
 ```css
 .navbar {
   display: flex;
@@ -389,6 +435,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **2. Card Components**
+
 ```css
 .card {
   display: flex;
@@ -401,6 +448,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **3. Form Layouts**
+
 ```css
 .form-row {
   display: flex;
@@ -414,6 +462,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **4. Centering Content**
+
 ```css
 .centered {
   display: flex;
@@ -424,6 +473,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **5. Equal Height Columns**
+
 ```css
 .equal-height {
   display: flex;
@@ -436,6 +486,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 ### **Flexbox Use Cases:**
+
 - Component layouts
 - Navigation menus
 - Form controls
@@ -451,18 +502,20 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ### **Perfect for CSS Grid:**
 
 #### **1. Page Layouts**
+
 ```css
 .page-layout {
   display: grid;
   grid-template:
-    "header header header" 60px
-    "sidebar main main" 1fr
-    "footer footer footer" 60px
+    'header header header' 60px
+    'sidebar main main' 1fr
+    'footer footer footer' 60px
     / 250px 1fr 250px;
 }
 ```
 
 #### **2. Complex Grids**
+
 ```css
 .photo-grid {
   display: grid;
@@ -473,30 +526,33 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 #### **3. Dashboard Layouts**
+
 ```css
 .dashboard {
   display: grid;
   grid-template:
-    "stats stats chart" 200px
-    "table table chart" 1fr
-    "footer footer footer" 50px
+    'stats stats chart' 200px
+    'table table chart' 1fr
+    'footer footer footer' 50px
     / 1fr 1fr 300px;
 }
 ```
 
 #### **4. Magazine Layouts**
+
 ```css
 .magazine {
   display: grid;
   grid-template:
-    "hero hero hero" 300px
-    "article sidebar sidebar" 400px
-    "article footer footer" 200px
+    'hero hero hero' 300px
+    'article sidebar sidebar' 400px
+    'article footer footer' 200px
     / 2fr 1fr 1fr;
 }
 ```
 
 #### **5. Overlapping Elements**
+
 ```css
 .overlap-layout {
   display: grid;
@@ -518,6 +574,7 @@ CSS Grid is a two-dimensional layout system that creates a grid of rows and colu
 ```
 
 ### **Grid Use Cases:**
+
 - Page layouts
 - Complex grids
 - Overlapping content
@@ -539,9 +596,9 @@ Modern layouts often combine both systems for optimal results:
 .page {
   display: grid;
   grid-template:
-    "header header" 60px
-    "sidebar main" 1fr
-    "footer footer" 40px
+    'header header' 60px
+    'sidebar main' 1fr
+    'footer footer' 40px
     / 250px 1fr;
   min-height: 100vh;
 }
@@ -570,6 +627,7 @@ Modern layouts often combine both systems for optimal results:
 ### **Common Patterns**
 
 #### **Grid + Flexbox Card Layout**
+
 ```css
 /* Grid for page layout */
 .app {
@@ -617,9 +675,9 @@ Modern layouts often combine both systems for optimal results:
 .blog-layout {
   display: grid;
   grid-template:
-    "header header" 80px
-    "sidebar main" 1fr
-    "footer footer" 60px
+    'header header' 80px
+    'sidebar main' 1fr
+    'footer footer' 60px
     / 300px 1fr;
   gap: 20px;
   min-height: 100vh;
@@ -686,9 +744,9 @@ Modern layouts often combine both systems for optimal results:
 .dashboard {
   display: grid;
   grid-template:
-    "sidebar header header" 60px
-    "sidebar main main" 1fr
-    "sidebar footer footer" 40px
+    'sidebar header header' 60px
+    'sidebar main main' 1fr
+    'sidebar footer footer' 40px
     / 240px 1fr 1fr;
   gap: 16px;
   min-height: 100vh;
@@ -716,29 +774,32 @@ Modern layouts often combine both systems for optimal results:
 ## 🌐 Browser Support {#browser-support}
 
 ### **Flexbox Support**
+
 ```css
 /* Excellent support - IE 11+ with prefixes */
 .flex-container {
-  display: -webkit-box;      /* iOS 6-, Safari 3.1-6 */
-  display: -moz-box;         /* Firefox 19- (buggy) */
-  display: -ms-flexbox;      /* IE 10 */
-  display: -webkit-flex;     /* Chrome 21+, Safari 6.1+, iOS Safari 7+, IE 10 */
-  display: flex;             /* Chrome 29+, Firefox 28+, IE 11+, Edge 12+ */
+  display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
+  display: -moz-box; /* Firefox 19- (buggy) */
+  display: -ms-flexbox; /* IE 10 */
+  display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, IE 10 */
+  display: flex; /* Chrome 29+, Firefox 28+, IE 11+, Edge 12+ */
 }
 ```
 
 ### **CSS Grid Support**
+
 ```css
 /* Excellent support - IE 11+ with prefixes */
 .grid-container {
-  display: -ms-grid;         /* IE 10-11 */
-  display: grid;             /* Chrome 57+, Firefox 52+, Safari 10.1+, Edge 16+ */
+  display: -ms-grid; /* IE 10-11 */
+  display: grid; /* Chrome 57+, Firefox 52+, Safari 10.1+, Edge 16+ */
 }
 
 /* Autoprefixer handles vendor prefixes automatically */
 ```
 
 ### **Progressive Enhancement**
+
 ```css
 /* Fallback for older browsers */
 .container {
@@ -775,17 +836,17 @@ Modern layouts often combine both systems for optimal results:
 ```css
 /* ✅ Efficient: Changes don't trigger reflow */
 .grid-item {
-  grid-column: 2 / 3;  /* Changes position without affecting others */
+  grid-column: 2 / 3; /* Changes position without affecting others */
 }
 
 .flex-item {
-  order: 2;           /* Visual reordering without DOM changes */
+  order: 2; /* Visual reordering without DOM changes */
 }
 
 /* ❌ Inefficient: Causes reflow */
 .item {
-  width: 50%;         /* Changes trigger layout recalculation */
-  margin-left: 10px;  /* Additional reflow */
+  width: 50%; /* Changes trigger layout recalculation */
+  margin-left: 10px; /* Additional reflow */
 }
 ```
 
@@ -804,6 +865,7 @@ Modern layouts often combine both systems for optimal results:
 ### **From Floats to Modern Layouts**
 
 #### **Before (Floats)**
+
 ```css
 /* Old float-based layout */
 .container::after {
@@ -820,6 +882,7 @@ Modern layouts often combine both systems for optimal results:
 ```
 
 #### **After (Flexbox)**
+
 ```css
 /* Modern Flexbox layout */
 .container {
@@ -833,6 +896,7 @@ Modern layouts often combine both systems for optimal results:
 ```
 
 #### **After (CSS Grid)**
+
 ```css
 /* Modern Grid layout */
 .container {
@@ -845,6 +909,7 @@ Modern layouts often combine both systems for optimal results:
 ### **From Bootstrap to Modern CSS**
 
 #### **Bootstrap Grid**
+
 ```html
 <div class="container">
   <div class="row">
@@ -856,6 +921,7 @@ Modern layouts often combine both systems for optimal results:
 ```
 
 #### **Modern CSS Grid**
+
 ```html
 <div class="container">
   <div class="column">Column 1</div>
@@ -919,9 +985,9 @@ Modern layouts often combine both systems for optimal results:
 .grid-layout {
   display: grid;
   grid-template-areas:
-    "header header"
-    "sidebar main"
-    "footer footer";
+    'header header'
+    'sidebar main'
+    'footer footer';
 }
 
 /* ❌ Avoid: Over-complicated grids */
@@ -986,6 +1052,7 @@ Modern layouts often combine both systems for optimal results:
 ## 🚀 Future of CSS Layout
 
 ### **CSS Grid Level 2**
+
 ```css
 /* Subgrid (coming soon) */
 .parent-grid {
@@ -1006,6 +1073,7 @@ Modern layouts often combine both systems for optimal results:
 ```
 
 ### **Container Queries**
+
 ```css
 /* Container-relative sizing (coming) */
 @container (min-width: 400px) {
@@ -1028,6 +1096,7 @@ Modern layouts often combine both systems for optimal results:
 ## 🎯 Quick Decision Guide
 
 ### **Choose Flexbox when:**
+
 - ✅ One-dimensional layout (row or column)
 - ✅ Content determines layout
 - ✅ Aligning items within containers
@@ -1037,6 +1106,7 @@ Modern layouts often combine both systems for optimal results:
 - ✅ Equal height columns
 
 ### **Choose CSS Grid when:**
+
 - ✅ Two-dimensional layout (rows AND columns)
 - ✅ Layout determines content placement
 - ✅ Complex page layouts
@@ -1046,6 +1116,7 @@ Modern layouts often combine both systems for optimal results:
 - ✅ Dashboard designs
 
 ### **Use Both when:**
+
 - ✅ Page-level structure (Grid)
 - ✅ Component-level layouts (Flexbox)
 - ✅ Responsive card grids
@@ -1055,7 +1126,9 @@ Modern layouts often combine both systems for optimal results:
 
 ## 🎉 Final Thoughts
 
-**CSS Grid and Flexbox are not competitors—they're complementary tools** that work best together. Understanding when to use each will dramatically improve your layout skills.
+**CSS Grid and Flexbox are not competitors—they're complementary tools** that
+work best together. Understanding when to use each will dramatically improve
+your layout skills.
 
 **Key Takeaways:**
 
@@ -1065,11 +1138,14 @@ Modern layouts often combine both systems for optimal results:
 - **Mobile-first**: Always design for small screens first
 - **Progressive enhancement**: Provide fallbacks for older browsers
 
-**The future of CSS layout is bright!** With ongoing improvements to Grid, Flexbox, and new features like Container Queries, modern CSS provides powerful tools for any layout challenge.
+**The future of CSS layout is bright!** With ongoing improvements to Grid,
+Flexbox, and new features like Container Queries, modern CSS provides powerful
+tools for any layout challenge.
 
 **Happy laying out! 🎨**
 
-*Resources for further learning:*
+_Resources for further learning:_
+
 - [CSS Grid Guide](https://css-tricks.com/snippets/css/complete-guide-grid/)
 - [Flexbox Guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 - [Grid by Example](https://gridbyexample.com/)
