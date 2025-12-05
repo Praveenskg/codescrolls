@@ -1,9 +1,11 @@
 # 📘 CodeScrolls – Developer Docs, Notes & CheatSheets
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.9.1-green.svg)](https://docusaurus.io/)
-[![React](https://img.shields.io/badge/React-19.2.0-blue.svg)](https://reactjs.org/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.9.2-green.svg)](https://docusaurus.io/)
+[![React](https://img.shields.io/badge/React-19.2.1-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-9.39.1-purple.svg)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-3.7.4-pink.svg)](https://prettier.io/)
 
 CodeScrolls is a comprehensive, modern documentation site built with
 [Docusaurus 3](https://docusaurus.io/). It provides well-organized technical
@@ -37,12 +39,14 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 ### **Developer Experience**
 
-- 🔧 **TypeScript** - Full TypeScript support
-- 🎯 **ESLint** - Code quality enforcement with ESLint 9
-- 💅 **Prettier** - Consistent code formatting
-- 🔄 **CI/CD** - Automated builds and quality checks
+- 🔧 **TypeScript** - Full TypeScript support with strict mode
+- 🎯 **ESLint 9** - Code quality enforcement (flat config)
+- 💅 **Prettier** - Consistent code formatting with auto-organize imports
+- 🪝 **Git Hooks** - Pre-commit checks and commit message validation
+- 🔄 **CI/CD** - Comprehensive GitHub Actions pipeline
 - 📊 **Analytics** - Google Analytics & Vercel Analytics
-- 🤖 **GitHub Actions** - Automated workflows
+- ✅ **Quality Checks** - Automated type checking, linting, and formatting
+- 🚀 **Fast Development** - Hot reload and optimized builds
 
 ### **SEO & Monetization**
 
@@ -104,11 +108,13 @@ npm install
 
 This will install all required dependencies including:
 
-- Docusaurus 3.9.1
-- React 19.2.0
+- Docusaurus 3.9.2
+- React 19.2.1
 - TypeScript 5.9.3
-- ESLint 9
-- Prettier 3.6.2
+- ESLint 9.39.1 (flat config)
+- Prettier 3.7.4
+- Husky 9.1.7 (Git hooks)
+- lint-staged 16.2.7
 - And more...
 
 ---
@@ -156,18 +162,57 @@ npm run serve
 
 ## 📜 Available Scripts
 
-| Script                 | Description                    |
-| ---------------------- | ------------------------------ |
-| `npm start`            | Start development server       |
-| `npm run build`        | Build for production           |
-| `npm run serve`        | Serve production build locally |
-| `npm run clean`        | Clear Docusaurus cache         |
-| `npm run deploy`       | Deploy to GitHub Pages         |
-| `npm run typecheck`    | Run TypeScript type checking   |
-| `npm run lint`         | Run ESLint                     |
-| `npm run lint:fix`     | Fix ESLint issues              |
-| `npm run format`       | Format code with Prettier      |
-| `npm run format:check` | Check code formatting          |
+| Script                      | Description                                |
+| --------------------------- | ------------------------------------------ |
+| `npm start`                 | Start development server                   |
+| `npm run build`             | Build for production                       |
+| `npm run serve`             | Serve production build locally             |
+| `npm run clean`             | Clear Docusaurus cache                     |
+| `npm run deploy`            | Deploy to GitHub Pages                     |
+| `npm run typecheck`         | Run TypeScript type checking               |
+| `npm run lint`              | Run ESLint                                 |
+| `npm run lint:fix`          | Fix ESLint issues automatically            |
+| `npm run format`            | Format code with Prettier                  |
+| `npm run format:check`      | Check code formatting                      |
+| `npm run validate`          | Run all checks (typecheck + lint + format) |
+| `npm run write-heading-ids` | Generate heading IDs for MDX files         |
+| `npm run safe-upgrade`      | Upgrade dependencies safely (minor only)   |
+
+---
+
+## 🪝 Git Hooks
+
+The project uses [Husky](https://typicode.github.io/husky/) for Git hooks to
+ensure code quality:
+
+### **Pre-commit Hook**
+
+Automatically runs before each commit:
+
+- ✅ Formats code with Prettier
+- ✅ Lints code with ESLint (auto-fixes issues)
+- ✅ Type checks with TypeScript (only if TS files staged)
+- ✅ Detects merge conflicts
+- ✅ Warns about large files (>1MB)
+- ✅ Shows timing information
+
+### **Commit-msg Hook**
+
+Validates commit message format:
+
+- ✅ Enforces Conventional Commits format
+- ✅ Validates commit types (feat, fix, docs, etc.)
+- ✅ Checks subject line length
+- ✅ Provides helpful error messages
+
+**Example commit messages:**
+
+```bash
+✅ feat: add new blog post
+✅ fix(navbar): resolve mobile menu issue
+✅ docs: update README
+❌ Added new feature  # Invalid - missing type
+```
 
 ---
 
@@ -220,10 +265,17 @@ codescrolls/
 │   ├── ads.txt                # AdSense verification
 │   ├── manifest.json          # PWA manifest
 │   └── robots.txt             # SEO robots file
-├── .eslintrc.json             # ESLint configuration
+├── .husky/                    # Git hooks (Husky)
+│   ├── pre-commit            # Pre-commit checks
+│   └── commit-msg            # Commit message validation
+├── .github/                   # GitHub workflows and templates
+│   ├── workflows/
+│   │   └── ci.yml            # CI/CD pipeline
+│   └── ISSUE_TEMPLATE/       # Issue templates
+├── eslint.config.mjs          # ESLint configuration (flat config)
 ├── .prettierrc                # Prettier configuration
 ├── docusaurus.config.ts       # Docusaurus configuration
-├── package.json               # Dependencies
+├── package.json               # Dependencies and scripts
 ├── sidebars.ts                # Sidebar configuration
 ├── tsconfig.json              # TypeScript configuration
 ├── CODE_OF_CONDUCT.md         # Code of conduct
@@ -253,14 +305,21 @@ codescrolls/
 - Basics: Variables, Data Types, Functions, Interfaces
 - Intermediate: Union Types, Type Guards, Generics
 
-#### **Cheat Sheets**
+#### **Cheat Sheets** (14 comprehensive cheat sheets)
 
-- **Git** - Complete Git workflow and commands (890 lines)
-- **JavaScript** - ES6+ features and patterns (558 lines)
-- **Linux** - System administration and commands (571 lines)
-- **Markdown** - Complete Markdown syntax (851 lines)
-- **MDX** - Docusaurus MDX features (603 lines)
-- **VSCode** - Extensions and shortcuts (516 lines)
+- **Git** - Complete Git workflow and commands
+- **JavaScript** - ES6+ features and modern patterns
+- **TypeScript** - Type system and advanced features
+- **React** - Components, hooks, and patterns
+- **CSS** - Layout, animations, and modern features
+- **HTML** - Elements, attributes, and semantic HTML
+- **Linux** - System administration and commands
+- **Markdown** - Complete Markdown syntax
+- **MDX** - Docusaurus MDX features
+- **VSCode** - Extensions and shortcuts
+- **Node.js** - Server-side JavaScript
+- **SQL** - Database queries and operations
+- **API** - REST API design and best practices
 
 #### **Interview Questions**
 
@@ -271,11 +330,19 @@ codescrolls/
 - TypeScript (50 questions)
 - Node.js (questions)
 
-### **Blog Posts**
+### **Blog Posts** (15+ comprehensive articles)
 
-- JavaScript closures and hoisting
-- React hooks deep dive
-- VSCode productivity tips
+- **React 19 Complete Guide** - New features, hooks, and best practices
+- **Modern TypeScript Features** - Latest TypeScript capabilities
+- **Modern CSS Features** - Container queries, :has(), nesting, and more
+- **API Design Best Practices** - RESTful principles and patterns
+- **JavaScript Promises & Async** - Complete async programming guide
+- **Git Workflows Best Practices** - Branching strategies and collaboration
+- **Docker Developer's Guide** - Containerization and best practices
+- **Database Design Principles** - Data modeling and optimization
+- **CSS Grid vs Flexbox** - Layout system comparison
+- **VSCode Tips & Tricks** - Productivity enhancements
+- **JavaScript Closures & Hoisting** - Core concepts explained
 - And more...
 
 ---
@@ -284,15 +351,18 @@ codescrolls/
 
 ### **Core**
 
-- **[Docusaurus 3.9.1](https://docusaurus.io/)** - Documentation framework
-- **[React 19.2.0](https://reactjs.org/)** - UI library
+- **[Docusaurus 3.9.2](https://docusaurus.io/)** - Documentation framework
+- **[React 19.2.1](https://reactjs.org/)** - UI library (latest features)
 - **[TypeScript 5.9.3](https://www.typescriptlang.org/)** - Type safety
 
 ### **Development Tools**
 
-- **[ESLint 9](https://eslint.org/)** - Code linting (flat config)
-- **[Prettier 3.6.2](https://prettier.io/)** - Code formatting
+- **[ESLint 9.39.1](https://eslint.org/)** - Code linting (flat config)
+- **[Prettier 3.7.4](https://prettier.io/)** - Code formatting
 - **[TypeScript ESLint](https://typescript-eslint.io/)** - TypeScript linting
+- **[Husky 9.1.7](https://typicode.github.io/husky/)** - Git hooks
+- **[lint-staged 16.2.7](https://github.com/okonet/lint-staged)** - Pre-commit
+  formatting
 
 ### **Plugins & Features**
 
@@ -382,10 +452,18 @@ We welcome contributions! Please see our
 4. **Run quality checks**
 
    ```bash
-   npm run typecheck
-   npm run lint
-   npm run format
-   npm run build
+   npm run validate    # Runs all checks (typecheck + lint + format)
+   npm run build       # Build for production
+   ```
+
+   Or run individually:
+
+   ```bash
+   npm run typecheck   # TypeScript type checking
+   npm run lint        # ESLint checking
+   npm run lint:fix    # Auto-fix ESLint issues
+   npm run format      # Format with Prettier
+   npm run format:check # Check formatting
    ```
 
 5. **Commit your changes**
@@ -393,6 +471,15 @@ We welcome contributions! Please see our
    ```bash
    git commit -m "feat: add amazing feature"
    ```
+
+   **Note:** The project uses Conventional Commits format. Your commit message
+   will be validated automatically.
+
+   Valid formats:
+   - `feat: add new feature`
+   - `fix(navbar): resolve mobile menu issue`
+   - `docs: update README`
+   - `refactor(hooks): simplify useAuth hook`
 
 6. **Push and create PR**
    ```bash
@@ -431,30 +518,38 @@ We welcome contributions! Please see our
 
 ### **Developer Friendly**
 
-- ✅ TypeScript support
-- ✅ ESLint configuration
-- ✅ Prettier formatting
+- ✅ TypeScript support with strict mode
+- ✅ ESLint 9 flat config
+- ✅ Prettier formatting with auto-organize imports
+- ✅ Git hooks (pre-commit & commit-msg)
 - ✅ Hot reload
 - ✅ Live code blocks
+- ✅ Comprehensive CI/CD pipeline
 
 ### **Production Ready**
 
-- ✅ CI/CD pipeline
-- ✅ Automated testing
-- ✅ Code quality checks
+- ✅ Comprehensive CI/CD pipeline (GitHub Actions)
+- ✅ Automated quality checks (TypeScript, ESLint, Prettier)
+- ✅ Git hooks for code quality
+- ✅ Conventional Commits enforcement
 - ✅ PWA support
 - ✅ Analytics integration
+- ✅ SEO optimized
+- ✅ Performance optimized (Docusaurus faster mode)
 
 ---
 
 ## 📊 Project Stats
 
-- **30+ Documentation Pages**
-- **8 Blog Posts**
-- **6 Comprehensive Cheat Sheets**
-- **300+ Interview Questions**
-- **~3,000 Lines of Quality Content**
-- **98/100 Industry Standard Score**
+- **116+ Documentation Pages** (HTML, CSS, JavaScript, React, TypeScript)
+- **15+ Blog Posts** (React 19, TypeScript, CSS, API Design, Docker, etc.)
+- **14 Comprehensive Cheat Sheets** (Git, JavaScript, TypeScript, React, CSS,
+  HTML, Linux, Markdown, MDX, VSCode, Node.js, SQL, API)
+- **300+ Interview Questions** (HTML, CSS, JavaScript, React, TypeScript,
+  Node.js)
+- **Modern Features** - React 19.2, TypeScript 5.9, ES2024/2025, CSS Container
+  Queries
+- **Production Ready** - CI/CD, Git hooks, automated quality checks
 
 ---
 
