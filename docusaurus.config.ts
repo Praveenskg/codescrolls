@@ -21,6 +21,18 @@ const config: Config = {
   },
 
   markdown: {
+    format: 'mdx',
+    mermaid: true,
+    preprocessor: undefined,
+    parseFrontMatter: undefined,
+    anchors: {
+      maintainCase: false,
+    },
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
@@ -251,6 +263,19 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Color mode configuration
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
+
+    // Table of contents configuration
+    tableOfContents: {
+      minHeadingLevel: 2,
+      maxHeadingLevel: 5,
+    },
+
     metadata: [
       // Basic Meta Tags
       {
@@ -361,27 +386,6 @@ const config: Config = {
       title: 'CodeScrolls',
       logo: { alt: 'CodeScrolls Logo', src: 'img/logo.png' },
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'htmlSidebar',
-          position: 'left',
-          label: 'HTML',
-          to: '/docs/html',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'cssSidebar',
-          position: 'left',
-          label: 'CSS',
-          to: '/docs/css',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'javascriptSidebar',
-          position: 'left',
-          label: 'JavaScript',
-          to: '/docs/javascript',
-        },
         {
           type: 'docSidebar',
           sidebarId: 'reactSidebar',

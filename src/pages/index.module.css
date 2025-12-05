@@ -471,10 +471,18 @@
 
 .hubsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  max-width: 60rem;
+  max-width: 80rem;
   margin: 0 auto;
+}
+
+/* Tablet: 2 items per row */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .hubsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 .hubCard {

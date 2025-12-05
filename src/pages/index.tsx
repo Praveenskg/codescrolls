@@ -134,13 +134,6 @@ export default function Home(): ReactNode {
     },
   ];
 
-  const stats = [
-    { value: '111+', label: 'Documentation Pages' },
-    { value: '300+', label: 'Interview Questions' },
-    { value: '8+', label: 'Blog Posts' },
-    { value: '10+', label: 'Cheat Sheets' },
-  ];
-
   const hubs = [
     {
       name: 'Documentation',
@@ -204,38 +197,6 @@ export default function Home(): ReactNode {
             </div>
           </div>
         </section>
-
-        {/* Statistics Section */}
-        <section className={styles.statsSection}>
-          <div className={styles.statsGrid}>
-            {stats.map(({ value, label }) => (
-              <div key={label} className={styles.statCard}>
-                <div className={styles.statValue}>{value}</div>
-                <div className={styles.statLabel}>{label}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Features Highlight Section */}
-        <section className={styles.featuresSection}>
-          <h2 className={styles.sectionHeading}>Why CodeScrolls?</h2>
-          <p className={styles.sectionSubtext}>
-            Everything you need to accelerate your web development journey
-          </p>
-          <hr className={styles.sectionUnderline} />
-          <div className={styles.featuresGrid}>
-            {features.map(({ icon, title, description }) => (
-              <div key={title} className={styles.featureCard}>
-                <div className={styles.featureIcon}>{icon}</div>
-                <h3 className={styles.featureTitle}>{title}</h3>
-                <p className={styles.featureDescription}>{description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Explore Topics Section */}
         <section className={styles.categorySection}>
           <h2 className={styles.sectionHeading}>Explore Topics</h2>
           <p className={styles.sectionSubtext}>
@@ -264,6 +225,26 @@ export default function Home(): ReactNode {
                 <span className={styles.categoryName}>{name}</span>
                 <p className={styles.categoryDescription}>{description}</p>
               </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Statistics Section */}
+
+        {/* Features Highlight Section */}
+        <section className={styles.featuresSection}>
+          <h2 className={styles.sectionHeading}>Why CodeScrolls?</h2>
+          <p className={styles.sectionSubtext}>
+            Everything you need to accelerate your web development journey
+          </p>
+          <hr className={styles.sectionUnderline} />
+          <div className={styles.featuresGrid}>
+            {features.map(({ icon, title, description }) => (
+              <div key={title} className={styles.featureCard}>
+                <div className={styles.featureIcon}>{icon}</div>
+                <h3 className={styles.featureTitle}>{title}</h3>
+                <p className={styles.featureDescription}>{description}</p>
+              </div>
             ))}
           </div>
         </section>
