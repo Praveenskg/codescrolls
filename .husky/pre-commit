@@ -39,9 +39,27 @@ if [ -n "$GIT_MERGE_AUTOEDIT" ] || [ -n "$GIT_MERGE_MODE" ]; then
   exit 0
 fi
 
-# Check for merge conflicts
-if ! git diff --check --cached > /dev/null 2>&1; then
+# Check for merge conflicts (only check actual conflict markers, not commented examples)
+# Look for conflict markers at the start of lines that are NOT in comments
+CONFLICT_FILES=""
+for file in $(git diff --cached --name-only --diff-filter=ACM); do
+  if [ -f "$file" ]; then
+    # Check for conflict markers that are actual conflicts (not in comments or code examples)
+    # Pattern: <<<<<<< HEAD or <<<<<<< (7 or more <)
+    #          ======= (7 or more =)
+    #          >>>>>>> branch-name or >>>>>>> (7 or more >)
+    # Must be at start of line (possibly with whitespace) and NOT preceded by #, //, or /*
+    if grep -qE '^[[:space:]]*<<<<<<< |^[[:space:]]*=======$|^[[:space:]]*>>>>>>> ' "$file" 2>/dev/null; then
+      # Double-check it's not in a comment (for common comment styles)
+      if ! grep -qE '^[[:space:]]*#.*<<<<<<|^[[:space:]]*//.*<<<<<<|^[[:space:]]*/\*.*<<<<<<' "$file" 2>/dev/null; then
+        CONFLICT_FILES="${CONFLICT_FILES}${file}\n"
+      fi
+    fi
+  fi
+done
+if [ -n "$CONFLICT_FILES" ]; then
   print_error "Merge conflict markers found in staged files!"
+  printf "$CONFLICT_FILES"
   print_info "Please resolve conflicts before committing"
   exit 1
 fi

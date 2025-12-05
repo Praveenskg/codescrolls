@@ -92,7 +92,16 @@ export default function CheatSheetGrid() {
     <div className="cheatsheet-grid">
       {cheatsheets.map(({ title, href, icon, description }) => (
         <Link key={title} href={href} className="cheatsheet-card">
-          <img src={icon} alt={`${title} icon`} className="cheatsheet-icon" loading="lazy" />
+          <img
+            src={icon}
+            alt={`${title} cheat sheet icon`}
+            className="cheatsheet-icon"
+            width={64}
+            height={64}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
           <strong className="cheatsheet-title">{title}</strong>
           <p className="cheatsheet-description">{description}</p>
         </Link>

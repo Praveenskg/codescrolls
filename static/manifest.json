@@ -4,7 +4,7 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0ea5e9",
+  "theme_color": "#3b82f6",
   "description": "A curated hub of dev notes, snippets, cheatsheets and documentation",
   "icons": [
     {

@@ -93,6 +93,11 @@ react:
   permalink: /react
   description: Writing reusable components in React
 
+react19:
+  label: React 19
+  permalink: /react19
+  description: React 19 features, hooks, and best practices
+
 typescript:
   label: TypeScript
   permalink: /typescript

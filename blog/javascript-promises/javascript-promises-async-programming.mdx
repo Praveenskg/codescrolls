@@ -37,7 +37,7 @@ Asynchronous programming is at the heart of modern JavaScript applications. Whet
 
 ---
 
-## ⚡ The Problem: Synchronous vs Asynchronous
+## ⚡ The Problem: Synchronous vs Asynchronous {#the-problem-synchronous-vs-asynchronous}
 
 ### **Synchronous Code**
 ```javascript
@@ -70,7 +70,7 @@ console.log('End');
 
 ---
 
-## 🔥 Callback Hell: The Old Way
+## 🔥 Callback Hell: The Old Way {#callback-hell-the-old-way}
 
 ### **What is Callback Hell?**
 
@@ -109,7 +109,7 @@ getUser(userId, function(user) {
 
 ---
 
-## 🎯 Promises: The Solution
+## 🎯 Promises: The Solution {#promises-the-solution}
 
 ### **What is a Promise?**
 
@@ -158,7 +158,7 @@ getUser(userId)
 
 ---
 
-## 🔄 Promise States & Lifecycle
+## 🔄 Promise States & Lifecycle {#promise-states--lifecycle}
 
 ### **Three Promise States**
 
@@ -200,7 +200,7 @@ promise.then(() => console.log('This also runs'));
 
 ---
 
-## 🏗️ Creating Promises
+## 🏗️ Creating Promises {#creating-promises}
 
 ### **Manual Promise Creation**
 
@@ -260,7 +260,7 @@ fetchUser(123)
 
 ---
 
-## 📥 Consuming Promises
+## 📥 Consuming Promises {#consuming-promises}
 
 ### **The `.then()` Method**
 
@@ -299,7 +299,7 @@ Promise.resolve(5)
 
 ---
 
-## 🔗 Promise Chaining
+## 🔗 Promise Chaining {#promise-chaining}
 
 ### **Sequential Operations**
 
@@ -363,7 +363,7 @@ authenticateUser({ username: 'john', password: 'secret' })
 
 ---
 
-## ⚠️ Error Handling
+## ⚠️ Error Handling {#error-handling}
 
 ### **The `.catch()` Method**
 
@@ -417,7 +417,7 @@ function fetchDataWithRetry(url, maxRetries = 3) {
 
 ---
 
-## ⚡ Async/Await: Syntactic Sugar
+## ⚡ Async/Await: Syntactic Sugar {#asyncawait-syntactic-sugar}
 
 ### **What is Async/Await?**
 
@@ -517,7 +517,7 @@ async function fetchMultipleResources() {
 
 ---
 
-## 🎨 Advanced Patterns
+## 🎨 Advanced Patterns {#advanced-patterns}
 
 ### **Promise.all() - Parallel Execution**
 
@@ -604,7 +604,7 @@ Promise.any(promises)
 
 ---
 
-## 🌍 Real-World Examples
+## 🌍 Real-World Examples {#real-world-examples}
 
 ### **API Calls with Error Handling**
 
@@ -805,7 +805,7 @@ async function transferMoney(fromAccount, toAccount, amount) {
 
 ---
 
-## 🎯 Best Practices
+## 🎯 Best Practices {#best-practices}
 
 ### **1. Always Handle Errors**
 
@@ -933,7 +933,7 @@ const data = await withRetry(() => fetchUnreliableApi());
 
 ---
 
-## ⚠️ Common Pitfalls
+## ⚠️ Common Pitfalls {#common-pitfalls}
 
 ### **1. Forgetting to Await**
 

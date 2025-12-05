@@ -1,0 +1,722 @@
+---
+id: semantic-html
+title: Semantic HTML - Complete Guide
+description:
+  Master semantic HTML elements for better accessibility, SEO, and
+  maintainability. Learn proper document structure and semantic markup.
+keywords:
+  [
+    semantic html,
+    html5 semantic elements,
+    accessibility,
+    seo html,
+    html structure,
+    web standards,
+    screen readers,
+  ]
+tags: [HTML, Semantic, Accessibility, SEO, Structure, HTML5]
+sidebar_position: 3
+---
+
+# 🎯 Semantic HTML
+
+Semantic HTML uses meaningful elements that clearly describe their purpose to
+browsers, developers, and assistive technologies.
+
+## 📖 Why Semantic HTML Matters?
+
+Without semantic HTML:
+
+```html
+<div id="header">
+  <div class="nav">
+    <div class="nav-item">Home</div>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="post">
+    <div class="title">Article Title</div>
+    <div class="text">Article content...</div>
+  </div>
+</div>
+```
+
+With semantic HTML:
+
+```html
+<header>
+  <nav>
+    <a href="/">Home</a>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <h1>Article Title</h1>
+    <p>Article content...</p>
+  </article>
+</main>
+```
+
+---
+
+## 🏗️ Document Structure Elements
+
+### `<header>`
+
+Represents introductory content or navigation.
+
+```html
+<!-- Site header -->
+<header>
+  <h1>Site Title</h1>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Article header -->
+<article>
+  <header>
+    <h1>Article Title</h1>
+    <p>By <a href="/author/john">John Doe</a></p>
+    <time datetime="2025-01-15">January 15, 2025</time>
+  </header>
+</article>
+```
+
+### `<nav>`
+
+Defines navigation links.
+
+```html
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/products">Products</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Secondary navigation -->
+<nav aria-label="Product categories">
+  <ul>
+    <li><a href="/electronics">Electronics</a></li>
+    <li><a href="/books">Books</a></li>
+  </ul>
+</nav>
+```
+
+### `<main>`
+
+Represents the main content of the document.
+
+```html
+<body>
+  <header>Site header</header>
+
+  <main>
+    <article>
+      <h1>Main article</h1>
+      <p>Article content...</p>
+    </article>
+  </main>
+
+  <footer>Site footer</footer>
+</body>
+```
+
+### `<section>`
+
+Represents a standalone section of content.
+
+```html
+<main>
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>Welcome to our website...</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Web Development</li>
+      <li>Design</li>
+      <li>Consulting</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>...</form>
+  </section>
+</main>
+```
+
+### `<article>`
+
+Represents self-contained content that could be distributed independently.
+
+```html
+<!-- Blog post -->
+<article>
+  <header>
+    <h1>Understanding React Hooks</h1>
+    <p>Published by <a href="/authors/jane">Jane Doe</a></p>
+    <time datetime="2025-01-10">January 10, 2025</time>
+  </header>
+
+  <p>React hooks are a powerful feature...</p>
+
+  <footer>
+    <p>Tags: <a href="/tags/react">React</a></p>
+  </footer>
+</article>
+
+<!-- News article -->
+<article>
+  <h1>Breaking News</h1>
+  <p>Important announcement...</p>
+  <footer>© 2025 News Corp</footer>
+</article>
+```
+
+### `<aside>`
+
+Represents content indirectly related to the main content.
+
+```html
+<!-- Sidebar with related content -->
+<aside>
+  <h3>Related Articles</h3>
+  <ul>
+    <li><a href="/related1">Related Article 1</a></li>
+    <li><a href="/related2">Related Article 2</a></li>
+  </ul>
+</aside>
+
+<!-- Pull quote -->
+<article>
+  <p>Main content here...</p>
+
+  <aside>
+    <blockquote>"This is an important point worth highlighting."</blockquote>
+  </aside>
+
+  <p>More content...</p>
+</article>
+```
+
+### `<footer>`
+
+Represents footer content for its nearest sectioning content.
+
+```html
+<!-- Site footer -->
+<footer>
+  <p>&copy; 2025 Company Name</p>
+  <nav>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms of Service</a>
+  </nav>
+</footer>
+
+<!-- Article footer -->
+<article>
+  <h1>Article Title</h1>
+  <p>Article content...</p>
+
+  <footer>
+    <p>Published: <time datetime="2025-01-01">January 1, 2025</time></p>
+    <p>Author: John Doe</p>
+  </footer>
+</article>
+```
+
+---
+
+## 📝 Text Content Elements
+
+### `<h1>` - `<h6>` Headings
+
+Proper heading hierarchy is crucial for accessibility.
+
+```html
+<!-- Good hierarchy -->
+<h1>Main Page Title</h1>
+
+<section>
+  <h2>Section Title</h2>
+
+  <section>
+    <h3>Subsection Title</h3>
+    <h4>Sub-subsection</h4>
+  </section>
+</section>
+
+<section>
+  <h2>Another Section</h2>
+</section>
+```
+
+### `<p>` Paragraphs
+
+```html
+<article>
+  <h1>Article Title</h1>
+
+  <p>This is the first paragraph of the article.</p>
+
+  <p>This is the second paragraph with more detailed information.</p>
+</article>
+```
+
+### `<blockquote>` Blockquotes
+
+```html
+<p>According to the documentation:</p>
+
+<blockquote cite="https://developer.mozilla.org/">
+  <p>
+    The blockquote element represents content that is quoted from another
+    source.
+  </p>
+  <footer>— MDN Web Docs</footer>
+</blockquote>
+```
+
+### `<cite>` Citations
+
+```html
+<p>The book <cite>The Pragmatic Programmer</cite> is highly recommended.</p>
+
+<blockquote>
+  <p>
+    Programs must be written for people to read, and only incidentally for
+    machines to execute.
+  </p>
+</blockquote>
+<p>— <cite>The Structure and Interpretation of Computer Programs</cite></p>
+```
+
+### `<time>` Time and Dates
+
+```html
+<article>
+  <header>
+    <h1>Conference Announcement</h1>
+    <p>Published: <time datetime="2025-03-15">March 15, 2025</time></p>
+  </header>
+
+  <p>
+    The conference will be held on
+    <time datetime="2025-06-01T09:00">June 1, 2025 at 9:00 AM</time>.
+  </p>
+</article>
+```
+
+---
+
+## 📊 Data and Lists
+
+### `<figure>` and `<figcaption>`
+
+Groups media content with captions.
+
+```html
+<figure>
+  <img src="chart.jpg" alt="Sales chart showing growth" />
+  <figcaption>Quarterly sales growth from Q1 to Q4 2024</figcaption>
+</figure>
+
+<figure>
+  <pre><code>console.log('Hello, World!');</code></pre>
+  <figcaption>Your first JavaScript program</figcaption>
+</figure>
+```
+
+### `<details>` and `<summary>`
+
+Creates collapsible content.
+
+```html
+<details>
+  <summary>What is HTML?</summary>
+  <p>
+    HTML (HyperText Markup Language) is the standard markup language for web
+    pages.
+  </p>
+</details>
+
+<details open>
+  <summary>Advanced Options</summary>
+  <form>
+    <input type="checkbox" id="option1" />
+    <label for="option1">Enable advanced features</label>
+  </form>
+</details>
+```
+
+### `<mark>` Highlighted Text
+
+```html
+<p>
+  The most important point is <mark>semantic HTML improves accessibility</mark>.
+</p>
+
+<p>
+  Search results: <mark>semantic</mark> HTML is better than generic
+  <code>&lt;div&gt;</code> elements.
+</p>
+```
+
+---
+
+## 🎯 Complete Semantic Page Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic HTML Blog</title>
+  </head>
+  <body>
+    <header>
+      <h1>My Awesome Blog</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Welcome to My Blog</h2>
+        <p>Discover amazing content about web development and design.</p>
+      </section>
+
+      <section class="featured-post">
+        <h2>Featured Article</h2>
+
+        <article>
+          <header>
+            <h3>Understanding Semantic HTML</h3>
+            <p>
+              By <a href="/author/john">John Doe</a> on
+              <time datetime="2025-01-15">January 15, 2025</time>
+            </p>
+          </header>
+
+          <p>Semantic HTML provides meaning to web content...</p>
+
+          <figure>
+            <img
+              src="semantic-html-diagram.jpg"
+              alt="Diagram showing semantic HTML structure"
+            />
+            <figcaption>
+              Visual representation of semantic HTML elements
+            </figcaption>
+          </figure>
+
+          <h4>Why Semantic HTML Matters</h4>
+          <ul>
+            <li>Improves accessibility for screen readers</li>
+            <li>Better SEO performance</li>
+            <li>Easier maintenance and styling</li>
+          </ul>
+
+          <aside>
+            <h5>Quick Tip</h5>
+            <p>
+              Use semantic elements instead of generic divs whenever possible.
+            </p>
+          </aside>
+
+          <footer>
+            <p>
+              Filed under: <a href="/category/html">HTML</a>,
+              <a href="/category/accessibility">Accessibility</a>
+            </p>
+          </footer>
+        </article>
+      </section>
+
+      <aside class="sidebar">
+        <section>
+          <h3>Recent Posts</h3>
+          <ul>
+            <li><a href="/post1">Understanding CSS Grid</a></li>
+            <li><a href="/post2">JavaScript Best Practices</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Categories</h3>
+          <nav>
+            <ul>
+              <li><a href="/category/html">HTML</a></li>
+              <li><a href="/category/css">CSS</a></li>
+              <li><a href="/category/javascript">JavaScript</a></li>
+            </ul>
+          </nav>
+        </section>
+      </aside>
+    </main>
+
+    <footer>
+      <section class="newsletter">
+        <h3>Subscribe to Newsletter</h3>
+        <form>
+          <input type="email" placeholder="Enter your email" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+
+      <section class="site-info">
+        <p>&copy; 2025 My Awesome Blog</p>
+        <nav>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </nav>
+      </section>
+    </footer>
+  </body>
+</html>
+```
+
+---
+
+## ♿ Accessibility Benefits
+
+### Screen Reader Support
+
+```html
+<!-- Good for screen readers -->
+<header>
+  <nav>
+    <h2>Site Navigation</h2>
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <h1>Article Title</h1>
+    <p>Content...</p>
+  </article>
+</main>
+```
+
+### Landmark Navigation
+
+```html
+<!-- Screen readers can jump between landmarks -->
+<header>Site header</header>
+<nav>Main navigation</nav>
+<main>Main content</main>
+<aside>Sidebar content</aside>
+<footer>Site footer</footer>
+```
+
+---
+
+## 🎯 SEO Benefits
+
+### Search Engine Understanding
+
+```html
+<!-- Search engines understand content structure -->
+<article>
+  <header>
+    <h1>Complete HTML Guide</h1>
+    <time datetime="2025-01-01">January 1, 2025</time>
+  </header>
+
+  <section>
+    <h2>Introduction</h2>
+    <p>Learn HTML from basics to advanced...</p>
+  </section>
+
+  <section>
+    <h2>Getting Started</h2>
+    <p>Start your HTML journey...</p>
+  </section>
+</article>
+```
+
+### Rich Snippets Support
+
+```html
+<article itemscope itemtype="https://schema.org/Article">
+  <header>
+    <h1 itemprop="headline">Article Title</h1>
+    <p>By <span itemprop="author">John Doe</span></p>
+    <time itemprop="datePublished" datetime="2025-01-01">January 1, 2025</time>
+  </header>
+
+  <div itemprop="articleBody">
+    <p>Article content...</p>
+  </div>
+</article>
+```
+
+---
+
+## 📋 Best Practices
+
+### ✅ DO:
+
+```html
+<!-- Use semantic elements -->
+<header>Site header</header>
+<nav>Navigation</nav>
+<main>Main content</main>
+<section>Content sections</section>
+<article>Articles</article>
+<aside>Sidebars</aside>
+<footer>Footers</footer>
+
+<!-- Proper heading hierarchy -->
+<h1>Main title</h1>
+<section>
+  <h2>Section title</h2>
+  <section>
+    <h3>Subsection</h3>
+  </section>
+</section>
+
+<!-- Use figure for images with captions -->
+<figure>
+  <img src="diagram.jpg" alt="Process diagram" />
+  <figcaption>Visual representation of the process</figcaption>
+</figure>
+
+<!-- Use time for dates -->
+<p>Published: <time datetime="2025-01-01">January 1, 2025</time></p>
+```
+
+### ❌ DON'T:
+
+```html
+<!-- Don't use div for everything -->
+<div id="header">Header</div>
+<!-- Use <header> -->
+<div class="nav">Navigation</div>
+<!-- Use <nav> -->
+<div class="main">Content</div>
+<!-- Use <main> -->
+
+<!-- Don't skip heading levels -->
+<h1>Title</h1>
+<h3>Skip h2</h3>
+<!-- Poor hierarchy -->
+
+<!-- Don't use blockquote for indentation -->
+<blockquote>Indented text</blockquote>
+<!-- Wrong usage -->
+
+<!-- Don't use header/footer inside article improperly -->
+<article>
+  <header>Article header</header>
+  <header>Another header</header>
+  <!-- Only one per article -->
+</article>
+```
+
+---
+
+## 🔍 Semantic vs Generic Elements
+
+| Generic  | Semantic    | Use Case             |
+| -------- | ----------- | -------------------- |
+| `<div>`  | `<header>`  | Page/article header  |
+| `<div>`  | `<nav>`     | Navigation menus     |
+| `<div>`  | `<main>`    | Main content         |
+| `<div>`  | `<section>` | Content sections     |
+| `<div>`  | `<article>` | Independent content  |
+| `<div>`  | `<aside>`   | Sidebar content      |
+| `<div>`  | `<footer>`  | Footer content       |
+| `<span>` | `<time>`    | Dates and times      |
+| `<div>`  | `<figure>`  | Images with captions |
+| `<span>` | `<mark>`    | Highlighted text     |
+
+---
+
+## 🎯 Migration Guide
+
+### From Generic to Semantic
+
+**Before:**
+
+```html
+<div id="wrapper">
+  <div id="header">
+    <div class="nav">
+      <div class="nav-list">
+        <div class="nav-item"><a href="/">Home</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+    <div class="post">
+      <div class="title">Post Title</div>
+      <div class="content">Post content...</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="copyright">© 2025</div>
+  </div>
+</div>
+```
+
+**After:**
+
+```html
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h1>Post Title</h1>
+      <p>Post content...</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2025</p>
+  </footer>
+</body>
+```
+
+---
+
+## 🚀 What's Next?
+
+Now that you understand semantic HTML, learn about **HTML Forms**:
+
+👉 [Next: HTML Forms →](./forms.mdx)
+
+Or return to the [HTML Overview →](../index.mdx)
+
+Master semantic HTML for accessible, SEO-friendly websites! 🎯

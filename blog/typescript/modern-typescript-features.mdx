@@ -27,7 +27,7 @@ TypeScript continues to evolve with powerful new features that make type-safe de
 
 ---
 
-## ✨ The `satisfies` Operator
+## ✨ The `satisfies` Operator {#the-satisfies-operator}
 
 The `satisfies` operator is one of the most powerful additions to TypeScript. It allows you to validate that a value matches a type without changing the inferred type of that value.
 
@@ -135,7 +135,7 @@ const smallSpacing = theme.spacing.small; // 8 (literal)
 
 ---
 
-## 🔒 Const Type Parameters
+## 🔒 Const Type Parameters {#const-type-parameters}
 
 `const` type parameters allow you to infer the most specific type possible from function arguments, preserving literal types and readonly modifiers.
 
@@ -216,7 +216,7 @@ const result = processItems(['apple', 'banana', 'cherry']);
 
 ---
 
-## 🚫 NoInfer Utility Type
+## 🚫 NoInfer Utility Type {#noinfer-utility-type}
 
 `NoInfer` prevents TypeScript from inferring a type parameter, forcing you to explicitly provide it. This is useful when you want to control type inference more precisely.
 
@@ -285,7 +285,7 @@ const emailValidator = createValidator<string>([
 
 ---
 
-## ⚙️ Modern Compiler Options
+## ⚙️ Modern Compiler Options {#modern-compiler-options}
 
 TypeScript 5.x introduces modern compiler options that reflect current best practices.
 
@@ -347,7 +347,7 @@ import utils from './utils/index.js'; // .js extension supported
 
 ---
 
-## ✅ TypeScript Best Practices
+## ✅ TypeScript Best Practices {#typescript-best-practices}
 
 ### 1. Avoid `React.FC` in React Components
 
@@ -467,7 +467,7 @@ function fetchUser(): {
 
 ---
 
-## 🎯 Common Patterns
+## 🎯 Common Patterns {#common-patterns}
 
 ### Pattern 1: Builder Pattern with Type Safety
 
@@ -579,7 +579,7 @@ const newUser = await api.post('/users', {
 
 ---
 
-## 🔄 Migration Tips
+## 🔄 Migration Tips {#migration-tips}
 
 ### Migrating to `satisfies`
 
@@ -628,7 +628,7 @@ function createArray<const T extends readonly any[]>(items: T): T {
 
 ---
 
-## 🌟 Real-World Examples
+## 🌟 Real-World Examples {#real-world-examples}
 
 ### Example 1: Form Validation Library
 

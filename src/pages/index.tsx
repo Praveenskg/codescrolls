@@ -165,7 +165,10 @@ export default function Home(): ReactNode {
 
   return (
     <Layout title={`Welcome to ${siteConfig.title}`} description={siteConfig.tagline}>
-      <main className={styles.homeMain}>
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+      <main id="main-content" className={styles.homeMain}>
         {/* Hero Section with Animation */}
         <section className={styles.heroSection}>
           <div className={styles.heroContent}>
@@ -184,10 +187,18 @@ export default function Home(): ReactNode {
               insights.
             </p>
             <div className={styles.buttonGroup}>
-              <Link className={styles.btnPrimary} href="/docs">
+              <Link
+                className={styles.btnPrimary}
+                href="/docs"
+                aria-label="Start learning web development"
+              >
                 🚀 Start Learning
               </Link>
-              <Link className={styles.btnSecondary} to="/blog">
+              <Link
+                className={styles.btnSecondary}
+                to="/blog"
+                aria-label="Read CodeScrolls blog posts"
+              >
                 📖 Read Blog
               </Link>
             </div>
@@ -234,12 +245,21 @@ export default function Home(): ReactNode {
           <hr className={styles.sectionUnderline} />
           <div className={styles.categoryGrid}>
             {categories.map(({ name, href, icon, description }) => (
-              <Link key={name} to={href} className={styles.categoryCard}>
+              <Link
+                key={name}
+                to={href}
+                className={styles.categoryCard}
+                aria-label={`Explore ${name} documentation`}
+              >
                 <img
                   src={useBaseUrl(icon)}
-                  alt={name}
+                  alt={`${name} documentation and tutorials`}
                   className={styles.categoryIcon}
+                  width={64}
+                  height={64}
                   loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
                 <span className={styles.categoryName}>{name}</span>
                 <p className={styles.categoryDescription}>{description}</p>
@@ -255,7 +275,12 @@ export default function Home(): ReactNode {
           <hr className={styles.sectionUnderline} />
           <div className={styles.blogGrid}>
             {featuredPosts.map(({ title, description, href, tag }) => (
-              <Link key={title} to={href} className={styles.blogCard}>
+              <Link
+                key={title}
+                to={href}
+                className={styles.blogCard}
+                aria-label={`Read blog post: ${title}`}
+              >
                 <span className={styles.blogTag}>{tag}</span>
                 <h3 className={styles.blogTitle}>{title}</h3>
                 <p className={styles.blogDescription}>{description}</p>
@@ -264,7 +289,7 @@ export default function Home(): ReactNode {
             ))}
           </div>
           <div className={styles.ctaCenter}>
-            <Link className={styles.btnOutline} to="/blog">
+            <Link className={styles.btnOutline} to="/blog" aria-label="View all blog posts">
               View All Posts
             </Link>
           </div>
@@ -277,7 +302,12 @@ export default function Home(): ReactNode {
           <hr className={styles.sectionUnderline} />
           <div className={styles.hubsGrid}>
             {hubs.map(({ name, href, icon, description }) => (
-              <Link key={name} to={href} className={styles.hubCard}>
+              <Link
+                key={name}
+                to={href}
+                className={styles.hubCard}
+                aria-label={`Explore ${name} resources`}
+              >
                 <div className={styles.hubIcon}>{icon}</div>
                 <h3 className={styles.hubName}>{name}</h3>
                 <p className={styles.hubDescription}>{description}</p>
@@ -306,7 +336,11 @@ export default function Home(): ReactNode {
               with CodeScrolls. Start your journey today &ndash; it&apos;s completely free!
             </p>
             <div className={styles.ctaButtons}>
-              <Link className={styles.btnPrimary} href="/docs/javascript">
+              <Link
+                className={styles.btnPrimary}
+                href="/docs/javascript"
+                aria-label="Get started with JavaScript documentation"
+              >
                 Get Started Now
               </Link>
               <Link
@@ -314,6 +348,7 @@ export default function Home(): ReactNode {
                 to="https://github.com/praveenskg/codescrolls"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Star CodeScrolls on GitHub (opens in new tab)"
               >
                 ⭐ Star on GitHub
               </Link>

@@ -35,7 +35,7 @@ React 19 represents a significant evolution in the React ecosystem, introducing 
 
 ---
 
-## 🚀 What's New in React 19
+## 🚀 What's New in React 19 {#whats-new-in-react-19}
 
 React 19 brings several groundbreaking features:
 
@@ -49,7 +49,7 @@ React 19 brings several groundbreaking features:
 
 ---
 
-## ⚡ React Compiler
+## ⚡ React Compiler {#react-compiler}
 
 The React Compiler automatically optimizes your components by memoizing values and callbacks, eliminating the need for manual `useMemo`, `useCallback`, and `React.memo` in most cases.
 
@@ -126,7 +126,7 @@ The React Compiler analyzes your code and automatically applies optimizations, m
 
 ---
 
-## 📝 Form Actions & New Hooks
+## 📝 Form Actions & New Hooks {#form-actions--new-hooks}
 
 React 19 introduces a powerful new way to handle forms with server actions and several new hooks that simplify form state management.
 
@@ -160,7 +160,7 @@ function UserForm() {
 }
 ```
 
-### useActionState
+### useActionState {#useactionstate}
 
 `useActionState` (formerly `useFormState`) manages form state and handles action results.
 
@@ -197,7 +197,7 @@ function ProfileForm() {
 }
 ```
 
-### useFormStatus
+### useFormStatus {#useformstatus}
 
 `useFormStatus` provides form submission status within form components, perfect for showing loading states.
 
@@ -230,7 +230,7 @@ function ContactForm() {
 }
 ```
 
-### useOptimistic
+### useOptimistic {#useoptimistic}
 
 `useOptimistic` enables optimistic UI updates, showing immediate feedback before server confirmation.
 
@@ -279,7 +279,7 @@ function CommentList({ comments }) {
 
 ---
 
-## 🎣 The `use()` Hook
+## 🎣 The `use()` Hook {#the-use-hook}
 
 The `use()` hook allows you to read the value of a Promise or Context directly in components, including conditional usage.
 
@@ -330,7 +330,7 @@ function ThemedButton() {
 
 ---
 
-## 🖥️ Server Components
+## 🖥️ Server Components {#server-components}
 
 React 19 includes built-in support for Server Components, allowing you to fetch data and render on the server.
 
@@ -371,11 +371,11 @@ function AddToCartButton({ productId }) {
 
 ---
 
-## 🆕 React 19.2 Features
+## 🆕 React 19.2 Features {#react-192-features}
 
 React 19.2 introduces additional features that enhance the developer experience.
 
-### Activity Component
+### Activity Component {#activity-component}
 
 The `<Activity />` component provides a standardized way to show loading and activity states.
 
@@ -401,7 +401,7 @@ function DataFetcher() {
 }
 ```
 
-### useEffectEvent Hook
+### useEffectEvent Hook {#useeffectevent-hook}
 
 `useEffectEvent` allows you to define event handlers that don't need to be in the dependency array.
 
@@ -435,7 +435,7 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-### cacheSignal API
+### cacheSignal API {#cachesignal-api}
 
 `cacheSignal` provides a way to cache signals for better performance in concurrent rendering.
 
@@ -454,7 +454,7 @@ function ExpensiveComponent({ data }) {
 
 ---
 
-## ⚡ Performance Improvements
+## ⚡ Performance Improvements {#performance-improvements}
 
 ### Automatic Batching
 
@@ -503,7 +503,7 @@ async function BlogPost({ slug }) {
 
 ---
 
-## 📘 TypeScript Integration
+## 📘 TypeScript Integration {#typescript-integration}
 
 React 19 improves TypeScript support with better type inference and error messages.
 
@@ -529,7 +529,7 @@ React 19 provides more helpful TypeScript error messages that guide you to the c
 
 ---
 
-## 🔄 Migration Guide
+## 🔄 Migration Guide {#migration-guide}
 
 ### Upgrading to React 19
 
@@ -586,7 +586,7 @@ const callback = () => doSomething(a);
 
 ---
 
-## ✅ Best Practices
+## ✅ Best Practices {#best-practices}
 
 ### 1. Use Form Actions for Form Handling
 

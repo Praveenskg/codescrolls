@@ -38,7 +38,7 @@ Database design is the foundation of any data-driven application. Poor design le
 
 ---
 
-## 🏗️ Understanding Database Design
+## 🏗️ Understanding Database Design {#understanding-database-design}
 
 ### **Why Database Design Matters**
 
@@ -93,7 +93,7 @@ CREATE TABLE order_items (
 
 ---
 
-## 📊 Data Modeling Fundamentals
+## 📊 Data Modeling Fundamentals {#data-modeling-fundamentals}
 
 ### **Entity-Relationship Model (ER Model)**
 
@@ -152,7 +152,7 @@ CREATE TABLE order_items (
 
 ---
 
-## 🔄 Normalization Principles
+## 🔄 Normalization Principles {#normalization-principles}
 
 ### **What is Normalization?**
 
@@ -271,7 +271,7 @@ CREATE TABLE order_summary (
 
 ---
 
-## 🔗 Relationships & Foreign Keys
+## 🔗 Relationships & Foreign Keys {#relationships--foreign-keys}
 
 ### **Relationship Types**
 
@@ -370,7 +370,7 @@ CREATE TABLE orders (
 
 ---
 
-## 🔍 Indexing Strategies
+## 🔍 Indexing Strategies {#indexing-strategies}
 
 ### **What is Indexing?**
 
@@ -443,7 +443,7 @@ REINDEX INDEX CONCURRENTLY idx_users_email;
 
 ---
 
-## 🗝️ Primary & Composite Keys
+## 🗝️ Primary & Composite Keys {#primary--composite-keys}
 
 ### **Primary Key Types**
 
@@ -495,7 +495,7 @@ CREATE TABLE user_permissions (
 
 ---
 
-## 🛡️ Constraints & Data Integrity
+## 🛡️ Constraints & Data Integrity {#constraints--data-integrity}
 
 ### **Constraint Types**
 
@@ -564,7 +564,7 @@ FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 ---
 
-## 🆚 SQL vs NoSQL Design Patterns
+## 🆚 SQL vs NoSQL Design Patterns {#sql-vs-nosql-design-patterns}
 
 ### **SQL Databases (Relational)**
 
@@ -683,7 +683,7 @@ CREATE TABLE users (
 
 ---
 
-## ⚡ Performance Optimization
+## ⚡ Performance Optimization {#performance-optimization}
 
 ### **Query Optimization**
 
@@ -753,7 +753,7 @@ pool.query('SELECT * FROM users WHERE id = $1', [userId])
 
 ---
 
-## 🔒 Database Security
+## 🔒 Database Security {#database-security}
 
 ### **Access Control**
 
@@ -807,7 +807,7 @@ const dangerousQuery = `SELECT * FROM users WHERE email = '${userEmail}'`;
 
 ---
 
-## 🔄 Migration Strategies
+## 🔄 Migration Strategies {#migration-strategies}
 
 ### **Database Versioning**
 
@@ -865,7 +865,7 @@ ALTER TABLE users RENAME COLUMN new_email TO email;
 
 ---
 
-## 🚫 Common Pitfalls
+## 🚫 Common Pitfalls {#common-pitfalls}
 
 ### **1. Poor Normalization**
 
@@ -968,7 +968,7 @@ CREATE TABLE employees (
 
 ---
 
-## 🎨 Design Patterns
+## 🎨 Design Patterns {#design-patterns}
 
 ### **Soft Delete Pattern**
 
@@ -1060,7 +1060,7 @@ WHERE d.id = $1;
 
 ---
 
-## 🌍 Real-World Examples
+## 🌍 Real-World Examples {#real-world-examples}
 
 ### **E-commerce Database Design**
 

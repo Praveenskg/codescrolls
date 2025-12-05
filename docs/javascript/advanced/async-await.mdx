@@ -1,0 +1,688 @@
+---
+id: javascript-async-await
+sidebar_position: 2
+title: Async/Await - Modern JavaScript
+description:
+  Master async/await for clean asynchronous code. Learn async functions, await
+  keyword, error handling, parallel execution, and best practices for modern
+  async JavaScript.
+keywords:
+  [
+    async await javascript,
+    async functions,
+    await keyword,
+    asynchronous javascript,
+    try catch async,
+    promise async await,
+    modern async javascript,
+  ]
+tags:
+  - JavaScript
+  - Async/Await
+  - Promises
+  - Advanced
+---
+
+# Async/Await
+
+**Async/await** is syntactic sugar over Promises, making asynchronous code look
+and behave like synchronous code!
+
+---
+
+## 🎯 Why Async/Await?
+
+### Promises vs Async/Await
+
+```js
+// ❌ Promises - still has callbacks
+fetchUser()
+  .then(user => {
+    return fetchPosts(user.id);
+  })
+  .then(posts => {
+    console.log(posts);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+// ✅ Async/Await - looks synchronous!
+async function loadUserPosts() {
+  try {
+    const user = await fetchUser();
+    const posts = await fetchPosts(user.id);
+    console.log(posts);
+  } catch (error) {
+    console.error(error);
+  }
+}
+```
+
+---
+
+## 📦 Async Functions
+
+Functions marked with `async` always return a Promise.
+
+### Basic Async Function
+
+```js live
+// Regular function
+function regularFunction() {
+  return 'Hello';
+}
+
+// Async function
+async function asyncFunction() {
+  return 'Hello';
+}
+
+console.log(regularFunction()); // 'Hello'
+console.log(asyncFunction()); // Promise { 'Hello' }
+
+// Use .then() to get value
+asyncFunction().then(value => console.log(value)); // 'Hello'
+```
+
+### Different Async Syntaxes
+
+```js live
+// Function declaration
+async function fetchData1() {
+  return 'data';
+}
+
+// Function expression
+const fetchData2 = async function () {
+  return 'data';
+};
+
+// Arrow function
+const fetchData3 = async () => {
+  return 'data';
+};
+
+// Method
+const obj = {
+  async getData() {
+    return 'data';
+  },
+};
+
+// All return Promises
+fetchData1().then(console.log);
+fetchData2().then(console.log);
+fetchData3().then(console.log);
+obj.getData().then(console.log);
+```
+
+---
+
+## ⏳ The await Keyword
+
+`await` pauses execution until Promise resolves.
+
+### Basic Usage
+
+```js live
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function demo() {
+  console.log('Starting...');
+
+  await delay(1000);
+  console.log('After 1 second');
+
+  await delay(1000);
+  console.log('After 2 seconds');
+
+  return 'Done!';
+}
+
+demo().then(console.log);
+```
+
+### Awaiting Multiple Promises
+
+```js live
+async function fetchUserData(userId) {
+  // Sequential (slower)
+  const user = await fetchUser(userId);
+  const posts = await fetchPosts(userId);
+  const comments = await fetchComments(userId);
+
+  return { user, posts, comments };
+}
+
+// Better: Parallel execution
+async function fetchUserDataFast(userId) {
+  // Start all at once
+  const [user, posts, comments] = await Promise.all([
+    fetchUser(userId),
+    fetchPosts(userId),
+    fetchComments(userId),
+  ]);
+
+  return { user, posts, comments };
+}
+```
+
+---
+
+## ⚠️ Error Handling
+
+### Try/Catch
+
+```js live
+async function fetchData() {
+  try {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Fetch failed:', error.message);
+    throw error; // Re-throw or handle
+  }
+}
+
+// Usage
+fetchData()
+  .then(data => console.log('Success:', data))
+  .catch(error => console.error('Error:', error));
+```
+
+### Multiple Try/Catch
+
+```js live
+async function processData() {
+  let user;
+  try {
+    user = await fetchUser();
+  } catch (error) {
+    console.error('User fetch failed:', error);
+    user = { id: 'default', name: 'Guest' };
+  }
+
+  let posts;
+  try {
+    posts = await fetchPosts(user.id);
+  } catch (error) {
+    console.error('Posts fetch failed:', error);
+    posts = [];
+  }
+
+  return { user, posts };
+}
+```
+
+### Handling Multiple Errors
+
+```js live
+async function fetchAllData() {
+  const results = await Promise.allSettled([
+    fetchUser(),
+    fetchPosts(),
+    fetchComments(),
+  ]);
+
+  const [userResult, postsResult, commentsResult] = results;
+
+  return {
+    user: userResult.status === 'fulfilled' ? userResult.value : null,
+    posts: postsResult.status === 'fulfilled' ? postsResult.value : [],
+    comments: commentsResult.status === 'fulfilled' ? commentsResult.value : [],
+  };
+}
+```
+
+---
+
+## 🔄 Parallel vs Sequential
+
+### Sequential Execution
+
+```js live
+// Runs one after another (slower)
+async function sequential() {
+  const start = Date.now();
+
+  const result1 = await fetchData1(); // Wait 1s
+  const result2 = await fetchData2(); // Wait 1s
+  const result3 = await fetchData3(); // Wait 1s
+
+  const elapsed = Date.now() - start;
+  console.log(`Sequential took ${elapsed}ms`); // ~3000ms
+
+  return [result1, result2, result3];
+}
+```
+
+### Parallel Execution
+
+```js live
+// Runs simultaneously (faster)
+async function parallel() {
+  const start = Date.now();
+
+  // Start all at once
+  const [result1, result2, result3] = await Promise.all([
+    fetchData1(), // All start together
+    fetchData2(),
+    fetchData3(),
+  ]);
+
+  const elapsed = Date.now() - start;
+  console.log(`Parallel took ${elapsed}ms`); // ~1000ms
+
+  return [result1, result2, result3];
+}
+```
+
+### When to Use Each
+
+```js
+// Use Sequential when:
+// - Operations depend on each other
+async function sequential() {
+  const user = await fetchUser();
+  const posts = await fetchPosts(user.id); // Needs user.id
+  return { user, posts };
+}
+
+// Use Parallel when:
+// - Operations are independent
+async function parallel() {
+  const [users, products, stats] = await Promise.all([
+    fetchUsers(), // Independent
+    fetchProducts(), // Independent
+    fetchStats(), // Independent
+  ]);
+  return { users, products, stats };
+}
+```
+
+---
+
+## 📚 Practical Examples
+
+### Example 1: API Data Fetching
+
+```js live
+async function loadUserProfile(userId) {
+  try {
+    // Show loading
+    showLoader();
+
+    // Fetch user data
+    const response = await fetch(`/api/users/${userId}`);
+    if (!response.ok) throw new Error('User not found');
+
+    const user = await response.json();
+
+    // Fetch related data in parallel
+    const [posts, followers, following] = await Promise.all([
+      fetch(`/api/users/${userId}/posts`).then(r => r.json()),
+      fetch(`/api/users/${userId}/followers`).then(r => r.json()),
+      fetch(`/api/users/${userId}/following`).then(r => r.json()),
+    ]);
+
+    return {
+      ...user,
+      posts,
+      followers,
+      following,
+    };
+  } catch (error) {
+    showError(error.message);
+    throw error;
+  } finally {
+    hideLoader();
+  }
+}
+
+// Usage
+loadUserProfile(123)
+  .then(profile => {
+    displayProfile(profile);
+  })
+  .catch(error => {
+    console.error('Failed to load profile:', error);
+  });
+```
+
+### Example 2: Form Submission
+
+```js live
+async function handleFormSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const data = Object.fromEntries(formData);
+
+  try {
+    // Validate
+    await validateForm(data);
+
+    // Submit
+    const response = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+
+    const result = await response.json();
+
+    showSuccess('Form submitted successfully!');
+    return result;
+  } catch (error) {
+    showError(error.message);
+    throw error;
+  }
+}
+
+// Usage
+document.querySelector('#myForm').addEventListener('submit', async e => {
+  try {
+    await handleFormSubmit(e);
+  } catch (error) {
+    console.error('Submission failed:', error);
+  }
+});
+```
+
+### Example 3: Retry Logic
+
+```js live
+async function fetchWithRetry(url, options = {}, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        return await response.json();
+      }
+      throw new Error(`HTTP ${response.status}`);
+    } catch (error) {
+      console.log(`Attempt ${i + 1} failed: ${error.message}`);
+
+      if (i === retries - 1) throw error; // Last attempt
+
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, delay));
+      delay *= 2; // Exponential backoff
+    }
+  }
+}
+
+// Usage
+fetchWithRetry('/api/data', {}, 3, 1000)
+  .then(data => console.log('Success:', data))
+  .catch(error => console.error('All retries failed:', error));
+```
+
+### Example 4: Concurrent Requests with Limit
+
+```js live
+async function fetchWithConcurrencyLimit(urls, limit = 3) {
+  const results = [];
+  const executing = [];
+
+  for (const url of urls) {
+    const promise = fetch(url).then(r => r.json());
+    results.push(promise);
+
+    if (limit <= urls.length) {
+      const execute = promise.then(() =>
+        executing.splice(executing.indexOf(execute), 1),
+      );
+      executing.push(execute);
+
+      if (executing.length >= limit) {
+        await Promise.race(executing);
+      }
+    }
+  }
+
+  return Promise.all(results);
+}
+
+// Usage: Fetch 10 URLs but only 3 at a time
+const urls = Array.from({ length: 10 }, (_, i) => `/api/data/${i}`);
+fetchWithConcurrencyLimit(urls, 3).then(results => {
+  console.log('All fetched:', results);
+});
+```
+
+### Example 5: Async Iterator
+
+```js live
+async function* fetchPages(startPage, endPage) {
+  for (let page = startPage; page <= endPage; page++) {
+    const response = await fetch(`/api/data?page=${page}`);
+    const data = await response.json();
+    yield data;
+  }
+}
+
+// Usage
+async function loadAllPages() {
+  for await (const pageData of fetchPages(1, 5)) {
+    console.log('Page loaded:', pageData);
+    displayPage(pageData);
+  }
+}
+
+loadAllPages();
+```
+
+---
+
+## 🎯 Best Practices
+
+### 1. Always Use Try/Catch
+
+```js
+// ✅ Good
+async function getData() {
+  try {
+    return await fetch('/api/data');
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// ❌ Bad - unhandled error
+async function getData() {
+  return await fetch('/api/data'); // May throw!
+}
+```
+
+### 2. Use Promise.all for Parallel Operations
+
+```js
+// ✅ Good - parallel (faster)
+const [users, posts] = await Promise.all([fetchUsers(), fetchPosts()]);
+
+// ❌ Bad - sequential (slower)
+const users = await fetchUsers();
+const posts = await fetchPosts();
+```
+
+### 3. Don't Await in Loops (Usually)
+
+```js
+// ❌ Bad - sequential
+for (const id of ids) {
+  const user = await fetchUser(id);
+  users.push(user);
+}
+
+// ✅ Good - parallel
+const users = await Promise.all(ids.map(id => fetchUser(id)));
+```
+
+### 4. Handle Cleanup with Finally
+
+```js
+async function fetchData() {
+  showLoader();
+  try {
+    return await fetch('/api/data');
+  } catch (error) {
+    showError(error);
+  } finally {
+    hideLoader(); // Always runs
+  }
+}
+```
+
+---
+
+## 💡 Common Pitfalls
+
+### Pitfall 1: Forgetting await
+
+```js
+// ❌ Wrong - returns Promise, not value
+async function getUser() {
+  const user = fetchUser(); // Missing await!
+  console.log(user); // Promise, not user object
+  return user;
+}
+
+// ✅ Correct
+async function getUser() {
+  const user = await fetchUser();
+  console.log(user); // Actual user object
+  return user;
+}
+```
+
+### Pitfall 2: Sequential When You Want Parallel
+
+```js
+// ❌ Slow - waits for each
+async function loadData() {
+  const users = await fetchUsers(); // 1s
+  const posts = await fetchPosts(); // 1s
+  return { users, posts }; // Total: 2s
+}
+
+// ✅ Fast - runs together
+async function loadData() {
+  const [users, posts] = await Promise.all([
+    fetchUsers(), // Both run together
+    fetchPosts(),
+  ]);
+  return { users, posts }; // Total: 1s
+}
+```
+
+### Pitfall 3: Using Async in Array Methods
+
+```js
+// ❌ Wrong - doesn't wait
+const results = items.map(async item => {
+  return await processItem(item);
+});
+console.log(results); // Array of Promises!
+
+// ✅ Correct
+const results = await Promise.all(
+  items.map(async item => {
+    return await processItem(item);
+  }),
+);
+console.log(results); // Actual results
+```
+
+---
+
+## 🆕 Top-Level Await
+
+Use `await` at the module top level without wrapping in async functions.
+
+### Basic Usage
+
+```js
+// config.js
+// Fetch configuration before module loads
+const response = await fetch('/api/config');
+const config = await response.json();
+
+export default config;
+```
+
+```js
+// main.js
+import config from './config.js';
+
+// Config is already loaded!
+console.log('API URL:', config.apiUrl);
+```
+
+### Loading Dependencies
+
+```js
+// data.js
+const data = await import('./data.json', {
+  with: { type: 'json' },
+});
+
+export const users = data.default.users;
+```
+
+### Error Handling
+
+```js
+// app.js
+let config;
+
+try {
+  config = await fetch('/api/config').then(r => r.json());
+} catch (error) {
+  console.error('Failed to load config:', error);
+  config = { apiUrl: 'http://localhost:3000' }; // Fallback
+}
+
+export default config;
+```
+
+### Conditional Loading
+
+```js
+// feature.js
+const feature = await import(condition ? './feature-a.js' : './feature-b.js');
+
+feature.default.init();
+```
+
+**Browser Support**: Chrome 89+, Firefox 89+, Safari 15.0+
+
+**Note**: Top-level await only works in ES modules (`type="module"`).
+
+---
+
+## 🔗 What's Next?
+
+Learn about JavaScript Classes!
+
+👉 [Next: Classes »](./classes.mdx)
+
+---
+
+## 📖 Additional Resources
+
+- [MDN: Async Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [MDN: await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [JavaScript.info: Async/await](https://javascript.info/async-await)
