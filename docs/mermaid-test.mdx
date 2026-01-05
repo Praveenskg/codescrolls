@@ -46,29 +46,30 @@ sequenceDiagram
 ```mermaid
 classDiagram
     class User {
-        +String name
-        +String email
-        +login()
-        +logout()
+        String name
+        String email
+        login()
+        logout()
     }
 
     class Post {
-        +String title
-        +String content
-        +Date createdAt
-        +publish()
-        +edit()
+        String title
+        String content
+        Date createdAt
+        publish()
+        edit()
     }
 
     class Comment {
-        +String content
-        +Date createdAt
-        +reply()
+        String content
+        Date createdAt
+        reply()
     }
 
-    User ||--o{ Post : creates
-    Post ||--o{ Comment : has
-    User ||--o{ Comment : writes
+    %% Relationships
+    User "1" --> "many" Post : creates
+    Post "1" --> "many" Comment : has
+    User "1" --> "many" Comment : writes
 ```
 
 ## State Diagram
@@ -155,17 +156,26 @@ journey
 ## Git Graph
 
 ```mermaid
-gitgraph
-    commit id: "Initial commit"
-    branch develop
-    checkout develop
-    commit id: "Add feature A"
-    branch feature-b
-    checkout feature-b
-    commit id: "Add feature B"
-    checkout develop
-    merge feature-b
-    checkout main
-    merge develop
-    commit id: "Release v1.0"
+flowchart LR
+    A[Initial commit] --> B[Add feature A]
+    B --> C[Add feature B]
+    C --> D[Merge feature-b into develop]
+    D --> E[Merge develop into main]
+    E --> F[Release v1.0]
+
+    subgraph develop
+        B
+        D
+    end
+
+    subgraph feature-b
+        C
+    end
+
+    subgraph main
+        A
+        E
+        F
+    end
+
 ```
