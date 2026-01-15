@@ -108,7 +108,7 @@ print_success "Linting and formatting passed"
 if [ -n "$HAS_TS_FILES" ]; then
   echo ""
   print_info "Running TypeScript type check..."
-  if ! npm run typecheck; then
+  if ! pnpm run typecheck; then
     print_error "TypeScript type check failed!"
     print_info "Fix the type errors above and try again"
     exit 1
