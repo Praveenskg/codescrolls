@@ -17,9 +17,10 @@ concurrency:
 
 jobs:
   # -------------------------
-  # Job 1: TypeScript
+  # Job 1: TypeScript Check
   # -------------------------
   typescript:
+    name: TypeScript Type Check
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -27,7 +28,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
 
@@ -36,18 +39,22 @@ jobs:
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run typecheck
+      - name: Run TypeScript check
+        run: pnpm run typecheck
+
+      - if: always()
+        run: |
+          echo "## TypeScript Check" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
 
   # -------------------------
   # Job 2: ESLint
   # -------------------------
   eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -64,18 +71,19 @@ jobs:
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
+
+      - if: always()
+        run: |
+          echo "## ESLint" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
 
   # -------------------------
   # Job 3: Prettier
   # -------------------------
   prettier:
+    name: Prettier
     runs-on: ubuntu-latest
     timeout-minutes: 7
     permissions:
@@ -92,18 +100,19 @@ jobs:
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-
       - run: pnpm install --frozen-lockfile
       - run: pnpm run format:check
+
+      - if: always()
+        run: |
+          echo "## Prettier" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
 
   # -------------------------
   # Job 4: Build (Docusaurus)
   # -------------------------
   build:
+    name: Build Docs
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -120,28 +129,30 @@ jobs:
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-
       - run: pnpm install --frozen-lockfile
 
-      - name: Build Docs
+      - name: Build Docusaurus
         env:
           NODE_ENV: production
         run: pnpm run build
 
       - uses: actions/upload-artifact@v4
+        if: success()
         with:
           name: docusaurus-build
           path: build/
           retention-days: 1
 
+      - if: always()
+        run: |
+          echo "## Build" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+
   # -------------------------
   # Job 5: Security Audit
   # -------------------------
   security:
+    name: Security Audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -159,18 +170,19 @@ jobs:
           corepack enable
           corepack prepare pnpm@9 --activate
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --audit-level=high
 
+      - if: always()
+        run: |
+          echo "## Security Audit" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** Completed" >> $GITHUB_STEP_SUMMARY
+
   # -------------------------
-  # Job 6: PR Comment
+  # Job 6: PR Comment Bot
   # -------------------------
   pr-comment:
+    name: PR Status Comment
     if: github.event_name == 'pull_request'
     needs: [typescript, eslint, prettier, build, security]
     runs-on: ubuntu-latest
