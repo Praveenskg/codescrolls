@@ -1,41 +1,60 @@
 ---
 id: jsx
-title: JSX in React
-description:
-  Learn how JSX works in React – the syntax extension that lets you write HTML
-  in JavaScript.
+title: JSX in React – Syntax, Rules & Examples
+description: >
+  Learn JSX in React with simple explanations, syntax rules, and real examples.
+  Understand what JSX is, how it works, why it is used, and common mistakes
+  beginners should avoid.
 slug: /docs/react/basics/jsx
 sidebar_position: 1
 keywords:
   [
     'JSX',
-    'React JSX',
-    'React syntax',
+    'JSX in React',
+    'What is JSX',
+    'React JSX tutorial',
+    'JSX syntax',
+    'JSX examples',
     'JavaScript XML',
-    'JSX tutorial',
     'React basics',
   ]
 image: /img/cover.png
 ---
 
-# 🎨 JSX – JavaScript XML
+# JSX in React – JavaScript XML in React
 
-JSX is a **syntax extension** for JavaScript that lets you write **HTML-like
-code inside JavaScript**. It's used in React to describe what the UI should look
-like.
+JSX (JavaScript XML) is a **syntax extension used in React** that allows you to
+write **HTML-like code inside JavaScript**. It makes React components easier to
+read, write, and maintain.
 
----
-
-## 📦 Why Use JSX?
-
-- It’s **more readable** than `React.createElement()`
-- JSX brings **HTML and JS closer**
-- Enables **dynamic rendering** using JavaScript expressions
-- Cleaner and **component-friendly**
+If you are learning React, **understanding JSX is essential**, because almost
+every React application uses JSX to describe the user interface.
 
 ---
 
-## ✍️ Basic JSX Example
+## What Is JSX in React?
+
+JSX stands for **JavaScript XML**. It lets developers describe UI elements using
+a syntax that looks similar to HTML but works directly inside JavaScript code.
+
+Although JSX looks like HTML, **it is not HTML**. JSX is converted into regular
+JavaScript using `React.createElement()` before it runs in the browser.
+
+---
+
+## Why Use JSX?
+
+JSX is popular in React because it improves both **developer experience** and
+**code clarity**.
+
+- Makes UI code **more readable**
+- Keeps **markup and logic together**
+- Allows **dynamic rendering** using JavaScript expressions
+- Helps build **reusable components**
+
+---
+
+## Basic JSX Example
 
 ```jsx live
 function Greeting() {
@@ -45,7 +64,7 @@ function Greeting() {
 
 ---
 
-## 🔄 Embedding JavaScript Expressions
+## Embedding JavaScript Expressions
 
 Use curly braces `{}` to embed JavaScript in JSX.
 
@@ -58,7 +77,7 @@ function GreetingWithName() {
 
 ---
 
-## ⚠️ JSX Rules You Must Know
+## JSX Rules You Must Know
 
 - Return only **one root element** from a component
 - Use `className` instead of `class`
@@ -72,7 +91,7 @@ function ButtonExample() {
 
 ---
 
-## 🔁 Convert HTML to JSX
+## Convert HTML to JSX
 
 Here’s how you convert a simple HTML snippet to JSX.
 
@@ -100,7 +119,7 @@ function HtmlToJsx() {
 
 ---
 
-## 🧠 JSX Behind the Scenes
+## JSX Behind the Scenes
 
 JSX is **syntactic sugar** for:
 
@@ -116,7 +135,7 @@ React.createElement('h1', null, 'Hello');
 
 ---
 
-## ✅ Recap
+## Recap
 
 - JSX makes React code clean and readable
 - You can embed JS expressions using `{}`
@@ -124,5 +143,5 @@ React.createElement('h1', null, 'Hello');
 
 ---
 
-> 🔍 Tip: Use an online converter like
+> **Tip**: Use an online converter like
 > [transform.tools](https://transform.tools/html-to-jsx) to convert HTML to JSX.

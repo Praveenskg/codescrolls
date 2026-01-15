@@ -44,10 +44,6 @@ const config: Config = {
       attributes: { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     },
     {
-      tagName: 'link',
-      attributes: { rel: 'canonical', href: 'https://codescrolls.site' },
-    },
-    {
       tagName: 'script',
       attributes: {
         async: 'true',
@@ -190,7 +186,7 @@ const config: Config = {
       '@docusaurus/plugin-pwa',
       {
         debug: false,
-        offlineModeActivationStrategies: ['appInstalled', 'standalone', 'queryString'],
+        offlineModeActivationStrategies: ['appInstalled'],
         pwaHead: [
           { tagName: 'link', rel: 'icon', href: '/img/logo-192.png' },
           { tagName: 'link', rel: 'manifest', href: '/manifest.json' },
