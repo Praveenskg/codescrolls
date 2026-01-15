@@ -105,7 +105,58 @@ jobs:
         run: pnpm run format:check
 
   # -------------------------------
-  # Job 4: Security Audit
+  # Job 4: Build Verification
+  # -------------------------------
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install Dependencies
+        env:
+          HUSKY: 0
+        run: pnpm install --frozen-lockfile --prefer-offline
+
+      - name: Build Docusaurus Documentation
+        env:
+          NODE_ENV: production
+          CI: true
+        run: |
+          echo "Building Docusaurus documentation..."
+          pnpm run build 2>&1 | tee build.log || {
+            echo "❌ Build failed!"
+            echo "Check the logs above for detailed error messages"
+            exit 1
+          }
+          echo "✅ Build completed successfully"
+
+      - name: Upload Build Artifacts
+        if: success()
+        uses: actions/upload-artifact@v6
+        with:
+          name: build-artifacts-${{ github.run_id }}
+          path: |
+            build/
+          retention-days: 7
+          if-no-files-found: ignore
+
+  # -------------------------------
+  # Job 5: Security Audit
   # -------------------------------
   security:
     name: Security Audit
@@ -136,12 +187,12 @@ jobs:
         run: pnpm audit --audit-level=moderate
 
   # -------------------------------
-  # Job 5: PR Comment Bot
+  # Job 6: PR Comment Bot
   # -------------------------------
   pr-comment:
     name: PR Status Comment
     runs-on: ubuntu-latest
-    needs: [typescript, eslint, prettier, security]
+    needs: [typescript, eslint, prettier, build, security]
     if: github.event_name == 'pull_request'
 
     permissions:
@@ -156,6 +207,7 @@ jobs:
               { name: "TypeScript", status: "${{ needs.typescript.result }}" },
               { name: "ESLint", status: "${{ needs.eslint.result }}" },
               { name: "Prettier", status: "${{ needs.prettier.result }}" },
+              { name: "Build", status: "${{ needs.build.result }}" },
               { name: "Security Audit", status: "${{ needs.security.result }}" },
             ];
 
