@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/logo.png',
   future: { v4: true, experimental_faster: true },
 
-  url: 'https://codescrolls.site',
+  url: 'https://www.codescrolls.site',
   baseUrl: '/',
   organizationName: 'Praveenskg',
   projectName: 'codescrolls',
@@ -60,10 +60,10 @@ const config: Config = {
         '@type': 'Organization',
         name: 'CodeScrolls',
         alternateName: 'CodeScrolls - Web Development Documentation',
-        url: 'https://codescrolls.site',
+        url: 'https://www.codescrolls.site',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://codescrolls.site/img/logo.png',
+          url: 'https://www.codescrolls.site/img/logo.png',
           width: 512,
           height: 512,
         },
@@ -78,7 +78,7 @@ const config: Config = {
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'Technical Support',
-          url: 'https://codescrolls.site/contact',
+          url: 'https://www.codescrolls.site/contact',
         },
         sameAs: [
           'https://github.com/Praveenskg',
@@ -96,7 +96,7 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'CodeScrolls',
-        url: 'https://codescrolls.site',
+        url: 'https://www.codescrolls.site',
         description:
           'Learn web development with clear documentation, tutorials, and guides for JavaScript, React, TypeScript, and more.',
         publisher: {
@@ -104,14 +104,14 @@ const config: Config = {
           name: 'CodeScrolls',
           logo: {
             '@type': 'ImageObject',
-            url: 'https://codescrolls.site/img/logo.png',
+            url: 'https://www.codescrolls.site/img/logo.png',
           },
         },
         potentialAction: {
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: 'https://codescrolls.site/search?q={search_term_string}',
+            urlTemplate: 'https://www.codescrolls.site/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
@@ -126,7 +126,7 @@ const config: Config = {
         '@context': 'https://schema.org',
         '@type': 'EducationalOrganization',
         name: 'CodeScrolls',
-        url: 'https://codescrolls.site',
+        url: 'https://www.codescrolls.site',
         description: 'Free educational resource for learning web development technologies.',
         educationalCredentialAwarded: 'Web Development Knowledge',
         hasOfferCatalog: {
@@ -308,9 +308,9 @@ const config: Config = {
         content:
           'Comprehensive web development documentation and tutorials for JavaScript, React, TypeScript, and modern web technologies. Learn to code with clear, organized guides.',
       },
-      { property: 'og:url', content: 'https://codescrolls.site' },
-      { property: 'og:image', content: 'https://codescrolls.site/img/cover.png' },
-      { property: 'og:image:secure_url', content: 'https://codescrolls.site/img/cover.png' },
+      { property: 'og:url', content: 'https://www.codescrolls.site' },
+      { property: 'og:image', content: 'https://www.codescrolls.site/img/cover.png' },
+      { property: 'og:image:secure_url', content: 'https://www.codescrolls.site/img/cover.png' },
       { property: 'og:image:type', content: 'image/png' },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
@@ -331,7 +331,7 @@ const config: Config = {
         content:
           'Comprehensive web development documentation for JavaScript, React, TypeScript. Free tutorials, guides, and resources for developers.',
       },
-      { name: 'twitter:image', content: 'https://codescrolls.site/img/cover.png' },
+      { name: 'twitter:image', content: 'https://www.codescrolls.site/img/cover.png' },
       { name: 'twitter:image:alt', content: 'CodeScrolls - Web Development Documentation' },
       { name: 'twitter:domain', content: 'codescrolls.site' },
 
