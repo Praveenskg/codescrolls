@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Point to your sitemap
-Sitemap: https://codescrolls.site/sitemap.xml
+Sitemap: https://www.codescrolls.site/sitemap.xml
