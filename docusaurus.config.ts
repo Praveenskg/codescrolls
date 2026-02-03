@@ -13,8 +13,8 @@ const config: Config = {
   organizationName: 'Praveenskg',
   projectName: 'codescrolls',
   trailingSlash: false,
-  onBrokenLinks: 'warn',
-
+  onBrokenLinks: 'throw',
+  onDuplicateRoutes: 'throw',
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -34,7 +34,7 @@ const config: Config = {
       headingIds: true,
     },
     hooks: {
-      onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownLinks: 'throw',
     },
   },
 

@@ -1,11 +1,11 @@
 ---
-id: hooks
+  id: hooks
 title: React Hooks
 description:
   Learn the basics of React Hooks like useState, useEffect, and useRef with
-  hands-on live examples.
-keywords:
-  [react hooks, useState, useEffect, useRef, functional components, react state]
+  hands - on live examples.
+  keywords:
+[react hooks, useState, useEffect, useRef, functional components, react state]
 sidebar_position: 1
 ---
 
@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 # 🔗 React Hooks
 
-React Hooks let you **use state and other React features** without writing a
+React Hooks let you ** use state and other React features ** without writing a
 class. They make functional components more powerful.
 
 ---
@@ -26,7 +26,7 @@ class. They make functional components more powerful.
 | `useState`       | Adds local state to functional components    |
 | `useEffect`      | Performs side effects in function components |
 | `useRef`         | Access DOM nodes or persist values           |
-| `useEffectEvent` | Stable event callback (React 19.2+)          |
+| `useEffectEvent` | Stable event callback(React 19.2 +)          |
 
 ---
 
@@ -48,7 +48,7 @@ function Counter() {
 
 ---
 
-## ⚙️ useEffect – For Side Effects
+## ⚙️ useEffect – For Side Effects { #useeffect }
 
 ```jsx live
 function Timer() {
@@ -129,18 +129,18 @@ function ThemeSwitcher() {
 
 ---
 
-## 💡 When to Use Hooks?
+## 💡 When to Use Hooks ?
 
-- Manage local state (`useState`)
-- Perform side effects like data fetching (`useEffect`)
-- Access or persist DOM references (`useRef`)
+- Manage local state(`useState`)
+  - Perform side effects like data fetching(`useEffect`)
+    - Access or persist DOM references(`useRef`)
 
 ---
 
 :::tip Rules of Hooks
 
-- ✅ Call hooks at the **top level only**
-- ✅ Use hooks only in **React functional components**
+- ✅ Call hooks at the ** top level only **
+  - ✅ Use hooks only in ** React functional components **
 
 :::
 
@@ -152,7 +152,7 @@ function ThemeSwitcher() {
 
 ### useActionState
 
-Manages the state of action-based functions (form actions, mutations).
+Manages the state of action - based functions(form actions, mutations).
 
 ```jsx
 import { useActionState } from 'react';
@@ -186,11 +186,11 @@ function UpdateNameForm() {
 }
 ```
 
-**Browser Support**: React 19+
+** Browser Support **: React 19 +
 
 ### useFormStatus
 
-Tracks the submission state of forms (used inside form actions).
+Tracks the submission state of forms(used inside form actions).
 
 ```jsx
 import { useFormStatus } from 'react-dom';
@@ -222,9 +222,10 @@ function ContactForm() {
 }
 ```
 
-**Note**: `useFormStatus` must be used inside a `<form>` element with an action.
+** Note **: `useFormStatus` must be used inside a `<form>` element with an
+action.
 
-**Browser Support**: React 19+
+** Browser Support **: React 19 +
 
 ### useOptimistic
 
@@ -266,7 +267,7 @@ function TodoList({ todos }) {
 }
 ```
 
-**Browser Support**: React 19+
+** Browser Support **: React 19 +
 
 ### use() Hook
 
@@ -300,12 +301,12 @@ function ThemedButton() {
 }
 ```
 
-**Browser Support**: React 19+
+** Browser Support **: React 19 +
 
-### useEffectEvent (React 19.2)
+### useEffectEvent(React 19.2)
 
 Provides a stable event callback that always accesses the latest props and state
-without causing re-renders.
+without causing re - renders.
 
 ```jsx
 import { useEffect, useEffectEvent } from 'react';
@@ -336,19 +337,19 @@ function ChatRoom({ roomId }) {
 }
 ```
 
-**Benefits:**
+** Benefits:**
 
-- ✅ Stable reference - doesn't change between renders
-- ✅ Always accesses latest props/state
-- ✅ Prevents unnecessary effect re-runs
-- ✅ Perfect for WebSocket handlers, analytics
+    - ✅ Stable reference - doesn't change between renders
+      - ✅ Always accesses latest props / state
+        - ✅ Prevents unnecessary effect re - runs
+          - ✅ Perfect for WebSocket handlers, analytics
 
-**Browser Support**: React 19.2+
+            ** Browser Support **: React 19.2 +
 
----
+              ---
 
 ## 📘 What's Next?
 
-- Dive into [Context API](./context-api)
-- Learn how to handle [Forms](../basics/forms)
-- Master effects with [useEffect](#useeffect)
+- Dive into[Context API](./ context - api)
+  - Learn how to handle[Forms](../basics/forms)
+    - Master effects with [useEffect](#useeffect)

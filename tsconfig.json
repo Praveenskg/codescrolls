@@ -1,7 +1,10 @@
 {
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types": ["@docusaurus/module-type-aliases", "@mdx-js/react"],
+    "skipLibCheck": true
   },
+  "include": ["src", "docs", "blog", "docusaurus.config.ts"],
   "exclude": [".docusaurus", "build"]
 }
