@@ -221,6 +221,7 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          tags: false,
         },
         gtag: { trackingID: 'G-6YM7WQM05W', anonymizeIP: true },
         blog: {
@@ -240,13 +241,20 @@ const config: Config = {
             xslt: true,
           },
           postsPerPage: 5,
+          tags: false,
         },
         theme: { customCss: './src/css/custom.css' },
         sitemap: {
           lastmod: 'date',
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
+          ignorePatterns: [
+            '/tags/**',
+            '/blog/tags/**',
+            '/blog/authors/**',
+            '/blog/archive',
+            '/docs/tags/**',
+          ],
           filename: 'sitemap.xml',
           createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
