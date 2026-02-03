@@ -295,7 +295,6 @@ const config: Config = {
       { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
       { name: 'apple-mobile-web-app-title', content: 'CodeScrolls' },
       { name: 'format-detection', content: 'telephone=no' },
-      { name: 'theme-color', content: '#3b82f6' },
       { name: 'msapplication-TileColor', content: '#3b82f6' },
       { name: 'msapplication-config', content: '/browserconfig.xml' },
 
@@ -309,8 +308,11 @@ const config: Config = {
           'Comprehensive web development documentation and tutorials for JavaScript, React, TypeScript, and modern web technologies. Learn to code with clear, organized guides.',
       },
       { property: 'og:url', content: 'https://www.codescrolls.site' },
-      { property: 'og:image', content: 'https://www.codescrolls.site/img/cover.png' },
-      { property: 'og:image:secure_url', content: 'https://www.codescrolls.site/img/cover.png' },
+      { property: 'og:image', content: 'https://www.codescrolls.site/img/opengraph.png' },
+      {
+        property: 'og:image:secure_url',
+        content: 'https://www.codescrolls.site/img/opengraph.png',
+      },
       { property: 'og:image:type', content: 'image/png' },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
@@ -331,7 +333,7 @@ const config: Config = {
         content:
           'Comprehensive web development documentation for JavaScript, React, TypeScript. Free tutorials, guides, and resources for developers.',
       },
-      { name: 'twitter:image', content: 'https://www.codescrolls.site/img/cover.png' },
+      { name: 'twitter:image', content: 'https://www.codescrolls.site/img/opengraph.png' },
       { name: 'twitter:image:alt', content: 'CodeScrolls - Web Development Documentation' },
       { name: 'twitter:domain', content: 'codescrolls.site' },
 
@@ -380,7 +382,6 @@ const config: Config = {
 
     navbar: {
       title: 'CodeScrolls',
-      logo: { alt: 'CodeScrolls Logo', src: 'img/logo.png' },
       items: [
         {
           type: 'docSidebar',
