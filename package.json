@@ -74,5 +74,11 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
     "*.{json,md,mdx,css,yml,yaml}": ["prettier --write"]
+  },
+  "pnpm": {
+    "overrides": {
+      "@isaacs/brace-expansion": ">=5.0.1",
+      "lodash-es": ">=4.17.23"
+    }
   }
 }
