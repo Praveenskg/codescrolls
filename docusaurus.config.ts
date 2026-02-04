@@ -230,7 +230,7 @@ const config: Config = {
           routeBasePath: 'blog',
           blogTitle: 'CodeScrolls Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
-          postsPerPage: 5,
+          postsPerPage: 10,
           showReadingTime: false,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
