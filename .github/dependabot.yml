@@ -22,21 +22,17 @@ updates:
         patterns:
           - 'eslint*'
           - '@typescript-eslint/*'
-        group-update-scope: 'auto'
       react:
         patterns:
           - 'react'
           - 'react-dom'
-        group-update-scope: 'auto'
       docusaurus:
         patterns:
           - '@docusaurus/*'
           - 'docusaurus'
-        group-update-scope: 'auto'
       other:
         patterns:
           - '*'
-        group-update-scope: 'auto'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
