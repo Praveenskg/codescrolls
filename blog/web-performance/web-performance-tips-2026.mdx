@@ -1,0 +1,782 @@
+---
+title: '25 Web Performance Tips to Make Your Website Lightning Fast'
+description:
+  'Boost your website speed with these proven web performance optimization tips.
+  Learn practical techniques to improve loading times, Core Web Vitals, and user
+  experience.'
+slug: web-performance-tips-2026
+tags: [performance, web-development, optimization, frontend, javascript]
+authors: praveen
+image: /img/blog/web-performance.png
+date: 2026-02-18
+keywords:
+  [
+    'web performance',
+    'website speed',
+    'core web vitals',
+    'performance optimization',
+    'page load time',
+    'web vitals',
+    'frontend performance',
+    'LCP',
+    'FID',
+    'CLS',
+  ]
+---
+
+Website performance directly impacts user experience, SEO rankings, and
+conversion rates. Studies show that a 1-second delay in page load time can
+reduce conversions by 7%. This guide covers 25 actionable tips to dramatically
+improve your website's performance in 2026.
+
+{/* truncate */}
+
+## Table of Contents
+
+1. [Image Optimization](#image-optimization)
+2. [JavaScript Performance](#javascript-performance)
+3. [CSS Optimization](#css-optimization)
+4. [Network & Caching](#network--caching)
+5. [Core Web Vitals](#core-web-vitals)
+6. [Monitoring & Measurement](#monitoring--measurement)
+
+---
+
+## Image Optimization
+
+### 1. Use Modern Image Formats
+
+Switch to WebP or AVIF formats for significantly smaller file sizes without
+quality loss.
+
+```html
+<!-- ✅ Modern approach with fallbacks -->
+<picture>
+  <source srcset="image.avif" type="image/avif" />
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Description" loading="lazy" />
+</picture>
+```
+
+**Impact:** 25-35% smaller file sizes compared to JPEG/PNG
+
+### 2. Implement Responsive Images
+
+Serve appropriately sized images for different screen sizes.
+
+```html
+<img
+  srcset="small.jpg 300w, medium.jpg 600w, large.jpg 1200w"
+  sizes="
+    (max-width: 600px) 300px,
+    (max-width: 1200px) 600px,
+    1200px
+  "
+  src="medium.jpg"
+  alt="Responsive image"
+/>
+```
+
+**Impact:** 50-70% reduction in image bandwidth on mobile devices
+
+### 3. Lazy Load Images
+
+Load images only when they're about to enter the viewport.
+
+```html
+<!-- Native lazy loading -->
+<img src="image.jpg" alt="Lazy loaded" loading="lazy" />
+
+<!-- For background images -->
+<style>
+  .lazy-bg {
+    background-image: none;
+  }
+  .lazy-bg.loaded {
+    background-image: url('background.jpg');
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('loaded');
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  document.querySelectorAll('.lazy-bg').forEach(el => observer.observe(el));
+</script>
+```
+
+**Impact:** Reduces initial page load by 40-60% on image-heavy pages
+
+### 4. Optimize Image Compression
+
+Use tools to compress images without visible quality loss.
+
+```bash
+# Using Sharp (Node.js)
+npm install sharp
+
+# optimize-images.js
+const sharp = require('sharp');
+
+sharp('input.jpg')
+  .resize(1200, 800, { fit: 'cover' })
+  .webp({ quality: 80 })
+  .toFile('output.webp');
+```
+
+**Tools:** TinyPNG, Squoosh, ImageOptim, Sharp
+
+**Impact:** 60-80% file size reduction
+
+### 5. Use SVG for Icons and Logos
+
+Vector graphics are resolution-independent and typically smaller than raster
+images.
+
+```jsx
+// Inline SVG for critical icons
+function Icon({ name }) {
+  return (
+    <svg className="icon" viewBox="0 0 24 24">
+      <use href={`/sprites.svg#${name}`} />
+    </svg>
+  );
+}
+
+// SVG sprite sheet for multiple icons
+// sprites.svg
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="home" viewBox="0 0 24 24">
+    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+  </symbol>
+  <symbol id="user" viewBox="0 0 24 24">
+    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+  </symbol>
+</svg>;
+```
+
+**Impact:** 50-90% smaller than PNG icons
+
+---
+
+## JavaScript Performance
+
+### 6. Code Splitting
+
+Split your JavaScript into smaller chunks loaded on demand.
+
+```jsx
+// React lazy loading
+import { lazy, Suspense } from 'react';
+
+const Dashboard = lazy(() => import('./Dashboard'));
+const Profile = lazy(() => import('./Profile'));
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Suspense>
+  );
+}
+
+// Webpack code splitting
+button.addEventListener('click', async () => {
+  const module = await import('./heavy-feature.js');
+  module.init();
+});
+```
+
+**Impact:** 40-60% faster initial page load
+
+### 7. Tree Shaking
+
+Remove unused code from your bundles.
+
+```javascript
+// ❌ Imports entire library
+import _ from 'lodash';
+
+// ✅ Import only what you need
+import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
+
+// ✅ Modern ES modules for tree shaking
+import { debounce } from 'lodash-es';
+```
+
+**Impact:** 30-50% smaller bundle size
+
+### 8. Defer Non-Critical JavaScript
+
+Load scripts that aren't immediately needed using defer or async.
+
+```html
+<!-- ✅ Defer script execution until DOM is ready -->
+<script src="analytics.js" defer></script>
+
+<!-- ✅ Async for independent scripts -->
+<script src="chat-widget.js" async></script>
+
+<!-- ❌ Blocks rendering -->
+<script src="heavy-script.js"></script>
+```
+
+**Impact:** 20-40% faster First Contentful Paint (FCP)
+
+### 9. Minimize Third-Party Scripts
+
+Audit and reduce external scripts that slow down your site.
+
+```javascript
+// ✅ Self-host critical third-party resources
+// Download and serve from your domain
+
+// ✅ Use facades for heavy embeds
+// Show a placeholder, load real embed on click
+function YouTubeEmbed({ videoId }) {
+  const [loaded, setLoaded] = useState(false);
+
+  if (!loaded) {
+    return (
+      <div
+        className="youtube-facade"
+        onClick={() => setLoaded(true)}
+        style={{
+          backgroundImage: `url(https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg)`,
+        }}
+      >
+        <button>Play Video</button>
+      </div>
+    );
+  }
+
+  return (
+    <iframe
+      src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+      allow="autoplay"
+    />
+  );
+}
+```
+
+**Impact:** 1-3 seconds faster load time per removed third-party script
+
+### 10. Use Web Workers for Heavy Computations
+
+Offload CPU-intensive tasks to background threads.
+
+```javascript
+// worker.js
+self.addEventListener('message', e => {
+  const result = performHeavyCalculation(e.data);
+  self.postMessage(result);
+});
+
+// main.js
+const worker = new Worker('worker.js');
+
+worker.postMessage(largeDataSet);
+
+worker.addEventListener('message', e => {
+  console.log('Result:', e.data);
+  updateUI(e.data);
+});
+```
+
+**Impact:** Maintains 60fps during heavy operations
+
+---
+
+## CSS Optimization
+
+### 11. Critical CSS Inlining
+
+Inline critical above-the-fold CSS directly in HTML.
+
+```html
+<head>
+  <style>
+    /* Critical CSS for above-the-fold content */
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .header {
+      background: #000;
+      color: #fff;
+      padding: 1rem;
+    }
+    .hero {
+      min-height: 100vh;
+    }
+  </style>
+
+  <!-- Load full CSS asynchronously -->
+  <link
+    rel="preload"
+    href="styles.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript><link rel="stylesheet" href="styles.css" /></noscript>
+</head>
+```
+
+**Tools:** Critical, Critters, PurgeCSS
+
+**Impact:** 30-50% faster First Contentful Paint
+
+### 12. Remove Unused CSS
+
+Eliminate CSS that's not being used on your pages.
+
+```bash
+# Using PurgeCSS
+npm install @fullhuman/postcss-purgecss
+
+# postcss.config.js
+module.exports = {
+  plugins: [
+    require('@fullhuman/postcss-purgecss')({
+      content: ['./src/**/*.html', './src/**/*.jsx'],
+      safelist: ['active', 'show', /^fade-/]
+    })
+  ]
+}
+```
+
+**Impact:** 40-90% reduction in CSS file size
+
+### 13. Use CSS Containment
+
+Help the browser optimize rendering by isolating component styles.
+
+```css
+.card {
+  /* Contains layout, style, and paint */
+  contain: layout style paint;
+}
+
+.independent-section {
+  /* Full containment */
+  contain: strict;
+}
+
+.dynamic-content {
+  /* Contains size for better layout performance */
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+```
+
+**Impact:** 20-40% faster rendering on complex pages
+
+### 14. Optimize Font Loading
+
+Prevent layout shifts and flash of invisible text (FOIT).
+
+```html
+<head>
+  <!-- Preconnect to font provider -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Modern font loading with display swap -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<style>
+  /* Font-face with fallback */
+  @font-face {
+    font-family: 'InterVariable';
+    src: url('/fonts/inter-var.woff2') format('woff2-variations');
+    font-weight: 100 900;
+    font-display: swap; /* Show fallback immediately */
+  }
+
+  body {
+    font-family:
+      'InterVariable',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      sans-serif;
+  }
+</style>
+```
+
+**Impact:** Eliminates FOIT, reduces CLS
+
+### 15. Use CSS Variables for Dynamic Styling
+
+Faster than inline styles and easier to maintain.
+
+```css
+:root {
+  --primary-color: #3b82f6;
+  --spacing-unit: 8px;
+  --border-radius: 4px;
+}
+
+.button {
+  background: var(--primary-color);
+  padding: calc(var(--spacing-unit) * 2);
+  border-radius: var(--border-radius);
+}
+
+/* Dynamic theming */
+[data-theme='dark'] {
+  --primary-color: #60a5fa;
+  --background: #1f2937;
+  --text: #f3f4f6;
+}
+```
+
+**Impact:** Better performance than JavaScript-based theming
+
+---
+
+## Network & Caching
+
+### 16. Enable HTTP/2 or HTTP/3
+
+Use modern protocols for multiplexing and faster transfers.
+
+```nginx
+# Nginx config
+server {
+  listen 443 ssl http2;
+  # http2 is automatically enabled
+
+  # Enable HTTP/3 (QUIC)
+  listen 443 quic reuseport;
+  add_header Alt-Svc 'h3=":443"; ma=86400';
+}
+```
+
+**Impact:** 20-30% faster page loads with multiple resources
+
+### 17. Implement Aggressive Caching
+
+Cache static assets with long expiry times.
+
+```nginx
+# Nginx caching strategy
+location ~* \.(jpg|jpeg|png|gif|ico|css|js|woff2)$ {
+  expires 1y;
+  add_header Cache-Control "public, immutable";
+}
+
+location ~* \.(html)$ {
+  expires -1;
+  add_header Cache-Control "no-cache, must-revalidate";
+}
+```
+
+```javascript
+// Service Worker caching
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open('v1').then(cache => {
+      return cache.addAll(['/', '/styles.css', '/app.js', '/logo.svg']);
+    }),
+  );
+});
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    }),
+  );
+});
+```
+
+**Impact:** Near-instant loads for returning visitors
+
+### 18. Use CDN for Static Assets
+
+Serve assets from servers closer to your users.
+
+```html
+<!-- CDN for libraries -->
+<script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+
+<!-- CDN for your static assets -->
+<img src="https://cdn.yoursite.com/images/hero.webp" alt="Hero" />
+```
+
+**Impact:** 40-70% faster asset delivery globally
+
+### 19. Resource Hints
+
+Help browsers prioritize and preload critical resources.
+
+```html
+<head>
+  <!-- DNS prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://api.example.com" />
+
+  <!-- Preconnect for critical third-party origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
+  <!-- Prefetch resources needed for next navigation -->
+  <link rel="prefetch" href="/dashboard.js" />
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/hero-image.webp" as="image" />
+  <link rel="preload" href="/app.css" as="style" />
+  <link
+    rel="preload"
+    href="/font.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+</head>
+```
+
+**Impact:** 200-500ms faster for preloaded critical resources
+
+### 20. Compress Text Assets
+
+Use Gzip or Brotli compression for text-based files.
+
+```nginx
+# Nginx Brotli compression
+brotli on;
+brotli_comp_level 6;
+brotli_types
+  text/plain
+  text/css
+  text/javascript
+  application/javascript
+  application/json
+  image/svg+xml;
+
+# Fallback Gzip
+gzip on;
+gzip_comp_level 6;
+gzip_types text/plain text/css application/json application/javascript text/xml;
+```
+
+**Impact:** 70-90% reduction in text file sizes
+
+---
+
+## Core Web Vitals
+
+### 21. Optimize Largest Contentful Paint (LCP)
+
+Ensure your largest content element loads quickly (< 2.5s).
+
+```javascript
+// Measure LCP
+new PerformanceObserver((list) => {
+  const entries = list.getEntries();
+  const lastEntry = entries[entries.length - 1];
+  console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
+}).observe({ entryTypes: ['largest-contentful-paint'] });
+
+// Optimization: Prioritize hero image
+<link rel="preload" as="image" href="/hero.webp">
+
+// Use priority hints
+<img src="hero.jpg" fetchpriority="high" alt="Hero">
+```
+
+**Target:** < 2.5 seconds
+
+### 22. Minimize Cumulative Layout Shift (CLS)
+
+Prevent unexpected layout shifts (score < 0.1).
+
+```html
+<!-- ✅ Always specify dimensions -->
+<img src="photo.jpg" width="800" height="600" alt="Photo" />
+
+<!-- ✅ Reserve space for dynamic content -->
+<style>
+  .ad-slot {
+    min-height: 250px; /* Reserve space */
+    background: #f0f0f0;
+  }
+
+  /* Aspect ratio boxes */
+  .video-container {
+    aspect-ratio: 16 / 9;
+  }
+</style>
+
+<!-- ✅ Use font-display: swap -->
+@font-face { font-family: 'CustomFont'; src: url('font.woff2'); font-display:
+swap; }
+```
+
+**Target:** < 0.1 score
+
+### 23. Improve Interaction to Next Paint (INP)
+
+Ensure fast response to user interactions (< 200ms).
+
+```javascript
+// Debounce expensive operations
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
+const handleSearch = debounce(query => {
+  // Expensive search operation
+  searchAPI(query);
+}, 300);
+
+// Use requestIdleCallback for non-urgent work
+requestIdleCallback(() => {
+  // Non-critical analytics
+  trackUserBehavior();
+});
+
+// Break up long tasks
+async function processLargeDataset(data) {
+  for (let i = 0; i < data.length; i++) {
+    processItem(data[i]);
+
+    // Yield to browser every 50 items
+    if (i % 50 === 0) {
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+  }
+}
+```
+
+**Target:** < 200ms for 75th percentile
+
+---
+
+## Monitoring & Measurement
+
+### 24. Use Real User Monitoring (RUM)
+
+Track actual user performance data.
+
+```javascript
+// Web Vitals library
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+function sendToAnalytics({ name, value, id }) {
+  // Send to your analytics endpoint
+  fetch('/analytics', {
+    method: 'POST',
+    body: JSON.stringify({ name, value, id }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+
+getCLS(sendToAnalytics);
+getFID(sendToAnalytics);
+getFCP(sendToAnalytics);
+getLCP(sendToAnalytics);
+getTTFB(sendToAnalytics);
+```
+
+**Tools:** Google Analytics, New Relic, Datadog
+
+### 25. Regular Performance Audits
+
+Continuously monitor and improve performance.
+
+```bash
+# Lighthouse CI in your build pipeline
+npm install -g @lhci/cli
+
+# lighthouserc.json
+{
+  "ci": {
+    "collect": {
+      "url": ["http://localhost:3000"],
+      "numberOfRuns": 3
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", {"minScore": 0.9}],
+        "first-contentful-paint": ["error", {"maxNumericValue": 2000}],
+        "largest-contentful-paint": ["error", {"maxNumericValue": 2500}]
+      }
+    }
+  }
+}
+
+# Run in CI/CD
+lhci autorun
+```
+
+**Tools:** Lighthouse, WebPageTest, Chrome DevTools, GTmetrix
+
+---
+
+## Performance Checklist
+
+Use this quick checklist to ensure you've covered the essentials:
+
+- [ ] Images are in modern formats (WebP/AVIF)
+- [ ] Images are lazy loaded
+- [ ] JavaScript is code-split and minified
+- [ ] Third-party scripts are minimized
+- [ ] CSS is optimized and unused styles removed
+- [ ] Critical CSS is inlined
+- [ ] Fonts are optimized with font-display: swap
+- [ ] Caching headers are set correctly
+- [ ] Assets are served from CDN
+- [ ] Brotli/Gzip compression is enabled
+- [ ] HTTP/2 or HTTP/3 is enabled
+- [ ] LCP is under 2.5 seconds
+- [ ] CLS is under 0.1
+- [ ] INP is under 200ms
+- [ ] Real user monitoring is implemented
+
+---
+
+## Conclusion
+
+Web performance is not a one-time task—it's an ongoing process. By implementing
+these 25 tips, you can significantly improve your website's loading speed, user
+experience, and search engine rankings.
+
+**Key Takeaways:**
+
+- **Start with images** - They're usually the biggest performance bottleneck
+- **Measure first** - Use tools to identify actual bottlenecks before optimizing
+- **Prioritize Core Web Vitals** - Google uses them for ranking
+- **Automate monitoring** - Set up alerts for performance regressions
+- **Think mobile-first** - Most users are on slower connections
+
+Remember: A 1-second improvement in load time can increase conversions by 7%.
+Every millisecond counts!
+
+### Performance Tools & Resources
+
+- [PageSpeed Insights](https://pagespeed.web.dev/)
+- [WebPageTest](https://www.webpagetest.org/)
+- [Chrome DevTools Performance Panel](https://developer.chrome.com/docs/devtools/performance/)
+- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
+- [Web Vitals Extension](https://chrome.google.com/webstore/detail/web-vitals/)
+- [Bundlephobia](https://bundlephobia.com/) - Check npm package sizes
+
+Happy optimizing! ⚡🚀

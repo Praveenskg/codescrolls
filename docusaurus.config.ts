@@ -231,6 +231,7 @@ const config: Config = {
           blogTitle: 'CodeScrolls Blog',
           blogDescription: 'Tech blogs and tutorials on JavaScript, Web Dev, and more!',
           postsPerPage: 10,
+          blogSidebarCount: 'ALL',
           showReadingTime: false,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
