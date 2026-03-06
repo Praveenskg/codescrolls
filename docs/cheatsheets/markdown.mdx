@@ -280,7 +280,7 @@ Term 1
 Term 2  
 : Definition 2
 
-> ⚠️ Note: Not supported in GitHub Markdown.
+> Note: Not supported in GitHub Markdown.
 
 ---
 
@@ -378,8 +378,6 @@ Here is a footnote reference[^1].
 
 **Output:**
 
-😄 🚀 🎉
-
 ---
 
 ## Advanced Code Blocks
@@ -431,22 +429,22 @@ echo "Hello, World!"
 ### Table with Multiple Lines
 
 ```markdown
-| Feature         | Description         | Status         |
-| --------------- | ------------------- | -------------- |
-| Basic Syntax    | Standard Markdown   | ✅ Complete    |
-| Advanced Tables | Multi-line cells    | ✅ Complete    |
-| Code Blocks     | Syntax highlighting | 🚧 In Progress |
-| Interactive     | JSX components      | ❌ Not Started |
+| Feature         | Description         | Status      |
+| --------------- | ------------------- | ----------- |
+| Basic Syntax    | Standard Markdown   | Complete    |
+| Advanced Tables | Multi-line cells    | Complete    |
+| Code Blocks     | Syntax highlighting | In Progress |
+| Interactive     | JSX components      | Not Started |
 ```
 
 **Output:**
 
-| Feature         | Description         | Status         |
-| --------------- | ------------------- | -------------- |
-| Basic Syntax    | Standard Markdown   | ✅ Complete    |
-| Advanced Tables | Multi-line cells    | ✅ Complete    |
-| Code Blocks     | Syntax highlighting | 🚧 In Progress |
-| Interactive     | JSX components      | ❌ Not Started |
+| Feature         | Description         | Status      |
+| --------------- | ------------------- | ----------- |
+| Basic Syntax    | Standard Markdown   | Complete    |
+| Advanced Tables | Multi-line cells    | Complete    |
+| Code Blocks     | Syntax highlighting | In Progress |
+| Interactive     | JSX components      | Not Started |
 
 ### Table with HTML
 
@@ -682,7 +680,7 @@ console.log('Code inside details');
 ### 1. Consistent Formatting
 
 ```markdown
-{/_ ✅ Good: Consistent spacing _/}
+{/_ Good: Consistent spacing _/}
 
 ## Section Title
 
@@ -692,7 +690,7 @@ Content here with proper spacing.
 
 More content.
 
-{/_ ❌ Bad: Inconsistent spacing _/}
+{/_ Bad: Inconsistent spacing _/}
 
 ##Section Title Content here with no spacing. ###Subsection More content.
 ```
@@ -700,11 +698,11 @@ More content.
 ### 2. Meaningful Link Text
 
 ```markdown
-{/_ ✅ Good: Descriptive link text _/}
+{/_ Good: Descriptive link text _/}
 
 [Read our comprehensive React guide](/docs/react)
 
-{/_ ❌ Bad: Generic link text _/}
+{/_ Bad: Generic link text _/}
 
 [Click here](/docs/react)
 ```
@@ -712,11 +710,11 @@ More content.
 ### 3. Alt Text for Images
 
 ```markdown
-{/_ ✅ Good: Descriptive alt text _/}
+{/_ Good: Descriptive alt text _/}
 
 ![React component lifecycle diagram](/img/react-lifecycle.png)
 
-{/_ ❌ Bad: Generic alt text _/}
+{/_ Bad: Generic alt text _/}
 
 ![Image](/img/react-lifecycle.png)
 ```
@@ -724,14 +722,14 @@ More content.
 ### 4. Code Block Language Specification
 
 ````markdown
-{/_ ✅ Good: Specify language _/}
+{/_ Good: Specify language _/}
 
 ```js
 const message = 'Hello, World!';
 ```
 ````
 
-{/* ❌ Bad: No language specified */}
+{/* Bad: No language specified */}
 
 ````markdown
 ```
@@ -745,14 +743,14 @@ const message = "Hello, World!";
 
 | Feature          | GitHub | GitLab | Docusaurus | CommonMark |
 | ---------------- | ------ | ------ | ---------- | ---------- |
-| Tables           | ✅     | ✅     | ✅         | ✅         |
-| Task Lists       | ✅     | ✅     | ✅         | ❌         |
-| Strikethrough    | ✅     | ✅     | ✅         | ❌         |
-| Autolinks        | ✅     | ✅     | ✅         | ✅         |
-| Footnotes        | ✅     | ✅     | ✅         | ❌         |
-| Definition Lists | ❌     | ✅     | ✅         | ❌         |
-| Math             | ❌     | ✅     | ✅         | ❌         |
-| Admonitions      | ❌     | ❌     | ✅         | ❌         |
+| Tables           | Yes    | Yes    | Yes        | No         |
+| Task Lists       | Yes    | Yes    | Yes        | No         |
+| Strikethrough    | Yes    | Yes    | Yes        | No         |
+| Autolinks        | Yes    | Yes    | Yes        | Yes        |
+| Footnotes        | Yes    | Yes    | Yes        | No         |
+| Definition Lists | No     | Yes    | No         | No         |
+| Math             | Yes    | Yes    | Yes        | No         |
+| Admonitions      | No     | No     | Yes        | No         |
 
 ---
 

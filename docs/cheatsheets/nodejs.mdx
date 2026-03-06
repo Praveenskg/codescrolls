@@ -8,7 +8,7 @@ keywords: [nodejs, cheatsheet, node, backend, javascript, reference]
 sidebar_position: 10
 ---
 
-# 🟢 Node.js Cheatsheet
+# Node.js Cheatsheet
 
 A quick reference guide for essential Node.js APIs, modules, patterns, and best
 practices.
@@ -20,7 +20,7 @@ server-side applications.
 
 :::
 
-## 📦 Modules System
+## Modules System
 
 ```js
 // CommonJS (default)
@@ -54,7 +54,7 @@ export default myFunction;
 
 ---
 
-## 📁 File System (fs)
+## File System (fs)
 
 ```js
 const fs = require('fs');
@@ -107,7 +107,7 @@ console.log(stats.size); // File size in bytes
 
 ---
 
-## 🛤️ Path Module
+## Path Module
 
 ```js
 const path = require('path');
@@ -147,7 +147,7 @@ path.normalize('/users//john/../jane/./file.txt');
 
 ---
 
-## 🌐 HTTP Module
+## HTTP Module
 
 ```js
 const http = require('http');
@@ -197,7 +197,7 @@ http.get('http://api.example.com', res => {
 
 ---
 
-## 📡 Events Module
+## Events Module
 
 ```js
 const EventEmitter = require('events');
@@ -237,7 +237,7 @@ myEmitter.off('hello', callback); // Remove listener
 
 ---
 
-## 🔄 Streams
+## Streams
 
 ```js
 const fs = require('fs');
@@ -282,7 +282,7 @@ fs.createReadStream('input.txt')
 
 ---
 
-## ⚡ Express.js Basics
+## Express.js Basics
 
 ```js
 const express = require('express');
@@ -353,7 +353,7 @@ app.listen(3000, () => {
 
 ---
 
-## 🗄️ Working with JSON
+## Working with JSON
 
 ```js
 // Read JSON file
@@ -414,7 +414,7 @@ process.nextTick(() => {
 
 ---
 
-## 🌍 Environment Variables
+## Environment Variables
 
 ```js
 // Access environment variables
@@ -439,7 +439,7 @@ process.env.MY_VAR = 'value';
 
 ---
 
-## 🔐 Crypto Module
+## Crypto Module
 
 ```js
 const crypto = require('crypto');
@@ -480,7 +480,7 @@ function decrypt(encrypted) {
 
 ---
 
-## 🔧 Process Module
+## Process Module
 
 ```js
 // Process information
@@ -521,7 +521,7 @@ console.log(process.memoryUsage());
 
 ---
 
-## 📝 Buffer
+## Buffer
 
 ```js
 // Create buffer
@@ -555,7 +555,7 @@ console.log(buf1.compare(buf2)); // -1 (buf1 comes before buf2)
 
 ---
 
-## 🌐 URL Module
+## URL Module
 
 ```js
 const url = require('url');
@@ -587,7 +587,7 @@ console.log(newUrl.toString());
 
 ---
 
-## 🔄 Child Processes
+## Child Processes
 
 ```js
 const { exec, spawn, fork } = require('child_process');
@@ -628,7 +628,7 @@ child.send({ hello: 'world' });
 
 ---
 
-## 📚 NPM Commands
+## NPM Commands
 
 ```bash
 # Initialize project
@@ -670,7 +670,7 @@ npm audit fix
 
 ---
 
-## 🎯 Async/Await
+## Async/Await
 
 ```js
 // Async function
@@ -718,42 +718,42 @@ async function getData() {
 
 ---
 
-## ✨ Best Practices
+## Best Practices
 
 ```js
-// ✅ DO: Use async/await instead of callbacks
+//  DO: Use async/await instead of callbacks
 async function readFile() {
   const data = await fs.promises.readFile('file.txt', 'utf8');
   return data;
 }
 
-// ✅ DO: Handle errors properly
+//  DO: Handle errors properly
 try {
   await riskyOperation();
 } catch (error) {
   console.error('Error:', error);
 }
 
-// ✅ DO: Use environment variables for configuration
+//  DO: Use environment variables for configuration
 const port = process.env.PORT || 3000;
 
-// ✅ DO: Use path.join for file paths
+//  DO: Use path.join for file paths
 const filePath = path.join(__dirname, 'data', 'file.txt');
 
-// ✅ DO: Close connections properly
+//  DO: Close connections properly
 server.close(() => {
   database.disconnect();
 });
 
-// ❌ DON'T: Use synchronous methods in production
-// ❌ DON'T: Ignore errors
-// ❌ DON'T: Hardcode sensitive data
-// ❌ DON'T: Use var (use const/let instead)
+//  DON'T: Use synchronous methods in production
+//  DON'T: Ignore errors
+//  DON'T: Hardcode sensitive data
+//  DON'T: Use var (use const/let instead)
 ```
 
 ---
 
-## 🚀 Resources
+## Resources
 
 - **Official Docs**: [nodejs.org/docs](https://nodejs.org/docs/)
 - **NPM Registry**: [npmjs.com](https://www.npmjs.com/)
@@ -761,4 +761,4 @@ server.close(() => {
 
 ---
 
-**Master Node.js for building scalable server-side applications!** 🟢
+**Master Node.js for building scalable server-side applications!**

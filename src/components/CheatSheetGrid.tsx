@@ -59,6 +59,13 @@ const cheatsheets = [
       'Essential Linux commands, file operations, permissions, processes, and shell scripting basics.',
   },
   {
+    title: 'Windows',
+    href: './cheatsheets/windows',
+    icon: '/img/skills/Windows.png',
+    description:
+      'PowerShell and CMD commands, system administration, registry operations, and Windows management essentials.',
+  },
+  {
     title: 'VS Code',
     href: './cheatsheets/vscode',
     icon: '/img/skills/VSCode.png',

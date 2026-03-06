@@ -1,0 +1,1297 @@
+---
+id: windows
+title: Windows Cheatsheet
+sidebar_label: Windows CheatSheet
+description: Essential Windows PowerShell and CMD commands for everyday use
+keywords: [windows, powershell, cmd, terminal, cheatsheet, commands]
+sidebar_position: 14
+---
+
+# Windows Cheatsheet
+
+A complete reference for Windows PowerShell and Command Prompt (CMD) commands —
+from file management to system administration, networking, and beyond.
+
+---
+
+## File & Directory Navigation
+
+### PowerShell
+
+```powershell
+# Show current directory
+Get-Location
+pwd                # alias
+
+# List contents
+Get-ChildItem
+ls                 # alias
+dir                # alias
+ls -Force          # include hidden
+ls -Recurse        # recursive
+
+# Change directory
+Set-Location C:\Path\To\Dir
+cd C:\Path\To\Dir  # alias
+cd ~               # home directory
+cd ..              # up one level
+
+# Create or remove directories
+New-Item -ItemType Directory -Path "NewFolder"
+mkdir NewFolder    # alias
+Remove-Item "Folder" -Recurse -Force
+rmdir Folder       # empty directory
+```
+
+### CMD
+
+```cmd
+# Show current directory
+cd
+
+# List contents
+dir
+dir /a             # include hidden
+dir /s             # recursive
+
+# Change directory
+cd C:\Path\To\Dir
+cd %USERPROFILE%   # home directory
+cd ..              # up one level
+
+# Create or remove directories
+mkdir NewFolder
+md NewFolder       # alias
+rmdir Folder       # empty directory
+rmdir /s /q Folder # non-empty, quiet
+```
+
+---
+
+## File Operations
+
+### PowerShell
+
+```powershell
+# Create a file
+New-Item -ItemType File -Path "file.txt"
+echo "content" > file.txt
+
+# View file contents
+Get-Content file.txt
+cat file.txt       # alias
+gc file.txt        # alias
+gc file.txt -Tail 10        # last 10 lines
+gc file.txt -Wait           # live updates
+
+# Copy, move, rename
+Copy-Item source.txt dest.txt
+cp source.txt dest.txt      # alias
+Move-Item file.txt newname.txt
+mv file.txt newname.txt     # alias
+Remove-Item file.txt
+rm file.txt                 # alias
+
+# Search inside files
+Select-String "text" file.txt
+sls "text" file.txt         # alias
+sls "text" -Path *.txt -Recurse
+```
+
+### CMD
+
+```cmd
+# Create a file
+echo content > file.txt
+type nul > file.txt  # empty file
+
+# View file contents
+type file.txt
+more file.txt        # paginated
+
+# Copy, move, rename
+copy source.txt dest.txt
+move file.txt newname.txt
+del file.txt         # delete
+
+# Search inside files
+findstr "text" file.txt
+findstr /s /i "text" *.txt  # recursive, case-insensitive
+```
+
+---
+
+## Editing Files
+
+### PowerShell
+
+```powershell
+notepad file.txt           # Notepad
+notepad++ file.txt         # Notepad++ (if installed)
+code file.txt              # VS Code (if installed)
+vim file.txt               # Vim (if installed)
+
+# Edit with PowerShell ISE
+ise file.ps1
+```
+
+### CMD
+
+```cmd
+notepad file.txt           # Notepad
+edit file.txt              # MS-DOS Editor (older systems)
+```
+
+---
+
+## Permissions & Security
+
+### PowerShell
+
+```powershell
+# View file permissions (ACL)
+Get-Acl file.txt | Format-List
+
+# Set permissions
+$acl = Get-Acl file.txt
+$rule = New-Object System.Security.AccessControl.FileSystemAccessRule("User","FullControl","Allow")
+$acl.SetAccessRule($rule)
+Set-Acl file.txt $acl
+
+# Take ownership
+takeown /f file.txt
+icacls file.txt /grant User:F
+
+# View execution policy
+Get-ExecutionPolicy
+
+# Set execution policy
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Set-ExecutionPolicy Bypass -Scope Process
+```
+
+### CMD
+
+```cmd
+# View/modify permissions
+icacls file.txt
+icacls file.txt /grant User:F  # full control
+icacls file.txt /deny User:R   # deny read
+
+# Take ownership
+takeown /f file.txt
+takeown /r /f folder           # recursive
+```
+
+---
+
+## Package Management
+
+### Windows Package Manager (winget)
+
+```powershell
+# Search for packages
+winget search appname
+
+# Install packages
+winget install Microsoft.PowerShell
+winget install Git.Git
+winget install Mozilla.Firefox
+
+# Update packages
+winget upgrade --all
+winget upgrade appname
+
+# Uninstall packages
+winget uninstall appname
+
+# List installed
+winget list
+```
+
+### Chocolatey
+
+```powershell
+# Install Chocolatey first
+# See https://chocolatey.org/install
+
+# Search for packages
+choco search packagename
+
+# Install packages
+choco install nodejs
+choco install vscode
+choco install -y git          # skip confirmation
+
+# Update packages
+choco upgrade all
+choco upgrade packagename
+
+# Uninstall packages
+choco uninstall packagename
+
+# List installed
+choco list --local
+```
+
+### PowerShell Modules
+
+```powershell
+# Find modules
+Find-Module -Name ModuleName
+
+# Install modules
+Install-Module -Name PSReadLine
+Install-Module -Name Posh-Git
+
+# Update modules
+Update-Module -Name ModuleName
+
+# List installed
+Get-Module -ListAvailable
+
+# Import module
+Import-Module ModuleName
+```
+
+---
+
+## System Info & Monitoring
+
+### PowerShell
+
+```powershell
+# System information
+Get-ComputerInfo
+systeminfo         # CMD equivalent
+
+# OS version
+[System.Environment]::OSVersion
+$PSVersionTable    # PowerShell version
+
+# Hardware info
+Get-WmiObject Win32_ComputerSystem
+Get-WmiObject Win32_Processor
+Get-WmiObject Win32_BIOS
+
+# Memory & disk
+Get-WmiObject Win32_PhysicalMemory | Measure-Object Capacity -Sum
+Get-PSDrive        # disk usage
+Get-Volume         # volume information
+
+# Uptime
+(Get-Date) - (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
+```
+
+### CMD
+
+```cmd
+# System information
+systeminfo
+systeminfo | findstr /C:"OS Name" /C:"OS Version"
+
+# Hostname
+hostname
+
+# Memory info
+wmic memorychip list brief
+wmic os get TotalVisibleMemorySize,FreePhysicalMemory
+
+# Disk info
+wmic logicaldisk get name,size,freespace
+```
+
+---
+
+## Process Management
+
+### PowerShell
+
+```powershell
+# Show running processes
+Get-Process
+ps                 # alias
+ps | Sort-Object CPU -Descending | Select-Object -First 10
+
+# Get specific process
+Get-Process -Name chrome
+ps chrome          # alias
+
+# Kill a process
+Stop-Process -Name notepad
+Stop-Process -Id 1234
+Stop-Process -Name chrome -Force
+kill 1234          # alias
+
+# Start a process
+Start-Process notepad
+Start-Process "C:\Program Files\app.exe" -ArgumentList "/arg"
+```
+
+### CMD
+
+```cmd
+# Show running processes
+tasklist
+tasklist /fi "imagename eq chrome.exe"
+
+# Kill a process
+taskkill /IM notepad.exe
+taskkill /PID 1234
+taskkill /F /IM chrome.exe      # force
+
+# Start a process
+start notepad.exe
+start "" "C:\Program Files\app.exe"
+```
+
+---
+
+## Networking
+
+### PowerShell
+
+```powershell
+# Network configuration
+Get-NetIPConfiguration
+ipconfig           # CMD equivalent
+ipconfig /all      # detailed info
+
+# Test connectivity
+Test-Connection google.com
+ping google.com    # CMD equivalent
+
+# DNS lookup
+Resolve-DnsName google.com
+nslookup google.com            # CMD equivalent
+
+# Network adapters
+Get-NetAdapter
+Get-NetAdapter | Select-Object Name, Status, LinkSpeed
+
+# Open ports & connections
+Get-NetTCPConnection
+Get-NetTCPConnection -State Listen
+netstat -ano       # CMD equivalent
+
+# Public IP
+(Invoke-WebRequest -Uri "https://api.ipify.org").Content
+curl ifconfig.me   # if curl installed
+
+# Flush DNS cache
+Clear-DnsClientCache
+ipconfig /flushdns # CMD equivalent
+
+# Network statistics
+Get-NetAdapterStatistics
+netstat -e         # CMD equivalent
+```
+
+### CMD
+
+```cmd
+# Network configuration
+ipconfig
+ipconfig /all
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns
+
+# Test connectivity
+ping google.com
+ping -t google.com  # continuous
+tracert google.com  # trace route
+
+# DNS lookup
+nslookup google.com
+
+# Open ports
+netstat -ano
+netstat -ano | findstr :80
+
+# ARP table
+arp -a
+
+# Network shares
+net share
+net use Z: \\server\share
+net use Z: /delete
+```
+
+---
+
+## Advanced File Operations
+
+### Text Processing (PowerShell)
+
+```powershell
+# Sort and filter
+Get-Content file.txt | Sort-Object
+Get-Content file.txt | Sort-Object -Descending
+Get-Content file.txt | Sort-Object -Unique
+
+# Select specific lines
+Get-Content file.txt | Select-Object -First 10
+Get-Content file.txt | Select-Object -Last 10
+
+# Filter and search
+Get-Content file.txt | Where-Object { $_ -match "pattern" }
+Get-Content file.txt | Where-Object { $_ -notmatch "pattern" }
+Get-Content file.txt | Where-Object { $_.Length -gt 50 }
+
+# String manipulation
+Get-Content file.txt | ForEach-Object { $_.Replace("old", "new") }
+Get-Content file.txt | ForEach-Object { $_.ToUpper() }
+Get-Content file.txt | ForEach-Object { $_.Trim() }
+
+# CSV operations
+Import-Csv data.csv
+Import-Csv data.csv | Where-Object { $_.Age -gt 25 }
+Import-Csv data.csv | Select-Object Name, Email | Export-Csv filtered.csv
+
+# JSON operations
+Get-Content data.json | ConvertFrom-Json
+$data = @{Name="John"; Age=30}
+$data | ConvertTo-Json | Out-File data.json
+```
+
+### Advanced Search (PowerShell)
+
+```powershell
+# Find files by criteria
+Get-ChildItem -Path C:\ -Filter *.log -Recurse -ErrorAction SilentlyContinue
+Get-ChildItem -Recurse | Where-Object { $_.Length -gt 100MB }
+Get-ChildItem -Recurse | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }
+
+# Find and execute
+Get-ChildItem -Filter *.tmp -Recurse | Remove-Item
+Get-ChildItem -Filter *.log -Recurse | ForEach-Object { $_.FullName }
+
+# Search registry
+Get-ItemProperty -Path "HKLM:\Software\*" -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.PSChildName -match "pattern" }
+```
+
+---
+
+## System Administration
+
+### User Management (PowerShell)
+
+```powershell
+# Local users
+Get-LocalUser
+New-LocalUser -Name "NewUser" -Password (ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force)
+Remove-LocalUser -Name "Username"
+Set-LocalUser -Name "Username" -Password (ConvertTo-SecureString "NewPassword" -AsPlainText -Force)
+
+# Local groups
+Get-LocalGroup
+New-LocalGroup -Name "NewGroup"
+Add-LocalGroupMember -Group "Administrators" -Member "Username"
+Remove-LocalGroupMember -Group "Administrators" -Member "Username"
+
+# Current user info
+whoami
+whoami /user       # SID
+whoami /priv       # privileges
+whoami /groups     # group membership
+```
+
+### User Management (CMD)
+
+```cmd
+# User operations
+net user           # list users
+net user Username  # user details
+net user NewUser P@ssw0rd /add
+net user Username /delete
+net user Username NewPassword
+
+# Group operations
+net localgroup
+net localgroup Administrators
+net localgroup Administrators Username /add
+net localgroup Administrators Username /delete
+```
+
+### Service Management (PowerShell)
+
+```powershell
+# List services
+Get-Service
+Get-Service | Where-Object { $_.Status -eq "Running" }
+Get-Service -Name "wuauserv"
+
+# Control services
+Start-Service -Name "servicename"
+Stop-Service -Name "servicename"
+Restart-Service -Name "servicename"
+
+# Set service startup type
+Set-Service -Name "servicename" -StartupType Automatic
+Set-Service -Name "servicename" -StartupType Manual
+Set-Service -Name "servicename" -StartupType Disabled
+
+# Service status
+Get-Service -Name "servicename" | Select-Object Name, Status, StartType
+```
+
+### Service Management (CMD)
+
+```cmd
+# List services
+sc query
+net start          # running services
+
+# Control services
+sc start servicename
+sc stop servicename
+net start servicename
+net stop servicename
+
+# Service configuration
+sc config servicename start=auto
+sc config servicename start=demand
+sc config servicename start=disabled
+sc query servicename
+```
+
+### Disk Management (PowerShell)
+
+```powershell
+# Disk information
+Get-Disk
+Get-Volume
+Get-Partition
+
+# Disk usage
+Get-PSDrive -PSProvider FileSystem
+Get-ChildItem C:\ -Recurse -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum
+
+# Format disk
+Format-Volume -DriveLetter D -FileSystem NTFS -NewFileSystemLabel "Data"
+
+# Check disk
+Repair-Volume -DriveLetter C -Scan
+Repair-Volume -DriveLetter C -OfflineScanAndFix
+```
+
+### Disk Management (CMD)
+
+```cmd
+# Disk information
+wmic logicaldisk get name,size,freespace
+diskpart           # interactive disk management
+
+# Check disk
+chkdsk C:
+chkdsk C: /f       # fix errors
+chkdsk C: /r       # locate bad sectors
+
+# Disk cleanup
+cleanmgr           # GUI
+cleanmgr /d C:     # specific drive
+```
+
+---
+
+## Registry Operations
+
+### PowerShell
+
+```powershell
+# Navigate registry (like filesystem)
+Set-Location HKCU:\Software
+cd HKLM:\Software
+
+# Read registry values
+Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion"
+Get-ItemPropertyValue -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "ShellState"
+
+# Create registry key
+New-Item -Path "HKCU:\Software\MyApp"
+New-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting" -Value "Value" -PropertyType String
+
+# Modify registry value
+Set-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting" -Value "NewValue"
+
+# Delete registry key/value
+Remove-Item -Path "HKCU:\Software\MyApp" -Recurse
+Remove-ItemProperty -Path "HKCU:\Software\MyApp" -Name "Setting"
+
+# Search registry
+Get-ChildItem -Path HKCU:\Software -Recurse | Where-Object { $_.PSChildName -match "pattern" }
+```
+
+### CMD
+
+```cmd
+# Query registry
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion"
+reg query "HKLM\Software" /s       # recursive
+
+# Add registry value
+reg add "HKCU\Software\MyApp" /v Setting /t REG_SZ /d "Value"
+reg add "HKCU\Software\MyApp" /v Number /t REG_DWORD /d 123
+
+# Modify registry value
+reg add "HKCU\Software\MyApp" /v Setting /t REG_SZ /d "NewValue" /f
+
+# Delete registry key/value
+reg delete "HKCU\Software\MyApp" /f
+reg delete "HKCU\Software\MyApp" /v Setting /f
+
+# Export/Import registry
+reg export "HKCU\Software\MyApp" backup.reg
+reg import backup.reg
+```
+
+---
+
+## PowerShell Scripting
+
+### Basic Scripting
+
+```powershell
+# Variables
+$name = "John"
+$age = 25
+Write-Output "Hello $name, you are $age years old"
+Write-Host "Hello $name" -ForegroundColor Green
+
+# Arrays
+$array = @(1, 2, 3, 4, 5)
+$array[0]              # first element
+$array[-1]             # last element
+$array.Count           # length
+
+# Hashtables (dictionaries)
+$hash = @{
+    Name = "John"
+    Age = 30
+    City = "New York"
+}
+$hash["Name"]
+$hash.Age
+
+# Conditional statements
+if ($age -gt 18) {
+    Write-Output "Adult"
+} elseif ($age -eq 18) {
+    Write-Output "Just turned adult"
+} else {
+    Write-Output "Minor"
+}
+
+# Comparison operators
+# -eq, -ne, -gt, -ge, -lt, -le, -like, -notlike, -match, -notmatch
+
+# Loops
+foreach ($item in $array) {
+    Write-Output "Item: $item"
+}
+
+for ($i = 0; $i -lt 5; $i++) {
+    Write-Output "Number: $i"
+}
+
+while ($i -lt 10) {
+    Write-Output $i
+    $i++
+}
+
+# Functions
+function Greet {
+    param(
+        [string]$Name,
+        [int]$Age = 0
+    )
+    Write-Output "Hello $Name, you are $Age years old"
+}
+Greet -Name "John" -Age 30
+```
+
+### Advanced Scripting
+
+```powershell
+# Error handling
+try {
+    Get-Content "nonexistent.txt" -ErrorAction Stop
+} catch {
+    Write-Error "Error: $_"
+} finally {
+    Write-Output "Cleanup"
+}
+
+# Parameter validation
+function ValidateAge {
+    param(
+        [Parameter(Mandatory=$true)]
+        [ValidateRange(0, 120)]
+        [int]$Age
+    )
+    Write-Output "Age is $Age"
+}
+
+# Pipeline and filters
+Get-Process | Where-Object { $_.CPU -gt 10 } | Sort-Object CPU -Descending | Select-Object -First 5
+
+# Custom objects
+$obj = [PSCustomObject]@{
+    Name = "John"
+    Age = 30
+    City = "New York"
+}
+
+# File monitoring
+$watcher = New-Object System.IO.FileSystemWatcher
+$watcher.Path = "C:\Temp"
+$watcher.Filter = "*.txt"
+$watcher.EnableRaisingEvents = $true
+Register-ObjectEvent $watcher "Created" -Action {
+    Write-Host "File created: $($Event.SourceEventArgs.Name)"
+}
+
+# Scheduled tasks
+$action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "-File C:\script.ps1"
+$trigger = New-ScheduledTaskTrigger -Daily -At 9am
+Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "MyTask"
+```
+
+---
+
+## Windows Shortcuts
+
+### File Explorer
+
+```
+Ctrl + N               # New window
+Ctrl + W               # Close window
+Ctrl + Shift + N       # New folder
+F2                     # Rename
+Delete                 # Move to Recycle Bin
+Shift + Delete         # Permanently delete
+Ctrl + X               # Cut
+Ctrl + C               # Copy
+Ctrl + V               # Paste
+Ctrl + Z               # Undo
+Alt + Up               # Go up one level
+Alt + Left/Right       # Back/Forward
+Ctrl + E               # Focus search box
+Alt + D                # Focus address bar
+F11                    # Maximize/restore
+```
+
+### Desktop & Window Management
+
+```
+Win + D                # Show/hide desktop
+Win + E                # Open File Explorer
+Win + L                # Lock computer
+Win + R                # Run dialog
+Win + X                # Quick Link menu
+Win + I                # Settings
+Win + Tab              # Task View
+Alt + Tab              # Switch windows
+Alt + F4               # Close window
+Win + Left/Right       # Snap window
+Win + Up               # Maximize
+Win + Down             # Minimize/restore
+Win + Shift + S        # Screenshot tool
+Win + V                # Clipboard history
+Win + .                # Emoji picker
+```
+
+### Command Line
+
+```
+Tab                    # Auto-complete
+Ctrl + C               # Cancel command
+Ctrl + A               # Select all
+Ctrl + F               # Find
+F7                     # Command history (CMD)
+Up/Down arrows         # Previous/next command
+Ctrl + R               # Search command history (PowerShell)
+```
+
+---
+
+## Performance Monitoring
+
+### PowerShell
+
+```powershell
+# CPU and memory usage
+Get-Counter '\Processor(_Total)\% Processor Time'
+Get-Counter '\Memory\Available MBytes'
+
+# Process monitoring
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 Name, CPU, PM
+Get-Process | Sort-Object WorkingSet -Descending | Select-Object -First 10 Name, @{Name="Memory(MB)";Expression={$_.WorkingSet / 1MB}}
+
+# Disk performance
+Get-Counter '\PhysicalDisk(*)\% Disk Time'
+Get-Counter '\PhysicalDisk(*)\Disk Bytes/sec'
+
+# Network monitoring
+Get-Counter '\Network Interface(*)\Bytes Total/sec'
+Get-NetAdapterStatistics
+
+# System logs
+Get-EventLog -LogName System -Newest 10
+Get-EventLog -LogName Application -EntryType Error -Newest 20
+Get-WinEvent -LogName System -MaxEvents 10
+```
+
+### Task Manager & Resource Monitor
+
+```cmd
+# Open Task Manager
+taskmgr
+
+# Open Resource Monitor
+resmon
+
+# Performance Monitor
+perfmon
+
+# Event Viewer
+eventvwr
+```
+
+---
+
+## Advanced Networking
+
+### Network Troubleshooting (PowerShell)
+
+```powershell
+# Connectivity tests
+Test-Connection google.com -Count 4
+Test-NetConnection google.com -Port 443
+Test-NetConnection -ComputerName server -CommonTCPPort RDP
+
+# Trace route
+Test-NetConnection google.com -TraceRoute
+
+# DNS testing
+Resolve-DnsName google.com
+Resolve-DnsName google.com -Type MX
+Resolve-DnsName google.com -Server 8.8.8.8
+
+# Port scanning
+Test-NetConnection -ComputerName server -Port 443
+1..1024 | ForEach-Object { Test-NetConnection -ComputerName server -Port $_ -WarningAction SilentlyContinue } | Where-Object { $_.TcpTestSucceeded }
+
+# Network shares
+Get-SmbShare
+New-SmbShare -Name "SharedFolder" -Path "C:\Share" -FullAccess "Everyone"
+Remove-SmbShare -Name "SharedFolder" -Force
+```
+
+### Firewall Management (PowerShell)
+
+```powershell
+# Firewall status
+Get-NetFirewallProfile
+
+# Enable/disable firewall
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+# Firewall rules
+Get-NetFirewallRule | Where-Object { $_.Enabled -eq $true }
+Get-NetFirewallRule -DisplayName "Rule Name"
+
+# Add firewall rule
+New-NetFirewallRule -DisplayName "Allow Port 8080" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+New-NetFirewallRule -DisplayName "Block App" -Direction Outbound -Program "C:\app.exe" -Action Block
+
+# Remove firewall rule
+Remove-NetFirewallRule -DisplayName "Rule Name"
+
+# Enable remote desktop
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+```
+
+### Firewall Management (CMD)
+
+```cmd
+# Firewall status
+netsh advfirewall show allprofiles
+
+# Enable/disable firewall
+netsh advfirewall set allprofiles state on
+netsh advfirewall set allprofiles state off
+
+# Add firewall rule
+netsh advfirewall firewall add rule name="Allow Port 8080" dir=in action=allow protocol=TCP localport=8080
+netsh advfirewall firewall add rule name="Block App" dir=out action=block program="C:\app.exe"
+
+# Remove firewall rule
+netsh advfirewall firewall delete rule name="Rule Name"
+
+# Show firewall rules
+netsh advfirewall firewall show rule name=all
+```
+
+---
+
+## Advanced Commands
+
+### Compression & Archives (PowerShell)
+
+```powershell
+# ZIP operations
+Compress-Archive -Path "C:\Files\*" -DestinationPath "archive.zip"
+Compress-Archive -Path "C:\Files\*" -DestinationPath "archive.zip" -CompressionLevel Optimal
+Expand-Archive -Path "archive.zip" -DestinationPath "C:\Extracted"
+Expand-Archive -Path "archive.zip" -DestinationPath "C:\Extracted" -Force
+
+# 7-Zip (if installed)
+7z a archive.7z files\       # create
+7z x archive.7z              # extract
+7z l archive.7z              # list contents
+```
+
+### Environment Variables
+
+```powershell
+# View environment variables
+Get-ChildItem Env:
+$env:PATH
+[Environment]::GetEnvironmentVariable("PATH", "Machine")
+
+# Set environment variable (session)
+$env:MY_VAR = "value"
+
+# Set environment variable (permanent)
+[Environment]::SetEnvironmentVariable("MY_VAR", "value", "User")
+[Environment]::SetEnvironmentVariable("MY_VAR", "value", "Machine")
+
+# Add to PATH
+$env:PATH += ";C:\New\Path"
+[Environment]::SetEnvironmentVariable("PATH", $env:PATH + ";C:\New\Path", "User")
+
+# Remove environment variable
+[Environment]::SetEnvironmentVariable("MY_VAR", $null, "User")
+```
+
+### CMD Environment Variables
+
+```cmd
+# View environment variables
+set
+echo %PATH%
+echo %USERPROFILE%
+
+# Set environment variable (session)
+set MY_VAR=value
+
+# Set environment variable (permanent)
+setx MY_VAR "value"
+setx PATH "%PATH%;C:\New\Path"
+
+# Common variables
+%USERPROFILE%      # C:\Users\Username
+%APPDATA%          # C:\Users\Username\AppData\Roaming
+%LOCALAPPDATA%     # C:\Users\Username\AppData\Local
+%TEMP%             # Temp directory
+%PROGRAMFILES%     # C:\Program Files
+%SYSTEMROOT%       # C:\Windows
+```
+
+### Aliases & Profile (PowerShell)
+
+```powershell
+# Create aliases
+Set-Alias -Name ll -Value Get-ChildItem
+Set-Alias -Name grep -Value Select-String
+New-Alias -Name np -Value notepad
+
+# View aliases
+Get-Alias
+Get-Alias -Name ll
+
+# PowerShell profile
+notepad $PROFILE   # edit profile
+
+# Example profile.ps1
+function ll { Get-ChildItem -Force }
+function .. { Set-Location .. }
+function ... { Set-Location ..\.. }
+function grep { param($pattern, $path) Select-String -Pattern $pattern -Path $path }
+function touch { param($file) New-Item -ItemType File -Path $file -Force }
+function which { param($cmd) Get-Command $cmd | Select-Object -ExpandProperty Definition }
+
+# Custom prompt
+function prompt {
+    $location = Get-Location
+    "PS [$location]> "
+}
+```
+
+### Background Jobs (PowerShell)
+
+```powershell
+# Start background job
+Start-Job -ScriptBlock { Get-Process }
+Start-Job -FilePath "C:\script.ps1"
+
+# List jobs
+Get-Job
+
+# Get job results
+Receive-Job -Id 1
+Receive-Job -Name "Job1" -Keep  # keep results
+
+# Wait for job
+Wait-Job -Id 1
+
+# Remove job
+Remove-Job -Id 1
+
+# Stop job
+Stop-Job -Id 1
+```
+
+---
+
+## Windows Subsystem for Linux (WSL)
+
+### WSL Commands
+
+```powershell
+# List available distributions
+wsl --list --online
+
+# Install WSL
+wsl --install
+wsl --install -d Ubuntu
+
+# List installed distributions
+wsl --list --verbose
+wsl -l -v
+
+# Set default distribution
+wsl --set-default Ubuntu
+
+# Run command in WSL
+wsl ls -la
+wsl -d Ubuntu pwd
+
+# Enter WSL
+wsl
+wsl -d Ubuntu
+
+# Shutdown WSL
+wsl --shutdown
+wsl --terminate Ubuntu
+
+# Update WSL
+wsl --update
+
+# Export/Import distribution
+wsl --export Ubuntu ubuntu-backup.tar
+wsl --import Ubuntu C:\WSL\Ubuntu ubuntu-backup.tar
+```
+
+---
+
+## Remote Management
+
+### PowerShell Remoting
+
+```powershell
+# Enable PS Remoting
+Enable-PSRemoting -Force
+
+# Connect to remote computer
+Enter-PSSession -ComputerName Server01
+Enter-PSSession -ComputerName Server01 -Credential (Get-Credential)
+
+# Run command on remote computer
+Invoke-Command -ComputerName Server01 -ScriptBlock { Get-Process }
+Invoke-Command -ComputerName Server01,Server02 -ScriptBlock { Get-Service }
+
+# Copy files to remote
+Copy-Item -Path "C:\file.txt" -Destination "C:\destination\" -ToSession $session
+
+# Persistent sessions
+$session = New-PSSession -ComputerName Server01
+Invoke-Command -Session $session -ScriptBlock { Get-Process }
+Remove-PSSession $session
+```
+
+### Remote Desktop
+
+```powershell
+# Enable RDP via PowerShell
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+# Connect via RDP
+mstsc /v:server.domain.com
+mstsc /v:192.168.1.100 /admin  # console session
+```
+
+### CMD Remote Management
+
+```cmd
+# Remote command execution
+psexec \\server -u user -p password cmd
+psexec \\server -s cmd          # as SYSTEM
+
+# Remote desktop
+mstsc /v:server.domain.com
+
+# Remote shutdown/restart
+shutdown /m \\server /r /t 0
+shutdown /m \\server /s /t 60 /c "Maintenance"
+```
+
+---
+
+## Windows Admin Tools
+
+### Common Administrative Commands
+
+```powershell
+# Computer Management
+compmgmt.msc
+
+# Device Manager
+devmgmt.msc
+
+# Disk Management
+diskmgmt.msc
+
+# Event Viewer
+eventvwr.msc
+
+# Local Security Policy
+secpol.msc
+
+# Services
+services.msc
+
+# System Configuration
+msconfig
+
+# System Information
+msinfo32
+
+# Registry Editor
+regedit
+
+# Group Policy Editor (Pro/Enterprise)
+gpedit.msc
+
+# Certificate Manager
+certmgr.msc
+
+# Task Scheduler
+taskschd.msc
+
+# Windows Firewall with Advanced Security
+wf.msc
+
+# Performance Monitor
+perfmon.msc
+
+# Disk Cleanup
+cleanmgr
+
+# Disk Defragmenter
+dfrgui
+```
+
+---
+
+## System Maintenance
+
+### Windows Update (PowerShell)
+
+```powershell
+# Check for updates (requires PSWindowsUpdate module)
+Install-Module PSWindowsUpdate -Force
+Get-WindowsUpdate
+Install-WindowsUpdate -AcceptAll -AutoReboot
+
+# View update history
+Get-HotFix
+Get-HotFix | Sort-Object InstalledOn -Descending
+```
+
+### System File Checker
+
+```cmd
+# Scan system files
+sfc /scannow
+
+# Scan but don't repair
+sfc /verifyonly
+
+# Scan offline Windows
+sfc /scannow /offbootdir=C:\ /offwindir=C:\Windows
+```
+
+### DISM (Deployment Image Servicing)
+
+```cmd
+# Check image health
+DISM /Online /Cleanup-Image /CheckHealth
+
+# Scan image
+DISM /Online /Cleanup-Image /ScanHealth
+
+# Restore image
+DISM /Online /Cleanup-Image /RestoreHealth
+
+# Cleanup component store
+DISM /Online /Cleanup-Image /StartComponentCleanup
+```
+
+---
+
+## Resources
+
+- [Microsoft PowerShell Documentation](https://docs.microsoft.com/powershell/) –
+  Official PowerShell docs
+- [SS64 Windows CMD](https://ss64.com/nt/) – Command-line reference
+- [PowerShell Gallery](https://www.powershellgallery.com/) – PowerShell modules
+- [Windows Sysinternals](https://docs.microsoft.com/sysinternals/) – Advanced
+  system utilities
+- [Chocolatey](https://chocolatey.org/) – Package manager for Windows
+- [winget](https://github.com/microsoft/winget-cli) – Windows Package Manager
+- [PowerShell GitHub](https://github.com/PowerShell/PowerShell) – PowerShell
+  Core
+
+---
+
+:::tip Pro Tip
+
+Use `Get-Help command-name` to get detailed help for any PowerShell cmdlet. Add
+`-Examples` to see usage examples.
+
+```powershell
+Get-Help Get-Process -Examples
+Get-Help Get-Service -Detailed
+Get-Help about_*  # list all conceptual help topics
+```
+
+:::
+
+:::note Advanced Users
+
+For system administrators, consider learning about:
+
+- **Windows Admin Center** for web-based server management
+- **Active Directory** for domain management
+- **Group Policy** for centralized configuration
+- **PowerShell DSC** (Desired State Configuration) for infrastructure as code
+- **Azure PowerShell** for cloud resource management
+- **WSL2** for Linux development on Windows
+
+:::

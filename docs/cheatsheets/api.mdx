@@ -22,7 +22,7 @@ sidebar_position: 8
 
 import LiveCodeBlock from '@theme/LiveCodeBlock';
 
-# 🔗 API/REST Cheatsheet
+# API/REST Cheatsheet
 
 A comprehensive quick reference guide for REST APIs, HTTP protocols,
 authentication, and API design best practices.
@@ -35,7 +35,7 @@ design, consume, and test RESTful APIs.
 
 :::
 
-## 🌐 HTTP Methods
+## HTTP Methods
 
 ### **Core HTTP Methods**
 
@@ -53,17 +53,17 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 
 | Method  | Safe | Idempotent | Cacheable |
 | ------- | ---- | ---------- | --------- |
-| GET     | ✅   | ✅         | ✅        |
-| HEAD    | ✅   | ✅         | ✅        |
-| OPTIONS | ✅   | ✅         | ❌        |
-| PUT     | ❌   | ✅         | ❌        |
-| DELETE  | ❌   | ✅         | ❌        |
-| POST    | ❌   | ❌         | ❌        |
-| PATCH   | ❌   | ❌         | ❌        |
+| GET     | Yes  | Yes        | Yes       |
+| HEAD    | Yes  | Yes        | Yes       |
+| OPTIONS | Yes  | Yes        | No        |
+| PUT     | No   | Yes        | No        |
+| DELETE  | No   | Yes        | No        |
+| POST    | No   | No         | No        |
+| PATCH   | No   | No         | No        |
 
 ---
 
-## 📊 HTTP Status Codes
+## HTTP Status Codes
 
 ### **1xx Informational**
 
@@ -153,7 +153,7 @@ OPTIONS /users          # Get allowed methods (safe, idempotent)
 
 ---
 
-## 🔐 Authentication Methods
+## Authentication Methods
 
 ### **API Key Authentication**
 
@@ -227,7 +227,7 @@ Authorization: Digest username="user", realm="api@example.com", nonce="abc123", 
 
 ---
 
-## 📝 API Design Patterns
+## API Design Patterns
 
 ### **RESTful Resource Naming**
 
@@ -329,7 +329,7 @@ Content-Type: application/json
 
 ---
 
-## 📦 Request/Response Formats
+## Request/Response Formats
 
 ### **JSON API Response Structure**
 
@@ -433,7 +433,7 @@ Content-Type: application/json
 
 ---
 
-## 🧪 API Testing Tools
+## API Testing Tools
 
 ### **cURL Commands**
 
@@ -534,7 +534,7 @@ http --download GET https://api.example.com/files/document.pdf
 
 ---
 
-## ⚡ Performance & Caching
+## Performance & Caching
 
 ### **HTTP Caching Headers**
 
@@ -585,7 +585,7 @@ Vary: Accept-Encoding
 
 ---
 
-## 🛡️ Security Best Practices
+## Security Best Practices
 
 ### **HTTPS Always**
 
@@ -638,8 +638,8 @@ Access-Control-Request-Headers: X-Custom-Header
 
 ```http
 # Never expose API keys in URLs
-❌ GET /api/data?api_key=secret123
-✅ GET /api/data
+ GET /api/data?api_key=secret123
+ GET /api/data
    Authorization: Bearer secret123
 
 # Use environment variables
@@ -654,7 +654,7 @@ EXPIRY_DATE=2024-12-31
 
 ---
 
-## 🔄 API Versioning
+## API Versioning
 
 ### **URL Versioning**
 
@@ -701,7 +701,7 @@ Content-Type: application/vnd.company.api.v1+json
 
 ---
 
-## 📚 Advanced API Patterns
+## Advanced API Patterns
 
 ### **GraphQL vs REST**
 
@@ -785,31 +785,31 @@ Content-Type: multipart/form-data
 
 ---
 
-## 🧪 Testing Strategies
+## Testing Strategies
 
 ### **API Testing Checklist**
 
 ```bash
 # Status Code Testing
-✓ 200 OK for successful GET
-✓ 201 Created for successful POST
-✓ 204 No Content for successful DELETE
-✓ 400 Bad Request for invalid input
-✓ 401 Unauthorized for missing auth
-✓ 403 Forbidden for insufficient permissions
-✓ 404 Not Found for missing resources
-✓ 422 Unprocessable Entity for validation errors
-✓ 429 Too Many Requests for rate limiting
-✓ 500 Internal Server Error for server issues
+ 200 OK for successful GET
+ 201 Created for successful POST
+ 204 No Content for successful DELETE
+ 400 Bad Request for invalid input
+ 401 Unauthorized for missing auth
+ 403 Forbidden for insufficient permissions
+ 404 Not Found for missing resources
+ 422 Unprocessable Entity for validation errors
+ 429 Too Many Requests for rate limiting
+ 500 Internal Server Error for server issues
 
 # Response Format Testing
-✓ JSON structure matches specification
-✓ Required fields are present
-✓ Data types are correct
-✓ Pagination works correctly
-✓ Error responses follow consistent format
-✓ CORS headers are set correctly
-✓ Content-Type headers are correct
+ JSON structure matches specification
+ Required fields are present
+ Data types are correct
+ Pagination works correctly
+ Error responses follow consistent format
+ CORS headers are set correctly
+ Content-Type headers are correct
 ```
 
 ### **Load Testing Commands**
@@ -849,30 +849,30 @@ Content-Type: application/json
 
 ---
 
-## 🎯 API Design Best Practices
+## API Design Best Practices
 
 ### **RESTful Principles**
 
 ```http
 # 1. Use nouns for resources
-✅ GET /users/123/posts
-❌ GET /getUserPosts/123
+ GET /users/123/posts
+ GET /getUserPosts/123
 
 # 2. Use HTTP methods correctly
-✅ DELETE /users/123      # Delete user
-❌ GET /users/delete/123  # Wrong method
+ DELETE /users/123      # Delete user
+ GET /users/delete/123  # Wrong method
 
 # 3. Use plural nouns
-✅ GET /users
-❌ GET /user
+ GET /users
+ GET /user
 
 # 4. Use sub-resources for relationships
-✅ GET /users/123/posts
-❌ GET /posts?user_id=123
+ GET /users/123/posts
+ GET /posts?user_id=123
 
 # 5. Handle trailing slashes consistently
-✅ GET /users/123
-❌ GET /users/123/
+ GET /users/123
+ GET /users/123/
 ```
 
 ### **Error Handling**
@@ -931,5 +931,5 @@ paths:
 
 ---
 
-**🎉 Master these API patterns and you'll build robust, scalable web services
-that developers love to use! 🚀**
+** Master these API patterns and you'll build robust, scalable web services that
+developers love to use! **

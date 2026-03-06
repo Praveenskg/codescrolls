@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 import Details from '@theme/Details';
 import Link from '@docusaurus/Link';
 
-# 📘 MDX Cheatsheet
+# MDX Cheatsheet
 
 A quick reference guide to writing MDX – Markdown + JSX. Perfect for Docusaurus,
 Next.js, and other static site generators that support interactive
@@ -20,14 +20,14 @@ documentation.
 
 ---
 
-## 🔍 What is MDX?
+## What is MDX?
 
 MDX lets you use **JSX (React components)** directly in Markdown files. It's
 like Markdown supercharged with interactivity.
 
 ---
 
-## 📝 Basic Markdown Syntax
+## Basic Markdown Syntax
 
 ```md
 # Heading 1
@@ -57,7 +57,7 @@ _Italic_
 
 ---
 
-## ⚛️ Using JSX in MDX
+## Using JSX in MDX
 
 ```jsx
 <h1>This is a JSX header inside MDX</h1>
@@ -66,7 +66,7 @@ _Italic_
 
 ---
 
-## 📦 Importing Components
+## Importing Components
 
 ```jsx
 import MyComponent from '../components/MyComponent';
@@ -76,7 +76,7 @@ import MyComponent from '../components/MyComponent';
 
 ---
 
-## 💡 Admonitions
+## Admonitions
 
 ```md
 :::note This is a note. :::
@@ -122,7 +122,7 @@ import MyComponent from '../components/MyComponent';
 
 ---
 
-## 🧪 Code Blocks
+## Code Blocks
 
 ### Static Code Block
 
@@ -145,7 +145,7 @@ console.log(Hello());
 
 ---
 
-## 🧱 Custom Components Example
+## Custom Components Example
 
 ```jsx
 // MyCard.jsx
@@ -169,7 +169,7 @@ import MyCard from '../components/MyCard';
 
 ---
 
-## 🧾 Frontmatter
+## Frontmatter
 
 ```mdx
 ---
@@ -201,7 +201,7 @@ image: /img/cover.png
 
 ---
 
-## 🖼️ Images and Media
+## Images and Media
 
 ### Basic Images
 
@@ -232,7 +232,7 @@ image: /img/cover.png
 
 ---
 
-## 🎭 Interactive Examples
+## Interactive Examples
 
 ### Counter Component
 
@@ -282,7 +282,7 @@ function Counter() {
 
 ---
 
-## 📝 Code Examples with Syntax Highlighting
+## Code Examples with Syntax Highlighting
 
 ### Multiple Language Support
 
@@ -321,22 +321,22 @@ function example() {
 
 ---
 
-## 📊 Tables
+## Tables
 
 ```md
 | Feature       | MDX | Markdown |
 | ------------- | --- | -------- |
-| JSX Support   | ✅  | ❌       |
-| Components    | ✅  | ❌       |
-| Interactivity | ✅  | ❌       |
+| JSX Support   | Yes | No       |
+| Components    | Yes | No       |
+| Interactivity | Yes | No       |
 ```
 
 **Output:** | Feature | MDX | Markdown | |---------|-----|----------| | JSX
-Support | ✅ | ❌ | | Components | ✅ | ❌ | | Interactivity | ✅ | ❌ |
+Support | Yes | No | | Components | Yes | No | | Interactivity | Yes | No |
 
 ---
 
-## ✅ Task Lists
+## Task Lists
 
 ```md
 - [x] Learn MDX basics
@@ -354,7 +354,7 @@ Support | ✅ | ❌ | | Components | ✅ | ❌ | | Interactivity | ✅ | ❌ |
 
 ---
 
-## 🎯 Docusaurus-Specific Features
+## Docusaurus-Specific Features
 
 ### Tabs
 
@@ -364,13 +364,13 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="apple" label="Apple" default>
-    This is an apple 🍎
+    This is an apple
   </TabItem>
   <TabItem value="orange" label="Orange">
-    This is an orange 🍊
+    This is an orange
   </TabItem>
   <TabItem value="banana" label="Banana">
-    This is a banana 🍌
+    This is a banana
   </TabItem>
 </Tabs>
 ```
@@ -380,13 +380,13 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="apple" label="Apple" default>
-    This is an apple 🍎
+    This is an apple
   </TabItem>
   <TabItem value="orange" label="Orange">
-    This is an orange 🍊
+    This is an orange
   </TabItem>
   <TabItem value="banana" label="Banana">
-    This is a banana 🍌
+    This is a banana
   </TabItem>
 </Tabs>
 
@@ -414,7 +414,7 @@ import Link from '@docusaurus/Link';
 
 ---
 
-## 🎨 Advanced MDX Patterns
+## Advanced MDX Patterns
 
 ### Conditional Rendering
 
@@ -482,7 +482,7 @@ import InfoBox from '../components/InfoBox';
 
 ---
 
-## 🔧 MDX Configuration
+## MDX Configuration
 
 ### Docusaurus Config
 
@@ -526,17 +526,17 @@ module.exports = {
 
 ---
 
-## 🚀 Best Practices
+## Best Practices
 
 ### 1. Component Organization
 
 ```jsx
-// ✅ Good: Organized imports
+// Good: Organized imports
 import React from 'react';
 import MyComponent from '../components/MyComponent';
 import { Button } from '@docusaurus/theme-common';
 
-// ✅ Good: Clear component usage
+// Good: Clear component usage
 <MyComponent title="Example"></MyComponent>
 <Button variant="primary">Click me</Button>
 ```
@@ -544,7 +544,7 @@ import { Button } from '@docusaurus/theme-common';
 ### 2. Performance Optimization
 
 ```jsx
-// ✅ Good: Lazy loading for heavy components
+// Good: Lazy loading for heavy components
 import { lazy, Suspense } from 'react';
 
 const HeavyComponent = lazy(() => import('./HeavyComponent'));
@@ -557,7 +557,7 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'));
 ### 3. Accessibility
 
 ```jsx
-// ✅ Good: Accessible components
+// Good: Accessible components
 <button onClick={handleClick} aria-label="Close dialog" role="button">
   ×
 </button>
@@ -565,7 +565,7 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'));
 
 ---
 
-## 🐛 Common Issues & Solutions
+## Common Issues & Solutions
 
 ### Issue: JSX not rendering
 
@@ -587,7 +587,7 @@ installed
 
 ---
 
-## 📚 Resources
+## Resources
 
 - [MDX Official Docs](https://mdxjs.com/)
 - [Docusaurus MDX Guide](https://docusaurus.io/docs/markdown-features/mdx)

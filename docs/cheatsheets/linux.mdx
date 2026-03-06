@@ -1,20 +1,20 @@
 ---
 id: linux
-title: 🐧 Linux Cheatsheet
+title: Linux Cheatsheet
 sidebar_label: Linux CheatSheet
 description: Essential Linux commands and operations for everyday use
 keywords: [linux, terminal, shell, cheatsheet, commands]
 sidebar_position: 11
 ---
 
-# 🐧 Linux Cheatsheet
+# Linux Cheatsheet
 
 A complete reference for common and advanced Linux commands — from navigation to
 permissions, networking, and beyond.
 
 ---
 
-## 📁 File & Directory Navigation
+## File & Directory Navigation
 
 ```bash
 # Show current directory
@@ -40,7 +40,7 @@ rm -r folder        # non-empty
 
 ---
 
-## 📄 File Operations
+## File Operations
 
 ```bash
 # Create a file
@@ -65,7 +65,7 @@ grep -r "text" ./folder
 
 ---
 
-## ✍️ Editing Files
+## Editing Files
 
 ```bash
 nano file.txt     # beginner-friendly
@@ -75,7 +75,7 @@ code file.txt     # VS Code (if installed)
 
 ---
 
-## 🔐 Permissions
+## Permissions
 
 ```bash
 # View permissions
@@ -91,7 +91,7 @@ chown user:group file
 
 ---
 
-## 📦 Package Management
+## Package Management
 
 ### Ubuntu/Debian (apt)
 
@@ -112,7 +112,7 @@ sudo pacman -R packagename
 
 ---
 
-## 🧠 System Info & Monitoring
+## System Info & Monitoring
 
 ```bash
 # System info
@@ -132,7 +132,7 @@ uptime
 
 ---
 
-## 🔄 Process Management
+## Process Management
 
 ```bash
 # Show running processes
@@ -149,7 +149,7 @@ pkill firefox
 
 ---
 
-## 🌐 Networking
+## Networking
 
 ```bash
 # Network info
@@ -169,7 +169,7 @@ dig domain.com
 
 ---
 
-## 🔍 Advanced File Operations
+## Advanced File Operations
 
 ### Text Processing
 
@@ -225,7 +225,7 @@ find . \( -name "*.js" -o -name "*.ts" \) -size +1k
 
 ---
 
-## 🛠️ System Administration
+## System Administration
 
 ### User Management
 
@@ -284,7 +284,7 @@ sudo mkfs.xfs /dev/sdb1
 
 ---
 
-## 🔒 Security & Permissions
+## Security & Permissions
 
 ### Advanced Permissions
 
@@ -330,7 +330,7 @@ ssh -R 8080:localhost:80 user@server    # remote port forward
 
 ---
 
-## 🐚 Shell Scripting
+## Shell Scripting
 
 ### Basic Scripting
 
@@ -391,7 +391,7 @@ trap 'echo "Script interrupted"; exit 1' INT TERM
 
 ---
 
-## 📊 Performance Monitoring
+## Performance Monitoring
 
 ### System Monitoring
 
@@ -429,7 +429,7 @@ awk '/ERROR/ {print $1, $2}' /var/log/app.log  # extract timestamps
 
 ---
 
-## 🔧 Advanced Networking
+## Advanced Networking
 
 ### Network Troubleshooting
 
@@ -467,7 +467,7 @@ sudo iptables -A INPUT -j DROP
 
 ---
 
-## 🧪 Advanced Commands
+## Advanced Commands
 
 ### Compression & Archives
 
@@ -546,7 +546,7 @@ comm <(sort file1) <(sort file2) # compare sorted files
 
 ---
 
-## 📚 Resources
+## Resources
 
 - [tldr.sh](https://tldr.sh) – Simplified man pages
 - [explainshell.com](https://explainshell.com) – Explain shell commands

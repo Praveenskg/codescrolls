@@ -12,7 +12,7 @@ sidebar_position: 12
 
 import LiveCodeBlock from '@theme/LiveCodeBlock';
 
-# 🗄️ SQL Cheatsheet
+# SQL Cheatsheet
 
 A comprehensive quick reference guide for SQL queries, database design, and
 relational database management.
@@ -25,7 +25,7 @@ PostgreSQL, SQLite, and other SQL databases.
 
 :::
 
-## 🏗️ Database Basics
+## Database Basics
 
 ### **Connecting to Database**
 
@@ -60,7 +60,7 @@ DROP DATABASE mydatabase;
 
 ---
 
-## 📋 Data Definition Language (DDL)
+## Data Definition Language (DDL)
 
 ### **Creating Tables**
 
@@ -143,7 +143,7 @@ DROP INDEX idx_users_email;  -- PostgreSQL (different syntax might apply)
 
 ---
 
-## 🔍 Data Query Language (DQL)
+## Data Query Language (DQL)
 
 ### **Basic SELECT Statements**
 
@@ -222,7 +222,7 @@ SELECT * FROM users ORDER BY score DESC LIMIT 5;
 
 ---
 
-## 🔗 JOIN Operations
+## JOIN Operations
 
 ### **INNER JOIN**
 
@@ -293,7 +293,7 @@ LEFT JOIN employees m ON e.manager_id = m.id;
 
 ---
 
-## 📊 Aggregate Functions & GROUP BY
+## Aggregate Functions & GROUP BY
 
 ### **Aggregate Functions**
 
@@ -364,7 +364,7 @@ HAVING SUM(total) > 1000 AND COUNT(*) >= 3;
 
 ---
 
-## ✏️ Data Manipulation Language (DML)
+## Data Manipulation Language (DML)
 
 ### **INSERT Statements**
 
@@ -429,7 +429,7 @@ DELETE FROM users WHERE active = false;
 
 ---
 
-## 🔧 Advanced SQL Features
+## Advanced SQL Features
 
 ### **Subqueries**
 
@@ -509,7 +509,7 @@ FROM daily_sales;
 
 ---
 
-## 🔐 Data Control Language (DCL)
+## Data Control Language (DCL)
 
 ### **User Management**
 
@@ -557,21 +557,21 @@ ROLLBACK TO my_savepoint;
 
 ---
 
-## 📈 Database Design Patterns
+## Database Design Patterns
 
 ### **Normalization Examples**
 
 #### **First Normal Form (1NF)**
 
 ```sql
--- ❌ Not normalized
+--  Not normalized
 CREATE TABLE user_contacts (
     user_id INT,
     name VARCHAR(100),
     emails VARCHAR(500)  -- "email1,email2,email3"
 );
 
--- ✅ 1NF Compliant
+--  1NF Compliant
 CREATE TABLE users (
     user_id INT PRIMARY KEY,
     name VARCHAR(100)
@@ -588,7 +588,7 @@ CREATE TABLE user_emails (
 #### **Third Normal Form (3NF)**
 
 ```sql
--- ❌ Not normalized
+--  Not normalized
 CREATE TABLE orders (
     order_id INT PRIMARY KEY,
     customer_name VARCHAR(100),
@@ -598,7 +598,7 @@ CREATE TABLE orders (
     quantity INT
 );
 
--- ✅ 3NF Compliant
+--  3NF Compliant
 CREATE TABLE customers (
     customer_id INT PRIMARY KEY,
     name VARCHAR(100),
@@ -623,50 +623,50 @@ CREATE TABLE orders (
 
 ---
 
-## 🐛 Common SQL Problems & Solutions
+## Common SQL Problems & Solutions
 
 ### **Performance Issues**
 
 ```sql
--- ❌ Slow query
+-- Slow query
 SELECT * FROM users WHERE UPPER(name) LIKE 'JOHN%';
 
--- ✅ Optimized
+-- Optimized
 SELECT * FROM users WHERE name LIKE 'John%';
 
--- ❌ Using SELECT *
+--  Using SELECT *
 SELECT * FROM users WHERE active = true;
 
--- ✅ Select only needed columns
+--  Select only needed columns
 SELECT id, name, email FROM users WHERE active = true;
 
--- ❌ No indexes on WHERE clauses
+--  No indexes on WHERE clauses
 SELECT * FROM orders WHERE customer_id = 123 AND created_at > '2024-01-01';
 
--- ✅ Add composite index
+--  Add composite index
 CREATE INDEX idx_orders_customer_date ON orders(customer_id, created_at);
 ```
 
 ### **Data Integrity Issues**
 
 ```sql
--- ❌ No foreign key constraints
+--  No foreign key constraints
 CREATE TABLE orders (
     id INT PRIMARY KEY,
     user_id INT  -- No constraint!
 );
 
--- ✅ With constraints
+--  With constraints
 CREATE TABLE orders (
     id INT PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- ❌ NULL values in required fields
+--  NULL values in required fields
 INSERT INTO users (name) VALUES ('John');  -- email is NULL but required
 
--- ✅ Check constraints
+--  Check constraints
 CREATE TABLE users (
     id INT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -677,7 +677,7 @@ CREATE TABLE users (
 
 ---
 
-## 🛠️ Database-Specific Syntax
+## Database-Specific Syntax
 
 ### **MySQL Specific**
 
@@ -741,7 +741,7 @@ SELECT * FROM other.users;
 
 ---
 
-## 📊 Useful SQL Queries
+## Useful SQL Queries
 
 ### **Analytics & Reporting**
 
@@ -807,7 +807,7 @@ WHERE p.last_activity > u.last_login;
 
 ---
 
-## 🎯 Best Practices
+## Best Practices
 
 ### **Query Optimization**
 
@@ -843,5 +843,5 @@ WHERE p.last_activity > u.last_login;
 
 ---
 
-**🎉 Happy querying! Master these SQL fundamentals and you'll handle any
-database challenge!**
+** Happy querying! Master these SQL fundamentals and you'll handle any database
+challenge!**

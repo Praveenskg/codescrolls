@@ -8,7 +8,7 @@ keywords: [react, cheatsheet, hooks, components, jsx, reference]
 sidebar_position: 6
 ---
 
-# ⚛️ React Cheatsheet
+# React Cheatsheet
 
 A quick reference guide for essential React concepts, hooks, components, and
 patterns.
@@ -20,7 +20,7 @@ components.
 
 :::
 
-## 🎨 JSX Basics
+## JSX Basics
 
 ```jsx
 // Basic JSX
@@ -57,7 +57,7 @@ const list = (
 
 ---
 
-## 🏗️ Components
+## Components
 
 ```jsx
 // Function component
@@ -104,7 +104,7 @@ function App() {
 
 ---
 
-## 🎣 Hooks - useState
+## Hooks - useState
 
 ```jsx
 import { useState } from 'react';
@@ -166,7 +166,7 @@ function TodoList() {
 
 ---
 
-## 🎣 Hooks - useEffect
+## Hooks - useEffect
 
 ```jsx
 import { useEffect, useState } from 'react';
@@ -196,25 +196,41 @@ useEffect(() => {
 function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     setLoading(true);
-    fetch(`/api/users/${userId}`)
+    setError(null);
+
+    fetch(`/api/users/${userId}`, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
         setUser(data);
+      })
+      .catch(err => {
+        if (err.name !== 'AbortError') {
+          setError(err);
+        }
+      })
+      .finally(() => {
         setLoading(false);
       });
+
+    return () => {
+      controller.abort();
+    };
   }, [userId]);
 
   if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   return <div>{user.name}</div>;
 }
 ```
 
 ---
 
-## 🎣 Hooks - useContext
+## Hooks - useContext
 
 ```jsx
 import { createContext, useContext, useState } from 'react';
@@ -227,7 +243,7 @@ function ThemeProvider({ children }) {
   const [theme, setTheme] = useState('light');
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(current => (current === 'light' ? 'dark' : 'light'));
   };
 
   return (
@@ -261,10 +277,10 @@ function App() {
 
 ---
 
-## 🎣 Hooks - useRef
+## Hooks - useRef
 
 ```jsx
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 // DOM reference
 function TextInput() {
@@ -304,7 +320,7 @@ function Timer() {
 
 ---
 
-## 🎣 Hooks - useMemo & useCallback
+## Hooks - useMemo & useCallback
 
 ```jsx
 import { useMemo, useCallback, useState } from 'react';
@@ -335,7 +351,7 @@ function ParentComponent() {
 
 ---
 
-## 🎣 Hooks - useReducer
+## Hooks - useReducer
 
 ```jsx
 import { useReducer } from 'react';
@@ -371,7 +387,7 @@ function Counter() {
 
 ---
 
-## 🎣 Custom Hooks
+## Custom Hooks
 
 ```jsx
 // Custom hook for fetching data
@@ -381,16 +397,27 @@ function useFetch(url) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(url)
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+
+    fetch(url, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
         setData(data);
-        setLoading(false);
       })
       .catch(err => {
-        setError(err);
+        if (err.name !== 'AbortError') {
+          setError(err);
+        }
+      })
+      .finally(() => {
         setLoading(false);
       });
+
+    return () => {
+      controller.abort();
+    };
   }, [url]);
 
   return { data, loading, error };
@@ -422,7 +449,7 @@ function useLocalStorage(key, initialValue) {
 
 ---
 
-## 📝 Forms
+## Forms
 
 ```jsx
 // Controlled component
@@ -487,7 +514,7 @@ function RegisterForm() {
 
 ---
 
-## 🎭 Conditional Rendering
+## Conditional Rendering
 
 ```jsx
 // If-else with ternary
@@ -539,7 +566,7 @@ function UserProfile({ user }) {
 
 ---
 
-## 📋 Lists & Keys
+## Lists & Keys
 
 ```jsx
 // Basic list
@@ -578,7 +605,7 @@ function SimpleList({ items }) {
 
 ---
 
-## 🎯 Event Handling
+## Event Handling
 
 ```jsx
 // Click event
@@ -611,7 +638,7 @@ function handleSubmit(e) {
 
 ---
 
-## 🚀 Performance Optimization
+## Performance Optimization
 
 ```jsx
 import { memo, lazy, Suspense } from 'react';
@@ -633,17 +660,17 @@ function App() {
 }
 
 // Avoid inline object/array creation
-// ❌ Bad: Creates new object on every render
+//  Not always a problem; optimize only when identity stability matters
 <Component style={{ margin: 10 }} />;
 
-// ✅ Good: Define outside component
+// Better when passing to memoized children or dependency arrays
 const styles = { margin: 10 };
 <Component style={styles} />;
 ```
 
 ---
 
-## 🎨 Styling
+## Styling
 
 ```jsx
 // Inline styles
@@ -676,7 +703,7 @@ const Button = styled.button`
 
 ---
 
-## 🛡️ Error Boundaries
+## Error Boundaries
 
 ```jsx
 class ErrorBoundary extends React.Component {
@@ -710,19 +737,19 @@ class ErrorBoundary extends React.Component {
 
 ---
 
-## 📚 Quick Reference
+## Quick Reference
 
 ### Common Hooks
 
 ```jsx
-(useState,
-  useEffect,
-  useContext,
-  useRef,
-  useMemo,
-  useCallback,
-  useReducer,
-  useLayoutEffect);
+useState(initialValue);
+useEffect(effect, deps);
+useContext(Context);
+useRef(initialValue);
+useMemo(factory, deps);
+useCallback(callback, deps);
+useReducer(reducer, initialState);
+useLayoutEffect(effect, deps);
 ```
 
 ### Lifecycle (with hooks)
@@ -754,29 +781,29 @@ useEffect(() => {
 
 ---
 
-## ✨ Best Practices
+## Best Practices
 
 ```jsx
-// ✅ DO: Use functional components
+//  DO: Use functional components
 function MyComponent() {
   return <div>Content</div>;
 }
 
-// ✅ DO: Keep components small and focused
-// ✅ DO: Use PropTypes or TypeScript
-// ✅ DO: Extract reusable logic into custom hooks
-// ✅ DO: Use keys properly in lists
-// ✅ DO: Avoid inline functions in JSX when possible
+//  DO: Keep components small and focused
+//  DO: Use PropTypes or TypeScript
+//  DO: Extract reusable logic into custom hooks
+//  DO: Use keys properly in lists
+//  DO: Optimize with memo/useCallback only when profiling shows a need
 
-// ❌ DON'T: Mutate state directly
-// ❌ DON'T: Use index as key (when items can reorder)
-// ❌ DON'T: Put hooks inside conditions/loops
-// ❌ DON'T: Forget to cleanup in useEffect
+//  DON'T: Mutate state directly
+//  DON'T: Use index as key (when items can reorder)
+//  DON'T: Put hooks inside conditions/loops
+//  DON'T: Forget to cleanup in useEffect
 ```
 
 ---
 
-## 🚀 Resources
+## Resources
 
 - **Official Docs**: [react.dev](https://react.dev/)
 - **React Patterns**: [patterns.dev](https://www.patterns.dev/)
@@ -784,4 +811,4 @@ function MyComponent() {
 
 ---
 
-**Master React for building modern user interfaces!** ⚛️
+**Master React for building modern user interfaces!**
