@@ -1,3 +1,10 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "codescrolls.site" }],
+      "destination": "https://www.codescrolls.site/:path*",
+      "permanent": true
+    }
+  ]
 }

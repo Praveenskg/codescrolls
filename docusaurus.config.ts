@@ -257,6 +257,8 @@ const config: Config = {
             '/blog/authors/**',
             '/blog/archive',
             '/docs/tags/**',
+            '/search/**',
+            '/404',
           ],
           filename: 'sitemap.xml',
           createSitemapItems: async params => {
@@ -270,6 +272,8 @@ const config: Config = {
   ],
 
   themeConfig: {
+    image: 'img/opengraph.png',
+
     // Color mode configuration
     colorMode: {
       defaultMode: 'light',
@@ -296,8 +300,14 @@ const config: Config = {
         name: 'robots',
         content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
       },
-      { name: 'googlebot', content: 'index,follow' },
-      { name: 'bingbot', content: 'index,follow' },
+      {
+        name: 'googlebot',
+        content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+      },
+      {
+        name: 'bingbot',
+        content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+      },
 
       // Mobile Meta Tags
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=5.0' },
@@ -355,12 +365,7 @@ const config: Config = {
           'Learn web development with comprehensive documentation, tutorials, and guides for JavaScript, React, TypeScript, HTML, CSS, and more. Free educational resource for developers.',
       },
       { name: 'application-name', content: 'CodeScrolls' },
-      { name: 'apple-mobile-web-app-title', content: 'CodeScrolls' },
       { name: 'language', content: 'English' },
-      { name: 'revisit-after', content: '7 days' },
-      { name: 'rating', content: 'General' },
-      { name: 'distribution', content: 'global' },
-      { name: 'coverage', content: 'Worldwide' },
 
       // Copyright and Author
       {
@@ -368,11 +373,6 @@ const config: Config = {
         content: `Copyright © ${new Date().getFullYear()} CodeScrolls by Praveen Singh`,
       },
       { name: 'owner', content: 'Praveen Singh' },
-
-      // Geo Tags
-      { name: 'geo.region', content: 'US' },
-      { name: 'geo.position', content: '37.7749;-122.4194' },
-      { name: 'ICBM', content: '37.7749, -122.4194' },
     ],
     liveCodeBlock: { playgroundPosition: 'bottom' },
     docs: { sidebar: { hideable: true } },
