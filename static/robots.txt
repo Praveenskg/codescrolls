@@ -1,6 +1,17 @@
-# Allow all crawlers full access
 User-agent: *
 Allow: /
 
-# Point to your sitemap
+# Block useless / duplicate pages
+Disallow: /tags/
+Disallow: /search
+Disallow: /page/
+Disallow: /blog/archive
+Disallow: /blog/tags/
+Disallow: /blog/authors/
+
+# Allow important content
+Allow: /docs/
+Allow: /blog/
+
+# Sitemap
 Sitemap: https://www.codescrolls.site/sitemap.xml

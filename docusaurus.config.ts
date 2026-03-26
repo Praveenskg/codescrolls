@@ -236,6 +236,7 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           tags: false,
+          blogListComponent: '@theme/BlogListPage',
           authorsMapPath: undefined,
           archiveBasePath: null,
           feedOptions: {
@@ -264,7 +265,17 @@ const config: Config = {
           createSitemapItems: async params => {
             const { defaultCreateSitemapItems, ...rest } = params;
             const items = await defaultCreateSitemapItems(rest);
-            return items.filter(item => !item.url.includes('/page/'));
+
+            return items.filter(item => {
+              const url = item.url;
+
+              return (
+                !url.includes('/page/') &&
+                !url.includes('/tags') &&
+                !url.includes('/search') &&
+                !url.includes('/blog/archive')
+              );
+            });
           },
         },
       } satisfies Preset.Options,
