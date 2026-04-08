@@ -1,0 +1,34 @@
+---
+title: Python Decorators
+description:
+  Reuse cross-cutting logic like logging, timing, and auth checks with
+  decorators.
+sidebar_position: 4
+---
+
+# Python Decorators
+
+Decorators wrap functions without modifying core implementation.
+
+## Basic Decorator
+
+```python
+def log_call(fn):
+    def wrapper(*args, **kwargs):
+        print(f"Calling {fn.__name__}")
+        return fn(*args, **kwargs)
+    return wrapper
+
+@log_call
+def greet(name):
+    return f"Hello, {name}"
+```
+
+## Common Use Cases
+
+- Logging
+- Authorization checks
+- Retry logic
+- Timing/performance metrics
+
+Use `functools.wraps` to preserve original metadata.

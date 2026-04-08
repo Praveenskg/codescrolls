@@ -1,0 +1,10 @@
+{
+  "label": "Python - Advanced",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Advanced Python",
+    "description": "Master OOP, iterators, generators, and packaging workflows in Python."
+  }
+}

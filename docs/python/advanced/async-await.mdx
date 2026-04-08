@@ -1,0 +1,42 @@
+---
+title: Async and Await in Python
+description:
+  Build concurrent I/O programs using coroutines, tasks, and event loops.
+sidebar_position: 8
+---
+
+# Async and Await in Python
+
+Async programming is best for I/O-bound work like APIs, sockets, and queues.
+
+## Basic Coroutine
+
+```python
+import asyncio
+
+async def fetch_data():
+    await asyncio.sleep(1)
+    return "done"
+
+async def main():
+    result = await fetch_data()
+    print(result)
+
+asyncio.run(main())
+```
+
+## Running Multiple Tasks
+
+```python
+async def task(n):
+    await asyncio.sleep(1)
+    return n
+
+results = await asyncio.gather(task(1), task(2), task(3))
+```
+
+## Best Practices
+
+- Avoid blocking calls in async code
+- Use timeouts and cancellation for reliability
+- Keep CPU-heavy work outside event loop

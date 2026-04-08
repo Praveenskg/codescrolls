@@ -1,0 +1,42 @@
+---
+title: Python Context Managers
+description:
+  Manage external resources safely using `with`, custom context managers, and
+  cleanup guarantees.
+sidebar_position: 5
+---
+
+# Python Context Managers
+
+Context managers ensure setup and cleanup always occur.
+
+## Built-In Usage
+
+```python
+with open("notes.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+```
+
+## Custom Class-Based Context Manager
+
+```python
+class Resource:
+    def __enter__(self):
+        print("acquire")
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        print("release")
+```
+
+## contextlib Example
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def managed():
+    print("start")
+    yield
+    print("end")
+```

@@ -68,7 +68,7 @@ const config: Config = {
           height: 512,
         },
         description:
-          'Comprehensive web development documentation covering JavaScript, React, TypeScript, and modern web technologies.',
+          'Comprehensive web development documentation covering JavaScript, React, TypeScript, Python, and modern web technologies.',
         foundingDate: '2024',
         founder: {
           '@type': 'Person',
@@ -167,6 +167,20 @@ const config: Config = {
                 '@type': 'Course',
                 name: 'TypeScript Documentation',
                 description: 'TypeScript guides and best practices',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'CodeScrolls',
+                },
+              },
+              price: '0',
+              priceCurrency: 'USD',
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Course',
+                name: 'Python Documentation',
+                description: 'Python tutorials and best practices',
                 provider: {
                   '@type': 'Organization',
                   name: 'CodeScrolls',
@@ -303,7 +317,7 @@ const config: Config = {
       {
         name: 'keywords',
         content:
-          'JavaScript, Web Development, Tutorials, Code, Programming, CodeScrolls, React, TypeScript, HTML, CSS, Node.js, Frontend, Backend, Web Design, Coding, Learn to Code, Developer Resources, Programming Tutorials, JavaScript Tutorial, React Tutorial, TypeScript Guide',
+          'JavaScript, Web Development, Tutorials, Code, Programming, CodeScrolls, React, TypeScript, Python, HTML, CSS, Node.js, Frontend, Backend, Web Design, Coding, Learn to Code, Developer Resources, Programming Tutorials, JavaScript Tutorial, React Tutorial, TypeScript Guide, Python Tutorial',
       },
       { name: 'author', content: 'Praveen Singh' },
       { name: 'publisher', content: 'CodeScrolls' },
@@ -419,6 +433,13 @@ const config: Config = {
           label: 'Typescript',
           to: '/docs/typescript',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'pythonSidebar',
+          position: 'left',
+          label: 'Python',
+          to: '/docs/python',
+        },
 
         {
           type: 'docSidebar',
@@ -452,6 +473,7 @@ const config: Config = {
           items: [
             { label: 'JavaScript', to: '/docs/javascript' },
             { label: 'TypeScript', to: '/docs/typescript' },
+            { label: 'Python', to: '/docs/python' },
             { label: 'React', to: '/docs/react' },
             { label: 'Cheat Sheets', to: '/docs/cheatsheets' },
           ],

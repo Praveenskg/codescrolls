@@ -1,0 +1,92 @@
+---
+title: Python Control Flow
+description:
+  Master if/elif/else, loops, truthy values, and loop control in Python.
+sidebar_position: 2
+---
+
+# Python Control Flow
+
+Control flow defines how your program makes decisions and repeats work.
+
+## if / elif / else
+
+```python
+score = 82
+
+if score >= 90:
+    grade = "A"
+elif score >= 75:
+    grade = "B"
+else:
+    grade = "C"
+```
+
+Use `elif` for multiple conditions in sequence.
+
+## Truthy and Falsy Values
+
+Falsy values include:
+
+- `0`, `0.0`
+- `""` (empty string)
+- `[]`, `{}`, `set()`
+- `None`
+- `False`
+
+```python
+items = []
+if not items:
+    print("No items found")
+```
+
+## for Loop
+
+```python
+for i in range(1, 4):
+    print(i)
+```
+
+Iterates over sequences or iterables.
+
+## while Loop
+
+```python
+count = 3
+while count > 0:
+    print(count)
+    count -= 1
+```
+
+Use for condition-based repetition.
+
+## Loop Control Statements
+
+- `break`: stop loop immediately
+- `continue`: skip current iteration
+- `pass`: placeholder for future code
+
+```python
+for n in range(5):
+    if n == 2:
+        continue
+    if n == 4:
+        break
+    print(n)
+```
+
+## match-case (Python 3.10+)
+
+```python
+status = 404
+
+match status:
+    case 200:
+        print("OK")
+    case 404:
+        print("Not Found")
+    case _:
+        print("Unknown")
+```
+
+Good for readable multi-branch logic.

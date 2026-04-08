@@ -1,0 +1,52 @@
+---
+title: Python Error Handling
+description:
+  Handle runtime failures safely with try/except/else/finally and meaningful
+  exception strategies.
+sidebar_position: 3
+---
+
+# Python Error Handling
+
+Error handling keeps applications stable and user-friendly.
+
+## Basic try/except
+
+```python
+try:
+    value = int("abc")
+except ValueError:
+    value = 0
+```
+
+## else and finally
+
+```python
+try:
+    number = int("42")
+except ValueError:
+    print("Invalid")
+else:
+    print("Parsed", number)
+finally:
+    print("Done")
+```
+
+## Catch Specific Exceptions
+
+Avoid broad `except Exception` unless you re-raise or log responsibly.
+
+## Raise Errors Intentionally
+
+```python
+def withdraw(balance, amount):
+    if amount > balance:
+        raise ValueError("Insufficient balance")
+    return balance - amount
+```
+
+## Best Practices
+
+- Handle only expected exceptions
+- Keep error messages clear and actionable
+- Log context for debugging

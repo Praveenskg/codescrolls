@@ -1,0 +1,62 @@
+---
+title: Python Data Structures
+description:
+  Learn lists, tuples, dictionaries, and sets in detail, including when to use
+  each and common operations.
+sidebar_position: 1
+---
+
+# Python Data Structures
+
+Python's built-in data structures cover most day-to-day programming tasks.
+
+## Lists
+
+Ordered, mutable sequences.
+
+```python
+items = ["html", "css", "python"]
+items.append("react")
+items.remove("css")
+```
+
+Use lists when order matters and values can change.
+
+## Tuples
+
+Ordered, immutable sequences.
+
+```python
+point = (10, 20)
+```
+
+Use tuples for fixed records like coordinates or RGB values.
+
+## Dictionaries
+
+Key-value mapping with fast lookups.
+
+```python
+user = {"name": "Praveen", "role": "developer"}
+print(user["name"])
+user["active"] = True
+```
+
+Use dictionaries for structured entities and configuration.
+
+## Sets
+
+Unordered collections of unique values.
+
+```python
+tags = {"python", "docs", "python"}
+print(tags)  # duplicates removed
+```
+
+Useful for uniqueness checks and set math.
+
+## Performance Notes
+
+- List lookup by value: O(n)
+- Dict/set lookup by key/value: average O(1)
+- Tuple is lighter and safer when mutation is not needed
