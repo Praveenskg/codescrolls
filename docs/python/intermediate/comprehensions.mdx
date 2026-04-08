@@ -1,0 +1,40 @@
+---
+title: Python Comprehensions
+description:
+  Write concise transformations using list, dict, and set comprehensions.
+sidebar_position: 5
+---
+
+# Python Comprehensions
+
+Comprehensions let you transform and filter collections in one readable line.
+
+## List Comprehension
+
+```python
+squares = [n * n for n in range(6)]
+evens = [n for n in range(10) if n % 2 == 0]
+```
+
+## Dictionary Comprehension
+
+```python
+mapping = {n: n * n for n in range(4)}
+```
+
+## Set Comprehension
+
+```python
+unique_lengths = {len(word) for word in ["python", "code", "docs"]}
+```
+
+## Nested Comprehensions
+
+```python
+matrix = [[1, 2], [3, 4]]
+flat = [num for row in matrix for num in row]
+```
+
+## Readability Rule
+
+If a comprehension becomes too complex, switch to a regular loop.

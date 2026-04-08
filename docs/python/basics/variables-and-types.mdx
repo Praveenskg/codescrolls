@@ -1,13 +1,15 @@
 ---
 title: Python Variables and Data Types
 description:
-  Understand Python variables, naming conventions, and core built-in data types.
+  Learn variables, naming conventions, mutability, and all core built-in Python
+  data types with practical examples.
 sidebar_position: 1
 ---
 
 # Python Variables and Data Types
 
-Python variables are dynamically typed and do not require explicit declarations.
+Variables are labels that point to values in memory. Python is dynamically
+typed, so you do not declare a variable type explicitly.
 
 ## Variable Basics
 
@@ -16,6 +18,15 @@ name = "CodeScrolls"
 age = 2
 is_active = True
 ```
+
+Python infers types at runtime.
+
+## Naming Rules and Conventions
+
+- Use `snake_case` for variable names (`total_price`)
+- Start with a letter or underscore, not a digit
+- Avoid Python keywords like `class`, `for`, `if`
+- Use uppercase for constants by convention (`MAX_RETRIES = 3`)
 
 ## Core Data Types
 
@@ -27,13 +38,17 @@ is_active = True
 - `tuple`: ordered immutable collection
 - `dict`: key-value mapping
 - `set`: unordered unique values
+- `NoneType`: absence of value (`None`)
 
 ## Type Checking
 
 ```python
 value = 42
-print(type(value))  # <class 'int'>
+print(type(value))           # <class 'int'>
+print(isinstance(value, int))  # True
 ```
+
+Prefer `isinstance()` for checks in real code.
 
 ## Type Conversion
 
@@ -42,3 +57,30 @@ num = int("10")
 text = str(100)
 price = float("19.99")
 ```
+
+Be careful: invalid conversions raise `ValueError`.
+
+## Mutable vs Immutable Types
+
+- Mutable: `list`, `dict`, `set`
+- Immutable: `int`, `float`, `str`, `tuple`, `bool`
+
+```python
+items = [1, 2]
+items.append(3)  # list changes in place
+
+text = "hi"
+text = text + "!"  # creates a new string
+```
+
+## Common Pitfalls
+
+- Reusing built-in names (`list`, `str`, `dict`) as variables
+- Assuming input values are numbers (they are strings by default)
+- Mutating shared objects unintentionally
+
+## Quick Practice
+
+1. Create variables for `name`, `age`, and `skills`.
+2. Convert user age input to integer safely.
+3. Print each variable type using `type()`.

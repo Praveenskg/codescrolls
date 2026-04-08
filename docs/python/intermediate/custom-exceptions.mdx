@@ -1,0 +1,46 @@
+---
+title: Python Custom Exceptions
+description:
+  Design domain-specific exceptions to make errors clearer and easier to handle.
+sidebar_position: 8
+---
+
+# Python Custom Exceptions
+
+Custom exceptions improve clarity by encoding business meaning in errors.
+
+## Define a Custom Exception
+
+```python
+class ValidationError(Exception):
+    """Raised when input validation fails."""
+```
+
+## Raise and Catch
+
+```python
+def validate_username(name):
+    if len(name) < 3:
+        raise ValidationError("Username too short")
+
+try:
+    validate_username("ab")
+except ValidationError as error:
+    print(error)
+```
+
+## Exception Hierarchy
+
+```python
+class AppError(Exception):
+    pass
+
+class AuthenticationError(AppError):
+    pass
+```
+
+## Best Practices
+
+- Use clear class names
+- Add actionable messages
+- Catch the narrowest exception possible

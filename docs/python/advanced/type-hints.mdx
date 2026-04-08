@@ -1,0 +1,39 @@
+---
+title: Python Type Hints
+description:
+  Improve readability, tooling, and reliability using static type hints and
+  modern typing features.
+sidebar_position: 6
+---
+
+# Python Type Hints
+
+Type hints make APIs easier to understand and validate.
+
+## Basic Function Types
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+## Typed Collections
+
+```python
+from typing import List, Dict
+
+scores: List[int] = [90, 88, 95]
+meta: Dict[str, str] = {"topic": "python"}
+```
+
+## Optional and Union
+
+```python
+from typing import Optional
+
+user_id: Optional[int] = None
+```
+
+## Tooling
+
+Use MyPy or Pyright in CI to catch type issues early.

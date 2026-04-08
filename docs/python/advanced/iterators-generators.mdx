@@ -1,18 +1,17 @@
 ---
 title: Iterators and Generators in Python
 description:
-  Write memory-efficient loops and lazy pipelines using iterators and
-  generators.
+  Use iterators and generators for lazy, memory-efficient processing pipelines.
 sidebar_position: 2
 ---
 
 # Iterators and Generators in Python
 
-Generators allow you to produce values lazily, one at a time.
+Generators produce values on demand, which is efficient for large datasets.
 
 ## Iterator Protocol
 
-An iterator implements:
+An iterator supports:
 
 - `__iter__()`
 - `__next__()`
@@ -35,4 +34,8 @@ for value in countdown(3):
 squares = (n * n for n in range(5))
 ```
 
-Use generators for large data streams to reduce memory usage.
+## When to Use
+
+- Streaming large files
+- Data pipelines
+- Lazy transformations

@@ -1,0 +1,44 @@
+---
+title: Python Comments and Docstrings
+description: Document Python code effectively using comments and docstrings.
+sidebar_position: 5
+---
+
+# Python Comments and Docstrings
+
+Good documentation helps collaborators and future-you understand intent.
+
+## Comments
+
+Use comments for non-obvious reasoning.
+
+```python
+# Apply discount only for premium users
+if user.is_premium:
+    total *= 0.9
+```
+
+## Docstrings
+
+Use docstrings for modules, functions, classes, and methods.
+
+```python
+def add(a: int, b: int) -> int:
+    """Return the sum of two integers."""
+    return a + b
+```
+
+## Multi-line Docstring Format
+
+```python
+def fetch_user(user_id: int) -> dict:
+    """Fetch user details.
+
+    Args:
+        user_id: Unique user identifier.
+
+    Returns:
+        User dictionary.
+    """
+    return {"id": user_id}
+```

@@ -1,12 +1,14 @@
 ---
 title: Python Functions
-description: Define reusable logic with parameters, return values, and defaults.
+description:
+  Learn function definitions, parameters, return values, scope, and best
+  practices for reusable Python code.
 sidebar_position: 3
 ---
 
 # Python Functions
 
-Functions help organize and reuse logic.
+Functions package reusable logic into a named block.
 
 ## Defining a Function
 
@@ -17,17 +19,18 @@ def greet(name):
 print(greet("Praveen"))
 ```
 
-## Default Parameters
+## Parameters and Arguments
+
+- Positional arguments
+- Keyword arguments
+- Default arguments
 
 ```python
 def power(base, exp=2):
     return base ** exp
-```
 
-## Keyword Arguments
-
-```python
-result = power(exp=3, base=2)
+print(power(4))
+print(power(base=2, exp=3))
 ```
 
 ## Variable-Length Arguments
@@ -35,4 +38,33 @@ result = power(exp=3, base=2)
 ```python
 def total(*numbers):
     return sum(numbers)
+
+def build_profile(**details):
+    return details
+```
+
+## Return Values
+
+Functions return values with `return`. If omitted, Python returns `None`.
+
+## Type Hints in Functions
+
+```python
+def add(a: int, b: int) -> int:
+    return a + b
+```
+
+## Best Practices
+
+- Keep each function focused on one task
+- Use descriptive names
+- Avoid hidden side effects
+- Add docstrings for public APIs
+
+## Example with Docstring
+
+```python
+def to_slug(text: str) -> str:
+    """Convert text to a URL-friendly slug."""
+    return text.strip().lower().replace(" ", "-")
 ```

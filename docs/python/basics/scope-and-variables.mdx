@@ -1,0 +1,59 @@
+---
+title: Variable Scope in Python
+description:
+  Understand LEGB rules, global/nonlocal usage, and scope best practices.
+sidebar_position: 8
+---
+
+# Variable Scope in Python
+
+Scope controls where a variable can be read or modified.
+
+## LEGB Rule
+
+Python resolves names in this order:
+
+- Local
+- Enclosing
+- Global
+- Built-in
+
+## Local and Global Scope
+
+```python
+x = "global"
+
+def show():
+    x = "local"
+    print(x)
+
+show()
+print(x)
+```
+
+## nonlocal in Nested Functions
+
+```python
+def outer():
+    count = 0
+
+    def inner():
+        nonlocal count
+        count += 1
+        return count
+
+    return inner
+```
+
+## global Keyword
+
+```python
+counter = 0
+
+def increment():
+    global counter
+    counter += 1
+```
+
+Prefer passing values through function parameters instead of relying on global
+state.

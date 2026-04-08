@@ -1,0 +1,35 @@
+---
+title: Python Dataclasses
+description: Build clean data models with less boilerplate using `@dataclass`.
+sidebar_position: 7
+---
+
+# Python Dataclasses
+
+Dataclasses are ideal for classes that primarily store data.
+
+## Basic Example
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    name: str
+    age: int
+```
+
+Python auto-generates `__init__`, `__repr__`, and equality methods.
+
+## Defaults and Factories
+
+```python
+from dataclasses import dataclass, field
+
+@dataclass
+class Team:
+    name: str
+    members: list[str] = field(default_factory=list)
+```
+
+Use `default_factory` for mutable defaults.

@@ -1,0 +1,53 @@
+---
+title: Python Operators
+description:
+  Learn arithmetic, comparison, logical, identity, and membership operators.
+sidebar_position: 6
+---
+
+# Python Operators
+
+Operators are used to compute values and evaluate conditions.
+
+## Arithmetic
+
+```python
+a, b = 10, 3
+print(a + b)
+print(a // b)
+print(a % b)
+print(a ** b)
+```
+
+## Comparison
+
+```python
+print(5 == 5)
+print(5 != 2)
+print(5 > 2)
+```
+
+## Logical
+
+```python
+is_valid = True
+is_admin = False
+print(is_valid and is_admin)
+print(is_valid or is_admin)
+print(not is_admin)
+```
+
+## Membership and Identity
+
+```python
+langs = ["python", "js"]
+print("python" in langs)
+
+x = [1, 2]
+y = x
+z = [1, 2]
+print(x is y)
+print(x is z)
+```
+
+Use `is` for identity checks such as `value is None`.

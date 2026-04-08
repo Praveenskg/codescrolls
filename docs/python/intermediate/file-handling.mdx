@@ -1,0 +1,41 @@
+---
+title: Python File Handling
+description:
+  Read, write, append, and process files safely with context managers.
+sidebar_position: 6
+---
+
+# Python File Handling
+
+Use `with open(...)` to avoid file-leak bugs.
+
+## Read File
+
+```python
+with open("notes.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+```
+
+## Write File
+
+```python
+with open("notes.txt", "w", encoding="utf-8") as file:
+    file.write("Hello Python")
+```
+
+## Append File
+
+```python
+with open("notes.txt", "a", encoding="utf-8") as file:
+    file.write("\nAnother line")
+```
+
+## Read Line by Line
+
+```python
+with open("notes.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line.strip())
+```
+
+For large files, iterate line by line instead of using `read()`.

@@ -1,13 +1,14 @@
 ---
 title: Python Error Handling
 description:
-  Handle runtime issues safely with try/except/finally and custom exceptions.
+  Handle runtime failures safely with try/except/else/finally and meaningful
+  exception strategies.
 sidebar_position: 3
 ---
 
 # Python Error Handling
 
-Handle exceptions to make your applications more resilient.
+Error handling keeps applications stable and user-friendly.
 
 ## Basic try/except
 
@@ -18,17 +19,24 @@ except ValueError:
     value = 0
 ```
 
-## finally Block
+## else and finally
 
 ```python
-file = open("data.txt", "r")
 try:
-    content = file.read()
+    number = int("42")
+except ValueError:
+    print("Invalid")
+else:
+    print("Parsed", number)
 finally:
-    file.close()
+    print("Done")
 ```
 
-## Raise Custom Errors
+## Catch Specific Exceptions
+
+Avoid broad `except Exception` unless you re-raise or log responsibly.
+
+## Raise Errors Intentionally
 
 ```python
 def withdraw(balance, amount):
@@ -36,3 +44,9 @@ def withdraw(balance, amount):
         raise ValueError("Insufficient balance")
     return balance - amount
 ```
+
+## Best Practices
+
+- Handle only expected exceptions
+- Keep error messages clear and actionable
+- Log context for debugging

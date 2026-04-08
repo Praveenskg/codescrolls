@@ -1,0 +1,34 @@
+---
+title: Python Standard Library Essentials
+description:
+  Learn practical built-in modules for paths, dates, JSON, math, and
+  collections.
+sidebar_position: 7
+---
+
+# Python Standard Library Essentials
+
+Python includes batteries-included modules for common tasks.
+
+## Useful Modules
+
+- `pathlib`: path operations
+- `datetime`: date and time handling
+- `json`: parse and generate JSON
+- `math`: mathematical functions
+- `collections`: specialized containers
+
+## Example
+
+```python
+from pathlib import Path
+from datetime import datetime
+import json
+
+path = Path("data.json")
+print(path.exists())
+print(datetime.now().isoformat())
+print(json.dumps({"ok": True}))
+```
+
+Use standard library first before adding external dependencies.
