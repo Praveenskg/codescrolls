@@ -1,6 +1,7 @@
 {
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "types": ["@docusaurus/module-type-aliases", "@mdx-js/react"],
     "skipLibCheck": true
