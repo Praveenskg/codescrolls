@@ -6,7 +6,7 @@ const config: Config = {
   title: 'CodeScrolls',
   tagline: 'Scroll through code. Learn. Build. Repeat.',
   favicon: 'img/logo.png',
-  future: { v4: true, experimental_faster: true },
+  future: { v4: true, faster: true },
 
   url: 'https://www.codescrolls.site',
   baseUrl: '/',
