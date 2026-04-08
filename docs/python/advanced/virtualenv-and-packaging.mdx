@@ -1,0 +1,35 @@
+---
+title: Virtual Environments and Packaging
+description:
+  Isolate dependencies and package Python projects for reliable development.
+sidebar_position: 3
+---
+
+# Virtual Environments and Packaging
+
+Use isolated environments to keep dependencies clean and reproducible.
+
+## Create and Activate venv
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+## Install and Freeze Dependencies
+
+```bash
+pip install requests
+pip freeze > requirements.txt
+```
+
+## Packaging Basics
+
+Typical package files:
+
+- `pyproject.toml`
+- `README.md`
+- source code folder
+
+Modern tools like `poetry`, `uv`, and `hatch` can simplify packaging and
+publishing.

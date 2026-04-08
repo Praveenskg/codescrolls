@@ -1,0 +1,10 @@
+{
+  "label": "Python - Basics",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Python Basics",
+    "description": "Learn Python fundamentals including variables, data types, control flow, and functions."
+  }
+}

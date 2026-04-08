@@ -1,0 +1,32 @@
+---
+title: OOP in Python
+description: Learn classes, objects, inheritance, and encapsulation in Python.
+sidebar_position: 1
+---
+
+# OOP in Python
+
+Object-oriented programming helps model real-world entities in code.
+
+## Class and Object
+
+```python
+class User:
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        return f"Hello, {self.name}"
+```
+
+## Inheritance
+
+```python
+class Admin(User):
+    def can_manage(self):
+        return True
+```
+
+## Special Methods
+
+Implement methods like `__repr__`, `__len__`, and `__str__` for richer objects.

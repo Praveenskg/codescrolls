@@ -1,0 +1,38 @@
+---
+title: Python Functions
+description: Define reusable logic with parameters, return values, and defaults.
+sidebar_position: 3
+---
+
+# Python Functions
+
+Functions help organize and reuse logic.
+
+## Defining a Function
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Praveen"))
+```
+
+## Default Parameters
+
+```python
+def power(base, exp=2):
+    return base ** exp
+```
+
+## Keyword Arguments
+
+```python
+result = power(exp=3, base=2)
+```
+
+## Variable-Length Arguments
+
+```python
+def total(*numbers):
+    return sum(numbers)
+```

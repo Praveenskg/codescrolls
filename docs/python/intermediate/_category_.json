@@ -1,0 +1,10 @@
+{
+  "label": "Python - Intermediate",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Intermediate Python",
+    "description": "Build practical Python skills with data structures, imports, and robust error handling."
+  }
+}

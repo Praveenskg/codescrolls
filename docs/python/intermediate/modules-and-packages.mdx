@@ -1,0 +1,43 @@
+---
+title: Python Modules and Packages
+description: Organize code with modules, imports, and package structure.
+sidebar_position: 2
+---
+
+# Python Modules and Packages
+
+As projects grow, split logic into multiple files and packages.
+
+## Importing a Module
+
+```python
+import math
+print(math.sqrt(49))
+```
+
+## Import Specific Members
+
+```python
+from datetime import date
+print(date.today())
+```
+
+## Creating a Module
+
+Create a file named `utils.py`:
+
+```python
+def slugify(text):
+    return text.lower().replace(" ", "-")
+```
+
+Use it elsewhere:
+
+```python
+from utils import slugify
+print(slugify("Python Docs"))
+```
+
+## Package Tip
+
+A package is a folder of modules, commonly with an `__init__.py` file.
