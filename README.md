@@ -1,11 +1,11 @@
 # 📘 CodeScrolls – Developer Docs, Notes & CheatSheets
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.9.2-green.svg)](https://docusaurus.io/)
-[![React](https://img.shields.io/badge/React-19.2.1-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue.svg)](https://www.typescriptlang.org/)
-[![ESLint](https://img.shields.io/badge/ESLint-9.39.1-purple.svg)](https://eslint.org/)
-[![Prettier](https://img.shields.io/badge/Prettier-3.7.4-pink.svg)](https://prettier.io/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.10.0-green.svg)](https://docusaurus.io/)
+[![React](https://img.shields.io/badge/React-19.2.4-blue.svg)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.2-blue.svg)](https://www.typescriptlang.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-9.39.2-purple.svg)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-3.8.1-pink.svg)](https://prettier.io/)
 
 CodeScrolls is a comprehensive, modern documentation site built with
 [Docusaurus 3](https://docusaurus.io/). It provides well-organized technical
@@ -30,7 +30,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 ### **Technical**
 
-- ⚡ **Blazing Fast** - Static site generation with Docusaurus 3.9.1
+- ⚡ **Blazing Fast** - Static site generation with Docusaurus 3.10.0
 - 🔍 **Local Search** - Full-text search without Algolia
 - 📱 **PWA Support** - Offline-capable Progressive Web App
 - 🌙 **Dark Mode** - Beautiful dark theme support
@@ -108,13 +108,13 @@ npm install
 
 This will install all required dependencies including:
 
-- Docusaurus 3.9.2
-- React 19.2.1
-- TypeScript 5.9.3
-- ESLint 9.39.1 (flat config)
-- Prettier 3.7.4
+- Docusaurus 3.10.0
+- React 19.2.4
+- TypeScript 6.0.2
+- ESLint 9.39.2 (flat config)
+- Prettier 3.8.1
 - Husky 9.1.7 (Git hooks)
-- lint-staged 16.2.7
+- lint-staged 16.4.0
 - And more...
 
 ---
@@ -351,17 +351,17 @@ codescrolls/
 
 ### **Core**
 
-- **[Docusaurus 3.9.2](https://docusaurus.io/)** - Documentation framework
-- **[React 19.2.1](https://reactjs.org/)** - UI library (latest features)
-- **[TypeScript 5.9.3](https://www.typescriptlang.org/)** - Type safety
+- **[Docusaurus 3.10.0](https://docusaurus.io/)** - Documentation framework
+- **[React 19.2.4](https://reactjs.org/)** - UI library (latest features)
+- **[TypeScript 6.0.2](https://www.typescriptlang.org/)** - Type safety
 
 ### **Development Tools**
 
-- **[ESLint 9.39.1](https://eslint.org/)** - Code linting (flat config)
-- **[Prettier 3.7.4](https://prettier.io/)** - Code formatting
+- **[ESLint 9.39.2](https://eslint.org/)** - Code linting (flat config)
+- **[Prettier 3.8.1](https://prettier.io/)** - Code formatting
 - **[TypeScript ESLint](https://typescript-eslint.io/)** - TypeScript linting
 - **[Husky 9.1.7](https://typicode.github.io/husky/)** - Git hooks
-- **[lint-staged 16.2.7](https://github.com/okonet/lint-staged)** - Pre-commit
+- **[lint-staged 16.4.0](https://github.com/okonet/lint-staged)** - Pre-commit
   formatting
 
 ### **Plugins & Features**
