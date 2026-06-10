@@ -1,7 +1,15 @@
 packages:
   - '.'
 
+allowBuilds:
+  '@swc/core': true
+  core-js: true
+
 onlyBuiltDependencies:
   - '@swc/core'
   - core-js
   - core-js-pure
+
+overrides:
+  '@isaacs/brace-expansion': '^5.0.1'
+  lodash-es: '^4.17.23'

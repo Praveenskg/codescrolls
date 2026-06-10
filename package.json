@@ -2,6 +2,7 @@
   "name": "codescrolls",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@11.5.2",
   "description": "A developer-focused documentation site built using Docusaurus.",
   "keywords": ["docusaurus", "documentation", "codescrolls", "developer-docs", "mdx", "typescript"],
   "author": "Praveen Singh",
@@ -41,7 +42,7 @@
     "@docusaurus/plugin-pwa": "^3.10.0",
     "@docusaurus/plugin-sitemap": "^3.10.0",
     "@docusaurus/plugin-vercel-analytics": "^3.10.0",
-    "@docusaurus/preset-classic": "3.10.0",
+    "@docusaurus/preset-classic": "3.10.1",
     "@docusaurus/theme-live-codeblock": "^3.10.0",
     "@docusaurus/theme-mermaid": "^3.10.0",
     "@easyops-cn/docusaurus-search-local": "^0.55.1",
@@ -51,9 +52,9 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/tsconfig": "3.10.0",
-    "@docusaurus/types": "3.10.0",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/tsconfig": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
     "@types/react": "^19.2.14",
@@ -65,7 +66,7 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.5.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.7",
     "prettier": "^3.8.2",
     "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~6.0.2"
@@ -77,11 +78,5 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
     "*.{json,md,mdx,css,yml,yaml}": ["prettier --write"]
-  },
-  "pnpm": {
-    "overrides": {
-      "@isaacs/brace-expansion": ">=5.0.1",
-      "lodash-es": ">=4.17.23"
-    }
   }
 }
