@@ -35,21 +35,21 @@
     "validate": "pnpm typecheck && pnpm lint && pnpm format:check"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.10.0",
-    "@docusaurus/faster": "^3.10.0",
-    "@docusaurus/plugin-content-docs": "^3.10.0",
-    "@docusaurus/plugin-debug": "^3.10.0",
-    "@docusaurus/plugin-pwa": "^3.10.0",
-    "@docusaurus/plugin-sitemap": "^3.10.0",
-    "@docusaurus/plugin-vercel-analytics": "^3.10.0",
+    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/faster": "^3.10.1",
+    "@docusaurus/plugin-content-docs": "^3.10.1",
+    "@docusaurus/plugin-debug": "^3.10.1",
+    "@docusaurus/plugin-pwa": "^3.10.1",
+    "@docusaurus/plugin-sitemap": "^3.10.1",
+    "@docusaurus/plugin-vercel-analytics": "^3.10.1",
     "@docusaurus/preset-classic": "3.10.1",
-    "@docusaurus/theme-live-codeblock": "^3.10.0",
-    "@docusaurus/theme-mermaid": "^3.10.0",
-    "@easyops-cn/docusaurus-search-local": "^0.55.1",
+    "@docusaurus/theme-live-codeblock": "^3.10.1",
+    "@docusaurus/theme-mermaid": "^3.10.1",
+    "@easyops-cn/docusaurus-search-local": "^0.55.2",
     "@mdx-js/react": "^3.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.1",
@@ -57,7 +57,7 @@
     "@docusaurus/types": "3.10.1",
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.62.0",
     "@typescript-eslint/parser": "^8.62.0",
@@ -67,9 +67,9 @@
     "globals": "^17.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.4",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.3"
   },
   "browserslist": {
     "production": [">0.5%", "not dead", "not op_mini all"],
