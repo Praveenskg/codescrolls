@@ -1,51 +1,37 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
+import tseslint from 'typescript-eslint';
 
 export default defineConfig([
   globalIgnores([
-    '**/node_modules/',
-    '**/build/',
-    '**/.docusaurus/',
-    '**/*.config.js',
-    '**/*.config.ts',
+    '**/node_modules/**',
+    '**/build/**',
+    '**/.docusaurus/**',
+    '**/.cache/**',
+    '**/coverage/**',
+    '**/dist/**',
+    '**/*.min.js',
   ]),
-  {
-    extends: compat.extends(
-      'eslint:recommended',
-      'plugin:react/recommended',
-      'plugin:@typescript-eslint/recommended',
-      'prettier',
-    ),
 
-    plugins: {
-      react,
-      '@typescript-eslint': typescriptEslint,
-    },
+  js.configs.recommended,
+
+  ...tseslint.configs.recommended,
+
+  react.configs.flat.recommended,
+
+  {
+    files: ['**/*.{js,mjs,cjs,jsx,ts,tsx}'],
 
     languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+
       globals: {
         ...globals.browser,
         ...globals.node,
       },
-
-      parser: tsParser,
-      ecmaVersion: 2021,
-      sourceType: 'module',
 
       parserOptions: {
         ecmaFeatures: {
@@ -63,9 +49,15 @@ export default defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
+      'react/jsx-uses-react': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
       'no-console': [
         'warn',
         {
@@ -75,6 +67,9 @@ export default defineConfig([
 
       'prefer-const': 'error',
       'no-var': 'error',
+      'no-debugger': 'error',
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
     },
   },
 ]);
