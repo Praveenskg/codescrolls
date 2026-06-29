@@ -349,9 +349,7 @@ function isDog(animal: Animal): animal is Dog {
   return 'bark' in animal;
 }
 
-const animals: Animal[] = [
-  /* ... */
-];
+const animals: Animal[] = [/* ... */];
 const dogs = filter(animals, isDog); // Dog[]
 ```
 

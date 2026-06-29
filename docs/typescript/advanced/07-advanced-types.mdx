@@ -241,12 +241,7 @@ type User = (typeof users)[number];
 
 ```typescript
 type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+  string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
 const data: JSONValue = {
   name: 'John',

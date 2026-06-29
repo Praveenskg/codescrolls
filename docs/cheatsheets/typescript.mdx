@@ -564,12 +564,7 @@ let email: EmailAddress = 'user@example.com';
 
 // Recursive types
 type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+  string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
 // Index signatures
 interface StringMap {
