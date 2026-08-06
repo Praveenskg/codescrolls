@@ -1,0 +1,250 @@
+---
+title: 'React Patterns & Best Practices — 2026'
+description:
+  'Practical React patterns, hooks strategies, state management, and
+  architecture guidance for 2026.'
+slug: react-patterns-2026
+tags: [react, patterns, frontend]
+authors: praveen
+date: 2026-08-06
+keywords:
+  ['react patterns', 'react hooks', 'state management', 'react architecture']
+---
+
+# React Patterns & Best Practices — 2026
+
+{/* truncate */}
+
+This post collects practical, production-ready React patterns and guidance for
+building maintainable apps in 2026. It focuses on component design, hooks
+patterns, state management strategies, performance optimizations, testing, and
+upgrade/migration advice. Most examples use TypeScript-flavored snippets.
+
+## TL;DR
+
+- Prefer composition and small components; avoid huge monoliths.
+- Keep UI pure and push data access to dedicated layers or server components
+  (when using frameworks like Next.js).
+- Use the right tool for state: local (`useState`/`useReducer`), context for UI
+  state, and server-caching (TanStack Query) for async data.
+- Optimize only after measuring; focus on preventing unnecessary re-renders and
+  shipping minimal client JS.
+
+## Table of Contents
+
+- [Component Design](#component-design)
+- [Hooks & Custom Hooks](#hooks--custom-hooks)
+- [State Management](#state-management)
+- [Performance Patterns](#performance-patterns)
+- [Testing Strategy](#testing-strategy)
+- [Migration & Upgrade Tips](#migration--upgrade-tips)
+- [Real-world Example: Todo App](#real-world-example-todo-app)
+- [Conclusion](#conclusion)
+
+## Component Design
+
+Design components for a single responsibility. Split components into:
+
+- Presentational (dumb) components under `components/ui/` — purely render based
+  on props.
+- Feature containers under `features/` — compose UI, handle data fetching and
+  orchestration.
+
+Benefits:
+
+- Smaller surface area for testing.
+- Easier reuse and less accidental coupling.
+
+Example: a small `Badge` and a `UserCard` that composes it.
+
+```tsx
+// components/ui/Badge.tsx
+export function Badge({ children }: { children: React.ReactNode }) {
+  return <span className="badge">{children}</span>;
+}
+
+// features/user/UserCard.tsx
+import { Badge } from '@/components/ui/Badge';
+
+export function UserCard({ user }: { user: { name: string; role: string } }) {
+  return (
+    <div className="card">
+      <h3>{user.name}</h3>
+      <Badge>{user.role}</Badge>
+    </div>
+  );
+}
+```
+
+Keep CSS/Styling local to components (CSS modules, CSS-in-JS, or utility
+classes) to avoid global style leakage.
+
+## Hooks & Custom Hooks
+
+Custom hooks are the best place to encapsulate side effects, subscriptions, and
+reusable logic. They should return minimal, stable values and keep side-effects
+isolated.
+
+Pattern guidelines:
+
+- Return stable references (useMemo/useCallback) for handlers.
+- Keep hooks focused; one responsibility per hook.
+- Document their contract and side-effects.
+
+Example: a `useFetch` hook with cancellation and error handling.
+
+```tsx
+import { useEffect, useState } from 'react';
+
+export function useFetch<T = unknown>(url: string | null) {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (!url) return;
+    const controller = new AbortController();
+    setLoading(true);
+    fetch(url, { signal: controller.signal })
+      .then(res => {
+        if (!res.ok) throw new Error('Network error');
+        return res.json() as Promise<T>;
+      })
+      .then(json => setData(json))
+      .catch(err => {
+        if (err.name !== 'AbortError') setError(err);
+      })
+      .finally(() => setLoading(false));
+    return () => controller.abort();
+  }, [url]);
+
+  return { data, loading, error };
+}
+```
+
+## State Management
+
+Choose the state strategy by scope:
+
+- Local UI state: `useState` or `useReducer` for complex local transitions.
+- Cross-component UI state: React Context (small scope) or lightweight stores
+  (Zustand) for more global needs.
+- Server state: TanStack Query (React Query) / SWR — cache, revalidation, and
+  optimistic updates are built-in.
+
+Example: `useReducer` for a controlled form state.
+
+```tsx
+type State = { title: string; body: string };
+type Action =
+  { type: 'SET_TITLE'; title: string } | { type: 'SET_BODY'; body: string };
+
+function formReducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'SET_TITLE':
+      return { ...state, title: action.title };
+    case 'SET_BODY':
+      return { ...state, body: action.body };
+    default:
+      return state;
+  }
+}
+
+function PostForm() {
+  const [state, dispatch] = React.useReducer(formReducer, {
+    title: '',
+    body: '',
+  });
+  return (
+    <form>
+      <input
+        value={state.title}
+        onChange={e => dispatch({ type: 'SET_TITLE', title: e.target.value })}
+      />
+    </form>
+  );
+}
+```
+
+## Performance Patterns
+
+Measure first. Use React Profiler and Lighthouse to find real bottlenecks.
+
+Common optimizations:
+
+- Memoize pure components with `React.memo` and handlers with `useCallback`.
+- Avoid passing new object literals as props; prefer `useMemo`.
+- Code-split routes and lazy-load non-critical components using `React.lazy` and
+  `Suspense`.
+- Keep large dependencies out of client bundles; prefer server-side work for
+  heavy processing.
+
+Example: memoizing a list item renderer.
+
+```tsx
+const Item = React.memo(function Item({ value }: { value: string }) {
+  return <li>{value}</li>;
+});
+```
+
+## Testing Strategy
+
+- Unit tests: React Testing Library for components; test behavior over
+  implementation.
+- Integration: MSW (Mock Service Worker) to simulate API responses.
+- E2E: Playwright for critical flows (login, checkout) running against a staging
+  environment.
+
+Quick MSW example for a test:
+
+```ts
+// setupTests.ts
+import { server } from './mocks/server';
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
+
+## Migration & Upgrade Tips
+
+- When upgrading React or libraries, run the test suite and use the React
+  DevTools profiler to detect regressions.
+- Replace legacy lifecycle code with hooks; beware of subtle differences (e.g.
+  double-invocation of effects in Strict Mode during development).
+- Incrementally migrate large components by introducing wrapper containers and
+  extracting concerns into hooks.
+
+## Real-world Example: Todo App (Putting it together)
+
+Small architecture:
+
+- `features/todos/` — `TodosList`, `TodoItem`, `useTodos` (TanStack Query), and
+  `todosApi` client.
+
+Core hook using TanStack Query:
+
+```ts
+import { useQuery } from '@tanstack/react-query';
+
+export function useTodos() {
+  return useQuery(['todos'], () => fetch('/api/todos').then(r => r.json()));
+}
+```
+
+Component consumes the hook and renders protected UI while leveraging the cache
+and background revalidation.
+
+## Conclusion
+
+React in 2026 rewards clear separation of concerns: small components, focused
+hooks, and the right state tool for the job. Start by measuring real performance
+bottlenecks, iterate with small, testable changes, and prefer composability over
+monolithic patterns.
+
+If you'd like, I can:
+
+- Expand the Todo example into a runnable starter repo.
+- Add authentication and optimistic-update examples with TanStack Query.
+- Translate this post to Hindi or a shorter summary for social sharing.
+
+Which would you like next?
