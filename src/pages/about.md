@@ -54,7 +54,7 @@ with modern tech like **Docusaurus**, **TailwindCSS**, and **AI-powered tools**.
 ## 📬 Contact & Links
 
 - 📧 Email: `Praveencdg@gmail.com`
-- 🌐 Website: [codescrolls.site](https://codescrolls.site)
+- 🌐 Website: [codescrolls.vercel.app](https://codescrolls.vercel.app)
 - 🐙 GitHub: [github.com/praveenskg](https://github.com/praveenskg)
 - 🧵 Twitter/X: [@its_praveen_s](https://twitter.com/its_praveen_s)
 

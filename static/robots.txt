@@ -14,4 +14,4 @@ Allow: /docs/
 Allow: /blog/
 
 # Sitemap
-Sitemap: https://www.codescrolls.site/sitemap.xml
+Sitemap: https://codescrolls.vercel.app/sitemap.xml

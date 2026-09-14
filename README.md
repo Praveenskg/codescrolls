@@ -13,7 +13,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 > 🧠 Learn faster. 📚 Refer anytime. 🚀 Level up your dev journey.
 
-**Live Site:** [https://codescrolls.site](https://codescrolls.vercel.app)
+**Live Site:** [https://codescrolls.vercel.app](https://codescrolls.vercel.app)
 
 ---
 
@@ -389,8 +389,8 @@ codescrolls/
 
 ### **Vercel**
 
-The site is configured for Vercel deployment with `vercel.json` and the custom
-domain [codescrolls.site](https://codescrolls.site).
+The site is deployed on Vercel at
+[codescrolls.vercel.app](https://codescrolls.vercel.app).
 
 **Manual Deployment:**
 
@@ -401,16 +401,6 @@ pnpm dlx vercel
 # Deploy from the repository root
 pnpm dlx vercel --prod
 ```
-
-### **Custom Domain**
-
-This site uses a custom domain: **[codescrolls.site](https://codescrolls.site)**
-
-**Setup:**
-
-1. Add `CNAME` file in `static/` directory
-2. Configure DNS records (A or CNAME)
-3. Enable HTTPS in repository settings
 
 ---
 
@@ -488,9 +478,12 @@ We welcome contributions! Please see our
 
 ## 📄 Legal & Policies
 
-- [Privacy Policy](https://codescrolls.site/privacy-policy) - How we handle data
-- [Terms of Service](https://codescrolls.site/terms-of-service) - Usage terms
-- [Disclaimer](https://codescrolls.site/disclaimer) - Important disclaimers
+- [Privacy Policy](https://codescrolls.vercel.app/privacy-policy) - How we
+  handle data
+- [Terms of Service](https://codescrolls.vercel.app/terms-of-service) - Usage
+  terms
+- [Disclaimer](https://codescrolls.vercel.app/disclaimer) - Important
+  disclaimers
 - [Code of Conduct](CODE_OF_CONDUCT.md) - Community standards
 
 ---
@@ -543,7 +536,7 @@ We welcome contributions! Please see our
 
 ## 🔗 Links
 
-- **Website:** [https://codescrolls.site](https://codescrolls.site)
+- **Website:** [https://codescrolls.vercel.app](https://codescrolls.vercel.app)
 - **Repository:**
   [https://github.com/Praveenskg/codescrolls](https://github.com/Praveenskg/codescrolls)
 - **Issues:**
@@ -557,7 +550,7 @@ We welcome contributions! Please see our
 
 **Praveen Singh**
 
-- 🌐 Website: [codescrolls.site](https://codescrolls.site)
+- 🌐 Website: [codescrolls.vercel.app](https://codescrolls.vercel.app)
 - 🐙 GitHub: [@Praveenskg](https://github.com/Praveenskg)
 - 🧵 Twitter: [@its_praveen_s](https://twitter.com/its_praveen_s)
 - 💼 LinkedIn: [praveenskg](https://linkedin.com/in/praveenskg)

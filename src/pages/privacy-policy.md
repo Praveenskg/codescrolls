@@ -18,9 +18,9 @@ keywords:
 Effective Date: July 19, 2025
 
 At **CodeScrolls**, accessible at
-[https://www.codescrolls.site](https://www.codescrolls.site), your privacy is
-important to us. This Privacy Policy explains how we collect, use, and protect
-your information.
+[https://codescrolls.vercel.app](https://codescrolls.vercel.app), your privacy
+is important to us. This Privacy Policy explains how we collect, use, and
+protect your information.
 
 ---
 
@@ -286,7 +286,7 @@ If you have any questions, concerns, or requests regarding this Privacy Policy
 or your personal data, please contact us:
 
 **📧 Email:** Praveencdg@gmail.com  
-**🌐 Website:** https://codescrolls.site  
+**🌐 Website:** https://codescrolls.vercel.app  
 **📍 Location:** Available upon request
 
 **Response Time:** We aim to respond to all inquiries within 48 hours.

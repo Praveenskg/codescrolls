@@ -19,7 +19,7 @@ keywords:
 **Effective Date:** October 8, 2025
 
 Please read this disclaimer carefully before using **CodeScrolls** at
-[https://codescrolls.site](https://codescrolls.site).
+[https://codescrolls.vercel.app](https://codescrolls.vercel.app).
 
 ---
 
@@ -279,7 +279,7 @@ Before using any code or information from CodeScrolls in production:
 For questions about this disclaimer:
 
 **📧 Email:** Praveencdg@gmail.com  
-**🌐 Website:** https://codescrolls.site  
+**🌐 Website:** https://codescrolls.vercel.app  
 **🐙 GitHub:** https://github.com/praveenskg/codescrolls
 
 **Response Time:** We aim to respond within 48 hours.

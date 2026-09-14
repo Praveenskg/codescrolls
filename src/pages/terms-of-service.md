@@ -18,8 +18,8 @@ keywords:
 Effective Date: July 19, 2025
 
 By accessing **CodeScrolls** at
-[https://www.codescrolls.site](https://www.codescrolls.site), you agree to the
-following terms and conditions.
+[https://codescrolls.vercel.app](https://codescrolls.vercel.app), you agree to
+the following terms and conditions.
 
 ---
 

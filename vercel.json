@@ -1,11 +1,3 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "codescrolls.site" }],
-      "destination": "https://www.codescrolls.site/:path*",
-      "permanent": true
-    }
-  ],
   "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/index.html" }]
 }

@@ -102,7 +102,7 @@ Past security advisories and fixes can be found in our:
 
 ### 📞 Contact Information
 
-- **Project URL:** https://codescrolls.site
+- **Project URL:** https://codescrolls.vercel.app
 - **Repository:** https://github.com/Praveenskg/codescrolls
 - **Maintainer:** Praveen Singh
 - **Email:** praveencdg@gmail.com
