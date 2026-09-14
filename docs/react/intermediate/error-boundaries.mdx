@@ -23,7 +23,7 @@ in their child component tree, log those errors, and display a fallback UI.
 
 ---
 
-## 📌 What are Error Boundaries?
+## What are Error Boundaries?
 
 Error boundaries catch errors during:
 
@@ -40,7 +40,7 @@ They **don't** catch errors in:
 
 ---
 
-## 🔸 Creating an Error Boundary
+## Creating an Error Boundary
 
 ### Basic Error Boundary
 
@@ -139,7 +139,7 @@ class ErrorBoundary extends React.Component {
 
 ---
 
-## 🔸 Usage Patterns
+## Usage Patterns
 
 ### Wrapping Entire App
 
@@ -209,7 +209,7 @@ class ErrorBoundary extends React.Component {
 
 ---
 
-## 🔸 Error Logging
+## Error Logging
 
 ### Logging to Service
 
@@ -254,7 +254,7 @@ function App() {
 
 ---
 
-## 🔸 Handling Event Handler Errors
+## Handling Event Handler Errors
 
 Error boundaries don't catch errors in event handlers. Use try-catch:
 
@@ -282,7 +282,7 @@ function MyComponent() {
 
 ---
 
-## 🔸 Async Error Handling
+## Async Error Handling
 
 ### With useEffect
 
@@ -343,7 +343,7 @@ function MyComponent() {
 
 ---
 
-## 🔸 Recovery Strategies
+## Recovery Strategies
 
 ### Retry Logic
 
@@ -401,7 +401,7 @@ function ErrorBoundaryWithReset({ children }) {
 
 ---
 
-## 🔸 Development vs Production
+## Development vs Production
 
 ### Different Fallbacks
 
@@ -433,12 +433,12 @@ class ErrorBoundary extends React.Component {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Use Multiple Error Boundaries**
 
 ```jsx
-// ✅ Good - Granular error boundaries
+//  Good - Granular error boundaries
 <div>
   <ErrorBoundary name="sidebar">
     <Sidebar />
@@ -449,7 +449,7 @@ class ErrorBoundary extends React.Component {
   </ErrorBoundary>
 </div>
 
-// ❌ Bad - Single boundary for everything
+//  Bad - Single boundary for everything
 <ErrorBoundary>
   <Sidebar />
   <MainContent />
@@ -470,7 +470,7 @@ componentDidCatch(error, errorInfo) {
 ### 3. **Provide Recovery Options**
 
 ```jsx
-// ✅ Good - Give users options
+//  Good - Give users options
 <div>
   <button onClick={retry}>Try Again</button>
   <button onClick={goHome}>Go Home</button>
@@ -500,19 +500,19 @@ if (shouldThrowError) {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Expecting to Catch Event Handler Errors**
 
 ```jsx
-// ❌ Won't be caught by error boundary
+//  Won't be caught by error boundary
 <button onClick={() => {
   throw new Error('Error!');
 }}>
   Click
 </button>
 
-// ✅ Use try-catch
+//  Use try-catch
 <button onClick={() => {
   try {
     riskyOperation();
@@ -527,12 +527,12 @@ if (shouldThrowError) {
 ### 2. **Not Logging Errors**
 
 ```jsx
-// ❌ Bad - Silent failure
+//  Bad - Silent failure
 componentDidCatch(error, errorInfo) {
   this.setState({ hasError: true });
 }
 
-// ✅ Good - Log errors
+//  Good - Log errors
 componentDidCatch(error, errorInfo) {
   this.setState({ hasError: true });
   logErrorToService(error, errorInfo);
@@ -542,12 +542,12 @@ componentDidCatch(error, errorInfo) {
 ### 3. **Single Error Boundary for Entire App**
 
 ```jsx
-// ❌ Bad - One error crashes everything
+//  Bad - One error crashes everything
 <ErrorBoundary>
   <EntireApp />
 </ErrorBoundary>
 
-// ✅ Good - Multiple boundaries
+//  Good - Multiple boundaries
 <div>
   <ErrorBoundary><Header /></ErrorBoundary>
   <ErrorBoundary><Sidebar /></ErrorBoundary>
@@ -557,7 +557,7 @@ componentDidCatch(error, errorInfo) {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **Error boundaries** catch rendering errors
 - Use **class components** (no hook equivalent yet)
@@ -571,7 +571,7 @@ componentDidCatch(error, errorInfo) {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Hooks](./hooks)
 - [Custom Hooks](./custom-hooks)
@@ -580,4 +580,4 @@ componentDidCatch(error, errorInfo) {
 
 ---
 
-**Handle errors gracefully for better user experience!** 🚀
+**Handle errors gracefully for better user experience!**

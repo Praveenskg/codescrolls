@@ -1,0 +1,193 @@
+---
+id: core-hooks-and-concurrency
+title: Core Hooks and Concurrent UI
+description:
+  Learn useReducer, useTransition, useDeferredValue, useId, and the other React
+  hooks used for complex state, responsive updates, and integrations.
+keywords:
+  - useReducer
+  - useTransition
+  - useDeferredValue
+  - useId
+  - useSyncExternalStore
+  - React concurrency
+sidebar_position: 6
+---
+
+# Core Hooks and Concurrent UI
+
+React's core hooks cover more than local state and effects. This guide focuses
+on hooks that help with complex state, non-blocking updates, stable IDs, and
+external data sources.
+
+## useReducer for Complex State
+
+Use `useReducer` when several state transitions belong to one feature or when
+the next state depends on the action type.
+
+```tsx
+import { useReducer } from 'react';
+
+type State = { count: number };
+type Action = { type: 'increment' } | { type: 'decrement' };
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+  }
+}
+
+export function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    <>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+    </>
+  );
+}
+```
+
+Keep reducers pure. Put network requests and other side effects in event
+handlers or effects, not inside the reducer.
+
+## useTransition for Non-Blocking Updates
+
+`useTransition` marks an update as non-urgent. The current UI stays responsive
+while React prepares the next state.
+
+```tsx
+import { useState, useTransition } from 'react';
+
+export function SearchResults({ items }: { items: string[] }) {
+  const [query, setQuery] = useState('');
+  const [visibleQuery, setVisibleQuery] = useState('');
+  const [isPending, startTransition] = useTransition();
+
+  function handleChange(value: string) {
+    setQuery(value);
+    startTransition(() => setVisibleQuery(value));
+  }
+
+  const results = items.filter(item =>
+    item.toLowerCase().includes(visibleQuery.toLowerCase()),
+  );
+
+  return (
+    <section>
+      <input
+        value={query}
+        onChange={event => handleChange(event.target.value)}
+      />
+      {isPending && <p>Updating results...</p>}
+      {results.map(item => (
+        <p key={item}>{item}</p>
+      ))}
+    </section>
+  );
+}
+```
+
+Do not use transitions for controlled input values that must update immediately.
+Keep the input state urgent and transition the expensive result update.
+
+## useDeferredValue for Expensive Children
+
+`useDeferredValue` lets a child continue displaying its previous value while a
+new value is being prepared.
+
+```tsx
+import { useDeferredValue, useMemo } from 'react';
+
+function ProductResults({ query, products }: Props) {
+  const deferredQuery = useDeferredValue(query);
+  const results = useMemo(
+    () => products.filter(product => product.name.includes(deferredQuery)),
+    [products, deferredQuery],
+  );
+
+  return <ProductList products={results} />;
+}
+```
+
+Use it when the parent owns the urgent value and a child performs expensive
+rendering. It is not a replacement for debouncing network requests.
+
+## useId for Accessible Relationships
+
+`useId` creates stable IDs that work across server and client rendering.
+
+```tsx
+import { useId } from 'react';
+
+export function EmailField() {
+  const id = useId();
+
+  return (
+    <>
+      <label htmlFor={id}>Email</label>
+      <input id={id} type="email" aria-describedby={`${id}-hint`} />
+      <p id={`${id}-hint`}>We will not share your email.</p>
+    </>
+  );
+}
+```
+
+Do not use `useId` for list keys. Keys should come from the data model.
+
+## useSyncExternalStore
+
+Use `useSyncExternalStore` when React reads from a store or browser API that
+lives outside React state.
+
+```tsx
+import { useSyncExternalStore } from 'react';
+
+const subscribe = (callback: () => void) => {
+  window.addEventListener('online', callback);
+  return () => window.removeEventListener('online', callback);
+};
+
+const getSnapshot = () => navigator.onLine;
+
+export function OnlineStatus() {
+  const online = useSyncExternalStore(subscribe, getSnapshot, () => true);
+  return <p>{online ? 'Online' : 'Offline'}</p>;
+}
+```
+
+Provide a server snapshot when the hook is used in server-rendered code.
+
+## Other Effect Hooks
+
+- `useLayoutEffect` runs before the browser paints and is useful for measuring
+  layout. Prefer `useEffect` unless the browser must not see an intermediate
+  layout.
+- `useInsertionEffect` is intended mainly for CSS-in-JS libraries that need to
+  insert styles before layout effects run. Application code rarely needs it.
+- `useImperativeHandle` customizes the value exposed by a forwarded ref. Use it
+  only for a small imperative API, not as a replacement for declarative props.
+
+## Choosing a Hook
+
+| Need                                     | Hook                   |
+| ---------------------------------------- | ---------------------- |
+| Several related state transitions        | `useReducer`           |
+| Keep urgent UI responsive                | `useTransition`        |
+| Defer expensive child rendering          | `useDeferredValue`     |
+| Link labels, hints, or inputs accessibly | `useId`                |
+| Subscribe to an external store           | `useSyncExternalStore` |
+| Measure layout before paint              | `useLayoutEffect`      |
+
+## Common Mistakes
+
+- Starting a transition for a controlled input value.
+- Performing side effects inside a reducer.
+- Using generated IDs as list keys.
+- Treating `useDeferredValue` as a network cache or debounce utility.
+- Reaching for layout effects when a normal effect is sufficient.

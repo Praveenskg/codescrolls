@@ -1,0 +1,142 @@
+---
+id: accessibility
+title: React Accessibility
+description:
+  Build accessible React interfaces with semantic HTML, keyboard support,
+  labels, focus management, ARIA, and accessible component patterns.
+keywords:
+  - React accessibility
+  - WCAG React
+  - ARIA React
+  - keyboard navigation
+  - focus management
+sidebar_position: 4
+---
+
+# React Accessibility
+
+Accessible React applications use semantic HTML first, preserve keyboard
+behavior, and expose meaningful names and states to assistive technology.
+
+## Use Semantic HTML
+
+Choose the element that already describes the interaction:
+
+```tsx
+export function Actions() {
+  return (
+    <nav aria-label="Account actions">
+      <a href="/profile">Profile</a>
+      <button type="button">Sign out</button>
+    </nav>
+  );
+}
+```
+
+Do not replace buttons with clickable `div` elements. Native elements provide
+keyboard behavior, focus handling, and semantics automatically.
+
+## Labels and Descriptions
+
+Every form control needs a visible label or an intentional accessible name. Use
+`useId` when a label and description need a stable relationship:
+
+```tsx
+import { useId } from 'react';
+
+export function PasswordField() {
+  const id = useId();
+  return (
+    <div>
+      <label htmlFor={id}>Password</label>
+      <input id={id} type="password" aria-describedby={`${id}-hint`} />
+      <p id={`${id}-hint`}>Use at least 12 characters.</p>
+    </div>
+  );
+}
+```
+
+## Keyboard Navigation
+
+All interactive controls must be reachable with the keyboard. Keep focus visible
+and preserve a logical tab order.
+
+```css
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+```
+
+Avoid positive `tabIndex` values. Use `tabIndex={0}` only when a custom
+interactive element truly needs to enter the natural tab order.
+
+## Dynamic Content and Live Regions
+
+Use a live region for status messages that appear without moving focus:
+
+```tsx
+function SaveStatus({ message }: { message: string }) {
+  return (
+    <p role="status" aria-live="polite">
+      {message}
+    </p>
+  );
+}
+```
+
+Do not announce every visual update. Announce important status changes and
+errors in a way that does not interrupt the user's current task.
+
+## Focus Management
+
+Move focus deliberately after actions such as opening a dialog or navigating to
+a new view. Return focus when a temporary surface closes.
+
+```tsx
+import { useEffect, useRef } from 'react';
+
+export function Dialog({ open, onClose }: Props) {
+  const closeButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (open) closeButton.current?.focus();
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+      <h2 id="dialog-title">Confirm action</h2>
+      <button ref={closeButton} type="button" onClick={onClose}>
+        Close
+      </button>
+    </div>
+  );
+}
+```
+
+Production dialogs should also trap focus, close predictably, and restore focus
+to the triggering control. Prefer a well-tested dialog primitive when possible.
+
+## Images and Icons
+
+Provide useful alternative text for informative images and empty alt text for
+decorative images:
+
+```tsx
+<img src="/chart.png" alt="Revenue increased by 18 percent in Q4" />
+<img src="/decorative-line.svg" alt="" />
+```
+
+Do not put important information only in color, animation, or an icon.
+
+## Accessibility Checklist
+
+- Use semantic landmarks such as `header`, `nav`, `main`, and `footer`.
+- Keep heading levels logical and unique per page where appropriate.
+- Label inputs and associate validation errors with `aria-describedby`.
+- Ensure keyboard users can operate every interaction.
+- Respect `prefers-reduced-motion` for non-essential animation.
+- Test at 200% zoom and with a screen reader or browser accessibility tree.
+- Use ARIA only when native HTML cannot express the behavior.

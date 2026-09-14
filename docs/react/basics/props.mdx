@@ -24,7 +24,7 @@ reusable.
 
 ---
 
-## 📌 What are Props?
+## What are Props?
 
 Props are arguments passed into React components, similar to function
 parameters. They allow you to pass data and event handlers down the component
@@ -41,7 +41,7 @@ function Welcome(props) {
 
 ---
 
-## 🔸 Passing Props
+## Passing Props
 
 ### Basic Props
 
@@ -81,7 +81,7 @@ function App() {
 
 ---
 
-## 🔸 Destructuring Props
+## Destructuring Props
 
 Instead of using `props.name`, you can destructure props for cleaner code:
 
@@ -121,7 +121,7 @@ function Button({ text = "Click Me", color = "blue" }) {
 
 ---
 
-## 🔸 Props Types
+## Props Types
 
 ### String Props
 
@@ -191,7 +191,7 @@ function App() {
 
 ---
 
-## 🔸 Children Props
+## Children Props
 
 The special `children` prop allows you to pass components or elements between
 opening and closing tags:
@@ -232,7 +232,7 @@ function Layout({ children }) {
 
 ---
 
-## 🔸 Default Props
+## Default Props
 
 You can set default values for props:
 
@@ -259,7 +259,7 @@ Button.defaultProps = {
 
 ---
 
-## 🔸 Prop Spreading
+## Prop Spreading
 
 You can spread an object as props:
 
@@ -287,7 +287,7 @@ function App() {
 
 ---
 
-## 🔸 Props Validation with PropTypes
+## Props Validation with PropTypes
 
 PropTypes help validate the types of props passed to components:
 
@@ -353,7 +353,7 @@ Component.propTypes = {
 
 ---
 
-## 🔸 TypeScript Props
+## TypeScript Props
 
 For TypeScript projects, define prop types using interfaces or types:
 
@@ -399,7 +399,7 @@ function Card({ title, children }: CardProps) {
 
 ---
 
-## 🔸 Common Patterns
+## Common Patterns
 
 ### Conditional Props
 
@@ -444,27 +444,27 @@ function SearchBox({ onSearch }) {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Keep Props Simple**
 
 ```jsx
-// ❌ Bad - Too many props
+//  Bad - Too many props
 <UserCard name={name} age={age} email={email} phone={phone} address={address} />
 
-// ✅ Good - Use object
+//  Good - Use object
 <UserCard user={{ name, age, email, phone, address }} />
 ```
 
 ### 2. **Use Destructuring**
 
 ```jsx
-// ❌ Bad
+//  Bad
 function Card(props) {
   return <div>{props.title}</div>;
 }
 
-// ✅ Good
+//  Good
 function Card({ title }) {
   return <div>{title}</div>;
 }
@@ -491,13 +491,13 @@ UserCard.propTypes = {
 ### 5. **Don't Mutate Props**
 
 ```jsx
-// ❌ Bad - Never modify props
+//  Bad - Never modify props
 function Component({ items }) {
   items.push('new item'); // Don't do this!
   return <div>{items.length}</div>;
 }
 
-// ✅ Good - Create new array
+//  Good - Create new array
 function Component({ items }) {
   const newItems = [...items, 'new item'];
   return <div>{newItems.length}</div>;
@@ -506,17 +506,17 @@ function Component({ items }) {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Modifying Props**
 
 ```jsx
-// ❌ Wrong
+//  Wrong
 function Component({ user }) {
   user.name = 'New Name'; // Props are read-only!
 }
 
-// ✅ Correct
+//  Correct
 function Component({ user }) {
   const [userData, setUserData] = useState(user);
   // Now you can modify userData
@@ -526,12 +526,12 @@ function Component({ user }) {
 ### 2. **Missing Keys in Lists**
 
 ```jsx
-// ❌ Wrong
+//  Wrong
 {
   items.map(item => <div>{item}</div>);
 }
 
-// ✅ Correct
+//  Correct
 {
   items.map((item, index) => <div key={index}>{item}</div>);
 }
@@ -540,17 +540,17 @@ function Component({ user }) {
 ### 3. **Passing Objects Inline**
 
 ```jsx
-// ❌ Bad - Creates new object on every render
+//  Bad - Creates new object on every render
 <UserCard user={{ name: 'John', age: 25 }} />;
 
-// ✅ Good - Define outside or use useMemo
+//  Good - Define outside or use useMemo
 const user = { name: 'John', age: 25 };
 <UserCard user={user} />;
 ```
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **Props** are read-only data passed from parent to child
 - Use **destructuring** for cleaner code
@@ -561,7 +561,7 @@ const user = { name: 'John', age: 25 };
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Components](./components)
 - [State Management](../intermediate/hooks)
@@ -571,4 +571,4 @@ const user = { name: 'John', age: 25 };
 ---
 
 **Props are the foundation of React's data flow. Master them to build flexible,
-reusable components!** 🚀
+reusable components!**

@@ -1,0 +1,160 @@
+---
+id: ssr-and-server-components
+title: React SSR and Server Components
+description:
+  Understand server-side rendering, hydration, Suspense streaming, Server
+  Components, and the boundaries between server and client code.
+keywords:
+  - React SSR
+  - React hydration
+  - React Server Components
+  - Suspense streaming
+  - server rendering
+  - client components
+sidebar_position: 6
+---
+
+# React SSR and Server Components
+
+Server-side rendering (SSR) generates HTML on the server so users can see a page
+before the JavaScript bundle finishes loading. Hydration then connects the
+client React tree to that HTML.
+
+React Server Components (RSC) are a separate architecture. They render on the
+server and can access server-only resources, while Client Components provide
+interactivity in the browser.
+
+## SSR and Hydration
+
+A framework usually manages SSR and hydration. At the React DOM level, the
+client hydrates server HTML with `hydrateRoot`:
+
+```tsx
+import { hydrateRoot } from 'react-dom/client';
+import App from './App';
+
+hydrateRoot(document.getElementById('root')!, <App />);
+```
+
+The initial server output must match the first client render. Avoid reading
+`window`, `localStorage`, random values, or the local time zone during that
+initial render. Use stable server data or the React 19.3 `browser()` API for
+intentional browser-only content.
+
+## Streaming with Suspense
+
+Suspense boundaries let a server stream the page shell while slower content is
+prepared. A framework decides how to connect the server stream to the client:
+
+```tsx
+import { Suspense } from 'react';
+
+export function Dashboard() {
+  return (
+    <main>
+      <h1>Dashboard</h1>
+      <Suspense fallback={<DashboardSkeleton />}>
+        <AnalyticsPanel />
+      </Suspense>
+    </main>
+  );
+}
+```
+
+Keep fallbacks useful and stable. A fallback should communicate what is loading
+without causing large layout shifts.
+
+## Server and Client Boundaries
+
+In an RSC-capable framework, a module marked with `'use client'` is a boundary
+for browser code:
+
+```tsx
+// LikeButton.tsx
+'use client';
+
+import { useState } from 'react';
+
+export function LikeButton() {
+  const [liked, setLiked] = useState(false);
+  return (
+    <button onClick={() => setLiked(value => !value)}>
+      {liked ? 'Liked' : 'Like'}
+    </button>
+  );
+}
+```
+
+A Server Component can render the Client Component and pass serializable props:
+
+```tsx
+// Article.tsx - Server Component
+import { LikeButton } from './LikeButton';
+
+export async function Article({ id }: { id: string }) {
+  const article = await getArticle(id);
+
+  return (
+    <article>
+      <h1>{article.title}</h1>
+      <LikeButton articleId={article.id} />
+    </article>
+  );
+}
+```
+
+Keep database clients, secrets, and filesystem access on the server. Keep event
+handlers, browser APIs, and interactive state in Client Components.
+
+## Server Actions and Forms
+
+React 19 form Actions can work with framework-supported Server Actions:
+
+```tsx
+async function updateProfile(formData: FormData) {
+  'use server';
+  await saveProfile(formData);
+}
+
+export function ProfileForm() {
+  return (
+    <form action={updateProfile}>
+      <input name="displayName" required />
+      <button type="submit">Save profile</button>
+    </form>
+  );
+}
+```
+
+The `'use server'` directive is interpreted by the framework. React alone does
+not provide a database transport or authentication layer.
+
+## Avoid Hydration Problems
+
+- Render the same initial data on the server and client.
+- Do not generate random IDs manually during render; use `useId` for related
+  accessibility IDs.
+- Move browser-only reads into an effect or use `browser()` below Suspense.
+- Keep date, locale, and timezone formatting consistent across environments.
+- Do not suppress hydration warnings unless the mismatch is intentional and
+  understood.
+
+## When to Use SSR, SSG, or RSC
+
+| Approach         | Best for                                                    |
+| ---------------- | ----------------------------------------------------------- |
+| SSR              | Fresh request-specific HTML and SEO-sensitive pages         |
+| SSG              | Content that can be generated ahead of time and cached      |
+| RSC              | Server data access with a small interactive client boundary |
+| Client rendering | Highly interactive private app surfaces                     |
+
+Choose the rendering strategy provided by your framework and measure the result.
+The fastest architecture is the one that keeps the critical UI small without
+making data flow or caching impossible to reason about.
+
+## Related React 19.3 APIs
+
+- Use `browser()` for a component that has no meaningful server output.
+- Use `<ViewTransition />` to animate Suspense reveals and transitions.
+- Render Context directly in Server Components when the Context comes from a
+  `'use client'` module.

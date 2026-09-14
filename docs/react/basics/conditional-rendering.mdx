@@ -24,7 +24,7 @@ components.
 
 ---
 
-## 📌 Why Conditional Rendering?
+## Why Conditional Rendering?
 
 You often need to show different content based on:
 
@@ -37,7 +37,7 @@ You often need to show different content based on:
 
 ---
 
-## 🔸 If-Else Statements
+## If-Else Statements
 
 The most basic way to conditionally render is using if-else statements:
 
@@ -71,7 +71,7 @@ function UserDashboard({ user }) {
 
 ---
 
-## 🔸 Ternary Operator
+## Ternary Operator
 
 The ternary operator (`condition ? true : false`) is perfect for inline
 conditional rendering:
@@ -90,10 +90,10 @@ function UserStatus({ status }) {
     <div>
       Status:{' '}
       {status === 'online'
-        ? '🟢 Online'
+        ? ' Online'
         : status === 'away'
-          ? '🟡 Away'
-          : '🔴 Offline'}
+          ? ' Away'
+          : ' Offline'}
     </div>
   );
 }
@@ -109,7 +109,7 @@ function App({ isLoggedIn }) {
 
 ---
 
-## 🔸 Logical AND (&&) Operator
+## Logical AND (&&) Operator
 
 Use `&&` when you want to render something only if a condition is true:
 
@@ -141,20 +141,20 @@ function UserProfile({ user, isAdmin }) {
 }
 ```
 
-### ⚠️ Beware of Falsy Values
+### Beware of Falsy Values
 
 ```jsx
-// ❌ Bad - Will render "0" if count is 0
+//  Bad - Will render "0" if count is 0
 {
   count && <div>Count: {count}</div>;
 }
 
-// ✅ Good - Explicitly check
+//  Good - Explicitly check
 {
   count > 0 && <div>Count: {count}</div>;
 }
 
-// ✅ Also good
+//  Also good
 {
   count !== 0 && <div>Count: {count}</div>;
 }
@@ -162,7 +162,7 @@ function UserProfile({ user, isAdmin }) {
 
 ---
 
-## 🔸 Logical OR (||) Operator
+## Logical OR (||) Operator
 
 Use `||` to provide fallback content:
 
@@ -183,7 +183,7 @@ function Counter({ count }) {
 
 ---
 
-## 🔸 Switch Statements
+## Switch Statements
 
 For multiple conditions, use switch statements:
 
@@ -193,13 +193,13 @@ function StatusBadge({ status }) {
 
   switch (status) {
     case 'success':
-      badge = <span>✓ Success</span>;
+      badge = <span> Success</span>;
       break;
     case 'error':
-      badge = <span>✗ Error</span>;
+      badge = <span> Error</span>;
       break;
     case 'warning':
-      badge = <span>⚠ Warning</span>;
+      badge = <span> Warning</span>;
       break;
     default:
       badge = <span>ℹ Info</span>;
@@ -214,9 +214,9 @@ function StatusBadge({ status }) {
 ```jsx
 function StatusBadge({ status }) {
   const badges = {
-    success: <span>✓ Success</span>,
-    error: <span>✗ Error</span>,
-    warning: <span>⚠ Warning</span>,
+    success: <span> Success</span>,
+    error: <span> Error</span>,
+    warning: <span> Warning</span>,
     info: <span>ℹ Info</span>,
   };
 
@@ -226,7 +226,7 @@ function StatusBadge({ status }) {
 
 ---
 
-## 🔸 Conditional CSS Classes
+## Conditional CSS Classes
 
 ### Using Template Literals
 
@@ -248,7 +248,7 @@ function Button({ isPrimary, isDisabled, isLarge }) {
 
 ---
 
-## 🔸 Conditional Styles
+## Conditional Styles
 
 ### Inline Styles
 
@@ -286,7 +286,7 @@ function Box({ isHighlighted }) {
 
 ---
 
-## 🔸 Rendering Lists Conditionally
+## Rendering Lists Conditionally
 
 ```jsx
 function UserList({ users, showEmptyState }) {
@@ -306,7 +306,7 @@ function UserList({ users, showEmptyState }) {
 
 ---
 
-## 🔸 Loading States
+## Loading States
 
 ### Simple Loading
 
@@ -357,7 +357,7 @@ function UserProfile({ user, isLoading, error }) {
 
 ---
 
-## 🔸 Authentication Examples
+## Authentication Examples
 
 ### Protected Route
 
@@ -399,7 +399,7 @@ function AdminPanel({ user }) {
 
 ---
 
-## 🔸 Feature Flags
+## Feature Flags
 
 ```jsx
 function App({ features }) {
@@ -419,17 +419,17 @@ function App({ features }) {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Keep Conditions Simple**
 
 ```jsx
-// ❌ Bad - Complex nested conditions
+//  Bad - Complex nested conditions
 {
   isLoggedIn && user && user.isPremium && user.hasAccess && <PremiumContent />;
 }
 
-// ✅ Good - Extract to variable
+//  Good - Extract to variable
 const canAccessPremium = isLoggedIn && user?.isPremium && user?.hasAccess;
 
 {
@@ -440,7 +440,7 @@ const canAccessPremium = isLoggedIn && user?.isPremium && user?.hasAccess;
 ### 2. **Use Early Returns**
 
 ```jsx
-// ❌ Bad - Nested conditions
+//  Bad - Nested conditions
 function Component({ data }) {
   return (
     <div>
@@ -457,7 +457,7 @@ function Component({ data }) {
   );
 }
 
-// ✅ Good - Early returns
+//  Good - Early returns
 function Component({ data }) {
   if (!data) return <div>Loading...</div>;
   if (!data.items) return <div>No items</div>;
@@ -469,14 +469,14 @@ function Component({ data }) {
 ### 3. **Extract Complex Conditions**
 
 ```jsx
-// ❌ Bad
+//  Bad
 {
   user && user.age >= 18 && user.hasLicense && !user.isSuspended && (
     <DriveButton />
   );
 }
 
-// ✅ Good
+//  Good
 const canDrive = user?.age >= 18 && user?.hasLicense && !user?.isSuspended;
 
 {
@@ -487,27 +487,27 @@ const canDrive = user?.age >= 18 && user?.hasLicense && !user?.isSuspended;
 ### 4. **Use Descriptive Variable Names**
 
 ```jsx
-// ❌ Bad
+//  Bad
 const x = user && user.role === 'admin';
 
-// ✅ Good
+//  Good
 const isAdmin = user?.role === 'admin';
 const canEditPost = isAdmin || post.authorId === user?.id;
 ```
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Rendering Falsy Values**
 
 ```jsx
-// ❌ Wrong - Renders "0"
+//  Wrong - Renders "0"
 {
   items.length && <div>Items: {items.length}</div>;
 }
 
-// ✅ Correct
+//  Correct
 {
   items.length > 0 && <div>Items: {items.length}</div>;
 }
@@ -516,12 +516,12 @@ const canEditPost = isAdmin || post.authorId === user?.id;
 ### 2. **Not Handling Null/Undefined**
 
 ```jsx
-// ❌ Wrong - Can crash if user is null
+//  Wrong - Can crash if user is null
 {
   user.name && <div>{user.name}</div>;
 }
 
-// ✅ Correct - Use optional chaining
+//  Correct - Use optional chaining
 {
   user?.name && <div>{user.name}</div>;
 }
@@ -530,7 +530,7 @@ const canEditPost = isAdmin || post.authorId === user?.id;
 ### 3. **Too Many Ternaries**
 
 ```jsx
-// ❌ Bad - Hard to read
+//  Bad - Hard to read
 {
   status === 'loading' ? (
     <Spinner />
@@ -543,7 +543,7 @@ const canEditPost = isAdmin || post.authorId === user?.id;
   );
 }
 
-// ✅ Good - Use if-else or object mapping
+//  Good - Use if-else or object mapping
 function StatusDisplay({ status }) {
   if (status === 'loading') return <Spinner />;
   if (status === 'error') return <Error />;
@@ -554,7 +554,7 @@ function StatusDisplay({ status }) {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - Use **if-else** for complex logic with early returns
 - Use **ternary operator** for inline conditional rendering
@@ -567,7 +567,7 @@ function StatusDisplay({ status }) {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Lists and Keys](./lists-and-keys)
 - [State](./state)
@@ -576,4 +576,4 @@ function StatusDisplay({ status }) {
 
 ---
 
-**Master conditional rendering to build dynamic, responsive UIs!** 🚀
+**Master conditional rendering to build dynamic, responsive UIs!**

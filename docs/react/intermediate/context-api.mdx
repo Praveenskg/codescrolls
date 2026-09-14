@@ -11,7 +11,7 @@ sidebar_position: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 🧩 React Context API
+# React Context API
 
 React's Context API is a way to manage **global state** across your app — like
 theme, auth, or user preferences — without passing props manually at every
@@ -19,7 +19,7 @@ level.
 
 ---
 
-## 📦 Why Use Context?
+## Why Use Context?
 
 - Avoid **prop drilling**
 - Share state/data globally
@@ -27,7 +27,7 @@ level.
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 1. **Create a context**
 2. **Wrap your app with a Provider**
@@ -35,7 +35,7 @@ level.
 
 ---
 
-## ✍️ Create & Provide Context
+## Create & Provide Context
 
 ```jsx
 import React, { createContext, useState } from 'react';
@@ -57,7 +57,7 @@ function ThemeProvider({ children }) {
 
 ---
 
-## 📥 Consume Context (Child Component)
+## Consume Context (Child Component)
 
 ```jsx
 import { useContext } from 'react';
@@ -78,7 +78,7 @@ function ThemeSwitcher() {
 
 ---
 
-## 🧪 Putting it Together
+## Putting it Together
 
 ```jsx
 function App() {
@@ -92,7 +92,7 @@ function App() {
 
 ---
 
-## 🔁 Best Practices
+## Best Practices
 
 - Keep Context small and focused (e.g. one for theme, one for auth)
 - Avoid overusing Context for frequently changing data (can cause re-renders)
@@ -100,12 +100,12 @@ function App() {
 
 ---
 
-> 💡 **Context is perfect for global, read-heavy data**. For dynamic or large
-> apps, you may consider libraries like Redux or Zustand.
+> **Context is perfect for global, read-heavy data**. For dynamic or large apps,
+> you may consider libraries like Redux or Zustand.
 
 ---
 
-## 📘 What's Next?
+## What's Next?
 
 - Learn about [useReducer](./hooks)
 - Dive into [Form Handling in React](../basics/forms)

@@ -26,7 +26,7 @@ times.
 
 ---
 
-## 🆕 React 19: React Compiler
+## React 19: React Compiler
 
 React 19 introduces the **React Compiler** - an automatic optimization tool that
 handles memoization for you.
@@ -35,10 +35,10 @@ handles memoization for you.
 
 The React Compiler automatically:
 
-- ✅ Memoizes components and values
-- ✅ Optimizes re-renders
-- ✅ Reduces need for manual `useMemo`/`useCallback`
-- ✅ Improves build-time performance
+- Memoizes components and values
+- Optimizes re-renders
+- Reduces need for manual `useMemo`/`useCallback`
+- Improves build-time performance
 
 ### Before React Compiler
 
@@ -108,15 +108,15 @@ setTimeout(() => {
 
 **Benefits:**
 
-- ✅ Fewer re-renders
-- ✅ Better performance
-- ✅ Less manual optimization needed
+- Fewer re-renders
+- Better performance
+- Less manual optimization needed
 
 **Browser Support**: React 19+ (with compiler enabled)
 
 ---
 
-## 📌 Why Optimize?
+## Why Optimize?
 
 Common performance issues:
 
@@ -128,7 +128,7 @@ Common performance issues:
 
 ---
 
-## 🔸 React.memo
+## React.memo
 
 ### Memoizing Components
 
@@ -167,7 +167,7 @@ const UserCard = memo(
 
 ---
 
-## 🔸 useMemo Hook
+## useMemo Hook
 
 ### Memoizing Expensive Calculations
 
@@ -197,10 +197,10 @@ function ProductList({ products, filter }) {
 function Parent() {
   const [count, setCount] = useState(0);
 
-  // ❌ Bad - New object on every render
+  //  Bad - New object on every render
   const config = { theme: 'dark', count };
 
-  // ✅ Good - Memoized object
+  //  Good - Memoized object
   const config = useMemo(
     () => ({
       theme: 'dark',
@@ -215,7 +215,7 @@ function Parent() {
 
 ---
 
-## 🔸 useCallback Hook
+## useCallback Hook
 
 ### Memoizing Functions
 
@@ -225,12 +225,12 @@ import { useCallback } from 'react';
 function Parent() {
   const [count, setCount] = useState(0);
 
-  // ❌ Bad - New function on every render
+  //  Bad - New function on every render
   const handleClick = () => {
     console.log('Clicked!');
   };
 
-  // ✅ Good - Memoized function
+  //  Good - Memoized function
   const handleClick = useCallback(() => {
     console.log('Clicked!');
   }, []);
@@ -266,7 +266,7 @@ function TodoList({ todos }) {
 
 ---
 
-## 🔸 Code Splitting
+## Code Splitting
 
 ### React.lazy and Suspense
 
@@ -318,7 +318,7 @@ function App() {
 
 ---
 
-## 🔸 Virtualization
+## Virtualization
 
 ### React Window
 
@@ -363,7 +363,7 @@ function InfiniteList({ items }) {
 
 ---
 
-## 🔸 Debouncing and Throttling
+## Debouncing and Throttling
 
 ### Debounce Search
 
@@ -438,7 +438,7 @@ function ScrollTracker() {
 
 ---
 
-## 🔸 Image Optimization
+## Image Optimization
 
 ### Lazy Loading Images
 
@@ -470,15 +470,15 @@ function ProgressiveImage({ placeholder, src, alt }) {
 
 ---
 
-## 🔸 Bundle Size Optimization
+## Bundle Size Optimization
 
 ### Tree Shaking
 
 ```jsx
-// ❌ Bad - Imports entire library
+//  Bad - Imports entire library
 import _ from 'lodash';
 
-// ✅ Good - Imports only what's needed
+//  Good - Imports only what's needed
 import debounce from 'lodash/debounce';
 ```
 
@@ -494,7 +494,7 @@ const loadChart = async () => {
 
 ---
 
-## 🔸 React Profiler
+## React Profiler
 
 ### Measuring Performance
 
@@ -523,15 +523,15 @@ function App() {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Avoid Inline Functions in JSX**
 
 ```jsx
-// ❌ Bad - New function on every render
+//  Bad - New function on every render
 <button onClick={() => handleClick(id)}>Click</button>;
 
-// ✅ Good - Memoized function
+//  Good - Memoized function
 const handleClick = useCallback(() => {
   doSomething(id);
 }, [id]);
@@ -542,12 +542,12 @@ const handleClick = useCallback(() => {
 ### 2. **Use Keys Properly**
 
 ```jsx
-// ❌ Bad - Index as key
+//  Bad - Index as key
 {
   items.map((item, index) => <div key={index}>{item}</div>);
 }
 
-// ✅ Good - Unique ID
+//  Good - Unique ID
 {
   items.map(item => <div key={item.id}>{item}</div>);
 }
@@ -556,10 +556,10 @@ const handleClick = useCallback(() => {
 ### 3. **Avoid Creating Objects in Render**
 
 ```jsx
-// ❌ Bad - New object every render
+//  Bad - New object every render
 <Component style={{ margin: 10 }} />;
 
-// ✅ Good - Define outside or use useMemo
+//  Good - Define outside or use useMemo
 const style = { margin: 10 };
 <Component style={style} />;
 ```
@@ -584,15 +584,15 @@ const About = lazy(() => import('./About'));
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Premature Optimization**
 
 ```jsx
-// ❌ Don't optimize everything
+//  Don't optimize everything
 const value = useMemo(() => x + y, [x, y]); // Overkill for simple calc
 
-// ✅ Optimize when needed
+//  Optimize when needed
 const filteredList = useMemo(() =>
   items.filter(expensive computation),
   [items]
@@ -602,12 +602,12 @@ const filteredList = useMemo(() =>
 ### 2. **Wrong Dependencies**
 
 ```jsx
-// ❌ Wrong - Missing dependencies
+//  Wrong - Missing dependencies
 const memoizedValue = useMemo(() => {
   return computeExpensiveValue(a, b);
 }, [a]); // Missing 'b'!
 
-// ✅ Correct - All dependencies
+//  Correct - All dependencies
 const memoizedValue = useMemo(() => {
   return computeExpensiveValue(a, b);
 }, [a, b]);
@@ -616,10 +616,10 @@ const memoizedValue = useMemo(() => {
 ### 3. **Overusing React.memo**
 
 ```jsx
-// ❌ Bad - Memoizing everything
+//  Bad - Memoizing everything
 const SimpleComponent = memo(() => <div>Hello</div>);
 
-// ✅ Good - Only expensive components
+//  Good - Only expensive components
 const ExpensiveList = memo(({ items }) => {
   return items.map(/* expensive rendering */);
 });
@@ -627,7 +627,7 @@ const ExpensiveList = memo(({ items }) => {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - Use **React.memo** for expensive components
 - Use **useMemo** for expensive calculations
@@ -641,7 +641,7 @@ const ExpensiveList = memo(({ items }) => {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Hooks](./hooks)
 - [Custom Hooks](./custom-hooks)
@@ -650,4 +650,4 @@ const ExpensiveList = memo(({ items }) => {
 
 ---
 
-**Optimize wisely for a fast, smooth user experience!** 🚀
+**Optimize wisely for a fast, smooth user experience!**

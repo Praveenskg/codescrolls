@@ -24,7 +24,7 @@ better control and validation.
 
 ---
 
-## 📌 Controlled vs Uncontrolled Components
+## Controlled vs Uncontrolled Components
 
 ### Controlled Components (Recommended)
 
@@ -60,7 +60,7 @@ function UncontrolledInput() {
 
 ---
 
-## 🔸 Basic Form Handling
+## Basic Form Handling
 
 ### Single Input
 
@@ -141,7 +141,7 @@ function UserForm() {
 
 ---
 
-## 🔸 Different Input Types
+## Different Input Types
 
 ### Text Input
 
@@ -275,7 +275,7 @@ const [file, setFile] = useState(null);
 
 ---
 
-## 🔸 Form Validation
+## Form Validation
 
 ### Basic Validation
 
@@ -377,7 +377,7 @@ function SignupForm() {
 
 ---
 
-## 🔸 Form Submission
+## Form Submission
 
 ### Async Submission
 
@@ -435,7 +435,7 @@ function ContactForm() {
 
 ---
 
-## 🔸 Form Libraries
+## Form Libraries
 
 ### React Hook Form
 
@@ -522,16 +522,16 @@ function LoginForm() {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Use Controlled Components**
 
 ```jsx
-// ✅ Good - Controlled
+//  Good - Controlled
 const [value, setValue] = useState('');
 <input value={value} onChange={(e) => setValue(e.target.value)} />
 
-// ❌ Avoid - Uncontrolled (unless necessary)
+//  Avoid - Uncontrolled (unless necessary)
 <input ref={inputRef} />
 ```
 
@@ -578,17 +578,17 @@ const handleSubmit = e => {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Forgetting preventDefault**
 
 ```jsx
-// ❌ Wrong - Page will reload
+//  Wrong - Page will reload
 const handleSubmit = () => {
   console.log('Submit');
 };
 
-// ✅ Correct
+//  Correct
 const handleSubmit = e => {
   e.preventDefault();
   console.log('Submit');
@@ -598,26 +598,26 @@ const handleSubmit = e => {
 ### 2. **Not Using Controlled Components**
 
 ```jsx
-// ❌ Bad - Uncontrolled
+//  Bad - Uncontrolled
 <input onChange={(e) => console.log(e.target.value)} />
 
-// ✅ Good - Controlled
+//  Good - Controlled
 <input value={value} onChange={(e) => setValue(e.target.value)} />
 ```
 
 ### 3. **Mutating State Directly**
 
 ```jsx
-// ❌ Wrong
+//  Wrong
 formData.name = 'New Name';
 
-// ✅ Correct
+//  Correct
 setFormData({ ...formData, name: 'New Name' });
 ```
 
 ---
 
-## 🆕 React 19: Form Actions
+## React 19: Form Actions
 
 React 19 introduces **Actions** - a modern way to handle form submissions with
 automatic state management.
@@ -711,16 +711,16 @@ function ContactForm() {
 
 **Benefits:**
 
-- ✅ Automatic loading states
-- ✅ Built-in error handling
-- ✅ Progressive enhancement
-- ✅ Less boilerplate code
+- Automatic loading states
+- Built-in error handling
+- Progressive enhancement
+- Less boilerplate code
 
 **Browser Support**: React 19+
 
 ---
 
-## 📝 Summary
+## Summary
 
 - Use **controlled components** for form inputs
 - Always **preventDefault()** on form submission
@@ -733,7 +733,7 @@ function ContactForm() {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [State](./state)
 - [Events](./events)
@@ -742,4 +742,4 @@ function ContactForm() {
 
 ---
 
-**Master forms to build great user experiences!** 🚀
+**Master forms to build great user experiences!**

@@ -24,7 +24,7 @@ components. Learn industry-standard patterns used in production applications.
 
 ---
 
-## 📌 Why Learn Patterns?
+## Why Learn Patterns?
 
 Benefits:
 
@@ -35,7 +35,7 @@ Benefits:
 
 ---
 
-## 🔸 Compound Components
+## Compound Components
 
 ### Basic Pattern
 
@@ -121,7 +121,7 @@ function TabPanel({ children }) {
 
 ---
 
-## 🔸 Render Props
+## Render Props
 
 ### Basic Pattern
 
@@ -175,7 +175,7 @@ function DataFetcher({ url, children }) {
 
 ---
 
-## 🔸 Higher-Order Components (HOC)
+## Higher-Order Components (HOC)
 
 ### Basic HOC
 
@@ -224,7 +224,7 @@ const EnhancedComponent = enhance(MyComponent);
 
 ---
 
-## 🔸 Portals
+## Portals
 
 ### Basic Portal
 
@@ -285,7 +285,7 @@ function Tooltip({ children, content }) {
 
 ---
 
-## 🔸 Provider Pattern
+## Provider Pattern
 
 ### Custom Provider
 
@@ -322,7 +322,7 @@ function useTheme() {
 
 ---
 
-## 🔸 Container/Presentational Pattern
+## Container/Presentational Pattern
 
 ### Separation of Concerns
 
@@ -371,7 +371,7 @@ function UserListPresentation({ users, loading, onDelete }) {
 
 ---
 
-## 🔸 Controlled Props Pattern
+## Controlled Props Pattern
 
 ### Flexible Component
 
@@ -409,7 +409,7 @@ function Counter({ value, onChange, defaultValue = 0 }) {
 
 ---
 
-## 🔸 State Reducer Pattern
+## State Reducer Pattern
 
 ### Flexible State Management
 
@@ -441,7 +441,7 @@ const [isOn, toggle] = useToggle(false, customReducer);
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Choose the Right Pattern**
 
@@ -455,12 +455,12 @@ const [isOn, toggle] = useToggle(false, customReducer);
 ### 2. **Keep Components Simple**
 
 ```jsx
-// ✅ Good - Single responsibility
+//  Good - Single responsibility
 function UserProfile({ user }) {
   return <div>{user.name}</div>;
 }
 
-// ❌ Bad - Too many responsibilities
+//  Bad - Too many responsibilities
 function UserProfile({ user, theme, auth, settings }) {
   // Too complex
 }
@@ -483,15 +483,15 @@ function Tabs({ children }) {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Overusing HOCs**
 
 ```jsx
-// ❌ Bad - Too many HOCs
+//  Bad - Too many HOCs
 const Enhanced = withAuth(withTheme(withData(withLoading(Component))));
 
-// ✅ Good - Use hooks instead
+//  Good - Use hooks instead
 function Component() {
   const auth = useAuth();
   const theme = useTheme();
@@ -503,12 +503,12 @@ function Component() {
 ### 2. **Not Handling Edge Cases**
 
 ```jsx
-// ❌ Bad - No null check
+//  Bad - No null check
 function useTheme() {
   return useContext(ThemeContext);
 }
 
-// ✅ Good - Error handling
+//  Good - Error handling
 function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -520,17 +520,17 @@ function useTheme() {
 
 ---
 
-## 🆕 React 19: Server Components
+## React 19: Server Components
 
 Server Components allow you to render components on the server, reducing
 client-side JavaScript.
 
 ### What Are Server Components?
 
-- ✅ **Rendered on server** - Execute on server, not client
-- ✅ **Zero JavaScript** - No JS sent to client
-- ✅ **Direct data access** - Access databases, APIs directly
-- ✅ **Better performance** - Smaller bundle sizes
+- **Rendered on server** - Execute on server, not client
+- **Zero JavaScript** - No JS sent to client
+- **Direct data access** - Access databases, APIs directly
+- **Better performance** - Smaller bundle sizes
 
 ### Basic Server Component
 
@@ -594,18 +594,16 @@ async function UserProfile({ userId }) {
 function UserActions({ userId }) {
   const [liked, setLiked] = useState(false);
 
-  return (
-    <button onClick={() => setLiked(!liked)}>{liked ? '❤️' : '🤍'}</button>
-  );
+  return <button onClick={() => setLiked(!liked)}>{liked ? '' : ''}</button>;
 }
 ```
 
 ### Benefits
 
-- ✅ **Smaller bundles** - Less JavaScript to download
-- ✅ **Faster initial load** - Content ready immediately
-- ✅ **Better SEO** - Fully rendered HTML
-- ✅ **Secure** - API keys stay on server
+- **Smaller bundles** - Less JavaScript to download
+- **Faster initial load** - Content ready immediately
+- **Better SEO** - Fully rendered HTML
+- **Secure** - API keys stay on server
 
 **Browser Support**: React 19+ (with Next.js 13+ or compatible framework)
 
@@ -634,9 +632,9 @@ function ProductPage({ productId }) {
 
 **Benefits:**
 
-- ✅ Faster initial load - static content ready immediately
-- ✅ Better SEO - static content fully rendered
-- ✅ Progressive enhancement - dynamic parts load as needed
+- Faster initial load - static content ready immediately
+- Better SEO - static content fully rendered
+- Progressive enhancement - dynamic parts load as needed
 
 ### cacheSignal API (React 19.2)
 
@@ -696,9 +694,9 @@ function App() {
 
 **Benefits:**
 
-- ✅ Reduced flickering
-- ✅ Consistent server/client behavior
-- ✅ Better visual consistency
+- Reduced flickering
+- Consistent server/client behavior
+- Better visual consistency
 
 ### Web Streams Integration (React 19.2)
 
@@ -724,15 +722,15 @@ function StreamingComponent() {
 
 **Benefits:**
 
-- ✅ Progressive content loading
-- ✅ Better performance on slow networks
-- ✅ Improved perceived performance
+- Progressive content loading
+- Better performance on slow networks
+- Improved perceived performance
 
 **Browser Support**: React 19.2+
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **Compound Components** - Flexible, composable APIs
 - **Render Props** - Share logic via function props
@@ -747,7 +745,7 @@ function StreamingComponent() {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Custom Hooks](../intermediate/custom-hooks)
 - [Context API](../intermediate/context-api)
@@ -756,4 +754,4 @@ function StreamingComponent() {
 
 ---
 
-**Master these patterns to build professional React applications!** 🚀
+**Master these patterns to build professional React applications!**

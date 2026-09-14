@@ -24,7 +24,7 @@ re-render.
 
 ---
 
-## 📌 What is State?
+## What is State?
 
 State is a JavaScript object that holds data that may change during the
 component's lifecycle. When state changes, React re-renders the component to
@@ -47,7 +47,7 @@ function Counter() {
 
 ---
 
-## 🔸 useState Hook
+## useState Hook
 
 The `useState` hook is the primary way to add state to functional components.
 
@@ -80,7 +80,7 @@ function TextInput() {
 
 ---
 
-## 🔸 Multiple State Variables
+## Multiple State Variables
 
 You can use multiple `useState` hooks in a single component:
 
@@ -115,7 +115,7 @@ function UserForm() {
 
 ---
 
-## 🔸 State with Different Data Types
+## State with Different Data Types
 
 ### String State
 
@@ -171,7 +171,7 @@ const updateName = newName => {
 
 ---
 
-## 🔸 Updating State
+## Updating State
 
 ### Direct Update
 
@@ -189,10 +189,10 @@ When the new state depends on the previous state, use functional updates:
 ```jsx
 const [count, setCount] = useState(0);
 
-// ✅ Good - Functional update
+//  Good - Functional update
 setCount(prevCount => prevCount + 1);
 
-// ❌ Bad - Direct update (can cause issues)
+//  Bad - Direct update (can cause issues)
 setCount(count + 1);
 ```
 
@@ -203,12 +203,12 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   const incrementThreeTimes = () => {
-    // ❌ This will only increment by 1
+    //  This will only increment by 1
     setCount(count + 1);
     setCount(count + 1);
     setCount(count + 1);
 
-    // ✅ This will increment by 3
+    //  This will increment by 3
     setCount(prev => prev + 1);
     setCount(prev => prev + 1);
     setCount(prev => prev + 1);
@@ -220,7 +220,7 @@ function Counter() {
 
 ---
 
-## 🔸 Updating Arrays
+## Updating Arrays
 
 ### Add Item
 
@@ -305,7 +305,7 @@ function TodoList() {
 
 ---
 
-## 🔸 Updating Objects
+## Updating Objects
 
 ### Update Single Property
 
@@ -393,15 +393,15 @@ function UserForm() {
 
 ---
 
-## 🔸 Lazy Initial State
+## Lazy Initial State
 
 If the initial state requires expensive computation, use a function:
 
 ```jsx
-// ❌ Bad - Runs on every render
+//  Bad - Runs on every render
 const [state, setState] = useState(expensiveComputation());
 
-// ✅ Good - Runs only once
+//  Good - Runs only once
 const [state, setState] = useState(() => expensiveComputation());
 ```
 
@@ -421,7 +421,7 @@ function Component() {
 
 ---
 
-## 🔸 State vs Props
+## State vs Props
 
 | Feature        | State              | Props                |
 | -------------- | ------------------ | -------------------- |
@@ -453,38 +453,38 @@ function Child({ count, onIncrement }) {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Don't Mutate State Directly**
 
 ```jsx
-// ❌ Bad
+//  Bad
 const [items, setItems] = useState([1, 2, 3]);
 items.push(4); // Don't mutate!
 
-// ✅ Good
+//  Good
 setItems([...items, 4]);
 ```
 
 ### 2. **Use Functional Updates for Dependent State**
 
 ```jsx
-// ❌ Bad
+//  Bad
 setCount(count + 1);
 
-// ✅ Good
+//  Good
 setCount(prev => prev + 1);
 ```
 
 ### 3. **Group Related State**
 
 ```jsx
-// ❌ Bad - Too many separate states
+//  Bad - Too many separate states
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [email, setEmail] = useState('');
 
-// ✅ Good - Group related data
+//  Good - Group related data
 const [user, setUser] = useState({
   firstName: '',
   lastName: '',
@@ -495,12 +495,12 @@ const [user, setUser] = useState({
 ### 4. **Keep State Minimal**
 
 ```jsx
-// ❌ Bad - Derived state
+//  Bad - Derived state
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const [fullName, setFullName] = useState('');
 
-// ✅ Good - Calculate on render
+//  Good - Calculate on render
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
 const fullName = `${firstName} ${lastName}`;
@@ -509,7 +509,7 @@ const fullName = `${firstName} ${lastName}`;
 ### 5. **Initialize State Properly**
 
 ```jsx
-// ✅ Good - Clear initial values
+//  Good - Clear initial values
 const [count, setCount] = useState(0);
 const [user, setUser] = useState(null);
 const [items, setItems] = useState([]);
@@ -518,27 +518,27 @@ const [isLoading, setIsLoading] = useState(false);
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Mutating State**
 
 ```jsx
-// ❌ Wrong
+//  Wrong
 const [user, setUser] = useState({ name: 'John' });
 user.name = 'Jane'; // Don't do this!
 
-// ✅ Correct
+//  Correct
 setUser({ ...user, name: 'Jane' });
 ```
 
 ### 2. **Using State Immediately After Setting**
 
 ```jsx
-// ❌ Wrong - State updates are asynchronous
+//  Wrong - State updates are asynchronous
 setCount(count + 1);
 console.log(count); // Still old value!
 
-// ✅ Correct - Use useEffect or functional update
+//  Correct - Use useEffect or functional update
 setCount(prev => {
   console.log(prev + 1); // New value
   return prev + 1;
@@ -548,13 +548,13 @@ setCount(prev => {
 ### 3. **Too Many State Variables**
 
 ```jsx
-// ❌ Bad
+//  Bad
 const [name, setName] = useState('');
 const [email, setEmail] = useState('');
 const [age, setAge] = useState(0);
 const [address, setAddress] = useState('');
 
-// ✅ Better
+//  Better
 const [user, setUser] = useState({
   name: '',
   email: '',
@@ -565,7 +565,7 @@ const [user, setUser] = useState({
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **State** is mutable data managed within a component
 - Use **useState** hook to add state to functional components
@@ -576,7 +576,7 @@ const [user, setUser] = useState({
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Props](./props)
 - [Hooks](../intermediate/hooks)
@@ -586,4 +586,4 @@ const [user, setUser] = useState({
 ---
 
 **State is the heart of React components. Master it to build dynamic,
-interactive UIs!** 🚀
+interactive UIs!**

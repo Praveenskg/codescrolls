@@ -23,7 +23,7 @@ follow the same rules as built-in hooks and start with "use".
 
 ---
 
-## 📌 Why Custom Hooks?
+## Why Custom Hooks?
 
 Benefits:
 
@@ -34,7 +34,7 @@ Benefits:
 
 ---
 
-## 🔸 Creating Custom Hooks
+## Creating Custom Hooks
 
 ### Basic Custom Hook
 
@@ -86,7 +86,7 @@ function Modal() {
 
 ---
 
-## 🔸 Common Custom Hooks
+## Common Custom Hooks
 
 ### useLocalStorage
 
@@ -424,7 +424,7 @@ function LoginForm() {
 
 ---
 
-## 🔸 Advanced Patterns
+## Advanced Patterns
 
 ### Composing Hooks
 
@@ -484,16 +484,16 @@ function useAsync(asyncFunction) {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Name Hooks with "use" Prefix**
 
 ```jsx
-// ✅ Good
+//  Good
 function useCounter() {}
 function useFetch() {}
 
-// ❌ Bad
+//  Bad
 function counter() {}
 function fetchData() {}
 ```
@@ -501,14 +501,14 @@ function fetchData() {}
 ### 2. **Follow Hook Rules**
 
 ```jsx
-// ✅ Good - Always at top level
+//  Good - Always at top level
 function useCustomHook() {
   const [state, setState] = useState();
   useEffect(() => {}, []);
   return state;
 }
 
-// ❌ Bad - Conditional hooks
+//  Bad - Conditional hooks
 function useCustomHook(condition) {
   if (condition) {
     useState(); // Don't do this!
@@ -519,7 +519,7 @@ function useCustomHook(condition) {
 ### 3. **Return Consistent Values**
 
 ```jsx
-// ✅ Good - Array or object
+//  Good - Array or object
 function useToggle() {
   return [value, toggle];
 }
@@ -559,17 +559,17 @@ function useEventListener(eventName, handler, element = window) {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Not Following Hook Rules**
 
 ```jsx
-// ❌ Wrong - Conditional hook
+//  Wrong - Conditional hook
 if (condition) {
   useEffect(() => {}, []);
 }
 
-// ✅ Correct - Condition inside hook
+//  Correct - Condition inside hook
 useEffect(() => {
   if (condition) {
     // Do something
@@ -580,12 +580,12 @@ useEffect(() => {
 ### 2. **Missing Dependencies**
 
 ```jsx
-// ❌ Wrong - Missing dependency
+//  Wrong - Missing dependency
 useEffect(() => {
   fetchData(userId);
 }, []); // Missing userId!
 
-// ✅ Correct
+//  Correct
 useEffect(() => {
   fetchData(userId);
 }, [userId]);
@@ -594,13 +594,13 @@ useEffect(() => {
 ### 3. **Not Memoizing Callbacks**
 
 ```jsx
-// ❌ Bad - New function every render
+//  Bad - New function every render
 function useCustomHook() {
   const handleClick = () => {};
   return handleClick;
 }
 
-// ✅ Good - Memoized
+//  Good - Memoized
 function useCustomHook() {
   const handleClick = useCallback(() => {}, []);
   return handleClick;
@@ -609,7 +609,7 @@ function useCustomHook() {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **Custom hooks** extract reusable logic
 - Start hook names with **"use"**
@@ -622,7 +622,7 @@ function useCustomHook() {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Hooks](./hooks)
 - [Performance Optimization](./performance-optimization)
@@ -631,4 +631,4 @@ function useCustomHook() {
 
 ---
 
-**Create custom hooks to write cleaner, more reusable code!** 🚀
+**Create custom hooks to write cleaner, more reusable code!**

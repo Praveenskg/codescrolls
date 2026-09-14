@@ -26,7 +26,7 @@ sync with the URL.
 
 ---
 
-## 📌 Installation
+## Installation
 
 ```bash
 # Install React Router v6
@@ -38,7 +38,7 @@ yarn add react-router-dom
 
 ---
 
-## 🔸 Basic Setup
+## Basic Setup
 
 ### BrowserRouter
 
@@ -90,7 +90,7 @@ function App() {
 
 ---
 
-## 🔸 Navigation
+## Navigation
 
 ### Link Component
 
@@ -156,7 +156,7 @@ function LoginForm() {
 
 ---
 
-## 🔸 Route Parameters
+## Route Parameters
 
 ### Dynamic Routes
 
@@ -197,7 +197,7 @@ function BlogPost() {
 
 ---
 
-## 🔸 Query Parameters
+## Query Parameters
 
 ### Reading Query Params
 
@@ -242,7 +242,7 @@ function SearchBox() {
 
 ---
 
-## 🔸 Nested Routes
+## Nested Routes
 
 ### Basic Nesting
 
@@ -286,7 +286,7 @@ function App() {
 
 ---
 
-## 🔸 Protected Routes
+## Protected Routes
 
 ### Basic Protection
 
@@ -347,7 +347,7 @@ function ProtectedRoute({ children, requiredRole }) {
 
 ---
 
-## 🔸 Layout Routes
+## Layout Routes
 
 ### Shared Layout
 
@@ -380,7 +380,7 @@ function App() {
 
 ---
 
-## 🔸 404 Not Found
+## 404 Not Found
 
 ### Catch-All Route
 
@@ -403,7 +403,7 @@ function NotFound() {
 
 ---
 
-## 🔸 Lazy Loading Routes
+## Lazy Loading Routes
 
 ### Code Splitting
 
@@ -431,7 +431,7 @@ function App() {
 
 ---
 
-## 🔸 Navigation Hooks
+## Navigation Hooks
 
 ### useNavigate
 
@@ -481,12 +481,12 @@ const { id, category } = useParams();
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Use Lazy Loading**
 
 ```jsx
-// ✅ Good - Code splitting
+//  Good - Code splitting
 const Dashboard = lazy(() => import('./Dashboard'));
 
 <Suspense fallback={<Loading />}>
@@ -497,7 +497,7 @@ const Dashboard = lazy(() => import('./Dashboard'));
 ### 2. **Protect Sensitive Routes**
 
 ```jsx
-// ✅ Good - Protected routes
+//  Good - Protected routes
 <Route
   path="/admin"
   element={
@@ -511,7 +511,7 @@ const Dashboard = lazy(() => import('./Dashboard'));
 ### 3. **Use Layouts for Common UI**
 
 ```jsx
-// ✅ Good - Shared layout
+//  Good - Shared layout
 <Route element={<Layout />}>
   <Route path="/" element={<Home />} />
   <Route path="/about" element={<About />} />
@@ -521,30 +521,30 @@ const Dashboard = lazy(() => import('./Dashboard'));
 ### 4. **Handle 404s**
 
 ```jsx
-// ✅ Good - Catch-all route
+//  Good - Catch-all route
 <Route path="*" element={<NotFound />} />
 ```
 
 ### 5. **Use NavLink for Active States**
 
 ```jsx
-// ✅ Good - Active styling
+//  Good - Active styling
 <NavLink to="/dashboard">Dashboard</NavLink>
 ```
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Forgetting BrowserRouter**
 
 ```jsx
-// ❌ Wrong - No router wrapper
+//  Wrong - No router wrapper
 <Routes>
   <Route path="/" element={<Home />} />
 </Routes>
 
-// ✅ Correct
+//  Correct
 <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home />} />
@@ -555,22 +555,22 @@ const Dashboard = lazy(() => import('./Dashboard'));
 ### 2. **Using `<a>` Instead of `<Link>`**
 
 ```jsx
-// ❌ Wrong - Full page reload
+//  Wrong - Full page reload
 <a href="/about">About</a>
 
-// ✅ Correct - Client-side navigation
+//  Correct - Client-side navigation
 <Link to="/about">About</Link>
 ```
 
 ### 3. **Not Using `<Outlet>`**
 
 ```jsx
-// ❌ Wrong - Nested routes won't render
+//  Wrong - Nested routes won't render
 function Dashboard() {
   return <div>Dashboard</div>;
 }
 
-// ✅ Correct - Include Outlet
+//  Correct - Include Outlet
 function Dashboard() {
   return (
     <div>
@@ -583,7 +583,7 @@ function Dashboard() {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **BrowserRouter** wraps your app
 - **Routes** and **Route** define navigation
@@ -598,7 +598,7 @@ function Dashboard() {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Hooks](../intermediate/hooks)
 - [Custom Hooks](../intermediate/custom-hooks)
@@ -607,4 +607,4 @@ function Dashboard() {
 
 ---
 
-**Master React Router for seamless navigation in your apps!** 🚀
+**Master React Router for seamless navigation in your apps!**

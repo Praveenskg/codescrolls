@@ -25,7 +25,7 @@ ways to render lists of data using JavaScript's `map()` function and requires
 
 ---
 
-## 📌 Why Lists and Keys?
+## Why Lists and Keys?
 
 - Display collections of data (users, products, posts, etc.)
 - Keys help React identify which items have changed, been added, or removed
@@ -33,7 +33,7 @@ ways to render lists of data using JavaScript's `map()` function and requires
 
 ---
 
-## 🔸 Rendering Basic Lists
+## Rendering Basic Lists
 
 ### Using map()
 
@@ -75,7 +75,7 @@ function UserList() {
 
 ---
 
-## 🔸 Understanding Keys
+## Understanding Keys
 
 ### What are Keys?
 
@@ -83,7 +83,7 @@ Keys are special string attributes that help React identify which items in a
 list have changed, been added, or removed.
 
 ```jsx
-// ✅ Good - Using unique ID as key
+//  Good - Using unique ID as key
 {
   users.map(user => <UserCard key={user.id} user={user} />);
 }
@@ -100,9 +100,9 @@ Without keys or with incorrect keys, React may:
 
 ---
 
-## 🔸 Choosing Keys
+## Choosing Keys
 
-### ✅ Good Keys
+### Good Keys
 
 #### 1. **Database IDs (Best)**
 
@@ -132,12 +132,12 @@ const items = data.map(item => ({
 }));
 ```
 
-### ❌ Bad Keys
+### Bad Keys
 
 #### 1. **Array Index (Avoid if list can change)**
 
 ```jsx
-// ❌ Bad - Can cause bugs if list changes
+//  Bad - Can cause bugs if list changes
 {
   items.map((item, index) => <li key={index}>{item}</li>);
 }
@@ -153,7 +153,7 @@ const items = data.map(item => ({
 #### 2. **Random Values**
 
 ```jsx
-// ❌ Very Bad - New key on every render
+//  Very Bad - New key on every render
 {
   items.map(item => <li key={Math.random()}>{item}</li>);
 }
@@ -162,7 +162,7 @@ const items = data.map(item => ({
 #### 3. **Non-Unique Values**
 
 ```jsx
-// ❌ Bad - Not unique
+//  Bad - Not unique
 {
   users.map(user => <li key={user.name}>{user.name}</li>);
 }
@@ -170,19 +170,19 @@ const items = data.map(item => ({
 
 ---
 
-## 🔸 Key Rules
+## Key Rules
 
 ### 1. **Keys Must Be Unique Among Siblings**
 
 ```jsx
-// ✅ Good - Keys unique within this list
+//  Good - Keys unique within this list
 <ul>
   {users.map(user => (
     <li key={user.id}>{user.name}</li>
   ))}
 </ul>
 
-// ✅ Also good - Different lists can have same keys
+//  Also good - Different lists can have same keys
 <ul>
   {admins.map(admin => (
     <li key={admin.id}>{admin.name}</li>
@@ -193,18 +193,18 @@ const items = data.map(item => ({
 ### 2. **Keys Must Be Stable**
 
 ```jsx
-// ❌ Bad - Key changes on every render
+//  Bad - Key changes on every render
 key={Date.now()}
 key={Math.random()}
 
-// ✅ Good - Stable key
+//  Good - Stable key
 key={item.id}
 ```
 
 ### 3. **Keys Should Not Be Passed as Props**
 
 ```jsx
-// ❌ Wrong - Key is not accessible as prop
+//  Wrong - Key is not accessible as prop
 function ListItem({ key, name }) {
   return (
     <li>
@@ -213,7 +213,7 @@ function ListItem({ key, name }) {
   ); // key is undefined
 }
 
-// ✅ Correct - Pass ID separately
+//  Correct - Pass ID separately
 function ListItem({ id, name }) {
   return (
     <li>
@@ -227,7 +227,7 @@ function ListItem({ id, name }) {
 
 ---
 
-## 🔸 Common Patterns
+## Common Patterns
 
 ### Extracting List Components
 
@@ -297,7 +297,7 @@ function TaskList({ tasks, onDelete, onToggle }) {
 
 ---
 
-## 🔸 Filtering and Sorting Lists
+## Filtering and Sorting Lists
 
 ### Filtering
 
@@ -363,7 +363,7 @@ function SearchableList({ items, searchTerm }) {
 
 ---
 
-## 🔸 Empty States
+## Empty States
 
 ### No Items
 
@@ -407,7 +407,7 @@ function UserList({ users, isLoading }) {
 
 ---
 
-## 🔸 Performance Optimization
+## Performance Optimization
 
 ### Memoizing List Items
 
@@ -457,7 +457,7 @@ function VirtualList({ items }) {
 
 ---
 
-## 🔸 Advanced Patterns
+## Advanced Patterns
 
 ### Grouped Lists
 
@@ -533,17 +533,17 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Always Use Keys**
 
 ```jsx
-// ❌ Bad - No key
+//  Bad - No key
 {
   items.map(item => <li>{item}</li>);
 }
 
-// ✅ Good - With key
+//  Good - With key
 {
   items.map(item => <li key={item.id}>{item}</li>);
 }
@@ -552,12 +552,12 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 ### 2. **Use Stable, Unique Keys**
 
 ```jsx
-// ❌ Bad - Index as key (if list changes)
+//  Bad - Index as key (if list changes)
 {
   items.map((item, index) => <li key={index}>{item}</li>);
 }
 
-// ✅ Good - Unique ID
+//  Good - Unique ID
 {
   items.map(item => <li key={item.id}>{item}</li>);
 }
@@ -566,7 +566,7 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 ### 3. **Extract List Item Components**
 
 ```jsx
-// ❌ Bad - Complex inline rendering
+//  Bad - Complex inline rendering
 {
   items.map(item => (
     <div key={item.id}>
@@ -577,7 +577,7 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
   ));
 }
 
-// ✅ Good - Extracted component
+//  Good - Extracted component
 {
   items.map(item => (
     <ListItem key={item.id} item={item} onClick={handleClick} />
@@ -588,7 +588,7 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 ### 4. **Handle Empty States**
 
 ```jsx
-// ✅ Good - Clear empty state
+//  Good - Clear empty state
 {
   items.length > 0 ? (
     items.map(item => <ListItem key={item.id} item={item} />)
@@ -600,17 +600,17 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Using Index as Key When List Changes**
 
 ```jsx
-// ❌ Wrong - Bugs when reordering
+//  Wrong - Bugs when reordering
 {
   items.map((item, index) => <li key={index}>{item.name}</li>);
 }
 
-// ✅ Correct
+//  Correct
 {
   items.map(item => <li key={item.id}>{item.name}</li>);
 }
@@ -619,12 +619,12 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 ### 2. **Forgetting Keys**
 
 ```jsx
-// ❌ Wrong - Missing key warning
+//  Wrong - Missing key warning
 {
   items.map(item => <li>{item}</li>);
 }
 
-// ✅ Correct
+//  Correct
 {
   items.map(item => <li key={item.id}>{item}</li>);
 }
@@ -633,12 +633,12 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 ### 3. **Using Non-Unique Keys**
 
 ```jsx
-// ❌ Wrong - Duplicate keys
+//  Wrong - Duplicate keys
 {
   items.map(item => <li key={item.type}>{item.name}</li>);
 }
 
-// ✅ Correct - Unique keys
+//  Correct - Unique keys
 {
   items.map(item => <li key={item.id}>{item.name}</li>);
 }
@@ -646,7 +646,7 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - Use **map()** to render lists in React
 - **Keys** help React identify list items
@@ -659,7 +659,7 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Conditional Rendering](./conditional-rendering)
 - [State](./state)
@@ -668,4 +668,4 @@ function PaginatedList({ items, itemsPerPage = 10 }) {
 
 ---
 
-**Master lists and keys to build efficient, bug-free list UIs!** 🚀
+**Master lists and keys to build efficient, bug-free list UIs!**

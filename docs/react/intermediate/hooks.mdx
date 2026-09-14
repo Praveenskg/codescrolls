@@ -17,14 +17,14 @@ sidebar_position: 1
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 🔗 React Hooks
+# React Hooks
 
 React Hooks let you ** use state and other React features ** without writing a
 class. They make functional components more powerful.
 
 ---
 
-## 📦 Commonly Used Hooks
+## Commonly Used Hooks
 
 | Hook             | Description                                  |
 | ---------------- | -------------------------------------------- |
@@ -35,7 +35,7 @@ class. They make functional components more powerful.
 
 ---
 
-## 🔁 useState – For Component State
+## useState – For Component State
 
 ```jsx live
 function Counter() {
@@ -53,7 +53,7 @@ function Counter() {
 
 ---
 
-## ⚙️ useEffect – For Side Effects {#useeffect}
+## useEffect – For Side Effects {#useeffect}
 
 ```jsx live
 function Timer() {
@@ -75,7 +75,7 @@ function Timer() {
 
 ---
 
-## 🔍 useRef – For Persistent References
+## useRef – For Persistent References
 
 ```jsx live
 function FocusInput() {
@@ -98,7 +98,7 @@ function FocusInput() {
 
 ---
 
-## 🧩 Custom Hook – useLocalStorage
+## Custom Hook – useLocalStorage
 
 Create your own reusable hooks for specific logic.
 
@@ -134,7 +134,7 @@ function ThemeSwitcher() {
 
 ---
 
-## 💡 When to Use Hooks ?
+## When to Use Hooks ?
 
 - Manage local state(`useState`)
   - Perform side effects like data fetching(`useEffect`)
@@ -144,8 +144,8 @@ function ThemeSwitcher() {
 
 :::tip Rules of Hooks
 
-- ✅ Call hooks at the ** top level only **
-  - ✅ Use hooks only in ** React functional components **
+- Call hooks at the ** top level only **
+- Use hooks only in ** React functional components **
 
 :::
 
@@ -153,7 +153,7 @@ function ThemeSwitcher() {
 
 ---
 
-## 🆕 React 19 Hooks
+## React 19 Hooks
 
 ### useActionState
 
@@ -344,16 +344,16 @@ function ChatRoom({ roomId }) {
 
 ** Benefits:**
 
-    - ✅ Stable reference - doesn't change between renders
-      - ✅ Always accesses latest props / state
-        - ✅ Prevents unnecessary effect re - runs
-          - ✅ Perfect for WebSocket handlers, analytics
+    -  Stable reference - doesn't change between renders
+      -  Always accesses latest props / state
+        -  Prevents unnecessary effect re - runs
+          -  Perfect for WebSocket handlers, analytics
 
             ** Browser Support **: React 19.2 +
 
               ---
 
-## 📘 What's Next?
+## What's Next?
 
 - Dive into[Context API](./ context - api)
   - Learn how to handle[Forms](../basics/forms)

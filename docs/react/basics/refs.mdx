@@ -25,7 +25,7 @@ values that don't trigger re-renders.
 
 ---
 
-## 📌 What are Refs?
+## What are Refs?
 
 Refs allow you to:
 
@@ -36,7 +36,7 @@ Refs allow you to:
 
 ---
 
-## 🔸 useRef Hook
+## useRef Hook
 
 ### Basic Usage
 
@@ -71,7 +71,7 @@ myRef.current = newValue; // Update the value
 
 ---
 
-## 🔸 Accessing DOM Elements
+## Accessing DOM Elements
 
 ### Focus Management
 
@@ -173,7 +173,7 @@ function VideoPlayer() {
 
 ---
 
-## 🔸 Storing Mutable Values
+## Storing Mutable Values
 
 ### Preserving Values Across Renders
 
@@ -255,7 +255,7 @@ function ExpensiveComponent() {
 
 ---
 
-## 🔸 Ref Callbacks
+## Ref Callbacks
 
 ### Dynamic Refs
 
@@ -304,7 +304,7 @@ function MeasureOnRender() {
 
 ---
 
-## 🔸 forwardRef
+## forwardRef
 
 ### Forwarding Refs to Child Components
 
@@ -349,7 +349,7 @@ const CustomInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 
 ---
 
-## 🔸 useImperativeHandle
+## useImperativeHandle
 
 ### Exposing Custom Methods
 
@@ -433,7 +433,7 @@ function App() {
 
 ---
 
-## 🔸 Common Use Cases
+## Common Use Cases
 
 ### Form Management
 
@@ -510,56 +510,56 @@ function MapComponent() {
 
 ---
 
-## 🔸 Refs vs State
+## Refs vs State
 
-| Feature                | Refs               | State                |
-| ---------------------- | ------------------ | -------------------- |
-| **Triggers re-render** | ❌ No              | ✅ Yes               |
-| **Mutable**            | ✅ Yes             | ❌ No (use setState) |
-| **Async updates**      | ❌ No (immediate)  | ✅ Yes               |
-| **Use case**           | DOM access, timers | UI data              |
-| **Persistence**        | ✅ Across renders  | ✅ Across renders    |
+| Feature                | Refs               | State             |
+| ---------------------- | ------------------ | ----------------- |
+| **Triggers re-render** | No                 | Yes               |
+| **Mutable**            | Yes                | No (use setState) |
+| **Async updates**      | No (immediate)     | Yes               |
+| **Use case**           | DOM access, timers | UI data           |
+| **Persistence**        | Across renders     | Across renders    |
 
 ### When to Use Refs
 
 ```jsx
-// ✅ Good - DOM manipulation
+//  Good - DOM manipulation
 const inputRef = useRef(null);
 inputRef.current.focus();
 
-// ✅ Good - Storing timer ID
+//  Good - Storing timer ID
 const timerRef = useRef(null);
 timerRef.current = setInterval(...);
 
-// ✅ Good - Previous value
+//  Good - Previous value
 const prevValueRef = useRef(value);
 ```
 
 ### When to Use State
 
 ```jsx
-// ✅ Good - UI data
+//  Good - UI data
 const [count, setCount] = useState(0);
 
-// ✅ Good - Triggers re-render
+//  Good - Triggers re-render
 const [isOpen, setIsOpen] = useState(false);
 
-// ✅ Good - Form inputs
+//  Good - Form inputs
 const [name, setName] = useState('');
 ```
 
 ---
 
-## ✅ Best Practices
+## Best Practices
 
 ### 1. **Don't Overuse Refs**
 
 ```jsx
-// ❌ Bad - Use state instead
+//  Bad - Use state instead
 const countRef = useRef(0);
 countRef.current++;
 
-// ✅ Good - Use state for UI data
+//  Good - Use state for UI data
 const [count, setCount] = useState(0);
 setCount(count + 1);
 ```
@@ -567,13 +567,13 @@ setCount(count + 1);
 ### 2. **Check for null Before Accessing**
 
 ```jsx
-// ❌ Bad - Can crash
+//  Bad - Can crash
 inputRef.current.focus();
 
-// ✅ Good - Safe access
+//  Good - Safe access
 inputRef.current?.focus();
 
-// ✅ Also good
+//  Also good
 if (inputRef.current) {
   inputRef.current.focus();
 }
@@ -598,7 +598,7 @@ useEffect(() => {
 ### 4. **Use forwardRef for Reusable Components**
 
 ```jsx
-// ✅ Good - Allows parent to access ref
+//  Good - Allows parent to access ref
 const Button = forwardRef((props, ref) => {
   return <button ref={ref} {...props} />;
 });
@@ -607,27 +607,27 @@ const Button = forwardRef((props, ref) => {
 ### 5. **Avoid Refs for Controlled Components**
 
 ```jsx
-// ❌ Bad - Use controlled component
+//  Bad - Use controlled component
 const inputRef = useRef();
 const getValue = () => inputRef.current.value;
 
-// ✅ Good - Controlled component
+//  Good - Controlled component
 const [value, setValue] = useState('');
 <input value={value} onChange={e => setValue(e.target.value)} />;
 ```
 
 ---
 
-## 🚨 Common Mistakes
+## Common Mistakes
 
 ### 1. **Using Refs for State**
 
 ```jsx
-// ❌ Wrong - Won't trigger re-render
+//  Wrong - Won't trigger re-render
 const countRef = useRef(0);
 countRef.current++;
 
-// ✅ Correct - Use state
+//  Correct - Use state
 const [count, setCount] = useState(0);
 setCount(count + 1);
 ```
@@ -635,12 +635,12 @@ setCount(count + 1);
 ### 2. **Not Checking for null**
 
 ```jsx
-// ❌ Wrong - Can crash if ref is null
+//  Wrong - Can crash if ref is null
 const handleClick = () => {
   inputRef.current.focus();
 };
 
-// ✅ Correct - Check first
+//  Correct - Check first
 const handleClick = () => {
   if (inputRef.current) {
     inputRef.current.focus();
@@ -651,12 +651,12 @@ const handleClick = () => {
 ### 3. **Forgetting Cleanup**
 
 ```jsx
-// ❌ Wrong - Memory leak
+//  Wrong - Memory leak
 useEffect(() => {
   intervalRef.current = setInterval(() => {}, 1000);
 }, []);
 
-// ✅ Correct - Cleanup
+//  Correct - Cleanup
 useEffect(() => {
   intervalRef.current = setInterval(() => {}, 1000);
   return () => clearInterval(intervalRef.current);
@@ -665,7 +665,7 @@ useEffect(() => {
 
 ---
 
-## 📝 Summary
+## Summary
 
 - **Refs** provide direct access to DOM elements
 - Use **useRef** for mutable values that don't trigger re-renders
@@ -678,7 +678,7 @@ useEffect(() => {
 
 ---
 
-## 🔗 Related Topics
+## Related Topics
 
 - [Hooks](../intermediate/hooks)
 - [State](./state)
@@ -687,4 +687,4 @@ useEffect(() => {
 
 ---
 
-**Use refs wisely for DOM manipulation and mutable values!** 🚀
+**Use refs wisely for DOM manipulation and mutable values!**

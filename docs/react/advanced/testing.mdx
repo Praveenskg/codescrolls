@@ -1,0 +1,146 @@
+---
+id: testing
+title: Testing React Components
+description:
+  Learn practical React component testing with Vitest, React Testing Library,
+  user interactions, async UI, and accessibility-focused assertions.
+keywords:
+  - React testing
+  - React Testing Library
+  - Vitest React
+  - component testing
+  - integration testing
+sidebar_position: 5
+---
+
+# Testing React Components
+
+React tests should verify what users can see and do instead of testing private
+component implementation details. Component tests are most useful when they
+cover rendering, interactions, loading states, errors, and accessibility.
+
+## Install a Testing Stack
+
+This example uses Vitest, Testing Library, and `jsdom`:
+
+```bash
+pnpm add -D vitest jsdom @testing-library/react @testing-library/jest-dom
+```
+
+A minimal Vitest configuration can use the browser-like `jsdom` environment:
+
+```ts
+// vitest.config.ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test-setup.ts'],
+  },
+});
+```
+
+```ts
+// src/test-setup.ts
+import '@testing-library/jest-dom/vitest';
+```
+
+## Test User-Visible Behavior
+
+Query elements by their accessible role or label and interact with them like a
+user:
+
+```tsx
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { Counter } from './Counter';
+
+describe('Counter', () => {
+  it('increments when the user clicks the button', () => {
+    render(<Counter />);
+
+    fireEvent.click(screen.getByRole('button', { name: /increment/i }));
+
+    expect(screen.getByText('Count: 1')).toBeInTheDocument();
+  });
+});
+```
+
+For realistic pointer and keyboard behavior, prefer
+`@testing-library/user-event` over low-level event dispatch when it is available
+in the project.
+
+## Forms and Validation
+
+Test labels, validation messages, and submit behavior through the accessible
+interface:
+
+```tsx
+it('shows a validation message for an empty email', async () => {
+  render(<SignupForm />);
+
+  await userEvent.click(screen.getByRole('button', { name: /sign up/i }));
+
+  expect(screen.getByRole('alert')).toHaveTextContent('Email is required');
+});
+```
+
+A test should not depend on a component's internal state variable or DOM class
+name unless that detail is part of the public contract.
+
+## Async UI
+
+Use `findBy` queries or `waitFor` when the UI changes after an asynchronous
+operation:
+
+```tsx
+it('renders loaded data', async () => {
+  render(<UserProfile />);
+
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+  expect(
+    await screen.findByRole('heading', { name: 'Ada Lovelace' }),
+  ).toBeVisible();
+});
+```
+
+Mock the network at the request boundary with a tool such as MSW instead of
+mocking every implementation function inside the component.
+
+## Accessibility Assertions
+
+Testing Library queries encourage accessible markup:
+
+```tsx
+expect(screen.getByRole('textbox', { name: 'Email' })).toBeInTheDocument();
+expect(screen.getByRole('button', { name: 'Save' })).toBeEnabled();
+```
+
+Add `jest-axe` or an equivalent automated check for common violations, but
+combine it with keyboard and manual screen-reader testing.
+
+## What to Test
+
+- Initial content and important loading or error states.
+- User interactions and resulting visible changes.
+- Form validation and submission behavior.
+- Navigation and route-level integration flows.
+- Accessible names, roles, states, and keyboard behavior.
+
+## What Not to Test
+
+- React internals or hook call order.
+- Exact component state variable names.
+- Implementation-only CSS classes.
+- Third-party library internals.
+- Every line of a presentational component when a higher-level test covers it.
+
+## Testing Checklist
+
+1. Prefer accessible queries such as `getByRole` and `getByLabelText`.
+2. Use `user-event` for realistic interactions.
+3. Wait for async UI with `findBy` or `waitFor`.
+4. Mock external systems at their boundaries.
+5. Keep tests independent and reset shared state between tests.
+6. Run tests, typecheck, lint, and the production build in CI.

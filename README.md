@@ -13,7 +13,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 > 🧠 Learn faster. 📚 Refer anytime. 🚀 Level up your dev journey.
 
-**Live Site:** [https://codescrolls.vercel.app](https://codescrolls.site)
+**Live Site:** [https://codescrolls.site](https://codescrolls.vercel.app)
 
 ---
 

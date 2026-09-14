@@ -56,7 +56,7 @@ In this guide, you will learn how to build Next.js apps the right way in 2026.
 
 ---
 
-## Why Next.js (Detailed)
+## Why Next.js (Detailed) {#why-nextjs}
 
 Next.js continues to lead the React meta-framework space because it solves a
 large set of cross-cutting concerns for production web apps: routing, server
@@ -74,7 +74,7 @@ Netlify, Fly, and cloud providers).
 In short: Next.js is pragmatic — it gives teams a safe set of defaults while
 allowing opt-in complexity for advanced needs.
 
-## App Router Fundamentals (Expanded)
+## App Router Fundamentals (Expanded) {#app-router-fundamentals}
 
 The App Router (app/) is now the recommended way to organize routes. It uses
 nested layouts and server-driven rendering to ship only the UI that changes.
@@ -127,7 +127,7 @@ Tips:
 - Prefer many small layouts for predictable CSS scoping and easier transitions.
 - Use `loading.tsx` per segment to provide progressive loading UX.
 
-## Server vs Client Components (Deep Dive)
+## Server vs Client Components (Deep Dive) {#server-vs-client-components}
 
 Server Components (SC): rendered on server, can access secrets and DBs, and send
 minimal HTML to the client. They cannot use hooks like `useState` or the DOM.
@@ -178,7 +178,7 @@ export function CommentForm({ postId }: { postId: number }) {
 }
 ```
 
-## Rendering Strategies (When to use which)
+## Rendering Strategies (When to use which) {#rendering-strategies}
 
 - Static (SSG): for marketing pages, docs — fastest for repeated traffic.
 - Incremental Static Regeneration (ISR): static by default, revalidate every N
@@ -199,7 +199,7 @@ const posts = await fetch('https://api.example.com/posts', {
 Use `no-store` or `cache: 'no-store'` for sensitive endpoints (user sessions,
 payment status).
 
-## Data Fetching and Caching (Patterns)
+## Data Fetching and Caching (Patterns) {#data-fetching-and-caching}
 
 - Keep data fetching in server components or React server actions.
 - Prefer fetch with `next: { revalidate }` for ISR and `cache: 'no-store'` for
@@ -212,7 +212,7 @@ Resilience:
 - Add timeouts and error handling to fetches.
 - Provide fallback UI via `loading.tsx` and `error.tsx`.
 
-## Server Actions (Best Practices)
+## Server Actions (Best Practices) {#server-actions}
 
 Server Actions reduce boilerplate for form submissions and mutations but require
 careful error handling and idempotency consideration.
@@ -235,7 +235,7 @@ export async function createPost(formData: FormData) {
 }
 ```
 
-## API Route Handlers (When to prefer them)
+## API Route Handlers (When to prefer them) {#api-route-handlers}
 
 Use route handlers when you need a web callback, webhooks, or an endpoint used
 by external services. Keep public APIs idempotent and authenticated when
@@ -249,7 +249,7 @@ export async function GET() {
 }
 ```
 
-## SEO in Next.js (Detailed)
+## SEO in Next.js (Detailed) {#seo-in-nextjs}
 
 - Use the Metadata API to generate canonical, OG, and structured data.
 - Generate sitemaps on build or via an API route if content updates frequently.
@@ -269,7 +269,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 }
 ```
 
-## Project Structure (Opinionated)
+## Project Structure (Opinionated) {#project-structure}
 
 Use `src/` with feature folders, `app/` for routes, `components/` for dumb UI,
 `features/` for domain logic, and `lib/` for utilities and integrations.
@@ -286,7 +286,7 @@ src/
   types/
 ```
 
-## Performance Best Practices (Checklist)
+## Performance Best Practices (Checklist) {#performance-best-practices}
 
 - Prefer Server Components for initial render.
 - Use `next/image` and `next/font`.
@@ -294,14 +294,14 @@ src/
 - Use HTTP caching (CDN) and appropriate Cache-Control headers.
 - Measure Core Web Vitals and iterate.
 
-## Common Mistakes (Longer list)
+## Common Mistakes (Longer list) {#common-mistakes-to-avoid}
 
 - Overusing `'use client'` and shipping unnecessary JS.
 - Blocking rendering with long-running sync tasks.
 - Not handling partial failures in streaming pages.
 - Ignoring accessibility and semantic HTML.
 
-## Deployment Checklist (Expanded)
+## Deployment Checklist (Expanded) {#deployment-checklist}
 
 1. Check environment variables and secrets management.
 2. Run accessibility and performance audits (Lighthouse, Axe).
