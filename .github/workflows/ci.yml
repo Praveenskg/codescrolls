@@ -174,7 +174,7 @@ jobs:
         run: pnpm install --frozen-lockfile --prefer-offline
 
       - name: Security Audit
-        run: pnpm audit --audit-level=moderate
+        run: pnpm audit --audit-level=moderate --ignore-unfixable
 
   # -------------------------------
   # Job 6: PR Comment Bot

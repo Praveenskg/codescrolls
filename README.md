@@ -1,11 +1,11 @@
 # 📘 CodeScrolls – Developer Docs, Notes & CheatSheets
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.10.0-green.svg)](https://docusaurus.io/)
-[![React](https://img.shields.io/badge/React-19.2.4-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.2-blue.svg)](https://www.typescriptlang.org/)
-[![ESLint](https://img.shields.io/badge/ESLint-9.39.2-purple.svg)](https://eslint.org/)
-[![Prettier](https://img.shields.io/badge/Prettier-3.8.1-pink.svg)](https://prettier.io/)
+[![Docusaurus](https://img.shields.io/badge/Docusaurus-3.10.2-green.svg)](https://docusaurus.io/)
+[![React](https://img.shields.io/badge/React-19.3.0-blue.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue.svg)](https://www.typescriptlang.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-9.39.5-purple.svg)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-3.9.6-pink.svg)](https://prettier.io/)
 
 CodeScrolls is a comprehensive, modern documentation site built with
 [Docusaurus 3](https://docusaurus.io/). It provides well-organized technical
@@ -13,7 +13,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 > 🧠 Learn faster. 📚 Refer anytime. 🚀 Level up your dev journey.
 
-**Live Site:** [https://codescrolls.site](https://codescrolls.site)
+**Live Site:** [https://codescrolls.vercel.app](https://codescrolls.site)
 
 ---
 
@@ -30,7 +30,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 
 ### **Technical**
 
-- ⚡ **Blazing Fast** - Static site generation with Docusaurus 3.10.0
+- ⚡ **Blazing Fast** - Static site generation with Docusaurus 3.10.2
 - 🔍 **Local Search** - Full-text search without Algolia
 - 📱 **PWA Support** - Offline-capable Progressive Web App
 - 🌙 **Dark Mode** - Beautiful dark theme support
@@ -40,7 +40,7 @@ notes, comprehensive cheat sheets, tutorials, and guides for web developers.
 ### **Developer Experience**
 
 - 🔧 **TypeScript** - Full TypeScript support with strict mode
-- 🎯 **ESLint 9** - Code quality enforcement (flat config)
+- 🎯 **ESLint 9** - Code quality enforcement with flat config
 - 💅 **Prettier** - Consistent code formatting with auto-organize imports
 - 🪝 **Git Hooks** - Pre-commit checks and commit message validation
 - 🔄 **CI/CD** - Comprehensive GitHub Actions pipeline
@@ -81,13 +81,13 @@ git clone https://github.com/Praveenskg/codescrolls.git
 cd codescrolls
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm start
+pnpm start
 
 # Build for production
-npm run build
+pnpm build
 ```
 
 ---
@@ -96,25 +96,25 @@ npm run build
 
 ### Prerequisites
 
-- **Node.js** 18+ or 20+
-- **npm** or **yarn**
+- **Node.js** 20+ (CI uses Node.js 24)
+- **pnpm** 11+
 - **Git**
 
 ### Install Dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 This will install all required dependencies including:
 
-- Docusaurus 3.10.0
-- React 19.2.4
-- TypeScript 6.0.2
-- ESLint 9.39.2 (flat config)
-- Prettier 3.8.1
+- Docusaurus 3.10.2
+- React 19.3.0
+- TypeScript 6.0.3
+- ESLint 9.39.5 (flat config)
+- Prettier 3.9.6
 - Husky 9.1.7 (Git hooks)
-- lint-staged 16.4.0
+- lint-staged 17.5.1
 - And more...
 
 ---
@@ -124,7 +124,7 @@ This will install all required dependencies including:
 Start the development server:
 
 ```bash
-npm start
+pnpm start
 ```
 
 The site will open at [http://localhost:3000](http://localhost:3000).
@@ -143,7 +143,7 @@ The site will open at [http://localhost:3000](http://localhost:3000).
 Generate a static production build:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 **Output:**
@@ -155,28 +155,29 @@ npm run build
 **Test the build locally:**
 
 ```bash
-npm run serve
+pnpm serve
 ```
 
 ---
 
 ## 📜 Available Scripts
 
-| Script                      | Description                                |
-| --------------------------- | ------------------------------------------ |
-| `npm start`                 | Start development server                   |
-| `npm run build`             | Build for production                       |
-| `npm run serve`             | Serve production build locally             |
-| `npm run clean`             | Clear Docusaurus cache                     |
-| `npm run deploy`            | Deploy to GitHub Pages                     |
-| `npm run typecheck`         | Run TypeScript type checking               |
-| `npm run lint`              | Run ESLint                                 |
-| `npm run lint:fix`          | Fix ESLint issues automatically            |
-| `npm run format`            | Format code with Prettier                  |
-| `npm run format:check`      | Check code formatting                      |
-| `npm run validate`          | Run all checks (typecheck + lint + format) |
-| `npm run write-heading-ids` | Generate heading IDs for MDX files         |
-| `npm run safe-upgrade`      | Upgrade dependencies safely (minor only)   |
+| Script                          | Description                                  |
+| ------------------------------- | -------------------------------------------- |
+| `pnpm start`                    | Start development server                     |
+| `pnpm build`                    | Build for production                         |
+| `pnpm serve`                    | Serve production build locally               |
+| `pnpm clean`                    | Clear Docusaurus cache                       |
+| `pnpm deploy`                   | Deploy to GitHub Pages                       |
+| `pnpm typecheck`                | Run TypeScript type checking                 |
+| `pnpm lint`                     | Run ESLint                                   |
+| `pnpm lint:fix`                 | Fix ESLint issues automatically              |
+| `pnpm format`                   | Format code with Prettier                    |
+| `pnpm format:check`             | Check code formatting                        |
+| `pnpm validate`                 | Run all checks (typecheck + lint + format)   |
+| `pnpm audit --ignore-unfixable` | Check dependencies for known vulnerabilities |
+| `pnpm write-heading-ids`        | Generate heading IDs for MDX files           |
+| `pnpm safe-upgrade`             | Upgrade dependencies safely (minor only)     |
 
 ---
 
@@ -247,7 +248,10 @@ codescrolls/
 │   │   ├── nodejs.mdx
 │   │   ├── react.md
 │   │   └── typescript.md
+│   ├── css/                   # CSS docs
+│   ├── html/                  # HTML docs
 │   ├── javascript/            # JavaScript docs
+│   ├── python/                # Python docs
 │   ├── react/                 # React docs
 │   └── typescript/            # TypeScript docs
 ├── src/                        # Source files
@@ -268,10 +272,6 @@ codescrolls/
 ├── .husky/                    # Git hooks (Husky)
 │   ├── pre-commit            # Pre-commit checks
 │   └── commit-msg            # Commit message validation
-├── .github/                   # GitHub workflows and templates
-│   ├── workflows/
-│   │   └── ci.yml            # CI/CD pipeline
-│   └── ISSUE_TEMPLATE/       # Issue templates
 ├── eslint.config.mjs          # ESLint configuration (flat config)
 ├── .prettierrc                # Prettier configuration
 ├── docusaurus.config.ts       # Docusaurus configuration
@@ -320,6 +320,7 @@ codescrolls/
 - **Node.js** - Server-side JavaScript
 - **SQL** - Database queries and operations
 - **API** - REST API design and best practices
+- **Windows** - PowerShell, CMD, and system administration
 
 #### **Interview Questions**
 
@@ -351,17 +352,17 @@ codescrolls/
 
 ### **Core**
 
-- **[Docusaurus 3.10.0](https://docusaurus.io/)** - Documentation framework
-- **[React 19.2.4](https://reactjs.org/)** - UI library (latest features)
-- **[TypeScript 6.0.2](https://www.typescriptlang.org/)** - Type safety
+- **[Docusaurus 3.10.2](https://docusaurus.io/)** - Documentation framework
+- **[React 19.3.0](https://react.dev/)** - UI library (latest features)
+- **[TypeScript 6.0.3](https://www.typescriptlang.org/)** - Type safety
 
 ### **Development Tools**
 
-- **[ESLint 9.39.2](https://eslint.org/)** - Code linting (flat config)
-- **[Prettier 3.8.1](https://prettier.io/)** - Code formatting
+- **[ESLint 9.39.5](https://eslint.org/)** - Code linting (flat config)
+- **[Prettier 3.9.6](https://prettier.io/)** - Code formatting
 - **[TypeScript ESLint](https://typescript-eslint.io/)** - TypeScript linting
 - **[Husky 9.1.7](https://typicode.github.io/husky/)** - Git hooks
-- **[lint-staged 16.4.0](https://github.com/okonet/lint-staged)** - Pre-commit
+- **[lint-staged 17.5.1](https://github.com/okonet/lint-staged)** - Pre-commit
   formatting
 
 ### **Plugins & Features**
@@ -386,21 +387,19 @@ codescrolls/
 
 ## 🚀 Deployment
 
-### **GitHub Pages**
+### **Vercel**
 
-The site is automatically deployed to GitHub Pages using the `gh-pages` branch.
+The site is configured for Vercel deployment with `vercel.json` and the custom
+domain [codescrolls.site](https://codescrolls.site).
 
 **Manual Deployment:**
 
 ```bash
-# Using npm
-npm run deploy
+# Install Vercel CLI
+pnpm dlx vercel
 
-# Using SSH
-USE_SSH=true npm run deploy
-
-# Using HTTPS with token
-GIT_USER=<your-username> npm run deploy
+# Deploy from the repository root
+pnpm dlx vercel --prod
 ```
 
 ### **Custom Domain**
@@ -412,16 +411,6 @@ This site uses a custom domain: **[codescrolls.site](https://codescrolls.site)**
 1. Add `CNAME` file in `static/` directory
 2. Configure DNS records (A or CNAME)
 3. Enable HTTPS in repository settings
-
-### **Vercel (Alternative)**
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
 
 ---
 
@@ -452,18 +441,18 @@ We welcome contributions! Please see our
 4. **Run quality checks**
 
    ```bash
-   npm run validate    # Runs all checks (typecheck + lint + format)
-   npm run build       # Build for production
+   pnpm validate    # Runs all checks (typecheck + lint + format)
+   pnpm build       # Build for production
    ```
 
    Or run individually:
 
    ```bash
-   npm run typecheck   # TypeScript type checking
-   npm run lint        # ESLint checking
-   npm run lint:fix    # Auto-fix ESLint issues
-   npm run format      # Format with Prettier
-   npm run format:check # Check formatting
+   pnpm typecheck   # TypeScript type checking
+   pnpm lint        # ESLint checking
+   pnpm lint:fix    # Auto-fix ESLint issues
+   pnpm format      # Format with Prettier
+   pnpm format:check # Check formatting
    ```
 
 5. **Commit your changes**
@@ -541,13 +530,12 @@ We welcome contributions! Please see our
 
 ## 📊 Project Stats
 
-- **116+ Documentation Pages** (HTML, CSS, JavaScript, React, TypeScript)
-- **15+ Blog Posts** (React 19, TypeScript, CSS, API Design, Docker, etc.)
+- **144 Documentation Files** (HTML, CSS, JavaScript, Python, React, TypeScript)
+- **20 Blog Posts** (React, TypeScript, CSS, API Design, Docker, and more)
 - **14 Comprehensive Cheat Sheets** (Git, JavaScript, TypeScript, React, CSS,
-  HTML, Linux, Markdown, MDX, VSCode, Node.js, SQL, API)
-- **300+ Interview Questions** (HTML, CSS, JavaScript, React, TypeScript,
-  Node.js)
-- **Modern Features** - React 19.2, TypeScript 5.9, ES2024/2025, CSS Container
+  HTML, Linux, Markdown, MDX, VS Code, Node.js, SQL, API, Windows)
+- **Interview Questions** (HTML, CSS, JavaScript, Node.js, React, TypeScript)
+- **Modern Features** - React 19, TypeScript 6, ES2024/2025, CSS Container
   Queries
 - **Production Ready** - CI/CD, Git hooks, automated quality checks
 
