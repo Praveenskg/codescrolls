@@ -9,6 +9,10 @@ updates:
 
     open-pull-requests-limit: 1
 
+    ignore:
+      - dependency-name: 'eslint'
+      - dependency-name: 'typescript'
+
     reviewers:
       - 'praveenskg'
 
