@@ -1,0 +1,503 @@
+---
+title: 'React 19.3: What Is New and How to Use It'
+description:
+  'Explore the stable ViewTransition and Fragment Refs APIs, browser-only
+  rendering, Trusted Types support, and other React 19.3 improvements with
+  practical examples.'
+slug: react-19-3-new-features
+tags: [react, react19, react19.3, javascript, typescript, frontend, tutorial]
+authors: praveen
+image: /img/blog/react.png
+date: 2026-09-14
+keywords:
+  [
+    'react 19.3',
+    'react 19.3 features',
+    'ViewTransition',
+    'Fragment Refs',
+    'addTransitionType',
+    'react browser',
+    'Trusted Types React',
+    'React Server Components',
+  ]
+---
+
+![React 19.3 new features](/img/blog/react.png)
+
+React 19.3 is a focused release for apps that want better UI transitions, more
+composable DOM behavior, and safer server-rendered applications. The two
+headline APIs, `<ViewTransition />` and Fragment Refs, are now stable after
+being experimental in earlier React releases.
+
+This guide explains what changed, when to use each feature, and how to adopt it
+without rewriting an existing React application.
+
+{/* truncate */}
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Upgrade to React 19.3](#upgrade-to-react-193)
+- [View Transitions](#view-transitions)
+  - [Customize the animation with CSS](#customize-the-animation-with-css)
+  - [View Transitions with Suspense](#view-transitions-with-suspense)
+- [Transition Types](#transition-types)
+- [Fragment Refs](#fragment-refs)
+- [Browser-only Rendering with `browser()`](#browser-only-rendering-with-browser)
+- [Trusted Types Support](#trusted-types-support)
+- [Context in Server Components](#context-in-server-components)
+- [Other Improvements](#other-improvements)
+- [Migration Checklist](#migration-checklist)
+- [Conclusion](#conclusion)
+
+---
+
+## Upgrade to React 19.3
+
+Install matching versions of `react` and `react-dom`:
+
+```bash
+pnpm add react@19.3.0 react-dom@19.3.0
+```
+
+With npm or Yarn, use the equivalent command:
+
+```bash
+npm install react@19.3.0 react-dom@19.3.0
+```
+
+For TypeScript projects, update the React type packages too:
+
+```bash
+pnpm add -D @types/react@latest @types/react-dom@latest
+```
+
+The new APIs are part of React itself. You do not need a separate animation
+library for `<ViewTransition />`, but the browser still needs View Transition
+API support for the animations to run.
+
+> Keep `react` and `react-dom` on the same version. Mixing React 19.3 with an
+> older `react-dom` can produce confusing runtime and type errors.
+
+## View Transitions
+
+React 19.3 makes `<ViewTransition />` stable. It connects React transitions to
+the browser View Transition API, so React can animate elements when they enter,
+exit, move, or update.
+
+A basic example looks like this:
+
+```tsx
+import { startTransition, useState, ViewTransition } from 'react';
+
+export function DetailsPanel() {
+  const [open, setOpen] = useState(false);
+
+  function togglePanel() {
+    startTransition(() => {
+      setOpen(current => !current);
+    });
+  }
+
+  return (
+    <section>
+      <button type="button" onClick={togglePanel}>
+        {open ? 'Hide details' : 'Show details'}
+      </button>
+
+      {open && (
+        <ViewTransition>
+          <div className="details-panel">
+            <h2>Additional details</h2>
+            <p>This panel enters and exits as part of the React transition.</p>
+          </div>
+        </ViewTransition>
+      )}
+    </section>
+  );
+}
+```
+
+The state update must happen inside `startTransition` for React to treat it as a
+non-urgent transition. Normal urgent updates should remain immediate and do not
+automatically trigger a View Transition.
+
+### Customize the animation with CSS
+
+By default, React uses a cross-fade. Add a `className` to the View Transition to
+select a custom transition class:
+
+```tsx
+<ViewTransition className="details-transition">
+  <div className="details-panel">...</div>
+</ViewTransition>
+```
+
+Then define the animation using the browser pseudo-elements:
+
+```css
+::view-transition-old(.details-transition),
+::view-transition-new(.details-transition) {
+  animation-duration: 220ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-old(.details-transition) {
+  animation-name: details-exit;
+}
+
+::view-transition-new(.details-transition) {
+  animation-name: details-enter;
+}
+
+@keyframes details-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes details-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+```
+
+Use `prefers-reduced-motion` so the feature does not create unwanted motion for
+users who have disabled animations:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 1ms;
+  }
+}
+```
+
+### View Transitions with Suspense
+
+A View Transition can wrap a Suspense boundary. This lets a loading fallback
+appear immediately while the resolved content animates into place:
+
+```tsx
+import { Suspense, ViewTransition } from 'react';
+
+export function Profile() {
+  return (
+    <ViewTransition>
+      <Suspense fallback={<ProfileSkeleton />}>
+        <ProfileContent />
+      </Suspense>
+    </ViewTransition>
+  );
+}
+```
+
+Keep this pattern focused on meaningful UI changes. Animating every small update
+can make an application feel slower, especially when cached content could appear
+instantly.
+
+## Transition Types
+
+React 19.3 adds `addTransitionType`, which lets you describe why a transition
+happened. This is useful when the same state change needs different animations,
+such as moving a carousel forward or backward.
+
+```tsx
+import {
+  addTransitionType,
+  startTransition,
+  useState,
+  ViewTransition,
+} from 'react';
+
+export function Carousel({ items }: { items: string[] }) {
+  const [index, setIndex] = useState(0);
+  const item = items[index];
+
+  function next() {
+    startTransition(() => {
+      addTransitionType('next');
+      setIndex(current => (current + 1) % items.length);
+    });
+  }
+
+  function previous() {
+    startTransition(() => {
+      addTransitionType('previous');
+      setIndex(current => (current - 1 + items.length) % items.length);
+    });
+  }
+
+  return (
+    <>
+      <div className="carousel-controls">
+        <button type="button" onClick={previous} aria-label="Previous item">
+          Previous
+        </button>
+        <button type="button" onClick={next} aria-label="Next item">
+          Next
+        </button>
+      </div>
+
+      <ViewTransition
+        key={index}
+        enter={{ next: 'slide-from-right', previous: 'slide-from-left' }}
+        exit={{ next: 'slide-to-left', previous: 'slide-to-right' }}
+      >
+        <article>{item}</article>
+      </ViewTransition>
+    </>
+  );
+}
+```
+
+The transition type is also exposed to the browser View Transition API, so CSS
+can target it with `:active-view-transition-type(...)` when that browser feature
+is available.
+
+## Fragment Refs
+
+Fragment Refs allow a ref to be attached to a `<Fragment>`. The resulting
+`FragmentInstance` can work with the Fragment's first-level DOM children without
+adding an extra wrapper element.
+
+This is useful for reusable components that render multiple siblings, lists of
+items, or children that do not expose their own refs.
+
+```tsx
+import { Fragment, type FragmentInstance, useEffect, useRef } from 'react';
+
+export function ArticleList({ titles }: { titles: string[] }) {
+  const fragmentRef = useRef<FragmentInstance>(null);
+
+  useEffect(() => {
+    const instance = fragmentRef.current;
+    if (!instance) return;
+
+    instance.scrollIntoView();
+  }, []);
+
+  return (
+    <Fragment ref={fragmentRef}>
+      {titles.map(title => (
+        <article key={title}>
+          <h2>{title}</h2>
+        </article>
+      ))}
+    </Fragment>
+  );
+}
+```
+
+If your TypeScript version does not recognize `FragmentInstance`, update
+`@types/react` or use the type inferred by `useRef` in your project setup.
+
+A Fragment Ref supports group-level operations such as:
+
+- `addEventListener`, `removeEventListener`, and `dispatchEvent` for first-level
+  children.
+- `focus`, `focusLast`, and `blur` for keyboard focus management.
+- `observeUsing` and `unobserveUsing` for `IntersectionObserver` or
+  `ResizeObserver`.
+- `getClientRects`, `scrollIntoView`, and `getRootNode` for measurement and
+  navigation.
+
+For example, an `InView` wrapper can observe children without requiring a
+wrapper `<div>`:
+
+```tsx
+import {
+  Fragment,
+  type FragmentInstance,
+  useLayoutEffect,
+  useRef,
+} from 'react';
+
+type InViewProps = {
+  children: React.ReactNode;
+  onChange: (visible: boolean) => void;
+};
+
+export function InView({ children, onChange }: InViewProps) {
+  const fragmentRef = useRef<FragmentInstance>(null);
+
+  useLayoutEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      onChange(entries.some(entry => entry.isIntersecting));
+    });
+    const instance = fragmentRef.current;
+
+    if (!instance) return;
+    instance.observeUsing(observer);
+
+    return () => instance.unobserveUsing(observer);
+  }, [onChange]);
+
+  return <Fragment ref={fragmentRef}>{children}</Fragment>;
+}
+```
+
+Prefer a normal element ref when a single DOM node is available. Fragment Refs
+are most valuable when adding a wrapper would change layout or when a component
+returns a group of siblings.
+
+## Browser-only Rendering with `browser()`
+
+Server-rendered components normally need to produce compatible output on the
+server and in the browser. That is not possible for components that depend on
+browser-only values such as `localStorage`, `window`, or the user's local time
+zone.
+
+React 19.3 adds `browser()` in `react-dom`. Calling `use(browser())` suspends
+the component during server rendering, but continues normally after hydration in
+the browser:
+
+```tsx
+import { Suspense, use } from 'react';
+import { browser } from 'react-dom';
+
+function LocalTimeZone() {
+  use(browser());
+
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return <p>Your time zone: {timeZone}</p>;
+}
+
+export function TimeZoneCard() {
+  return (
+    <Suspense fallback={<p>Detecting your time zone...</p>}>
+      <LocalTimeZone />
+    </Suspense>
+  );
+}
+```
+
+Use `browser()` when browser rendering is genuinely required. It should not be
+used as a replacement for fixing a hydration mismatch that could be avoided by
+passing stable server data to the component.
+
+You can also call it conditionally because `use` supports conditional calls:
+
+```tsx
+function ProductDetails({ initialData }: { initialData?: Product }) {
+  if (!initialData) {
+    use(browser());
+  }
+
+  const product = initialData ?? useProductQuery();
+  return <h1>{product.name}</h1>;
+}
+```
+
+Always render this kind of component below a Suspense boundary when it can
+suspend during server rendering.
+
+## Trusted Types Support
+
+React 19.3 improves integration with the browser Trusted Types API. When an
+application uses a Content Security Policy such as:
+
+```http
+Content-Security-Policy: require-trusted-types-for 'script'
+```
+
+React preserves Trusted Types values instead of coercing them into plain strings
+before passing them to DOM injection sinks. This makes it easier to combine
+React with a Trusted Types policy and a sanitizer in applications with strict
+XSS protections.
+
+Trusted Types do not replace input validation or sanitization. Configure a
+policy for the parts of your application that handle HTML, scripts, or URLs, and
+avoid using `dangerouslySetInnerHTML` with untrusted input.
+
+## Context in Server Components
+
+React Server Components can now render a Context directly when the Context is
+exported from a `'use client'` module. A wrapper Provider component is no longer
+required when a Server Component only needs to pass a value into the client
+tree.
+
+```tsx
+// user-context.ts
+'use client';
+
+import { createContext } from 'react';
+
+export const UserContext = createContext<User | null>(null);
+```
+
+```tsx
+// layout.tsx - Server Component
+import { UserContext } from './user-context';
+
+export async function Layout({ children }: { children: React.ReactNode }) {
+  const user = await getCurrentUser();
+
+  return <UserContext value={user}>{children}</UserContext>;
+}
+```
+
+This feature depends on a framework or runtime that supports React Server
+Components. It does not turn a regular client-rendered React app into an RSC
+application by itself.
+
+## Other Improvements
+
+React 19.3 also includes platform and developer-experience improvements:
+
+- Transitions render independently, so a slow transition does not hold up
+  unrelated transitions.
+- React adds better Trusted Types integration for strict Content Security Policy
+  setups.
+- React DOM supports additional events and resource attributes, including
+  fullscreen events and `fetchPriority` for module resources.
+- Strict Mode effects are double-invoked during hydration to better match
+  client-rendered roots.
+- Fast Refresh, Suspense, `use`, and Server Components receive bug fixes and
+  stability improvements.
+
+These changes are mostly automatic after upgrading, but they may expose code
+that relied on undocumented behavior or incorrect hook usage.
+
+## Migration Checklist
+
+Use this checklist when upgrading an existing application:
+
+1. Upgrade `react` and `react-dom` together to `19.3.0`.
+2. Upgrade `@types/react` and `@types/react-dom` in TypeScript projects.
+3. Run your typecheck, lint, unit tests, and production build.
+4. Add `<ViewTransition />` only around meaningful non-urgent UI changes.
+5. Wrap `use(browser())` components in Suspense boundaries during SSR.
+6. Test navigation and animations with `prefers-reduced-motion` enabled.
+7. Review Trusted Types and CSP configuration if your app uses HTML injection.
+8. Test Server Components separately if your framework enables RSC.
+
+## Conclusion
+
+React 19.3 does not require a complete rewrite. Its most useful improvements are
+incremental APIs that solve specific problems: `<ViewTransition />` for
+coordinated animations, Fragment Refs for DOM behavior across sibling nodes,
+`browser()` for intentional server-rendering boundaries, and Trusted Types
+support for security-focused applications.
+
+Start with one contained use case, such as a route transition or an
+element-observer utility. Measure the result, keep reduced-motion behavior in
+place, and expand adoption only where the new API makes the component simpler.
+
+---
+
+_React 19.3 references:
+[official React release post](https://react.dev/blog/2026/09/09/react-19-3) and
+[React 19.3 release notes](https://github.com/facebook/react/releases/tag/v19.3.0)._
