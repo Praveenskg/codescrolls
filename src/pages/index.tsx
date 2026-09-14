@@ -157,7 +157,10 @@ export default function Home(): ReactNode {
   ];
 
   return (
-    <Layout title={`Welcome to ${siteConfig.title}`} description={siteConfig.tagline}>
+    <Layout
+      title="Web Development Docs, Tutorials & Cheat Sheets"
+      description="Learn web development with clear documentation, practical tutorials, cheat sheets, and interview preparation for JavaScript, React, TypeScript, HTML, CSS, and more."
+    >
       <a href="#main-content" className="skip-to-content">
         Skip to main content
       </a>
