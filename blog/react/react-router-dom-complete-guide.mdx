@@ -1,0 +1,553 @@
+---
+title: 'React Router Complete Guide: Routing, Data APIs, and Protected Routes'
+description:
+  'Learn React Router with practical examples for routes, nested layouts, URL
+  params, data loaders, form actions, protected routes, lazy loading, and
+  production-ready navigation.'
+slug: react-router-complete-guide
+tags: [react, react-router, javascript, typescript, frontend, tutorial]
+authors: praveen
+image: /img/blog/react.png
+date: 2026-09-14
+keywords:
+  [
+    'react router',
+    'react router tutorial',
+    'react router v8',
+    'react routing',
+    'nested routes react',
+    'protected routes react',
+    'react router loaders',
+    'react router actions',
+    'react router typescript',
+  ]
+---
+
+![React Router complete guide](/img/blog/react.png)
+
+React Router connects a React application to the browser URL. It handles
+navigation, nested layouts, route parameters, data loading, form submissions,
+and error boundaries without forcing every component to manage URL state
+manually.
+
+This guide uses the current React Router APIs and also explains the simpler
+declarative approach that is useful for small applications.
+
+{/* truncate */}
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Install React Router](#install-react-router)
+- [Choose a Router Style](#choose-a-router-style)
+  - [Declarative Router](#declarative-router)
+  - [Data Router](#data-router)
+- [Create Routes with a Data Router](#create-routes-with-a-data-router)
+- [Nested Routes and Layouts](#nested-routes-and-layouts)
+- [Navigation and Active Links](#navigation-and-active-links)
+- [URL Parameters and Search Params](#url-parameters-and-search-params)
+  - [Dynamic Route Parameters](#dynamic-route-parameters)
+  - [Search Parameters](#search-parameters)
+- [Load Data with Loaders](#load-data-with-loaders)
+  - [Pending UI](#pending-ui)
+- [Submit Data with Actions](#submit-data-with-actions)
+- [Protected Routes](#protected-routes)
+- [Lazy Loading Routes](#lazy-loading-routes)
+- [Error Handling](#error-handling)
+- [TypeScript Patterns](#typescript-patterns)
+- [Production Best Practices](#production-best-practices)
+- [Conclusion](#conclusion)
+
+---
+
+## Install React Router
+
+Install the current unified package:
+
+```bash
+pnpm add react-router@8.3.1
+```
+
+For a new TypeScript application, the package includes its own router types.
+
+React Router supports two main styles:
+
+- **Declarative routing** with `<BrowserRouter>`, `<Routes>`, and `<Route>`.
+  This is easy to learn and works well for smaller client-rendered apps.
+- **Data routing** with `createBrowserRouter` and `<RouterProvider>`. This adds
+  route loaders, actions, pending states, and route-level error handling.
+
+Use data routing when routes own data fetching or form mutations. Use the
+declarative style when you only need URL-to-component mapping.
+
+## Choose a Router Style
+
+### Declarative Router
+
+```tsx
+import { BrowserRouter, Route, Routes } from 'react-router';
+
+export function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
+
+### Data Router
+
+```tsx
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+
+const router = createBrowserRouter([
+  { path: '/', Component: Home },
+  { path: '/about', Component: About },
+]);
+
+export function App() {
+  return <RouterProvider router={router} />;
+}
+```
+
+The data-router configuration is usually declared outside the component so the
+router is not recreated on every render.
+
+## Create Routes with a Data Router
+
+A route can define its URL, component, loader, action, and error element in one
+place:
+
+```tsx
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    Component: Home,
+  },
+  {
+    path: '/products',
+    Component: Products,
+  },
+]);
+
+export function Root() {
+  return <RouterProvider router={router} />;
+}
+```
+
+For large applications, split route definitions by feature:
+
+```text
+src/
+  app/
+    router.tsx
+  features/
+    products/
+      routes.tsx
+      ProductsPage.tsx
+      ProductDetails.tsx
+```
+
+This keeps route configuration close to the feature it renders while leaving a
+small top-level router file.
+
+## Nested Routes and Layouts
+
+Nested routes let a parent layout render shared navigation while an `<Outlet />`
+renders the matched child route:
+
+```tsx
+import { Outlet } from 'react-router';
+
+function DashboardLayout() {
+  return (
+    <div className="dashboard">
+      <aside>
+        <nav>
+          <NavLink to="/dashboard">Overview</NavLink>
+          <NavLink to="settings">Settings</NavLink>
+        </nav>
+      </aside>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/dashboard',
+    Component: DashboardLayout,
+    children: [
+      { index: true, Component: DashboardOverview },
+      { path: 'settings', Component: Settings },
+    ],
+  },
+]);
+```
+
+Use relative child paths such as `settings`, not `/settings`, when the child
+belongs under the parent route. An `index: true` route is the default child for
+a parent path.
+
+## Navigation and Active Links
+
+Use `Link` or `NavLink` for internal navigation. They update the URL without a
+full document reload:
+
+```tsx
+import { Link, NavLink } from 'react-router';
+
+export function Navigation() {
+  return (
+    <nav aria-label="Main navigation">
+      <NavLink
+        to="/"
+        className={({ isActive }) => (isActive ? 'active' : undefined)}
+      >
+        Home
+      </NavLink>
+      <Link to="/products">Products</Link>
+    </nav>
+  );
+}
+```
+
+Use `useNavigate` after an imperative event such as a successful sign-in or
+checkout. Prefer links for ordinary user navigation:
+
+```tsx
+import { useNavigate } from 'react-router';
+
+function CheckoutSuccess() {
+  const navigate = useNavigate();
+
+  return (
+    <button type="button" onClick={() => navigate('/orders')}>
+      View orders
+    </button>
+  );
+}
+```
+
+## URL Parameters and Search Params
+
+### Dynamic Route Parameters
+
+Declare a parameter with `:name` and read it with `useParams`:
+
+```tsx
+import { useParams } from 'react-router';
+
+function ProductDetails() {
+  const { productId } = useParams<'productId'>();
+  return <h1>Product: {productId}</h1>;
+}
+```
+
+A parameter is a string and may be missing. Validate it before using it as a
+number or database identifier.
+
+### Search Parameters
+
+Use `useSearchParams` for filters, sorting, and pagination that should be
+shareable in a URL:
+
+```tsx
+import { useSearchParams } from 'react-router';
+
+function ProductFilters() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sort = searchParams.get('sort') ?? 'newest';
+
+  function changeSort(value: string) {
+    setSearchParams(current => {
+      current.set('sort', value);
+      return current;
+    });
+  }
+
+  return (
+    <label>
+      Sort by
+      <select value={sort} onChange={event => changeSort(event.target.value)}>
+        <option value="newest">Newest</option>
+        <option value="price">Price</option>
+      </select>
+    </label>
+  );
+}
+```
+
+Keep URL state serializable. Use component state for temporary UI details that
+do not need a shareable URL.
+
+## Load Data with Loaders
+
+Data routers can load route data before rendering the route component. Read the
+result with `useLoaderData`:
+
+```tsx
+import { useLoaderData } from 'react-router';
+
+async function productLoader({ params }: LoaderFunctionArgs) {
+  const response = await fetch(`/api/products/${params.productId}`);
+  if (!response.ok) {
+    throw new Response('Product not found', { status: response.status });
+  }
+  return response.json() as Promise<Product>;
+}
+
+function ProductDetails() {
+  const product = useLoaderData() as Product;
+  return <h1>{product.name}</h1>;
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/products/:productId',
+    loader: productLoader,
+    Component: ProductDetails,
+  },
+]);
+```
+
+Loaders run before the route renders and are automatically revalidated when a
+related route action completes. Keep authorization checks close to the data
+being loaded instead of trusting a client-side guard alone.
+
+### Pending UI
+
+Use `useNavigation` to show a global pending state:
+
+```tsx
+import { useNavigation } from 'react-router';
+
+export function GlobalPendingIndicator() {
+  const navigation = useNavigation();
+  const isLoading = navigation.state === 'loading';
+
+  return isLoading ? <progress aria-label="Loading" /> : null;
+}
+```
+
+For route-specific pending content, use the navigation location or a `Suspense`
+boundary with a deferred loader value.
+
+## Submit Data with Actions
+
+Actions handle mutations from route forms and can return validation errors or
+redirects:
+
+```tsx
+import { Form, redirect, useActionData } from 'react-router';
+
+async function createProduct({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const name = String(formData.get('name') ?? '').trim();
+
+  if (!name) {
+    return { error: 'Product name is required' };
+  }
+
+  const product = await saveProduct({ name });
+  return redirect(`/products/${product.id}`);
+}
+
+function NewProduct() {
+  const result = useActionData() as { error?: string } | undefined;
+
+  return (
+    <Form method="post">
+      <label>
+        Product name
+        <input name="name" />
+      </label>
+      {result?.error && <p role="alert">{result.error}</p>}
+      <button type="submit">Create product</button>
+    </Form>
+  );
+}
+```
+
+Register the action on the route:
+
+```tsx
+{
+  path: '/products/new',
+  action: createProduct,
+  Component: NewProduct,
+}
+```
+
+`Form` uses normal HTML semantics while giving the router control over pending
+states, redirects, and revalidation. Use `useNavigation().state` to disable a
+submit button while the action is running.
+
+## Protected Routes
+
+A client-side guard improves navigation experience, but it is not a security
+boundary. The server must still authenticate and authorize every protected
+request.
+
+```tsx
+import { Navigate, Outlet, useLocation } from 'react-router';
+
+function RequireAuth() {
+  const location = useLocation();
+  const user = useCurrentUser();
+
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
+  return <Outlet />;
+}
+
+const router = createBrowserRouter([
+  {
+    element: <RequireAuth />,
+    children: [
+      { path: '/account', Component: Account },
+      { path: '/orders', Component: Orders },
+    ],
+  },
+]);
+```
+
+For data routers, an authentication loader can redirect before the protected
+component renders:
+
+```tsx
+async function requireUser() {
+  const user = await getCurrentUser();
+  if (!user) throw redirect('/login');
+  return user;
+}
+```
+
+## Lazy Loading Routes
+
+Lazy loading keeps route code out of the initial bundle:
+
+```tsx
+import { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router';
+
+const Settings = lazy(() => import('./Settings'));
+
+export function AppRoutes() {
+  return (
+    <Suspense fallback={<p>Loading page...</p>}>
+      <Routes>
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </Suspense>
+  );
+}
+```
+
+With a data router, route-level `lazy` can load the route module only when the
+route is needed:
+
+```tsx
+const router = createBrowserRouter([
+  {
+    path: '/settings',
+    lazy: () => import('./routes/settings'),
+  },
+]);
+```
+
+Choose one route-loading strategy consistently in an application and make sure
+the fallback preserves the page layout.
+
+## Error Handling
+
+Give routes an error boundary so a failed loader or render does not blank the
+whole application:
+
+```tsx
+import { isRouteErrorResponse, useRouteError } from 'react-router';
+
+function RouteError() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <main>
+        <h1>{error.status}</h1>
+        <p>{error.statusText || 'The page could not be loaded.'}</p>
+      </main>
+    );
+  }
+
+  return <p>Something went wrong. Please try again.</p>;
+}
+```
+
+Register it with a route using `ErrorBoundary: RouteError` in the data-router
+configuration. Put the boundary at a level where the user can recover without
+losing unrelated parts of the application.
+
+## TypeScript Patterns
+
+Use route-specific types for params, loader data, and action results:
+
+```tsx
+type Product = {
+  id: string;
+  name: string;
+};
+
+type ProductActionResult = {
+  error?: string;
+};
+
+function ProductDetails() {
+  const { productId } = useParams<'productId'>();
+  const product = useLoaderData() as Product;
+
+  if (!productId) return <p>Missing product ID.</p>;
+  return <h1>{product.name}</h1>;
+}
+```
+
+For larger applications, generate route types with the React Router framework
+mode or keep loader/action return types next to their route modules. Avoid
+casting every loader result to `any`; validate API responses at the boundary.
+
+## Production Best Practices
+
+- Use `Link` and `NavLink` instead of plain anchors for internal routes.
+- Keep route configuration outside component render functions.
+- Use nested layouts to avoid repeating navigation and page shells.
+- Put URL-shareable filters and pagination in search params.
+- Use loaders for route data and actions for mutations.
+- Show pending UI without blocking the entire application.
+- Add route-level error boundaries for failed data and rendering.
+- Keep authentication and authorization on the server.
+- Preserve focus and document titles during navigation.
+- Test deep links in production hosting; configure SPA fallback or server
+  routes.
+- Lazy-load large, infrequently visited route modules.
+
+## Conclusion
+
+React Router gives React applications a structured way to connect URLs,
+components, and data. Start with declarative routes for a small app, then move
+to a data router when loaders, actions, pending UI, and route-level errors
+become important.
+
+The most maintainable routing setup keeps route configuration close to feature
+boundaries, treats the URL as shareable state, and makes loading, error, and
+accessibility states part of the route design from the beginning.
