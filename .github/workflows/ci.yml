@@ -124,6 +124,17 @@ jobs:
           HUSKY: 0
         run: pnpm install --frozen-lockfile --prefer-offline
 
+      # Restore after install so pnpm does not wipe the bundler cache.
+      # Official Docusaurus Faster guidance: persist node_modules/.cache (Rspack).
+      - name: Cache Docusaurus bundler
+        uses: actions/cache@v6
+        with:
+          path: node_modules/.cache
+          key: docusaurus-${{ runner.os }}-node${{ env.NODE_VERSION }}-${{ hashFiles('pnpm-lock.yaml', 'package.json', 'docusaurus.config.ts') }}
+          restore-keys: |
+            docusaurus-${{ runner.os }}-node${{ env.NODE_VERSION }}-
+            docusaurus-${{ runner.os }}-
+
       - name: Build Docusaurus Documentation
         env:
           NODE_ENV: production
