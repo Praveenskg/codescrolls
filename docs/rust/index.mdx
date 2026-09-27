@@ -1,0 +1,94 @@
+---
+id: index
+title: Rust Tutorial and Documentation (Basics to Advanced)
+sidebar_position: 1
+sidebar_label: Rust Overview
+description:
+  'Learn Rust from ownership and borrowing through traits, concurrency, async,
+  and unsafe — with practical examples and Cargo workflows.'
+keywords:
+  [
+    rust,
+    rust tutorial,
+    learn rust,
+    rust ownership,
+    rust borrowing,
+    rust traits,
+    cargo,
+    systems programming,
+  ]
+---
+
+# Rust - Complete Learning Path
+
+Rust is a systems programming language focused on **safety**, **speed**, and
+**concurrency** — without a garbage collector. It powers browsers, databases,
+CLIs, embedded systems, and cloud services.
+
+## Why Learn Rust?
+
+- Memory safety without GC pauses
+- Fearless concurrency with strong compile-time checks
+- Zero-cost abstractions and predictable performance
+- Growing industry demand (WebAssembly, backends, tooling)
+
+## Prerequisites
+
+- Basic programming experience (variables, loops, functions)
+- Comfort with a terminal / CLI
+- Rust toolchain via [rustup](https://rustup.rs/) (stable channel)
+
+## Course Structure
+
+### Basics
+
+- [Getting Started](./basics/getting-started.mdx)
+- [Variables and Mutability](./basics/variables-and-mutability.mdx)
+- [Data Types](./basics/data-types.mdx)
+- [Functions](./basics/functions.mdx)
+- [Control Flow](./basics/control-flow.mdx)
+- [Ownership](./basics/ownership.mdx)
+- [References and Borrowing](./basics/references-and-borrowing.mdx)
+
+Build the mental model Rust is famous for: ownership, moves, and borrowing.
+
+### Intermediate
+
+- [Structs](./intermediate/structs.mdx)
+- [Enums and Pattern Matching](./intermediate/enums-and-pattern-matching.mdx)
+- [Collections](./intermediate/collections.mdx)
+- [Error Handling](./intermediate/error-handling.mdx)
+- [Modules and Crates](./intermediate/modules-and-crates.mdx)
+- [Traits](./intermediate/traits.mdx)
+- [Lifetimes](./intermediate/lifetimes.mdx)
+
+Write idiomatic, maintainable Rust with the standard library and Cargo.
+
+### Advanced
+
+- [Generics](./advanced/generics.mdx)
+- [Smart Pointers](./advanced/smart-pointers.mdx)
+- [Concurrency](./advanced/concurrency.mdx)
+- [Async and Await](./advanced/async-await.mdx)
+- [Macros](./advanced/macros.mdx)
+- [Unsafe Rust](./advanced/unsafe-rust.mdx)
+- [Testing and Cargo](./advanced/testing-and-cargo.mdx)
+
+Production patterns: abstraction, parallelism, async I/O, and careful `unsafe`.
+
+## Suggested Learning Flow
+
+1. Finish Basics in order — especially ownership and borrowing.
+2. Practice Intermediate topics with small CLI crates.
+3. Move to Advanced and ship one end-to-end project.
+
+## Mini Project Ideas
+
+- CLI file organizer (ownership, `Path`, `Result`)
+- JSON config tool (structs, serde, error handling)
+- Concurrent downloader (threads or async + `tokio`)
+
+## Next Step
+
+Start with [Getting Started](./basics/getting-started.mdx) and run every example
+with `cargo run`.

@@ -1,0 +1,62 @@
+---
+title: Unsafe Rust
+description:
+  'Learn what unsafe enables, when it is justified, and how to encapsulate it
+  behind safe APIs.'
+sidebar_position: 6
+---
+
+# Unsafe Rust
+
+`unsafe` unlocks operations the compiler cannot verify. Keep it minimal and
+encapsulated.
+
+## What unsafe Allows
+
+- Dereference raw pointers
+- Call `unsafe` functions
+- Access/modify mutable statics
+- Implement `unsafe` traits
+- Access union fields
+
+```rust
+let mut num = 5;
+let r = &num as *const i32;
+unsafe {
+    println!("{}", *r);
+}
+```
+
+## Safe Abstractions
+
+Expose a safe API that upholds invariants internally:
+
+```rust
+pub struct AlignedBuffer { /* ... */ }
+
+impl AlignedBuffer {
+    pub fn get(&self, index: usize) -> Option<&u8> {
+        // bounds checks in safe code; unsafe only if proven valid
+        self.as_slice().get(index)
+    }
+}
+```
+
+## Guidelines
+
+- Prefer safe Rust first
+- Document safety invariants
+- Minimize `unsafe` blocks
+- Add tests around boundaries
+
+## Common Pitfalls
+
+- Large `unsafe` regions instead of tiny ones
+- Undefined behavior from dangling/unaligned pointers
+- Skipping documentation of invariants
+
+## Practice
+
+1. Create a raw pointer from a reference and read it in `unsafe`.
+2. Wrap an unsafe operation in a safe function with checks.
+3. List three cases where `unsafe` is justified (FFI, OS APIs, performance).

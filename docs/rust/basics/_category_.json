@@ -1,0 +1,10 @@
+{
+  "label": "Rust - Basics",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Rust Basics",
+    "description": "Learn Rust fundamentals: Cargo, variables, types, functions, control flow, ownership, and borrowing."
+  }
+}

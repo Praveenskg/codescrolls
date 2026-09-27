@@ -1,0 +1,59 @@
+---
+title: Macros
+description:
+  'Use declarative macros with macro_rules! and understand when procedural
+  macros help.'
+sidebar_position: 5
+---
+
+# Macros
+
+Macros write code that writes code. Start with declarative `macro_rules!`.
+
+## macro_rules!
+
+```rust
+macro_rules! say_hello {
+    () => {
+        println!("Hello!");
+    };
+    ($name:expr) => {
+        println!("Hello, {}!", $name);
+    };
+}
+
+say_hello!();
+say_hello!("Rust");
+```
+
+## Useful Patterns
+
+```rust
+macro_rules! vec_of_strings {
+    ($($x:expr),* $(,)?) => {
+        vec![$($x.to_string()),*]
+    };
+}
+
+let v = vec_of_strings!["a", "b", "c"];
+```
+
+## Procedural Macros (Overview)
+
+- `#[derive(...)]` — generate trait impls
+- Attribute macros — wrap items
+- Function-like proc macros — custom DSLs
+
+Prefer small declarative macros before writing proc-macro crates.
+
+## Common Pitfalls
+
+- Unreadable macros without good error messages
+- Accidental infinite expansion
+- Using macros where a generic function is enough
+
+## Practice
+
+1. Write a macro that creates a test module stub.
+2. Write `hashmap!` sugar for inserting pairs.
+3. Replace a macro with a generic function if possible.

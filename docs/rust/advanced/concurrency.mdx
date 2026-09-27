@@ -1,0 +1,72 @@
+---
+title: Concurrency
+description:
+  'Spawn threads, move data across channels, and share state with Mutex and Arc.'
+sidebar_position: 3
+---
+
+# Concurrency
+
+Rust prevents data races at compile time. Prefer message passing or synchronized
+shared state.
+
+## Threads
+
+```rust
+use std::thread;
+
+let handle = thread::spawn(|| {
+    println!("from thread");
+});
+handle.join().unwrap();
+```
+
+## Move Closures
+
+```rust
+let data = String::from("hi");
+thread::spawn(move || {
+    println!("{data}");
+}).join().unwrap();
+```
+
+## Channels
+
+```rust
+use std::sync::mpsc;
+
+let (tx, rx) = mpsc::channel();
+thread::spawn(move || {
+    tx.send(String::from("ping")).unwrap();
+});
+println!("{}", rx.recv().unwrap());
+```
+
+## Mutex and Arc
+
+```rust
+use std::sync::{Arc, Mutex};
+
+let counter = Arc::new(Mutex::new(0));
+let mut handles = vec![];
+
+for _ in 0..8 {
+    let c = Arc::clone(&counter);
+    handles.push(thread::spawn(move || {
+        *c.lock().unwrap() += 1;
+    }));
+}
+for h in handles { h.join().unwrap(); }
+```
+
+## Common Pitfalls
+
+- Forgetting `move` when spawning
+- Holding a `MutexGuard` across awaits (in async code)
+- Deadlocks from lock ordering
+
+## Practice
+
+1. Spawn two threads that print messages.
+2. Send five numbers through a channel and sum them in the receiver.
+3. Increment a shared counter with `Arc<Mutex<_>>`.

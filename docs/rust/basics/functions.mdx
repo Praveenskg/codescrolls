@@ -1,0 +1,66 @@
+---
+title: Functions
+description:
+  'Define Rust functions with parameters, return values, expressions vs
+  statements, and early returns.'
+sidebar_position: 4
+---
+
+# Functions
+
+Functions are declared with `fn`. The last expression (without `;`) is the
+return value.
+
+## Defining Functions
+
+```rust
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn main() {
+    let sum = add(2, 3);
+    println!("{sum}");
+}
+```
+
+Parameter and return types are required.
+
+## Statements vs Expressions
+
+```rust
+fn describe(n: i32) -> String {
+    let label = if n % 2 == 0 { "even" } else { "odd" };
+    format!("{n} is {label}")
+}
+```
+
+- Statement: performs an action, no value (`let x = 1;`)
+- Expression: evaluates to a value (`x + 1`, `if` / `match` blocks)
+
+## Early Return
+
+```rust
+fn abs(n: i32) -> i32 {
+    if n < 0 {
+        return -n;
+    }
+    n
+}
+```
+
+## Unit Type
+
+Functions without an explicit return type return `()` (unit).
+
+## Common Pitfalls
+
+- Adding `;` after the final expression accidentally returns `()`
+- Forgetting type annotations on parameters
+- Expecting default arguments (Rust has none — use `Option` or builders)
+
+## Practice
+
+1. Write `multiply(a, b) -> i32`.
+2. Write `is_adult(age: u8) -> bool`.
+3. Convert a Celsius value to Fahrenheit with a typed function.

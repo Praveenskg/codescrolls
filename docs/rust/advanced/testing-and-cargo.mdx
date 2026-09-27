@@ -1,0 +1,75 @@
+---
+title: Testing and Cargo
+description:
+  'Write unit and integration tests, use cargo test features, and adopt quality
+  tooling with Clippy and rustfmt.'
+sidebar_position: 7
+---
+
+# Testing and Cargo
+
+Cargo ships a built-in test runner. Combine it with Clippy and rustfmt for
+quality.
+
+## Unit Tests
+
+```rust
+fn add(a: i32, b: i32) -> i32 { a + b }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn adds_numbers() {
+        assert_eq!(add(2, 2), 4);
+    }
+}
+```
+
+## Integration Tests
+
+Place files under `tests/`:
+
+```text
+tests/
+└── api_test.rs
+```
+
+## Useful Commands
+
+```bash
+cargo test
+cargo test adds_numbers
+cargo test -- --nocapture
+cargo fmt
+cargo clippy -- -D warnings
+cargo doc --open
+```
+
+## Cargo.toml Essentials
+
+```toml
+[package]
+name = "demo"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+
+[dev-dependencies]
+pretty_assertions = "1"
+```
+
+## Common Pitfalls
+
+- Putting integration tests in `src/` instead of `tests/`
+- Ignoring Clippy warnings that catch real bugs
+- Not running tests in CI
+
+## Practice
+
+1. Add unit tests for a pure function.
+2. Add one integration test crate file.
+3. Fail Clippy with `-D warnings` and fix the lint.

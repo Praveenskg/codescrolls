@@ -189,6 +189,20 @@ const config: Config = {
               price: '0',
               priceCurrency: 'USD',
             },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Course',
+                name: 'Rust Documentation',
+                description: 'Rust tutorials covering ownership, traits, and concurrency',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'CodeScrolls',
+                },
+              },
+              price: '0',
+              priceCurrency: 'USD',
+            },
           ],
         },
       }),
@@ -440,6 +454,13 @@ const config: Config = {
           label: 'Python',
           to: '/docs/python',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'rustSidebar',
+          position: 'left',
+          label: 'Rust',
+          to: '/docs/rust',
+        },
 
         {
           type: 'docSidebar',
@@ -475,6 +496,7 @@ const config: Config = {
             { label: 'React', to: '/docs/react' },
             { label: 'TypeScript', to: '/docs/typescript' },
             { label: 'Python', to: '/docs/python' },
+            { label: 'Rust', to: '/docs/rust' },
             { label: 'JavaScript', to: '/docs/javascript' },
             { label: 'Cheat Sheets', to: '/docs/cheatsheets' },
             { label: 'Interviews', to: '/docs/interviews' },

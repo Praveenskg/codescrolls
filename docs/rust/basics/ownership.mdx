@@ -1,0 +1,69 @@
+---
+title: Ownership
+description:
+  'Understand Rust ownership rules, moves, cloning, and how memory is managed
+  without a garbage collector.'
+sidebar_position: 6
+---
+
+# Ownership
+
+Ownership is Rust’s core memory model. Each value has a single owner; when the
+owner goes out of scope, the value is dropped.
+
+## The Rules
+
+1. Each value has exactly one owner.
+2. There can only be one owner at a time.
+3. When the owner goes out of scope, the value is dropped.
+
+## Moves
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1; // s1 is moved
+// println!("{s1}"); // error: borrow of moved value
+println!("{s2}");
+```
+
+`String` owns heap data, so assignment **moves** rather than shallow-copies.
+
+## Copy Types
+
+Scalars like `i32`, `bool`, and `char` implement `Copy`:
+
+```rust
+let a = 5;
+let b = a; // both valid
+println!("{a}, {b}");
+```
+
+## Clone
+
+Deep copy when you need both owners:
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+println!("{s1}, {s2}");
+```
+
+## Scope and Drop
+
+```rust
+{
+    let temp = String::from("temporary");
+} // temp dropped here
+```
+
+## Common Pitfalls
+
+- Trying to use a value after move
+- Cloning heavily in hot paths instead of borrowing
+- Confusing stack `Copy` types with heap-owned types
+
+## Practice
+
+1. Move a `String` into a function and observe the compile error on reuse.
+2. Fix it by cloning once, then by returning ownership.
+3. List three `Copy` types and three non-`Copy` types.

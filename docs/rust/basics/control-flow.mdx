@@ -1,0 +1,81 @@
+---
+title: Control Flow
+description:
+  'Use if expressions, loops, while, for, and loop labels to control program
+  flow in Rust.'
+sidebar_position: 5
+---
+
+# Control Flow
+
+Rust’s `if` is an expression. Loops include `loop`, `while`, and `for`.
+
+## if Expressions
+
+```rust
+let score = 85;
+let grade = if score >= 90 {
+    "A"
+} else if score >= 80 {
+    "B"
+} else {
+    "C"
+};
+```
+
+Branches must return compatible types.
+
+## loop
+
+```rust
+let mut n = 0;
+let result = loop {
+    n += 1;
+    if n == 3 {
+        break n * 2;
+    }
+};
+```
+
+`loop` can return a value with `break value`.
+
+## while and for
+
+```rust
+let mut x = 3;
+while x > 0 {
+    x -= 1;
+}
+
+for i in 1..=5 {
+    println!("{i}");
+}
+
+for item in [10, 20, 30] {
+    println!("{item}");
+}
+```
+
+## Loop Labels
+
+```rust
+'outer: for i in 1..4 {
+    for j in 1..4 {
+        if i * j > 4 {
+            break 'outer;
+        }
+    }
+}
+```
+
+## Common Pitfalls
+
+- Using `=` instead of `==` in conditions
+- Infinite `loop` without `break`
+- Assuming C-style `for (;;)` syntax exists
+
+## Practice
+
+1. Print numbers 1–10 with `for`.
+2. Sum 1..=100 with a `loop` and `break`.
+3. Use a labeled break to exit nested loops.

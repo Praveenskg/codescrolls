@@ -1,0 +1,60 @@
+---
+title: Collections
+description:
+  'Work with Vec, String, and HashMap — the most common Rust standard library
+  collections.'
+sidebar_position: 3
+---
+
+# Collections
+
+Growable collections live on the heap and are owned values.
+
+## Vec
+
+```rust
+let mut nums = vec![1, 2, 3];
+nums.push(4);
+for n in &nums {
+    println!("{n}");
+}
+```
+
+Indexing with `[]` can panic; prefer `.get()` for safe access.
+
+## String and &str
+
+```rust
+let mut s = String::from("Hello");
+s.push_str(", Rust");
+let slice: &str = &s[0..5];
+```
+
+`String` is owned; `&str` is a borrowed string slice.
+
+## HashMap
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("blue"), 10);
+let score = scores.get("blue").copied().unwrap_or(0);
+```
+
+## Ownership Notes
+
+Inserting into a map **moves** owned keys/values unless you clone or use
+references with care.
+
+## Common Pitfalls
+
+- UTF-8 indexing panics on non-char boundaries
+- Borrowing a map while mutating it
+- Using `unwrap` on `.get()` instead of handling `None`
+
+## Practice
+
+1. Build a `Vec` of temperatures and compute the average.
+2. Count word frequencies with `HashMap`.
+3. Convert between `&str` and `String` in a helper function.

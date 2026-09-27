@@ -1,0 +1,64 @@
+---
+title: Variables and Mutability
+description:
+  'Learn Rust variables, mutability, shadowing, constants, and why immutability
+  is the default.'
+sidebar_position: 2
+---
+
+# Variables and Mutability
+
+In Rust, variables are **immutable by default**. You opt into mutation with
+`mut`.
+
+## Immutable by Default
+
+```rust
+let x = 5;
+// x = 6; // error: cannot assign twice to immutable variable
+```
+
+## Mutable Variables
+
+```rust
+let mut count = 0;
+count += 1;
+println!("{count}");
+```
+
+## Shadowing
+
+You can declare a new variable with the same name:
+
+```rust
+let spaces = "   ";
+let spaces = spaces.len(); // type can change when shadowing
+```
+
+Shadowing is not the same as `mut` — it creates a new binding.
+
+## Constants
+
+```rust
+const MAX_POINTS: u32 = 100_000;
+```
+
+Constants require a type, use `const`, and must be a compile-time value.
+
+## Naming Conventions
+
+- Variables and functions: `snake_case`
+- Types and traits: `PascalCase`
+- Constants: `SCREAMING_SNAKE_CASE`
+
+## Common Pitfalls
+
+- Using `mut` everywhere instead of shadowing when a new value is enough
+- Forgetting that `let` without `mut` rejects reassignment
+- Confusing shadowing with interior mutability (`Cell`, `RefCell`)
+
+## Practice
+
+1. Write a counter with `mut` and print each step.
+2. Shadow a string into its length.
+3. Define a `const` for a max retry count.

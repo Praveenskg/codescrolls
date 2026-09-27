@@ -1,0 +1,78 @@
+---
+title: Async and Await
+description:
+  'Write asynchronous Rust with async fn, await, Futures, and Tokio basics.'
+sidebar_position: 4
+---
+
+# Async and Await
+
+`async` functions return futures. They need a runtime (commonly Tokio) to
+execute.
+
+## async fn
+
+```rust
+async fn fetch_title() -> String {
+    String::from("CodeScrolls")
+}
+
+// Inside an async context / #[tokio::main]
+// let title = fetch_title().await;
+```
+
+## Why a Runtime?
+
+Calling an async function does not run it — `.await` polls the future on a
+runtime executor.
+
+Add Tokio in `Cargo.toml`:
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+```
+
+```rust
+#[tokio::main]
+async fn main() {
+    let title = fetch_title().await;
+    println!("{title}");
+}
+
+async fn fetch_title() -> String {
+    String::from("CodeScrolls")
+}
+```
+
+## Concurrent Tasks
+
+```rust
+async fn work(n: u8) {
+    println!("task {n}");
+}
+
+#[tokio::main]
+async fn main() {
+    let t1 = tokio::spawn(work(1));
+    let t2 = tokio::spawn(work(2));
+    let _ = tokio::join!(t1, t2);
+}
+```
+
+## When to Use Async
+
+- Many concurrent I/O waits (HTTP, DB, files)
+- Not a free speedup for CPU-bound work — use threads or rayon
+
+## Common Pitfalls
+
+- Blocking inside async (use `spawn_blocking`)
+- Holding `Mutex` guards across `.await`
+- Forgetting to add runtime features in `Cargo.toml`
+
+## Practice
+
+1. Add `tokio` to a crate and write an `async main`.
+2. `join!` two fake async tasks.
+3. Explain the difference between `spawn` and awaiting directly.
