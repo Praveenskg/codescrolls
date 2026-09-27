@@ -1,0 +1,56 @@
+---
+title: Streams
+description:
+  'Process large data efficiently with readable, writable, and pipeline streams.'
+sidebar_position: 5
+---
+
+# Streams
+
+Streams process data chunk-by-chunk — memory-friendly for files and network.
+
+## Read and Write
+
+```js
+import { createReadStream, createWriteStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+
+await pipeline(createReadStream('input.txt'), createWriteStream('output.txt'));
+```
+
+Prefer `pipeline` over `.pipe()` for proper error propagation.
+
+## Transform
+
+```js
+import { Transform } from 'node:stream';
+
+const upper = new Transform({
+  transform(chunk, enc, cb) {
+    cb(null, chunk.toString().toUpperCase());
+  },
+});
+```
+
+## Backpressure
+
+If a writable is slow, streams pause the readable side. Don't ignore `write()`
+returning `false` in custom producers.
+
+## Common Uses
+
+- File uploads/downloads
+- Proxying HTTP bodies
+- Log processing and ETL
+
+## Common Pitfalls
+
+- Loading huge files with `readFile` instead of streams
+- Missing error handlers on piped streams
+- Assuming chunks are always full strings
+
+## Practice
+
+1. Copy a large file with `pipeline`.
+2. Build a transform that counts lines.
+3. Stream a file as an HTTP response.

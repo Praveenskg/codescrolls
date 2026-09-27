@@ -1,0 +1,74 @@
+---
+title: Express Basics
+description:
+  'Build APIs with Express routing, request/response helpers, and project
+  structure.'
+sidebar_position: 2
+---
+
+# Express Basics
+
+Express is the most common Node web framework — minimal and flexible.
+
+## Setup
+
+```bash
+npm install express
+```
+
+```js
+import express from 'express';
+
+const app = express();
+app.use(express.json());
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+app.listen(3000);
+```
+
+## Route Params and Query
+
+```js
+app.get('/users/:id', (req, res) => {
+  res.json({ id: req.params.id, q: req.query });
+});
+```
+
+## Routers
+
+```js
+import { Router } from 'express';
+
+const users = Router();
+users.get('/', (req, res) => res.json([]));
+users.post('/', (req, res) => res.status(201).json(req.body));
+
+app.use('/users', users);
+```
+
+## Project Shape
+
+```text
+src/
+  index.js
+  routes/
+  controllers/
+  middleware/
+```
+
+Keep route files thin; put logic in services/controllers.
+
+## Common Pitfalls
+
+- Missing `express.json()` for JSON bodies
+- Sending multiple responses
+- Putting secrets in source instead of env vars
+
+## Practice
+
+1. Create CRUD routes for in-memory notes.
+2. Split routes into a `Router`.
+3. Return proper status codes (`201`, `404`, `400`).

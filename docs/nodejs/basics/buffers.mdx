@@ -1,0 +1,56 @@
+---
+title: Buffers
+description:
+  'Handle binary data in Node.js with Buffer for files, network, and encodings.'
+sidebar_position: 7
+---
+
+# Buffers
+
+A `Buffer` is a fixed-length chunk of raw memory — used for binary data.
+
+## Creating Buffers
+
+```js
+const buf = Buffer.from('hello', 'utf8');
+console.log(buf); // <Buffer 68 65 6c 6c 6f>
+console.log(buf.toString('utf8'));
+
+const empty = Buffer.alloc(8); // zero-filled, safe
+```
+
+Avoid deprecated `new Buffer()` / `Buffer.allocUnsafe` unless you know why.
+
+## Encoding
+
+```js
+const b64 = Buffer.from('CodeScrolls').toString('base64');
+const back = Buffer.from(b64, 'base64').toString('utf8');
+```
+
+## Slicing and Concat
+
+```js
+const a = Buffer.from('Hello ');
+const b = Buffer.from('Node');
+const c = Buffer.concat([a, b]);
+console.log(c.subarray(0, 5).toString()); // Hello
+```
+
+## When You Need Buffers
+
+- File and network I/O
+- Image/audio processing
+- Crypto digests and hashes
+
+## Common Pitfalls
+
+- Mutating a shared Buffer unexpectedly
+- Wrong encodings (`latin1` vs `utf8`)
+- Using unsafe allocation without filling
+
+## Practice
+
+1. Convert a string to hex and back.
+2. Concatenate two buffers.
+3. Read a file into a Buffer and print its byte length.

@@ -1,0 +1,65 @@
+---
+title: Middleware
+description:
+  'Understand Express middleware order, custom middleware, and error middleware.'
+sidebar_position: 3
+---
+
+# Middleware
+
+Middleware functions run in a pipeline: `req → middleware… → handler → res`.
+
+## Custom Middleware
+
+```js
+function requestLogger(req, res, next) {
+  console.log(req.method, req.url);
+  next();
+}
+
+app.use(requestLogger);
+```
+
+Always call `next()` or end the response.
+
+## Route-Level Middleware
+
+```js
+function requireApiKey(req, res, next) {
+  if (req.header('x-api-key') !== process.env.API_KEY) {
+    return res.status(401).json({ error: 'unauthorized' });
+  }
+  next();
+}
+
+app.get('/admin', requireApiKey, (req, res) => {
+  res.json({ secret: true });
+});
+```
+
+## Error Middleware
+
+```js
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).json({ error: err.message || 'server error' });
+});
+```
+
+Must have **four** parameters `(err, req, res, next)`.
+
+## Order Matters
+
+Register parsers and auth **before** routes. Error middleware **last**.
+
+## Common Pitfalls
+
+- Forgetting `next()` (request hangs)
+- Error middleware registered too early
+- Mutating `req` in unclear ways
+
+## Practice
+
+1. Add a timing middleware that logs duration.
+2. Protect one route with a header check.
+3. Throw an error in a handler and catch it centrally.

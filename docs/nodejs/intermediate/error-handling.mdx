@@ -1,0 +1,63 @@
+---
+title: Error Handling
+description:
+  'Handle operational vs programmer errors, async failures, and centralized
+  Express errors.'
+sidebar_position: 6
+---
+
+# Error Handling
+
+Distinguish **operational** errors (expected) from **programmer** bugs.
+
+## Throwing and Catching
+
+```js
+class AppError extends Error {
+  constructor(message, status = 400) {
+    super(message);
+    this.status = status;
+  }
+}
+
+throw new AppError('Invalid email', 400);
+```
+
+## Express Async Errors
+
+```js
+const asyncHandler = fn => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+app.get(
+  '/user/:id',
+  asyncHandler(async (req, res) => {
+    const user = await findUser(req.params.id);
+    if (!user) throw new AppError('Not found', 404);
+    res.json(user);
+  }),
+);
+```
+
+## Process-Level Safety
+
+```js
+process.on('uncaughtException', err => {
+  console.error('fatal', err);
+  process.exit(1);
+});
+```
+
+Log and restart (process managers) — don't keep a corrupted process alive.
+
+## Common Pitfalls
+
+- Swallowing errors with empty `catch`
+- Leaking stack traces to clients in production
+- Treating all errors as 500s
+
+## Practice
+
+1. Create `AppError` with status codes.
+2. Wire Express error middleware.
+3. Map validation failures to `400`.
