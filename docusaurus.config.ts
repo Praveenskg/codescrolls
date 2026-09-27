@@ -203,6 +203,20 @@ const config: Config = {
               price: '0',
               priceCurrency: 'USD',
             },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Course',
+                name: 'Node.js Documentation',
+                description: 'Node.js tutorials covering Express, streams, auth, and deployment',
+                provider: {
+                  '@type': 'Organization',
+                  name: 'CodeScrolls',
+                },
+              },
+              price: '0',
+              priceCurrency: 'USD',
+            },
           ],
         },
       }),
@@ -461,6 +475,13 @@ const config: Config = {
           label: 'Rust',
           to: '/docs/rust',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'nodejsSidebar',
+          position: 'left',
+          label: 'Node.js',
+          to: '/docs/nodejs',
+        },
 
         {
           type: 'docSidebar',
@@ -497,6 +518,7 @@ const config: Config = {
             { label: 'TypeScript', to: '/docs/typescript' },
             { label: 'Python', to: '/docs/python' },
             { label: 'Rust', to: '/docs/rust' },
+            { label: 'Node.js', to: '/docs/nodejs' },
             { label: 'JavaScript', to: '/docs/javascript' },
             { label: 'Cheat Sheets', to: '/docs/cheatsheets' },
             { label: 'Interviews', to: '/docs/interviews' },
