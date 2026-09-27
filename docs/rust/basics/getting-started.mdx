@@ -1,0 +1,80 @@
+---
+title: Getting Started with Rust
+description:
+  'Install Rust with rustup, create a Cargo project, and run your first Hello
+  World program.'
+sidebar_position: 1
+---
+
+# Getting Started with Rust
+
+Install the toolchain, create a project with Cargo, and verify your setup.
+
+## Install Rust
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://rustup.rs | sh
+```
+
+Then reload your shell and check versions:
+
+```bash
+rustc --version
+cargo --version
+```
+
+## Create a Project
+
+```bash
+cargo new hello_rust
+cd hello_rust
+```
+
+Cargo creates:
+
+```text
+hello_rust/
+├── Cargo.toml
+└── src/
+    └── main.rs
+```
+
+## Hello World
+
+`src/main.rs`:
+
+```rust
+fn main() {
+    println!("Hello, CodeScrolls!");
+}
+```
+
+Run it:
+
+```bash
+cargo run
+```
+
+Build a release binary with `cargo build --release` (output in
+`target/release/`).
+
+## Key Tools
+
+| Tool      | Role                           |
+| --------- | ------------------------------ |
+| `rustc`   | Compiler                       |
+| `cargo`   | Package manager and build tool |
+| `rustfmt` | Formatter (`cargo fmt`)        |
+| `clippy`  | Lints (`cargo clippy`)         |
+
+## Common Pitfalls
+
+- Forgetting to source `~/.cargo/env` after install
+- Editing the wrong `main.rs` in a workspace
+- Expecting `cargo run` to pick up unsaved editor buffers
+
+## Practice
+
+1. Create a new crate and print your name.
+2. Run `cargo fmt` and `cargo clippy`.
+3. Build with `--release` and compare binary size.

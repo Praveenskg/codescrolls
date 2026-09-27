@@ -1,0 +1,72 @@
+---
+title: Structs
+description:
+  'Define classic, tuple, and unit structs; implement methods with impl blocks.'
+sidebar_position: 1
+---
+
+# Structs
+
+Structs group related data. Methods live in `impl` blocks.
+
+## Defining and Instantiating
+
+```rust
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+}
+
+let user = User {
+    username: String::from("praveen"),
+    email: String::from("hi@example.com"),
+    active: true,
+};
+```
+
+## Update Syntax
+
+```rust
+let user2 = User {
+    email: String::from("new@example.com"),
+    ..user
+};
+```
+
+## Tuple and Unit Structs
+
+```rust
+struct Color(i32, i32, i32);
+struct AlwaysEqual;
+```
+
+## Methods
+
+```rust
+impl User {
+    fn new(username: String, email: String) -> Self {
+        Self { username, email, active: true }
+    }
+
+    fn deactivate(&mut self) {
+        self.active = false;
+    }
+}
+```
+
+- `&self` — read
+- `&mut self` — mutate
+- `self` — take ownership
+
+## Common Pitfalls
+
+- Storing `&str` in structs without lifetimes (prefer `String` first)
+- Forgetting `mut` on the binding when calling `&mut self` methods
+- Moving fields out of a partially used struct
+
+## Practice
+
+1. Model a `Rectangle { width, height }` with an `area` method.
+2. Add an associated function `square(size) -> Self`.
+3. Use struct update syntax to clone-with-changes.

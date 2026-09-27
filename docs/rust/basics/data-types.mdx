@@ -1,0 +1,63 @@
+---
+title: Data Types
+description:
+  'Explore Rust scalar and compound types: integers, floats, booleans, chars,
+  tuples, and arrays.'
+sidebar_position: 3
+---
+
+# Data Types
+
+Rust is statically typed. The compiler usually infers types, but you can
+annotate when needed.
+
+## Scalar Types
+
+```rust
+let a: i32 = -42;
+let b: u64 = 1_000;
+let c: f64 = 3.14;
+let ok: bool = true;
+let heart: char = '❤';
+```
+
+Common integers: `i8`–`i128`, `u8`–`u128`, `isize` / `usize`.
+
+## Compound Types
+
+### Tuples
+
+```rust
+let point: (i32, i32, f64) = (10, 20, 1.5);
+let (x, y, z) = point;
+println!("{x}, {y}, {z}");
+```
+
+### Arrays
+
+```rust
+let nums: [i32; 3] = [1, 2, 3];
+let first = nums[0];
+```
+
+Arrays have fixed length known at compile time. Prefer `Vec` for growable lists.
+
+## Type Annotations and Inference
+
+```rust
+let guess: u32 = "42".parse().expect("Not a number");
+```
+
+Parsing often needs an annotation because many types implement `FromStr`.
+
+## Common Pitfalls
+
+- Integer overflow in debug vs release (debug panics by default)
+- Indexing past array bounds (runtime panic)
+- Using `char` for multi-codepoint emoji strings — prefer `&str` / `String`
+
+## Practice
+
+1. Destructure a 3-tuple of coordinates.
+2. Create an array of five `u8` values and print the last.
+3. Parse a string into `f64` with error handling via `expect`.

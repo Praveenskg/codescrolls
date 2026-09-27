@@ -1,0 +1,71 @@
+---
+title: Traits
+description:
+  'Define shared behavior with traits, implement them, and use trait bounds and
+  derive.'
+sidebar_position: 6
+---
+
+# Traits
+
+Traits define shared behavior — similar to interfaces.
+
+## Defining and Implementing
+
+```rust
+trait Greet {
+    fn greet(&self) -> String;
+}
+
+struct Person {
+    name: String,
+}
+
+impl Greet for Person {
+    fn greet(&self) -> String {
+        format!("Hi, I'm {}", self.name)
+    }
+}
+```
+
+## Default Methods
+
+```rust
+trait Greet {
+    fn name(&self) -> &str;
+    fn greet(&self) -> String {
+        format!("Hi, I'm {}", self.name())
+    }
+}
+```
+
+## Trait Bounds
+
+```rust
+fn notify<T: Greet>(item: &T) {
+    println!("{}", item.greet());
+}
+
+fn notify2(item: &impl Greet) {
+    println!("{}", item.greet());
+}
+```
+
+## Derive
+
+```rust
+#[derive(Debug, Clone, PartialEq)]
+struct Point { x: i32, y: i32 }
+```
+
+## Common Pitfalls
+
+- Orphan rule: you must own the trait or the type to implement it
+- Object safety limits for `dyn Trait`
+- Over-bounding generics when a simpler `impl Trait` works
+
+## Practice
+
+1. Define `Summary` with `summarize(&self) -> String`.
+2. Implement it for a `Article` struct.
+3. Write a generic function bounded by `Summary + Display`.

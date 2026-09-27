@@ -1,0 +1,10 @@
+{
+  "label": "Rust - Advanced",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Rust Advanced",
+    "description": "Generics, smart pointers, concurrency, async, macros, unsafe, and testing with Cargo."
+  }
+}

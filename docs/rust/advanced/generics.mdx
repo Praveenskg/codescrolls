@@ -1,0 +1,62 @@
+---
+title: Generics
+description:
+  'Write reusable code with generic types, trait bounds, and monomorphization
+  basics.'
+sidebar_position: 1
+---
+
+# Generics
+
+Generics abstract over types without runtime cost (monomorphization).
+
+## Generic Functions and Structs
+
+```rust
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut max = &list[0];
+    for item in list {
+        if item > max {
+            max = item;
+        }
+    }
+    max
+}
+
+struct Point<T> {
+    x: T,
+    y: T,
+}
+```
+
+## Multiple Parameters
+
+```rust
+struct Pair<T, U> {
+    first: T,
+    second: U,
+}
+```
+
+## where Clauses
+
+```rust
+fn print_it<T>(value: T)
+where
+    T: std::fmt::Display + Clone,
+{
+    println!("{value}");
+}
+```
+
+## Common Pitfalls
+
+- Missing trait bounds (`PartialOrd`, `Display`, …)
+- Over-generalizing APIs that only need one type
+- Confusing compile-time generics with `dyn Trait` objects
+
+## Practice
+
+1. Generic `wrap<T>(value: T) -> Option<T>`.
+2. `Point<T>` with a `mixup` method swapping types.
+3. Add a `where` clause requiring `Debug`.

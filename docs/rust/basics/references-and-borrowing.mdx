@@ -1,0 +1,77 @@
+---
+title: References and Borrowing
+description:
+  'Borrow values with shared and mutable references, and learn the borrow
+  checker rules.'
+sidebar_position: 7
+---
+
+# References and Borrowing
+
+Borrowing lets you use a value without taking ownership — via references.
+
+## Shared References (`&T`)
+
+```rust
+fn len(s: &String) -> usize {
+    s.len()
+}
+
+fn main() {
+    let s = String::from("rust");
+    let n = len(&s);
+    println!("{s} has {n} chars"); // s still valid
+}
+```
+
+## Mutable References (`&mut T`)
+
+```rust
+fn push_world(s: &mut String) {
+    s.push_str(" world");
+}
+
+fn main() {
+    let mut s = String::from("hello");
+    push_world(&mut s);
+    println!("{s}");
+}
+```
+
+## Borrow Rules
+
+- Many shared references **or** one mutable reference (not both)
+- References must always be valid (no dangling pointers)
+
+```rust
+let mut s = String::from("hi");
+let r1 = &s;
+let r2 = &s;
+println!("{r1}, {r2}");
+// let r3 = &mut s; // error while r1/r2 are active
+```
+
+## Dangling References
+
+Rust rejects returning references to locals:
+
+```rust
+// fn dangle() -> &String {
+//     let s = String::from("nope");
+//     &s // error: s would be dropped
+// }
+```
+
+Return an owned `String` instead.
+
+## Common Pitfalls
+
+- Holding an immutable borrow across a mutable use
+- Trying to mutate through `&T`
+- Long-lived borrows that block later mutation
+
+## Practice
+
+1. Write `starts_with_r(s: &str) -> bool`.
+2. Mutably borrow a `Vec` and push two items.
+3. Intentionally create a borrow conflict and fix it by narrowing scopes.

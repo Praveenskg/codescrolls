@@ -1,0 +1,67 @@
+---
+title: Enums and Pattern Matching
+description:
+  'Model variants with enums, use Option and Result, and master match and if
+  let.'
+sidebar_position: 2
+---
+
+# Enums and Pattern Matching
+
+Enums express a value that is one of several variants. `match` is exhaustive.
+
+## Defining Enums
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+```
+
+## match
+
+```rust
+fn handle(msg: Message) {
+    match msg {
+        Message::Quit => println!("quit"),
+        Message::Move { x, y } => println!("move to {x},{y}"),
+        Message::Write(text) => println!("{text}"),
+        Message::ChangeColor(r, g, b) => println!("rgb({r},{g},{b})"),
+    }
+}
+```
+
+## Option and Result
+
+```rust
+fn find_user(id: u32) -> Option<String> {
+    if id == 1 { Some(String::from("admin")) } else { None }
+}
+
+let name = find_user(1).unwrap_or_else(|| String::from("guest"));
+```
+
+Prefer `?`, `map`, and `unwrap_or` over reckless `unwrap`.
+
+## if let and while let
+
+```rust
+if let Some(name) = find_user(1) {
+    println!("hi {name}");
+}
+```
+
+## Common Pitfalls
+
+- Non-exhaustive `match` arms
+- Overusing `unwrap()` in library code
+- Ignoring `_` catch-alls that hide new variants
+
+## Practice
+
+1. Create a `Payment` enum with `Cash`, `Card(String)`, `Crypto`.
+2. Match on it and print a description.
+3. Convert a fallible parse into `Option` with `ok()`.

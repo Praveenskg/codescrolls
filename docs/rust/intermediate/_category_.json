@@ -1,0 +1,10 @@
+{
+  "label": "Rust - Intermediate",
+  "position": 3,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Rust Intermediate",
+    "description": "Structs, enums, collections, error handling, modules, traits, and lifetimes."
+  }
+}

@@ -1,0 +1,67 @@
+---
+title: Modules and Crates
+description:
+  'Organize code with modules, paths, use, visibility, and Cargo packages.'
+sidebar_position: 5
+---
+
+# Modules and Crates
+
+A **crate** is a compilation unit. A **package** (Cargo) can contain a binary
+and/or library crate.
+
+## Module Tree
+
+```rust
+// src/lib.rs
+mod network;
+pub use network::connect;
+
+// src/network.rs
+pub fn connect() {
+    println!("connected");
+}
+```
+
+Or inline:
+
+```rust
+mod utils {
+    pub fn helper() {}
+}
+```
+
+## Visibility
+
+- Items are private by default
+- `pub` exports to parents
+- `pub(crate)` keeps it crate-visible
+
+## use Paths
+
+```rust
+use std::collections::HashMap;
+use crate::network::connect;
+```
+
+## Binary + Library
+
+```text
+src/
+├── main.rs   # binary
+└── lib.rs    # library
+```
+
+`main.rs` can call `my_crate::...` functions from `lib.rs`.
+
+## Common Pitfalls
+
+- Forgetting `mod` declarations for files
+- Circular module dependencies
+- Publishing internals that should stay private
+
+## Practice
+
+1. Split a crate into `lib.rs` + `main.rs`.
+2. Add a `models` module with a public struct.
+3. Re-export a clean API with `pub use`.

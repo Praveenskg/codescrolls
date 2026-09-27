@@ -1,0 +1,58 @@
+---
+title: Smart Pointers
+description:
+  'Use Box, Rc, RefCell, and Arc to manage heap data and shared ownership.'
+sidebar_position: 2
+---
+
+# Smart Pointers
+
+Smart pointers own data and add extra metadata or capabilities.
+
+## Box
+
+Heap allocation and recursive types:
+
+```rust
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+```
+
+## Rc and Arc
+
+Shared ownership (single-threaded `Rc`, thread-safe `Arc`):
+
+```rust
+use std::rc::Rc;
+let a = Rc::new(String::from("shared"));
+let b = Rc::clone(&a);
+```
+
+## RefCell
+
+Interior mutability with runtime borrow checking:
+
+```rust
+use std::cell::RefCell;
+let data = RefCell::new(5);
+*data.borrow_mut() += 1;
+```
+
+## Common Combinations
+
+- `Rc` + `RefCell` — shared mutable state (single thread)
+- `Arc` + `Mutex` — shared mutable state across threads
+
+## Common Pitfalls
+
+- Reference cycles with `Rc` (consider `Weak`)
+- `RefCell` panics on conflicting borrows at runtime
+- Using `Rc` across threads (use `Arc`)
+
+## Practice
+
+1. Build a cons list with `Box`.
+2. Share a config string with `Rc`.
+3. Mutate inside `RefCell` and observe a double-borrow panic safely in a test.

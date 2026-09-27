@@ -1,0 +1,61 @@
+---
+title: Error Handling
+description:
+  'Handle recoverable errors with Result, propagate with ?, and design clear
+  error types.'
+sidebar_position: 4
+---
+
+# Error Handling
+
+Rust splits errors into recoverable (`Result`) and unrecoverable (`panic!`).
+
+## Result
+
+```rust
+use std::fs::File;
+
+fn open_config() -> Result<File, std::io::Error> {
+    File::open("config.toml")
+}
+```
+
+## The ? Operator
+
+```rust
+use std::fs;
+use std::io;
+
+fn read_username() -> Result<String, io::Error> {
+    let mut content = fs::read_to_string("username.txt")?;
+    content = content.trim().to_string();
+    Ok(content)
+}
+```
+
+`?` returns early on `Err`.
+
+## map_err and Custom Messages
+
+```rust
+fn parse_port(s: &str) -> Result<u16, String> {
+    s.parse::<u16>().map_err(|e| format!("invalid port: {e}"))
+}
+```
+
+## panic! vs Result
+
+- `panic!` / `unwrap` / `expect`: bugs or unrecoverable states
+- `Result`: expected failures (I/O, parsing, network)
+
+## Common Pitfalls
+
+- Swallowing errors with `let _ = ...`
+- Using `unwrap()` in libraries
+- Returning `Box<dyn Error>` everywhere without context
+
+## Practice
+
+1. Read a file with `?` and print its length.
+2. Parse an integer from user input with a custom error string.
+3. Replace one `unwrap` in a sample with proper handling.
