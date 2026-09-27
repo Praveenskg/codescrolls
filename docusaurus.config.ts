@@ -471,11 +471,13 @@ const config: Config = {
         {
           title: 'Docs',
           items: [
-            { label: 'JavaScript', to: '/docs/javascript' },
+            { label: 'Overview', to: '/docs' },
+            { label: 'React', to: '/docs/react' },
             { label: 'TypeScript', to: '/docs/typescript' },
             { label: 'Python', to: '/docs/python' },
-            { label: 'React', to: '/docs/react' },
+            { label: 'JavaScript', to: '/docs/javascript' },
             { label: 'Cheat Sheets', to: '/docs/cheatsheets' },
+            { label: 'Interviews', to: '/docs/interviews' },
           ],
         },
         {
