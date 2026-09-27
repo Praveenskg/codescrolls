@@ -48,6 +48,13 @@ export default function Home(): ReactNode {
         'Ownership, borrowing, traits, concurrency, async Rust, and systems programming with Cargo.',
     },
     {
+      name: 'Node.js',
+      href: '/docs/nodejs',
+      icon: '/img/skills/NodeJS.png',
+      description:
+        'Event loop, Express, streams, auth, databases, and production Node.js backends.',
+    },
+    {
       name: 'React',
       href: '/docs/react',
       icon: '/img/skills/React.png',
@@ -103,7 +110,7 @@ export default function Home(): ReactNode {
       icon: '📚',
       title: 'Complete Documentation',
       description:
-        '160+ documentation pages covering HTML, CSS, JavaScript, TypeScript, React, Python, and Rust.',
+        '180+ documentation pages covering HTML, CSS, JavaScript, TypeScript, React, Python, Rust, and Node.js.',
     },
     {
       icon: '💡',
@@ -141,7 +148,7 @@ export default function Home(): ReactNode {
       href: '/docs',
       icon: '📚',
       description:
-        'Structured guides for HTML, CSS, JavaScript, TypeScript, React, Python, and Rust.',
+        'Structured guides for HTML, CSS, JavaScript, TypeScript, React, Python, Rust, and Node.js.',
     },
     {
       name: 'Interview Hub',
@@ -181,7 +188,7 @@ export default function Home(): ReactNode {
             </h1>
             <p className={styles.heroSubtext}>
               Scroll through code. Learn. Build. Repeat. Master HTML, CSS, JavaScript, TypeScript,
-              React, Python, and Rust with clear docs, cheat sheets, and interview prep.
+              React, Python, Rust, and Node.js with clear docs, cheat sheets, and interview prep.
             </p>
             <div className={styles.buttonGroup}>
               <Link
@@ -316,7 +323,7 @@ export default function Home(): ReactNode {
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaHeading}>Ready to Level Up Your Skills?</h2>
             <p className={styles.ctaText}>
-              Level up with HTML, CSS, JavaScript, TypeScript, React, Python, and Rust on
+              Level up with HTML, CSS, JavaScript, TypeScript, React, Python, Rust, and Node.js on
               CodeScrolls &mdash; free docs, cheat sheets, and interview prep.
             </p>
             <div className={styles.ctaButtons}>
