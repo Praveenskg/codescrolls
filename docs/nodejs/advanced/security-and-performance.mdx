@@ -1,0 +1,51 @@
+---
+title: Security and Performance
+description:
+  'Harden Node.js APIs with Helmet, rate limits, validation, and performance
+  basics.'
+sidebar_position: 6
+---
+
+# Security and Performance
+
+Ship safely and keep latency predictable under load.
+
+## Security Checklist
+
+- Validate and sanitize all input
+- Use HTTPS in production
+- Hash passwords (bcrypt/argon2)
+- Set security headers (`helmet`)
+- Rate-limit auth routes
+- Keep dependencies updated (`npm audit`)
+
+```bash
+npm install helmet express-rate-limit
+```
+
+```js
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+
+app.use(helmet());
+app.use('/auth', rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
+```
+
+## Performance Basics
+
+- Avoid sync I/O in request path
+- Use connection pooling
+- Cache hot reads when safe
+- Profile before optimizing (`clinic`, `node --inspect`)
+
+## Common Pitfalls
+
+- Disabling TLS verification "temporarily"
+- Logging secrets/tokens
+- Unbounded JSON body size
+
+## Practice
+
+1. Add Helmet + rate limiting.
+2. Cap JSON body size with `express.json({ limit: '100kb' })`.
+3. Run `npm audit` and fix a moderate issue.

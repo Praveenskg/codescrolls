@@ -1,0 +1,73 @@
+---
+title: npm and package.json
+description:
+  'Manage dependencies, scripts, and package metadata with npm and package.json.'
+sidebar_position: 3
+---
+
+# npm and package.json
+
+`package.json` describes your project. npm installs and runs it.
+
+## Initialize
+
+```bash
+npm init -y
+```
+
+## Dependencies
+
+```bash
+npm install express
+npm install -D nodemon
+```
+
+- `dependencies` — needed at runtime
+- `devDependencies` — tooling/tests only
+
+## Scripts
+
+```json
+{
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node --test"
+  }
+}
+```
+
+```bash
+npm run dev
+npm start
+```
+
+## Semantic Versioning
+
+```text
+^1.2.3  → compatible with 1.x
+~1.2.3  → compatible with 1.2.x
+1.2.3   → exact
+```
+
+Lockfile (`package-lock.json`) pins exact versions for reproducible installs.
+
+## npx
+
+```bash
+npx prettier --write .
+```
+
+Runs package binaries without a global install.
+
+## Common Pitfalls
+
+- Committing `node_modules` (ignore it)
+- Using `*` version ranges in libraries
+- Mixing npm/yarn/pnpm lockfiles in one repo
+
+## Practice
+
+1. Create a package with `start` and `dev` scripts.
+2. Add a dependency and a devDependency.
+3. Explain what `npm ci` is for.

@@ -1,0 +1,61 @@
+---
+title: Databases
+description:
+  'Connect Node.js apps to SQL and MongoDB, with pooling, queries, and
+  migrations basics.'
+sidebar_position: 3
+---
+
+# Databases
+
+Most APIs need persistent storage. Pick SQL (Postgres) or document stores
+(MongoDB) based on data shape.
+
+## Postgres with `pg`
+
+```bash
+npm install pg
+```
+
+```js
+import pg from 'pg';
+
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const { rows } = await pool.query('select id, email from users where id = $1', [
+  id,
+]);
+```
+
+Always parameterize queries — never string-concat user input.
+
+## MongoDB
+
+```bash
+npm install mongodb
+```
+
+```js
+import { MongoClient } from 'mongodb';
+
+const client = new MongoClient(process.env.MONGO_URL);
+await client.connect();
+const users = client.db('app').collection('users');
+await users.insertOne({ email: 'a@b.com' });
+```
+
+## Migrations
+
+Use a migration tool (e.g. `node-pg-migrate`, Prisma Migrate, Knex) so schema
+changes are repeatable in every environment.
+
+## Common Pitfalls
+
+- Opening a new DB connection per request
+- SQL injection via string interpolation
+- No indexes on frequent filters
+
+## Practice
+
+1. Insert and fetch a user with parameterized SQL.
+2. Add a simple migration for a `users` table.
+3. Close pools on shutdown (`SIGTERM`).

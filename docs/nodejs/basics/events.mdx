@@ -1,0 +1,62 @@
+---
+title: Events
+description:
+  'Use EventEmitter to build event-driven flows in Node.js applications.'
+sidebar_position: 6
+---
+
+# Events
+
+Many Node APIs are event-driven. `EventEmitter` is the foundation.
+
+## Basic Usage
+
+```js
+import { EventEmitter } from 'node:events';
+
+const bus = new EventEmitter();
+
+bus.on('message', text => {
+  console.log('got:', text);
+});
+
+bus.emit('message', 'hello');
+```
+
+## once and removeListener
+
+```js
+bus.once('ready', () => console.log('ready'));
+bus.emit('ready');
+bus.emit('ready'); // ignored
+```
+
+## Error Events
+
+```js
+bus.on('error', err => {
+  console.error('handled', err.message);
+});
+
+bus.emit('error', new Error('boom'));
+```
+
+Unhandled `'error'` events can crash the process.
+
+## Real-World Uses
+
+- HTTP servers (`request`, `connection`)
+- Streams (`data`, `end`, `error`)
+- Custom app buses for domain events
+
+## Common Pitfalls
+
+- Forgetting to handle `'error'`
+- Memory leaks from never removing listeners
+- Emitting before listeners are registered
+
+## Practice
+
+1. Build a tiny logger that emits `info` and `error`.
+2. Use `once` for a startup `ready` event.
+3. Count listener count with `listenerCount`.

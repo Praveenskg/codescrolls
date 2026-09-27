@@ -1,0 +1,73 @@
+---
+title: Authentication
+description:
+  'Implement password hashing, sessions, and JWT-based authentication in Node.js
+  APIs.'
+sidebar_position: 2
+---
+
+# Authentication
+
+Prove who the user is (authentication), then check what they can do
+(authorization).
+
+## Password Hashing
+
+```bash
+npm install bcryptjs
+```
+
+```js
+import bcrypt from 'bcryptjs';
+
+const hash = await bcrypt.hash(password, 10);
+const ok = await bcrypt.compare(password, hash);
+```
+
+Never store plaintext passwords.
+
+## JWT (Stateless)
+
+```bash
+npm install jsonwebtoken
+```
+
+```js
+import jwt from 'jsonwebtoken';
+
+const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
+  expiresIn: '1h',
+});
+
+const payload = jwt.verify(token, process.env.JWT_SECRET);
+```
+
+Send via `Authorization: Bearer <token>`.
+
+## Auth Middleware
+
+```js
+function auth(req, res, next) {
+  const header = req.header('authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : null;
+  if (!token) return res.status(401).json({ error: 'unauthorized' });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch {
+    return res.status(401).json({ error: 'invalid token' });
+  }
+}
+```
+
+## Common Pitfalls
+
+- Weak JWT secrets
+- Putting sensitive data in JWT payloads
+- Skipping token expiry and rotation strategy
+
+## Practice
+
+1. Register + login endpoints with hashed passwords.
+2. Protect a route with JWT middleware.
+3. Return `401` vs `403` correctly.

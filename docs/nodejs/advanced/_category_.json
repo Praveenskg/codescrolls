@@ -1,0 +1,10 @@
+{
+  "label": "Node.js - Advanced",
+  "position": 4,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Node.js Advanced",
+    "description": "REST APIs, auth, databases, testing, clustering, security, and deployment."
+  }
+}

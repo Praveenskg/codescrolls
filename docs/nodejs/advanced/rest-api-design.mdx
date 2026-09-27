@@ -1,0 +1,67 @@
+---
+title: REST API Design
+description:
+  'Design clear REST endpoints with status codes, validation, pagination, and
+  versioning.'
+sidebar_position: 1
+---
+
+# REST API Design
+
+Good APIs are consistent, predictable, and boring — in a good way.
+
+## Resource Naming
+
+```text
+GET    /users
+POST   /users
+GET    /users/:id
+PATCH  /users/:id
+DELETE /users/:id
+```
+
+Use nouns, not verbs (`/createUser` ❌).
+
+## Status Codes
+
+| Code | Meaning          |
+| ---- | ---------------- |
+| 200  | OK               |
+| 201  | Created          |
+| 204  | No content       |
+| 400  | Validation error |
+| 401  | Unauthenticated  |
+| 403  | Forbidden        |
+| 404  | Not found        |
+| 500  | Server error     |
+
+## Validation
+
+Validate input early (Zod, Joi, or manual checks). Return structured errors:
+
+```json
+{
+  "error": "validation_failed",
+  "details": [{ "field": "email", "message": "required" }]
+}
+```
+
+## Pagination
+
+```text
+GET /posts?limit=20&cursor=abc
+```
+
+Prefer cursor pagination for large datasets.
+
+## Common Pitfalls
+
+- Over-fetching huge arrays without pagination
+- Inconsistent error shapes
+- Breaking clients without versioning
+
+## Practice
+
+1. Design routes for a blog API.
+2. Add limit/offset pagination.
+3. Standardize an error JSON envelope.

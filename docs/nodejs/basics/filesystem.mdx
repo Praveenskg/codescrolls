@@ -1,0 +1,65 @@
+---
+title: File System
+description:
+  'Read, write, and manage files with the Node.js fs and fs/promises APIs.'
+sidebar_position: 4
+---
+
+# File System
+
+The `fs` module reads and writes files. Prefer promise-based APIs for modern
+code.
+
+## Read and Write
+
+```js
+import { readFile, writeFile } from 'node:fs/promises';
+
+const text = await readFile('notes.txt', 'utf8');
+await writeFile('copy.txt', text);
+```
+
+## Sync vs Async
+
+```js
+import fs from 'node:fs';
+
+// blocks the event loop — avoid in servers
+const data = fs.readFileSync('notes.txt', 'utf8');
+```
+
+Use sync only in simple CLIs or startup config loading.
+
+## Directories
+
+```js
+import { mkdir, readdir } from 'node:fs/promises';
+
+await mkdir('data', { recursive: true });
+const files = await readdir('data');
+```
+
+## Checking Existence
+
+```js
+import { access } from 'node:fs/promises';
+import { constants } from 'node:fs';
+
+try {
+  await access('config.json', constants.F_OK);
+} catch {
+  console.log('missing config');
+}
+```
+
+## Common Pitfalls
+
+- Forgetting `'utf8'` and getting a Buffer
+- Using sync APIs inside request handlers
+- Path separators — use `path.join`, not string concat
+
+## Practice
+
+1. Write a script that appends a line to a log file.
+2. List all `.md` files in a folder.
+3. Copy a file using read + write.

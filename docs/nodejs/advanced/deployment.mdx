@@ -1,0 +1,67 @@
+---
+title: Deployment
+description:
+  'Deploy Node.js apps with production settings, process managers, Docker, and
+  health checks.'
+sidebar_position: 7
+---
+
+# Deployment
+
+Production Node apps need process management, health checks, and safe config.
+
+## Production Checklist
+
+```bash
+export NODE_ENV=production
+npm ci --omit=dev
+node src/index.js
+```
+
+- `NODE_ENV=production`
+- Lockfile installs (`npm ci`)
+- Structured logging
+- Graceful shutdown on `SIGTERM`
+
+## Graceful Shutdown
+
+```js
+const server = app.listen(port);
+
+async function shutdown() {
+  server.close(() => process.exit(0));
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
+```
+
+## Docker (Sketch)
+
+```dockerfile
+FROM node:22-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+ENV NODE_ENV=production
+CMD ["node", "src/index.js"]
+```
+
+## Platforms
+
+- Vercel / Railway / Render / Fly.io for managed deploys
+- VMs with PM2/systemd
+- Kubernetes for larger fleets
+
+## Common Pitfalls
+
+- Running `npm install` without a lockfile in CI
+- No health endpoint for orchestrators
+- Ignoring open DB handles on shutdown
+
+## Practice
+
+1. Add `GET /health` returning `{ ok: true }`.
+2. Handle `SIGTERM` and close the server.
+3. Write a minimal Dockerfile for your API.

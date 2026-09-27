@@ -1,0 +1,76 @@
+---
+title: Modules (CommonJS and ESM)
+description:
+  'Use CommonJS require/module.exports and ES modules import/export in Node.js.'
+sidebar_position: 2
+---
+
+# Modules (CommonJS and ESM)
+
+Node supports **CommonJS** (default historically) and **ES modules** (modern
+standard).
+
+## CommonJS
+
+```js
+// math.js
+function add(a, b) {
+  return a + b;
+}
+module.exports = { add };
+
+// app.js
+const { add } = require('./math');
+console.log(add(2, 3));
+```
+
+## ES Modules
+
+In `package.json`:
+
+```json
+{
+  "type": "module"
+}
+```
+
+```js
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+
+// app.js
+import { add } from './math.js';
+console.log(add(2, 3));
+```
+
+Named files can also use `.mjs` / `.cjs` extensions.
+
+## Built-in Modules
+
+```js
+import fs from 'node:fs';
+import path from 'node:path';
+import { createServer } from 'node:http';
+```
+
+Prefer the `node:` protocol for clarity.
+
+## Choosing a Style
+
+- New projects: prefer **ESM**
+- Legacy packages: often CommonJS
+- Mixing: possible, but keep boundaries clean
+
+## Common Pitfalls
+
+- Forgetting `.js` extensions in ESM relative imports
+- Using `require` in an ESM file
+- Circular dependencies causing `undefined` exports
+
+## Practice
+
+1. Split helpers into a local module and import them.
+2. Convert a CommonJS file to ESM.
+3. Import `node:fs/promises` and read a file.

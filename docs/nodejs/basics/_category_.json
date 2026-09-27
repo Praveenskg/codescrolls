@@ -1,0 +1,10 @@
+{
+  "label": "Node.js - Basics",
+  "position": 2,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Node.js Basics",
+    "description": "Install Node, modules, npm, filesystem, path/URL/OS, events, and buffers."
+  }
+}

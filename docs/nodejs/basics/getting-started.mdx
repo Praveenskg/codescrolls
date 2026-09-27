@@ -1,0 +1,78 @@
+---
+title: Getting Started with Node.js
+description:
+  'Install Node.js LTS, run scripts with node and npm, and understand the
+  runtime basics.'
+sidebar_position: 1
+---
+
+# Getting Started with Node.js
+
+Install the LTS runtime, verify your toolchain, and run your first script.
+
+## Install
+
+Download LTS from [nodejs.org](https://nodejs.org/) or use a version manager:
+
+```bash
+# example with nvm
+nvm install --lts
+nvm use --lts
+```
+
+Check versions:
+
+```bash
+node -v
+npm -v
+```
+
+## First Script
+
+`hello.js`:
+
+```js
+console.log('Hello from Node.js');
+console.log('Node version:', process.version);
+```
+
+```bash
+node hello.js
+```
+
+## REPL
+
+```bash
+node
+> 2 + 2
+4
+> .exit
+```
+
+## What Node Is (and Is Not)
+
+- **Is:** a JavaScript runtime for servers, CLIs, and tools
+- **Is not:** a framework (Express/Fastify sit on top)
+- **Uses:** V8 + libuv for async I/O
+
+## Useful Globals
+
+```js
+console.log(__dirname); // CommonJS only
+console.log(process.cwd());
+console.log(process.env.NODE_ENV);
+```
+
+In ESM, use `import.meta.url` instead of `__dirname`.
+
+## Common Pitfalls
+
+- Installing an old Node version accidentally
+- Confusing browser APIs (`window`, `document`) with Node
+- Running `node` on a TypeScript file without a loader/compiler
+
+## Practice
+
+1. Print `process.argv` and parse a CLI flag.
+2. Log current working directory vs script directory.
+3. Create a tiny script that exits with code `1` on error.

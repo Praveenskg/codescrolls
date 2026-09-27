@@ -1,0 +1,50 @@
+---
+title: Clustering and Workers
+description: 'Scale Node.js across CPU cores with cluster and worker_threads.'
+sidebar_position: 5
+---
+
+# Clustering and Workers
+
+One Node process uses one thread for JS. Scale CPU-bound or multi-core workloads
+intentionally.
+
+## cluster
+
+```js
+import cluster from 'node:cluster';
+import os from 'node:os';
+import http from 'node:http';
+
+if (cluster.isPrimary) {
+  for (let i = 0; i < os.cpus().length; i++) cluster.fork();
+} else {
+  http.createServer((req, res) => res.end('ok')).listen(3000);
+}
+```
+
+In production, prefer a process manager (PM2) or container orchestrator.
+
+## worker_threads
+
+```js
+import { Worker } from 'node:worker_threads';
+
+const worker = new Worker(new URL('./heavy.js', import.meta.url));
+worker.postMessage({ n: 40 });
+worker.on('message', console.log);
+```
+
+Use workers for CPU-heavy tasks without blocking the event loop.
+
+## Common Pitfalls
+
+- Sharing in-memory state across cluster workers (it isn't shared)
+- Spawning unbounded workers
+- Doing heavy crypto/image work on the main thread
+
+## Practice
+
+1. Fork workers equal to CPU count.
+2. Move a CPU task into `worker_threads`.
+3. Explain sticky sessions for websocket apps.

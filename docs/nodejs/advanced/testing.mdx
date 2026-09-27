@@ -1,0 +1,62 @@
+---
+title: Testing
+description:
+  'Write unit and integration tests for Node.js APIs with node:test or
+  Vitest/Jest.'
+sidebar_position: 4
+---
+
+# Testing
+
+Automate confidence with unit tests (pure logic) and integration tests (HTTP +
+DB).
+
+## Built-in Test Runner
+
+```js
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { add } from '../src/math.js';
+
+test('adds numbers', () => {
+  assert.equal(add(2, 3), 5);
+});
+```
+
+```bash
+node --test
+```
+
+## HTTP Integration
+
+```bash
+npm install -D supertest
+```
+
+```js
+import request from 'supertest';
+import { app } from '../src/app.js';
+
+test('GET /health', async () => {
+  const res = await request(app).get('/health');
+  assert.equal(res.status, 200);
+});
+```
+
+## Test Pyramid
+
+- Many fast unit tests
+- Fewer API/integration tests
+- Minimal end-to-end smoke tests
+
+## Common Pitfalls
+
+- Hitting production DB in tests
+- Flaky tests with shared mutable state
+- No assertion on status codes/body shape
+
+## Practice
+
+1. Unit test a pure validator function.
+2. Integration-test one Express route.
+3. Run tests in CI with `npm test`.

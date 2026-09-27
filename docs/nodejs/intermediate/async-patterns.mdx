@@ -1,0 +1,57 @@
+---
+title: Async Patterns
+description:
+  'Master callbacks, promises, async/await, and the Node.js event loop model.'
+sidebar_position: 4
+---
+
+# Async Patterns
+
+Node is single-threaded for JS, but I/O is non-blocking via the event loop.
+
+## Callbacks → Promises → async/await
+
+```js
+import { readFile } from 'node:fs/promises';
+
+async function load() {
+  try {
+    const data = await readFile('data.json', 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+```
+
+## Parallel Work
+
+```js
+const [users, posts] = await Promise.all([fetchUsers(), fetchPosts()]);
+```
+
+## Event Loop (Mental Model)
+
+1. Execute JS (call stack)
+2. Handle expired timers
+3. Poll I/O callbacks
+4. Check `setImmediate` / close handlers
+
+CPU-heavy work blocks everything — offload or chunk it.
+
+## Avoiding Callback Hell
+
+Prefer `fs/promises`, `fetch`, and `async` functions over nested callbacks.
+
+## Common Pitfalls
+
+- Unhandled promise rejections
+- `await` inside sequential loops when `Promise.all` is better
+- Blocking with sync crypto/fs in hot paths
+
+## Practice
+
+1. Convert a callback API to promises with `util.promisify`.
+2. Fetch two resources in parallel.
+3. Add `process.on('unhandledRejection', ...)`.

@@ -1,0 +1,63 @@
+---
+title: HTTP Servers
+description:
+  'Create raw HTTP servers with the Node.js http module and handle requests.'
+sidebar_position: 1
+---
+
+# HTTP Servers
+
+The `node:http` module is enough for simple APIs before you add a framework.
+
+## Minimal Server
+
+```js
+import http from 'node:http';
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ ok: true, path: req.url }));
+});
+
+server.listen(3000, () => {
+  console.log('http://localhost:3000');
+});
+```
+
+## Routing Manually
+
+```js
+if (req.method === 'GET' && req.url === '/health') {
+  res.end('ok');
+  return;
+}
+res.writeHead(404);
+res.end('Not found');
+```
+
+## Reading a Body
+
+```js
+async function readBody(req) {
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  return Buffer.concat(chunks).toString('utf8');
+}
+```
+
+## When to Use a Framework
+
+Raw `http` teaches fundamentals. For real apps, Express/Fastify add routing,
+middleware, and safer defaults.
+
+## Common Pitfalls
+
+- Forgetting `res.end()`
+- Not handling request errors
+- Blocking the event loop inside handlers
+
+## Practice
+
+1. Return JSON for `GET /api/hello`.
+2. Accept POST JSON and echo it back.
+3. Add a 404 fallback route.

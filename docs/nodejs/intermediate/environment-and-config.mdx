@@ -1,0 +1,67 @@
+---
+title: Environment and Config
+description:
+  'Manage configuration with environment variables, dotenv, and 12-factor
+  practices.'
+sidebar_position: 7
+---
+
+# Environment and Config
+
+Keep secrets and environment-specific values out of source code.
+
+## process.env
+
+```js
+const port = Number(process.env.PORT) || 3000;
+const dbUrl = process.env.DATABASE_URL;
+```
+
+## dotenv (Development)
+
+```bash
+npm install dotenv
+```
+
+```js
+import 'dotenv/config';
+```
+
+`.env`:
+
+```env
+PORT=3000
+DATABASE_URL=postgres://localhost:5432/app
+```
+
+Never commit real secrets. Use `.env.example` for keys only.
+
+## Validation
+
+```js
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value) throw new Error(`Missing env: ${name}`);
+  return value;
+}
+
+const databaseUrl = requireEnv('DATABASE_URL');
+```
+
+## 12-Factor Tips
+
+- Config via env
+- Separate `development` / `test` / `production`
+- Fail fast on missing required config
+
+## Common Pitfalls
+
+- Committing `.env` with secrets
+- Different defaults silently changing behavior
+- Parsing numbers/booleans as strings incorrectly
+
+## Practice
+
+1. Load config from env with defaults.
+2. Fail startup if `DATABASE_URL` is missing.
+3. Create `.env.example` for your API.
