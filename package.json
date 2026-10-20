@@ -48,8 +48,8 @@
     "@easyops-cn/docusaurus-search-local": "^0.55.3",
     "@mdx-js/react": "^3.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
@@ -64,10 +64,10 @@
     "globals": "^17.13.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "prettier": "^3.9.9",
+    "prettier": "^3.9.10",
     "prettier-plugin-organize-imports": "^4.3.0",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.71.0"
+    "typescript-eslint": "^8.71.2"
   },
   "browserslist": {
     "production": [">0.5%", "not dead", "not op_mini all"],
